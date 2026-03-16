@@ -5,3 +5,9 @@
 - **Type**: `fix`
 - **Scope**: `ui`
 - **Change**: fix(ui): correct null pointer check during initialization phase (#174)
+
+
+### Contribution Update #34 - 2026-08-06 21:24:30
+- **Type**: `docs`
+- **Scope**: `ui`
+- **Change**: docs(ui): clarify environment setup instructions in README (#437)
