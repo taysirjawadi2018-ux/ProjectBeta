@@ -11,3 +11,9 @@
 - **Type**: `test`
 - **Scope**: `auth`
 - **Change**: test(auth): add unit test coverage for edge cases in payload validator (#167)
+
+
+### Contribution Update #46 - 2026-08-06 21:24:33
+- **Type**: `docs`
+- **Scope**: `auth`
+- **Change**: docs(auth): update API reference specifications for v2 endpoints (#334)
