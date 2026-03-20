@@ -23,3 +23,9 @@
 - **Type**: `fix`
 - **Scope**: `auth`
 - **Change**: fix(auth): prevent timing attack on password hash comparison routine
+
+
+### Contribution Update #51 - 2026-08-06 21:24:34
+- **Type**: `docs`
+- **Scope**: `auth`
+- **Change**: docs(auth): add inline docstrings to public interface definitions
