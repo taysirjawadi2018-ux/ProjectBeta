@@ -17,3 +17,9 @@
 - **Type**: `docs`
 - **Scope**: `auth`
 - **Change**: docs(auth): update API reference specifications for v2 endpoints (#334)
+
+
+### Contribution Update #50 - 2026-08-06 21:24:34
+- **Type**: `fix`
+- **Scope**: `auth`
+- **Change**: fix(auth): prevent timing attack on password hash comparison routine
