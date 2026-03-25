@@ -17,3 +17,9 @@
 - **Type**: `build`
 - **Scope**: `types`
 - **Change**: build(types): update asset compression plugin options (#246)
+
+
+### Contribution Update #71 - 2026-08-06 21:24:37
+- **Type**: `security`
+- **Scope**: `types`
+- **Change**: security(types): update cryptographic hashing algorithm to Argon2id (#133)
