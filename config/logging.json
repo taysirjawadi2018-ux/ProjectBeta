@@ -1,3 +1,5 @@
 # LOGGER Module
 
 # [2026-08-06 21:24:37] #67 test(logger): add unit test coverage for edge cases in payload validator (#314)
+
+# [2026-08-06 21:24:38] #75 fix(logger): resolve incorrect status code mapping for unauthorized calls (#421)
