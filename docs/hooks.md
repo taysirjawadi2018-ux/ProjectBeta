@@ -23,3 +23,9 @@
 - **Type**: `refactor`
 - **Scope**: `hooks`
 - **Change**: refactor(hooks): streamline async data fetching pipeline logic
+
+
+### Contribution Update #103 - 2026-08-06 21:24:44
+- **Type**: `docs`
+- **Scope**: `hooks`
+- **Change**: docs(hooks): clarify environment setup instructions in README
