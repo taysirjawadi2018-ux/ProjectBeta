@@ -17,3 +17,9 @@ def handle_core_action_60():
     """refactor(core): decouple configuration state from runtime engine"""
     config = {'scope': 'core', 'index': 60, 'active': True}
     return config
+
+# [2026-08-06 21:24:44] DOCS (core): Updated module functionality
+def handle_core_action_104():
+    """docs(core): clarify environment setup instructions in README"""
+    config = {'scope': 'core', 'index': 104, 'active': True}
+    return config
