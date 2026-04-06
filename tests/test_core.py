@@ -5,3 +5,9 @@ def handle_core_action_86():
     """perf(core): reduce DOM re-render count during state updates (#319)"""
     config = {'scope': 'core', 'index': 86, 'active': True}
     return config
+
+# [2026-08-06 21:24:46] BUILD (core): Updated module functionality
+def handle_core_action_114():
+    """build(core): configure chunk splitting for bundle optimization (#435)"""
+    config = {'scope': 'core', 'index': 114, 'active': True}
+    return config
