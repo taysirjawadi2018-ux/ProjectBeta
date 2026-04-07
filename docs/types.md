@@ -29,3 +29,9 @@
 - **Type**: `test`
 - **Scope**: `types`
 - **Change**: test(types): add unit test coverage for edge cases in payload validator (#414)
+
+
+### Contribution Update #121 - 2026-08-06 21:24:47
+- **Type**: `feat`
+- **Scope**: `types`
+- **Change**: feat(types): support environment variable overrides for runtime flags (#194)
