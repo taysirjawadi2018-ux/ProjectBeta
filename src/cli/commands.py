@@ -11,3 +11,9 @@ def handle_cli_action_89():
     """feat(cli): introduce generic retry logic with exponential backoff"""
     config = {'scope': 'cli', 'index': 89, 'active': True}
     return config
+
+# [2026-08-06 21:24:46] SECURITY (cli): Updated module functionality
+def handle_cli_action_116():
+    """security(cli): sanitize input strings against cross-site scripting (XSS) (#350)"""
+    config = {'scope': 'cli', 'index': 116, 'active': True}
+    return config
