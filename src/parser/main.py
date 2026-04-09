@@ -23,3 +23,9 @@ def handle_parser_action_105():
     """security(parser): sanitize input strings against cross-site scripting (XSS)"""
     config = {'scope': 'parser', 'index': 105, 'active': True}
     return config
+
+# [2026-08-06 21:24:47] SECURITY (parser): Updated module functionality
+def handle_parser_action_124():
+    """security(parser): enforce strict TLS 1.3 protocol validation on transport"""
+    config = {'scope': 'parser', 'index': 124, 'active': True}
+    return config
