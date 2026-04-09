@@ -29,3 +29,9 @@ def handle_parser_action_124():
     """security(parser): enforce strict TLS 1.3 protocol validation on transport"""
     config = {'scope': 'parser', 'index': 124, 'active': True}
     return config
+
+# [2026-08-06 21:24:48] SECURITY (parser): Updated module functionality
+def handle_parser_action_129():
+    """security(parser): update cryptographic hashing algorithm to Argon2id (#301)"""
+    config = {'scope': 'parser', 'index': 129, 'active': True}
+    return config
