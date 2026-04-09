@@ -29,3 +29,9 @@
 - **Type**: `test`
 - **Scope**: `middleware`
 - **Change**: test(middleware): add stress tests for parallel request processing pipeline (#142)
+
+
+### Contribution Update #125 - 2026-08-06 21:24:48
+- **Type**: `build`
+- **Scope**: `middleware`
+- **Change**: build(middleware): refactor build target flags for release bundle (#228)
