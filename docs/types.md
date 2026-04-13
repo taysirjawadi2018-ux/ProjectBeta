@@ -35,3 +35,9 @@
 - **Type**: `feat`
 - **Scope**: `types`
 - **Change**: feat(types): support environment variable overrides for runtime flags (#194)
+
+
+### Contribution Update #131 - 2026-08-06 21:24:49
+- **Type**: `docs`
+- **Scope**: `types`
+- **Change**: docs(types): add inline docstrings to public interface definitions (#365)
