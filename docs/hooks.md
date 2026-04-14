@@ -29,3 +29,9 @@
 - **Type**: `docs`
 - **Scope**: `hooks`
 - **Change**: docs(hooks): clarify environment setup instructions in README
+
+
+### Contribution Update #139 - 2026-08-06 21:24:51
+- **Type**: `security`
+- **Scope**: `hooks`
+- **Change**: security(hooks): update cryptographic hashing algorithm to Argon2id
