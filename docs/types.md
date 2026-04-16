@@ -47,3 +47,9 @@
 - **Type**: `ci`
 - **Scope**: `types`
 - **Change**: ci(types): optimize workflow execution steps to leverage cache
+
+
+### Contribution Update #147 - 2026-08-06 21:24:52
+- **Type**: `security`
+- **Scope**: `types`
+- **Change**: security(types): update cryptographic hashing algorithm to Argon2id
