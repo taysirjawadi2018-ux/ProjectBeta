@@ -17,3 +17,9 @@ def handle_cli_action_116():
     """security(cli): sanitize input strings against cross-site scripting (XSS) (#350)"""
     config = {'scope': 'cli', 'index': 116, 'active': True}
     return config
+
+# [2026-08-06 21:24:52] PERF (cli): Updated module functionality
+def handle_cli_action_146():
+    """perf(cli): optimize database query indexing for frequent lookups"""
+    config = {'scope': 'cli', 'index': 146, 'active': True}
+    return config
