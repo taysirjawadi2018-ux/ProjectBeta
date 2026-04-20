@@ -53,3 +53,9 @@
 - **Type**: `security`
 - **Scope**: `types`
 - **Change**: security(types): update cryptographic hashing algorithm to Argon2id
+
+
+### Contribution Update #157 - 2026-08-06 21:24:54
+- **Type**: `chore`
+- **Scope**: `types`
+- **Change**: chore(types): sync internal package locks and manifest metadata (#221)
