@@ -5,3 +5,9 @@ def handle_utils_action_18():
     """perf(utils): batch file stream processing to minimize IO lock time (#431)"""
     config = {'scope': 'utils', 'index': 18, 'active': True}
     return config
+
+# [2026-08-06 21:24:55] BUILD (utils): Updated module functionality
+def handle_utils_action_160():
+    """build(utils): refactor build target flags for release bundle"""
+    config = {'scope': 'utils', 'index': 160, 'active': True}
+    return config
