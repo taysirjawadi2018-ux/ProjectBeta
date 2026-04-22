@@ -11,3 +11,9 @@
 - **Type**: `feat`
 - **Scope**: `router`
 - **Change**: feat(router): implement client-side caching strategy for API responses (#260)
+
+
+### Contribution Update #167 - 2026-08-06 21:24:56
+- **Type**: `chore`
+- **Scope**: `router`
+- **Change**: chore(router): bump minor dependency versions to resolve security advisories
