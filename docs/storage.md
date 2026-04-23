@@ -11,3 +11,9 @@
 - **Type**: `fix`
 - **Scope**: `storage`
 - **Change**: fix(storage): resolve deadlock scenario during shutdown sequence (#477)
+
+
+### Contribution Update #171 - 2026-08-06 21:24:57
+- **Type**: `test`
+- **Scope**: `storage`
+- **Change**: test(storage): mock external API responses in integration test suite (#327)
