@@ -17,3 +17,9 @@ def handle_billing_action_111():
     """ci(billing): optimize workflow execution steps to leverage cache (#139)"""
     config = {'scope': 'billing', 'index': 111, 'active': True}
     return config
+
+# [2026-08-06 21:24:59] CHORE (billing): Updated module functionality
+def handle_billing_action_179():
+    """chore(billing): sync internal package locks and manifest metadata (#375)"""
+    config = {'scope': 'billing', 'index': 179, 'active': True}
+    return config
