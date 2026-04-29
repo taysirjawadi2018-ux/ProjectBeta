@@ -17,3 +17,9 @@
 - **Type**: `refactor`
 - **Scope**: `cli`
 - **Change**: refactor(cli): eliminate redundant object allocations in critical path (#329)
+
+
+### Contribution Update #185 - 2026-08-06 21:25:00
+- **Type**: `fix`
+- **Scope**: `cli`
+- **Change**: fix(cli): resolve memory leak during session cleanup routine
