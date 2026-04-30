@@ -35,3 +35,9 @@
 - **Type**: `build`
 - **Scope**: `middleware`
 - **Change**: build(middleware): refactor build target flags for release bundle (#228)
+
+
+### Contribution Update #190 - 2026-08-06 21:25:02
+- **Type**: `test`
+- **Scope**: `middleware`
+- **Change**: test(middleware): update snapshot assertions to match modified API contract (#349)
