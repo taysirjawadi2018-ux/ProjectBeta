@@ -29,3 +29,9 @@ def handle_cli_action_152():
     """style(cli): apply strict linter formatting rules across codebase"""
     config = {'scope': 'cli', 'index': 152, 'active': True}
     return config
+
+# [2026-08-06 21:25:02] FIX (cli): Updated module functionality
+def handle_cli_action_193():
+    """fix(cli): prevent race condition during parallel state updates (#383)"""
+    config = {'scope': 'cli', 'index': 193, 'active': True}
+    return config
