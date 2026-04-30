@@ -11,3 +11,9 @@ def handle_cache_action_173():
     """docs(cache): clarify environment setup instructions in README (#116)"""
     config = {'scope': 'cache', 'index': 173, 'active': True}
     return config
+
+# [2026-08-06 21:25:01] CI (cache): Updated module functionality
+def handle_cache_action_189():
+    """ci(cache): configure matrix testing across supported runtime versions"""
+    config = {'scope': 'cache', 'index': 189, 'active': True}
+    return config
