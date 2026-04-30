@@ -23,3 +23,9 @@
 - **Type**: `perf`
 - **Scope**: `storage`
 - **Change**: perf(storage): compress response payload size using gzip stream (#104)
+
+
+### Contribution Update #188 - 2026-08-06 21:25:01
+- **Type**: `feat`
+- **Scope**: `storage`
+- **Change**: feat(storage): add multi-tenant context propagation mechanism
