@@ -41,3 +41,9 @@
 - **Type**: `test`
 - **Scope**: `middleware`
 - **Change**: test(middleware): update snapshot assertions to match modified API contract (#349)
+
+
+### Contribution Update #194 - 2026-08-06 21:25:02
+- **Type**: `feat`
+- **Scope**: `middleware`
+- **Change**: feat(middleware): add multi-tenant context propagation mechanism (#246)
