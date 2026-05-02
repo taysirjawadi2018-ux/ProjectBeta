@@ -41,3 +41,9 @@
 - **Type**: `refactor`
 - **Scope**: `hooks`
 - **Change**: refactor(hooks): reorganize project directory layout for better module scope
+
+
+### Contribution Update #200 - 2026-08-06 21:25:03
+- **Type**: `build`
+- **Scope**: `hooks`
+- **Change**: build(hooks): refactor build target flags for release bundle
