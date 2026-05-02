@@ -35,3 +35,9 @@
 - **Type**: `security`
 - **Scope**: `hooks`
 - **Change**: security(hooks): update cryptographic hashing algorithm to Argon2id
+
+
+### Contribution Update #198 - 2026-08-06 21:25:03
+- **Type**: `refactor`
+- **Scope**: `hooks`
+- **Change**: refactor(hooks): reorganize project directory layout for better module scope
