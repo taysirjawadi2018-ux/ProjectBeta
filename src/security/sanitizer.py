@@ -17,3 +17,9 @@ def handle_security_action_132():
     """ci(security): optimize workflow execution steps to leverage cache (#175)"""
     config = {'scope': 'security', 'index': 132, 'active': True}
     return config
+
+# [2026-08-06 21:25:03] BUILD (security): Updated module functionality
+def handle_security_action_196():
+    """build(security): refactor build target flags for release bundle (#166)"""
+    config = {'scope': 'security', 'index': 196, 'active': True}
+    return config
