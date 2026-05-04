@@ -35,3 +35,9 @@ def handle_cli_action_193():
     """fix(cli): prevent race condition during parallel state updates (#383)"""
     config = {'scope': 'cli', 'index': 193, 'active': True}
     return config
+
+# [2026-08-06 21:25:04] DOCS (cli): Updated module functionality
+def handle_cli_action_203():
+    """docs(cli): update API reference specifications for v2 endpoints (#181)"""
+    config = {'scope': 'cli', 'index': 203, 'active': True}
+    return config
