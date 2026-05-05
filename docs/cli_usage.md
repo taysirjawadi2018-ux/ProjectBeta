@@ -23,3 +23,9 @@
 - **Type**: `fix`
 - **Scope**: `cli`
 - **Change**: fix(cli): resolve memory leak during session cleanup routine
+
+
+### Contribution Update #208 - 2026-08-06 21:25:05
+- **Type**: `build`
+- **Scope**: `cli`
+- **Change**: build(cli): refactor build target flags for release bundle
