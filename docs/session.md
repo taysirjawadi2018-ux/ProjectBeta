@@ -23,3 +23,9 @@
 - **Type**: `security`
 - **Scope**: `session`
 - **Change**: security(session): enforce strict TLS 1.3 protocol validation on transport (#279)
+
+
+### Contribution Update #211 - 2026-08-06 21:25:06
+- **Type**: `docs`
+- **Scope**: `session`
+- **Change**: docs(session): update deployment guide for production cluster setup (#397)
