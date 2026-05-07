@@ -41,3 +41,9 @@ def handle_cli_action_203():
     """docs(cli): update API reference specifications for v2 endpoints (#181)"""
     config = {'scope': 'cli', 'index': 203, 'active': True}
     return config
+
+# [2026-08-06 21:25:07] CHORE (cli): Updated module functionality
+def handle_cli_action_216():
+    """chore(cli): bump minor dependency versions to resolve security advisories"""
+    config = {'scope': 'cli', 'index': 216, 'active': True}
+    return config
