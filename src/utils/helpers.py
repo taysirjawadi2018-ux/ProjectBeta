@@ -47,3 +47,9 @@ def handle_utils_action_205():
     """feat(utils): add configurable timeout parameter to network transport (#305)"""
     config = {'scope': 'utils', 'index': 205, 'active': True}
     return config
+
+# [2026-08-06 21:25:07] BUILD (utils): Updated module functionality
+def handle_utils_action_214():
+    """build(utils): refactor build target flags for release bundle"""
+    config = {'scope': 'utils', 'index': 214, 'active': True}
+    return config
