@@ -23,3 +23,9 @@ def handle_hooks_action_184():
     """test(hooks): update snapshot assertions to match modified API contract"""
     config = {'scope': 'hooks', 'index': 184, 'active': True}
     return config
+
+# [2026-08-06 21:25:08] REFACTOR (hooks): Updated module functionality
+def handle_hooks_action_221():
+    """refactor(hooks): clean up deprecated helper methods across modules (#181)"""
+    config = {'scope': 'hooks', 'index': 221, 'active': True}
+    return config
