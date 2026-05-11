@@ -47,3 +47,9 @@
 - **Type**: `feat`
 - **Scope**: `middleware`
 - **Change**: feat(middleware): add multi-tenant context propagation mechanism (#246)
+
+
+### Contribution Update #226 - 2026-08-06 21:25:09
+- **Type**: `security`
+- **Scope**: `middleware`
+- **Change**: security(middleware): enforce strict TLS 1.3 protocol validation on transport
