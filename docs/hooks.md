@@ -47,3 +47,9 @@
 - **Type**: `build`
 - **Scope**: `hooks`
 - **Change**: build(hooks): refactor build target flags for release bundle
+
+
+### Contribution Update #230 - 2026-08-06 21:25:10
+- **Type**: `docs`
+- **Scope**: `hooks`
+- **Change**: docs(hooks): add inline docstrings to public interface definitions
