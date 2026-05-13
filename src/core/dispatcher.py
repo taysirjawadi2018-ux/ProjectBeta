@@ -11,3 +11,9 @@ def handle_core_action_120():
     """build(core): update asset compression plugin options"""
     config = {'scope': 'core', 'index': 120, 'active': True}
     return config
+
+# [2026-08-06 21:25:11] TEST (core): Updated module functionality
+def handle_core_action_234():
+    """test(core): update snapshot assertions to match modified API contract (#111)"""
+    config = {'scope': 'core', 'index': 234, 'active': True}
+    return config
