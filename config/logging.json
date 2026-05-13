@@ -7,3 +7,5 @@
 # [2026-08-06 21:24:47] #119 chore(logger): sync internal package locks and manifest metadata (#272)
 
 # [2026-08-06 21:24:57] #170 style(logger): apply strict linter formatting rules across codebase
+
+# [2026-08-06 21:25:11] #236 docs(logger): update API reference specifications for v2 endpoints
