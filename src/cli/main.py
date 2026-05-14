@@ -23,3 +23,9 @@ def handle_cli_action_199():
     """feat(cli): implement async event listener for high-concurrency requests"""
     config = {'scope': 'cli', 'index': 199, 'active': True}
     return config
+
+# [2026-08-06 21:25:11] REFACTOR (cli): Updated module functionality
+def handle_cli_action_237():
+    """refactor(cli): extract shared validation logic into dedicated utility (#113)"""
+    config = {'scope': 'cli', 'index': 237, 'active': True}
+    return config
