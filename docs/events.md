@@ -17,3 +17,9 @@
 - **Type**: `refactor`
 - **Scope**: `events`
 - **Change**: refactor(events): extract shared validation logic into dedicated utility (#455)
+
+
+### Contribution Update #239 - 2026-08-06 21:25:12
+- **Type**: `docs`
+- **Scope**: `events`
+- **Change**: docs(events): add inline docstrings to public interface definitions
