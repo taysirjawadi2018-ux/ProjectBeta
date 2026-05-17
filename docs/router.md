@@ -23,3 +23,9 @@
 - **Type**: `style`
 - **Scope**: `router`
 - **Change**: style(router): normalize indentation and trailing whitespace standards
+
+
+### Contribution Update #241 - 2026-08-06 21:25:13
+- **Type**: `security`
+- **Scope**: `router`
+- **Change**: security(router): sanitize input strings against cross-site scripting (XSS)
