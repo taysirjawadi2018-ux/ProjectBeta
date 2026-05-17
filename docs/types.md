@@ -65,3 +65,9 @@
 - **Type**: `refactor`
 - **Scope**: `types`
 - **Change**: refactor(types): streamline async data fetching pipeline logic (#166)
+
+
+### Contribution Update #246 - 2026-08-06 21:25:16
+- **Type**: `security`
+- **Scope**: `types`
+- **Change**: security(types): sanitize input strings against cross-site scripting (XSS)
