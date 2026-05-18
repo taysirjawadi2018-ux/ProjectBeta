@@ -23,3 +23,9 @@ def handle_validation_action_225():
     """perf(validation): compress response payload size using gzip stream (#426)"""
     config = {'scope': 'validation', 'index': 225, 'active': True}
     return config
+
+# [2026-08-06 21:25:18] TEST (validation): Updated module functionality
+def handle_validation_action_252():
+    """test(validation): update snapshot assertions to match modified API contract"""
+    config = {'scope': 'validation', 'index': 252, 'active': True}
+    return config
