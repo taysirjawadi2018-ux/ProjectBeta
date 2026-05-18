@@ -29,3 +29,9 @@
 - **Type**: `docs`
 - **Scope**: `session`
 - **Change**: docs(session): update deployment guide for production cluster setup (#397)
+
+
+### Contribution Update #250 - 2026-08-06 21:25:18
+- **Type**: `fix`
+- **Scope**: `session`
+- **Change**: fix(session): resolve incorrect status code mapping for unauthorized calls (#163)
