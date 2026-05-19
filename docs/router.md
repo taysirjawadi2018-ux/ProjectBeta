@@ -29,3 +29,9 @@
 - **Type**: `security`
 - **Scope**: `router`
 - **Change**: security(router): sanitize input strings against cross-site scripting (XSS)
+
+
+### Contribution Update #254 - 2026-08-06 21:25:19
+- **Type**: `perf`
+- **Scope**: `router`
+- **Change**: perf(router): compress response payload size using gzip stream
