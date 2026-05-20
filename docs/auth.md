@@ -35,3 +35,9 @@
 - **Type**: `docs`
 - **Scope**: `auth`
 - **Change**: docs(auth): add inline docstrings to public interface definitions
+
+
+### Contribution Update #262 - 2026-08-06 21:25:20
+- **Type**: `feat`
+- **Scope**: `auth`
+- **Change**: feat(auth): support multi-factor authentication (MFA) via TOTP
