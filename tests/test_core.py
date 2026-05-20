@@ -17,3 +17,9 @@ def handle_core_action_136():
     """test(core): add stress tests for parallel request processing pipeline"""
     config = {'scope': 'core', 'index': 136, 'active': True}
     return config
+
+# [2026-08-06 21:25:20] PERF (core): Updated module functionality
+def handle_core_action_261():
+    """perf(core): batch file stream processing to minimize IO lock time"""
+    config = {'scope': 'core', 'index': 261, 'active': True}
+    return config
