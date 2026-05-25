@@ -29,3 +29,9 @@ def handle_auth_action_256():
     """ci(auth): optimize workflow execution steps to leverage cache"""
     config = {'scope': 'auth', 'index': 256, 'active': True}
     return config
+
+# [2026-08-06 21:25:22] CHORE (auth): Updated module functionality
+def handle_auth_action_268():
+    """chore(auth): update compiler target settings to latest LTS release (#147)"""
+    config = {'scope': 'auth', 'index': 268, 'active': True}
+    return config
