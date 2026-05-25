@@ -29,3 +29,9 @@ def handle_validation_action_252():
     """test(validation): update snapshot assertions to match modified API contract"""
     config = {'scope': 'validation', 'index': 252, 'active': True}
     return config
+
+# [2026-08-06 21:25:22] BUILD (validation): Updated module functionality
+def handle_validation_action_269():
+    """build(validation): update asset compression plugin options (#343)"""
+    config = {'scope': 'validation', 'index': 269, 'active': True}
+    return config
