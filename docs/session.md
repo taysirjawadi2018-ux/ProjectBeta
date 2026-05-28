@@ -35,3 +35,9 @@
 - **Type**: `fix`
 - **Scope**: `session`
 - **Change**: fix(session): resolve incorrect status code mapping for unauthorized calls (#163)
+
+
+### Contribution Update #283 - 2026-08-06 21:25:25
+- **Type**: `feat`
+- **Scope**: `session`
+- **Change**: feat(session): implement dynamic rate limiting middleware
