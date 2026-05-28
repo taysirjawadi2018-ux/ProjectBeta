@@ -7,3 +7,7 @@ INSERT INTO schema_migrations (version, applied_at) VALUES ('0047_db', CURRENT_T
 -- [2026-08-06 21:24:45] Migration change for db
 -- docs(db): add architectural diagram references for service dependencies (#214)
 INSERT INTO schema_migrations (version, applied_at) VALUES ('0110_db', CURRENT_TIMESTAMP);
+
+-- [2026-08-06 21:25:25] Migration change for db
+-- security(db): update cryptographic hashing algorithm to Argon2id (#125)
+INSERT INTO schema_migrations (version, applied_at) VALUES ('0279_db', CURRENT_TIMESTAMP);
