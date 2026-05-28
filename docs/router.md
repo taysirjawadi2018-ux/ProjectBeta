@@ -35,3 +35,9 @@
 - **Type**: `perf`
 - **Scope**: `router`
 - **Change**: perf(router): compress response payload size using gzip stream
+
+
+### Contribution Update #277 - 2026-08-06 21:25:24
+- **Type**: `refactor`
+- **Scope**: `router`
+- **Change**: refactor(router): decouple database connection pool from request context
