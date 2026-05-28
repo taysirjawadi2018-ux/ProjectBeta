@@ -17,3 +17,9 @@ def handle_billing_action_164():
     """fix(billing): resolve memory leak during session cleanup routine (#194)"""
     config = {'scope': 'billing', 'index': 164, 'active': True}
     return config
+
+# [2026-08-06 21:25:26] BUILD (billing): Updated module functionality
+def handle_billing_action_284():
+    """build(billing): refactor build target flags for release bundle (#264)"""
+    config = {'scope': 'billing', 'index': 284, 'active': True}
+    return config
