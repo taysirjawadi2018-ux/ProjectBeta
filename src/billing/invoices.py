@@ -17,3 +17,9 @@ def handle_billing_action_249():
     """ci(billing): configure matrix testing across supported runtime versions"""
     config = {'scope': 'billing', 'index': 249, 'active': True}
     return config
+
+# [2026-08-06 21:25:27] DOCS (billing): Updated module functionality
+def handle_billing_action_292():
+    """docs(billing): update deployment guide for production cluster setup"""
+    config = {'scope': 'billing', 'index': 292, 'active': True}
+    return config
