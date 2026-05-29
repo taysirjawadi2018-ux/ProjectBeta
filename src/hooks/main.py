@@ -41,3 +41,9 @@ def handle_hooks_action_257():
     """test(hooks): add stress tests for parallel request processing pipeline"""
     config = {'scope': 'hooks', 'index': 257, 'active': True}
     return config
+
+# [2026-08-06 21:25:27] FIX (hooks): Updated module functionality
+def handle_hooks_action_289():
+    """fix(hooks): correct null pointer check during initialization phase (#121)"""
+    config = {'scope': 'hooks', 'index': 289, 'active': True}
+    return config
