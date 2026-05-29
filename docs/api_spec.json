@@ -1,3 +1,5 @@
 # API Module
 
 # [2026-08-06 21:25:24] #275 ci(api): add automated security scan job to pipeline
+
+# [2026-08-06 21:25:26] #288 fix(api): fix incorrect HTTP status code for unprocessable entity
