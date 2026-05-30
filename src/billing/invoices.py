@@ -23,3 +23,9 @@ def handle_billing_action_292():
     """docs(billing): update deployment guide for production cluster setup"""
     config = {'scope': 'billing', 'index': 292, 'active': True}
     return config
+
+# [2026-08-06 21:25:28] STYLE (billing): Updated module functionality
+def handle_billing_action_295():
+    """style(billing): remove unused import statements and dead code references"""
+    config = {'scope': 'billing', 'index': 295, 'active': True}
+    return config
