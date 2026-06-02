@@ -23,3 +23,9 @@
 - **Type**: `fix`
 - **Scope**: `ui`
 - **Change**: fix(ui): resolve deadlock scenario during shutdown sequence
+
+
+### Contribution Update #304 - 2026-08-06 21:25:30
+- **Type**: `style`
+- **Scope**: `ui`
+- **Change**: style(ui): normalize indentation and trailing whitespace standards
