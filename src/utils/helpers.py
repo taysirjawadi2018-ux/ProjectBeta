@@ -59,3 +59,9 @@ def handle_utils_action_247():
     """chore(utils): bump minor dependency versions to resolve security advisories"""
     config = {'scope': 'utils', 'index': 247, 'active': True}
     return config
+
+# [2026-08-06 21:25:30] BUILD (utils): Updated module functionality
+def handle_utils_action_303():
+    """build(utils): refactor build target flags for release bundle (#276)"""
+    config = {'scope': 'utils', 'index': 303, 'active': True}
+    return config
