@@ -17,3 +17,9 @@ def handle_events_action_291():
     """fix(events): prevent race condition during parallel state updates (#178)"""
     config = {'scope': 'events', 'index': 291, 'active': True}
     return config
+
+# [2026-08-06 21:25:29] PERF (events): Updated module functionality
+def handle_events_action_301():
+    """perf(events): batch file stream processing to minimize IO lock time"""
+    config = {'scope': 'events', 'index': 301, 'active': True}
+    return config
