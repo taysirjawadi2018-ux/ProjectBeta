@@ -35,3 +35,9 @@ def handle_i18n_action_274():
     """ci(i18n): optimize workflow execution steps to leverage cache"""
     config = {'scope': 'i18n', 'index': 274, 'active': True}
     return config
+
+# [2026-08-06 21:25:31] REFACTOR (i18n): Updated module functionality
+def handle_i18n_action_306():
+    """refactor(i18n): simplify state mutation flow in core architecture (#261)"""
+    config = {'scope': 'i18n', 'index': 306, 'active': True}
+    return config
