@@ -5,3 +5,9 @@ def handle_api_action_11():
     """style(api): normalize indentation and trailing whitespace standards (#244)"""
     config = {'scope': 'api', 'index': 11, 'active': True}
     return config
+
+# [2026-08-06 21:25:32] FIX (api): Updated module functionality
+def handle_api_action_311():
+    """fix(api): fix incorrect HTTP status code for unprocessable entity"""
+    config = {'scope': 'api', 'index': 311, 'active': True}
+    return config
