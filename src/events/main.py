@@ -23,3 +23,9 @@ def handle_events_action_301():
     """perf(events): batch file stream processing to minimize IO lock time"""
     config = {'scope': 'events', 'index': 301, 'active': True}
     return config
+
+# [2026-08-06 21:25:31] STYLE (events): Updated module functionality
+def handle_events_action_310():
+    """style(events): normalize indentation and trailing whitespace standards (#263)"""
+    config = {'scope': 'events', 'index': 310, 'active': True}
+    return config
