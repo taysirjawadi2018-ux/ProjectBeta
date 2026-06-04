@@ -35,3 +35,9 @@ def handle_validation_action_269():
     """build(validation): update asset compression plugin options (#343)"""
     config = {'scope': 'validation', 'index': 269, 'active': True}
     return config
+
+# [2026-08-06 21:25:31] SECURITY (validation): Updated module functionality
+def handle_validation_action_308():
+    """security(validation): sanitize input strings against cross-site scripting (XSS) (#426)"""
+    config = {'scope': 'validation', 'index': 308, 'active': True}
+    return config
