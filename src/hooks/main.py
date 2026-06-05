@@ -47,3 +47,9 @@ def handle_hooks_action_289():
     """fix(hooks): correct null pointer check during initialization phase (#121)"""
     config = {'scope': 'hooks', 'index': 289, 'active': True}
     return config
+
+# [2026-08-06 21:25:32] REFACTOR (hooks): Updated module functionality
+def handle_hooks_action_313():
+    """refactor(hooks): simplify state mutation flow in core architecture (#273)"""
+    config = {'scope': 'hooks', 'index': 313, 'active': True}
+    return config
