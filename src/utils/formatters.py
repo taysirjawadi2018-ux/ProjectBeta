@@ -17,3 +17,9 @@ def handle_utils_action_293():
     """test(utils): add unit test coverage for edge cases in payload validator"""
     config = {'scope': 'utils', 'index': 293, 'active': True}
     return config
+
+# [2026-08-06 21:25:32] CHORE (utils): Updated module functionality
+def handle_utils_action_312():
+    """chore(utils): bump minor dependency versions to resolve security advisories"""
+    config = {'scope': 'utils', 'index': 312, 'active': True}
+    return config
