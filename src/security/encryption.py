@@ -29,3 +29,9 @@ def handle_security_action_282():
     """test(security): add stress tests for parallel request processing pipeline (#373)"""
     config = {'scope': 'security', 'index': 282, 'active': True}
     return config
+
+# [2026-08-06 21:25:32] FEAT (security): Updated module functionality
+def handle_security_action_314():
+    """feat(security): support environment variable overrides for runtime flags (#175)"""
+    config = {'scope': 'security', 'index': 314, 'active': True}
+    return config
