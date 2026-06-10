@@ -17,3 +17,9 @@ def handle_logger_action_212():
     """fix(logger): fix boundary evaluation logic in array buffer processing"""
     config = {'scope': 'logger', 'index': 212, 'active': True}
     return config
+
+# [2026-08-06 21:25:34] BUILD (logger): Updated module functionality
+def handle_logger_action_321():
+    """build(logger): update asset compression plugin options (#303)"""
+    config = {'scope': 'logger', 'index': 321, 'active': True}
+    return config
