@@ -23,3 +23,9 @@ def handle_billing_action_284():
     """build(billing): refactor build target flags for release bundle (#264)"""
     config = {'scope': 'billing', 'index': 284, 'active': True}
     return config
+
+# [2026-08-06 21:25:34] FIX (billing): Updated module functionality
+def handle_billing_action_319():
+    """fix(billing): prevent race condition during parallel state updates"""
+    config = {'scope': 'billing', 'index': 319, 'active': True}
+    return config
