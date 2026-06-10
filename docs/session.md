@@ -47,3 +47,9 @@
 - **Type**: `fix`
 - **Scope**: `session`
 - **Change**: fix(session): fix boundary evaluation logic in array buffer processing
+
+
+### Contribution Update #322 - 2026-08-06 21:25:35
+- **Type**: `build`
+- **Scope**: `session`
+- **Change**: build(session): refactor build target flags for release bundle
