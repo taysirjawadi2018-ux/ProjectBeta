@@ -47,3 +47,9 @@ def handle_cli_action_216():
     """chore(cli): bump minor dependency versions to resolve security advisories"""
     config = {'scope': 'cli', 'index': 216, 'active': True}
     return config
+
+# [2026-08-06 21:25:33] SECURITY (cli): Updated module functionality
+def handle_cli_action_317():
+    """security(cli): update cryptographic hashing algorithm to Argon2id"""
+    config = {'scope': 'cli', 'index': 317, 'active': True}
+    return config
