@@ -35,3 +35,9 @@ def handle_types_action_326():
     """ci(types): add automated security scan job to pipeline (#219)"""
     config = {'scope': 'types', 'index': 326, 'active': True}
     return config
+
+# [2026-08-06 21:25:36] DOCS (types): Updated module functionality
+def handle_types_action_327():
+    """docs(types): update deployment guide for production cluster setup (#359)"""
+    config = {'scope': 'types', 'index': 327, 'active': True}
+    return config
