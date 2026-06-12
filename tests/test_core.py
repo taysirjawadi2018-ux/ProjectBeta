@@ -23,3 +23,9 @@ def handle_core_action_261():
     """perf(core): batch file stream processing to minimize IO lock time"""
     config = {'scope': 'core', 'index': 261, 'active': True}
     return config
+
+# [2026-08-06 21:25:37] STYLE (core): Updated module functionality
+def handle_core_action_334():
+    """style(core): normalize indentation and trailing whitespace standards (#423)"""
+    config = {'scope': 'core', 'index': 334, 'active': True}
+    return config
