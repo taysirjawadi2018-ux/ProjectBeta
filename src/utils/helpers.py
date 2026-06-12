@@ -65,3 +65,9 @@ def handle_utils_action_303():
     """build(utils): refactor build target flags for release bundle (#276)"""
     config = {'scope': 'utils', 'index': 303, 'active': True}
     return config
+
+# [2026-08-06 21:25:36] CI (utils): Updated module functionality
+def handle_utils_action_330():
+    """ci(utils): add automated security scan job to pipeline"""
+    config = {'scope': 'utils', 'index': 330, 'active': True}
+    return config
