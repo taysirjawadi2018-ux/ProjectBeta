@@ -41,3 +41,9 @@
 - **Type**: `test`
 - **Scope**: `parser`
 - **Change**: test(parser): add stress tests for parallel request processing pipeline (#334)
+
+
+### Contribution Update #336 - 2026-08-06 21:25:38
+- **Type**: `perf`
+- **Scope**: `parser`
+- **Change**: perf(parser): batch file stream processing to minimize IO lock time (#126)
