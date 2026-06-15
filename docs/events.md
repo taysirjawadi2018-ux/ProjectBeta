@@ -35,3 +35,9 @@
 - **Type**: `security`
 - **Scope**: `events`
 - **Change**: security(events): update cryptographic hashing algorithm to Argon2id
+
+
+### Contribution Update #340 - 2026-08-06 21:25:39
+- **Type**: `ci`
+- **Scope**: `events`
+- **Change**: ci(events): optimize workflow execution steps to leverage cache (#306)
