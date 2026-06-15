@@ -41,3 +41,9 @@
 - **Type**: `refactor`
 - **Scope**: `router`
 - **Change**: refactor(router): decouple database connection pool from request context
+
+
+### Contribution Update #338 - 2026-08-06 21:25:39
+- **Type**: `security`
+- **Scope**: `router`
+- **Change**: security(router): sanitize input strings against cross-site scripting (XSS)
