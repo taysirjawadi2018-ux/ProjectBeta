@@ -29,3 +29,9 @@
 - **Type**: `docs`
 - **Scope**: `events`
 - **Change**: docs(events): add inline docstrings to public interface definitions (#332)
+
+
+### Contribution Update #339 - 2026-08-06 21:25:39
+- **Type**: `security`
+- **Scope**: `events`
+- **Change**: security(events): update cryptographic hashing algorithm to Argon2id
