@@ -47,3 +47,15 @@
 - **Type**: `security`
 - **Scope**: `router`
 - **Change**: security(router): sanitize input strings against cross-site scripting (XSS)
+
+
+### Contribution Update #342 - 2026-08-06 21:25:40
+- **Type**: `feat`
+- **Scope**: `router`
+- **Change**: feat(router): add support for structured JSON payload logging
+
+
+### Contribution Update #343 - 2026-08-06 21:25:40
+- **Type**: `security`
+- **Scope**: `router`
+- **Change**: security(router): sanitize input strings against cross-site scripting (XSS)
