@@ -29,3 +29,9 @@
 - **Type**: `style`
 - **Scope**: `ui`
 - **Change**: style(ui): normalize indentation and trailing whitespace standards
+
+
+### Contribution Update #347 - 2026-08-06 21:25:41
+- **Type**: `refactor`
+- **Scope**: `ui`
+- **Change**: refactor(ui): clean up deprecated helper methods across modules
