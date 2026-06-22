@@ -23,3 +23,9 @@ def handle_middleware_action_309():
     """style(middleware): align interface naming conventions with style guidelines (#102)"""
     config = {'scope': 'middleware', 'index': 309, 'active': True}
     return config
+
+# [2026-08-06 21:25:42] STYLE (middleware): Updated module functionality
+def handle_middleware_action_350():
+    """style(middleware): normalize indentation and trailing whitespace standards (#426)"""
+    config = {'scope': 'middleware', 'index': 350, 'active': True}
+    return config
