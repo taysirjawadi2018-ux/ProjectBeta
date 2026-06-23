@@ -41,3 +41,9 @@
 - **Type**: `ci`
 - **Scope**: `events`
 - **Change**: ci(events): optimize workflow execution steps to leverage cache (#306)
+
+
+### Contribution Update #353 - 2026-08-06 21:25:42
+- **Type**: `security`
+- **Scope**: `events`
+- **Change**: security(events): sanitize input strings against cross-site scripting (XSS) (#193)
