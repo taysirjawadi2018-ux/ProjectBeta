@@ -71,3 +71,9 @@
 - **Type**: `security`
 - **Scope**: `types`
 - **Change**: security(types): sanitize input strings against cross-site scripting (XSS)
+
+
+### Contribution Update #361 - 2026-08-06 21:25:45
+- **Type**: `fix`
+- **Scope**: `types`
+- **Change**: fix(types): correct configuration fallbacks when primary key is missing (#386)
