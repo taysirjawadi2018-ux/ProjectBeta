@@ -47,3 +47,9 @@
 - **Type**: `build`
 - **Scope**: `auth`
 - **Change**: build(auth): configure chunk splitting for bundle optimization (#463)
+
+
+### Contribution Update #359 - 2026-08-06 21:25:44
+- **Type**: `refactor`
+- **Scope**: `auth`
+- **Change**: refactor(auth): decouple token validation logic from HTTP handler context
