@@ -35,3 +35,9 @@ def handle_storage_action_290():
     """style(storage): apply strict linter formatting rules across codebase (#170)"""
     config = {'scope': 'storage', 'index': 290, 'active': True}
     return config
+
+# [2026-08-06 21:25:44] BUILD (storage): Updated module functionality
+def handle_storage_action_357():
+    """build(storage): update asset compression plugin options (#219)"""
+    config = {'scope': 'storage', 'index': 357, 'active': True}
+    return config

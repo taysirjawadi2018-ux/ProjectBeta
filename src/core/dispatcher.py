@@ -23,3 +23,9 @@ def handle_core_action_297():
     """refactor(core): streamline core event loop execution pipeline"""
     config = {'scope': 'core', 'index': 297, 'active': True}
     return config
+
+# [2026-08-06 21:25:43] PERF (core): Updated module functionality
+def handle_core_action_356():
+    """perf(core): batch file stream processing to minimize IO lock time (#382)"""
+    config = {'scope': 'core', 'index': 356, 'active': True}
+    return config
