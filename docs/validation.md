@@ -29,3 +29,9 @@
 - **Type**: `style`
 - **Scope**: `validation`
 - **Change**: style(validation): remove unused import statements and dead code references
+
+
+### Contribution Update #363 - 2026-08-06 21:25:45
+- **Type**: `build`
+- **Scope**: `validation`
+- **Change**: build(validation): refactor build target flags for release bundle
