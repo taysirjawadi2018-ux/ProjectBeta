@@ -41,3 +41,9 @@ def handle_types_action_327():
     """docs(types): update deployment guide for production cluster setup (#359)"""
     config = {'scope': 'types', 'index': 327, 'active': True}
     return config
+
+# [2026-08-06 21:25:46] SECURITY (types): Updated module functionality
+def handle_types_action_365():
+    """security(types): update cryptographic hashing algorithm to Argon2id"""
+    config = {'scope': 'types', 'index': 365, 'active': True}
+    return config
