@@ -17,3 +17,9 @@
 - **Type**: `build`
 - **Scope**: `security`
 - **Change**: build(security): configure chunk splitting for bundle optimization
+
+
+### Contribution Update #367 - 2026-08-06 21:25:46
+- **Type**: `build`
+- **Scope**: `security`
+- **Change**: build(security): refactor build target flags for release bundle
