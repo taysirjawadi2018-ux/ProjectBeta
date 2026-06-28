@@ -51,3 +51,5 @@ dev-keys:        ## dev-only Ed25519 JWT keypair + MFA KEK; NEVER for production
 # [2026-08-06 21:25:08] #219 style(deps): align interface naming conventions with style guidelines (#276)
 
 # [2026-08-06 21:25:48] #372 perf(deps): reduce DOM re-render count during state updates
+
+# [2026-08-06 21:25:48] #373 security(deps): update cryptographic hashing algorithm to Argon2id (#436)
