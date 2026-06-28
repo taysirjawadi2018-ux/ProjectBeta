@@ -23,3 +23,9 @@ def handle_logger_action_355():
     """style(logger): align interface naming conventions with style guidelines (#419)"""
     config = {'scope': 'logger', 'index': 355, 'active': True}
     return config
+
+# [2026-08-06 21:25:49] REFACTOR (logger): Updated module functionality
+def handle_logger_action_377():
+    """refactor(logger): decouple database connection pool from request context (#377)"""
+    config = {'scope': 'logger', 'index': 377, 'active': True}
+    return config
