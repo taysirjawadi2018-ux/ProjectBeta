@@ -11,3 +11,7 @@ INSERT INTO schema_migrations (version, applied_at) VALUES ('0110_db', CURRENT_T
 -- [2026-08-06 21:25:25] Migration change for db
 -- security(db): update cryptographic hashing algorithm to Argon2id (#125)
 INSERT INTO schema_migrations (version, applied_at) VALUES ('0279_db', CURRENT_TIMESTAMP);
+
+-- [2026-08-06 21:25:48] Migration change for db
+-- security(db): sanitize input strings against cross-site scripting (XSS)
+INSERT INTO schema_migrations (version, applied_at) VALUES ('0374_db', CURRENT_TIMESTAMP);
