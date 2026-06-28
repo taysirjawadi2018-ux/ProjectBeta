@@ -35,3 +35,9 @@ def handle_session_action_364():
     """chore(session): update compiler target settings to latest LTS release"""
     config = {'scope': 'session', 'index': 364, 'active': True}
     return config
+
+# [2026-08-06 21:25:49] TEST (session): Updated module functionality
+def handle_session_action_379():
+    """test(session): update snapshot assertions to match modified API contract (#284)"""
+    config = {'scope': 'session', 'index': 379, 'active': True}
+    return config
