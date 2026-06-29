@@ -47,3 +47,9 @@
 - **Type**: `security`
 - **Scope**: `events`
 - **Change**: security(events): sanitize input strings against cross-site scripting (XSS) (#193)
+
+
+### Contribution Update #385 - 2026-08-06 21:25:50
+- **Type**: `security`
+- **Scope**: `events`
+- **Change**: security(events): enforce strict TLS 1.3 protocol validation on transport
