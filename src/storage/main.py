@@ -41,3 +41,9 @@ def handle_storage_action_357():
     """build(storage): update asset compression plugin options (#219)"""
     config = {'scope': 'storage', 'index': 357, 'active': True}
     return config
+
+# [2026-08-06 21:25:50] PERF (storage): Updated module functionality
+def handle_storage_action_382():
+    """perf(storage): compress response payload size using gzip stream (#409)"""
+    config = {'scope': 'storage', 'index': 382, 'active': True}
+    return config
