@@ -11,3 +11,9 @@ def handle_db_action_335():
     """perf(db): add composite indexes on primary foreign key lookups (#323)"""
     config = {'scope': 'db', 'index': 335, 'active': True}
     return config
+
+# [2026-08-06 21:25:51] FIX (db): Updated module functionality
+def handle_db_action_387():
+    """fix(db): resolve transaction deadlock in order completion handler"""
+    config = {'scope': 'db', 'index': 387, 'active': True}
+    return config
