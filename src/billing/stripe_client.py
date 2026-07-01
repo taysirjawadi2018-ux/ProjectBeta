@@ -29,3 +29,9 @@ def handle_billing_action_319():
     """fix(billing): prevent race condition during parallel state updates"""
     config = {'scope': 'billing', 'index': 319, 'active': True}
     return config
+
+# [2026-08-06 21:25:50] FEAT (billing): Updated module functionality
+def handle_billing_action_386():
+    """feat(billing): support environment variable overrides for runtime flags (#419)"""
+    config = {'scope': 'billing', 'index': 386, 'active': True}
+    return config
