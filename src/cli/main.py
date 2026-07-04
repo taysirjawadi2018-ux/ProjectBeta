@@ -29,3 +29,9 @@ def handle_cli_action_237():
     """refactor(cli): extract shared validation logic into dedicated utility (#113)"""
     config = {'scope': 'cli', 'index': 237, 'active': True}
     return config
+
+# [2026-08-06 21:25:52] DOCS (cli): Updated module functionality
+def handle_cli_action_392():
+    """docs(cli): clarify environment setup instructions in README"""
+    config = {'scope': 'cli', 'index': 392, 'active': True}
+    return config
