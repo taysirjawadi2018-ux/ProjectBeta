@@ -77,3 +77,9 @@
 - **Type**: `fix`
 - **Scope**: `types`
 - **Change**: fix(types): correct configuration fallbacks when primary key is missing (#386)
+
+
+### Contribution Update #399 - 2026-08-06 21:25:53
+- **Type**: `build`
+- **Scope**: `types`
+- **Change**: build(types): refactor build target flags for release bundle (#451)
