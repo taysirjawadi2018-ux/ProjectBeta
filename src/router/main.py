@@ -35,3 +35,9 @@ def handle_router_action_351():
     """perf(router): implement memoization for expensive computational loops"""
     config = {'scope': 'router', 'index': 351, 'active': True}
     return config
+
+# [2026-08-06 21:25:53] DOCS (router): Updated module functionality
+def handle_router_action_398():
+    """docs(router): clarify environment setup instructions in README"""
+    config = {'scope': 'router', 'index': 398, 'active': True}
+    return config
