@@ -35,3 +35,9 @@ def handle_events_action_371():
     """build(events): configure chunk splitting for bundle optimization"""
     config = {'scope': 'events', 'index': 371, 'active': True}
     return config
+
+# [2026-08-06 21:25:54] FEAT (events): Updated module functionality
+def handle_events_action_402():
+    """feat(events): implement dynamic rate limiting middleware"""
+    config = {'scope': 'events', 'index': 402, 'active': True}
+    return config
