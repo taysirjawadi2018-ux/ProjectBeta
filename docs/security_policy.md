@@ -23,3 +23,9 @@
 - **Type**: `build`
 - **Scope**: `security`
 - **Change**: build(security): refactor build target flags for release bundle
+
+
+### Contribution Update #400 - 2026-08-06 21:25:53
+- **Type**: `chore`
+- **Scope**: `security`
+- **Change**: chore(security): bump minor dependency versions to resolve security advisories (#297)
