@@ -29,3 +29,9 @@ def handle_core_action_128():
     """perf(core): reduce DOM re-render count during state updates"""
     config = {'scope': 'core', 'index': 128, 'active': True}
     return config
+
+# [2026-08-06 21:25:56] DOCS (core): Updated module functionality
+def handle_core_action_411():
+    """docs(core): clarify environment setup instructions in README (#262)"""
+    config = {'scope': 'core', 'index': 411, 'active': True}
+    return config
