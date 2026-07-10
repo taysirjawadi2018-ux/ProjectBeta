@@ -65,3 +65,9 @@
 - **Type**: `refactor`
 - **Scope**: `router`
 - **Change**: refactor(router): eliminate redundant object allocations in critical path
+
+
+### Contribution Update #417 - 2026-08-06 21:25:57
+- **Type**: `test`
+- **Scope**: `router`
+- **Change**: test(router): update snapshot assertions to match modified API contract
