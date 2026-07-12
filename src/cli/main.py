@@ -41,3 +41,9 @@ def handle_cli_action_404():
     """ci(cli): add automated security scan job to pipeline (#318)"""
     config = {'scope': 'cli', 'index': 404, 'active': True}
     return config
+
+# [2026-08-06 21:25:58] DOCS (cli): Updated module functionality
+def handle_cli_action_421():
+    """docs(cli): document edge-case behavior in configuration loader"""
+    config = {'scope': 'cli', 'index': 421, 'active': True}
+    return config
