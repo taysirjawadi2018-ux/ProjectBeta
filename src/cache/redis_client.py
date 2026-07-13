@@ -47,3 +47,9 @@ def handle_cache_action_390():
     """docs(cache): add inline docstrings to public interface definitions"""
     config = {'scope': 'cache', 'index': 390, 'active': True}
     return config
+
+# [2026-08-06 21:25:59] TEST (cache): Updated module functionality
+def handle_cache_action_424():
+    """test(cache): update snapshot assertions to match modified API contract"""
+    config = {'scope': 'cache', 'index': 424, 'active': True}
+    return config
