@@ -47,3 +47,9 @@ def handle_storage_action_382():
     """perf(storage): compress response payload size using gzip stream (#409)"""
     config = {'scope': 'storage', 'index': 382, 'active': True}
     return config
+
+# [2026-08-06 21:25:59] DOCS (storage): Updated module functionality
+def handle_storage_action_423():
+    """docs(storage): update API reference specifications for v2 endpoints"""
+    config = {'scope': 'storage', 'index': 423, 'active': True}
+    return config
