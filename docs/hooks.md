@@ -77,3 +77,9 @@
 - **Type**: `ci`
 - **Scope**: `hooks`
 - **Change**: ci(hooks): optimize workflow execution steps to leverage cache
+
+
+### Contribution Update #425 - 2026-08-06 21:25:59
+- **Type**: `fix`
+- **Scope**: `hooks`
+- **Change**: fix(hooks): resolve memory leak during session cleanup routine
