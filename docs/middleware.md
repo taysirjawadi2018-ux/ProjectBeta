@@ -59,3 +59,9 @@
 - **Type**: `style`
 - **Scope**: `middleware`
 - **Change**: style(middleware): remove unused import statements and dead code references (#114)
+
+
+### Contribution Update #433 - 2026-08-06 21:26:01
+- **Type**: `style`
+- **Scope**: `middleware`
+- **Change**: style(middleware): normalize indentation and trailing whitespace standards (#324)
