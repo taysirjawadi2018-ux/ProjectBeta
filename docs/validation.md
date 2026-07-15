@@ -35,3 +35,9 @@
 - **Type**: `build`
 - **Scope**: `validation`
 - **Change**: build(validation): refactor build target flags for release bundle
+
+
+### Contribution Update #429 - 2026-08-06 21:26:00
+- **Type**: `chore`
+- **Scope**: `validation`
+- **Change**: chore(validation): sync internal package locks and manifest metadata (#319)
