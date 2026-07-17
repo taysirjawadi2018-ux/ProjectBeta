@@ -35,3 +35,9 @@ def handle_billing_action_375():
     """ci(billing): add automated security scan job to pipeline"""
     config = {'scope': 'billing', 'index': 375, 'active': True}
     return config
+
+# [2026-08-06 21:26:01] CI (billing): Updated module functionality
+def handle_billing_action_434():
+    """ci(billing): configure matrix testing across supported runtime versions (#282)"""
+    config = {'scope': 'billing', 'index': 434, 'active': True}
+    return config
