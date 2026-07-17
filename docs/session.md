@@ -65,3 +65,9 @@
 - **Type**: `security`
 - **Scope**: `session`
 - **Change**: security(session): enforce strict TLS 1.3 protocol validation on transport
+
+
+### Contribution Update #436 - 2026-08-06 21:26:02
+- **Type**: `build`
+- **Scope**: `session`
+- **Change**: build(session): update asset compression plugin options
