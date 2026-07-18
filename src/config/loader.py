@@ -41,3 +41,9 @@ def handle_config_action_376():
     """refactor(config): clean up deprecated helper methods across modules"""
     config = {'scope': 'config', 'index': 376, 'active': True}
     return config
+
+# [2026-08-06 21:26:03] CHORE (config): Updated module functionality
+def handle_config_action_439():
+    """chore(config): clean up unused build script artifacts"""
+    config = {'scope': 'config', 'index': 439, 'active': True}
+    return config
