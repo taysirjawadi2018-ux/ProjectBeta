@@ -47,3 +47,9 @@ def handle_cli_action_421():
     """docs(cli): document edge-case behavior in configuration loader"""
     config = {'scope': 'cli', 'index': 421, 'active': True}
     return config
+
+# [2026-08-06 21:26:04] PERF (cli): Updated module functionality
+def handle_cli_action_446():
+    """perf(cli): reduce DOM re-render count during state updates (#428)"""
+    config = {'scope': 'cli', 'index': 446, 'active': True}
+    return config
