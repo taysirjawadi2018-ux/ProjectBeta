@@ -53,3 +53,9 @@ def handle_cache_action_424():
     """test(cache): update snapshot assertions to match modified API contract"""
     config = {'scope': 'cache', 'index': 424, 'active': True}
     return config
+
+# [2026-08-06 21:26:07] DOCS (cache): Updated module functionality
+def handle_cache_action_457():
+    """docs(cache): update deployment guide for production cluster setup"""
+    config = {'scope': 'cache', 'index': 457, 'active': True}
+    return config
