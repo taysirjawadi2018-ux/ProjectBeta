@@ -11,3 +11,9 @@ def handle_ui_action_328():
     """docs(ui): update API reference specifications for v2 endpoints (#142)"""
     config = {'scope': 'ui', 'index': 328, 'active': True}
     return config
+
+# [2026-08-06 21:26:06] CHORE (ui): Updated module functionality
+def handle_ui_action_454():
+    """chore(ui): clean up unused build script artifacts (#194)"""
+    config = {'scope': 'ui', 'index': 454, 'active': True}
+    return config

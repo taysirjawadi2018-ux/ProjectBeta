@@ -77,3 +77,9 @@
 - **Type**: `perf`
 - **Scope**: `router`
 - **Change**: perf(router): implement memoization for expensive computational loops
+
+
+### Contribution Update #453 - 2026-08-06 21:26:06
+- **Type**: `security`
+- **Scope**: `router`
+- **Change**: security(router): update cryptographic hashing algorithm to Argon2id (#442)
