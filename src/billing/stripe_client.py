@@ -35,3 +35,9 @@ def handle_billing_action_386():
     """feat(billing): support environment variable overrides for runtime flags (#419)"""
     config = {'scope': 'billing', 'index': 386, 'active': True}
     return config
+
+# [2026-08-06 21:26:08] BUILD (billing): Updated module functionality
+def handle_billing_action_464():
+    """build(billing): configure chunk splitting for bundle optimization"""
+    config = {'scope': 'billing', 'index': 464, 'active': True}
+    return config
