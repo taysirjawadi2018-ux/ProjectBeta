@@ -41,3 +41,9 @@ def handle_parser_action_209():
     """perf(parser): implement memoization for expensive computational loops (#439)"""
     config = {'scope': 'parser', 'index': 209, 'active': True}
     return config
+
+# [2026-08-06 21:26:07] CI (parser): Updated module functionality
+def handle_parser_action_461():
+    """ci(parser): configure matrix testing across supported runtime versions"""
+    config = {'scope': 'parser', 'index': 461, 'active': True}
+    return config
