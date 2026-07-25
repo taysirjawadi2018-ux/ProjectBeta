@@ -41,3 +41,9 @@ def handle_logger_action_460():
     """chore(logger): update compiler target settings to latest LTS release (#326)"""
     config = {'scope': 'logger', 'index': 460, 'active': True}
     return config
+
+# [2026-08-06 21:26:08] REFACTOR (logger): Updated module functionality
+def handle_logger_action_466():
+    """refactor(logger): eliminate redundant object allocations in critical path (#267)"""
+    config = {'scope': 'logger', 'index': 466, 'active': True}
+    return config
