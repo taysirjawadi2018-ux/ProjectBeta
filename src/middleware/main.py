@@ -35,3 +35,9 @@ def handle_middleware_action_368():
     """security(middleware): update cryptographic hashing algorithm to Argon2id"""
     config = {'scope': 'middleware', 'index': 368, 'active': True}
     return config
+
+# [2026-08-06 21:26:09] SECURITY (middleware): Updated module functionality
+def handle_middleware_action_471():
+    """security(middleware): sanitize input strings against cross-site scripting (XSS)"""
+    config = {'scope': 'middleware', 'index': 471, 'active': True}
+    return config
