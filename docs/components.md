@@ -53,3 +53,9 @@
 - **Type**: `refactor`
 - **Scope**: `ui`
 - **Change**: refactor(ui): simplify state mutation flow in core architecture
+
+
+### Contribution Update #468 - 2026-08-06 21:26:09
+- **Type**: `fix`
+- **Scope**: `ui`
+- **Change**: fix(ui): fix edge case in date parsing for timezone offsets
