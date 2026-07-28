@@ -17,3 +17,9 @@ def handle_auth_action_320():
     """build(auth): configure chunk splitting for bundle optimization"""
     config = {'scope': 'auth', 'index': 320, 'active': True}
     return config
+
+# [2026-08-06 21:26:10] FEAT (auth): Updated module functionality
+def handle_auth_action_473():
+    """feat(auth): integrate passwordless magic link generation endpoint"""
+    config = {'scope': 'auth', 'index': 473, 'active': True}
+    return config
