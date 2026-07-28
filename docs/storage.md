@@ -41,3 +41,9 @@
 - **Type**: `test`
 - **Scope**: `storage`
 - **Change**: test(storage): mock external API responses in integration test suite
+
+
+### Contribution Update #472 - 2026-08-06 21:26:09
+- **Type**: `fix`
+- **Scope**: `storage`
+- **Change**: fix(storage): resolve memory leak during session cleanup routine
