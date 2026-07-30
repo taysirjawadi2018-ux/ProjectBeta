@@ -42,6 +42,7 @@ CREATE TABLE offices (
     opening_hours   JSONB,                  -- Flexible schedule storage
     is_active       BOOLEAN DEFAULT TRUE,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at      TIMESTAMP,
 
     CONSTRAINT uq_offices_name_governorate UNIQUE (name, governorate, city)
 );
@@ -149,11 +150,11 @@ CREATE TABLE staff (
     office_id       INTEGER NOT NULL,
     name            VARCHAR(255) NOT NULL,
     email           VARCHAR(255) NOT NULL UNIQUE,
-    role            VARCHAR(100) NOT NULL,          -- e.g., 'clerk', 'supervisor', 'director'
+    role            VARCHAR(100) NOT NULL  CHECK (role IN ('clerk','supervisor','director','admin') ,    -- e.g., 'clerk', 'supervisor', 'director'
     password_hash   VARCHAR(255) NOT NULL,
     is_active       BOOLEAN DEFAULT TRUE,
     created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
+    updated_at      TIMESTAMP,
     CONSTRAINT fk_staff_office 
         FOREIGN KEY (office_id) REFERENCES offices(id) 
         ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -180,7 +181,7 @@ CREATE TABLE services (
     is_digital          BOOLEAN DEFAULT FALSE,      -- Fully digital workflow?
     is_available        BOOLEAN DEFAULT TRUE,
     created_at          TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
+    updated_at      TIMESTAMP,
     CONSTRAINT fk_services_office 
         FOREIGN KEY (office_id) REFERENCES offices(id) 
         ON DELETE CASCADE ON UPDATE CASCADE,
@@ -214,7 +215,11 @@ CREATE TABLE requests (
     estimated_ready_date DATE,
     completed_at        TIMESTAMP,
     notes               TEXT,                           -- Internal notes by staff
-
+    updated_at      TIMESTAMP,
+    assigned_staff_id SERIAL,
+    CONSTRAINT fk_requests_staff 
+        FOREIGN KEY (assigned_staff_id) REFERENCES staff(id) 
+        ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT fk_requests_user 
         FOREIGN KEY (user_id) REFERENCES users(id) 
         ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -319,8 +324,7 @@ CREATE TABLE appointments (
     CONSTRAINT fk_appointments_service 
         FOREIGN KEY (service_id) REFERENCES services(id) 
         ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT chk_appointments_status CHECK (status IN ('scheduled', 'completed', 'cancelled', 'no_show')),
-    CONSTRAINT chk_appointments_date_future CHECK (appointment_date >= CURRENT_DATE)
+    CONSTRAINT chk_appointments_status CHECK (status IN ('scheduled', 'completed', 'cancelled', 'no_show'))
 );
 
 COMMENT ON TABLE appointments IS 'Scheduled appointments for in-person visits';
@@ -409,8 +413,8 @@ CREATE TABLE user_steg_account (
         FOREIGN KEY (user_id) REFERENCES users(id) 
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT uq_user_steg_contract UNIQUE (contract_number),
-    CONSTRAINT uq_user_steg_primary_per_user UNIQUE (user_id, is_primary)
-);
+    CREATE UNIQUE INDEX uq_one_primary_steg_per_user ON user_steg_account(user_id) WHERE is_primary = TRUE;
+);  
 
 COMMENT ON TABLE user_steg_account IS 'Linked STEG (Tunisian Electricity/Gas) accounts';
 CREATE INDEX idx_user_steg_account_user_id ON user_steg_account(user_id);
