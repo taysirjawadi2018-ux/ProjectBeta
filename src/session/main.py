@@ -53,3 +53,9 @@ def handle_session_action_405():
     """build(session): configure chunk splitting for bundle optimization"""
     config = {'scope': 'session', 'index': 405, 'active': True}
     return config
+
+# [2026-08-06 21:26:10] DOCS (session): Updated module functionality
+def handle_session_action_474():
+    """docs(session): clarify environment setup instructions in README"""
+    config = {'scope': 'session', 'index': 474, 'active': True}
+    return config
