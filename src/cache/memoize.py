@@ -23,3 +23,9 @@ def handle_cache_action_426():
     """chore(cache): bump minor dependency versions to resolve security advisories"""
     config = {'scope': 'cache', 'index': 426, 'active': True}
     return config
+
+# [2026-08-06 21:26:11] FIX (cache): Updated module functionality
+def handle_cache_action_477():
+    """fix(cache): resolve incorrect status code mapping for unauthorized calls (#442)"""
+    config = {'scope': 'cache', 'index': 477, 'active': True}
+    return config
