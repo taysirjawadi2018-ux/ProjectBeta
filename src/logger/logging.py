@@ -29,3 +29,9 @@ def handle_logger_action_377():
     """refactor(logger): decouple database connection pool from request context (#377)"""
     config = {'scope': 'logger', 'index': 377, 'active': True}
     return config
+
+# [2026-08-06 21:26:11] PERF (logger): Updated module functionality
+def handle_logger_action_480():
+    """perf(logger): batch file stream processing to minimize IO lock time (#409)"""
+    config = {'scope': 'logger', 'index': 480, 'active': True}
+    return config
