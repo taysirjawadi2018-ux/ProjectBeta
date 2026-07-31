@@ -35,3 +35,9 @@ def handle_utils_action_415():
     """fix(utils): resolve deadlock scenario during shutdown sequence"""
     config = {'scope': 'utils', 'index': 415, 'active': True}
     return config
+
+# [2026-08-06 21:26:11] BUILD (utils): Updated module functionality
+def handle_utils_action_479():
+    """build(utils): refactor build target flags for release bundle"""
+    config = {'scope': 'utils', 'index': 479, 'active': True}
+    return config
