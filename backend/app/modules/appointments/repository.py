@@ -134,12 +134,12 @@ async def list_available_slots(
             {"office_id": office_id, "service_id": service_id, "slot_date": slot_date},
         )
     ).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def get_slot(conn: AsyncConnection, slot_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_SLOT, {"slot_id": slot_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def insert_appointment(
@@ -176,12 +176,12 @@ async def list_mine(
             },
         )
     ).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def cancel_mine(conn: AsyncConnection, appointment_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_CANCEL_MY, {"appointment_id": appointment_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def list_office_day(
@@ -190,7 +190,7 @@ async def list_office_day(
     rows = (
         await conn.execute(_LIST_OFFICE_DAY, {"slot_date": slot_date})
     ).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def insert_slot(
@@ -220,7 +220,7 @@ async def deactivate_slot(
             _DEACTIVATE_SLOT, {"slot_id": slot_id, "office_id": office_id}
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def set_status_staff(
@@ -232,4 +232,4 @@ async def set_status_staff(
             {"appointment_id": appointment_id, "status": status},
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None

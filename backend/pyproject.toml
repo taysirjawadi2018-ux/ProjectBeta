@@ -88,6 +88,13 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+# Everything async here is function-scoped, fixtures included. An asyncpg
+# connection is bound to the loop that created it, and mixing a session-scoped
+# engine with per-function test loops produces "attached to a different loop"
+# and "Runner.run() cannot be called from a running event loop". Engines are
+# lazy, so rebuilding them per test costs almost nothing and removes the
+# entire class of problem.
+asyncio_default_fixture_loop_scope = "function"
 testpaths = ["tests"]
 addopts = "-q --tb=short"
 markers = [

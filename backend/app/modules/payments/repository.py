@@ -116,12 +116,12 @@ _MARK_FAILED = text(
 
 async def get_type_by_code(conn: AsyncConnection, code: str) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_TYPE_BY_CODE, {"code": code})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def get_method_by_code(conn: AsyncConnection, code: str) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_METHOD_BY_CODE, {"code": code})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def insert_payment(
@@ -158,12 +158,12 @@ async def list_my(
             },
         )
     ).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def get_by_id(conn: AsyncConnection, payment_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_BY_ID, {"payment_id": payment_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def confirm_payment(
@@ -181,7 +181,7 @@ async def confirm_payment(
             },
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def list_filtered(
@@ -199,13 +199,13 @@ async def list_filtered(
             },
         )
     ).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def list_pending(conn: AsyncConnection, *, limit: int) -> list[dict[str, Any]]:
     """Worker-only: payments awaiting the gateway, oldest first."""
     rows = (await conn.execute(_LIST_PENDING, {"limit": limit})).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def mark_failed(

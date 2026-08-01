@@ -1,32 +1,26 @@
 """requests module business rules (Structure.md §3): SQL lives in repository.py.
 
 Services are what ARQ workers call; nothing here may touch HTTP. Cross-module
-calls go through other modules' service layer only, and the two lazy imports
-(catalog, notifications) are deliberately inside function bodies so module
-import order never matters.
+calls go through other modules' service layer only, and the notifications
+import is deliberately inside the function body so module import order never
+matters.
 """
 
 from __future__ import annotations
 
-import importlib
-import json
 from datetime import datetime
-from pathlib import Path
 from typing import Any
 
 import structlog
-from jsonschema import Draft202012Validator
-from jsonschema.exceptions import ValidationError
 from sqlalchemy.ext.asyncio import AsyncConnection
 
-from app.core.errors import BadRequest, Conflict, NotFound, UnprocessableEntity
+from app.core.errors import BadRequest, Conflict, NotFound
 from app.core.pagination import decode_cursor, encode_cursor
 from app.modules.requests import repository as requests_repo
+from app.modules.requests.formdata import validate_form_data
 from app.modules.requests.schemas import RequestCreateIn, StatusUpdateIn
 
 log = structlog.get_logger("watiq.requests")
-
-_FORMS_DIR = Path(__file__).parent / "formschemas"
 
 
 async def _validate_form_data(
@@ -35,39 +29,16 @@ async def _validate_form_data(
     """Boundary validation of the citizen-supplied form payload.
 
     `requests.form_data` is JSONB with no database-enforced shape, so it is the
-    one place the schema cannot help (Security.md §8.2). When the catalog
-    module is available it supplies the service's form schema; otherwise we
-    fall back to a plain object check rather than blocking submission.
+    one place the schema cannot help (Security.md §8.2). The size cap and the
+    structural limits in `formdata` apply unconditionally — they are the DoS
+    control and need no schema. Full JSON Schema validation applies on top
+    whenever the service has a file in `formschemas/`.
+
+    The service code is resolved here, server-side, from `office_service_id`.
+    It is never read from the request body.
     """
-    if not isinstance(form_data, dict):
-        raise UnprocessableEntity("form_data must be an object.")
-
-    schema: dict[str, Any] | None = None
-    try:
-        catalog = importlib.import_module("app.modules.catalog.service")
-        get_service = getattr(catalog, "get_service", None)
-        if get_service is not None:
-            row = await get_service(conn, office_service_id=office_service_id)
-            if isinstance(row, dict):
-                schema = row.get("form_schema") or row.get("required_schema")
-                if schema is None and row.get("code"):
-                    path = _FORMS_DIR / f"{row['code']}.json"
-                    if path.is_file():
-                        loaded = json.loads(path.read_text(encoding="utf-8"))
-                        schema = loaded if isinstance(loaded, dict) else None
-    except Exception as exc:  # catalog/formschemas are optional; never block on them
-        log.warning("form_schema_unavailable", office_service_id=office_service_id,
-                    error=str(exc))
-        schema = None
-
-    if schema is None:
-        return
-    try:
-        Draft202012Validator(schema).validate(form_data)
-    except ValidationError:
-        raise UnprocessableEntity(
-            "form_data does not match the required schema for this service."
-        ) from None
+    service_code = await requests_repo.get_service_code(conn, office_service_id)
+    validate_form_data(service_code, form_data)
 
 
 async def _notify(

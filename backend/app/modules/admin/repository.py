@@ -168,7 +168,7 @@ async def search_users(
             {"query": query, "cursor_id": cursor_id, "limit": limit},
         )
     ).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def deactivate_user(conn: AsyncConnection, *, user_id: int, reason: str) -> bool:
@@ -183,7 +183,7 @@ async def reactivate_user(conn: AsyncConnection, user_id: int) -> bool:
 
 async def find_anonymize_target(conn: AsyncConnection, user_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_ANONYMIZE_TARGET, {"user_id": user_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def anonymize_call(
@@ -226,7 +226,7 @@ async def revoke_sessions(
 
 async def list_staff(conn: AsyncConnection) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_STAFF)).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def insert_staff(
@@ -250,7 +250,7 @@ async def insert_staff(
 
 async def get_staff_by_id(conn: AsyncConnection, staff_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_STAFF_BY_ID, {"staff_id": staff_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def set_staff_active(conn: AsyncConnection, *, staff_id: int, is_active: bool) -> bool:
@@ -262,17 +262,17 @@ async def set_staff_active(conn: AsyncConnection, *, staff_id: int, is_active: b
 
 async def list_roles(conn: AsyncConnection) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_ROLES)).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def get_role_by_code(conn: AsyncConnection, role_code: str) -> dict[str, Any] | None:
     row = (await conn.execute(_ROLE_BY_CODE, {"role_code": role_code})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def get_role_by_id(conn: AsyncConnection, role_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_ROLE_BY_ID, {"role_id": role_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def replace_role_permissions(
@@ -291,4 +291,4 @@ async def replace_role_permissions(
 
 async def list_permissions(conn: AsyncConnection) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_PERMISSIONS)).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]

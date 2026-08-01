@@ -330,7 +330,7 @@ async def find_user_by_login(conn: AsyncConnection, login: str) -> dict[str, Any
             _FIND_USER_BY_LOGIN, {"login": login}
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def find_staff_by_email(conn: AsyncConnection, email: str) -> StaffLoginRow | None:
@@ -429,7 +429,7 @@ async def find_live_code(conn: AsyncConnection, *, purpose: str, user_id: int | 
             {"purpose": purpose, "user_id": user_id, "staff_id": staff_id},
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def find_live_code_by_hash(
@@ -441,7 +441,7 @@ async def find_live_code_by_hash(
             {"purpose": purpose, "code_hash": code_hash},
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def consume_code(conn: AsyncConnection, code_id: int) -> None:
@@ -458,7 +458,7 @@ async def insert_recovery_code(conn: AsyncConnection, *, staff_id: int, code_has
 
 async def find_live_recovery_code(conn: AsyncConnection, staff_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_FIND_LIVE_RECOVERY_CODE, {"staff_id": staff_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def use_recovery_code(conn: AsyncConnection, code_id: int) -> None:

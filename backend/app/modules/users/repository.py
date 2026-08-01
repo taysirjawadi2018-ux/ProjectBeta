@@ -41,7 +41,7 @@ _UPDATE_PROFILE = text(
 
 async def get_profile(conn: AsyncConnection, user_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_PROFILE, {"user_id": user_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def update_profile(
@@ -53,4 +53,4 @@ async def update_profile(
             {"user_id": user_id, **fields},
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None

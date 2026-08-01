@@ -64,7 +64,7 @@ _STAFF_EMAIL_BY_ID = text("SELECT email FROM staff WHERE id = :staff_id")
 
 async def _session_by_id(conn: AsyncConnection, session_id: str) -> dict[str, Any] | None:
     row = (await conn.execute(_SESSION_BY_ID, {"session_id": session_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def _staff_email_by_id(conn: AsyncConnection, staff_id: int | None) -> str:

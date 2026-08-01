@@ -49,7 +49,7 @@ _LIST_OFFICE_STAFF = text(
 
 async def get_me(conn: AsyncConnection, staff_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_ME, {"staff_id": staff_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def list_permissions(conn: AsyncConnection, staff_id: int) -> list[str]:
@@ -59,4 +59,4 @@ async def list_permissions(conn: AsyncConnection, staff_id: int) -> list[str]:
 
 async def list_office_staff(conn: AsyncConnection, office_id: int) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_OFFICE_STAFF, {"office_id": office_id})).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]

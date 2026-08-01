@@ -74,28 +74,28 @@ _LIST_CATEGORIES = text(
 
 async def list_services(conn: AsyncConnection) -> list[dict[str, Any]]:
     rows = await conn.execute(_LIST_SERVICES)
-    return [dict(r) for r in rows.fetchall()]
+    return [dict(r._mapping) for r in rows.fetchall()]
 
 
 async def find_service_by_slug(conn: AsyncConnection, slug: str) -> dict[str, Any] | None:
     row = (await conn.execute(_FIND_SERVICE_BY_SLUG, {"slug": slug})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def list_offices(
     conn: AsyncConnection, governorate: str | None = None,
 ) -> list[dict[str, Any]]:
     rows = await conn.execute(_LIST_OFFICES, {"governorate": governorate})
-    return [dict(r) for r in rows.fetchall()]
+    return [dict(r._mapping) for r in rows.fetchall()]
 
 
 async def list_office_services(
     conn: AsyncConnection, office_id: int,
 ) -> list[dict[str, Any]]:
     rows = await conn.execute(_LIST_OFFICE_SERVICES, {"office_id": office_id})
-    return [dict(r) for r in rows.fetchall()]
+    return [dict(r._mapping) for r in rows.fetchall()]
 
 
 async def list_categories(conn: AsyncConnection) -> list[dict[str, Any]]:
     rows = await conn.execute(_LIST_CATEGORIES)
-    return [dict(r) for r in rows.fetchall()]
+    return [dict(r._mapping) for r in rows.fetchall()]

@@ -76,7 +76,7 @@ async def list_for_user(
             "cursor_id": cursor_id,
         },
     )
-    return [dict(r) for r in rows.fetchall()]
+    return [dict(r._mapping) for r in rows.fetchall()]
 
 
 async def count_unread(conn: AsyncConnection, user_id: int) -> int:

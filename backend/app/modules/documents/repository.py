@@ -133,14 +133,14 @@ async def list_for_request(
     conn: AsyncConnection, request_id: int
 ) -> list[dict[str, Any]]:
     rows = await conn.execute(_LIST_FOR_REQUEST, {"request_id": request_id})
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def get_document(
     conn: AsyncConnection, document_id: int
 ) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_DOCUMENT, {"document_id": document_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def update_checksum(
@@ -170,7 +170,7 @@ async def confirm_verify(
             },
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def delete_document(conn: AsyncConnection, document_id: int) -> bool:

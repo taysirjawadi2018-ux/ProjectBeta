@@ -40,6 +40,19 @@ _LIST_MY = text(
     """
 )
 
+# Resolves office_service_id -> service_catalog.code, which selects the JSON
+# Schema in formschemas/ (Security.md §8.2). The code is looked up server-side
+# and never accepted from the client: a client able to name its own schema
+# could name the loosest one. Public catalogue data, so every role can read it.
+_GET_SERVICE_CODE = text(
+    """
+    SELECT sc.code
+      FROM office_services os
+      JOIN service_catalog sc ON sc.id = os.catalog_id
+     WHERE os.id = :office_service_id
+    """
+)
+
 _GET_BY_ID = text(
     """
     SELECT r.id, r.user_id, r.tracking_code, r.office_service_id, r.office_id,
@@ -169,6 +182,16 @@ _INSERT_STATUS_HISTORY = text(
 )
 
 
+async def get_service_code(conn: AsyncConnection, office_service_id: int) -> str | None:
+    """service_catalog.code for an office_service, or None if it does not exist."""
+    row = (
+        await conn.execute(
+            _GET_SERVICE_CODE, {"office_service_id": office_service_id}
+        )
+    ).first()
+    return str(row.code) if row is not None else None
+
+
 async def insert_request(
     conn: AsyncConnection,
     *,
@@ -215,12 +238,12 @@ async def list_my(
             "limit": limit,
         },
     )
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def get_by_id(conn: AsyncConnection, request_id: int) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_BY_ID, {"request_id": request_id})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def get_by_tracking_code(
@@ -231,14 +254,14 @@ async def get_by_tracking_code(
             _GET_BY_TRACKING_CODE, {"tracking_code": tracking_code}
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def list_history(
     conn: AsyncConnection, request_id: int
 ) -> list[dict[str, Any]]:
     rows = await conn.execute(_LIST_HISTORY, {"request_id": request_id})
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def list_office_queue(
@@ -256,7 +279,7 @@ async def list_office_queue(
             "limit": limit,
         },
     )
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def list_office(
@@ -276,7 +299,7 @@ async def list_office(
             "limit": limit,
         },
     )
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def assign_to_self(
@@ -287,12 +310,12 @@ async def assign_to_self(
             _ASSIGN_TO_SELF, {"request_id": request_id, "staff_id": staff_id}
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def get_status_by_code(conn: AsyncConnection, code: str) -> dict[str, Any] | None:
     row = (await conn.execute(_GET_STATUS_BY_CODE, {"code": code})).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def update_status(
@@ -312,7 +335,7 @@ async def update_status(
             },
         )
     ).first()
-    return dict(row) if row else None
+    return dict(row._mapping) if row else None
 
 
 async def insert_status_history(

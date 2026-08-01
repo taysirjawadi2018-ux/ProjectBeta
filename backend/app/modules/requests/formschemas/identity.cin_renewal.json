@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://watiq.tn/formschemas/identity.cin_renewal.json",
+  "title": "identity.cin_renewal",
+  "description": "Renouvellement CIN. Filename must equal service_catalog.code.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["current_national_id", "reason"],
+  "properties": {
+    "current_national_id": {
+      "type": "string",
+      "pattern": "^[0-9]{8}$",
+      "description": "Mirrors chk_users_national_id_format."
+    },
+    "reason": {
+      "type": "string",
+      "enum": ["expired", "lost", "stolen", "damaged", "data_change"]
+    },
+    "police_report_number": {
+      "type": "string",
+      "maxLength": 60,
+      "description": "Conditionally required for lost/stolen; see allOf below."
+    },
+    "current_address": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["governorate", "line1"],
+      "properties": {
+        "governorate": { "type": "string", "maxLength": 100 },
+        "delegation": { "type": "string", "maxLength": 100 },
+        "line1": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "postal_code": { "type": "string", "pattern": "^[0-9]{4}$" }
+      }
+    },
+    "profession": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "language": {
+      "type": "string",
+      "enum": ["ar", "fr"]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "reason": { "enum": ["lost", "stolen"] } },
+        "required": ["reason"]
+      },
+      "then": {
+        "required": ["police_report_number"]
+      }
+    }
+  ]
+}

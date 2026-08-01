@@ -161,24 +161,24 @@ async def list_access_log(
             },
         )
     ).all()
-    return [_normalize(dict(r)) for r in rows]
+    return [_normalize(dict(r._mapping)) for r in rows]
 
 
 async def list_user_access_log(conn: AsyncConnection, user_id: int) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_ACCESS_LOG_BY_USER, {"user_id": user_id})).all()
-    return [_normalize(dict(r)) for r in rows]
+    return [_normalize(dict(r._mapping)) for r in rows]
 
 
 async def list_staff_access_log(conn: AsyncConnection, staff_id: int) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_ACCESS_LOG_BY_STAFF, {"staff_id": staff_id})).all()
-    return [_normalize(dict(r)) for r in rows]
+    return [_normalize(dict(r._mapping)) for r in rows]
 
 
 async def list_user_requests(conn: AsyncConnection, user_id: int) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_USER_REQUESTS, {"user_id": user_id})).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
 
 
 async def list_user_status_history(conn: AsyncConnection, user_id: int) -> list[dict[str, Any]]:
     rows = (await conn.execute(_LIST_USER_STATUS_HISTORY, {"user_id": user_id})).all()
-    return [dict(r) for r in rows]
+    return [dict(r._mapping) for r in rows]
