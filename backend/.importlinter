@@ -1,0 +1,40 @@
+[importlinter]
+root_package = app
+include_external_packages = True
+
+[importlinter:contract:layers]
+name = Layered architecture
+type = layers
+layers =
+    app.modules
+    app.core
+
+[importlinter:contract:module-independence]
+name = Modules talk through services only
+type = forbidden
+source_modules =
+    app.modules.requests
+    app.modules.appointments
+    app.modules.payments
+    app.modules.documents
+    app.modules.notifications
+    app.modules.catalog
+    app.modules.users
+forbidden_modules =
+    app.modules.*.repository
+    app.modules.*.models
+# Indirect chains via foreign services are the sanctioned seam (Structure.md
+# §5: services call services, lazy-imported); only DIRECT imports of a foreign
+# module's repository/models are forbidden.
+allow_indirect_imports = true
+
+[importlinter:contract:routers-are-thin]
+name = Routers must not import SQLAlchemy
+type = forbidden
+source_modules = app.modules.*.router
+forbidden_modules = sqlalchemy
+# The sanctioned seams: deps (dependency injection) and the module's own
+# service/schemas are allowed to touch sqlalchemy (Structure.md §3 table).
+ignore_imports =
+    app.modules.*.router -> app.core.deps
+    app.modules.*.router -> app.modules.**

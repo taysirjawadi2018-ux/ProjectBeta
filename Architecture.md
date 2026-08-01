@@ -3,7 +3,6 @@
 > **Watiq** (وثيق) is the single national portal for Tunisia's public legal services: civil status, identity documents, transport, taxation, justice records, urbanism, and utility subscriptions.
 
 **Companion documents**
-
 | Document | Owns |
 |---|---|
 | `Architecture.md` (this file) | Technology choices, topology, trust boundaries, ADRs |

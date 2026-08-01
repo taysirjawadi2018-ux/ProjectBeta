@@ -1,0 +1,35 @@
+# --- Secrets: never committed (see Security.md §11) -----------------------
+.env
+secrets/
+*.key
+*.pem
+*.crt
+!ops/**/certs/.gitkeep
+
+# --- Python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+build/
+dist/
+
+# --- Tooling / IDE ---------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# --- Generated files (never hand-edited) -----------------------------------
+# uv.lock IS committed — it is the dependency source of truth (Structure.md §2).
+docs/openapi.json
+
+# --- Local ops state -------------------------------------------------------
+ops/backup/drill/
+*.log
