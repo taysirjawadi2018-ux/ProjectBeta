@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Requests - Watiq National Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e0e3e5",
+                      "surface-container": "#ebeef0",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#f8f9ff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#e70013",
+                      "secondary": "#4e5e81",
+                      "inverse-on-surface": "#eef1f3",
+                      "on-tertiary": "#ffffff",
+                      "on-background": "#181c1e",
+                      "on-tertiary-fixed-variant": "#3c475a",
+                      "on-tertiary-fixed": "#111c2c",
+                      "tertiary-fixed": "#d8e3fa",
+                      "on-primary-fixed": "#410001",
+                      "surface-bright": "#f7fafc",
+                      "surface-container-low": "#f1f4f6",
+                      "on-surface": "#181c1e",
+                      "inverse-surface": "#2d3133",
+                      "surface-container-high": "#e5e9eb",
+                      "on-primary-container": "#fff8f7",
+                      "surface-dim": "#d7dadc",
+                      "tertiary-fixed-dim": "#bcc7dd",
+                      "surface-tint": "#c0000e",
+                      "secondary-fixed": "#d8e2ff",
+                      "secondary-container": "#c4d4fd",
+                      "on-primary-fixed-variant": "#930008",
+                      "outline-variant": "#e9bcb6",
+                      "outline": "#946e69",
+                      "on-secondary-fixed-variant": "#364768",
+                      "secondary-fixed-dim": "#b6c6ef",
+                      "background": "#f7fafc",
+                      "inverse-primary": "#ffb4aa",
+                      "on-secondary-container": "#4b5b7e",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "tertiary-container": "#687387",
+                      "surface": "#f7fafc",
+                      "surface-container-highest": "#e0e3e5",
+                      "primary": "#b8000d",
+                      "tertiary": "#4f5b6e",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#ffb4aa",
+                      "primary-fixed": "#ffdad5",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#081b3a",
+                      "error": "#ba1a1a",
+                      "on-surface-variant": "#5f3f3b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "container-max": "1280px",
+                      "interpreter-slot-width": "320px",
+                      "margin-mobile": "16px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "display-lg-mobile": [
+                              "Public Sans"
+                      ],
+                      "label-md": [
+                              "Public Sans"
+                      ],
+                      "display-lg": [
+                              "Public Sans"
+                      ],
+                      "body-lg": [
+                              "Public Sans"
+                      ],
+                      "headline-md": [
+                              "Public Sans"
+                      ],
+                      "body-md": [
+                              "Public Sans"
+                      ],
+                      "label-sm": [
+                              "Public Sans"
+                      ],
+                      "headline-sm": [
+                              "Public Sans"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "30px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-sm": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .request-card {
+            transition: all 0.2s ease-in-out;
+            border: 1px solid theme('colors.surface-variant');
+        }
+        
+        .request-card:hover {
+            border-color: theme('colors.secondary');
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .focus-ring:focus-visible {
+            outline: 3px solid theme('colors.primary-container');
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-background w-full border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-4">
+<img alt="National Crest of Tunisia" class="h-8 w-8 object-contain" data-alt="A clean, minimalist vector rendering of the National Crest of Tunisia in white and deep navy on a subtle background. Highly professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK9e0l9MqHOOeiwh_VFYWC_uO1QJaBlmlNaK69ozQ00CtqZJ1xYocnrIaY2hLqmznmeBph_9URM2ttCuLBaejniSqpy8xIt-Fl5Ys2hctMLyg_a4XQph4EaymVDMT3bTTHwvya9uf0suou0ovyJXALxDyM32UKaa_2-hqBHVVBWTZLf8KgCRHfSvpo6EM0Kp5W2OSvwFkYWj1JXmKLObpwWBuorO2ezcw0OLg0_O0l3LNILhN35xhkdw"/>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Watiq</span>
+</div>
+<!-- Web Nav -->
+<nav class="hidden md:flex gap-6 h-full items-center">
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary h-full flex items-center px-2 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" href="#">
+<span class="text-label-md font-label-md">Services</span>
+</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 h-full flex items-center px-2 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors opacity-80 transition-all duration-200 focus-ring" href="#">
+<span class="text-label-md font-label-md">My Requests</span>
+</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary h-full flex items-center px-2 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" href="#">
+<span class="text-label-md font-label-md">Appointments</span>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button aria-label="Narration" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring">
+<span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">record_voice_over</span>
+</button>
+<button aria-label="Interpreter Mode" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring">
+<span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">interpreter_mode</span>
+</button>
+<button aria-label="Language" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring">
+<span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">language</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-gutter max-w-container-max mx-auto w-full py-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<!-- Content Area -->
+<div class="md:col-span-12 space-y-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-surface-variant pb-6">
+<div>
+<h1 class="text-display-lg font-display-lg text-on-surface mb-2">My Requests</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Track the status of your official documents and services.</p>
+</div>
+<div class="w-full md:w-96 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</div>
+<input aria-label="Search Requests" class="block w-full pl-10 pr-3 py-3 border border-surface-variant rounded-DEFAULT leading-5 bg-surface-container-lowest placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-primary-container sm:text-sm transition duration-150 ease-in-out text-body-md font-body-md" placeholder="Search by Tracking Code or Service..." type="text"/>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2">
+<button class="px-4 py-2 bg-secondary text-on-secondary rounded-full text-label-md font-label-md whitespace-nowrap focus-ring">All Requests</button>
+<button class="px-4 py-2 border border-surface-variant text-on-surface hover:bg-surface-container-low rounded-full text-label-md font-label-md whitespace-nowrap focus-ring">In Progress</button>
+<button class="px-4 py-2 border border-surface-variant text-on-surface hover:bg-surface-container-low rounded-full text-label-md font-label-md whitespace-nowrap focus-ring">Requires Action</button>
+<button class="px-4 py-2 border border-surface-variant text-on-surface hover:bg-surface-container-low rounded-full text-label-md font-label-md whitespace-nowrap focus-ring">Completed</button>
+</div>
+<!-- Bento Grid Layout for Requests -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Request Card 1 -->
+<a class="request-card bg-surface-container-lowest rounded-xl p-6 flex flex-col justify-between h-full focus-ring group" href="#">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low rounded-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant">
+                                In Progress
+                            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Passport Renewal</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">Standard 10-year Biometric Passport</p>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-variant grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Tracking Code</p>
+<p class="text-label-md font-label-md text-on-surface">TN-24-89X4P</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Submitted</p>
+<p class="text-label-md font-label-md text-on-surface">Oct 12, 2026</p>
+</div>
+</div>
+</a>
+<!-- Request Card 2 (Action Required) -->
+<a class="request-card bg-surface-container-lowest rounded-xl p-6 flex flex-col justify-between h-full focus-ring group border-l-4 border-l-primary-container" href="#">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low rounded-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-2xl">contact_page</span>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container text-on-error-container">
+                                Awaiting Payment
+                            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">CIN Application</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">First-time National ID Issuance</p>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-variant grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Tracking Code</p>
+<p class="text-label-md font-label-md text-on-surface">TN-24-33K9M</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Submitted</p>
+<p class="text-label-md font-label-md text-on-surface">Oct 15, 2026</p>
+</div>
+</div>
+</a>
+<!-- Request Card 3 (Completed) -->
+<a class="request-card bg-surface-container-lowest rounded-xl p-6 flex flex-col justify-between h-full focus-ring group" href="#">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low rounded-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-2xl">child_care</span>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-container text-on-secondary-container">
+                                Approved
+                            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Birth Certificate Extract</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">French Language Copy</p>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-variant grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Tracking Code</p>
+<p class="text-label-md font-label-md text-on-surface">TN-23-77V2L</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Completed</p>
+<p class="text-label-md font-label-md text-on-surface">Nov 02, 2023</p>
+</div>
+</div>
+</a>
+<!-- Request Card 4 (Rejected) -->
+<a class="request-card bg-surface-container-lowest rounded-xl p-6 flex flex-col justify-between h-full focus-ring group opacity-80" href="#">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low rounded-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-2xl">home_work</span>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-variant text-on-surface-variant">
+                                Rejected
+                            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">Property Registration</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">Missing Documentation</p>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-variant grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Tracking Code</p>
+<p class="text-label-md font-label-md text-on-surface">TN-23-11J8P</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Updated</p>
+<p class="text-label-md font-label-md text-on-surface">May 14, 2023</p>
+</div>
+</div>
+</a>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background dark:bg-surface-container-lowest w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center mt-auto border-t-[4px] border-primary-container">
+<div class="flex flex-col md:flex-row items-center gap-4 w-full justify-between max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-headline-sm font-headline-sm text-on-primary">Watiq</span>
+<span class="text-body-md font-body-md text-on-primary">© 2026 Tunisian Government. Watiq National Portal.</span>
+</div>
+<nav class="flex gap-6">
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="#">Legal</a>
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="#">Privacy Policy</a>
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="#">Accessibility</a>
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="#">Contact Us</a>
+</nav>
+</div>
+</footer>
+<!-- Accessibility Overlay Slot -->
+<div class="fixed bottom-4 right-4 w-[320px] h-[240px] bg-surface-container-highest rounded-lg border border-surface-variant shadow-lg overflow-hidden z-50 flex items-center justify-center">
+<span class="text-on-surface-variant text-label-sm text-center px-4">Sign Language Interpreter Video Feed Resides Here</span>
+</div>
+</body></html>

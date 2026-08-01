@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Watiq National Portal - Project Map</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#ffdad5",
+                      "primary": "#b8000d",
+                      "on-tertiary-fixed": "#111c2c",
+                      "on-secondary-fixed": "#081b3a",
+                      "secondary": "#4e5e81",
+                      "surface-variant": "#e0e3e5",
+                      "on-secondary-container": "#4b5b7e",
+                      "on-primary-container": "#fff8f7",
+                      "surface-container-high": "#e5e9eb",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#2d3133",
+                      "primary-container": "#e70013",
+                      "surface": "#f7fafc",
+                      "on-primary-fixed": "#410001",
+                      "on-background": "#181c1e",
+                      "on-surface": "#181c1e",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#c4d4fd",
+                      "secondary-fixed": "#d8e2ff",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#bcc7dd",
+                      "tertiary-container": "#687387",
+                      "on-secondary-fixed-variant": "#364768",
+                      "surface-container-low": "#f1f4f6",
+                      "surface-bright": "#f7fafc",
+                      "secondary-fixed-dim": "#b6c6ef",
+                      "on-surface-variant": "#5f3f3b",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-tertiary-fixed-variant": "#3c475a",
+                      "inverse-primary": "#ffb4aa",
+                      "on-primary-fixed-variant": "#930008",
+                      "on-error-container": "#93000a",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#ffb4aa",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#d7dadc",
+                      "tertiary-fixed": "#d8e3fa",
+                      "background": "#f7fafc",
+                      "on-tertiary-container": "#f8f9ff",
+                      "surface-container": "#ebeef0",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#946e69",
+                      "inverse-on-surface": "#eef1f3",
+                      "surface-tint": "#c0000e",
+                      "outline-variant": "#e9bcb6",
+                      "tertiary": "#4f5b6e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "interpreter-slot-width": "320px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Public Sans"],
+                      "display-lg-mobile": ["Public Sans"],
+                      "body-lg": ["Public Sans"],
+                      "label-md": ["Public Sans"],
+                      "headline-sm": ["Public Sans"],
+                      "label-sm": ["Public Sans"],
+                      "display-lg": ["Public Sans"],
+                      "body-md": ["Public Sans"]
+              },
+              "fontSize": {
+                      "headline-md": ["30px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .group:hover .group-hover\:shadow-elevation {
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased min-h-screen flex flex-col">
+<!-- Top Navigation (Shell Supressed as this is a meta-page, but minimal header included for context) -->
+<header class="bg-surface border-b border-surface-variant w-full h-16 flex items-center justify-between px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto shrink-0">
+<div class="text-primary font-headline-md text-headline-md font-bold">Watiq National Portal</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary-container transition-colors" data-icon="search">search</span>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12 space-y-12">
+<!-- Header Section -->
+<section class="text-center md:text-left border-b border-surface-variant pb-8">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-4">Project Index</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                A unified government interface designed for institutional authority, inclusivity, and clarity. This map collates all screens across the Watiq National Portal ecosystem.
+            </p>
+</section>
+<!-- Citizen Experience Section -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="group">group</span>
+                Citizen Experience
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_15}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A clean, minimalist government landing page layout showing a heroic search bar over a subtle tunisian landscape graphic. High key lighting, modern UI style with deep navy and red accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD44uYGw2BgN6u8w7J_p5K1NVuJ_tVsONEtUY0tE8A2OVYpUSeSIHf-EjOJq6S08kbqx813CJWHSRFBKq76PuaQx4beWPeM1iGZ7n3-pgxI-wMENNwAX2PDxFwkcDsQEylWWAQZcLULAQlPjzJ4t1Cr-_-Gg13do7tlg42_1sJCh68yuf4ZtwzuOXAGXnsuTSWjKGMz_O9RMEeAL-KbOiI-Ry9ichJiiPRlDQaqBwFnyYIQPJzbh6OJbQ')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Landing Page</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">The primary entry point for all citizens to access services.</p>
+</div>
+</a>
+<!-- Card 2 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_10}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A secure login screen interface featuring a minimalist white card centered on a light gray background. It shows input fields and a prominent red primary action button. Professional, trustworthy aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPD0sv0OebESkinRSZbzraREvmGjC5bryKOIHGFsNO9RdrLm3HvrDv1iPXD_ODLBNzUDlA6pzdM8cA5AS2Wzd5Tg0TlNeB2AhaGivp89GM2uhNLiaY7pIw-dzGnawkIBksxb4rwWZ9VsqFUybwUSsL4RQvW4iLS5bJggY6jQ3SVUt2-TEQxasRxi6QEXD1Ac6cXWHAzunn1IvixWTnUb1fiE1-2zALdbYuzgLm6t0aD6KBSW4D5LVvQA')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Login</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Secure authentication gateway for citizen profiles.</p>
+</div>
+</a>
+<!-- Card 3 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_9}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A user dashboard interface displaying structured data cards and a side navigation bar. Clean typography, white surfaces with subtle borders, highlighting recent activity and status." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTG7CVXAVpboj6yQ0_lepSxNp2TVAKoJh4ACdunXJDxHRv7YyC9qguE7jIsPK1pRyiY_EfksZKL4m4seXpwj4KrN_Ze9YR-5SHF088N_t84C77OtmAdUz3aeHhyQHDBPEdWC5eiQZR5P0iaru4AAdfqD_sC_o4PoefGlsIo_yQegzwuMPHWAdhxUGSgXmkKOe5fkj39Xrf-Tz5HRE4L3gOZNHc7DQii6LS9Leg4AFNK6Ls_E97S61THg')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Dashboard</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Personalized overview of citizen records and activities.</p>
+</div>
+</a>
+<!-- Card 4 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_14}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A structured multi-step form interface for submitting official requests. Features clear progress indicators, large input fields, and high-contrast labels. Institutional and clean design." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBB7EYsPHD_Si5u1dORACl0R6VU1VHaO1n5Xq6VAtjKbkvpOiKxbn6V_lznrsagG846Nt2wGVuAEN4ZscLOcW8yemgahHg0LcKFCndpdeFV6ny_wQgHOz2EKc6WjqTn-RbYEMKJLG9x-TPiLme8LSEPAzpIe7RYZBDIczyPmdGKynGbV05xEXIMEOKHXIRjC3kB2j_YrS3tjkH-IP1glcdb_SO8NNh2p9Uk-KcYV-5wbKu0P2YFeyHWwQ')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Submit Request</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Multi-step form for initiating official government procedures.</p>
+</div>
+</a>
+<!-- Card 5 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_11}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A clean data table interface displaying a list of user requests with status badges. Zebra-striped rows, deep navy headers, providing a clear overview of application states." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBTQaIYSqelIhhQv1Henzy6nyql2vLtDSALAFYyD-hmUNdYaBJchzzikk2BARKaZgg798fXykX7eVDqz52Rfbheej7UBihq0Molv-0HEyb_3pb4lRxL5iCkJnhIZbQNOlsj7DvCCIQneQbQshJWXDE3XuN_35MOs-Pd9iQjb80Lb8tlHy5Y1J6EAmraxddPmsyIGNjoZxcFU8teLB71Kvx1dGvaUyrKBOkmxfeiJh-kB6MDN9hvsqDoDg')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">My Requests</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Structured data table tracking the status of submitted items.</p>
+</div>
+</a>
+<!-- Card 6 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_7}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A calendar interface for booking appointments. Features a grid layout for dates, time slot selection buttons, and a clean, accessible layout utilizing navy and subtle gray tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCWFtg1FAmyKtaHb094ax0DeOON7umH22mmZ7C-6Z5LKpTZ2gKN_ONs8cAWgsSNZH-_u-QUEzgEIzEAKGIV96ACY5jp0kKHYLH-BcEBj0dg7Z12le9VjsmzRHzY1KHBl76X5d18AXb7S4UIjIZDRd3l09qADQrorQzG33mvmRV0DRLbNOTU0XWemDy4ejDhOZB5_ul5XQdKnFcPVJqMG9R6C9n6iPCK0EqRfCMm5UJ-qMh-A8BGowJJvA')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Book Appointment</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Interactive scheduling tool for in-person government visits.</p>
+</div>
+</a>
+<!-- Card 7 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_2}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A notification center UI showing a vertical list of alerts. Each alert features an icon, timestamp, and short message text on a clean white background with subtle dividers." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_qU1tXTuKzrmXQ_5p1nVqs-AM7MJKELJSfXvXgb6W7T5sc846Xam9iY0SZsqhWrjH8RbZEqA65gm8OpLu2QKuoOREgexJN1_P4T2wJDFD3aQFuFCI3-SF8WzmL8PQG5lfxWKEqn7ysOoCQnEOWGfv-fMuGBLneTyRbTxcT5_w2WU2xGP1ZG7EhNhDxFygJESuf18V5tQCxo2jDfzaPDlUWgLAwcjs-aaELU9lEr0GDlDqA3YdCQyvzQ')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Notification Center</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Centralized hub for important alerts and messages.</p>
+</div>
+</a>
+<!-- Card 8 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_4}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A transaction confirmation screen showing a large green checkmark icon, receipt details, and a primary action button to return to dashboard. Clean, reassuring, and professional." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBP26OYtJl-uoKsR6GjyUMeQQZxUKrZrdaaX3y5MGZ1wvrjvqP2Aopg0RvjHmSt-sj-I03PZTC_D1eOzF8P_HwhM_p58A2wxjOg9NM-u9594gmy3_WWdDDvZp4PQcDonf1ZAzyYMsEnoyrK6jm56d5irsELxWOgox1SoUYuyxV3mDBKc_K8fJgQibawwQ9b48XPov52L9-5IB7Zj1blzjFXg7ZXmyE49_ezM3FgyV0_ws5TafitXPM4vg')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Payment Confirmation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Transactional success screen with receipt details.</p>
+</div>
+</a>
+</div>
+</section>
+<!-- Government Operations Section -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="corporate_fare">corporate_fare</span>
+                Government Operations (Staff)
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_13}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="A dense, data-rich staff workbench interface showing split panels for processing queues and detailed document views. Professional, high-utility aesthetic using muted institutional colors." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCm3LgVsA5vaYL23B9B2BXCOsROAQJ2fTDCV5QY6bQ7K0EOp1uW_1uT_AD-RHPocYpSqsqzduGU_0T2CKT3GMmbxpqGU5lxqUOcjYN174kCENwLzG0fHTqR1C8vxGnMfh6IkZ8faH0H5zjnufe9XZwrddMc88o78w6r3r55MxSFw71npqxD6M4UKU19nLbe4UqffgC1IutOkkL4vRJ-e8gTQHkIV_c_Ir5Npa_qXAPvUAzh3SWIsTj-bA')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Staff Workbench</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Primary operational dashboard for government employees.</p>
+</div>
+</a>
+<!-- Card 2 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_5}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="An interface for verifying documents. Shows side-by-side comparison of user data and uploaded ID scans, with prominent approve/reject action buttons. Highly functional and structured layout." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAgrmfpqsDmi0iK3C8D580loSkUWWwcm_bcTIkZ-hkpouvGMczFir9haS2idac8_8748ku-sUtG1C-uLeH3jesGnc0e4-YVzZFkEr_cyNetr9kJs5E_mYkUHDfm1GSwOlAwcTKIfaWetY0RrDAFTmUAmNsIgHlW3pR9jgDkhaZnmEnXqWVMnGB1InmhYCEDakTft8mXcylt9c-wZDEfOihmy4EUjBj5Hg1NMS4Po5T8OulisXTk3nEtkA')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Verify Request</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Detailed view for staff to review and process applications.</p>
+</div>
+</a>
+</div>
+</section>
+<!-- System Administration Section -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="admin_panel_settings">admin_panel_settings</span>
+                System Administration
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{DATA:SCREEN:SCREEN_6}}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center" data-alt="An admin control panel interface featuring system metrics, user role management tables, and configuration settings. High-density information design with a technical, authoritative look." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6qiJlIyW-7GeVhKZBbWEKb1xugA3Jtdvbp-RpTb3ziTWtYZq_X2kZ6DQus8te7fDgGItjCdTUV1HYoUYx-_bH-8ZKA9laOTeGTxGIj8m_E66CMieql4k8Fz3Pmfwv-_EzQ2BS8cCX2D-kVNJbBOzj1tJblfX97-FPaQ0dGtXFDV-yuC0H7gPVqJazlA380Tj7AHTMqcz8G6XfXJ5_-VzOuYjZ2t07ZWrEBvKfgEl9kOQkBJ_T_BQLug')"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">Admin Management</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Global configuration and user role oversight.</p>
+</div>
+</a>
+</div>
+</section>
+<!-- Accessibility Reminder -->
+<section class="bg-surface-container-low p-6 rounded-xl border border-surface-variant flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="accessibility_new">accessibility_new</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-2">Accessibility Commitment</h4>
+<p class="font-body-sm text-on-surface-variant">
+                    All generated screens adhere strictly to the Watiq design system's high-contrast requirements. Note that a reserved 'Overlay Slot' is mandated for the Sign Language Interpreter video feed across primary citizen journeys to ensure full inclusivity.
+                </p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop bg-secondary dark:bg-on-secondary-fixed-variant text-on-secondary mt-auto">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-headline-sm font-headline-sm font-bold text-on-secondary">Watiq National Portal</div>
+<div class="text-body-md font-body-md">
+                 © 2024 Watiq National Portal. Official Tunisian Government Platform.
+             </div>
+<div class="flex gap-4">
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="#">Privacy Policy</a>
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+</body></html>

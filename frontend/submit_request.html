@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Birth Certificate Request - Watiq</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#d8e2ff",
+                      "on-primary-fixed": "#410001",
+                      "outline": "#946e69",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-surface": "#181c1e",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#364768",
+                      "primary-fixed": "#ffdad5",
+                      "surface-variant": "#e0e3e5",
+                      "tertiary-fixed": "#d8e3fa",
+                      "error": "#ba1a1a",
+                      "background": "#f7fafc",
+                      "inverse-surface": "#2d3133",
+                      "surface-container-high": "#e5e9eb",
+                      "surface-container-low": "#f1f4f6",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#687387",
+                      "surface-container": "#ebeef0",
+                      "on-primary-container": "#fff8f7",
+                      "primary": "#b8000d",
+                      "primary-container": "#e70013",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed-dim": "#b6c6ef",
+                      "on-secondary": "#ffffff",
+                      "on-background": "#181c1e",
+                      "secondary": "#4e5e81",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#ffb4aa",
+                      "on-tertiary-container": "#f8f9ff",
+                      "surface-tint": "#c0000e",
+                      "outline-variant": "#e9bcb6",
+                      "on-surface-variant": "#5f3f3b",
+                      "surface-dim": "#d7dadc",
+                      "on-tertiary-fixed-variant": "#3c475a",
+                      "inverse-on-surface": "#eef1f3",
+                      "tertiary": "#4f5b6e",
+                      "inverse-primary": "#ffb4aa",
+                      "surface": "#f7fafc",
+                      "surface-bright": "#f7fafc",
+                      "on-secondary-fixed": "#081b3a",
+                      "on-primary-fixed-variant": "#930008",
+                      "on-tertiary-fixed": "#111c2c",
+                      "tertiary-fixed-dim": "#bcc7dd",
+                      "on-secondary-container": "#4b5b7e",
+                      "on-error": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#c4d4fd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "interpreter-slot-width": "320px",
+                      "container-max": "1280px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "base": "8px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "label-md": ["Public Sans"],
+                      "label-sm": ["Public Sans"],
+                      "body-lg": ["Public Sans"],
+                      "display-lg-mobile": ["Public Sans"],
+                      "headline-md": ["Public Sans"],
+                      "display-lg": ["Public Sans"],
+                      "headline-sm": ["Public Sans"],
+                      "body-md": ["Public Sans"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                      "headline-md": ["30px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Base styles */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Focus styles */
+        *:focus-visible {
+            outline: 3px solid theme('colors.primary-container');
+            outline-offset: 3px;
+        }
+
+        /* Material Symbols */
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings:"liga";
+            font-feature-settings: "liga";
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Interactive Card Level 2 Hover */
+        .card-interactive:hover {
+            border: 2px solid theme('colors.secondary');
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .drag-active {
+            border-color: theme('colors.primary-container');
+            background-color: theme('colors.surface-container-high');
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md bg-background">
+<!-- TopNavBar -->
+<nav class="bg-surface border-b border-outline-variant docked full-width top-0 w-full z-50">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-headline-md font-bold text-primary">Watiq</span>
+</div>
+<div class="hidden md:flex items-center gap-6 text-label-md font-label-md">
+<a class="text-primary border-b-2 border-primary pb-1 opacity-80 transition-all duration-200" href="#">Services</a>
+<a class="text-secondary font-label-md hover:text-primary transition-colors" href="#">My Requests</a>
+<a class="text-secondary font-label-md hover:text-primary transition-colors" href="#">Appointments</a>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Accessibility Narration" class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">record_voice_over</span>
+</button>
+<button aria-label="Sign Language Interpreter" class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">interpreter_mode</span>
+</button>
+<button aria-label="Language" class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">language</span>
+</button>
+<img alt="National Crest of Tunisia" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="The national crest of Tunisia, featuring a ship, lion, and balance scales in a circular emblem on a pure white background, brightly lit to show crisp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHg1bMcLsrCKCm0bik7poHiQgtpLBotRjMDeeAE7oyBoiK5_g7vjd9g-q1fJ2uXXI4OtQyCNf7aJeZQ3V0u2R5QsB9v6fCl-e4nu1MseI_9yggb7fCixDcDTBJR2CK11T7tSY60iecNqmTrygta3xK7JohwBaiFfXnkusol3KgLIkmSU0uQ5l9W47SDYoh4WU8xQU0C9eNatWmUCchlLlu_k9WVc8zXddz8KkAVFh7sOQQ8omyo9zLEw"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-8">
+<div class="mb-8">
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-on-surface mb-2">Birth Certificate Request</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Complete the steps below to securely request an official birth certificate copy.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
+<!-- Left Column: Form & Stepper -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Stepper -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 w-full card-interactive transition-all">
+<div class="flex items-center justify-between w-full">
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-md font-label-md z-10 mb-2">1</div>
+<span class="text-label-sm font-label-sm text-primary">Personal Info</span>
+<div class="absolute top-4 left-1/2 w-full h-0.5 bg-primary -z-0"></div>
+</div>
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-label-md font-label-md z-10 mb-2 border border-surface-variant">2</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Details</span>
+<div class="absolute top-4 left-1/2 w-full h-0.5 bg-surface-variant -z-0"></div>
+</div>
+<div class="flex flex-col items-center flex-1 relative">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-label-md font-label-md z-10 mb-2 border border-surface-variant">3</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Upload</span>
+<div class="absolute top-4 left-1/2 w-full h-0.5 bg-surface-variant -z-0"></div>
+</div>
+<div class="flex flex-col items-center flex-1">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-label-md font-label-md z-10 mb-2 border border-surface-variant">4</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Review</span>
+</div>
+</div>
+</div>
+<!-- Form Section: Personal Info -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 w-full card-interactive transition-all">
+<h2 class="text-headline-sm font-headline-sm text-on-background border-b border-surface-variant pb-4 mb-6">Step 1: Personal Information</h2>
+<form class="flex flex-col gap-6" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface" for="firstName">First Name (As it appears on ID)</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="firstName" name="firstName" placeholder="e.g., Ahmed" required="" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface" for="lastName">Last Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="lastName" name="lastName" placeholder="e.g., Trabelsi" required="" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface" for="dob">Date of Birth</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="dob" name="dob" required="" type="date"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface" for="nationalId">National ID Number (CIN)</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="nationalId" name="nationalId" pattern="\d{8}" placeholder="8 digits" required="" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-label-md font-label-md text-on-surface" for="birthPlace">Place of Birth (Municipality)</label>
+<select class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0 appearance-none" id="birthPlace" name="birthPlace" required="">
+<option disabled="" selected="" value="">Select Municipality...</option>
+<option value="tunis">Tunis</option>
+<option value="sfax">Sfax</option>
+<option value="sousse">Sousse</option>
+</select>
+</div>
+<!-- Drag and Drop Example within step for context, normally step 3 -->
+<div class="mt-4 border-t border-surface-variant pt-6 hidden">
+<h3 class="text-label-md font-label-md text-on-surface mb-2">Upload ID Scan (Optional early upload)</h3>
+<div class="w-full border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container-low transition-colors bg-surface h-40" id="dropzone">
+<span class="material-symbols-outlined text-tertiary mb-2" style="font-size: 32px;">upload_file</span>
+<p class="text-body-md font-body-md text-on-surface-variant">Drag and drop your scanned ID here, or <span class="text-primary font-label-md underline">browse files</span></p>
+<p class="text-label-sm font-label-sm text-outline mt-1">Supported formats: PDF, JPG, PNG (Max 5MB)</p>
+</div>
+</div>
+<div class="flex justify-end gap-4 mt-6 pt-4 border-t border-surface-variant">
+<button class="px-6 py-2 border border-secondary text-secondary rounded bg-transparent hover:bg-surface-container-low text-label-md font-label-md transition-colors" type="button">Cancel</button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded hover:bg-surface-tint text-label-md font-label-md transition-colors" type="button">Next Step</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Right Column: Sidebar / Payment Summary -->
+<div class="lg:col-span-4">
+<div class="sticky top-24 bg-surface-container-lowest border border-surface-variant rounded-lg p-6 w-full shadow-sm card-interactive transition-all flex flex-col gap-6">
+<div class="flex items-center gap-3 border-b border-surface-variant pb-4">
+<span class="material-symbols-outlined text-secondary" style="font-size: 28px;">receipt_long</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Payment Summary</h3>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center text-body-md font-body-md">
+<span class="text-on-surface-variant">Document Fee</span>
+<span class="text-on-surface font-label-md">3.000 TND</span>
+</div>
+<div class="flex justify-between items-center text-body-md font-body-md">
+<span class="text-on-surface-variant">Processing Fee</span>
+<span class="text-on-surface font-label-md">1.500 TND</span>
+</div>
+<div class="flex justify-between items-center text-body-md font-body-md">
+<span class="text-on-surface-variant">Stamp Duty</span>
+<span class="text-on-surface font-label-md">0.500 TND</span>
+</div>
+<div class="border-t border-surface-variant pt-4 flex justify-between items-center">
+<span class="text-label-md font-label-md text-on-surface">Total Estimated</span>
+<span class="text-headline-sm font-headline-sm text-primary">5.000 TND</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded text-label-sm font-label-sm text-on-surface-variant flex gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-size: 16px;">info</span>
+<p>Payment is collected at the final step after document verification.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center mt-auto border-t-[8px] border-secondary">
+<div class="flex flex-col items-center md:items-start gap-2 mb-4 md:mb-0">
+<span class="text-headline-sm font-headline-sm text-on-primary">Watiq</span>
+<p class="text-body-md font-body-md text-on-primary">© 2026 Tunisian Government. Watiq National Portal.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6 text-label-sm font-label-sm text-surface-container hover:text-primary-fixed transition-colors">
+<a class="hover:text-primary-fixed transition-colors text-surface-container" href="#">Legal</a>
+<a class="hover:text-primary-fixed transition-colors text-surface-container" href="#">Privacy Policy</a>
+<a class="hover:text-primary-fixed transition-colors text-surface-container" href="#">Accessibility</a>
+<a class="hover:text-primary-fixed transition-colors text-surface-container" href="#">Contact Us</a>
+</div>
+</footer>
+<!-- Interpreter Overlay Slot (Reserved bottom-right) -->
+<div aria-hidden="true" class="fixed bottom-4 right-4 w-[320px] h-[240px] bg-inverse-surface border border-surface-variant rounded shadow-lg overflow-hidden hidden md:block z-50" style="display: none;">
+<!-- Placeholder for interpreter video feed -->
+<div class="w-full h-full flex items-center justify-center text-on-tertiary">
+<span class="material-symbols-outlined mr-2">interpreter_mode</span> Interpreter Feed Offline
+        </div>
+</div>
+<script>
+        // Simple drag and drop visual feedback
+        const dropzone = document.getElementById('dropzone');
+        if(dropzone) {
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropzone.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropzone.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropzone.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight(e) {
+                dropzone.classList.add('drag-active');
+            }
+
+            function unhighlight(e) {
+                dropzone.classList.remove('drag-active');
+            }
+        }
+    </script>
+</body></html>

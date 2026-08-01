@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Successful - Watiq National Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#bcc7dd",
+                    "secondary-fixed-dim": "#b6c6ef",
+                    "on-secondary-fixed-variant": "#364768",
+                    "inverse-surface": "#2d3133",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-container": "#687387",
+                    "surface-variant": "#e0e3e5",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#f7fafc",
+                    "on-tertiary-fixed": "#111c2c",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#ebeef0",
+                    "on-tertiary-fixed-variant": "#3c475a",
+                    "background": "#f7fafc",
+                    "primary-fixed-dim": "#ffb4aa",
+                    "surface-container-high": "#e5e9eb",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#ffb4aa",
+                    "primary": "#b8000d",
+                    "on-background": "#181c1e",
+                    "surface-dim": "#d7dadc",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#e70013",
+                    "surface-container-low": "#f1f4f6",
+                    "outline-variant": "#e9bcb6",
+                    "on-primary-container": "#fff8f7",
+                    "on-tertiary-container": "#f8f9ff",
+                    "surface-bright": "#f7fafc",
+                    "secondary": "#4e5e81",
+                    "on-primary-fixed": "#410001",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#d8e2ff",
+                    "primary-fixed": "#ffdad5",
+                    "on-secondary-container": "#4b5b7e",
+                    "on-error": "#ffffff",
+                    "on-surface": "#181c1e",
+                    "inverse-on-surface": "#eef1f3",
+                    "on-surface-variant": "#5f3f3b",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#081b3a",
+                    "on-primary-fixed-variant": "#930008",
+                    "secondary-container": "#c4d4fd",
+                    "tertiary": "#4f5b6e",
+                    "outline": "#946e69",
+                    "tertiary-fixed": "#d8e3fa",
+                    "surface-tint": "#c0000e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "interpreter-slot-width": "320px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-sm": ["Public Sans"],
+                    "label-md": ["Public Sans"],
+                    "body-md": ["Public Sans"],
+                    "headline-md": ["Public Sans"],
+                    "label-sm": ["Public Sans"],
+                    "display-lg-mobile": ["Public Sans"],
+                    "display-lg": ["Public Sans"],
+                    "body-lg": ["Public Sans"]
+            },
+            "fontSize": {
+                    "headline-sm": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["30px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased">
+<!-- Top Navigation omitted as this is a linear/transactional success screen, per instructions. -->
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-margin-mobile md:p-margin-desktop relative overflow-hidden">
+<!-- Decorative background elements -->
+<div class="absolute inset-0 pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-secondary-container opacity-20 blur-3xl"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-surface-variant opacity-30 blur-3xl"></div>
+</div>
+<div class="relative z-10 max-w-[600px] w-full bg-surface-container-lowest border border-surface-variant rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] p-8 md:p-12 flex flex-col items-center text-center">
+<!-- Success Icon -->
+<div class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-6 animate-[pulse_2s_ease-in-out_infinite]">
+<span class="material-symbols-outlined text-[48px] text-on-primary-container filled">check_circle</span>
+</div>
+<!-- Heading -->
+<h1 class="text-display-lg-mobile md:text-headline-md font-display-lg-mobile md:font-headline-md text-on-background mb-2">
+                Payment Successful
+            </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-8">
+                Your transaction has been processed securely.
+            </p>
+<!-- Transaction Summary Card -->
+<div class="w-full bg-surface-container-low border border-surface-variant rounded-lg p-6 mb-8 text-left">
+<h2 class="text-headline-sm font-headline-sm text-secondary mb-4 pb-2 border-b border-surface-variant">
+                    Transaction Details
+                </h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-body-md font-body-md text-on-surface-variant">Transaction ID</span>
+<span class="text-label-md font-label-md text-on-background">TRX-9827-4651</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md font-body-md text-on-surface-variant">Date &amp; Time</span>
+<span class="text-label-md font-label-md text-on-background">Oct 24, 2026 - 14:32</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md font-body-md text-on-surface-variant">Service</span>
+<span class="text-label-md font-label-md text-on-background">CIN Renewal</span>
+</div>
+<div class="pt-4 mt-4 border-t border-surface-variant flex justify-between items-center">
+<span class="text-body-lg font-body-lg font-semibold text-on-background">Total Amount</span>
+<span class="text-headline-sm font-headline-sm text-primary">25.000 TND</span>
+</div>
+</div>
+</div>
+<!-- Next Steps -->
+<div class="w-full bg-tertiary-container/10 border border-tertiary-container/20 rounded-lg p-4 mb-8 flex items-start text-left">
+<span class="material-symbols-outlined text-tertiary mr-3 mt-0.5">info</span>
+<p class="text-body-md font-body-md text-on-surface-variant">
+                    Your request is now moving to the processing stage. You will receive a notification once verified.
+                 </p>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col md:flex-row gap-4 justify-center">
+<button class="flex items-center justify-center gap-2 bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container px-6 py-3 rounded-lg text-label-md font-label-md transition-colors w-full md:w-auto focus:outline focus:outline-3 focus:outline-offset-2 focus:outline-primary-container">
+<span class="material-symbols-outlined">download</span>
+                    Download PDF Receipt
+                </button>
+<button class="flex items-center justify-center gap-2 bg-secondary text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container px-6 py-3 rounded-lg text-label-md font-label-md transition-colors w-full md:w-auto focus:outline focus:outline-3 focus:outline-offset-2 focus:outline-primary-container">
+                    Go to Dashboard
+                </button>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop bg-secondary dark:bg-on-secondary-fixed-variant text-on-secondary">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-headline-sm font-headline-sm font-bold text-on-secondary">
+                Watiq
+            </div>
+<div class="flex flex-wrap justify-center gap-4 text-label-sm font-label-sm text-secondary-fixed-dim">
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="#">Accessibility Statement</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="#">Open Data</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="#">Contact Us</a>
+</div>
+<div class="text-body-md font-body-md text-secondary-fixed-dim text-center md:text-right">
+                © 2026 Watiq National Portal. Official Tunisian Government Platform.
+            </div>
+</div>
+</footer>
+<!-- Accessibility Controls: Voice Narration -->
+<button aria-label="Toggle Voice Narration" class="fixed top-6 right-6 z-50 bg-surface-container-lowest border border-surface-variant shadow-lg p-3 rounded-full hover:bg-surface-variant transition-colors flex items-center justify-center focus:outline focus:outline-3 focus:outline-offset-2 focus:outline-primary-container group">
+<span class="material-symbols-outlined text-on-surface group-hover:text-primary transition-colors">record_voice_over</span>
+</button>
+<!-- Accessibility Overlay Slot: Sign Language Interpreter -->
+<div class="fixed bottom-6 right-6 w-interpreter-slot-width aspect-video bg-inverse-surface rounded-xl overflow-hidden shadow-2xl z-50 border-2 border-surface-variant">
+<!-- Placeholder for actual video feed -->
+<div class="w-full h-full flex flex-col items-center justify-center bg-inverse-surface text-inverse-on-surface p-4 relative" data-alt="A professional sign language interpreter against a plain, well-lit studio background. The interpreter is clearly visible from the waist up, making precise hand gestures. The lighting is studio quality, ensuring clear visibility for accessibility purposes. The mood is helpful and institutional." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBq1EXuxultAAUW92H61DbTKii48HWRy_We0XMfX0Srlhkhl3JlyfzRVB9pbVDOOZuqzqcvkJwRSTV866EWg66WO7LST4MNfodymaLutp9GTDZSDDXPk2SkSHGtfQ9-VDHsORcgKASTmA2g6AjLTe5gAcTAeUhmDJXwW65Z_qtSHP_rumUHL_045SEjqMeHAj7yL3xJvFyy5bxIEHQDYWw272kZmObl3LyZWNo4zErINpTZHsXxIB-ujg')">
+<div class="absolute inset-0 bg-inverse-surface/60 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-inverse-on-surface text-[32px] mb-2">sign_language</span>
+<span class="text-label-sm font-label-sm text-center">Live Interpreter Feed Available</span>
+</div>
+</div>
+</div>
+</body></html>
