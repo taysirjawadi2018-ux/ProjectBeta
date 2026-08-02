@@ -1,0 +1,137 @@
+<!--
+  Watiq HIDS correlation rules (Security.md §6).
+
+  Levels follow Wazuh convention: 12+ pages a human, 15 is the ceiling. These
+  are set high on purpose — each rule below describes something that cannot
+  happen during normal operation, so a hit is an incident and not a metric.
+
+  Rule ids 100100+ are the local range and will not collide with the bundled
+  ruleset.
+-->
+<group name="watiq,">
+
+  <!-- =================================================================
+       File integrity — the code is immutable at runtime
+       ================================================================= -->
+
+  <rule id="100100" level="14">
+    <if_sid>550,554</if_sid>
+    <field name="file">/opt/watiq/app/</field>
+    <description>WATIQ CRITICAL: application code modified at runtime</description>
+    <mitre>
+      <id>T1505.003</id>
+    </mitre>
+  </rule>
+
+  <rule id="100103" level="13">
+    <if_sid>550,554</if_sid>
+    <field name="file">/etc/nginx/</field>
+    <description>WATIQ: edge configuration modified outside deployment</description>
+    <mitre>
+      <id>T1562.001</id>
+    </mitre>
+  </rule>
+
+  <!-- =================================================================
+       Secrets and identity
+       ================================================================= -->
+
+  <rule id="100101" level="13">
+    <if_group>audit</if_group>
+    <field name="audit.key">watiq_secret_read</field>
+    <description>WATIQ: secret material read outside container start</description>
+    <mitre>
+      <id>T1552.001</id>
+    </mitre>
+  </rule>
+
+  <rule id="100104" level="12">
+    <if_group>audit</if_group>
+    <field name="audit.key">identity_change</field>
+    <description>WATIQ: local account database modified</description>
+    <mitre>
+      <id>T1136</id>
+    </mitre>
+  </rule>
+
+  <!-- =================================================================
+       Container escape — the classic paths
+       ================================================================= -->
+
+  <rule id="100102" level="15">
+    <if_group>audit</if_group>
+    <field name="audit.key">docker_socket</field>
+    <description>WATIQ CRITICAL: Docker socket accessed - container escape attempt</description>
+    <mitre>
+      <id>T1610</id>
+    </mitre>
+  </rule>
+
+  <rule id="100105" level="14">
+    <if_group>audit</if_group>
+    <field name="audit.key">process_injection</field>
+    <description>WATIQ CRITICAL: ptrace observed - process injection or debugger attach</description>
+    <mitre>
+      <id>T1055.008</id>
+    </mitre>
+  </rule>
+
+  <!-- =================================================================
+       Correlating Suricata's view with the host's
+       ================================================================= -->
+
+  <rule id="100110" level="15">
+    <decoded_as>json</decoded_as>
+    <field name="alert.signature">WATIQ CRITICAL Data-tier egress</field>
+    <description>WATIQ CRITICAL: data tier reached the internet - assume compromise</description>
+    <mitre>
+      <id>T1041</id>
+    </mitre>
+  </rule>
+
+  <rule id="100111" level="15">
+    <decoded_as>json</decoded_as>
+    <field name="alert.signature">WATIQ Possible bulk CIN exfiltration</field>
+    <description>WATIQ CRITICAL: bulk citizen identifiers in an outbound response</description>
+    <mitre>
+      <id>T1030</id>
+    </mitre>
+  </rule>
+
+  <!-- =================================================================
+       Application-level signals
+       ================================================================= -->
+
+  <!--
+    Refresh-token reuse means a token was replayed after rotation: either it was
+    stolen, or the session family is being replayed. The application already
+    revokes the whole family; this is what tells a human it happened.
+  -->
+  <rule id="100120" level="12">
+    <decoded_as>json</decoded_as>
+    <field name="event">refresh_token_reuse_detected</field>
+    <description>WATIQ: refresh token reuse - session family revoked, token likely stolen</description>
+    <mitre>
+      <id>T1550.004</id>
+    </mitre>
+  </rule>
+
+  <!--
+    An RLS or column-GRANT denial reaching the database means the application
+    tried something its own checks should have stopped. Either a bug, or the
+    service layer has been bypassed. Low volume by construction, so alerting on
+    a single occurrence is affordable.
+  -->
+  <rule id="100121" level="13">
+    <decoded_as>json</decoded_as>
+    <field name="event">insufficient_privilege</field>
+    <description>WATIQ: database refused a privilege the app layer should have refused first</description>
+  </rule>
+
+  <rule id="100122" level="10">
+    <decoded_as>json</decoded_as>
+    <field name="event">form_schema_missing</field>
+    <description>WATIQ: a service accepted form_data with no JSON Schema - add one</description>
+  </rule>
+
+</group>

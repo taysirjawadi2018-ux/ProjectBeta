@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% set html_class = 'light' %}
+
+{% block title %}Watiq - National Portal Login{% endblock %}
+{% block body_class %}bg-background text-on-background min-h-screen flex flex-col antialiased{% endblock %}
+
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/login.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<!-- Linear flow, so TopNavBar/SideNavBar are suppressed -->
+<main class="flex-grow flex flex-col md:flex-row min-h-screen w-full">
+<!-- Left Side: Branding & Flag -->
+<div class="hidden md:flex md:w-1/2 bg-surface-variant flex-col justify-between relative overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center bg-asset-login-1"></div>
+<!-- Content Overlay -->
+<div class="relative z-10 flex flex-col h-full p-12 justify-between bg-gradient-to-r from-on-background/80 to-transparent">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-on-primary text-4xl" data-icon="assured_workload">assured_workload</span>
+<h1 class="text-on-primary font-display-lg text-display-lg tracking-tight">Watiq</h1>
+</div>
+<div class="max-w-md">
+<h2 class="text-on-primary font-headline-md text-headline-md mb-4">National Portal of Tunisia</h2>
+<p class="text-surface-container font-body-lg text-body-lg">Access your citizen services securely and efficiently. Unified digital identity for all Tunisians.</p>
+</div>
+</div>
+</div>
+<!-- Right Side: Login Form -->
+<div class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 bg-surface-container-lowest">
+<div class="w-full max-w-md bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-8">
+<div class="md:hidden flex items-center justify-center space-x-2 mb-8">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="assured_workload">assured_workload</span>
+<h1 class="text-primary font-display-lg-mobile text-display-lg-mobile">Watiq</h1>
+</div>
+<div class="text-center mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Sign In</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Enter your credentials to access your account.</p>
+</div>
+<form action="{{ url_for('public.login', next=request.args.get('next'), staff='1' if staff_mode else None) }}" class="space-y-6" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<!-- CIN Input -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="cin">National ID (CIN)</label>
+<div class="relative focus-ring rounded">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="badge">badge</span>
+</div>
+<input aria-required="true" class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface text-on-surface placeholder-on-surface-variant/50 focus:ring-0 focus:border-outline-variant font-body-md text-body-md transition-colors" id="cin" name="cin" placeholder="8-digit ID number" required="" type="text"/>
+</div>
+</div>
+<!-- Password Input -->
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="block font-label-md text-label-md text-on-surface" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-secondary hover:text-secondary-fixed transition-colors" href="{{ url_for('public.password_reset') }}">Forgot Password?</a>
+</div>
+<div class="relative focus-ring rounded">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="lock">lock</span>
+</div>
+<input aria-required="true" class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface text-on-surface placeholder-on-surface-variant/50 focus:ring-0 focus:border-outline-variant font-body-md text-body-md transition-colors" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-3 px-4 rounded hover:bg-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex justify-center items-center group" type="submit">
+                        Sign In
+                        <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<div class="mt-8 pt-6 border-t border-outline-variant/30 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Don't have an account? 
+                        <a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed transition-colors" href="{{ url_for('public.register') }}">Register here</a>
+</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Accessibility Controls (Persistent) -->
+<div class="fixed top-4 right-4 z-50 flex gap-2">
+<button aria-label="Toggle Audio Description" class="p-3 bg-surface border border-outline-variant rounded-full shadow-sm hover:border-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary flex items-center justify-center text-on-surface" id="toggle-audio" data-action="a11y-narration" type="button">
+<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+</button>
+<button aria-label="Toggle Sign Language Interpreter" class="p-3 bg-surface border border-outline-variant rounded-full shadow-sm hover:border-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-primary flex items-center justify-center text-on-surface" id="toggle-interpreter" data-action="a11y-interpreter" type="button">
+<span class="material-symbols-outlined" data-icon="interpreter_mode">interpreter_mode</span>
+</button>
+</div>
+<!-- Interpreter Overlay Slot -->
+<div class="interpreter-overlay flex flex-col" id="interpreter-slot">
+<div class="bg-secondary text-on-secondary px-3 py-2 flex justify-between items-center text-label-sm font-label-sm">
+<span>Sign Language Interpretation</span>
+<button class="hover:text-tertiary-fixed transition-colors" id="close-interpreter" data-action="dismiss" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</button>
+</div>
+<div class="flex-grow bg-on-background relative flex items-center justify-center">
+<!-- Placeholder for video feed -->
+<span class="material-symbols-outlined text-surface-variant text-4xl opacity-50" data-icon="videocam">videocam</span>
+<p class="absolute bottom-2 text-surface-variant text-xs opacity-75">Live Feed Disabled</p>
+</div>
+</div>
+<!-- Footer Component from JSON (Required for consistent branding even on login, though simplified) -->
+<footer class="w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center bg-on-background dark:bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="text-on-primary font-headline-sm text-headline-sm mb-4 md:mb-0 flex items-center">
+<span class="material-symbols-outlined mr-2" data-icon="assured_workload">assured_workload</span>
+            Watiq
+        </div>
+<p class="font-body-md text-body-md text-on-primary text-center md:text-left mb-4 md:mb-0">
+            © {{ year }} Tunisian Government. Watiq National Portal.
+        </p>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="font-label-sm text-label-sm text-surface-container hover:text-primary-fixed transition-colors" href="{{ url_for('public.terms') }}">Legal</a>
+<a class="font-label-sm text-label-sm text-surface-container hover:text-primary-fixed transition-colors" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-surface-container hover:text-primary-fixed transition-colors" href="{{ url_for('public.accessibility') }}">Accessibility</a>
+<a class="font-label-sm text-label-sm text-surface-container hover:text-primary-fixed transition-colors" href="{{ url_for('public.contact') }}">Contact Us</a>
+</div>
+</footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/login.js') }}" defer></script>
+{% endblock %}

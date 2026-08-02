@@ -1,0 +1,103 @@
+%YAML 1.1
+---
+# Suricata — Layer 4 IDS (Security.md §5).
+#
+# Runs in IDS (detection) mode, NOT IPS. Inline blocking on the only ingress
+# path to a national portal risks a single false positive taking the service
+# offline for the whole country. CrowdSec already provides the actuation, and it
+# can be informed by these alerts without Suricata itself being in the drop path.
+#
+# What this buys that the WAF cannot: Suricata inspects traffic that never
+# reaches nginx — port scans, protocol abuse, malformed TLS — and it keeps an
+# independent record if the application layer is compromised. An attacker who
+# owns the API container cannot edit these logs.
+#
+# Validate before reload:  suricata -T -c ops/suricata/suricata.yaml -v
+
+vars:
+  address-groups:
+    HOME_NET: "[10.0.0.0/8,172.16.0.0/12,192.168.0.0/16]"
+    EXTERNAL_NET: "!$HOME_NET"
+    HTTP_SERVERS: "$HOME_NET"
+    SQL_SERVERS: "$HOME_NET"
+  port-groups:
+    HTTP_PORTS: "80,8000"
+    SHELLCODE_PORTS: "!80"
+
+default-log-dir: /var/log/suricata/
+
+af-packet:
+  - interface: eth0
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+    use-mmap: yes
+    tpacket-v3: yes
+
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: /var/log/suricata/eve.json
+      types:
+        - alert:
+            payload: yes
+            payload-printable: yes
+            http-body: yes
+            metadata: yes
+        - http:
+            extended: yes
+        - tls:
+            extended: yes
+        - dns
+        - flow
+        - anomaly
+
+  - stats:
+      enabled: yes
+      filename: /var/log/suricata/stats.log
+      interval: 60
+
+app-layer:
+  protocols:
+    tls:
+      enabled: yes
+      # Fingerprints the TLS stack rather than the payload, so it identifies
+      # scanners and bot frameworks even over an encrypted connection.
+      ja3-fingerprints: yes
+    http:
+      enabled: yes
+    dns:
+      enabled: yes
+
+detect:
+  profile: medium
+
+# Defrag and stream reassembly: an attacker who can split a payload across
+# segments defeats any inspection that looks at packets in isolation.
+defrag:
+  memcap: 128mb
+  max-frags: 65535
+
+stream:
+  memcap: 256mb
+  checksum-validation: yes
+  reassembly:
+    memcap: 512mb
+    depth: 1mb
+
+rule-files:
+  - watiq.rules            # ops/suricata/rules/watiq.rules
+  - suricata.rules         # Emerging Threats Open, refreshed by suricata-update
+
+default-rule-path: /var/lib/suricata/rules
+
+logging:
+  default-log-level: notice
+  outputs:
+    - console:
+        enabled: yes
+    - file:
+        enabled: yes
+        level: info
+        filename: /var/log/suricata/suricata.log

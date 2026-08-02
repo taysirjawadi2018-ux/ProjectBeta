@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% set html_class = '' %}
+
+{% block title %}My Requests - Watiq National Portal{% endblock %}
+{% block body_class %}min-h-screen flex flex-col font-body-md{% endblock %}
+
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/my_requests.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-on-background w-full border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-4">
+<img alt="National Crest of Tunisia" class="h-8 w-8 object-contain" data-alt="A clean, minimalist vector rendering of the National Crest of Tunisia in white and deep navy on a subtle background. Highly professional." src="{{ url_for('static', filename='img/img-656e2815c8dc.jpg') }}"/>
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Watiq</span>
+</div>
+<!-- Web Nav -->
+<nav class="hidden md:flex gap-6 h-full items-center">
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary h-full flex items-center px-2 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" href="{{ url_for('public.services') }}">
+<span class="text-label-md font-label-md">Services</span>
+</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 h-full flex items-center px-2 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors opacity-80 transition-all duration-200 focus-ring" href="{{ url_for('citizen.requests_list') }}">
+<span class="text-label-md font-label-md">My Requests</span>
+</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary h-full flex items-center px-2 hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" href="{{ url_for('citizen.book_appointment') }}">
+<span class="text-label-md font-label-md">Appointments</span>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button aria-label="Narration" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" data-action="a11y-narration" type="button">
+<span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">record_voice_over</span>
+</button>
+<button aria-label="Interpreter Mode" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" data-action="a11y-interpreter" type="button">
+<span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">interpreter_mode</span>
+</button>
+<button aria-label="Language" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" data-action="language" type="button">
+<span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">language</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-gutter max-w-container-max mx-auto w-full py-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-gutter relative">
+<!-- Content Area -->
+<div class="md:col-span-12 space-y-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 border-b border-surface-variant pb-6">
+<div>
+<h1 class="text-display-lg font-display-lg text-on-surface mb-2">My Requests</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Track the status of your official documents and services.</p>
+</div>
+<div class="w-full md:w-96 relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</div>
+<input aria-label="Search Requests" class="block w-full pl-10 pr-3 py-3 border border-surface-variant rounded-DEFAULT leading-5 bg-surface-container-lowest placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-primary-container sm:text-sm transition duration-150 ease-in-out text-body-md font-body-md" placeholder="Search by Tracking Code or Service..." type="text"/>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex gap-2 overflow-x-auto pb-2">
+<button class="px-4 py-2 bg-secondary text-on-secondary rounded-full text-label-md font-label-md whitespace-nowrap focus-ring" data-action="filter" data-filter-group="status" data-filter-value="all" type="button">All Requests</button>
+<button class="px-4 py-2 border border-surface-variant text-on-surface hover:bg-surface-container-low rounded-full text-label-md font-label-md whitespace-nowrap focus-ring" data-action="filter" data-filter-group="status" data-filter-value="in-progress" type="button">In Progress</button>
+<button class="px-4 py-2 border border-surface-variant text-on-surface hover:bg-surface-container-low rounded-full text-label-md font-label-md whitespace-nowrap focus-ring" data-action="filter" data-filter-group="status" data-filter-value="requires-action" type="button">Requires Action</button>
+<button class="px-4 py-2 border border-surface-variant text-on-surface hover:bg-surface-container-low rounded-full text-label-md font-label-md whitespace-nowrap focus-ring" data-action="filter" data-filter-group="status" data-filter-value="completed" type="button">Completed</button>
+</div>
+<!-- Bento Grid Layout for Requests -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Request cards: one per record from GET /api/v1/requests -->
+{%- for req in requests %}
+<a class="request-card bg-surface-container-lowest rounded-xl p-6 flex flex-col justify-between h-full focus-ring group{% if req.status_name and 'payment' in req.status_name|lower %} border-l-4 border-l-primary-container{% elif req.status_name and req.status_name|lower in ('rejected', 'closed') %} opacity-80{% endif %}" href="{{ url_for('citizen.request_detail', request_id=req.id) }}">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-surface-container-low rounded-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-highest text-on-surface-variant">
+                                {{ req.status_name }}
+                            </span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-1">{{ req.service_name or 'Service request' }}</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-4">{{ req.office_name or '' }}</p>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-variant grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Tracking Code</p>
+<p class="text-label-md font-label-md text-on-surface">{{ req.tracking_code }}</p>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Submitted</p>
+<p class="text-label-md font-label-md text-on-surface">{{ req.submitted_at }}</p>
+</div>
+</div>
+</a>
+{%- else %}
+<div class="md:col-span-2 lg:col-span-3 bg-surface-container-low p-8 rounded-xl border border-surface-variant text-center space-y-4">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-[48px]">folder_open</span>
+<p class="font-body-lg text-body-lg text-on-surface-variant">{% if status %}No requests with that status.{% else %}You have not submitted any requests yet.{% endif %}</p>
+<a class="inline-flex items-center gap-2 bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring" href="{{ url_for('citizen.submit_request') }}">
+<span aria-hidden="true" class="material-symbols-outlined">add_circle</span>
+                            Start a new request
+                        </a>
+</div>
+{%- endfor %}
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background dark:bg-surface-container-lowest w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center mt-auto border-t-[4px] border-primary-container">
+<div class="flex flex-col md:flex-row items-center gap-4 w-full justify-between max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-headline-sm font-headline-sm text-on-primary">Watiq</span>
+<span class="text-body-md font-body-md text-on-primary">© {{ year }} Tunisian Government. Watiq National Portal.</span>
+</div>
+<nav class="flex gap-6">
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="{{ url_for('public.terms') }}">Legal</a>
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="{{ url_for('public.accessibility') }}">Accessibility</a>
+<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring" href="{{ url_for('public.contact') }}">Contact Us</a>
+</nav>
+</div>
+</footer>
+<!-- Accessibility Overlay Slot -->
+<div class="fixed bottom-4 right-4 w-[320px] h-[240px] bg-surface-container-highest rounded-lg border border-surface-variant shadow-lg overflow-hidden z-50 flex items-center justify-center">
+<span class="text-on-surface-variant text-label-sm text-center px-4">Sign Language Interpreter Video Feed Resides Here</span>
+</div>
+{% endblock %}

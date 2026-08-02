@@ -1,0 +1,49 @@
+{% extends "_page.html" %}
+{% set active = 'appointments' %}
+
+{% block title %}Watiq National Portal - My Appointments{% endblock %}
+
+{% block page %}
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-variant pb-6">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">My appointments</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Upcoming and past visits to a government office.</p>
+</div>
+<a class="inline-flex items-center gap-2 bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring self-start" href="{{ url_for('citizen.book_appointment') }}">
+<span aria-hidden="true" class="material-symbols-outlined">calendar_add_on</span>
+    Book an appointment
+</a>
+</header>
+
+{% if appointments %}
+<ul class="space-y-4">
+{% for appt in appointments %}
+<li class="bg-surface-container-lowest rounded-xl p-6 border border-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary">event</span>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface">{{ appt.office_name or 'Government office' }}</p>
+<p class="font-body-md text-body-md text-on-surface-variant">{{ appt.slot_date }} {% if appt.time_slot %}· {{ appt.time_slot }}{% endif %}</p>
+{% if appt.service_name %}<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">{{ appt.service_name }}</p>{% endif %}
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm py-1 px-3 rounded-full">{{ appt.status or 'Booked' }}</span>
+{% if appt.status not in ('cancelled', 'completed') %}
+<form action="{{ url_for('citizen.cancel_appointment', appointment_id=appt.id) }}" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<button class="border border-outline-variant text-on-surface font-label-md text-label-md py-2 px-4 rounded hover:bg-surface-container-low transition-colors focus-ring" type="submit">Cancel</button>
+</form>
+{% endif %}
+</div>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<div class="bg-surface-container-low p-8 rounded-xl border border-surface-variant text-center space-y-4">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-[48px]">calendar_today</span>
+<p class="font-body-lg text-body-lg text-on-surface-variant">You have no appointments booked.</p>
+<a class="inline-flex items-center gap-2 bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring" href="{{ url_for('citizen.book_appointment') }}">Book your first appointment</a>
+</div>
+{% endif %}
+{% endblock %}

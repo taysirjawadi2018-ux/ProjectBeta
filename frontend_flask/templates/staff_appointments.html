@@ -1,0 +1,46 @@
+{% extends "_page.html" %}
+
+{% block title %}Watiq National Portal - Office Appointments{% endblock %}
+
+{% block page %}
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-variant pb-6">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Office appointments</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Scheduled visits for {{ staff.office_name if staff else 'your office' }}.</p>
+</div>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-primary focus-ring rounded-DEFAULT" href="{{ url_for('staff.workbench') }}">
+<span aria-hidden="true" class="material-symbols-outlined">arrow_back</span>
+    Back to workbench
+</a>
+</header>
+
+{% if appointments %}
+<ul class="space-y-3">
+{% for appt in appointments %}
+<li class="bg-surface-container-lowest rounded-xl p-5 border border-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary">event</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">{{ appt.slot_date }} {% if appt.time_slot %}· {{ appt.time_slot }}{% endif %}</p>
+<p class="font-body-md text-body-md text-on-surface-variant">{{ appt.service_name or 'Appointment' }}</p>
+</div>
+</div>
+<form action="{{ url_for('staff.appointment_status', appointment_id=appt.id) }}" class="flex items-center gap-2" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<label class="sr-only" for="status-{{ appt.id }}">Status for appointment {{ appt.id }}</label>
+<select class="border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md py-2 px-3 focus-ring" id="status-{{ appt.id }}" name="status">
+{% for s in ['booked', 'attended', 'no_show', 'cancelled'] %}
+<option value="{{ s }}"{% if appt.status == s %} selected{% endif %}>{{ s.replace('_', ' ') | title }}</option>
+{% endfor %}
+</select>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md py-2 px-4 rounded hover:bg-primary transition-colors focus-ring" type="submit">Update</button>
+</form>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<div class="bg-surface-container-low p-8 rounded-xl border border-surface-variant text-center">
+<p class="font-body-lg text-body-lg text-on-surface-variant">No appointments scheduled.</p>
+</div>
+{% endif %}
+{% endblock %}

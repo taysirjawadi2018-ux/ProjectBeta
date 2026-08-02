@@ -1,0 +1,96 @@
+{% extends "_page.html" %}
+{% set active = 'requests' %}
+
+{% block title %}Watiq National Portal - Request {{ request_item.tracking_code }}{% endblock %}
+
+{% block page %}
+<nav aria-label="Breadcrumb">
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-primary focus-ring rounded-DEFAULT" href="{{ url_for('citizen.requests_list') }}">
+<span aria-hidden="true" class="material-symbols-outlined">arrow_back</span>
+        All requests
+    </a>
+</nav>
+
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-variant pb-6">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">{{ request_item.service_name or 'Request' }}</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Tracking code {{ request_item.tracking_code }}</p>
+</div>
+<span class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container font-label-md text-label-md py-2 px-4 rounded-full self-start">
+<span aria-hidden="true" class="material-symbols-outlined">pending_actions</span>
+{{ request_item.status_name }}
+</span>
+</header>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<section class="lg:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-4">Submitted information</h2>
+{% if request_item.form_data %}
+<dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+{% for key, value in request_item.form_data.items() %}
+<div>
+<dt class="font-label-sm text-label-sm text-on-surface-variant">{{ key.replace('_', ' ') | title }}</dt>
+<dd class="font-body-md text-body-md text-on-surface break-words">{{ value }}</dd>
+</div>
+{% endfor %}
+</dl>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">No additional information was submitted with this request.</p>
+{% endif %}
+</div>
+
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-4">Documents</h2>
+{% if documents %}
+<ul class="space-y-3">
+{% for doc in documents %}
+<li class="flex items-center justify-between gap-4 p-3 rounded border border-surface-variant">
+<div class="flex items-center gap-3 min-w-0">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary">description</span>
+<div class="min-w-0">
+<p class="font-body-md text-body-md text-on-surface truncate">{{ doc.filename or doc.original_name }}</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+{% if doc.is_verified %}Verified{% elif doc.is_verified is none %}Awaiting review{% else %}Rejected{% endif %}
+</p>
+</div>
+</div>
+<form action="{{ url_for('citizen.delete_document', document_id=doc.id) }}" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<button class="p-2 text-on-surface-variant hover:text-error rounded-full focus-ring transition-colors" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined">close</span>
+<span class="sr-only">Remove {{ doc.filename }}</span>
+</button>
+</form>
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">No documents attached.</p>
+{% endif %}
+</div>
+</section>
+
+<aside class="space-y-6">
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-variant">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-4">History</h2>
+{% if history %}
+<ol class="space-y-4">
+{% for entry in history %}
+<li class="flex gap-3">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary">history</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">{{ entry.status_name or entry.action }}</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">{{ entry.changed_at or entry.created_at }}</p>
+{% if entry.note %}<p class="font-body-sm text-on-surface-variant mt-1">{{ entry.note }}</p>{% endif %}
+</div>
+</li>
+{% endfor %}
+</ol>
+{% else %}
+<p class="font-body-md text-body-md text-on-surface-variant">No history recorded yet.</p>
+{% endif %}
+</div>
+</aside>
+</div>
+{% endblock %}

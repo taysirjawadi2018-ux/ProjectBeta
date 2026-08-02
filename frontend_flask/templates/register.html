@@ -1,0 +1,87 @@
+{% extends "_page.html" %}
+
+{% block title %}Watiq National Portal - Create Account{% endblock %}
+
+{% block page %}
+<section class="max-w-2xl mx-auto">
+<div class="bg-surface-container-lowest rounded-xl p-8 md:p-10 border border-surface-variant">
+<div class="text-center mb-8">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Create your account</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Register with your national ID (CIN) to access government services.</p>
+</div>
+
+<form action="{{ url_for('public.register') }}" class="space-y-6" method="post" novalidate>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="national_id">National ID (CIN)</label>
+<div class="relative focus-ring rounded">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant">badge</span>
+</div>
+<input aria-describedby="cin-hint" aria-required="true" class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md" id="national_id" inputmode="numeric" maxlength="8" name="national_id" pattern="[0-9]{8}" placeholder="8-digit ID number" required="" type="text" value="{{ form.get('national_id', '') }}"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1" id="cin-hint">Exactly 8 digits, as printed on your CIN.</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="first_name">First name</label>
+<input aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="first_name" maxlength="100" name="first_name" required="" type="text" value="{{ form.get('first_name', '') }}"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="last_name">Last name</label>
+<input aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="last_name" maxlength="100" name="last_name" required="" type="text" value="{{ form.get('last_name', '') }}"/>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="email">Email <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
+<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="email" name="email" type="email" value="{{ form.get('email', '') }}"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="phone">Phone <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
+<input aria-describedby="phone-hint" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="phone" name="phone" pattern="\+216[0-9]{8}" placeholder="+216XXXXXXXX" type="tel" value="{{ form.get('phone', '') }}"/>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1" id="phone-hint">Tunisian number in +216 format.</p>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="governorate">Governorate <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
+<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="governorate" maxlength="100" name="governorate" type="text" value="{{ form.get('governorate', '') }}"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="city">City <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
+<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="city" maxlength="100" name="city" type="text" value="{{ form.get('city', '') }}"/>
+</div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="password">Password</label>
+<input aria-describedby="pw-hint" aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="password" minlength="8" name="password" required="" type="password"/>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1" id="pw-hint">At least 8 characters.</p>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2" for="password_confirm">Confirm password</label>
+<input aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="password_confirm" minlength="8" name="password_confirm" required="" type="password"/>
+</div>
+</div>
+
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-3 px-4 rounded hover:bg-primary transition-colors focus-ring flex justify-center items-center group" type="submit">
+                    Create account
+                    <span aria-hidden="true" class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</form>
+
+<div class="mt-8 pt-6 border-t border-outline-variant/30 text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Already have an account?
+                    <a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed transition-colors focus-ring rounded-DEFAULT" href="{{ url_for('public.login') }}">Sign in</a>
+</p>
+</div>
+</div>
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+/* login.html — page-scoped rules, lifted verbatim from the mockup's
+ * <style> block. Kept in its own file rather than merged into watiq.css:
+ * several pages define the same class with different values, so a merge
+ * would silently change how they render. theme() calls are resolved to the
+ * literal token values the Tailwind build would have produced. */
+
+body { font-family: 'Public Sans', sans-serif; }
+.focus-ring:focus-within {
+    outline: 3px solid #E70013;
+    outline-offset: 3px;
+}
+.interpreter-overlay {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 320px;
+    height: 240px;
+    z-index: 50;
+    background-color: #181c1e;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    display: none; /* Toggled via JS */
+}
+
+.bg-asset-login-1 { background-image: url('../../img/img-d6ba242252a8.jpg'); }

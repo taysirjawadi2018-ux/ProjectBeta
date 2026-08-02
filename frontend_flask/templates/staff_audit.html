@@ -1,0 +1,60 @@
+{% extends "_page.html" %}
+
+{% block title %}Watiq National Portal - Access Log{% endblock %}
+
+{% block page %}
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-variant pb-6">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Access log</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Who read or changed what, and when.</p>
+</div>
+<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-primary focus-ring rounded-DEFAULT" href="{{ url_for('staff.workbench') }}">
+<span aria-hidden="true" class="material-symbols-outlined">arrow_back</span>
+    Back to workbench
+</a>
+</header>
+
+{% if entries %}
+<div class="overflow-x-auto">
+<table class="w-full min-w-[760px] border border-surface-variant rounded-xl overflow-hidden">
+<caption class="sr-only">Access log entries</caption>
+<thead class="bg-surface-container">
+<tr>
+<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">When</th>
+<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Actor</th>
+<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Action</th>
+<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Resource</th>
+</tr>
+</thead>
+<tbody>
+{% for e in entries %}
+<tr class="border-t border-surface-variant bg-surface-container-lowest">
+<td class="p-4 font-body-md text-body-md text-on-surface-variant">{{ e.created_at or e.accessed_at }}</td>
+<td class="p-4 font-body-md text-body-md text-on-surface">{{ e.actor_label or e.staff_id or e.user_id or '—' }}</td>
+<td class="p-4 font-body-md text-body-md text-on-surface">{{ e.action }}</td>
+<td class="p-4 font-body-md text-body-md text-on-surface-variant">{{ e.resource_type }}{% if e.resource_id %} #{{ e.resource_id }}{% endif %}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between gap-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant">{{ total }} entries.</p>
+<div class="flex gap-2">
+{% if page > 1 %}
+<a class="inline-flex items-center gap-1 border border-outline-variant text-on-surface font-label-md text-label-md py-2 px-4 rounded hover:bg-surface-container-low transition-colors focus-ring" href="{{ url_for('staff.audit', page=page-1) }}">
+<span aria-hidden="true" class="material-symbols-outlined">chevron_left</span> Previous</a>
+{% endif %}
+{% if entries|length >= 50 %}
+<a class="inline-flex items-center gap-1 border border-outline-variant text-on-surface font-label-md text-label-md py-2 px-4 rounded hover:bg-surface-container-low transition-colors focus-ring" href="{{ url_for('staff.audit', page=page+1) }}">
+Next <span aria-hidden="true" class="material-symbols-outlined">chevron_right</span></a>
+{% endif %}
+</div>
+</div>
+{% else %}
+<div class="bg-surface-container-low p-8 rounded-xl border border-surface-variant text-center space-y-3">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-[48px]">history</span>
+<p class="font-body-lg text-body-lg text-on-surface-variant">No entries available, or your role does not include audit access.</p>
+</div>
+{% endif %}
+{% endblock %}

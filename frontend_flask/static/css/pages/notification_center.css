@@ -1,0 +1,11 @@
+/* notification_center.html — page-scoped rules, lifted verbatim from the mockup's
+ * <style> block. Kept in its own file rather than merged into watiq.css:
+ * several pages define the same class with different values, so a merge
+ * would silently change how they render. theme() calls are resolved to the
+ * literal token values the Tailwind build would have produced. */
+
+body { font-family: 'Public Sans', sans-serif; background-color: #f7fafc; }
+.interpreter-overlay { position: fixed; bottom: 24px; right: 24px; width: 320px; z-index: 50; }
+.voice-narration-btn { position: fixed; top: 88px; right: 24px; z-index: 40; }
+
+.bg-asset-notification-center-1 { background-image: url('../../img/img-5d7ea750bd07.jpg'); }

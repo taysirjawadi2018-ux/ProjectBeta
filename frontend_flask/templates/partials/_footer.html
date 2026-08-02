@@ -1,0 +1,20 @@
+{#
+  Shared footer for the screens that had no design of their own. Lifted from
+  index.html, with the two dead links now pointing at real pages. The twelve
+  ported mockups keep their own footers (five variants) — this partial does not
+  touch them.
+#}
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop bg-secondary dark:bg-on-secondary-fixed-variant text-on-secondary mt-auto">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-headline-sm font-headline-sm font-bold text-on-secondary">Watiq National Portal</div>
+<div class="text-body-md font-body-md">
+                 © {{ year }} Watiq National Portal. Official Tunisian Government Platform.
+             </div>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.terms') }}">Terms of Service</a>
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.accessibility') }}">Accessibility</a>
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.contact') }}">Contact Us</a>
+</div>
+</div>
+</footer>

@@ -1,0 +1,25 @@
+/* index.html — page-scoped rules, lifted verbatim from the mockup's
+ * <style> block. Kept in its own file rather than merged into watiq.css:
+ * several pages define the same class with different values, so a merge
+ * would silently change how they render. theme() calls are resolved to the
+ * literal token values the Tailwind build would have produced. */
+
+.group:hover .group-hover\:shadow-elevation {
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+}
+
+/* Project-map card thumbnails.
+ * The mockup set these with style="background-image: url(...)" on each card.
+ * An inline style attribute is blocked by style-src 'self', so each card now
+ * carries a .card-thumb--<endpoint> class and the image is declared here. */
+.card-thumb--public-services { background-image: url('../../img/img-9179d34af7be.jpg'); }
+.card-thumb--public-login { background-image: url('../../img/img-bd78e8b3a7f3.jpg'); }
+.card-thumb--citizen-dashboard { background-image: url('../../img/img-57e6aa78a6ec.jpg'); }
+.card-thumb--citizen-submit_request { background-image: url('../../img/img-c7da550f73d8.jpg'); }
+.card-thumb--citizen-requests_list { background-image: url('../../img/img-0c5aeee57f6e.jpg'); }
+.card-thumb--citizen-book_appointment { background-image: url('../../img/img-cdd9f0549147.jpg'); }
+.card-thumb--citizen-notifications { background-image: url('../../img/img-f0573fb85c4a.jpg'); }
+.card-thumb--citizen-payment_confirmation { background-image: url('../../img/img-5d9aa780b56c.jpg'); }
+.card-thumb--staff-workbench { background-image: url('../../img/img-c337bf0561a7.jpg'); }
+.card-thumb--staff-review { background-image: url('../../img/img-e804cbbd1940.jpg'); }
+.card-thumb--admin-index { background-image: url('../../img/img-a99969afbedc.jpg'); }

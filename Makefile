@@ -1,7 +1,7 @@
 .ONESHELL:
-.PHONY: up down migrate test test-security lint scan fmt dev-setup dev-keys
+.PHONY: up down migrate test test-security test-frontend lint scan fmt dev-setup dev-keys frontend-build frontend-dev
 
-up:              ## dev stack
+up:              ## dev stack (API + BFF frontend on 127.0.0.1:5000)
 	docker compose up -d --build
 
 down:
@@ -15,6 +15,16 @@ test:
 
 test-security:   ## the RLS regression suite — must pass before any merge
 	docker compose exec api pytest tests/security/ -v
+
+test-frontend:   ## BFF routes, guards and the dead-control gate
+	cd frontend_flask && .venv/bin/python -m pytest tests/ -q
+
+frontend-build:  ## compile the design tokens to a static stylesheet
+	cd frontend_flask && npm install --no-audit --no-fund && npm run build
+
+frontend-dev:    ## run the BFF against a local API, rebuilding CSS on change
+	cd frontend_flask && npm run watch & \
+	cd frontend_flask && .venv/bin/python app.py
 
 lint:
 	ruff check backend && ruff format --check backend
@@ -36,45 +46,4 @@ dev-setup:       ## first run: create .env from the example and generate dev key
 	$(MAKE) dev-keys
 
 dev-keys:        ## dev-only Ed25519 JWT keypair + MFA KEK; NEVER for production
-	uv run --project backend python - <<'PY'
-import base64, secrets
-from pathlib import Path
-from cryptography.hazmat.primitives import serialization
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
-
-env = Path(".env")
-if not env.exists():
-    raise SystemExit("missing .env — run: cp .env.example .env")
-
-key = Ed25519PrivateKey.generate()
-priv = key.private_bytes(
-    serialization.Encoding.PEM,
-    serialization.PrivateFormat.PKCS8,
-    serialization.NoEncryption(),
-).decode().strip()
-pub = key.public_key().public_bytes(
-    serialization.Encoding.PEM,
-    serialization.PublicFormat.SubjectPublicKeyInfo,
-).decode().strip()
-kek = base64.b64encode(secrets.token_bytes(32)).decode()
-
-def set_var(lines, name, value):
-    out = []
-    replaced = False
-    for line in lines:
-        if line.startswith(name + "="):
-            out.append(f"{name}=\"{value.replace(chr(10), chr(92) + 'n')}\"")
-            replaced = True
-        else:
-            out.append(line)
-    if not replaced:
-        out.append(f"{name}=\"{value}\"")
-    return out
-
-lines = env.read_text(encoding="utf-8").splitlines()
-for name, value in (("JWT_PRIVATE_KEY", priv), ("JWT_PUBLIC_KEY", pub),
-                    ("MFA_ENCRYPTION_KEY", kek)):
-    lines = set_var(lines, name, value)
-env.write_text("\n".join(lines) + "\n", encoding="utf-8")
-print("dev keys written to .env")
-PY
+	uv run --project backend python ops/dev/gen_dev_keys.py

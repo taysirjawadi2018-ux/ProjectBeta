@@ -1,0 +1,190 @@
+# Watiq SAST rules (Security.md §9.1).
+#
+#     semgrep --config ops/semgrep/watiq.yml --error backend/app
+#
+# These are not generic lint. Each one bans a specific construct that would
+# defeat a specific control in this system, and each is cheap to check and
+# impossible to argue with in review.
+
+rules:
+  # ------------------------------------------------------------------
+  # THE important one.
+  #
+  # Session identity is set with set_config('app.current_user_id', :uid, true).
+  # If that value is ever interpolated instead of bound, an input of
+  #     1'; SET app.current_office_id = '99
+  # rewrites the attacker's own office scope. Every RLS policy then evaluates
+  # correctly — against a forged identity. That is a total authorization bypass
+  # with no error, no anomaly, and no trace beyond an access_log entry that
+  # names the wrong office.
+  # ------------------------------------------------------------------
+  - id: no-fstring-sql
+    languages: [python]
+    severity: ERROR
+    message: >
+      Never build SQL with f-strings or concatenation. Use bind parameters.
+      For session context use: SELECT set_config('app.current_user_id', :uid, true)
+    patterns:
+      - pattern-either:
+          - pattern: sqlalchemy.text(f"...")
+          - pattern: text(f"...")
+          - pattern: $CONN.execute(f"...")
+          - pattern: text("..." + $X)
+          - pattern: text("..." % $X)
+          - pattern: text("...".format(...))
+
+  - id: no-set-local-interpolation
+    languages: [python]
+    severity: ERROR
+    message: "SET LOCAL cannot be parameterized. Use set_config(name, :value, true)."
+    pattern-regex: "SET\\s+LOCAL\\s+app\\."
+
+  - id: no-owner-connection
+    languages: [python]
+    severity: ERROR
+    message: >
+      RLS does not apply to the schema owner or to a superuser. Never connect as
+      one at runtime — every policy silently becomes inert while the application
+      keeps working perfectly.
+    # The optional ":password" group is load-bearing. Every DSN in this project
+    # is user:password@host, so a bare "(watiq_migrate|postgres)@" matches only
+    # the passwordless form and would never fire on real configuration.
+    pattern-regex: "(watiq_migrate|postgres)(:[^@/\\s]*)?@"
+
+  # ------------------------------------------------------------------
+  # Data handling
+  # ------------------------------------------------------------------
+  - id: no-returning-on-access-log
+    languages: [python]
+    severity: ERROR
+    message: >
+      Application roles hold INSERT but not SELECT on access_log, by design.
+      INSERT ... RETURNING requires SELECT and will fail at runtime.
+    patterns:
+      - pattern-regex: "(?is)INSERT\\s+INTO\\s+access_log\\b[^\"']*RETURNING"
+
+  - id: no-pickle
+    languages: [python]
+    severity: ERROR
+    message: >
+      No pickle anywhere, including ARQ job payloads. Deserializing attacker-
+      influenced data is remote code execution. ARQ is configured with JSON.
+    patterns:
+      - pattern-either:
+          - pattern: import pickle
+          - pattern: pickle.loads(...)
+          - pattern: import cPickle
+
+  - id: no-shell-invocation
+    languages: [python]
+    severity: ERROR
+    message: >
+      There is no shell in the request path (Security.md §9.2). ClamAV is
+      reached over its TCP protocol, not by invoking clamscan.
+    patterns:
+      - pattern-either:
+          - pattern: os.system(...)
+          - pattern: os.popen(...)
+          - pattern: subprocess.$F(..., shell=True, ...)
+          - pattern: eval(...)
+          - pattern: exec(...)
+
+  # ------------------------------------------------------------------
+  # Response hygiene — the fields that must never leave the process
+  # ------------------------------------------------------------------
+  - id: no-secret-in-response-model
+    languages: [python]
+    severity: ERROR
+    message: >
+      password_hash, mfa_secret, refresh_token_hash and storage_key must never
+      appear in a Pydantic response model. storage_key is a private object key;
+      exposing it hands out a durable pointer into the bucket.
+    patterns:
+      - pattern-inside: |
+          class $MODEL(BaseModel):
+            ...
+      - pattern-either:
+          - pattern: password_hash = ...
+          - pattern: mfa_secret = ...
+          - pattern: refresh_token_hash = ...
+          - pattern: storage_key = ...
+          # Quoted: an unquoted "name: $T" is parsed by YAML as a nested map.
+          - pattern: "password_hash: $T"
+          - pattern: "mfa_secret: $T"
+          - pattern: "refresh_token_hash: $T"
+          - pattern: "storage_key: $T"
+
+  - id: pydantic-must-forbid-extra
+    languages: [python]
+    severity: WARNING
+    message: >
+      Request models must set extra="forbid" (Security.md §8.1). Silently
+      ignoring unknown fields is how a mass-assignment bug hides.
+    patterns:
+      - pattern: ConfigDict(..., extra="allow", ...)
+
+  # ------------------------------------------------------------------
+  # Crypto
+  # ------------------------------------------------------------------
+  - id: no-weak-hash-for-secrets
+    languages: [python]
+    severity: ERROR
+    message: >
+      md5/sha1 are not acceptable for anything security-relevant. Passwords use
+      Argon2id; refresh tokens use SHA-256 of 256 bits of entropy.
+    patterns:
+      - pattern-either:
+          - pattern: hashlib.md5(...)
+          - pattern: hashlib.sha1(...)
+
+  - id: no-non-crypto-random-for-tokens
+    languages: [python]
+    severity: ERROR
+    message: >
+      random.* is predictable. Use secrets.* for tokens, codes and recovery
+      codes. (random.SystemRandom for cache TTL jitter is fine and explicit.)
+    # No exclusion needed for the one legitimate use: cache.py calls
+    # random.SystemRandom().uniform() for TTL jitter, and `uniform` is
+    # deliberately absent from the list below.
+    patterns:
+      - pattern-either:
+          - pattern: random.random()
+          - pattern: random.randint(...)
+          - pattern: random.choice(...)
+          - pattern: random.choices(...)
+
+  - id: no-jwt-decode-without-verification
+    languages: [python]
+    severity: ERROR
+    message: "jwt.decode with verification disabled accepts forged tokens."
+    patterns:
+      - pattern-either:
+          # Quoted: the inner dict literal contains a colon, which YAML would
+          # otherwise read as a nested mapping.
+          - pattern: 'jwt.decode(..., options={..., "verify_signature": False, ...}, ...)'
+          - pattern: "jwt.decode(..., verify=False, ...)"
+
+  # ------------------------------------------------------------------
+  # Configuration
+  # ------------------------------------------------------------------
+  - id: no-wildcard-cors
+    languages: [python]
+    severity: ERROR
+    message: >
+      CORS must be a strict allow-list, never "*". This is a single-origin SPA
+      whose refresh cookie is SameSite=Strict; a wildcard undoes that.
+    # The call context is required: a bare `allow_origins=$X` is parsed as an
+    # ASSIGNMENT, not a keyword argument, and silently matches nothing.
+    patterns:
+      - pattern: $F(..., allow_origins=$X, ...)
+      - metavariable-regex:
+          metavariable: $X
+          regex: '.*\*.*'
+
+  - id: no-hardcoded-dsn
+    languages: [python]
+    severity: ERROR
+    message: >
+      Credentials come from /run/secrets via pydantic-settings, never from
+      source. A DSN in git is a DSN in every clone and every image layer.
+    pattern-regex: "(postgresql|redis|rediss)(\\+asyncpg)?://[^:\\s]+:[^@\\s]{3,}@"

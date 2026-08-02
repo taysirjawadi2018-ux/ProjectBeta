@@ -1,0 +1,19 @@
+/* citizen_portal.html — page-scoped rules, lifted verbatim from the mockup's
+ * <style> block. Kept in its own file rather than merged into watiq.css:
+ * several pages define the same class with different values, so a merge
+ * would silently change how they render. theme() calls are resolved to the
+ * literal token values the Tailwind build would have produced. */
+
+.interactive-card {
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #e0e3e5; /* slate-200 equivalent */
+}
+.interactive-card:hover {
+    border-color: #4e5e81; /* Deep Navy */
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+}
+.focus-ring:focus-visible {
+    outline: 3px solid #E70013;
+    outline-offset: 3px;
+}

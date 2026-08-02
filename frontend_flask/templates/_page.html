@@ -1,0 +1,18 @@
+{#
+  Layout for screens that had no mockup of their own: nav + flash + main +
+  footer, all from existing design-system components. The twelve ported screens
+  do NOT use this — they extend base.html directly and keep their own markup.
+#}
+{% extends "base.html" %}
+{% set html_class = 'light' %}
+
+{% block body_class %}bg-background text-on-surface min-h-screen flex flex-col relative overflow-x-hidden font-body-md text-body-md{% endblock %}
+
+{% block content %}
+{% include "partials/_nav.html" %}
+{% include "partials/_flash.html" %}
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-margin-desktop space-y-8">
+{% block page %}{% endblock %}
+</main>
+{% include "partials/_footer.html" %}
+{% endblock %}

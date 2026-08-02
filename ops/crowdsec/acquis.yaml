@@ -1,0 +1,27 @@
+# CrowdSec log acquisition (Security.md §4).
+#
+# The WAF blocks *requests*; CrowdSec blocks *actors*. That distinction is why
+# it reads application logs and not only nginx: a credential-stuffing run that
+# stays under every per-request threshold is only visible as a pattern across
+# many requests, and only the application knows a login failed.
+#
+# Mounted at /etc/crowdsec/acquis.yaml (docker-compose.prod.yml).
+
+filenames:
+  - /var/log/nginx/access.log
+  - /var/log/nginx/error.log
+labels:
+  type: nginx
+---
+filenames:
+  - /var/log/modsec_audit.log
+labels:
+  type: modsecurity
+---
+# The structured application log. Its PII redaction allow-list (Security.md
+# §14.1) is what makes it safe to ship here: the events carry a source IP, a
+# principal id and an event name, never a CIN or a tracking code.
+filenames:
+  - /var/log/watiq/app.json
+labels:
+  type: watiq-api

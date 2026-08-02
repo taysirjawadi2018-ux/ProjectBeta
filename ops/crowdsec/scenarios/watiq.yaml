@@ -1,0 +1,99 @@
+# Watiq behavioural scenarios (Security.md §4).
+#
+# `leaky` is a leaky bucket: capacity fills on each matching event and drains at
+# leakspeed. It fires when the bucket overflows, which is what makes these
+# rate-of-behaviour detectors rather than single-event triggers.
+
+type: leaky
+name: watiq/login-bruteforce
+description: "Repeated failed logins from one IP"
+filter: "evt.Meta.log_type == 'watiq_auth_failure'"
+leakspeed: "10s"
+capacity: 10
+groupby: "evt.Meta.source_ip"
+blackhole: 5m
+labels:
+  remediation: true
+  behavior: "http:bruteforce"
+  confidence: 3
+---
+# The important one. A single IP failing against many *different* accounts has
+# no legitimate explanation — that is why `distinct` is on the account, not the
+# IP, and why profiles.yaml gives this scenario a 24h ban instead of 4h.
+type: leaky
+name: watiq/credential-stuffing
+description: "Failed logins across MANY distinct accounts from one IP"
+filter: "evt.Meta.log_type == 'watiq_auth_failure'"
+distinct: "evt.Meta.target_account"
+leakspeed: "60s"
+capacity: 5
+groupby: "evt.Meta.source_ip"
+labels:
+  remediation: true
+  behavior: "http:bruteforce"
+  confidence: 3
+---
+# Tracking codes are 2^40 of entropy, so sweeping them is hopeless — but an
+# attacker does not know that, and the attempt itself is a reliable signal.
+type: leaky
+name: watiq/tracking-code-enumeration
+description: "Sweeping /requests/track/ with codes that do not exist"
+filter: "evt.Parsed.request matches '/api/v1/requests/track/' && evt.Meta.http_status == '404'"
+leakspeed: "5s"
+capacity: 15
+groupby: "evt.Meta.source_ip"
+labels:
+  remediation: true
+  behavior: "http:enumeration"
+---
+# IP-only blocking is not enough. An authenticated abuser rotating through a
+# residential proxy pool is invisible to IP-based defence, so this one groups
+# by principal_id: the identity is the thing that cannot be rotated cheaply.
+type: leaky
+name: watiq/slot-hoarding
+description: "Booking then cancelling appointments to deny others capacity"
+filter: "evt.Meta.log_type == 'watiq_appointment_cancelled'"
+leakspeed: "300s"
+capacity: 10
+groupby: "evt.Meta.principal_id"
+labels:
+  remediation: true
+---
+type: trigger
+name: watiq/modsec-critical
+description: "A single critical ModSecurity hit"
+filter: "evt.Meta.log_type == 'modsecurity' && evt.Meta.severity == 'CRITICAL'"
+groupby: "evt.Meta.source_ip"
+labels:
+  remediation: true
+  confidence: 3
+---
+# Scanner path probes counted by ModSecurity rule 1102 (99-watiq-custom.conf).
+# One probe is noise; a sustained sweep is reconnaissance.
+type: leaky
+name: watiq/path-probing
+description: "Sweeping for .git, .env, wp-admin and similar"
+filter: "evt.Meta.log_type == 'modsecurity' && evt.Meta.rule_id == '1102'"
+leakspeed: "10s"
+capacity: 5
+groupby: "evt.Meta.source_ip"
+labels:
+  remediation: true
+  behavior: "http:scan"
+  confidence: 3
+---
+# A citizen's own account being hit from many source IPs is the mirror image of
+# credential stuffing, and it is the victim's signal rather than the attacker's.
+# Remediation is false: banning here would lock out the legitimate owner, which
+# is precisely the attacker's goal. This alerts a human instead.
+type: leaky
+name: watiq/distributed-account-attack
+description: "One account attacked from many distinct IPs"
+filter: "evt.Meta.log_type == 'watiq_auth_failure'"
+distinct: "evt.Meta.source_ip"
+leakspeed: "120s"
+capacity: 8
+groupby: "evt.Meta.target_account"
+labels:
+  remediation: false
+  behavior: "http:bruteforce"

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% set html_class = 'h-full' %}
+
+{% block title %}Staff Document Review - Watiq National Portal{% endblock %}
+{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex h-full overflow-hidden{% endblock %}
+
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/verify_request.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen p-4 border-r border-surface-variant bg-surface-container w-64 flex-shrink-0 z-20">
+<div class="mb-8">
+<h1 class="text-headline-sm font-headline-sm font-bold text-on-surface">Admin Console</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Government Staff Portal</p>
+</div>
+<a class="bg-primary text-on-primary font-label-md text-label-md py-3 px-4 rounded-lg w-full flex items-center justify-center gap-2 mb-8 hover:bg-primary-container transition-colors" href="{{ url_for('citizen.submit_request') }}">
+<span class="material-symbols-outlined">add</span>
+            New Request
+        </a>
+<ul class="flex flex-col gap-2 flex-grow">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('staff.workbench') }}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-lg px-4 py-2 font-label-md text-label-md transition-all shadow-sm" href="{{ url_for('staff.workbench') }}">
+<span class="material-symbols-outlined fill" data-icon="folder_shared">folder_shared</span>
+                    Service Requests
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('admin.index', tab='users') }}">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                    Citizen Registry
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('staff.workbench') }}">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                    Documents
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('staff.audit') }}">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('citizen.profile') }}">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<ul class="flex flex-col gap-2 mt-auto border-t border-surface-variant pt-4">
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('public.help_page') }}">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                    Help Center
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('public.logout') }}">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Logout
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col h-full overflow-hidden bg-surface">
+<!-- TopAppBar (Contextual for Review) -->
+<header class="bg-surface-container-lowest border-b border-surface-variant px-margin-mobile md:px-margin-desktop py-4 flex items-center justify-between z-10 shrink-0">
+<div class="flex items-center gap-4">
+<a class="text-tertiary hover:text-primary transition-colors flex items-center justify-center rounded-full p-2 border border-surface-variant bg-surface-container-low hover:border-primary-fixed-dim" href="{{ url_for('staff.workbench') }}">
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+<div>
+<div class="flex items-center gap-3">
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Review Request: <span class="font-bold">{{ request_item.tracking_code if request_item else "—" }}</span></h2>
+<span class="bg-tertiary-container text-on-tertiary px-2 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">Pending Review</span>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Applicant: {{ request_item.citizen_name or "—" }} • Submitted: {{ request_item.submitted_at }}</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-secondary font-label-md text-label-md px-4 py-2 rounded-lg border border-secondary hover:bg-secondary-fixed transition-colors" data-action="print" type="button">
+<span class="material-symbols-outlined">print</span>
+                    Print
+                </button>
+<div class="h-8 w-px bg-surface-variant"></div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary">timer</span>
+<span class="font-label-md text-label-md text-on-surface-variant">04:22 remaining SLA</span>
+</div>
+</div>
+</header>
+<!-- Review Workspace -->
+<div class="flex-grow flex flex-col md:flex-row overflow-hidden relative">
+<!-- Left Panel: Scanned Document -->
+<section class="flex-1 border-r border-surface-variant bg-surface-container-low overflow-hidden flex flex-col relative group">
+<div class="absolute top-4 left-4 right-4 flex justify-between z-10 opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-lowest/80 backdrop-blur-sm p-2 rounded-lg border border-surface-variant shadow-sm">
+<div class="flex gap-2">
+<button class="p-2 rounded bg-surface hover:bg-surface-variant text-on-surface transition-colors" title="Zoom In" data-action="zoom-in" type="button"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="p-2 rounded bg-surface hover:bg-surface-variant text-on-surface transition-colors" title="Zoom Out" data-action="zoom-out" type="button"><span class="material-symbols-outlined">zoom_out</span></button>
+<button class="p-2 rounded bg-surface hover:bg-surface-variant text-on-surface transition-colors" title="Rotate" data-action="rotate" type="button"><span class="material-symbols-outlined">rotate_right</span></button>
+</div>
+<span class="px-3 py-1 bg-secondary text-on-secondary rounded text-label-sm font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified_user</span> Authenticity Scan: 98%
+                    </span>
+</div>
+<div class="flex-grow overflow-auto p-6 flex items-center justify-center bg-surface-variant/30">
+<!-- Placeholder for Scanned Document -->
+<div class="w-full max-w-2xl bg-surface-container-lowest shadow-md border border-surface-variant p-2 rounded-lg rotate-[-1deg] hover:rotate-0 transition-transform duration-500 ease-out relative">
+<div class="absolute -top-3 -right-3 bg-error text-on-error w-8 h-8 rounded-full flex items-center justify-center shadow-sm animate-pulse" title="Needs Attention">
+<span class="material-symbols-outlined text-[18px]">priority_high</span>
+</div>
+<img alt="Scanned Document" class="w-full h-auto object-contain rounded border border-surface-variant opacity-90 filter contrast-125" data-alt="A high-resolution flatbed scan of an official Tunisian national identity card, front side, lying slightly crooked on a sterile digital review workspace. The scan shows complex micro-printing, a holographic seal reflecting harsh white light, and a severe portrait photograph of a middle-aged man. The document looks authentic but has slight wear on the edges. The overall aesthetic is clinical, institutional, and high-contrast, fitting a professional government verification interface." src="{{ url_for('static', filename='img/img-51bcf0772dcd.jpg') }}"/>
+</div>
+</div>
+<div class="p-3 bg-surface border-t border-surface-variant text-label-sm font-label-sm flex justify-between text-on-surface-variant">
+<span>Page 1 of 2 (National ID - Front)</span>
+<button class="text-primary hover:underline" data-action="next-page" type="button">View Page 2</button>
+</div>
+</section>
+<!-- Right Panel: Form Data & Verification -->
+<section class="flex-[0.8] bg-surface-container-lowest overflow-y-auto flex flex-col">
+<div class="p-6 flex-grow">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-6 flex items-center gap-2 border-b border-surface-variant pb-2">
+<span class="material-symbols-outlined text-secondary">fact_check</span>
+                        Data Verification
+                    </h3>
+<div class="space-y-6">
+<!-- Field 1 -->
+<div class="group border border-surface-variant rounded-lg p-4 bg-surface hover:border-secondary transition-colors hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] relative">
+<label class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Full Name (Arabic)</label>
+<div class="flex justify-between items-start gap-4">
+<p class="text-body-md font-body-md text-on-surface font-semibold text-right flex-grow" dir="rtl">أحمد بن علي</p>
+<div class="flex items-center gap-1 shrink-0">
+<button aria-label="Mark Match" class="w-8 h-8 rounded flex items-center justify-center border border-surface-variant bg-surface-container-lowest text-tertiary hover:bg-surface-variant hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-1" type="submit">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+<button aria-label="Mark Mismatch" class="w-8 h-8 rounded flex items-center justify-center border border-surface-variant bg-surface-container-lowest text-tertiary hover:bg-error-container hover:text-error hover:border-error transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-1" type="submit">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Field 2 -->
+<div class="group border-2 border-error-container rounded-lg p-4 bg-error-container/20 transition-colors relative">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-error rounded-full border-2 border-surface-container-lowest"></div>
+<label class="text-label-sm font-label-sm text-error uppercase tracking-wider block mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                                Date of Birth
+                            </label>
+<div class="flex justify-between items-start gap-4">
+<div class="flex-grow">
+<p class="text-body-md font-body-md text-on-surface font-semibold line-through text-on-surface-variant">15/04/1985</p>
+<p class="text-body-md font-body-md text-error font-semibold mt-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+                                        15/04/1986 <span class="text-label-sm font-label-sm font-normal text-on-surface-variant">(Extracted from scan)</span>
+</p>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<button class="w-8 h-8 rounded flex items-center justify-center bg-surface-container-lowest text-tertiary hover:bg-surface-variant border border-surface-variant transition-colors" title="Re-extract" data-action="refresh" type="button">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Field 3 -->
+<div class="group border border-secondary/30 rounded-lg p-4 bg-secondary-fixed/10 hover:border-secondary transition-colors relative">
+<label class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">National ID Number (CIN)</label>
+<div class="flex justify-between items-center gap-4">
+<p class="text-body-md font-body-md text-on-surface font-semibold tracking-widest">{{ request_item.citizen_national_id or "—" }}</p>
+<span class="bg-secondary text-on-secondary px-2 py-1 rounded text-[10px] uppercase font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Auto-Verified
+                                </span>
+</div>
+</div>
+</div>
+<!-- Reviewer Notes -->
+<div class="mt-8">
+<label class="text-label-md font-label-md text-on-surface block mb-2">Reviewer Notes (Internal)</label>
+<textarea class="w-full bg-surface border border-surface-variant rounded-lg p-3 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all resize-none h-24 placeholder:text-on-surface-variant/50" placeholder="Add notes regarding discrepancies or required actions..."></textarea>
+</div>
+</div>
+<!-- Bottom Actions -->
+{% if request_item %}
+<form action="{{ url_for('staff.set_status', request_id=request_item.id) }}" method="post" data-confirm="Record this decision? The citizen will be notified.">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<div class="p-4 border-t border-surface-variant bg-surface-container-lowest flex gap-3 justify-end sticky bottom-0 z-10 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
+<button name="status_id" value="{{ status_ids.resubmission }}" type="submit" class="px-4 py-2 border border-secondary text-secondary font-label-md text-label-md rounded-lg hover:bg-secondary-fixed transition-colors bg-transparent focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2">
+                        Request Resubmission
+                    </button>
+<button name="status_id" value="{{ status_ids.rejected }}" type="submit" class="px-4 py-2 bg-surface text-error border border-error font-label-md text-label-md rounded-lg hover:bg-error-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2">
+                        Reject
+                    </button>
+<button name="status_id" value="{{ status_ids.approved }}" type="submit" class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:bg-primary-container transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 hover:shadow-[0_4px_14px_rgba(184,0,13,0.3)]">
+<span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+                        Approve Request
+                    </button>
+</div>
+</form>
+{% else %}
+<div class="p-4 border-t border-surface-variant bg-surface-container-lowest text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">The queue is empty — there is nothing awaiting review.</p>
+</div>
+{% endif %}
+</section>
+</div>
+</main>
+<!-- Persistent Accessibility Overlay (Interpreter Slot) -->
+<div class="fixed bottom-6 right-6 w-interpreter-slot-width z-50 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-surface-variant bg-surface-container-highest flex flex-col group">
+<!-- Handle/Header -->
+<div class="bg-secondary text-on-secondary p-2 flex justify-between items-center cursor-move">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">sign_language</span>
+<span class="text-label-sm font-label-sm font-semibold">Live Interpreter</span>
+</div>
+<button aria-label="Minimize" class="text-on-secondary hover:text-white transition-colors opacity-0 group-hover:opacity-100 p-1" data-action="dismiss" type="button">
+<span class="material-symbols-outlined text-[16px]">close_fullscreen</span>
+</button>
+</div>
+<!-- Video Feed Placeholder -->
+<div class="relative bg-inverse-surface aspect-video w-full flex items-center justify-center">
+<div class="absolute inset-0 opacity-20">
+
+</div>
+<span class="material-symbols-outlined text-surface-variant text-4xl z-10 animate-pulse">videocam</span>
+</div>
+</div>
+<!-- Voice Narration Toggle (Top Right Fixed) -->
+<button aria-label="Enable Screen Reader Narration" class="fixed top-24 right-6 z-40 bg-surface-container-lowest border border-surface-variant text-secondary p-3 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:bg-secondary-fixed transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 flex items-center justify-center" title="Toggle Narration" data-action="a11y-narration" type="button">
+<span class="material-symbols-outlined">record_voice_over</span>
+</button>
+{% endblock %}

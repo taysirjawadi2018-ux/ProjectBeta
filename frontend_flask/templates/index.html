@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% set html_class = 'light' %}
+
+{% block title %}Watiq National Portal - Project Map{% endblock %}
+{% block body_class %}bg-background text-on-background font-body-md text-body-md antialiased min-h-screen flex flex-col{% endblock %}
+
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/index.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<!-- Top Navigation (Shell Supressed as this is a meta-page, but minimal header included for context) -->
+<header class="bg-surface border-b border-surface-variant w-full h-16 flex items-center justify-between px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto shrink-0">
+<div class="text-primary font-headline-md text-headline-md font-bold">Watiq National Portal</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary-container transition-colors" data-icon="search">search</span>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12 space-y-12">
+<!-- Header Section -->
+<section class="text-center md:text-left border-b border-surface-variant pb-8">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-4">Project Index</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                A unified government interface designed for institutional authority, inclusivity, and clarity. This map collates all screens across the Watiq National Portal ecosystem.
+            </p>
+</section>
+{%- for section in sections %}
+<!-- {{ section.heading }} Section -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-secondary-fixed mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="{{ section.icon }}">{{ section.icon }}</span>
+                {{ section.heading }}
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+{%- for card in section.cards %}
+<!-- Card {{ loop.index }} -->
+<a class="group block bg-surface-container-lowest border border-surface-variant rounded-lg overflow-hidden transition-all duration-200 hover:border-on-secondary-fixed focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-container focus-visible:ring-offset-2" href="{{ url_for(card.endpoint) }}">
+<div class="h-40 bg-surface-variant w-full relative">
+<div class="w-full h-full bg-cover bg-center card-thumb--{{ card.endpoint | replace('.', '-') }}" data-alt="{{ card.alt }}"></div>
+</div>
+<div class="p-4 group-hover:shadow-elevation h-full">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-fixed mb-1">{{ card.title }}</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">{{ card.blurb }}</p>
+</div>
+</a>
+{%- endfor %}
+</div>
+</section>
+{%- endfor %}
+<!-- Accessibility Reminder -->
+<section class="bg-surface-container-low p-6 rounded-xl border border-surface-variant flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="accessibility_new">accessibility_new</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-2">Accessibility Commitment</h4>
+<p class="font-body-sm text-on-surface-variant">
+                    All generated screens adhere strictly to the Watiq design system's high-contrast requirements. Note that a reserved 'Overlay Slot' is mandated for the Sign Language Interpreter video feed across primary citizen journeys to ensure full inclusivity.
+                </p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop bg-secondary dark:bg-on-secondary-fixed-variant text-on-secondary mt-auto">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-headline-sm font-headline-sm font-bold text-on-secondary">Watiq National Portal</div>
+<div class="text-body-md font-body-md">
+                 © {{ year }} Watiq National Portal. Official Tunisian Government Platform.
+             </div>
+<div class="flex gap-4">
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.contact') }}">Contact Us</a>
+</div>
+</div>
+</footer>
+{% endblock %}

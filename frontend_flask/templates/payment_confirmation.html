@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% set html_class = 'light' %}
+
+{% block title %}Payment Successful - Watiq National Portal{% endblock %}
+{% block body_class %}bg-background text-on-background min-h-screen flex flex-col font-body-md antialiased{% endblock %}
+
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/payment_confirmation.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<!-- Top Navigation omitted as this is a linear/transactional success screen, per instructions. -->
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-margin-mobile md:p-margin-desktop relative overflow-hidden">
+<!-- Decorative background elements -->
+<div class="absolute inset-0 pointer-events-none z-0">
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-secondary-container opacity-20 blur-3xl"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-surface-variant opacity-30 blur-3xl"></div>
+</div>
+<div class="relative z-10 max-w-[600px] w-full bg-surface-container-lowest border border-surface-variant rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] p-8 md:p-12 flex flex-col items-center text-center">
+<!-- Success Icon -->
+<div class="w-24 h-24 rounded-full bg-primary-container flex items-center justify-center mb-6 animate-[pulse_2s_ease-in-out_infinite]">
+<span class="material-symbols-outlined text-[48px] text-on-primary-container filled">check_circle</span>
+</div>
+<!-- Heading -->
+<h1 class="text-display-lg-mobile md:text-headline-md font-display-lg-mobile md:font-headline-md text-on-background mb-2">
+                Payment Successful
+            </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-8">
+                Your transaction has been processed securely.
+            </p>
+<!-- Transaction Summary Card -->
+<div class="w-full bg-surface-container-low border border-surface-variant rounded-lg p-6 mb-8 text-left">
+<h2 class="text-headline-sm font-headline-sm text-secondary mb-4 pb-2 border-b border-surface-variant">
+                    Transaction Details
+                </h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-body-md font-body-md text-on-surface-variant">Transaction ID</span>
+<span class="text-label-md font-label-md text-on-background">TRX-9827-4651</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md font-body-md text-on-surface-variant">Date &amp; Time</span>
+<span class="text-label-md font-label-md text-on-background">Oct 24, 2026 - 14:32</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md font-body-md text-on-surface-variant">Service</span>
+<span class="text-label-md font-label-md text-on-background">CIN Renewal</span>
+</div>
+<div class="pt-4 mt-4 border-t border-surface-variant flex justify-between items-center">
+<span class="text-body-lg font-body-lg font-semibold text-on-background">Total Amount</span>
+<span class="text-headline-sm font-headline-sm text-primary">{% if payment %}{{ '%.3f'|format(payment.amount|float) }} {{ payment.currency or 'TND' }}{% else %}—{% endif %}</span>
+</div>
+</div>
+</div>
+<!-- Next Steps -->
+<div class="w-full bg-tertiary-container/10 border border-tertiary-container/20 rounded-lg p-4 mb-8 flex items-start text-left">
+<span class="material-symbols-outlined text-tertiary mr-3 mt-0.5">info</span>
+<p class="text-body-md font-body-md text-on-surface-variant">
+                    Your request is now moving to the processing stage. You will receive a notification once verified.
+                 </p>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col md:flex-row gap-4 justify-center">
+<button data-action="print" type="button" class="flex items-center justify-center gap-2 bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary-container px-6 py-3 rounded-lg text-label-md font-label-md transition-colors w-full md:w-auto focus:outline focus:outline-3 focus:outline-offset-2 focus:outline-primary-container">
+<span class="material-symbols-outlined">download</span>
+                    Download PDF Receipt
+                </button>
+<a class="flex items-center justify-center gap-2 bg-secondary text-on-secondary hover:bg-secondary-container hover:text-on-secondary-container px-6 py-3 rounded-lg text-label-md font-label-md transition-colors w-full md:w-auto focus:outline focus:outline-3 focus:outline-offset-2 focus:outline-primary-container" href="{{ url_for('citizen.dashboard') }}">
+                    Go to Dashboard
+                </a>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop bg-secondary dark:bg-on-secondary-fixed-variant text-on-secondary">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-headline-sm font-headline-sm font-bold text-on-secondary">
+                Watiq
+            </div>
+<div class="flex flex-wrap justify-center gap-4 text-label-sm font-label-sm text-secondary-fixed-dim">
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="{{ url_for('public.terms') }}">Terms of Service</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="{{ url_for('public.accessibility') }}">Accessibility Statement</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="{{ url_for('public.open_data') }}">Open Data</a>
+<a class="hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed" href="{{ url_for('public.contact') }}">Contact Us</a>
+</div>
+<div class="text-body-md font-body-md text-secondary-fixed-dim text-center md:text-right">
+                © {{ year }} Watiq National Portal. Official Tunisian Government Platform.
+            </div>
+</div>
+</footer>
+<!-- Accessibility Controls: Voice Narration -->
+<button aria-label="Toggle Voice Narration" class="fixed top-6 right-6 z-50 bg-surface-container-lowest border border-surface-variant shadow-lg p-3 rounded-full hover:bg-surface-variant transition-colors flex items-center justify-center focus:outline focus:outline-3 focus:outline-offset-2 focus:outline-primary-container group" data-action="a11y-narration" type="button">
+<span class="material-symbols-outlined text-on-surface group-hover:text-primary transition-colors">record_voice_over</span>
+</button>
+<!-- Accessibility Overlay Slot: Sign Language Interpreter -->
+<div class="fixed bottom-6 right-6 w-interpreter-slot-width aspect-video bg-inverse-surface rounded-xl overflow-hidden shadow-2xl z-50 border-2 border-surface-variant">
+<!-- Placeholder for actual video feed -->
+<div class="w-full h-full flex flex-col items-center justify-center bg-inverse-surface text-inverse-on-surface p-4 relative bg-asset-payment-confirmation-1" data-alt="A professional sign language interpreter against a plain, well-lit studio background. The interpreter is clearly visible from the waist up, making precise hand gestures. The lighting is studio quality, ensuring clear visibility for accessibility purposes. The mood is helpful and institutional.">
+<div class="absolute inset-0 bg-inverse-surface/60 flex flex-col items-center justify-center">
+<span class="material-symbols-outlined text-inverse-on-surface text-[32px] mb-2">sign_language</span>
+<span class="text-label-sm font-label-sm text-center">Live Interpreter Feed Available</span>
+</div>
+</div>
+</div>
+{% endblock %}

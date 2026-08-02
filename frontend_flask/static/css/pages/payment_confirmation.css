@@ -1,0 +1,14 @@
+/* payment_confirmation.html — page-scoped rules, lifted verbatim from the mockup's
+ * <style> block. Kept in its own file rather than merged into watiq.css:
+ * several pages define the same class with different values, so a merge
+ * would silently change how they render. theme() calls are resolved to the
+ * literal token values the Tailwind build would have produced. */
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.material-symbols-outlined.filled {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.bg-asset-payment-confirmation-1 { background-image: url('../../img/img-cddc10fb877b.jpg'); }

@@ -1,0 +1,33 @@
+# Redis ACL users (Security.md §10.2).
+#
+# One user per component, each scoped to the key namespace it owns. The point is
+# blast radius: a leaked API credential must not be able to drain the ARQ job
+# queue, and a metrics scraper must not be able to read anything at all.
+#
+# >__FROM_SECRET__ is a placeholder. The deploy pipeline substitutes the real
+# password from Docker secrets / Vault before mounting this file
+# (docs/runbooks/secret-rotation.md). A literal password must never be
+# committed here.
+
+# The default user is the one every Redis compromise story starts with.
+user default off
+
+# API: cache + rate limits + idempotency keys + locks. No admin verbs, no
+# access outside the wtq: namespace.
+user watiq_api on >__FROM_SECRET__ ~wtq:* &* \
+  +@read +@write +@string +@hash +@set +@sortedset +@scripting \
+  -@dangerous -@admin -flushall -flushdb -keys -config
+
+# Worker: additionally owns the ARQ queues, which are lists.
+user watiq_worker on >__FROM_SECRET__ ~wtq:* ~arq:* &* \
+  +@read +@write +@list +@string +@scripting -@dangerous -@admin
+
+# Metrics: read-only server introspection, no data access whatsoever. The key
+# pattern is ~* only because INFO takes no key; no data command is granted.
+user watiq_metrics on >__FROM_SECRET__ ~* +info +ping +client|info
+
+# Break-glass administration. Disabled by default; enabled by hand during an
+# incident and disabled again afterwards (docs/runbooks/incident-response.md).
+# Present so the procedure is "enable this user", not "there is no way in, let
+# me put the default user back".
+user watiq_break_glass off >__FROM_SECRET__ ~* &* +@all

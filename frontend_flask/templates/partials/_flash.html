@@ -1,0 +1,16 @@
+{#
+  Flash messages. Colours come from the design tokens, so this matches the
+  notice panel the mockups already used on the project map.
+#}
+{% with messages = get_flashed_messages(with_categories=true) %}
+{%- if messages %}
+<div aria-live="polite" class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-4 space-y-3">
+{%- for category, message in messages %}
+<div class="flex items-start gap-3 p-4 rounded-xl border {% if category == 'error' %}bg-error-container border-error text-on-error-container{% elif category == 'success' %}bg-secondary-container border-secondary text-on-secondary-container{% else %}bg-surface-container-low border-surface-variant text-on-surface{% endif %}" role="{% if category == 'error' %}alert{% else %}status{% endif %}">
+<span aria-hidden="true" class="material-symbols-outlined">{% if category == 'error' %}warning{% elif category == 'success' %}check_circle{% else %}info{% endif %}</span>
+<p class="font-body-md text-body-md">{{ message }}</p>
+</div>
+{%- endfor %}
+</div>
+{%- endif %}
+{% endwith %}

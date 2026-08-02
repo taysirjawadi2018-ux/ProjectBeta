@@ -33,3 +33,7 @@ docs/openapi.json
 # --- Local ops state -------------------------------------------------------
 ops/backup/drill/
 *.log
+
+# Frontend build artefacts
+node_modules/
+frontend_flask/static/css/watiq.css

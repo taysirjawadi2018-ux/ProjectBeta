@@ -63,7 +63,57 @@ services:
       - payment_gateway_secret
     deploy:
       replicas: 2
-    networks: [watiq_edge, watiq_app, watiq_data]
+    # See docker-compose.yml — nginx resolves `watiq-api` in its upstream block.
+    networks:
+      watiq_edge:
+        aliases: [watiq-api]
+      watiq_app:
+      watiq_data:
+
+  frontend:
+    image: watiq-frontend:${VERSION}
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+      - seccomp:./ops/docker/seccomp-watiq.json
+    user: "10001:10001"
+    pids_limit: 256
+    mem_limit: 512m
+    ulimits:
+      nofile: { soft: 8192, hard: 8192 }
+    environment:
+      ENV: prod
+      DEBUG: "false"
+      WATIQ_API_URL: http://watiq-api:8000
+      REDIS_DSN: redis://session-store:6379/0
+      # Mounted, not injected: an env var is visible in `docker inspect`.
+      SECRET_KEY_FILE: /run/secrets/frontend_secret_key
+    secrets:
+      - frontend_secret_key
+    depends_on:
+      api:
+        condition: service_started
+    deploy:
+      replicas: 2
+    # Deliberately not on watiq_data — see docker-compose.yml.
+    networks:
+      watiq_edge:
+        aliases: [watiq-frontend]
+      watiq_app:
+
+  session-store:
+    image: redis:7.2
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    command: redis-server --bind 0.0.0.0 --maxmemory 256mb --maxmemory-policy volatile-lru --save ""
+    # --save "": sessions are disposable. Persisting them writes bearer tokens
+    # to disk for no benefit; a restart simply asks people to sign in again.
+    networks: [watiq_app]
 
   worker:
     image: watiq-api:${VERSION}
@@ -240,6 +290,7 @@ secrets:
   auth_pw: { file: ./secrets/auth_pw }
   auditor_pw: { file: ./secrets/auditor_pw }
   admin_pw: { file: ./secrets/admin_pw }
+  frontend_secret_key: { file: ./secrets/frontend_secret_key }
 
 volumes:
   pgdata:
@@ -252,7 +303,11 @@ volumes:
   lokidata:
 
 networks:
-  watiq_edge: {}
+  # Pinned to match set_real_ip_from in ops/nginx/conf.d/watiq.conf.
+  watiq_edge:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
   watiq_app: {}
   watiq_data:
     internal: true      # NO route to the internet from the data tier

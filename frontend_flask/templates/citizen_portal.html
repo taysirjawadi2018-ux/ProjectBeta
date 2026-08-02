@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% set html_class = 'light' %}
+
+{% block title %}Watiq National Portal - Services{% endblock %}
+{% block body_class %}bg-background text-on-surface min-h-screen flex flex-col relative overflow-x-hidden font-body-md text-body-md{% endblock %}
+
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/citizen_portal.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-on-background docked full-width top-0 z-50 sticky border-b border-outline-variant dark:border-outline flat no shadows">
+<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-4">
+<a aria-label="Watiq Home" class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed focus-ring rounded-DEFAULT flex items-center gap-2" href="{{ url_for('public.index') }}">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled">account_balance</span>
+                    Watiq
+                </a>
+</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center h-full space-x-6">
+<a aria-current="page" class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 h-full flex items-center font-label-md text-label-md focus-ring px-2 transition-all duration-200 opacity-80" href="{{ url_for('public.services') }}">Services</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary h-full flex items-center hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring px-2 rounded-DEFAULT" href="{{ url_for('citizen.requests_list') }}">My Requests</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary h-full flex items-center hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring px-2 rounded-DEFAULT" href="{{ url_for('citizen.book_appointment') }}">Appointments</a>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Accessibility Settings" class="p-2 text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors rounded-full focus-ring" data-action="a11y-narration" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">record_voice_over</span>
+</button>
+<button aria-label="Interpreter Mode" class="p-2 text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors rounded-full focus-ring" data-action="a11y-interpreter" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">interpreter_mode</span>
+</button>
+<button aria-label="Language" class="p-2 text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors rounded-full focus-ring" data-action="language" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">language</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2 flex-shrink-0 bg-surface-container">
+<img alt="National Crest of Tunisia" class="w-full h-full object-cover" data-alt="A small circular icon representing the National Crest of Tunisia in a minimalist, flat design style. The crest features a lion, scales of justice, and a galley ship in subtle gold and red tones against a neutral background." src="{{ url_for('static', filename='img/img-039e78dcc774.jpg') }}"/>
+</div>
+<!-- Mobile Menu Button -->
+<button aria-label="Menu" class="md:hidden p-2 text-secondary focus-ring rounded-full ml-2" data-action="menu" type="button">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-margin-desktop space-y-12 pb-32">
+<!-- Hero Section -->
+<section class="bg-surface-container-lowest rounded-xl p-8 md:p-12 interactive-card text-center max-w-4xl mx-auto relative overflow-hidden">
+<!-- Subtle background pattern or tonal shift could go here if needed, keeping it minimal -->
+<div class="relative z-10 space-y-6">
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-on-surface mb-4">
+                    What service are you looking for?
+                </h1>
+<p class="text-body-lg font-body-lg text-secondary max-w-2xl mx-auto">
+                    Access government services quickly and securely. Search by keyword or browse categories below.
+                </p>
+<!-- Global Search -->
+<div class="max-w-2xl mx-auto relative group">
+<label class="sr-only" for="global-search">Search services</label>
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-secondary">search</span>
+</div>
+<input class="w-full pl-12 pr-4 py-4 rounded-full border-2 border-surface-variant focus:border-primary-container focus:ring-0 bg-surface-container-lowest text-on-surface text-body-lg font-body-lg shadow-sm transition-all focus-ring placeholder-secondary" id="global-search" placeholder="e.g. Renew Passport, Tax Return" type="text"/>
+<button class="absolute inset-y-2 right-2 px-6 bg-primary-container hover:bg-primary text-on-primary rounded-full text-label-md font-label-md transition-colors focus-ring" type="submit">
+                        Search
+                    </button>
+</div>
+</div>
+</section>
+<!-- Service Categories - Bento Grid Style -->
+<section aria-labelledby="categories-heading" class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-headline-md font-headline-md text-on-surface" id="categories-heading">Browse by Category</h2>
+<a class="text-primary font-label-md text-label-md hover:underline focus-ring rounded-DEFAULT px-2 py-1 flex items-center gap-1" href="{{ url_for('public.services') }}">
+                    View All Services <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Civil Status -->
+<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='civil') }}">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span aria-hidden="true" class="material-symbols-outlined text-[28px]">family_restroom</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Civil Status</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Birth certificates, marriage registration, and family records.</p>
+</a>
+<!-- Identity -->
+<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='identity') }}">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span aria-hidden="true" class="material-symbols-outlined text-[28px]">id_card</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Identity</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-auto">National ID cards, passports, and digital identity management.</p>
+</a>
+<!-- Transport -->
+<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='transport') }}">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span aria-hidden="true" class="material-symbols-outlined text-[28px]">directions_car</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Transport</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Driver's licenses, vehicle registration, and traffic fines.</p>
+</a>
+<!-- Taxation -->
+<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='tax') }}">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span aria-hidden="true" class="material-symbols-outlined text-[28px]">account_balance_wallet</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Taxation</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Tax declarations, payments, and financial certificates.</p>
+</a>
+<!-- Health -->
+<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='health') }}">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span aria-hidden="true" class="material-symbols-outlined text-[28px]">medical_services</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Health</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Medical records, insurance status, and clinic appointments.</p>
+</a>
+<!-- Education -->
+<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none md:col-span-1 lg:col-span-3" href="{{ url_for('public.services', category='education') }}">
+<div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span aria-hidden="true" class="material-symbols-outlined text-[28px]">school</span>
+</div>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Education &amp; Employment</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">University enrollment, diploma verification, and job seeker registration.</p>
+</div>
+</div>
+</a>
+</div>
+</section>
+<!-- Track Request Section - Asymmetric Layout -->
+<section aria-labelledby="track-heading" class="bg-surface-container-low rounded-xl overflow-hidden border border-surface-variant grid grid-cols-1 md:grid-cols-5">
+<div class="p-8 md:p-12 md:col-span-3 flex flex-col justify-center">
+<div class="flex items-center gap-3 mb-4">
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
+<h2 class="text-headline-md font-headline-md text-on-surface" id="track-heading">Track Your Request</h2>
+</div>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-6">
+                    Enter your 12-digit tracking code to check the real-time status of your submitted application or document request.
+                </p>
+<form action="#" class="flex flex-col sm:flex-row gap-4" method="GET">
+<div class="flex-grow">
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="tracking-code">Tracking Code</label>
+<input aria-required="true" class="w-full px-4 py-3 rounded-lg border border-outline focus:border-primary focus:ring-0 bg-surface-container-lowest text-on-surface text-body-md font-body-md focus-ring" id="tracking-code" name="tracking-code" placeholder="e.g. 1234-5678-9012" required="" type="text"/>
+</div>
+<div class="flex items-end">
+<button class="w-full sm:w-auto px-6 py-3 bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary rounded-lg font-label-md text-label-md transition-colors focus-ring whitespace-nowrap" type="submit">
+                            Check Status
+                        </button>
+</div>
+</form>
+</div>
+<div class="hidden md:block md:col-span-2 relative bg-surface-container">
+<img alt="Tracking illustration" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A clean, minimalist 3D rendering of a document folder with a magnifying glass hovering over it, set against a soft slate background. The lighting is bright and studio-like, casting soft shadows, emphasizing themes of search, tracking, and government transparency." src="{{ url_for('static', filename='img/img-7cbf358d494a.jpg') }}"/>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-on-background dark:bg-surface-container-lowest mt-auto w-full">
+<div class="w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto border-t-[8px] border-secondary dark:border-surface-container-high flat no shadows">
+<div class="mb-4 md:mb-0 text-center md:text-left">
+<div class="text-headline-sm font-headline-sm text-on-primary font-bold mb-1 flex items-center justify-center md:justify-start gap-2">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled">account_balance</span>
+                    Watiq
+                </div>
+<p class="text-body-md font-body-md text-surface-container dark:text-on-surface-variant">
+                    © {{ year }} Tunisian Government. Watiq National Portal.
+                </p>
+</div>
+<nav aria-label="Footer Navigation">
+<ul class="flex flex-wrap justify-center gap-6">
+<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.terms') }}">Legal</a></li>
+<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.privacy') }}">Privacy Policy</a></li>
+<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.accessibility') }}">Accessibility</a></li>
+<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.contact') }}">Contact Us</a></li>
+</ul>
+</nav>
+</div>
+</footer>
+<!-- Accessibility Overlay: Sign Language Interpreter Placeholder -->
+<aside aria-label="Sign Language Interpreter Video" class="fixed bottom-4 right-4 z-50 w-[320px] rounded-xl overflow-hidden shadow-lg border-2 border-surface-variant bg-surface-container-lowest hidden md:block">
+<div class="bg-secondary text-on-secondary px-3 py-2 flex justify-between items-center cursor-move" id="interpreter-drag-handle">
+<span class="text-label-sm font-label-sm font-bold flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined text-[16px]">interpreter_mode</span>
+                Sign Language
+            </span>
+<button aria-label="Close Interpreter Video" class="text-on-secondary hover:text-primary-fixed transition-colors focus-ring rounded-full p-1" data-action="dismiss" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<div class="aspect-video bg-surface-dim relative">
+<!-- Placeholder for actual video feed -->
+<div class="absolute inset-0 flex items-center justify-center flex-col text-on-surface-variant p-4 text-center">
+<span class="material-symbols-outlined text-4xl mb-2 opacity-50">videocam_off</span>
+<p class="text-label-sm font-label-sm">Interpreter feed placeholder.</p>
+</div>
+<img alt="Sign language interpretation broadcast" class="absolute inset-0 w-full h-full object-cover" data-alt="A professional sign language interpreter, dressed in a minimal navy blue suit, standing in front of a neutral grey background. The lighting is even and soft to ensure hand gestures and facial expressions are clearly visible, representing official government accessibility communications." src="{{ url_for('static', filename='img/img-80cd4f09347d.jpg') }}"/>
+</div>
+</aside>
+<!-- Floating Voice Narration Toggle (Top Right, below nav) -->
+<button aria-label="Enable Voice Narration" class="fixed top-20 right-4 z-40 bg-surface-container-lowest border border-outline-variant shadow-sm hover:border-primary-container p-3 rounded-full text-secondary hover:text-primary-container transition-all focus-ring group" title="Enable Voice Narration" data-action="a11y-narration" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">volume_up</span>
+<span class="sr-only">Toggle Screen Reader Audio</span>
+</button>
+{% endblock %}

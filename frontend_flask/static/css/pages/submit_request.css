@@ -1,0 +1,46 @@
+/* submit_request.html — page-scoped rules, lifted verbatim from the mockup's
+ * <style> block. Kept in its own file rather than merged into watiq.css:
+ * several pages define the same class with different values, so a merge
+ * would silently change how they render. theme() calls are resolved to the
+ * literal token values the Tailwind build would have produced. */
+
+/* Base styles */
+body {
+    background-color: #f7fafc;
+    color: #181c1e;
+}
+
+/* Focus styles */
+*:focus-visible {
+    outline: 3px solid #e70013;
+    outline-offset: 3px;
+}
+
+/* Material Symbols */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings:"liga";
+    font-feature-settings: "liga";
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Interactive Card Level 2 Hover */
+.card-interactive:hover {
+    border: 2px solid #4e5e81;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+}
+
+.drag-active {
+    border-color: #e70013;
+    background-color: #e5e9eb;
+}

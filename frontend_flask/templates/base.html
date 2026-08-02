@@ -1,0 +1,43 @@
+{#
+  Shared shell for every Watiq screen.
+
+  Only the parts that were provably identical across all twelve source pages
+  live here: the document scaffold and the stylesheet link. Navigation bars,
+  footers and accessibility overlays are NOT shared — the source screens use
+  seven distinct nav variants and five distinct footers, so hoisting them would
+  silently change the design. Each page keeps its own markup in
+  {% block content %}.
+
+  Everything loaded here is same-origin on purpose. The production CSP
+  (ops/nginx/snippets/security-headers.conf) is
+
+      default-src 'none'; script-src 'self'; style-src 'self';
+      font-src 'self'; img-src 'self' data:
+
+  which rejects all four of the things the mockups loaded in this head: the
+  Tailwind Play CDN script, its inline `tailwind.config` block, and the two
+  Google Fonts stylesheets. The design tokens now live in tailwind.config.js
+  and compile to static/css/watiq.css via `npm run build`; the fonts and the 27
+  images are vendored under static/.
+#}<!DOCTYPE html>
+
+{#
+  The <html> class is a block because the mockups did not agree on it: seven
+  pages carried class="light" (inert — darkMode is "class", so only .dark does
+  anything), three carried no class at all, and staff_workbench and
+  verify_request carried class="h-full", which IS functional: their bodies are
+  `h-full flex overflow-hidden`, and without a full-height root the sidebar
+  layout collapses to content height.
+#}
+<html{% if html_class %} class="{{ html_class }}"{% endif %} lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{% block title %}Watiq National Portal{% endblock %}</title>
+<link href="{{ url_for('static', filename='css/watiq.css') }}" rel="stylesheet"/>
+{%- block page_style %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% block content %}{% endblock %}
+<script src="{{ url_for('static', filename='js/watiq.js') }}" defer></script>
+{%- block scripts %}{% endblock %}
+</body></html>

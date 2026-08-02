@@ -1,0 +1,103 @@
+#!/usr/sbin/nft -f
+#
+# Watiq host firewall — Layer 1 (Security.md §2).
+#
+# Default deny, BOTH directions. Postgres, Redis and MinIO are not merely
+# firewalled here: they publish no host port at all, and `watiq_data` is
+# declared `internal: true` so the data tier has no route to the internet
+# (Architecture.md §5). This ruleset is the second line for that, not the first.
+#
+# VALIDATE BEFORE LOADING. A syntax error combined with `policy drop` locks you
+# out of the machine:
+#
+#     nft -c -f ops/nftables/watiq.nft && systemctl reload nftables
+#
+# Egress is restricted deliberately. Most data exfiltration and most C2
+# callbacks need outbound connectivity this application never legitimately
+# uses; denying it by default turns "attacker has code execution" into
+# "attacker has code execution and cannot phone home".
+
+flush ruleset
+
+table inet watiq {
+
+    # ---- Blocklist maintained by CrowdSec / fail2ban -----------------------
+    # `timeout` lets decisions expire on their own, so a crashed bouncer cannot
+    # leave a citizen permanently banned. `interval` allows CIDR entries.
+    set blocklist_v4 { type ipv4_addr; flags timeout, interval; }
+    set blocklist_v6 { type ipv6_addr; flags timeout, interval; }
+
+    # ---- Admin sources. Replace with the real bastion prefix. --------------
+    set admin_v4 { type ipv4_addr; flags interval; elements = { 10.10.0.0/24 } }
+
+    chain inbound {
+        type filter hook input priority filter; policy drop;
+
+        # Conntrack first: cheapest accept, and drop invalid early.
+        ct state established,related accept
+        ct state invalid drop comment "malformed / out-of-window packets"
+
+        iif lo accept
+
+        # Dropped before anything else evaluates.
+        ip  saddr @blocklist_v4 drop
+        ip6 saddr @blocklist_v6 drop
+
+        # --- Anti-scan / anti-flood ---------------------------------------
+        # Nonsense TCP flag combinations used by nmap and stack fingerprinting.
+        tcp flags & (fin|syn|rst|psh|ack|urg) == 0x0            drop comment "null scan"
+        tcp flags & (fin|syn|rst|psh|ack|urg) == fin|psh|urg    drop comment "xmas scan"
+        tcp flags & (syn|fin) == syn|fin                        drop
+        tcp flags & (syn|rst) == syn|rst                        drop
+
+        # SYN flood: 200/s sustained, burst 500, then drop.
+        tcp flags syn tcp dport { 80, 443 } \
+            limit rate over 200/second burst 500 packets drop
+
+        # Cap concurrent connections per source IP. Slowloris budget.
+        tcp dport { 80, 443 } ct count over 100 drop
+
+        # --- ICMP: keep PMTU discovery working, rate-limit the rest --------
+        # Blanket-dropping ICMP breaks path-MTU discovery and produces
+        # intermittent hangs on large responses that look like application bugs.
+        icmp   type { destination-unreachable, time-exceeded, parameter-problem } accept
+        icmpv6 type { destination-unreachable, packet-too-big, time-exceeded, parameter-problem, nd-neighbor-solicit, nd-neighbor-advert, nd-router-advert } accept
+        icmp   type echo-request limit rate 5/second accept
+        icmpv6 type echo-request limit rate 5/second accept
+
+        # --- The only public services -------------------------------------
+        tcp dport { 80, 443 } accept
+
+        # --- Administration: bastion only ---------------------------------
+        ip saddr @admin_v4 tcp dport 22 ct state new \
+            limit rate 4/minute burst 4 packets accept
+
+        # Everything else is logged (sampled) and dropped by policy.
+        limit rate 10/minute log prefix "nft-drop-in: " level info
+    }
+
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+        # Docker installs its own forward rules in the ip/ip6 families; this
+        # inet table does not manage them and must not fight them.
+        ct state established,related accept
+    }
+
+    chain outbound {
+        type filter hook output priority filter; policy drop;
+
+        ct state established,related accept
+        oif lo accept
+
+        # DNS, NTP, and outbound TLS for updates / SMTP / payment gateway.
+        udp dport { 53, 123 } accept
+        tcp dport 53 accept
+        tcp dport { 80, 443 } accept
+        tcp dport { 465, 587 } accept comment "SMTP submission"
+
+        # Docker bridge subnets: inter-container traffic.
+        ip daddr { 172.16.0.0/12, 10.0.0.0/8 } accept
+
+        limit rate 10/minute log prefix "nft-drop-out: " level info
+    }
+}

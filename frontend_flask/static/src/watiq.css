@@ -1,0 +1,96 @@
+/*
+ * Watiq — global stylesheet source.
+ *
+ * Compiled by `npm run build` into static/css/watiq.css. This replaces three
+ * things the mockups pulled from CDNs, all of which the production CSP
+ * (default-src 'none'; script-src 'self'; style-src 'self') rejects:
+ *
+ *   1. cdn.tailwindcss.com          -> the @tailwind directives below
+ *   2. fonts.googleapis.com CSS     -> the @font-face rules below
+ *   3. fonts.gstatic.com woff2      -> static/fonts/*.woff2
+ *
+ * Rules that belong to ONE page live in static/css/pages/<page>.css and are
+ * linked from that page's `page_style` block. They are deliberately not merged
+ * in here: several pages define the same class with different values (login's
+ * .interpreter-overlay carries `display: none`, notification_center's does
+ * not), so merging them would change how those pages render.
+ */
+
+/* --- Public Sans -----------------------------------------------------------
+ * One variable font (wght 100..900) covers all four weights the design uses;
+ * Google serves the identical file for 400/500/600/700, so it is stored once.
+ * The unicode-range split is preserved so latin-ext is only fetched when a
+ * page actually contains those characters (French accents, Arabic transliteration).
+ */
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/public-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/public-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* --- Material Symbols Outlined ---------------------------------------------
+ * Subsetted to the 81 icons the twelve screens actually reference (26 KB vs
+ * ~3.5 MB for the full face). The FILL 0..1 and wght 100..700 axes are
+ * preserved because pages vary them via font-variation-settings.
+ *
+ * Regenerate with the icon list in `npm run icons` if a new icon is added —
+ * an icon outside the subset renders as its literal ligature text.
+ */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: block;
+  src: url('../fonts/material-symbols-outlined.woff2') format('woff2');
+}
+
+@tailwind base;
+@tailwind components;
+
+@layer base {
+  /* The Google Fonts stylesheet shipped this rule for every page that loaded
+   * it; self-hosting means declaring it once here. submit_request.html carried
+   * an identical copy inline, which its page stylesheet still repeats
+   * harmlessly. */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Six icons across four pages carried style="font-variation-settings: 'FILL' 1"
+   * inline. An inline style attribute is blocked by style-src just as a <style>
+   * block is, so it became this class. staff_workbench.css overrides it with the
+   * four-axis variant its mockup used. */
+  .material-symbols-outlined.icon-filled {
+    font-variation-settings: 'FILL' 1;
+  }
+}
+
+@tailwind utilities;

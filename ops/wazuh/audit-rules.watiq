@@ -1,0 +1,49 @@
+# Watiq auditd ruleset (Security.md §6).
+#
+# INSTALL PATH: /etc/audit/rules.d/watiq.rules  (NOT loaded from this location)
+#
+#   sudo install -m 0640 ops/wazuh/audit-rules.watiq /etc/audit/rules.d/watiq.rules
+#   sudo augenrules --load
+#   sudo auditctl -l          # verify
+#
+# It lives in the repository so it is version-controlled and reviewed like any
+# other control, and so Wazuh FIM can watch the installed copy for drift.
+#
+# These feed the <localfile> audit reader in ops/wazuh/ossec.conf; the -k keys
+# below are exactly the `audit.key` values matched in
+# ops/wazuh/rules/watiq_rules.xml. Renaming a key here silently disables the
+# corresponding alert there.
+
+# Application code is immutable at runtime; a write is arbitrary code execution.
+-w /opt/watiq/app     -p wa -k watiq_code_change
+
+# Secrets are read once, at container start. Any later read is either an
+# operator going somewhere they should not, or a process that should not exist.
+-w /run/secrets       -p r  -k watiq_secret_read
+
+-w /etc/shadow        -p wa -k identity_change
+-w /etc/sudoers       -p wa -k identity_change
+-w /etc/sudoers.d     -p wa -k identity_change
+
+# The classic container-escape path. Anything touching the Docker socket from
+# outside the deployment tooling is an escape attempt.
+-w /var/run/docker.sock -p rwa -k docker_socket
+
+# Root execution and process injection.
+-a always,exit -F arch=b64 -S execve -F euid=0 -k root_exec
+-a always,exit -F arch=b64 -S ptrace -k process_injection
+
+# Kernel module loading: a rootkit's first move, and something this host never
+# does outside a package upgrade.
+-a always,exit -F arch=b64 -S init_module -S finit_module -S delete_module -k module_load
+
+# Firewall changes. nftables is Layer 1; an unlogged change to it is an
+# unlogged change to the perimeter.
+-w /etc/nftables.conf -p wa -k firewall_change
+-w /etc/nginx         -p wa -k edge_config_change
+
+# Make the ruleset immutable until reboot. This must stay LAST: after -e 2 no
+# further rules can be added, and auditctl refuses changes until the machine
+# restarts — which is the point. An attacker with root can no longer quietly
+# disable auditing without a reboot that is itself conspicuous.
+-e 2

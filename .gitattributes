@@ -1,0 +1,53 @@
+# Watiq — line-ending policy.
+#
+# This repository lives on a Windows/OneDrive NTFS mount but every artifact in
+# it is consumed by Linux: shell scripts run inside Alpine/Debian containers,
+# nginx/ModSecurity/Suricata parse their own configs, and pgBackRest execs
+# restore-drill.sh. A stray CR is not cosmetic in any of those places — a
+# shebang line ending in \r makes the kernel look for an interpreter that does
+# not exist, and nftables rejects the ruleset outright.
+#
+# So: LF in the repository, LF in the working tree, no exceptions for text.
+
+* text=auto eol=lf
+
+# --- Explicit, because these break loudly rather than subtly with CRLF -------
+*.sh        text eol=lf
+*.bash      text eol=lf
+*.sql       text eol=lf
+*.conf      text eol=lf
+*.nft       text eol=lf
+*.rules     text eol=lf
+*.acl       text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+*.json      text eol=lf
+*.toml      text eol=lf
+*.py        text eol=lf
+*.mako      text eol=lf
+*.md        text eol=lf
+*.xml       text eol=lf
+Dockerfile  text eol=lf
+Makefile    text eol=lf
+.env.example text eol=lf
+
+# --- Binary: never touch, never diff ----------------------------------------
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.pdf       binary
+*.gz        binary
+*.zip       binary
+
+# --- Generated / noisy in review --------------------------------------------
+# uv.lock is 263 KB of resolver output. Keep it in git (hash-pinning is a
+# supply-chain control, Security.md §12.1) but keep it out of diffs.
+uv.lock     text eol=lf -diff linguist-generated=true
+
+# The schema is the governing artifact (Architecture.md §1). Mark it so GitHub
+# does not fold it away as vendored, and so a conflict here is never
+# auto-merged silently.
+Watiq.sql   text eol=lf -merge linguist-detectable=true
+backend/app/db/sql/watiq_baseline.sql text eol=lf -merge

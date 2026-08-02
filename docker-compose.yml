@@ -138,7 +138,51 @@ services:
         condition: service_completed_successfully
       roles-init:
         condition: service_completed_successfully
-    networks: [watiq_edge, watiq_app, watiq_data]
+    # `watiq-api` is the name ops/nginx/nginx.conf resolves in its upstream
+    # block. Without this alias Docker DNS only publishes `api` and nginx fails
+    # to resolve its own upstream at startup.
+    networks:
+      watiq_edge:
+        aliases: [watiq-api]
+      watiq_app:
+      watiq_data:
+
+  frontend:
+    build: ./frontend_flask
+    # The BFF. It renders the twelve screens server-side and is the only thing
+    # holding an API token — the browser never receives one (ADR-005).
+    environment:
+      ENV: dev
+      DEBUG: "false"
+      WATIQ_API_URL: http://api:8000
+      REDIS_DSN: redis://session-store:6379/0
+      SECRET_KEY: ${FRONTEND_SECRET_KEY:-watiq-dev-frontend-secret-change-me}
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      api:
+        condition: service_healthy
+      session-store:
+        condition: service_healthy
+    # NOT on watiq_data. The BFF talks to the API over HTTP and to its own
+    # session store — it has no business reaching Postgres, MinIO or the API's
+    # cache, and joining the data tier just to find a Redis would hand it that
+    # path for free.
+    networks: [watiq_edge, watiq_app]
+
+  session-store:
+    image: redis:7.2
+    # Separate from the API's Redis on purpose. It lives on the app tier rather
+    # than the data tier, and holds only BFF session records: access token,
+    # refresh token, expiry, CSRF token, user id and role. No citizen PII is
+    # ever written here (Backend.md §7, ADR-003).
+    command: redis-server --bind 0.0.0.0 --maxmemory 128mb --maxmemory-policy volatile-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    networks: [watiq_app]
 
   worker:
     build: ./backend
@@ -164,7 +208,15 @@ volumes:
   miniodata:
 
 networks:
-  watiq_edge: {}
+  # The subnet is pinned because ops/nginx/conf.d/watiq.conf trusts
+  # X-Forwarded-For only from 172.20.0.0/16 (set_real_ip_from). On a
+  # Docker-assigned subnet that match fails, nginx falls back to the proxy's own
+  # address, and every per-IP control — rate limits, CrowdSec decisions,
+  # access_log attribution — silently collapses onto one address.
+  watiq_edge:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
   watiq_app: {}
   watiq_data:
     internal: true   # NO route to the internet from the data tier (Security.md §2)

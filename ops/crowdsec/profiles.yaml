@@ -1,0 +1,53 @@
+# CrowdSec remediation profiles (Security.md §4).
+#
+# Evaluated top to bottom; `on_success: break` stops at the first match, so the
+# most specific profile must come first.
+#
+# Ban durations are deliberately asymmetric. Credential stuffing gets 24 hours
+# because it is unambiguous — one IP failing against many *different* accounts
+# has no innocent explanation. Ordinary brute force gets 4 hours, because a
+# citizen on shared CGNAT genuinely can fail ten logins, and a national portal
+# that locks out a whole mobile carrier's NAT pool has caused an outage, not
+# prevented an attack.
+
+name: watiq_escalating_ban
+filters:
+  - Alert.Remediation == true && Alert.GetScenario() == "watiq/credential-stuffing"
+decisions:
+  - type: ban
+    duration: 24h
+notifications:
+  - slack_security
+on_success: break
+---
+name: watiq_scanner_ban
+filters:
+  - Alert.Remediation == true && Alert.GetScenario() == "watiq/path-probing"
+decisions:
+  - type: ban
+    duration: 12h
+on_success: break
+---
+# Slot hoarding is an authenticated abuse, so the decision targets the identity
+# rather than the address. Banning the IP would punish everyone behind it and
+# would not stop the abuser, who can change address in seconds.
+name: watiq_slot_abuse
+filters:
+  - Alert.Remediation == true && Alert.GetScenario() == "watiq/slot-hoarding"
+decisions:
+  - type: throttle
+    duration: 6h
+    scope: principal_id
+notifications:
+  - slack_security
+on_success: break
+---
+name: watiq_standard_ban
+filters:
+  - Alert.Remediation == true
+decisions:
+  - type: ban
+    duration: 4h
+notifications:
+  - slack_security
+on_success: break
