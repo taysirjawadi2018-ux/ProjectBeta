@@ -9,7 +9,14 @@
 #   docker buildx imagetools inspect ghcr.io/astral-sh/uv:latest
 # Resolved 2026-08-02.
 FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3136726336b2a4c657aa30b AS builder
-ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+# UV_PROJECT_ENVIRONMENT puts the venv at its FINAL path during the build.
+# Console scripts (alembic, gunicorn, arq) bake an absolute shebang pointing at
+# the interpreter that created them, so a venv built at /build/.venv and then
+# copied to /opt/watiq/.venv yields scripts whose shebang names a path that does
+# not exist in the runtime image — the exec fails with the thoroughly
+# misleading "no such file or directory".
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy \
+    UV_PROJECT_ENVIRONMENT=/opt/watiq/.venv
 COPY --from=ghcr.io/astral-sh/uv@sha256:cf4eedcaa81655197f625739489effcbe71b61ceb1506f332c3facae5deceded /uv /bin/uv
 WORKDIR /build
 COPY pyproject.toml uv.lock ./
@@ -23,8 +30,8 @@ RUN groupadd -r watiq -g 10001 && \
     rm -rf /var/lib/apt/lists/*
 
 # Root-owned, non-root-executed: the process cannot modify its own code.
-COPY --from=builder --chown=root:root /build/.venv /opt/watiq/.venv
-COPY --from=builder --chown=root:root /build/app   /opt/watiq/app
+COPY --from=builder --chown=root:root /opt/watiq/.venv /opt/watiq/.venv
+COPY --from=builder --chown=root:root /build/app      /opt/watiq/app
 
 ENV PATH="/opt/watiq/.venv/bin:$PATH" PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /opt/watiq

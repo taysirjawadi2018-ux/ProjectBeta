@@ -25,7 +25,12 @@ FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 PIP_NO_CACHE_DIR=1
 WORKDIR /build
 COPY requirements.txt ./
-RUN python -m venv /build/.venv && /build/.venv/bin/pip install -r requirements.txt
+# Built at its FINAL path on purpose: console scripts (gunicorn) bake an
+# absolute shebang naming the interpreter that created them, so building at
+# /build/.venv and copying to /opt/watiq/.venv produces a gunicorn whose shebang
+# points nowhere — failing at exec with "no such file or directory".
+RUN python -m venv /opt/watiq/.venv \
+ && /opt/watiq/.venv/bin/pip install -r requirements.txt
 
 
 FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3136726336b2a4c657aa30b
@@ -34,7 +39,7 @@ RUN groupadd -r watiq -g 10001 && \
 
 # Root-owned, non-root-executed: the process cannot rewrite its own code or
 # templates at runtime (Wazuh FIM watches this tree).
-COPY --from=builder --chown=root:root /build/.venv /opt/watiq/.venv
+COPY --from=builder --chown=root:root /opt/watiq/.venv /opt/watiq/.venv
 COPY --chown=root:root app.py config.py api.py auth.py screens.py /opt/watiq/
 COPY --chown=root:root views      /opt/watiq/views
 COPY --chown=root:root templates  /opt/watiq/templates
