@@ -209,14 +209,22 @@ volumes:
 
 networks:
   # The subnet is pinned because ops/nginx/conf.d/watiq.conf trusts
-  # X-Forwarded-For only from 172.20.0.0/16 (set_real_ip_from). On a
+  # X-Forwarded-For only from this range (set_real_ip_from). On a
   # Docker-assigned subnet that match fails, nginx falls back to the proxy's own
   # address, and every per-IP control — rate limits, CrowdSec decisions,
   # access_log attribution — silently collapses onto one address.
+  #
+  # 10.200.0.0/16 rather than a 172.x range on purpose: Docker auto-allocates
+  # from 172.17.0.0/12 (172.17–172.31), so pinning inside that pool means
+  # racing every other project on the host for the address — which is exactly
+  # how this collided with a frappe network the first time. 10.200/16 is
+  # outside the pool, so nothing will be auto-assigned on top of it.
+  # Change here and in ops/nginx/conf.d/watiq.conf together, or XFF stops
+  # being trusted.
   watiq_edge:
     ipam:
       config:
-        - subnet: 172.20.0.0/16
+        - subnet: 10.200.0.0/16
   watiq_app: {}
   watiq_data:
     internal: true   # NO route to the internet from the data tier (Security.md §2)
