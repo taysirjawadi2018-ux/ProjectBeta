@@ -11,8 +11,30 @@
 name: watiq-dev
 
 services:
+  pg-tls-init:
+    # Generates the dev TLS certificate into PGDATA *before* postgres starts.
+    #
+    # 01-dev-tls.sh also sits in docker-entrypoint-initdb.d, but that directory
+    # only runs when the data directory is empty. Once a database exists — after
+    # any restart, or if the volume outlives a `down` — the script is skipped
+    # while the command below still forces `ssl=on`, and postgres exits with
+    # "could not load server certificate file". Running it as its own step
+    # makes the certificate a precondition of starting rather than a side
+    # effect of first-time initialisation. The script is idempotent.
+    image: postgres:15
+    environment:
+      PGDATA: /var/lib/postgresql/data
+    entrypoint: ["/bin/bash", "/init/01-dev-tls.sh"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./ops/postgres/init/01-dev-tls.sh:/init/01-dev-tls.sh:ro
+    networks: [watiq_data]
+
   postgres:
     image: postgres:15
+    depends_on:
+      pg-tls-init:
+        condition: service_completed_successfully
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: watiq-dev-postgres
