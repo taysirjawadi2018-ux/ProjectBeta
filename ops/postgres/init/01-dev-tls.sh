@@ -12,7 +12,7 @@
 # first time) and persists into PGDATA; subsequent starts reuse the files.
 set -euo pipefail
 
-CERT_DIR="$PGDATA/certs"
+CERT_DIR="/var/lib/postgresql/data/certs"
 if [ -f "$CERT_DIR/server.crt" ] && [ -f "$CERT_DIR/server.key" ]; then
     echo "dev-tls: certificate already present, skipping"
     exit 0

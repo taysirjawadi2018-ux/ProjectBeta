@@ -13,16 +13,16 @@
 set -e
 
 echo "roles-init: waiting for postgres..."
-until pg_isready -h postgres -U postgres -d watiq >/dev/null 2>&1; do sleep 1; done
+until pg_isready -h postgres -U watiq_migrate -d watiq >/dev/null 2>&1; do sleep 1; done
 
 echo "roles-init: waiting for migration 0001 (NOLOGIN bundles)..."
-until psql -h postgres -U postgres -d watiq -tAc \
+until psql -h postgres -U watiq_migrate -d watiq -tAc \
     "SELECT count(*) FROM pg_roles WHERE rolname LIKE 'watiq_%'" 2>/dev/null | grep -qE '^[5-9]$|^[1-9][0-9]+$'; do
     sleep 2
 done
 
 echo "roles-init: creating LOGIN users..."
-psql -h postgres -U postgres -d watiq \
+psql -h postgres -U watiq_migrate -d watiq \
     -v citizen_pw="$CITIZEN_PW" \
     -v staff_pw="$STAFF_PW" \
     -v auth_pw="$AUTH_PW" \

@@ -8,6 +8,7 @@ file is how it reaches a database.
 from pathlib import Path
 
 from alembic import op
+from sqlalchemy.util import await_only
 
 revision = "0001"
 down_revision = None
@@ -16,7 +17,9 @@ _SQL = Path(__file__).parents[2] / "sql" / "watiq_baseline.sql"
 
 
 def upgrade() -> None:
-    op.execute(_SQL.read_text(encoding="utf-8"))
+    conn = op.get_bind()
+    asyncpg_conn = conn.connection.driver_connection
+    await_only(asyncpg_conn.execute(_SQL.read_text(encoding="utf-8")))
 
 
 def downgrade() -> None:
