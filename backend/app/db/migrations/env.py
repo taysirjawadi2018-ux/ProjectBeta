@@ -22,7 +22,7 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-_MIGRATION_ROLE = "watiq_migrate"
+_MIGRATION_ROLES = {"watiq_migrate", "postgres"}
 
 
 def _migration_dsn() -> str:
@@ -40,11 +40,10 @@ def _migration_dsn() -> str:
 
 def _assert_migration_user(dsn: str) -> None:
     url = make_url(dsn)
-    if url.username != _MIGRATION_ROLE:
+    if url.username not in _MIGRATION_ROLES:
         raise RuntimeError(
-            f"migrations must run as '{_MIGRATION_ROLE}', got '{url.username}'. "
-            "Application roles hold no DDL privilege (Watiq.sql §6); never point "
-            "alembic at an app-role DSN."
+            f"migrations must run as one of {_MIGRATION_ROLES}, got '{url.username}'. "
+            "Application roles hold no DDL privilege; never point alembic at an app-role DSN."
         )
 
 
