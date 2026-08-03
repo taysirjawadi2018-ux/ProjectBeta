@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Watiq Staff Portal | Sovereign MFA</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#001b3d", // Midnight Navy
+                        "accent-gold": "#C5A059", // Polished Gold
+                        "mediterranean-cerulean": "#12629d",
+                        "tertiary-container": "#707375",
+                        "surface-container-low": "rgba(255, 255, 255, 0.05)",
+                        "tertiary-fixed": "#e0e3e5",
+                        "surface-tint": "#001b3d",
+                        "surface-variant": "#d5e3fd",
+                        "secondary-fixed": "#d8e2ff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "primary-fixed-dim": "#ffb4aa",
+                        "on-tertiary-fixed": "#191c1e",
+                        "surface-dim": "#ccdbf4",
+                        "outline": "#946e69",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#4b5b7e",
+                        "secondary-fixed-dim": "#b6c6ef",
+                        "on-secondary-fixed-variant": "#364768",
+                        "secondary-container": "#c4d4fd",
+                        "surface-container-highest": "#d5e3fd",
+                        "surface-container": "#e6eeff",
+                        "on-secondary-fixed": "#081b3a",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#f8fafc",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#410001",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#dde9ff",
+                        "inverse-on-surface": "#ebf1ff",
+                        "primary-container": "#001b3d",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-primary-fixed-variant": "#930008",
+                        "on-surface": "#0d1c2f",
+                        "outline-variant": "#e9bcb6",
+                        "primary-fixed": "#ffdad5",
+                        "inverse-primary": "#ffb4aa",
+                        "on-surface-variant": "#5f3f3b",
+                        "inverse-surface": "#233144",
+                        "on-primary-container": "#ffffff",
+                        "secondary": "#C5A059",
+                        "tertiary": "#575b5c",
+                        "on-background": "#001b3d",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "background": "#001b3d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px",
+                        "unit": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Public Sans"],
+                        "display-lg": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "headline-md": ["Public Sans"],
+                        "label-md": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "headline-lg-mobile": ["Public Sans"],
+                        "caption": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #001b3d;
+            font-family: 'Public Sans', sans-serif;
+            overflow-x: hidden;
+            color: #ffffff;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .sovereign-border {
+            border-top: 4px solid #C5A059;
+        }
+
+        .otp-input:focus {
+            outline: none;
+            border-color: #C5A059;
+            box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.3);
+        }
+
+        @keyframes pulse-gold {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        .timer-warning {
+            animation: pulse-gold 1.5s infinite ease-in-out;
+            color: #C5A059;
+        }
+
+        .tsl-pip {
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            background: #000;
+        }
+
+        .emblem-bg {
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC84-ZrmOdi5LCKrD1KElMFn7RQ3rOCL9RIKel9IAsGbi1K2vusFWC96102qEWSKU4shlgEpxQCNjrJLQ4CeJ8HkZgdc1hM6iuEh8475Y_1KvFErgqJfTXbTXeIsS0BHwXq0uct_gvwl9KolDony-VASiS_VNukPbKY6WfSw7h9W5fA22-QSOWLV11HqxIhanPoTowRpkrTdoGvu7qng8nrAh8sqtNG2BMPS8mIE_7J8PeSqb9AmTImgZG9fxaWjs_B');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 60%;
+            opacity: 0.04;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen relative overflow-x-hidden">
+<!-- Fluid 12-Column Grid Watermark Layer -->
+<div class="fixed inset-0 emblem-bg pointer-events-none z-0"></div>
+<!-- Header -->
+<header class="h-20 flex items-center px-margin-desktop bg-primary/95 border-b border-white/5 relative z-20 backdrop-blur-md">
+<div class="flex items-center justify-between max-w-container-max mx-auto w-full">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 flex items-center justify-center">
+<img alt="Tunisian Flag" class="h-full rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4OZ5QoYFWtoKytuSpQ6yju1hPwsb37owF4BL5YYRTEfnkyR0ad4f8a63gl1DFC8ep9eRBKRo_IJNmzDaez9V6ENmdMnC7QDsBx5BAwTT4C2poU4XZoLvckLQBHiXLMnZ5eBzYn9dMYBPBm9dBZFwccIq3HusFd2bfE-SSXunxsvy2w7rzfx2I0Y5y9rc_xwmA4mABj1iUnO2hkdjaqAcHh-xVkR9UCs8Bh8d0xAtUxD94yVQ13Io"/>
+</div>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-white leading-none tracking-tight">Watiq</span>
+<span class="text-[10px] font-bold text-accent-gold uppercase tracking-[0.2em] mt-1">Republic of Tunisia</span>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex items-center gap-6 text-label-md font-medium text-white/70">
+<a class="hover:text-accent-gold transition-colors" href="#">E-Government</a>
+<a class="hover:text-accent-gold transition-colors" href="#">Security</a>
+<a class="hover:text-accent-gold transition-colors" href="#">Support</a>
+</nav>
+<div class="h-8 w-[1px] bg-white/10 mx-2"></div>
+<div class="flex items-center gap-2 px-4 py-1.5 bg-accent-gold/5 border border-accent-gold/20 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-gold animate-pulse"></span>
+<span class="text-[10px] font-extrabold text-accent-gold uppercase tracking-widest">Sovereign Cloud Secured</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center p-margin-mobile md:p-gutter relative z-10">
+<div class="w-full max-w-md">
+<!-- MFA Card -->
+<div class="glass-card sovereign-border rounded-xl p-8 md:p-10 relative overflow-hidden">
+<!-- Status Badge -->
+<div class="absolute top-0 right-0">
+<div class="flex items-center gap-1.5 px-4 py-1 bg-accent-gold rounded-bl-xl shadow-lg">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="text-[10px] font-extrabold tracking-widest text-primary uppercase">Staff Restricted</span>
+</div>
+</div>
+<!-- Identity Header -->
+<div class="text-center mb-10 mt-4">
+<div class="relative inline-block mb-6">
+<div class="w-20 h-20 rounded-full bg-accent-gold flex items-center justify-center shadow-[0_0_40px_rgba(197,160,89,0.3)]">
+<span class="material-symbols-outlined text-primary text-[40px]" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-7 h-7 bg-mediterranean-cerulean rounded-full flex items-center justify-center border-2 border-primary">
+<span class="material-symbols-outlined text-white text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<h1 class="font-headline-md text-headline-md text-white tracking-tight mb-2">Identity Verification</h1>
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg">
+<span class="text-label-md font-semibold text-accent-gold">Imed Ben Ali</span>
+<span class="w-1 h-1 rounded-full bg-white/30"></span>
+<span class="text-caption text-white/50">Tunis Central Office</span>
+</div>
+</div>
+<!-- OTP Input Form -->
+<form class="space-y-8" id="mfa-form">
+<div class="space-y-4">
+<label class="block text-label-md font-medium text-white/60 text-center" for="otp-code">
+                            Enter security code from your <span class="text-white">Institutional Authenticator</span>
+</label>
+<div class="flex justify-center gap-2 md:gap-3" id="otp-container">
+<input autofocus="" class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text"/>
+<input class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text"/>
+<input class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text"/>
+<div class="flex items-center justify-center w-4 text-accent-gold/40 font-bold">-</div>
+<input class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text"/>
+<input class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text"/>
+<input class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text"/>
+</div>
+</div>
+<!-- Action Area -->
+<div class="space-y-5">
+<button class="w-full h-14 bg-accent-gold text-primary font-bold text-label-md rounded-lg shadow-[0_4px_20px_rgba(197,160,89,0.4)] hover:brightness-110 hover:translate-y-[-1px] active:translate-y-[1px] transition-all flex items-center justify-center gap-3 group" type="submit">
+<span class="tracking-widest">AUTHORIZE ACCESS</span>
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:rotate-12">lock_open</span>
+</button>
+<div class="flex items-center justify-between px-1">
+<button class="text-caption font-bold text-accent-gold/80 hover:text-accent-gold flex items-center gap-2 group" type="button">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span class="border-b border-accent-gold/30 group-hover:border-accent-gold">Use Recovery Code</span>
+</button>
+<div class="flex items-center gap-2 text-accent-gold timer-warning" id="timer-container">
+<span class="material-symbols-outlined text-[18px]">av_timer</span>
+<span class="font-label-md tabular-nums font-bold" id="timer-display">00:29</span>
+</div>
+</div>
+</div>
+</form>
+<!-- Security Protocol Footer -->
+<div class="mt-10 pt-6 border-t border-white/5 text-center">
+<div class="flex items-center justify-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-primary bg-accent-gold/20 flex items-center justify-center"><span class="material-symbols-outlined text-[12px] text-accent-gold">shield</span></div>
+<div class="w-6 h-6 rounded-full border-2 border-primary bg-mediterranean-cerulean/20 flex items-center justify-center"><span class="material-symbols-outlined text-[12px] text-mediterranean-cerulean">lock</span></div>
+</div>
+<span class="text-[10px] font-bold text-white/40 tracking-wider uppercase">AES-256-GCM Sovereign Encryption Active</span>
+</div>
+</div>
+</div>
+<!-- Global Support Links -->
+<div class="mt-8 flex justify-center gap-8">
+<a class="text-caption font-bold text-white/30 hover:text-accent-gold transition-colors" href="#">System Status</a>
+<a class="text-caption font-bold text-white/30 hover:text-accent-gold transition-colors" href="#">Legal Policy</a>
+<a class="text-caption font-bold text-white/30 hover:text-accent-gold transition-colors" href="#">IT Support</a>
+</div>
+</div>
+<!-- TSL Accessibility Component (PIP Style) -->
+<div class="fixed bottom-gutter right-gutter w-56 aspect-video rounded-xl overflow-hidden tsl-pip hidden md:block z-50 group border border-white/20 transition-all duration-300 hover:w-72 hover:border-accent-gold/50 cursor-pointer">
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-transparent transition-colors">
+<img alt="TSL Support" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida/AP1WRLsqaHHyuMRmnveOoZGIhgWgQMSgRrCKmUEqnKUDBtVOhQYK7mf2D-k8phs3G6kSnlJaqz2hFxfsZjUij_OnKYdK4T7iSPpvccRY8mJhMOdGb5uVQDmNijJ5uL7IiU0bbvjEK5KL15B_z8ZemQtgkBSEMt0JtilRvk8EiRc1h9A1Op9I_3CGEgogN_uT4OUSNXbAeE0ps8Uf4N0Z7G1th1cku8DehRIAjUJkWW_jRh-JLb99UG0bKRhz8w"/>
+<div class="absolute top-2 right-2 bg-red-500 w-2 h-2 rounded-full animate-pulse shadow-[0_0_8px_#ef4444]"></div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 bg-primary/90 backdrop-blur-sm py-1.5 px-3 flex items-center justify-between">
+<span class="text-[9px] font-extrabold text-accent-gold uppercase tracking-tighter">TSL Institutional Support</span>
+<span class="material-symbols-outlined text-[14px] text-accent-gold" style="font-variation-settings: 'FILL' 1;">sign_language</span>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="bg-black/40 border-t border-white/5 relative z-20 backdrop-blur-md">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-8 w-full max-w-container-max mx-auto gap-6">
+<div class="flex flex-col gap-2 text-center md:text-left">
+<span class="text-caption font-bold text-white/50 tracking-wide">Digital Sovereignty Department</span>
+<p class="text-[11px] text-white/30 max-w-md leading-relaxed">
+                    © 2024 Republic of Tunisia. Access to this platform is governed by the National Sovereign Legal Infrastructure and monitored for security compliance.
+                </p>
+</div>
+<div class="flex gap-8 opacity-40 hover:opacity-100 transition-opacity">
+<div class="flex flex-col items-center gap-1 group cursor-help">
+<span class="material-symbols-outlined text-accent-gold text-[20px]" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+<span class="text-[8px] font-bold text-white/50 uppercase">Identity</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-help">
+<span class="material-symbols-outlined text-accent-gold text-[20px]" style="font-variation-settings: 'FILL' 1;">policy</span>
+<span class="text-[8px] font-bold text-white/50 uppercase">Audit</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-help">
+<span class="material-symbols-outlined text-accent-gold text-[20px]" style="font-variation-settings: 'FILL' 1;">assured_workload</span>
+<span class="text-[8px] font-bold text-white/50 uppercase">Federal</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simple OTP Focus Management
+        const otpInputs = document.querySelectorAll('.otp-input');
+        otpInputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                    otpInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                    otpInputs[index - 1].focus();
+                }
+            });
+            
+            // Allow pasting 6 digit code
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').slice(0, 6);
+                const digits = pasteData.split('').filter(d => /[0-9]/.test(d));
+                digits.forEach((digit, i) => {
+                    if (otpInputs[i]) {
+                        otpInputs[i].value = digit;
+                        if (i === digits.length - 1 && otpInputs[i+1]) otpInputs[i+1].focus();
+                    }
+                });
+            });
+        });
+
+        // OTP Submission
+        document.getElementById('mfa-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const code = Array.from(otpInputs).map(i => i.value).join('');
+            if (code.length === 6) {
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalContent = btn.innerHTML;
+                btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">refresh</span> VERIFYING CREDENTIALS...';
+                btn.disabled = true;
+                btn.classList.add('opacity-80', 'cursor-not-allowed');
+                
+                setTimeout(() => {
+                    btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">verified</span> ACCESS GRANTED';
+                    btn.style.backgroundColor = '#10b981';
+                    btn.style.color = 'white';
+                    btn.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.4)';
+                    
+                    setTimeout(() => {
+                        alert('Identity Confirmed. Redirecting to Secure Internal Environment...');
+                        // In a real app: window.location.href = '/dashboard';
+                    }, 500);
+                }, 2000);
+            }
+        });
+
+        // Countdown Timer Logic
+        let timeLeft = 29;
+        const timerDisplay = document.getElementById('timer-display');
+        const timerContainer = document.getElementById('timer-container');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            const seconds = timeLeft < 10 ? `0${timeLeft}` : timeLeft;
+            timerDisplay.textContent = `00:${seconds}`;
+
+            if (timeLeft <= 10) {
+                timerContainer.classList.remove('text-accent-gold');
+                timerContainer.classList.add('text-error');
+            }
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timerDisplay.textContent = "EXPIRED";
+                timerContainer.classList.add('opacity-50');
+                timerContainer.classList.remove('timer-warning');
+            }
+        }, 1000);
+
+        // PIP Interaction
+        document.querySelector('.tsl-pip').addEventListener('click', () => {
+            alert('Opening expanded Institutional TSL Translation Module...');
+        });
+    </script>
+</body></html>

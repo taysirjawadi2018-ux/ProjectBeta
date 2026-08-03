@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Passport Booking - Sovereign Citizen Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #f8f9ff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .institutional-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+            width: 600px;
+        }
+        .secure-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 27, 61, 0.1), 0 2px 4px -1px rgba(0, 27, 61, 0.06);
+        }
+        .sovereign-header {
+            border-top: 4px solid #001b3d;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#001b3d", /* Midnight Navy */
+                    "secondary": "#005bb5", /* Mediterranean Cerulean */
+                    "tertiary": "#735c00", /* Sovereign Gold */
+                    "surface": "#f8f9ff",
+                    "surface-container": "#e6eeff",
+                    "surface-container-low": "#eff4ff",
+                    "surface-container-high": "#dde9ff",
+                    "on-surface": "#0d1c2f",
+                    "outline-variant": "#e0e3e5",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "unit": "8px"
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Institutional Watermark -->
+<img alt="National Emblem of Tunisia" class="institutional-watermark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfRl8xR02lc_j-OUG8yYFfWGI2F6ifOb1uiChqdN421wwkkUEvY0xLVoPkvflY7cmcDH-WyEQAyD64xwBfMMtnXLBovvBhiItLWZDx771oHVgqzWFZM7lELRBegnt-mLJPa4vbiq8V9u8MQQQjMLHmuXbQDNsTocboXR1HzJtH7uBYPNXVx2XQON11bs3fRASymzDcmrbFHeRslg2dVzrkzFFSpE9bzxBypu3m63BQ9Cphl51QfvwVngB6Dd5DfX6v"/>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant shadow-md flex-col py-8 gap-2 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-xl font-bold text-primary uppercase tracking-tight">Citizen Space</h1>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-wider">Secure Session Active</p>
+</div>
+<nav class="flex-grow flex flex-col gap-1 px-3">
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="bg-primary text-on-primary shadow-lg flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-tertiary">calendar_month</span>
+<span class="text-sm font-semibold">Appointments</span>
+</a>
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">description</span>
+<span class="text-sm font-semibold">Applications</span>
+</a>
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">folder_shared</span>
+<span class="text-sm font-semibold">My Documents</span>
+</a>
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3">gavel</span>
+<span class="text-sm font-semibold">Legal Support</span>
+</a>
+</nav>
+<!-- TSL Accessibility Widget -->
+<div class="px-4 mb-4">
+<div class="rounded-lg overflow-hidden border border-outline-variant bg-white p-2 shadow-sm">
+<p class="text-[9px] uppercase tracking-widest text-primary mb-2 font-bold px-1">Sign Language Support</p>
+<div class="aspect-video bg-black rounded relative overflow-hidden group cursor-pointer">
+<img alt="Tunisian Sign Language Video Support" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida/AP1WRLsqaHHyuMRmnveOoZGIhgWgQMSgRrCKmUEqnKUDBtVOhQYK7mf2D-k8phs3G6kSnlJaqz2hFxfsZjUij_OnKYdK4T7iSPpvccRY8mJhMOdGb5uVQDmNijJ5uL7IiU0bbvjEK5KL15B_z8ZemQtgkBSEMt0JtilRvk8EiRc1h9A1Op9I_3CGEgogN_uT4OUSNXbAeE0ps8Uf4N0Z7G1th1cku8DehRIAjUJkWW_jRh-JLb99UG0bKRhz8w"/>
+<div class="absolute inset-0 flex items-center justify-center bg-primary/20">
+<span class="material-symbols-outlined text-white text-3xl drop-shadow-md">play_circle</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-4 px-3 flex flex-col gap-1">
+<a class="text-on-surface/60 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">security</span>
+<span class="text-sm font-semibold text-primary">Security Log</span>
+</a>
+<a class="text-on-surface/60 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg" href="#">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span class="text-sm font-semibold">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md border-b border-outline-variant h-20 flex justify-between items-center px-margin-mobile lg:px-margin-desktop sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg shadow-md border-b-2 border-tertiary">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm lg:text-lg font-extrabold text-primary uppercase tracking-widest">Republic of Tunisia</span>
+<span class="text-[10px] font-bold text-tertiary uppercase tracking-tighter">Ministry of Interior</span>
+</div>
+</div>
+<div class="flex items-center gap-4 lg:gap-6">
+<div class="hidden md:flex items-center gap-2 px-4 py-2 bg-surface-container rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Sovereign Cloud Secured</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-high flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full border-2 border-tertiary overflow-hidden shadow-sm">
+<img alt="Citizen Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFi9b17K_yP3TJyFAx4hWgydliCDb7qXRzOQSoJwZkH4B2vH3E24uRkfPkzDh_3-8SpS3dX3vJswFI8MtAcTlLDRFy8QGOAujURFikDnaboAJFf-EjEpGPykD43noak8KB8VOSEgrD0Lj4YtW-YfZiD3ph_lt96iWuTy_BUtIj5TyGkMrz5l43-J097-v3yWiAIGY38zh0mL_i5QGgptsdIRiqOkuFFd-5w5RnIBwX_lP5VL7gTy4"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Booking Workflow Container -->
+<div class="flex-grow p-margin-mobile lg:p-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Workflow Navigation -->
+<div class="mb-12 flex justify-center">
+<div class="flex items-center gap-4 lg:gap-12">
+<div class="flex flex-col items-center gap-2" id="step-nav-1">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-lg shadow-lg border-2 border-tertiary">1</div>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Office</span>
+</div>
+<div class="h-[2px] w-8 lg:w-20 bg-outline-variant mt-[-18px]"></div>
+<div class="flex flex-col items-center gap-2" id="step-nav-2">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant text-on-surface/40 flex items-center justify-center font-bold text-lg bg-white">2</div>
+<span class="text-[10px] font-bold text-on-surface/40 uppercase tracking-widest">Schedule</span>
+</div>
+<div class="h-[2px] w-8 lg:w-20 bg-outline-variant mt-[-18px]"></div>
+<div class="flex flex-col items-center gap-2" id="step-nav-3">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant text-on-surface/40 flex items-center justify-center font-bold text-lg bg-white">3</div>
+<span class="text-[10px] font-bold text-on-surface/40 uppercase tracking-widest">Confirm</span>
+</div>
+</div>
+</div>
+<!-- Step 1: Office Selection -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="step-1">
+<div class="md:col-span-12 mb-6">
+<h2 class="text-2xl lg:text-3xl font-extrabold text-primary mb-1">Select Appointment Office</h2>
+<p class="text-sm lg:text-lg text-on-surface/70">Choose a regional headquarters for biometric passport processing.</p>
+</div>
+<!-- Search & Filters -->
+<div class="md:col-span-12 mb-6 flex flex-col md:flex-row gap-4">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface/40">search</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-secondary focus:border-secondary transition-all shadow-sm" placeholder="Search by city, ZIP code, or office name..." type="text"/>
+</div>
+<button class="flex items-center justify-center gap-2 px-8 py-4 bg-white border border-outline-variant rounded-lg hover:bg-surface-container-high transition-all font-bold text-primary shadow-sm">
+<span class="material-symbols-outlined text-secondary">filter_list</span>
+                        Advanced Filters
+                    </button>
+</div>
+<!-- Map Interface -->
+<div class="md:col-span-8 h-[500px] lg:h-[650px] rounded-xl overflow-hidden border border-outline-variant bg-white secure-shadow relative">
+<div class="absolute top-4 left-4 z-10 glass-panel p-3 border-l-4 border-tertiary rounded shadow-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div>
+<p class="text-[9px] font-bold text-primary uppercase tracking-widest">Currently Active Zone</p>
+<p class="font-bold text-xs">Greater Tunis &amp; Coastal Hubs</p>
+</div>
+</div>
+</div>
+<div class="w-full h-full bg-[#f0f2f5] relative">
+<img alt="Map of Tunisia with Office Pins" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.9]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBW990ENdaFxSxJEdkIWRvsJMpV4eLr0UtO_JjMk8n0Gvk9BNF4ItiOfZAJbZWCVbMfUM6QhmVNmrb_3tOU44b8TbRircwUDSbLpY7hiTBw0amPRp4OJ-62cE5wZQVjmFJAHmPvtsaBwliJAjvH-80Gs_FG90vDuvNQIpAcr1_t3yeNe9OTMRaFUfJ71GdZNdabew10p8F3P54nawmbF_7WeAhFoIrCTdWLJyXD5BoBgCqFAdsZrQ4"/>
+<!-- Interactive Pins -->
+<div class="absolute top-[25%] left-[48%] cursor-pointer group">
+<div class="relative flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-primary drop-shadow-md" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<div class="absolute -top-10 bg-primary text-white text-[10px] px-3 py-1 rounded shadow-xl font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Tunis Central HQ</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Office Details Side-Panel -->
+<div class="md:col-span-4 flex flex-col gap-4">
+<div class="bg-white p-6 rounded-xl border border-outline-variant secure-shadow sovereign-header border-t-primary cursor-pointer hover:border-tertiary transition-all group" onclick="goToStep2('Tunis Central')">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-lg font-bold text-primary">Tunis Central</h3>
+<p class="text-xs text-on-surface/60">Avenue Habib Bourguiba, District 1</p>
+</div>
+<span class="bg-tertiary/10 text-tertiary text-[9px] font-extrabold px-2 py-1 rounded uppercase tracking-widest border border-tertiary/20">Verified</span>
+</div>
+<div class="grid grid-cols-2 gap-4 text-[10px] font-bold text-on-surface/60 uppercase tracking-wider mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">schedule</span> 08:00 - 17:00
+                            </div>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm text-tertiary" style="font-variation-settings: 'FILL' 1;">event_available</span> Next: Tomorrow
+                            </div>
+</div>
+<div class="pt-4 border-t border-outline-variant flex justify-between items-center">
+<span class="text-[10px] font-extrabold text-primary uppercase tracking-widest">Select Location</span>
+<button class="bg-secondary text-white px-5 py-2 rounded-lg font-bold text-[10px] flex items-center gap-2 hover:bg-primary transition-colors uppercase tracking-widest">
+                                Book Now <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant cursor-pointer hover:border-secondary transition-all group" onclick="goToStep2('Sfax North')">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-lg font-bold text-primary">Sfax North</h3>
+<p class="text-xs text-on-surface/60">Tunis Road, Sfax 3000</p>
+</div>
+<span class="bg-surface-container text-primary text-[9px] font-bold px-2 py-1 rounded uppercase tracking-widest">Active</span>
+</div>
+<div class="flex items-center gap-4 text-[10px] font-bold text-on-surface/60 uppercase tracking-wider">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary">schedule</span> 08:00 - 16:30</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm">event</span> 3 Days Wait</span>
+</div>
+</div>
+<div class="bg-white p-6 rounded-xl border border-outline-variant cursor-pointer hover:border-secondary transition-all group" onclick="goToStep2('Sousse Maritime')">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-lg font-bold text-primary">Sousse Maritime</h3>
+<p class="text-xs text-on-surface/60">Port of Sousse Area</p>
+</div>
+<span class="bg-tertiary/10 text-tertiary text-[9px] font-extrabold px-2 py-1 rounded uppercase tracking-widest border border-tertiary/20">Verified</span>
+</div>
+<div class="flex items-center gap-4 text-[10px] font-bold text-on-surface/60 uppercase tracking-wider">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-secondary">schedule</span> 09:00 - 18:00</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-tertiary" style="font-variation-settings: 'FILL' 1;">event</span> Mon 28 Oct</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 2: Date & Time -->
+<section class="hidden grid grid-cols-1 lg:grid-cols-12 gap-gutter animate-in slide-in-from-right duration-500" id="step-2">
+<div class="lg:col-span-12 mb-6 flex items-center gap-4">
+<button class="w-12 h-12 rounded-lg border border-outline-variant flex items-center justify-center hover:bg-surface-container-high transition-all bg-white shadow-sm" onclick="backToStep1()">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<div>
+<h2 class="text-2xl lg:text-3xl font-extrabold text-primary">Schedule Appointment</h2>
+<p class="text-sm lg:text-lg text-on-surface/70">Location: <span class="font-bold text-secondary" id="selected-office-display">Tunis Central</span></p>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Calendar Panel -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant secure-shadow sovereign-header">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-bold text-primary uppercase tracking-tight">October 2024</h3>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-primary">chevron_left</span></button>
+<button class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-primary">chevron_right</span></button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-3">
+<div class="flex flex-col items-center p-3 rounded-lg border border-outline-variant opacity-30 bg-surface-container-low"><span class="text-[9px] font-bold uppercase">Mon 21</span></div>
+<div class="flex flex-col items-center p-4 rounded-lg border-2 border-tertiary bg-primary text-white shadow-xl scale-105">
+<span class="text-[9px] font-bold uppercase text-tertiary mb-1">Tue</span>
+<span class="text-2xl font-bold">22</span>
+</div>
+<div class="flex flex-col items-center p-3 rounded-lg border border-outline-variant hover:border-secondary hover:bg-surface-container-high cursor-pointer transition-all bg-white">
+<span class="text-[9px] font-bold uppercase text-on-surface/60 mb-1">Wed</span>
+<span class="text-xl font-bold text-primary">23</span>
+</div>
+<div class="flex flex-col items-center p-3 rounded-lg border border-outline-variant hover:border-secondary hover:bg-surface-container-high cursor-pointer transition-all bg-white">
+<span class="text-[9px] font-bold uppercase text-on-surface/60 mb-1">Thu</span>
+<span class="text-xl font-bold text-primary">24</span>
+</div>
+<div class="flex flex-col items-center p-3 rounded-lg border border-outline-variant hover:border-secondary hover:bg-surface-container-high cursor-pointer transition-all bg-white">
+<span class="text-[9px] font-bold uppercase text-on-surface/60 mb-1">Fri</span>
+<span class="text-xl font-bold text-primary">25</span>
+</div>
+<div class="flex flex-col items-center p-3 rounded-lg border border-outline-variant opacity-30 bg-surface-container-low"><span class="text-[9px] font-bold uppercase">Sat 26</span></div>
+<div class="flex flex-col items-center p-3 rounded-lg border border-outline-variant opacity-30 bg-surface-container-low"><span class="text-[9px] font-bold uppercase">Sun 27</span></div>
+</div>
+</div>
+<!-- Slot Grid -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant shadow-sm">
+<h3 class="text-sm font-bold text-primary mb-6 flex items-center gap-3 uppercase tracking-widest">
+<span class="w-1 h-4 bg-tertiary rounded-full"></span>
+                            Available Slots • Oct 22
+                        </h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<button class="py-4 rounded-lg border-2 border-outline-variant hover:border-secondary font-bold text-primary transition-all bg-white text-sm" onclick="selectTime('08:30')">08:30 AM</button>
+<button class="py-4 rounded-lg border-2 border-outline-variant hover:border-secondary font-bold text-primary transition-all bg-white text-sm" onclick="selectTime('09:15')">09:15 AM</button>
+<button class="py-4 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface/30 font-bold cursor-not-allowed line-through text-sm">10:00 AM</button>
+<button class="py-4 rounded-lg border-2 border-outline-variant hover:border-secondary font-bold text-primary transition-all bg-white text-sm" onclick="selectTime('14:00')">02:00 PM</button>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4">
+<div class="bg-primary text-white p-8 rounded-xl border-b-4 border-tertiary shadow-xl sticky top-24">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">security</span>
+<span class="font-bold uppercase text-[10px] tracking-widest">Sovereign Requirements</span>
+</div>
+<ul class="flex flex-col gap-6">
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-tertiary mt-0.5 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-medium leading-relaxed text-on-primary/80">Valid Tunisian National ID (CIN) original document.</span>
+</li>
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-tertiary mt-0.5 text-lg" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-xs font-medium leading-relaxed text-on-primary/80">Biometric photograph (white background, &lt; 6 months).</span>
+</li>
+</ul>
+<div class="mt-8 pt-8 border-t border-white/10">
+<p class="text-[9px] text-white/50 uppercase tracking-widest leading-relaxed">Appointments are valid for 15 minutes past scheduled time.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Step 3: Confirmation -->
+<section class="hidden max-w-4xl mx-auto animate-in zoom-in-95 duration-500" id="step-3">
+<div class="text-center mb-10">
+<div class="w-16 h-16 bg-tertiary/10 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-tertiary shadow-sm">
+<span class="material-symbols-outlined text-3xl text-tertiary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h2 class="text-3xl font-extrabold text-primary">Review &amp; Confirm</h2>
+<p class="text-on-surface/60 text-sm">Secure biometric passport appointment details.</p>
+</div>
+<div class="bg-white border border-outline-variant rounded-2xl overflow-hidden shadow-2xl sovereign-header border-t-primary relative">
+<div class="p-10 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div>
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-2 block">Citizen Applicant</span>
+<p class="text-xl font-bold text-primary">MOHAMED AMINE BEN SALEM</p>
+<p class="text-[10px] text-tertiary font-extrabold mt-1 uppercase">Identity Verified via Sovereign ID</p>
+</div>
+<div class="md:text-right">
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-2 block">Reference ID</span>
+<p class="text-lg font-mono bg-surface-container px-3 py-1.5 rounded inline-block border border-outline-variant text-primary font-bold">TN-PAS-8823910</p>
+</div>
+<div class="md:col-span-2 h-px bg-outline-variant"></div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded bg-surface-container flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+</div>
+<div>
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-1 block">Office Location</span>
+<p class="font-bold text-primary" id="final-office">Tunis Central HQ</p>
+<p class="text-[10px] text-on-surface/60">Avenue Habib Bourguiba, District 1</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-12 h-12 rounded bg-surface-container flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</div>
+<div>
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-1 block">Date &amp; Time Slot</span>
+<p class="font-bold text-primary">Tuesday, October 22, 2024</p>
+<p class="text-[10px] text-on-surface/60" id="final-time">09:15 AM (Local Time)</p>
+</div>
+</div>
+</div>
+<div class="mt-12 bg-surface-container-low p-6 rounded-xl border-l-4 border-primary flex gap-5">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<div>
+<p class="text-[11px] text-primary font-bold uppercase tracking-widest mb-1">Official Declaration</p>
+<p class="text-xs text-on-surface/70 leading-relaxed">
+                                    By validating this appointment, you certify that all information provided is accurate and that you possess the necessary sovereign documentation. This record is immutable and stored in the National Digital Ledger.
+                                </p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-outline-variant">
+<button class="px-6 py-3 font-bold text-on-surface/60 hover:text-secondary transition-all text-sm" onclick="backToStep2()">Modify Selection</button>
+<button class="w-full md:w-auto bg-primary text-on-primary px-12 py-4 rounded-lg font-bold shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3 border-b-4 border-tertiary" onclick="completeBooking()">
+                            VALIDATE APPOINTMENT <span class="material-symbols-outlined text-tertiary">lock</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Success Overlay -->
+<div class="fixed inset-0 bg-primary/95 backdrop-blur-xl z-[100] hidden items-center justify-center p-6" id="success-overlay">
+<div class="bg-white max-w-lg w-full rounded-2xl p-10 lg:p-14 text-center shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-3 bg-tertiary"></div>
+<div class="w-24 h-24 bg-tertiary/10 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner border border-tertiary/30">
+<span class="material-symbols-outlined text-tertiary text-6xl">check_circle</span>
+</div>
+<h2 class="text-3xl lg:text-4xl font-extrabold text-primary mb-4">Confirmed</h2>
+<p class="text-on-surface/70 mb-10 text-sm lg:text-base leading-relaxed">Your sovereign appointment has been successfully registered. A secure PDF voucher is now available in your 'My Documents' vault.</p>
+<button class="w-full bg-secondary text-white py-5 font-bold rounded-lg hover:bg-primary transition-all shadow-xl tracking-widest uppercase text-xs lg:text-sm border-b-4 border-black/20" onclick="window.location.reload()">Return to Workspace</button>
+</div>
+</div>
+<script>
+        let bookingData = {
+            office: 'Tunis Central',
+            time: '09:15'
+        };
+
+        function goToStep2(officeName) {
+            bookingData.office = officeName;
+            document.getElementById('selected-office-display').innerText = officeName;
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            
+            const s1 = document.getElementById('step-nav-1').querySelector('div');
+            s1.classList.remove('bg-primary', 'border-tertiary');
+            s1.classList.add('bg-tertiary', 'border-tertiary');
+            s1.innerHTML = '<span class="material-symbols-outlined text-white text-lg">check</span>';
+            
+            const s2 = document.getElementById('step-nav-2').querySelector('div');
+            s2.classList.add('bg-primary', 'text-white', 'border-tertiary', 'shadow-lg');
+            s2.classList.remove('text-on-surface/40');
+            document.getElementById('step-nav-2').querySelector('span').classList.remove('text-on-surface/40');
+            document.getElementById('step-nav-2').querySelector('span').classList.add('text-primary');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToStep1() {
+            document.getElementById('step-1').classList.remove('hidden');
+            document.getElementById('step-2').classList.add('hidden');
+            
+            const s1 = document.getElementById('step-nav-1').querySelector('div');
+            s1.classList.add('bg-primary', 'border-tertiary');
+            s1.classList.remove('bg-tertiary');
+            s1.innerHTML = '1';
+            
+            const s2 = document.getElementById('step-nav-2').querySelector('div');
+            s2.classList.remove('bg-primary', 'text-white', 'border-tertiary', 'shadow-lg');
+            s2.classList.add('text-on-surface/40');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectTime(timeStr) {
+            bookingData.time = timeStr;
+            document.getElementById('final-office').innerText = bookingData.office;
+            document.getElementById('final-time').innerText = timeStr + ' (Local Time)';
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+
+            const s2 = document.getElementById('step-nav-2').querySelector('div');
+            s2.classList.remove('bg-primary');
+            s2.classList.add('bg-tertiary');
+            s2.innerHTML = '<span class="material-symbols-outlined text-white text-lg">check</span>';
+
+            const s3 = document.getElementById('step-nav-3').querySelector('div');
+            s3.classList.add('bg-primary', 'text-white', 'border-tertiary', 'shadow-lg');
+            s3.classList.remove('text-on-surface/40');
+            document.getElementById('step-nav-3').querySelector('span').classList.remove('text-on-surface/40');
+            document.getElementById('step-nav-3').querySelector('span').classList.add('text-primary');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToStep2() {
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+
+            const s2 = document.getElementById('step-nav-2').querySelector('div');
+            s2.classList.add('bg-primary');
+            s2.classList.remove('bg-tertiary');
+            s2.innerHTML = '2';
+
+            const s3 = document.getElementById('step-nav-3').querySelector('div');
+            s3.classList.remove('bg-primary', 'text-white', 'border-tertiary', 'shadow-lg');
+            s3.classList.add('text-on-surface/40');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function completeBooking() {
+            const overlay = document.getElementById('success-overlay');
+            overlay.classList.remove('hidden');
+            overlay.classList.add('flex');
+        }
+    </script>
+</body></html>

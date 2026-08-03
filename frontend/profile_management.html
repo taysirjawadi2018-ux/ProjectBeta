@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Watiq | Citizen Space - Profile Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Work+Sans:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d0e4ff",
+                        "inverse-surface": "#213145",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-fixed": "#ffddb7",
+                        "surface": "#f8f9ff",
+                        "primary-fixed-dim": "#b1c7f2",
+                        "on-primary-fixed": "#001b3d",
+                        "on-primary-fixed-variant": "#31476b",
+                        "background": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "primary-container": "#001b3d",
+                        "secondary-fixed-dim": "#9ccaff",
+                        "on-secondary-fixed-variant": "#00497a",
+                        "on-tertiary-fixed": "#2a1700",
+                        "primary": "#000000",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-surface-variant": "#44474e",
+                        "surface-container": "#e5eeff",
+                        "on-tertiary-container": "#af792f",
+                        "secondary": "#12629d",
+                        "inverse-primary": "#b1c7f2",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#fabb6a",
+                        "secondary-container": "#80bdfe",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "tertiary-container": "#2a1700",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-background": "#0b1c30",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary-container": "#6f84ac",
+                        "outline": "#74777f",
+                        "outline-variant": "#c4c6cf",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#004c7e",
+                        "on-secondary-fixed": "#001d35",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary": "#000000",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-tint": "#495f84",
+                        "on-error": "#ffffff",
+                        "sovereign-gold": "#af792f",
+                        "mediterranean-cerulean": "#12629d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "base": "4px",
+                        "xs": "0.5rem",
+                        "md": "1.5rem",
+                        "container-max": "1440px",
+                        "sm": "1rem",
+                        "lg": "2.5rem",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "headline-xl": ["Manrope"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "body-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["1.5rem", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-xl": ["3rem", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["0.75rem", {"lineHeight": "1.5", "fontWeight": "500"}],
+                        "headline-lg": ["2.25rem", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "display-lg": ["4.5rem", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["1.125rem", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["1rem", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .verified-badge {
+            box-shadow: inset 0 0 0 1px rgba(175, 121, 47, 0.2);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .bento-item-full { grid-column: span 12; }
+        .bento-item-lg { grid-column: span 8; }
+        .bento-item-sm { grid-column: span 4; }
+        
+        @media (max-width: 1024px) {
+            .bento-item-lg, .bento-item-sm { grid-column: span 12; }
+        }
+        
+        .active-session-indicator::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            top: 50%;
+            right: -12px;
+            transform: translateY(-50%);
+            box-shadow: 0 0 8px #10b981;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar from JSON -->
+<header class="bg-primary-container docked full-width top-0 z-50 border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-md">
+<span class="font-headline-lg text-headline-lg font-bold text-on-primary-fixed tracking-tight">Watiq</span>
+<nav class="hidden md:flex gap-md items-center ml-lg">
+<a class="text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors duration-200 font-body-md" href="#">E-Government</a>
+<a class="text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors duration-200 font-body-md" href="#">Transparency</a>
+<a class="text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors duration-200 font-body-md" href="#">National Services</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-on-primary-fixed hover:text-primary-fixed transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-on-primary-fixed hover:text-primary-fixed transition-colors duration-200 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden ml-sm">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a Mediterranean citizen for a high-security government profile. The lighting is soft and neutral against a clean, off-white background, emphasizing a serious yet approachable expression. The image is crisp, with high resolution suitable for official digital identity documentation, maintaining a prestigious and modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4IUFa9O-GyCotN3rVc5zGjagCcQXuEB9Tots0ZFwsSsq5xjJutcS9jV8QpZQYrKYHGsRnTD5xyggnGBFP7kHEtD1JT7gCiKlWf9MA9ctKsRdP6tPUz9Q5-4d8TtjVKKBkaoFIQZFP-lKmYu4pN4R38o2DUSm1QbpXmTHss1PxWY4r2HpjPMSHrvFpzWJc3IDcDa9ZJwRcbL7vWGTYoZL35xwfe1cn2lP72apVF2hpXx9cmzZ8PM"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 max-w-container-max mx-auto w-full">
+<!-- SideNavBar from JSON -->
+<aside class="hidden lg:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant p-md space-y-md shrink-0">
+<div class="flex flex-col items-center py-lg border-b border-outline-variant mb-md">
+<div class="w-16 h-16 bg-primary-container rounded-lg flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="account_balance">account_balance</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Citizen Space</h2>
+<p class="font-label-sm text-label-sm opacity-70">Secure Portal</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all hover:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all hover:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-sm">Applications</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all hover:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-sm">My Documents</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all hover:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-label-sm">Legal Support</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-secondary font-bold border-l-4 border-tertiary-fixed-dim bg-secondary-fixed/10 rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm">Settings</span>
+</a>
+</nav>
+<div class="pt-md border-t border-outline-variant">
+<button class="w-full py-sm bg-mediterranean-cerulean text-white rounded font-label-sm flex items-center justify-center gap-sm mb-md hover:bg-opacity-90">
+<span class="material-symbols-outlined text-sm" data-icon="emergency">emergency</span>
+                    Emergency Support
+                </button>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-sm">Help Center</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-error hover:bg-error-container/20 rounded-lg mt-xs" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-sm">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-md lg:p-lg overflow-y-auto">
+<header class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<nav class="flex items-center gap-xs text-on-surface-variant font-label-sm mb-xs">
+<span>Settings</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-secondary">Profile Management</span>
+</nav>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Citizen Profile</h1>
+<p class="text-on-surface-variant font-body-md mt-xs">Manage your official state identity and security protocols.</p>
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm bg-surface-container-highest border border-outline-variant text-on-surface rounded font-label-sm hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="print">print</span>
+                        Export Data
+                    </button>
+<button class="px-md py-sm bg-mediterranean-cerulean text-white rounded font-label-sm hover:bg-opacity-90 transition-all flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="save">save</span>
+                        Save Changes
+                    </button>
+</div>
+</header>
+<div class="bento-grid">
+<!-- Personal Information -->
+<section class="bento-item-lg bg-surface-container-lowest border border-outline-variant p-lg rounded-xl relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-sovereign-gold"></div>
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="person">person</span>
+                            Personal Information
+                        </h3>
+<div class="px-sm py-1 bg-sovereign-gold/10 text-sovereign-gold border border-sovereign-gold/20 rounded-full font-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                            State Verified
+                        </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Full Legal Name (Latin)</label>
+<div class="p-sm bg-surface-container border border-outline-variant rounded font-body-md text-on-surface font-medium">
+                                SELMI, MOHAMED AMINE
+                            </div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Nom Complet (Arabe)</label>
+<div class="p-sm bg-surface-container border border-outline-variant rounded font-body-md text-on-surface font-medium text-right" dir="rtl">
+                                السلمي، محمد أمين
+                            </div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">National Identity Number (CIN)</label>
+<div class="p-sm bg-surface-container border border-outline-variant rounded font-label-sm tracking-widest text-on-surface flex justify-between items-center">
+<span>0987****</span>
+<button class="text-secondary"><span class="material-symbols-outlined text-[18px]" data-icon="visibility">visibility</span></button>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Date of Birth</label>
+<div class="p-sm bg-surface-container border border-outline-variant rounded font-body-md text-on-surface">
+                                14 JANVIER 1990
+                            </div>
+</div>
+</div>
+<div class="mt-lg pt-lg border-t border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-sm text-on-surface-variant font-label-sm">
+<span class="material-symbols-outlined text-sovereign-gold" data-icon="info">info</span>
+                            Information is synchronized with the Ministry of Interior.
+                        </div>
+<button class="text-secondary font-label-sm hover:underline">Update Request</button>
+</div>
+</section>
+<!-- Sign Language Module -->
+<section class="bento-item-sm bg-primary-container text-on-primary-fixed p-lg rounded-xl flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-tertiary-fixed-dim" data-icon="sign_language">sign_language</span>
+<h3 class="font-headline-md text-headline-md">TSL Assistant</h3>
+</div>
+<p class="font-body-md opacity-80 mb-lg">Access Tunisiene Sign Language support for all government documents and profile settings.</p>
+<div class="aspect-video w-full bg-black/30 rounded-lg border border-on-primary-container overflow-hidden mb-md group cursor-pointer relative">
+<img class="w-full h-full object-cover" data-alt="A high-quality studio recording frame of a professional Tunisian Sign Language interpreter performing official translations. The backdrop is a solid, deep cerulean blue, providing high contrast. The interpreter is dressed in professional dark attire, with soft, directional lighting that highlights clear hand movements and facial expressions, tailored for an accessible and elite government digital portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoPXqs0S_sWn-NtRG6r1hgY4xdsKPmQANNZOXfocYVFbZeAv0ASMc3pZgdpM6llqaV2y4yDFKiTJKBeRPF00CdXTqmYivG_8f2WP-Vdi0MLqwunaad_ODOF63es06IehJEw9d5JOIFbG4cjN0tuF1hpY34Ood1RPN-n8E3rhO_eNU9IIOXl2akrb1tePBNRvgYuynNmOIibCjN6hBwWsG7HY45zflW6hV1-W3cF0a5drr-sQTp6dw"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-white text-4xl" data-icon="play_circle">play_circle</span>
+</div>
+</div>
+</div>
+<button class="w-full py-sm border border-on-primary-container hover:bg-on-primary-container/20 rounded font-label-sm transition-colors">
+                        Launch Live Interpreter
+                    </button>
+</section>
+<!-- Contact Access -->
+<section class="bento-item-sm bg-surface-container-lowest border border-outline-variant p-lg rounded-xl">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="contact_page">contact_page</span>
+                        Contact Access
+                    </h3>
+<div class="space-y-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Verified Phone</label>
+<div class="flex gap-xs">
+<div class="flex-1 p-sm bg-surface-container border border-outline-variant rounded font-label-sm text-on-surface flex items-center justify-between">
+<span>+216 20 ••• 789</span>
+<span class="material-symbols-outlined text-green-600 text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<button class="w-12 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Official Email</label>
+<div class="flex gap-xs">
+<div class="flex-1 p-sm bg-surface-container border border-outline-variant rounded font-label-sm text-on-surface flex items-center justify-between">
+<span>m.amine@watiq.tn</span>
+<span class="material-symbols-outlined text-green-600 text-[18px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<button class="w-12 flex items-center justify-center border border-outline-variant rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+<div class="p-sm bg-secondary-fixed/20 border border-secondary/20 rounded-lg mt-lg">
+<p class="font-label-sm text-secondary-fixed-dim font-bold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="sms">sms</span>
+                                SMS 2FA Enabled
+                            </p>
+<p class="font-label-sm text-on-secondary-fixed-variant mt-xs">Used for critical document signings.</p>
+</div>
+</div>
+</section>
+<!-- Security & Credentials -->
+<section class="bento-item-lg bg-surface-container-lowest border border-outline-variant p-lg rounded-xl">
+<div class="flex items-center justify-between mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" data-icon="shield_lock">shield_lock</span>
+                            Security &amp; Credentials
+                        </h3>
+<button class="text-error font-label-sm hover:underline">Revoke All Access</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-md">
+<div class="p-md border border-outline-variant rounded-lg hover:border-secondary transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="passkey">passkey</span>
+<span class="font-label-sm text-secondary group-hover:underline">Manage</span>
+</div>
+<h4 class="font-body-md font-bold text-on-surface">Digital Passkey</h4>
+<p class="font-label-sm text-on-surface-variant mt-xs">Biometric authentication active via iPhone 15 Pro.</p>
+</div>
+<div class="p-md border border-outline-variant rounded-lg hover:border-secondary transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="password">password</span>
+<span class="font-label-sm text-secondary group-hover:underline">Update</span>
+</div>
+<h4 class="font-body-md font-bold text-on-surface">Master Password</h4>
+<p class="font-label-sm text-on-surface-variant mt-xs">Last changed 42 days ago.</p>
+</div>
+</div>
+<div class="bg-surface-container p-md rounded-lg">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-md">Active Sessions</h4>
+<div class="space-y-sm">
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest rounded border border-outline-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="laptop_mac">laptop_mac</span>
+<div>
+<p class="font-label-sm font-bold text-on-surface active-session-indicator relative inline-block mr-4">Safari on macOS</p>
+<p class="text-[10px] text-on-surface-variant">Tunis, TN • Current Session</p>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest rounded border border-outline-variant opacity-70">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="smartphone">smartphone</span>
+<div>
+<p class="font-label-sm font-bold text-on-surface">Watiq App (Android)</p>
+<p class="text-[10px] text-on-surface-variant">Sousse, TN • 2 hours ago</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-error">
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<button class="w-full mt-md py-xs text-center text-on-surface-variant font-label-sm hover:text-secondary transition-colors">
+                                View Full Access Log
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer from JSON -->
+<footer class="bg-primary-container w-full py-lg mt-auto border-t border-tertiary-fixed/30">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg px-lg max-w-container-max mx-auto">
+<div class="flex flex-col gap-sm">
+<span class="font-headline-md text-headline-md font-bold text-on-primary-fixed">Watiq</span>
+<p class="font-label-sm text-on-primary-fixed-variant">Digital Sovereignty Department</p>
+<p class="font-body-md text-on-primary-fixed-variant mt-sm">© 2024 Tunisian Republic</p>
+</div>
+<div class="flex flex-col gap-xs">
+<h4 class="font-label-sm text-primary-fixed mb-sm uppercase">Legal &amp; Compliance</h4>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="#">Security Protocols</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="#">Privacy Policy</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed text-tertiary-fixed-dim underline" href="#">Accessibility Standards</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="#">Legal Notice</a>
+</div>
+<div class="flex flex-col gap-xs">
+<h4 class="font-label-sm text-primary-fixed mb-sm uppercase">Resources</h4>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="#">User Manuals</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="#">Developer API</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="#">Institutional Portal</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-sm text-primary-fixed mb-xs uppercase">Connect</h4>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer" data-icon="public">public</span>
+<span class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer" data-icon="alternate_email">alternate_email</span>
+<span class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer" data-icon="shield">shield</span>
+</div>
+<div class="mt-md p-sm bg-on-primary-fixed/5 rounded border border-on-primary-container">
+<p class="text-[10px] text-on-primary-container leading-relaxed">Identity transactions on this platform are secured by national-grade end-to-end encryption.</p>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions and reactive states
+        document.querySelectorAll('.bento-item-lg, .bento-item-sm').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.boxShadow = '0px 4px 20px rgba(0, 0, 0, 0.05)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.boxShadow = 'none';
+            });
+        });
+
+        // Toggle visibility for sensitive data
+        const pinToggle = document.querySelector('[data-icon="visibility"]');
+        if(pinToggle) {
+            pinToggle.parentElement.addEventListener('click', function() {
+                const span = this.previousElementSibling;
+                if(span.textContent.includes('****')) {
+                    span.textContent = '09871234';
+                    this.querySelector('span').textContent = 'visibility_off';
+                } else {
+                    span.textContent = '0987****';
+                    this.querySelector('span').textContent = 'visibility';
+                }
+            });
+        }
+    </script>
+</body></html>

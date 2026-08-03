@@ -15,7 +15,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import make_url
 from sqlalchemy.engine import Connection
-from sqlalchemy.ext.asyncio import async_engine_from_config
+from sqlalchemy.ext.asyncio import create_async_engine
 
 config = context.config
 
@@ -40,9 +40,10 @@ def _migration_dsn() -> str:
 
 def _assert_migration_user(dsn: str) -> None:
     url = make_url(dsn)
-    if url.username not in _MIGRATION_ROLES:
+    if url.username not in _MIGRATION_ROLES and not url.username.startswith("postgres."):
         raise RuntimeError(
-            f"migrations must run as one of {_MIGRATION_ROLES}, got '{url.username}'. "
+            f"migrations must run as one of {_MIGRATION_ROLES} (or 'postgres.<project-ref>'), "
+            f"got '{url.username}'. "
             "Application roles hold no DDL privilege; never point alembic at an app-role DSN."
         )
 
@@ -74,10 +75,11 @@ def do_run_migrations(connection: Connection) -> None:
 async def run_async_migrations() -> None:
     dsn = _migration_dsn()
     _assert_migration_user(dsn)
-    config.set_main_option("sqlalchemy.url", dsn)
-    connectable = async_engine_from_config(
-        config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
+    connectable = create_async_engine(
+        dsn,
+        # Supabase's pgbouncer (transaction mode) rejects prepared statements
+        # (DuplicatePreparedStatementError); asyncpg must run un-prepared.
+        connect_args={"statement_cache_size": 0},
     )
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Accès Restreint - République Tunisienne</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#6f84ac",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#213145",
+                        "on-surface": "#0b1c30",
+                        "on-primary-fixed": "#001b3d",
+                        "error-container": "#ffdad6",
+                        "primary": "#000000",
+                        "primary-fixed": "#d6e3ff",
+                        "on-primary-fixed-variant": "#31476b",
+                        "inverse-primary": "#b1c7f2",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "surface": "#f8f9ff",
+                        "surface-tint": "#495f84",
+                        "on-tertiary-fixed": "#191c1e",
+                        "secondary-fixed": "#ffe088",
+                        "outline": "#74777f",
+                        "on-secondary-fixed": "#241a00",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "on-tertiary-container": "#818486",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e5eeff",
+                        "secondary-container": "#fed65b",
+                        "on-surface-variant": "#44474e",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface-container-high": "#dce9ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "tertiary-fixed": "#e0e3e5",
+                        "primary-container": "#001b3d",
+                        "error": "#ba1a1a",
+                        "background": "#f8f9ff",
+                        "secondary": "#735c00",
+                        "outline-variant": "#c4c6cf",
+                        "on-background": "#0b1c30",
+                        "primary-fixed-dim": "#b1c7f2",
+                        "tertiary-container": "#191c1e",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "tertiary": "#000000",
+                        "surface-variant": "#d3e4fe"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "container-max-width": "1440px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "support-sm": ["Public Sans"],
+                        "body-md": ["Public Sans"],
+                        "headline-md": ["Public Sans"],
+                        "headline-lg-mobile": ["Public Sans"],
+                        "label-caps": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "body-lg": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "support-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "300"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                        "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "300"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>body {
+    background-color: #f8f9ff;
+    color: #0b1c30;
+    overflow-x: hidden
+    }
+.national-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vh;
+    height: 80vh;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuBu-t4_sFjsv3qq5xbVdibfg5-0T4ud8JTz5EJZBCETQzbZ_StZSU84OMkLknEOwM4uQpBAL2IJ5jIUnf0q3XkeytveF-WUUQoqaaZPg2xIyOXjSzYGg71Dn6QL4UoDatX36OudyrRUsd7AsCRQ3JeVcYHwbQNFCeJ9mPbhDrmHYQujzTKwIJfj8mfPcNLOryUfa9LgEaQPDNd1xiUha-0aTyzSbFA_nBjdaQCt3kqGkr8LisoIWzU);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain
+    }
+.glass-panel {
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(11, 28, 48, 0.05)
+    }
+.scanline {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #ba1a1a, transparent);
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: scan 4s linear infinite
+    }
+@keyframes scan {
+    0% {
+        top: 0;
+        opacity: 0;
+        } 10% {
+        opacity: 1;
+        } 90% {
+        opacity: 1;
+        } 100% {
+        top: 100%;
+        opacity: 0;
+        }
+    }</style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Global Watermark -->
+<div class="national-watermark" data-alt="A high-fidelity vector illustration of the Tunisian National Emblem, featuring the lion, ship, and scales of justice. The graphic is presented as a subtle, monochromatic watermark in soft grey tones against a pristine white background, conveying institutional authority, sovereignty, and a sense of calm administrative control."></div>
+<!-- Header / Top Bar (Simplified for Transactional/Blocked State) -->
+<header class="fixed top-0 left-0 w-full h-20 px-margin-desktop flex items-center justify-between z-50">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-on-surface text-surface rounded-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">policy</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md tracking-wider uppercase text-on-surface leading-tight">République Tunisienne</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Portail National des Services</span>
+</div>
+</div>
+</header>
+<main class="relative z-10 min-h-screen flex items-center justify-center px-margin-mobile md:px-0 py-24">
+<!-- Main Security Container -->
+<div class="max-w-2xl w-full flex flex-col items-center">
+<!-- Sovereign Seal / Visual Anchor -->
+<div class="relative mb-12">
+<div class="absolute inset-0 bg-error opacity-5 blur-3xl rounded-full scale-150"></div>
+<div class="relative w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-error/20 p-2 flex items-center justify-center">
+<div class="w-full h-full rounded-full border-2 border-error/40 p-4 flex items-center justify-center bg-surface-container-lowest shadow-2xl">
+<span class="material-symbols-outlined text-error !text-[64px] md:!text-[80px]" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+</div>
+</div>
+<!-- Content Panel -->
+<div class="glass-panel rounded-xl p-8 md:p-12 w-full shadow-lg relative overflow-hidden text-center border-t-4 border-error">
+<div class="scanline"></div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2 uppercase tracking-tight">Access Restricted</h1>
+<p class="font-headline-md text-headline-md text-error mb-8">Security Protocol v2.4 Active</p>
+<div class="bg-surface-container-high rounded-sm p-6 mb-10 text-left border-l-4 border-on-surface">
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center border-b border-outline-variant pb-3">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reason for Restriction</span>
+<span class="font-body-md text-body-md font-bold text-on-surface">Anomalous IP Activity</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant pb-3">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Timestamp</span>
+<span class="font-body-md text-body-md text-on-surface" id="current-time">2024-05-24 14:32:01 UTC</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reference ID</span>
+<span class="font-body-md text-body-md font-bold text-primary tracking-widest bg-secondary-container px-2 py-1 rounded-sm">TN-SEC-9844-XP</span>
+</div>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg mx-auto">
+                    Systemic sensors have detected multiple failed authentication attempts or irregular traffic patterns originating from your current network location. Access to the national administrative grid is temporarily suspended to safeguard sensitive sovereign data.
+                </p>
+<!-- Actions -->
+<div class="flex flex-col md:flex-row gap-gutter justify-center items-center">
+<button class="w-full md:w-auto px-10 py-4 bg-primary text-on-primary font-headline-md text-headline-md rounded-sm hover:bg-on-surface-variant transition-all active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">send</span>
+                        Lodge Official Appeal
+                    </button>
+<button class="w-full md:w-auto px-10 py-4 border-2 border-primary text-primary font-headline-md text-headline-md rounded-sm hover:bg-surface-container-highest transition-all active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">support_agent</span>
+                        Contact Support
+                    </button>
+</div>
+</div>
+<!-- Footer Message -->
+<div class="mt-12 text-center">
+<p class="font-support-sm text-support-sm text-on-surface-variant opacity-60 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined !text-[16px]">verified_user</span>
+                    Secured by National Cybersecurity Agency (ANSI) &amp; Ministry of Justice
+                </p>
+</div>
+</div>
+</main>
+<!-- Sign Language Module (Accessibility) -->
+<div class="fixed bottom-margin-desktop right-margin-desktop z-[100] group">
+<div class="glass-panel rounded-xl p-2 border-2 border-secondary-container shadow-2xl relative overflow-hidden w-48 h-64 md:w-56 md:h-72">
+<div class="absolute top-2 left-2 z-10">
+<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">Live Interpreter</span>
+</div>
+<div class="w-full h-full bg-on-surface rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A professional sign language interpreter, an elegant woman in a dark corporate blazer, performing Tunisian Sign Language in front of a neutral studio background. The lighting is soft and even, highlighting her facial expressions and hand movements clearly. The overall tone is institutional and supportive, fitting the accessibility standards of a government portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0QExVa3PIblBW0leqmHR9zsqSdGuyXVlPWGZqvyEpGHmdPT-y4JyQGBlnIlQktMGjAl2I4_EhVrzjZS0AMB8FAkATYDV7V9JP9eDsHcqmYfodM9GHQqqBe2EjzEfHvwvwu1RktN7Rn0O453RbayEvzHcf_9sMWzkySS2MJw5qG5qhzihQ4GvCl1Db4sFGAj9NoB-3LE8Tt4u9MqnUANNPr5xWGU10kFHkOJvQAeUjmsdyajWcI0I"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent"></div>
+<!-- Controls -->
+<div class="absolute bottom-2 left-0 w-full flex justify-center gap-2">
+<button class="w-8 h-8 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined !text-[18px]">play_arrow</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined !text-[18px]">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Security Overlay Interaction -->
+<script>
+        // Set dynamic clock
+        function updateClock() {
+            const now = new Date();
+            const year = now.getUTCFullYear();
+            const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+            const day = String(now.getUTCDate()).padStart(2, '0');
+            const hours = String(now.getUTCHours()).padStart(2, '0');
+            const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+            document.getElementById('current-time').textContent = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} UTC`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Subtle ambient security light interaction
+        document.addEventListener('mousemove', (e) => {
+            const scanline = document.querySelector('.scanline');
+            if (scanline) {
+                const opacity = (Math.sin(Date.now() / 1000) * 0.2) + 0.8;
+                scanline.style.opacity = opacity;
+            }
+        });
+    </script>
+</body></html>
