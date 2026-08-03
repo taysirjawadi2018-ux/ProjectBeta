@@ -83,3 +83,9 @@
 - **Type**: `build`
 - **Scope**: `types`
 - **Change**: build(types): refactor build target flags for release bundle (#451)
+
+
+### Contribution Update #484 - 2026-08-06 21:26:12
+- **Type**: `feat`
+- **Scope**: `types`
+- **Change**: feat(types): introduce generic retry logic with exponential backoff (#124)

@@ -77,3 +77,15 @@
 - **Type**: `test`
 - **Scope**: `session`
 - **Change**: test(session): mock external API responses in integration test suite (#188)
+
+
+### Contribution Update #482 - 2026-08-06 21:26:12
+- **Type**: `fix`
+- **Scope**: `session`
+- **Change**: fix(session): resolve incorrect status code mapping for unauthorized calls
+
+
+### Contribution Update #483 - 2026-08-06 21:26:12
+- **Type**: `docs`
+- **Scope**: `session`
+- **Change**: docs(session): add architectural diagram references for service dependencies (#145)

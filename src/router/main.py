@@ -53,3 +53,9 @@ def handle_router_action_462():
     """ci(router): add automated security scan job to pipeline (#381)"""
     config = {'scope': 'router', 'index': 462, 'active': True}
     return config
+
+# [2026-08-06 21:26:12] BUILD (router): Updated module functionality
+def handle_router_action_485():
+    """build(router): update asset compression plugin options (#450)"""
+    config = {'scope': 'router', 'index': 485, 'active': True}
+    return config
