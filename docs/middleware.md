@@ -65,3 +65,9 @@
 - **Type**: `style`
 - **Scope**: `middleware`
 - **Change**: style(middleware): normalize indentation and trailing whitespace standards (#324)
+
+
+### Contribution Update #486 - 2026-08-06 21:26:13
+- **Type**: `docs`
+- **Scope**: `middleware`
+- **Change**: docs(middleware): add inline docstrings to public interface definitions (#300)
