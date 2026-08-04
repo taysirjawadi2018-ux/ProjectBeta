@@ -59,3 +59,9 @@
 - **Type**: `style`
 - **Scope**: `parser`
 - **Change**: style(parser): remove unused import statements and dead code references (#163)
+
+
+### Contribution Update #487 - 2026-08-06 21:26:13
+- **Type**: `style`
+- **Scope**: `parser`
+- **Change**: style(parser): remove unused import statements and dead code references (#255)
