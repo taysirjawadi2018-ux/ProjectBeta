@@ -1,35 +1,41 @@
-/* login.html — behaviour lifted verbatim from the mockup's inline
- * <script> block. Externalised because the production CSP is
- * script-src 'self' with no 'unsafe-inline', which blocks inline scripts
- * exactly as it blocks inline styles. */
+/* login.html — behaviour lifted from frontend/secure_login.html.
+ * Inline <script> is blocked by script-src 'self', so it lives here
+ * and is loaded with defer from the page's scripts block.
+ */
+(function () {
+  "use strict";
 
-// Simple toggle logic for accessibility overlay
-const toggleBtn = document.getElementById('toggle-interpreter');
-const closeBtn = document.getElementById('close-interpreter');
-const interpreterSlot = document.getElementById('interpreter-slot');
-let isInterpreterVisible = false;
+  var form = document.getElementById("loginForm");
+  if (!form) return;
 
-function toggleInterpreter() {
-    isInterpreterVisible = !isInterpreterVisible;
-    interpreterSlot.style.display = isInterpreterVisible ? 'flex' : 'none';
-}
+  /* Tint the leading icon while its field has focus. */
+  form.querySelectorAll("input").forEach(function (input) {
+    var icon = input.parentElement.querySelector(".material-symbols-outlined");
+    if (!icon) return;
+    input.addEventListener("focus", function () {
+      icon.classList.add("text-mediterranean-cerulean");
+    });
+    input.addEventListener("blur", function () {
+      icon.classList.remove("text-mediterranean-cerulean");
+    });
+  });
 
-toggleBtn.addEventListener('click', toggleInterpreter);
-closeBtn.addEventListener('click', () => {
-    isInterpreterVisible = false;
-    interpreterSlot.style.display = 'none';
-});
-
-// Simple audio toggle styling
-const audioBtn = document.getElementById('toggle-audio');
-let isAudioOn = false;
-audioBtn.addEventListener('click', () => {
-    isAudioOn = !isAudioOn;
-    if(isAudioOn) {
-        audioBtn.classList.add('bg-secondary-container', 'text-on-secondary-container');
-        audioBtn.classList.remove('bg-surface', 'text-on-surface');
-    } else {
-        audioBtn.classList.remove('bg-secondary-container', 'text-on-secondary-container');
-        audioBtn.classList.add('bg-surface', 'text-on-surface');
-    }
-});
+  /* The mockup called preventDefault here and faked a 1.8s "validated" state.
+   * The form now posts to public.login for real, so this only guards against
+   * a double submit and shows that something is happening while the round
+   * trip completes. */
+  form.addEventListener("submit", function () {
+    var button = form.querySelector("button[type=submit]");
+    if (!button) return;
+    button.classList.add("opacity-80", "cursor-not-allowed");
+    var spinner = document.createElement("span");
+    spinner.className = "material-symbols-outlined animate-spin";
+    spinner.textContent = "progress_activity";
+    button.replaceChildren(spinner, " Validating Sovereign Token...");
+    // Disabled after the event loop turn so the button's name/value still
+    // makes it into the submitted payload.
+    window.setTimeout(function () {
+      button.disabled = true;
+    }, 0);
+  });
+})();

@@ -16,7 +16,7 @@ body {
 
 .request-card:hover {
     border-color: #4e5e81;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .focus-ring:focus-visible {

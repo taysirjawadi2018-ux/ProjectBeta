@@ -26,7 +26,7 @@
 </div>
 </div>
 <form action="{{ url_for('staff.appointment_status', appointment_id=appt.id) }}" class="flex items-center gap-2" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <label class="sr-only" for="status-{{ appt.id }}">Status for appointment {{ appt.id }}</label>
 <select class="border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md py-2 px-3 focus-ring" id="status-{{ appt.id }}" name="status">
 {% for s in ['booked', 'attended', 'no_show', 'cancelled'] %}

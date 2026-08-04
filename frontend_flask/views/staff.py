@@ -10,10 +10,16 @@ import api
 import auth
 from auth import staff_required
 
-# request_status lookup ids, from the seed data in Watiq.sql. Surfaced to the
-# template so the decision buttons do not hardcode numbers in markup. If the
-# lookup table is ever reseeded, this is the single place to correct.
-STATUS_IDS = {"approved": 5, "rejected": 6, "resubmission": 4}
+# PATCH /requests/{id}/status takes StatusUpdateIn{new_status_code, reason} and
+# forbids extra keys, so it wants the *code* from request_statuses, not the
+# lookup id. These three are the decisions the review screen offers; the codes
+# are the ones seeded in Watiq.sql. Surfaced to the template so the buttons do
+# not hardcode workflow vocabulary in markup.
+STATUS_CODES = {
+    "approved": "approved",
+    "rejected": "rejected",
+    "resubmission": "pending_docs",
+}
 
 bp = Blueprint("staff", __name__, url_prefix="/staff")
 
@@ -62,7 +68,7 @@ def review(request_id: int | None = None) -> Any:
                 request_item=None,
                 history=[],
                 documents=[],
-                status_ids=STATUS_IDS,
+                status_codes=STATUS_CODES,
                 staff=api.try_get("/api/v1/staff/me"),
             )
         request_id = items[0]["id"]
@@ -73,7 +79,7 @@ def review(request_id: int | None = None) -> Any:
         history=api.items_of(api.try_get(f"/api/v1/requests/{request_id}/history")),
         documents=api.items_of(api.try_get(f"/api/v1/requests/{request_id}/documents")),
         staff=api.try_get("/api/v1/staff/me"),
-        status_ids=STATUS_IDS,
+        status_codes=STATUS_CODES,
         permissions=(api.try_get("/api/v1/staff/me/permissions", default={}) or {}).get(
             "permissions", []
         ),
@@ -83,24 +89,34 @@ def review(request_id: int | None = None) -> Any:
 @bp.post("/requests/<int:request_id>/assign")
 @staff_required
 def assign(request_id: int) -> Any:
-    payload: dict[str, Any] = {}
-    if request.form.get("staff_id", type=int):
-        payload["assigned_staff_id"] = request.form.get("staff_id", type=int)
-    api.patch(f"/api/v1/requests/{request_id}/assign", json=payload)
-    flash("Request assigned.", "success")
+    """Claim a request.
+
+    The endpoint takes no body — it assigns to the calling officer and derives
+    the staff id from the session, so a staff_id sent from the browser would be
+    both ignored and a privilege question we should not be asking the client.
+    """
+    try:
+        api.patch(f"/api/v1/requests/{request_id}/assign")
+    except api.ApiError as exc:
+        flash(exc.user_message(), "error")
+        return redirect(url_for("staff.review", request_id=request_id))
+    flash("Request assigned to you.", "success")
     return redirect(url_for("staff.review", request_id=request_id))
 
 
 @bp.post("/requests/<int:request_id>/status")
 @staff_required
 def set_status(request_id: int) -> Any:
-    status_id = request.form.get("status_id", type=int)
-    if not status_id:
+    status_code = (request.form.get("status_code") or "").strip()
+    if status_code not in STATUS_CODES.values():
         flash("Choose a decision before submitting.", "error")
         return redirect(url_for("staff.review", request_id=request_id))
-    payload: dict[str, Any] = {"status_id": status_id}
-    if request.form.get("note"):
-        payload["note"] = request.form["note"]
+    payload: dict[str, Any] = {"new_status_code": status_code}
+    # StatusUpdateIn caps the reason at 2000 characters and forbids extra keys,
+    # so it is sent only when the reviewer actually wrote one.
+    reason = (request.form.get("reason") or "").strip()
+    if reason:
+        payload["reason"] = reason[:2000]
     try:
         api.patch(f"/api/v1/requests/{request_id}/status", json=payload)
     except api.ApiError as exc:
@@ -113,11 +129,17 @@ def set_status(request_id: int) -> Any:
 @bp.post("/documents/<int:document_id>/verify")
 @staff_required
 def verify_document(document_id: int) -> Any:
-    api.patch(
-        f"/api/v1/documents/{document_id}/verify",
-        json={"is_verified": request.form.get("decision") == "accept"},
+    """VerifyIn takes status: "verified" | "rejected" and forbids anything else."""
+    status = "verified" if request.form.get("decision") == "accept" else "rejected"
+    try:
+        api.patch(f"/api/v1/documents/{document_id}/verify", json={"status": status})
+    except api.ApiError as exc:
+        flash(exc.user_message(), "error")
+        return redirect(request.referrer or url_for("staff.workbench"))
+    flash(
+        "Document accepted." if status == "verified" else "Document rejected.",
+        "success",
     )
-    flash("Document reviewed.", "success")
     return redirect(request.referrer or url_for("staff.workbench"))
 
 
@@ -134,10 +156,18 @@ def office_appointments() -> str:
 @bp.post("/appointments/<int:appointment_id>/status")
 @staff_required
 def appointment_status(appointment_id: int) -> Any:
-    api.patch(
-        f"/api/v1/appointments/{appointment_id}/status",
-        json={"status": request.form.get("status", "")},
-    )
+    """AppointmentStatusIn only accepts "completed" or "no_show"."""
+    status = request.form.get("status", "")
+    if status not in ("completed", "no_show"):
+        flash("Choose whether the citizen attended.", "error")
+        return redirect(url_for("staff.office_appointments"))
+    try:
+        api.patch(
+            f"/api/v1/appointments/{appointment_id}/status", json={"status": status}
+        )
+    except api.ApiError as exc:
+        flash(exc.user_message(), "error")
+        return redirect(url_for("staff.office_appointments"))
     flash("Appointment updated.", "success")
     return redirect(url_for("staff.office_appointments"))
 

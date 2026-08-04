@@ -14,8 +14,17 @@ PUBLIC_GETS = [
 
 CITIZEN_GETS = [
     "/dashboard", "/requests", "/requests/11", "/requests/new",
-    "/appointments", "/appointments/book", "/notifications",
+    # /requests/new only renders the office_service_id field once an office is
+    # chosen, so the second form of the page needs covering too.
+    "/requests/new?office_id=1",
+    "/appointments", "/notifications",
     "/payments", "/payments/confirmation",
+    # The booking wizard is three server-rendered steps selected by the query
+    # string: office list, then that office's slots, then the confirmation.
+    "/appointments/book",
+    "/appointments/book?office_id=1",
+    "/appointments/book?office_id=1&slot_date=2026-08-10",
+    "/appointments/book?office_id=1&slot_date=2026-08-10&slot_id=21",
 ]
 
 STAFF_GETS = ["/staff", "/staff/review", "/staff/review/11", "/staff/appointments"]

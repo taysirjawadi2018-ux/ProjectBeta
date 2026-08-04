@@ -49,7 +49,7 @@
 </div>
 <div class="flex items-center gap-3">
 <form action="{{ url_for('citizen.mark_all_read') }}" class="inline" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button type="submit" class="text-label-md font-label-md text-secondary hover:text-primary transition-colors focus:outline-none focus:ring-[3px] focus:ring-offset-2 focus:ring-primary-container rounded px-2 py-1">
                         Mark all as read
                     </button>
@@ -92,7 +92,7 @@
 {%- endif %}
 {%- if not note.is_read %}
 <form action="{{ url_for('citizen.mark_read', notification_id=note.id) }}" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="text-label-md font-label-md text-secondary hover:underline focus:outline-none rounded" type="submit">Mark as read</button>
 </form>
 {%- endif %}
@@ -107,11 +107,13 @@
 </div>
 {%- endfor %}
 </div>
+{%- if next_cursor %}
 <div class="flex justify-center mt-4">
-<button class="bg-surface-container-lowest border border-secondary text-secondary text-label-md font-label-md px-6 py-2 rounded hover:bg-surface-container-low transition-colors focus:outline-none focus:ring-[3px] focus:ring-offset-2 focus:ring-primary-container" data-action="load-more" type="button">
+<a class="bg-surface-container-lowest border border-secondary text-secondary text-label-md font-label-md px-6 py-2 rounded hover:bg-surface-container-low transition-colors focus:outline-none focus:ring-[3px] focus:ring-offset-2 focus:ring-primary-container" href="{{ url_for('citizen.notifications', cursor=next_cursor) }}">
                     Load More
-                </button>
+                </a>
 </div>
+{%- endif %}
 </div>
 <!-- Sidebar context (optional for layout balance) -->
 <div class="hidden lg:block col-span-3">

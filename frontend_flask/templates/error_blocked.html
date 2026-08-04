@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% set html_class = 'light tk-security-acces-blocked' %}
+{% block title %}{{ title }} | Watiq National Portal{% endblock %}
+{% block body_class %}font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/error_blocked.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<!-- Global Watermark -->
+<div class="national-watermark"></div>
+<!-- Header / Top Bar (Simplified for Transactional/Blocked State) -->
+<header class="fixed top-0 left-0 w-full h-20 px-margin-desktop flex items-center justify-between z-50">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 flex items-center justify-center bg-on-surface text-surface rounded-sm">
+<span class="icon-filled material-symbols-outlined">policy</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md tracking-wider uppercase text-on-surface leading-tight">République Tunisienne</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Portail National des Services</span>
+</div>
+</div>
+</header>
+<main class="relative z-10 min-h-screen flex items-center justify-center px-margin-mobile md:px-0 py-24">
+<!-- Main Security Container -->
+<div class="max-w-2xl w-full flex flex-col items-center">
+<!-- Sovereign Seal / Visual Anchor -->
+<div class="relative mb-12">
+<div class="absolute inset-0 bg-error opacity-5 blur-3xl rounded-full scale-150"></div>
+<div class="relative w-32 h-32 md:w-48 md:h-48 rounded-full border-4 border-error/20 p-2 flex items-center justify-center">
+<div class="w-full h-full rounded-full border-2 border-error/40 p-4 flex items-center justify-center bg-surface-container-lowest shadow-2xl">
+<span class="icon-filled material-symbols-outlined text-error !text-[64px] md:!text-[80px]">gavel</span>
+</div>
+</div>
+</div>
+<!-- Content Panel -->
+<div class="glass-panel rounded-xl p-8 md:p-12 w-full shadow-lg relative overflow-hidden text-center border-t-4 border-error">
+<div class="scanline"></div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2 uppercase tracking-tight">{{ title }}</h1>
+<p class="font-headline-md text-headline-md text-error mb-8">Security Protocol v2.4 Active</p>
+<div class="bg-surface-container-high rounded-sm p-6 mb-10 text-left border-l-4 border-on-surface">
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center border-b border-outline-variant pb-3">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reason for Restriction</span>
+<span class="font-body-md text-body-md font-bold text-on-surface">{{ title }}</span>
+</div>
+<div class="flex justify-between items-center border-b border-outline-variant pb-3">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Timestamp</span>
+<span class="font-body-md text-body-md text-on-surface" id="current-time">{{ now_utc }}</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Reference ID</span>
+<span class="font-body-md text-body-md font-bold text-primary tracking-widest bg-secondary-container px-2 py-1 rounded-sm">{{ code }}-{{ g.request_id[:8] if g.request_id else 'UNKNOWN' }}</span>
+</div>
+</div>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg mx-auto">
+                    {{ message }}
+                </p>
+<!-- Actions -->
+<div class="flex flex-col md:flex-row gap-gutter justify-center items-center">
+<a href="{{ url_for('public.contact') }}" class="w-full md:w-auto px-10 py-4 bg-primary text-on-primary font-headline-md text-headline-md rounded-sm hover:bg-on-surface-variant transition-all active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">send</span>
+                        Lodge Official Appeal
+                    </a>
+<a href="{{ url_for('public.contact') }}" class="w-full md:w-auto px-10 py-4 border-2 border-primary text-primary font-headline-md text-headline-md rounded-sm hover:bg-surface-container-highest transition-all active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">support_agent</span>
+                        Contact Support
+                    </a>
+</div>
+</div>
+<!-- Footer Message -->
+<div class="mt-12 text-center">
+<p class="font-support-sm text-support-sm text-on-surface-variant opacity-60 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined !text-[16px]">verified_user</span>
+                    Secured by National Cybersecurity Agency (ANSI) &amp; Ministry of Justice
+                </p>
+</div>
+</div>
+</main>
+<!-- Sign Language Module (Accessibility) -->
+<div class="fixed bottom-margin-desktop right-margin-desktop z-[100] group">
+<div class="glass-panel rounded-xl p-2 border-2 border-secondary-container shadow-2xl relative overflow-hidden w-48 h-64 md:w-56 md:h-72">
+<div class="absolute top-2 left-2 z-10">
+<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">Live Interpreter</span>
+</div>
+<div class="w-full h-full bg-on-surface rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover" alt="A professional sign language interpreter, an elegant woman in a dark corporate blazer, performing Tunisian Sign Language" src="{{ url_for('static', filename='img/img-5006c6991848.jpg') }}"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent"></div>
+<!-- Controls -->
+<div class="absolute bottom-2 left-0 w-full flex justify-center gap-2">
+<button class="w-8 h-8 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-secondary-container transition-colors" data-action="a11y-play" type="button">
+<span class="material-symbols-outlined !text-[18px]">play_arrow</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-secondary-container transition-colors" data-action="a11y-expand" type="button">
+<span class="material-symbols-outlined !text-[18px]">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Security Overlay Interaction -->
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/error_blocked.js') }}" defer></script>
+{% endblock %}

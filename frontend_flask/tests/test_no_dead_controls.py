@@ -55,6 +55,33 @@ def test_no_csp_violating_constructs(path: pathlib.Path) -> None:
     )
 
 
+def test_every_data_action_has_a_handler() -> None:
+    """A data-action nobody dispatches is a button that does nothing.
+
+    test_every_button_does_something only checks the attribute is present, so
+    without this a typo — or a control ported from a mockup whose handler was
+    never written — passes as "wired" while doing nothing when clicked.
+    """
+    root = pathlib.Path(__file__).resolve().parents[1]
+    handlers = "".join(
+        p.read_text() for p in sorted(root.joinpath("static/js").rglob("*.js"))
+    )
+    # A handler is registered either as a quoted key ("a11y-play": ...) — the
+    # only form hyphenated names can take — or as a bare identifier key, or by
+    # aliasing an existing one (ACTIONS.menu = ACTIONS.toggle).
+    handled = set(re.findall(r"""["']([a-z0-9-]+)["']""", handlers))
+    handled |= set(re.findall(r"\b([a-z][a-z0-9]*)\s*:\s*function", handlers))
+    handled |= set(re.findall(r"ACTIONS\.([a-z0-9]+)\s*=", handlers))
+
+    used = {
+        action
+        for path in TEMPLATES
+        for action in re.findall(r'data-action="([a-z0-9-]+)"', path.read_text())
+    }
+    unhandled = sorted(used - handled)
+    assert not unhandled, f"data-action values no JavaScript dispatches: {unhandled}"
+
+
 def test_rendered_pages_carry_no_remote_assets(client: Any, citizen: Any) -> None:
     """Belt and braces: check the rendered output, not just the sources."""
     pages = ["/", "/login", "/services", "/register", "/track", "/about"]

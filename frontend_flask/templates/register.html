@@ -1,87 +1,266 @@
-{% extends "_page.html" %}
-
-{% block title %}Watiq National Portal - Create Account{% endblock %}
-
-{% block page %}
-<section class="max-w-2xl mx-auto">
-<div class="bg-surface-container-lowest rounded-xl p-8 md:p-10 border border-surface-variant">
-<div class="text-center mb-8">
-<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Create your account</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Register with your national ID (CIN) to access government services.</p>
+{% extends 'base.html' %}
+{% set html_class = 'light tk-citizen-registration' %}
+{% block title %}Watiq | Citizen Registration - Sovereign Institutional Pro{% endblock %}
+{% block body_class %}bg-background text-on-surface flex flex-col min-h-screen relative selection:bg-tertiary/20{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/register.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<!-- Watermark Background -->
+<img alt="Tunisian National Emblem Watermark" class="watermark" src="{{ url_for('static', filename='img/img-2bb77862248b.jpg') }}"/>
+<!-- TSL Component -->
+<div class="tsl-video-container group cursor-pointer">
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-all flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-white text-5xl opacity-0 group-hover:opacity-100 transition-opacity">play_circle</span>
 </div>
-
-<form action="{{ url_for('public.register') }}" class="space-y-6" method="post" novalidate>
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
-
-<div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="national_id">National ID (CIN)</label>
-<div class="relative focus-ring rounded">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant">badge</span>
+<img alt="Tunisian Sign Language Interpreter" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<div class="absolute bottom-2 left-3 z-20">
+<span class="text-[10px] bg-primary text-white px-2 py-0.5 rounded font-bold uppercase tracking-widest">TSL Mode</span>
 </div>
-<input aria-describedby="cin-hint" aria-required="true" class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md" id="national_id" inputmode="numeric" maxlength="8" name="national_id" pattern="[0-9]{8}" placeholder="8-digit ID number" required="" type="text" value="{{ form.get('national_id', '') }}"/>
 </div>
-<p class="font-label-sm text-label-sm text-on-surface-variant mt-1" id="cin-hint">Exactly 8 digits, as printed on your CIN.</p>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="first_name">First name</label>
-<input aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="first_name" maxlength="100" name="first_name" required="" type="text" value="{{ form.get('first_name', '') }}"/>
+<!-- TopNavBar -->
+<header class="bg-primary border-b border-white/10 z-50 sticky top-0 h-20 flex items-center shadow-lg">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<div class="w-11 h-11 bg-white/5 flex items-center justify-center rounded-lg border border-white/10">
+<span class="icon-filled material-symbols-outlined text-secondary text-2xl">account_balance</span>
 </div>
 <div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="last_name">Last name</label>
-<input aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="last_name" maxlength="100" name="last_name" required="" type="text" value="{{ form.get('last_name', '') }}"/>
+<h1 class="text-2xl font-bold text-white tracking-tight">Watiq <span class="text-secondary font-light">Pro</span></h1>
+<p class="text-[10px] uppercase tracking-widest text-white/50 font-bold">Republic of Tunisia</p>
 </div>
 </div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="hidden md:flex gap-10 items-center">
+<nav class="flex gap-8">
+<a class="text-sm font-semibold text-white/80 hover:text-white transition-colors" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
+<a class="text-sm font-semibold text-white/80 hover:text-white transition-colors" href="{{ url_for('public.services', category='identity') }}">Identity</a>
+<a class="text-sm font-semibold text-white/80 hover:text-white transition-colors" href="{{ url_for('public.services', category='justice') }}">Justice</a>
+</nav>
+<div class="h-6 w-[1px] bg-white/20"></div>
+<a href="{{ url_for('public.login', staff=1) }}" class="text-xs font-bold text-secondary border border-secondary px-6 py-2.5 rounded hover:bg-secondary hover:text-white transition-all uppercase tracking-widest">Staff Access</a>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-desktop py-12">
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Sidebar (3 columns) -->
+<aside class="col-span-12 lg:col-span-3 space-y-6">
+<div class="bg-primary p-7 rounded-xl border border-white/10 shadow-xl overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl text-white">security</span>
+</div>
+<div class="flex items-center gap-2 mb-8">
+<span class="icon-filled material-symbols-outlined text-secondary">verified_user</span>
+<h2 class="text-xs font-bold text-secondary uppercase tracking-[0.2em]">Security Core</h2>
+</div>
+<ul class="space-y-6">
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary text-xl">sync</span>
 <div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="email">Email <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
-<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="email" name="email" type="email" value="{{ form.get('email', '') }}"/>
+<p class="text-[13px] text-white font-semibold">National Registry Sync</p>
+<p class="text-[11px] text-white/50 leading-relaxed mt-1">Direct verification with sovereign database v4.2 active.</p>
 </div>
+</li>
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-tertiary text-xl">key</span>
 <div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="phone">Phone <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
-<input aria-describedby="phone-hint" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="phone" name="phone" pattern="\+216[0-9]{8}" placeholder="+216XXXXXXXX" type="tel" value="{{ form.get('phone', '') }}"/>
-<p class="font-label-sm text-label-sm text-on-surface-variant mt-1" id="phone-hint">Tunisian number in +216 format.</p>
+<p class="text-[13px] text-white font-semibold">Quantum Encryption</p>
+<p class="text-[11px] text-white/50 leading-relaxed mt-1">End-to-end institutional grade protocols enabled.</p>
 </div>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+</li>
+</ul>
+<div class="mt-8 pt-6 border-t border-white/10">
+<div class="bg-white/5 p-4 rounded-lg border border-white/10 flex items-center justify-between">
 <div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="governorate">Governorate <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
-<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="governorate" maxlength="100" name="governorate" type="text" value="{{ form.get('governorate', '') }}"/>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-wider">Cloud Secured</p>
+<p class="text-[9px] text-white/30 font-mono mt-1">TN-PRIME-0922</p>
 </div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="city">City <span class="text-on-surface-variant font-body-sm">(optional)</span></label>
-<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="city" maxlength="100" name="city" type="text" value="{{ form.get('city', '') }}"/>
+<span class="material-symbols-outlined text-secondary/50">verified</span>
 </div>
 </div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="password">Password</label>
-<input aria-describedby="pw-hint" aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="password" minlength="8" name="password" required="" type="password"/>
-<p class="font-label-sm text-label-sm text-on-surface-variant mt-1" id="pw-hint">At least 8 characters.</p>
 </div>
-<div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="password_confirm">Confirm password</label>
-<input aria-required="true" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="password_confirm" minlength="8" name="password_confirm" required="" type="password"/>
+<div class="sovereign-card rounded-xl overflow-hidden h-44 shadow-lg flex flex-col group cursor-pointer">
+<div class="flex-grow overflow-hidden relative">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="{{ url_for('static', filename='img/img-e901e0e5ef46.jpg') }}"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+</div>
+<div class="p-4 bg-primary text-white">
+<p class="font-bold text-sm tracking-tight">Institutional Excellence</p>
+<p class="text-secondary text-[10px] font-medium uppercase tracking-widest mt-1">State Infrastructure</p>
 </div>
 </div>
-
-<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-3 px-4 rounded hover:bg-primary transition-colors focus-ring flex justify-center items-center group" type="submit">
-                    Create account
-                    <span aria-hidden="true" class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</aside>
+<!-- Registration Container (9 columns) -->
+<section class="col-span-12 lg:col-span-9 space-y-gutter">
+<!-- Stepper -->
+<div class="bg-white border border-outline-variant p-8 rounded-xl flex justify-between items-center shadow-sm">
+<div class="flex items-center gap-12 w-full max-w-2xl mx-auto">
+<div class="flex flex-col items-center gap-3 flex-1 relative" data-action="step-goto" data-step="1">
+<div class="w-12 h-12 rounded-full flex items-center justify-center text-white bg-primary border-2 border-secondary shadow-lg z-10 transition-all cursor-pointer" id="step-1-indicator">1</div>
+<span class="text-[11px] font-extrabold text-primary uppercase tracking-widest" id="step-1-label">Identity</span>
+<div class="absolute top-6 left-1/2 w-full h-[1px] bg-outline-variant -z-0 ml-6 hidden md:block"></div>
+</div>
+<div class="flex flex-col items-center gap-3 flex-1 relative" data-action="step-goto" data-step="2">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-white text-primary border border-outline-variant z-10 transition-all cursor-pointer" id="step-2-indicator">2</div>
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest" id="step-2-label">Contact</span>
+<div class="absolute top-6 left-1/2 w-full h-[1px] bg-outline-variant -z-0 ml-6 hidden md:block"></div>
+</div>
+<div class="flex flex-col items-center gap-3 flex-1 relative" data-action="step-goto" data-step="3">
+<div class="w-12 h-12 rounded-full flex items-center justify-center bg-white text-primary border border-outline-variant z-10 transition-all cursor-pointer" id="step-3-indicator">3</div>
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest" id="step-3-label">Security</span>
+</div>
+</div>
+</div>
+{#- One real form spanning all three steps. The server renders every step
+    visible and the button as a submit, so registration works with JavaScript
+    off; register.js then collapses it into the designed wizard. -#}
+<!-- Form Content Area -->
+<form action="{{ url_for('public.register') }}" class="sovereign-card p-12 rounded-xl min-h-[520px] flex flex-col" id="register-form" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+{% include 'partials/_flash.html' %}
+<!-- Step 1: Identity -->
+<div class="step-content" id="form-step-1">
+<div class="mb-12">
+<h2 class="text-4xl font-extrabold text-primary tracking-tight mb-4">Identity Verification</h2>
+<p class="text-on-surface-variant text-lg max-w-2xl">Verify your official credentials against the National Identification Registry to proceed.</p>
+</div>
+{#- The mockup had a single "Full Legal Name" box, but the API takes
+    first_name and last_name separately and splitting a free-text name
+    server-side is guesswork for anyone with more than two names. -#}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="space-y-4">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="last_name">Family Name (Latin)</label>
+<div class="relative group">
+<input autocomplete="family-name" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary focus:border-tertiary transition-all font-medium text-on-surface placeholder:text-on-surface-variant/40" id="last_name" name="last_name" placeholder="e.g. SELMI" required type="text" value="{{ form.get('last_name', '') }}">
+<span class="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-secondary opacity-40 group-focus-within:opacity-100 transition-opacity">verified</span>
+</div>
+</div>
+<div class="space-y-4">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="first_name">Given Name(s) (Latin)</label>
+<div class="relative group">
+<input autocomplete="given-name" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary focus:border-tertiary transition-all font-medium text-on-surface placeholder:text-on-surface-variant/40" id="first_name" name="first_name" placeholder="e.g. MOHAMED AMINE" required type="text" value="{{ form.get('first_name', '') }}">
+<span class="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-secondary opacity-40 group-focus-within:opacity-100 transition-opacity">verified</span>
+</div>
+</div>
+<div class="space-y-4 md:col-span-2">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="national_id">National ID Number (CIN)</label>
+<div class="relative group">
+<input class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary focus:border-tertiary transition-all font-mono tracking-widest text-on-surface placeholder:text-on-surface-variant/40" id="national_id" inputmode="numeric" name="national_id" placeholder="8-digit identity code" required type="text" value="{{ form.get('national_id', '') }}">
+<span class="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-secondary opacity-40 group-focus-within:opacity-100 transition-opacity">fingerprint</span>
+</div>
+</div>
+</div>
+<div class="mt-12 p-6 bg-surface-container-high border-l-4 border-l-secondary rounded-r-lg flex gap-5 items-start">
+<span class="material-symbols-outlined text-secondary text-2xl">info</span>
+<div class="text-sm text-on-surface leading-relaxed">
+<strong class="text-primary font-bold">Institutional Notice:</strong> Your identity data is synchronized directly with the Ministry of Interior. Any discrepancies will require a manual update request at a regional office as per the Digital Sovereignty Act.
+                            </div>
+</div>
+</div>
+<!-- Step 2: Contact -->
+<div class="step-content" id="form-step-2">
+<div class="mb-12">
+<h2 class="text-4xl font-extrabold text-primary tracking-tight mb-4">Contact Information</h2>
+<p class="text-on-surface-variant text-lg">Provide authenticated communication channels for secure transaction updates.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="space-y-4">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="email">Secure Email Address</label>
+<input autocomplete="email" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary transition-all" id="email" name="email" placeholder="user@watiq.tn" type="email" value="{{ form.get('email', '') }}">
+</div>
+<div class="space-y-4">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="phone">Verified Phone Number</label>
+<input autocomplete="tel" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary transition-all" id="phone" name="phone" placeholder="+216 -- --- ---" type="tel" value="{{ form.get('phone', '') }}">
+</div>
+</div>
+</div>
+<!-- Step 3: Security -->
+<div class="step-content" id="form-step-3">
+<div class="mb-12">
+<h2 class="text-4xl font-extrabold text-primary tracking-tight mb-4">Security Credentials</h2>
+<p class="text-on-surface-variant text-lg">Establish your high-security access credentials for the sovereign portal.</p>
+</div>
+<div class="max-w-xl space-y-8">
+<div class="space-y-4">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="password">Secure Master Password</label>
+<input autocomplete="new-password" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary transition-all" id="password" name="password" placeholder="••••••••••••••••" required type="password">
+</div>
+<div class="space-y-4">
+<label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="password_confirm">Confirm Master Password</label>
+<input autocomplete="new-password" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary transition-all" id="password_confirm" name="password_confirm" placeholder="••••••••••••••••" required type="password">
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-auto pt-12 flex justify-between items-center">
+<button class="invisible text-xs font-extrabold text-primary px-10 py-4 rounded-lg border border-primary/20 hover:bg-primary/5 transition-all flex items-center gap-2 uppercase tracking-widest" id="back-btn" data-action="step-prev">
+<span class="material-symbols-outlined text-sm">arrow_back</span> Back
+                        </button>
+<div class="flex items-center gap-6">
+<p class="text-[11px] text-on-surface-variant font-semibold uppercase tracking-wider hidden sm:block">Step <span id="current-step-text">1</span> of 3</p>
+<button class="text-xs font-extrabold text-white bg-primary px-12 py-5 rounded-lg border border-secondary shadow-xl hover:brightness-110 active:scale-[0.98] transition-all flex items-center gap-3 uppercase tracking-[0.2em]" id="next-btn" data-action="step-next">
+                                Next Step <span class="material-symbols-outlined text-secondary">arrow_forward</span>
 </button>
+</div>
+</div>
 </form>
-
-<div class="mt-8 pt-6 border-t border-outline-variant/30 text-center">
-<p class="font-body-md text-body-md text-on-surface-variant">
-                    Already have an account?
-                    <a class="font-label-md text-label-md text-secondary hover:text-secondary-fixed transition-colors focus-ring rounded-DEFAULT" href="{{ url_for('public.login') }}">Sign in</a>
-</p>
-</div>
-</div>
 </section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary border-t-4 border-secondary mt-24">
+<div class="max-w-container-max mx-auto px-margin-desktop py-20">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-16">
+<div class="md:col-span-4 space-y-8">
+<div class="flex items-center gap-4">
+<span class="icon-filled material-symbols-outlined text-secondary text-4xl">security</span>
+<h3 class="text-3xl font-extrabold text-white tracking-tight">Watiq <span class="text-secondary">Pro</span></h3>
+</div>
+<p class="text-white/60 text-sm leading-relaxed max-w-sm">
+                        The unified national portal for citizen identity and secure institutional services. Governed by the principles of digital sovereignty and data integrity.
+                    </p>
+<div class="flex items-center gap-8 pt-4">
+<p class="text-[10px] text-white/30 uppercase tracking-[0.3em] font-bold">© {{ year }} Tunisian Republic</p>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-secondary rounded-full animate-pulse"></div>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-widest">Sovereign Encryption Active</p>
+</div>
+</div>
+</div>
+<div class="md:col-span-8 grid grid-cols-2 lg:grid-cols-3 gap-12">
+<div class="space-y-6">
+<h4 class="text-[11px] font-extrabold text-secondary uppercase tracking-[0.2em]">Governance</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest" href="{{ url_for('public.terms') }}">Security Protocols</a>
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest" href="{{ url_for('public.privacy') }}">Privacy Hub</a>
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest" href="{{ url_for('public.terms') }}">Legal Notice</a>
+</nav>
+</div>
+<div class="space-y-6">
+<h4 class="text-[11px] font-extrabold text-secondary uppercase tracking-[0.2em]">Resources</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest" href="{{ url_for('public.help_page') }}">User Manuals</a>
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest" href="{{ url_for('public.open_data') }}">Developer API</a>
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest" href="{{ url_for('public.contact') }}">Support Center</a>
+</nav>
+</div>
+<div class="space-y-6">
+<h4 class="text-[11px] font-extrabold text-secondary uppercase tracking-[0.2em]">Institutional</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest" href="{{ url_for('citizen.requests_list') }}">National Archive</a>
+<a class="text-white/50 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest underline decoration-secondary underline-offset-8" href="{{ url_for('public.accessibility') }}">Accessibility</a>
+<div class="pt-4 flex gap-4">
+<span class="material-symbols-outlined text-white/40 hover:text-secondary cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-white/40 hover:text-secondary cursor-pointer transition-colors">shield</span>
+</div>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</footer>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/register.js') }}" defer></script>
 {% endblock %}

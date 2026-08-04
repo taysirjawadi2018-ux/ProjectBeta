@@ -6,8 +6,14 @@
  * (default-src 'none'; script-src 'self'; style-src 'self') rejects:
  *
  *   1. cdn.tailwindcss.com          -> the @tailwind directives below
- *   2. fonts.googleapis.com CSS     -> the @font-face rules below
+ *   2. fonts.googleapis.com CSS     -> _fonts.css
  *   3. fonts.gstatic.com woff2      -> static/fonts/*.woff2
+ *
+ * Both imports are generated; regenerate them with `npm run assets` rather
+ * than editing them:
+ *
+ *   _fonts.css   tools/vendor_assets.py  (self-hosted @font-face rules)
+ *   _tokens.css  tools/build_tokens.py   (design tokens + per-page overrides)
  *
  * Rules that belong to ONE page live in static/css/pages/<page>.css and are
  * linked from that page's `page_style` block. They are deliberately not merged
@@ -15,58 +21,23 @@
  * .interpreter-overlay carries `display: none`, notification_center's does
  * not), so merging them would change how those pages render.
  */
-
-/* --- Public Sans -----------------------------------------------------------
- * One variable font (wght 100..900) covers all four weights the design uses;
- * Google serves the identical file for 400/500/600/700, so it is stored once.
- * The unicode-range split is preserved so latin-ext is only fetched when a
- * page actually contains those characters (French accents, Arabic transliteration).
- */
-@font-face {
-  font-family: 'Public Sans';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('../fonts/public-sans-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
-    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
-    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Public Sans';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('../fonts/public-sans-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-/* --- Material Symbols Outlined ---------------------------------------------
- * Subsetted to the 81 icons the twelve screens actually reference (26 KB vs
- * ~3.5 MB for the full face). The FILL 0..1 and wght 100..700 axes are
- * preserved because pages vary them via font-variation-settings.
- *
- * Regenerate with the icon list in `npm run icons` if a new icon is added —
- * an icon outside the subset renders as its literal ligature text.
- */
-@font-face {
-  font-family: 'Material Symbols Outlined';
-  font-style: normal;
-  font-weight: 100 700;
-  font-display: block;
-  src: url('../fonts/material-symbols-outlined.woff2') format('woff2');
-}
+@import "_fonts.css";
+@import "_tokens.css";
 
 @tailwind base;
 @tailwind components;
 
 @layer base {
+  /* The mockups all set this on <body>; doing it here means a template that
+   * forgets the class still gets the right face rather than Times. */
+  body {
+    font-family: var(--w-ff-body-md);
+    background-color: rgb(var(--w-c-background));
+    color: rgb(var(--w-c-on-surface));
+  }
+
   /* The Google Fonts stylesheet shipped this rule for every page that loaded
-   * it; self-hosting means declaring it once here. submit_request.html carried
-   * an identical copy inline, which its page stylesheet still repeats
-   * harmlessly. */
+   * it; self-hosting means declaring it once here. */
   .material-symbols-outlined {
     font-family: 'Material Symbols Outlined';
     font-weight: normal;
@@ -82,15 +53,34 @@
     -webkit-font-feature-settings: 'liga';
     font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
 
-  /* Six icons across four pages carried style="font-variation-settings: 'FILL' 1"
-   * inline. An inline style attribute is blocked by style-src just as a <style>
-   * block is, so it became this class. staff_workbench.css overrides it with the
-   * four-axis variant its mockup used. */
+  /* Two mockups (the B3 application and the maintenance page) set the weight
+   * axis to 300 for a lighter institutional look. */
+  .icons-w300 .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* Icons the mockups filled with an inline
+   * style="font-variation-settings: 'FILL' 1". An inline style attribute is
+   * blocked by style-src just as a <style> block is, so it became a class. */
   .material-symbols-outlined.icon-filled {
-    font-variation-settings: 'FILL' 1;
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .icons-w300 .material-symbols-outlined.icon-filled {
+    font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
   }
 }
 
 @tailwind utilities;
+
+@layer utilities {
+  /* Keyboard focus ring. The mockups relied on the Play CDN's default ring;
+   * spelling it out keeps focus visible against both the light surfaces and
+   * the navy staff screens. */
+  .focus-ring:focus-visible {
+    outline: 2px solid rgb(var(--w-c-secondary));
+    outline-offset: 2px;
+  }
+}

@@ -1,179 +1,250 @@
-{% extends "base.html" %}
-{% set html_class = 'light' %}
-
-{% block title %}Birth Certificate Request - Watiq{% endblock %}
-{% block body_class %}min-h-screen flex flex-col font-body-md text-body-md bg-background{% endblock %}
-
+{% extends 'base.html' %}
+{% set html_class = 'light tk-crimanel-record-b3-application icons-w300' %}
+{% block title %}Demande d'Extrait de Casier Judiciaire (B3) - République Tunisienne{% endblock %}
+{% block body_class %}bg-background text-on-surface{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/submit_request.css') }}" rel="stylesheet"/>
 {% endblock %}
-
 {% block content %}
+<!-- National Watermark -->
+<div class="national-watermark">
+<img class="w-full h-full object-contain" alt="A highly detailed, high-fidelity technical rendering of the Tunisian National Emblem used as a watermark." src="{{ url_for('static', filename='img/img-b4cb8bfb107d.jpg') }}"/>
+</div>
 <!-- TopNavBar -->
-<nav class="bg-surface border-b border-outline-variant docked full-width top-0 w-full z-50">
-<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
+<header class="bg-surface sticky top-0 z-50 border-b border-outline-variant shadow-sm h-20">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
 <div class="flex items-center gap-4">
-<span class="text-headline-md font-headline-md font-bold text-primary">Watiq</span>
+<span class="font-headline-md text-headline-md text-primary uppercase tracking-wider">République Tunisienne</span>
 </div>
-<div class="hidden md:flex items-center gap-6 text-label-md font-label-md">
-<a class="text-primary border-b-2 border-primary pb-1 opacity-80 transition-all duration-200" href="{{ url_for('public.services') }}">Services</a>
-<a class="text-secondary font-label-md hover:text-primary transition-colors" href="{{ url_for('citizen.requests_list') }}">My Requests</a>
-<a class="text-secondary font-label-md hover:text-primary transition-colors" href="{{ url_for('citizen.book_appointment') }}">Appointments</a>
-</div>
-<div class="flex items-center gap-4">
-<button aria-label="Accessibility Narration" class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center" data-action="a11y-narration" type="button">
-<span class="material-symbols-outlined">record_voice_over</span>
-</button>
-<button aria-label="Sign Language Interpreter" class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center" data-action="a11y-interpreter" type="button">
-<span class="material-symbols-outlined">interpreter_mode</span>
-</button>
-<button aria-label="Language" class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors flex items-center justify-center" data-action="language" type="button">
-<span class="material-symbols-outlined">language</span>
-</button>
-<img alt="National Crest of Tunisia" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="The national crest of Tunisia, featuring a ship, lion, and balance scales in a circular emblem on a pure white background, brightly lit to show crisp details." src="{{ url_for('static', filename='img/img-66909a21b38d.jpg') }}"/>
-</div>
-</div>
+<nav class="hidden md:flex items-center gap-8 font-label-md text-label-md">
+<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="{{ url_for('public.services', category='identity') }}">Identity</a>
+<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='justice') }}">Justice</a>
+<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='admin') }}">Admin</a>
 </nav>
-<!-- Main Content Canvas -->
-<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-8">
-<div class="mb-8">
-<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-on-surface mb-2">Birth Certificate Request</h1>
-<p class="text-body-lg font-body-lg text-on-surface-variant">Complete the steps below to securely request an official birth certificate copy.</p>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 relative">
-<!-- Left Column: Form & Stepper -->
-<div class="lg:col-span-8 flex flex-col gap-6">
-<!-- Stepper -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 w-full card-interactive transition-all">
-<div class="flex items-center justify-between w-full">
-<div class="flex flex-col items-center flex-1 relative">
-<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center text-label-md font-label-md z-10 mb-2">1</div>
-<span class="text-label-sm font-label-sm text-primary">Personal Info</span>
-<div class="absolute top-4 left-1/2 w-full h-0.5 bg-primary -z-0"></div>
-</div>
-<div class="flex flex-col items-center flex-1 relative">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-label-md font-label-md z-10 mb-2 border border-surface-variant">2</div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Details</span>
-<div class="absolute top-4 left-1/2 w-full h-0.5 bg-surface-variant -z-0"></div>
-</div>
-<div class="flex flex-col items-center flex-1 relative">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-label-md font-label-md z-10 mb-2 border border-surface-variant">3</div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Upload</span>
-<div class="absolute top-4 left-1/2 w-full h-0.5 bg-surface-variant -z-0"></div>
-</div>
-<div class="flex flex-col items-center flex-1">
-<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-label-md font-label-md z-10 mb-2 border border-surface-variant">4</div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Review</span>
+<div class="flex items-center gap-4">
+<a href="{{ url_for('public.index') }}" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+</a>
+<a href="{{ url_for('citizen.notifications') }}" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</a>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" alt="A professional, high-quality corporate headshot of a person with a neutral, calm expression, representing a Citizen Prof" src="{{ url_for('static', filename='img/img-71d688a49052.jpg') }}"/>
 </div>
 </div>
 </div>
-<!-- Form Section: Personal Info -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 w-full card-interactive transition-all">
-<h2 class="text-headline-sm font-headline-sm text-on-background border-b border-surface-variant pb-4 mb-6">Step 1: Personal Information</h2>
-<form action="{{ url_for('citizen.submit_request') }}" class="flex flex-col gap-6" enctype="multipart/form-data" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
-{#- The mockup carried onsubmit="event.preventDefault()", which both blocked
-    submission and violates script-src 'self'. The form now posts for real. -#}
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="flex flex-col gap-2">
-<label class="text-label-md font-label-md text-on-surface" for="firstName">First Name (As it appears on ID)</label>
-<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="firstName" name="firstName" placeholder="e.g., Ahmed" required="" type="text"/>
+</header>
+<main class="relative z-10 max-w-[1000px] mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Header & Breadcrumbs -->
+<div class="mb-12">
+<div class="flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant mb-4 uppercase">
+<a class="hover:text-primary" href="{{ url_for('public.services', category='justice') }}">E-Justice</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Extrait de Casier Judiciaire (B3)</span>
 </div>
-<div class="flex flex-col gap-2">
-<label class="text-label-md font-label-md text-on-surface" for="lastName">Last Name</label>
-<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="lastName" name="lastName" placeholder="e.g., Trabelsi" required="" type="text"/>
+<h1 class="font-headline-lg text-headline-lg mb-4">Demande de Bulletin N°3</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                Plateforme officielle de demande d'extrait de casier judiciaire. Ce service sécurisé permet aux citoyens tunisiens d'obtenir leur document légal par voie postale.
+            </p>
+</div>
+<!-- Progress Stepper -->
+<div class="flex items-center justify-between mb-16 px-4">
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-10 h-10 rounded-sm bg-primary text-on-primary flex items-center justify-center font-bold">1</div>
+<span class="font-label-caps text-label-caps text-primary">Identité</span>
+</div>
+<div class="step-line step-line-active mx-4 mb-6"></div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-10 h-10 rounded-sm border-2 border-outline-variant text-outline-variant flex items-center justify-center font-bold">2</div>
+<span class="font-label-caps text-label-caps text-outline-variant">Objet</span>
+</div>
+<div class="step-line mx-4 mb-6"></div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-10 h-10 rounded-sm border-2 border-outline-variant text-outline-variant flex items-center justify-center font-bold">3</div>
+<span class="font-label-caps text-label-caps text-outline-variant">Livraison</span>
 </div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="flex flex-col gap-2">
-<label class="text-label-md font-label-md text-on-surface" for="dob">Date of Birth</label>
-<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="dob" name="dob" required="" type="date"/>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Form Section -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Institutional Notice -->
+<div class="bg-surface-container-high p-6 rounded-xl border border-primary/5 flex gap-4">
+<span class="icon-filled material-symbols-outlined text-primary" data-icon="gavel">gavel</span>
+<div>
+<h4 class="font-label-caps text-label-caps text-primary mb-1">Avis Institutionnel</h4>
+<p class="font-support-sm text-support-sm text-on-surface-variant">
+                            Conformément à la réglementation en vigueur, toute demande fait l'objet d'une vérification judiciaire rigoureuse. Les délais de traitement varient entre 24h et 72h ouvrables.
+                        </p>
 </div>
-<div class="flex flex-col gap-2">
-<label class="text-label-md font-label-md text-on-surface" for="nationalId">National ID Number (CIN)</label>
-<input class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0" id="nationalId" name="nationalId" pattern="\d{8}" placeholder="8 digits" required="" type="text"/>
 </div>
-</div>
-<div class="flex flex-col gap-2">
-<label class="text-label-md font-label-md text-on-surface" for="birthPlace">Place of Birth (Municipality)</label>
-<select class="w-full bg-surface border border-outline-variant rounded p-3 text-body-md focus:border-primary-container focus:ring-0 appearance-none" id="birthPlace" name="birthPlace" required="">
-<option disabled="" selected="" value="">Select Municipality...</option>
-<option value="tunis">Tunis</option>
-<option value="sfax">Sfax</option>
-<option value="sousse">Sousse</option>
+{% include 'partials/_flash.html' %}
+{#- A request is filed against an office_service_id, which is only listable
+    per office, so the office is picked first in its own GET form and the
+    services for it come back rendered. No JavaScript involved: choosing the
+    office is a normal navigation. -#}
+<!-- Office & Service Selection -->
+<div class="glass-panel p-8 rounded-xl space-y-6">
+<h2 class="font-headline-md text-headline-md mb-6">Bureau et Service</h2>
+<form action="{{ url_for('citizen.submit_request') }}" class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-end" method="get">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="office_id">Bureau compétent</label>
+<select class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary appearance-none cursor-pointer" id="office_id" name="office_id">
+<option value="">— Choisir un bureau —</option>
+{%- for office in offices %}
+<option value="{{ office.id }}"{% if office.id == office_id %} selected{% endif %}>{{ office.name }}{% if office.city %} — {{ office.city }}{% endif %}</option>
+{%- endfor %}
 </select>
 </div>
-<!-- Drag and Drop Example within step for context, normally step 3 -->
-<div class="mt-4 border-t border-surface-variant pt-6 hidden">
-<h3 class="text-label-md font-label-md text-on-surface mb-2">Upload ID Scan (Optional early upload)</h3>
-<div class="w-full border-2 border-dashed border-outline-variant rounded-lg p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-surface-container-low transition-colors bg-surface h-40" id="dropzone">
-<span class="material-symbols-outlined text-tertiary mb-2 text-[32px]">upload_file</span>
-<p class="text-body-md font-body-md text-on-surface-variant">Drag and drop your scanned ID here, or <span class="text-primary font-label-md underline">browse files</span></p>
-<p class="text-label-sm font-label-sm text-outline mt-1">Supported formats: PDF, JPG, PNG (Max 5MB)</p>
+<button class="bg-surface-container-high text-primary border border-outline-variant px-6 py-3 rounded-sm font-label-md text-label-md hover:bg-surface-container-highest transition-all" type="submit">Afficher les services</button>
+</form>
+{%- if office_id %}
+<div class="space-y-2 pt-4 border-t border-outline-variant/30">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="office_service_id">Service demandé</label>
+{%- if office_services %}
+<select class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary appearance-none cursor-pointer" form="request-form" id="office_service_id" name="office_service_id" required>
+<option value="">— Choisir un service —</option>
+{%- for item in office_services %}
+<option value="{{ item.id }}"{% if item.id|string == form.get('office_service_id', '')|string %} selected{% endif %}>{{ item.name }}{% if item.fee_override is not none %} — {{ item.fee_override }} TND{% endif %}</option>
+{%- endfor %}
+</select>
+{%- else %}
+<p class="font-body-md text-body-md text-on-surface-variant">Ce bureau ne propose actuellement aucun service en ligne. Choisissez un autre bureau.</p>
+{%- endif %}
+</div>
+{%- endif %}
+</div>
+<!-- Identity Form Section -->
+<form action="{{ url_for('citizen.submit_request') }}" class="glass-panel p-8 rounded-xl space-y-6" id="request-form" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<input name="office_id" type="hidden" value="{{ office_id or '' }}">
+<h2 class="font-headline-md text-headline-md mb-6">Informations Personnelles</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="cin">Numéro de la CIN</label>
+<input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" id="cin" inputmode="numeric" name="cin" placeholder="00000000" required type="text" value="{{ form.get('cin', (profile.national_id if profile else '') or '') }}">
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="date_de_delivrance">Date de Délivrance</label>
+<input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" id="date_de_delivrance" name="date_de_delivrance" type="date" value="{{ form.get('date_de_delivrance', '') }}">
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="nom_ar">Nom (en arabe)</label>
+<input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" dir="rtl" id="nom_ar" lang="ar" name="nom_ar" placeholder="اللقب" type="text" value="{{ form.get('nom_ar', '') }}">
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="prenom_ar">Prénom (en arabe)</label>
+<input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" dir="rtl" id="prenom_ar" lang="ar" name="prenom_ar" placeholder="الاسم" type="text" value="{{ form.get('prenom_ar', '') }}">
 </div>
 </div>
-<div class="flex justify-end gap-4 mt-6 pt-4 border-t border-surface-variant">
-<a class="px-6 py-2 border border-secondary text-secondary rounded bg-transparent hover:bg-surface-container-low text-label-md font-label-md transition-colors inline-flex items-center" href="{{ url_for('citizen.requests_list') }}">Cancel</a>
-<button class="px-6 py-2 bg-primary text-on-primary rounded hover:bg-surface-tint text-label-md font-label-md transition-colors" type="submit">Next Step</button>
+<div class="pt-6 border-t border-outline-variant/30 space-y-6">
+<h3 class="font-label-caps text-label-caps text-primary">Objet de la demande</h3>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="finalite">Finalité du document</label>
+<select class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary appearance-none cursor-pointer" id="finalite" name="finalite">
+{%- for option in ['Dossier de recrutement', "Création d'entreprise", 'Visa / Immigration', 'Autre usage administratif'] %}
+<option{% if form.get('finalite') == option %} selected{% endif %}>{{ option }}</option>
+{%- endfor %}
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="precisions">Précisions supplémentaires (Champ Sécurisé)</label>
+<textarea class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all resize-none" id="precisions" name="precisions" placeholder="Veuillez préciser l'institution destinataire..." rows="3">{{ form.get('precisions', '') }}</textarea>
+</div>
+</div>
+<div class="flex justify-between items-center pt-8">
+<a href="{{ url_for('citizen.requests_list') }}" class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Retour
+                        </a>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-sm font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-40 disabled:cursor-not-allowed" type="submit"{% if not office_services %} disabled{% endif %}>
+                            Soumettre la demande
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
 </div>
 </form>
 </div>
+<!-- Sidebar Info -->
+<div class="space-y-6">
+<!-- Status Badge -->
+<div class="bg-secondary-fixed text-on-secondary-fixed p-4 rounded-sm flex items-center gap-3">
+<span class="icon-filled material-symbols-outlined">verified_user</span>
+<span class="font-label-caps text-label-caps font-bold">Statut Souverain Vérifié</span>
 </div>
-<!-- Right Column: Sidebar / Payment Summary -->
-<div class="lg:col-span-4">
-<div class="sticky top-24 bg-surface-container-lowest border border-surface-variant rounded-lg p-6 w-full shadow-sm card-interactive transition-all flex flex-col gap-6">
-<div class="flex items-center gap-3 border-b border-surface-variant pb-4">
-<span class="material-symbols-outlined text-secondary text-[28px]">receipt_long</span>
-<h3 class="text-headline-sm font-headline-sm text-on-surface">Payment Summary</h3>
+<!-- Secure Checkbox List -->
+<div class="glass-panel p-6 rounded-xl space-y-4">
+<h4 class="font-label-caps text-label-caps text-primary">Pré-requis</h4>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-support-sm text-support-sm">CIN en cours de validité</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-support-sm text-support-sm">Paiement électronique (Timbre fiscal)</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+<span class="font-support-sm text-support-sm">Adresse de livraison exacte en Tunisie</span>
+</li>
+</ul>
 </div>
-<div class="flex flex-col gap-4">
-<div class="flex justify-between items-center text-body-md font-body-md">
-<span class="text-on-surface-variant">Document Fee</span>
-<span class="text-on-surface font-label-md">3.000 TND</span>
-</div>
-<div class="flex justify-between items-center text-body-md font-body-md">
-<span class="text-on-surface-variant">Processing Fee</span>
-<span class="text-on-surface font-label-md">1.500 TND</span>
-</div>
-<div class="flex justify-between items-center text-body-md font-body-md">
-<span class="text-on-surface-variant">Stamp Duty</span>
-<span class="text-on-surface font-label-md">0.500 TND</span>
-</div>
-<div class="border-t border-surface-variant pt-4 flex justify-between items-center">
-<span class="text-label-md font-label-md text-on-surface">Total Estimated</span>
-<span class="text-headline-sm font-headline-sm text-primary">5.000 TND</span>
-</div>
-</div>
-<div class="bg-surface-container-low p-4 rounded text-label-sm font-label-sm text-on-surface-variant flex gap-2">
-<span class="material-symbols-outlined text-secondary text-[16px]">info</span>
-<p>Payment is collected at the final step after document verification.</p>
-</div>
+<!-- Help Center Card -->
+<div class="bg-primary-container p-6 rounded-xl text-on-primary">
+<h4 class="font-label-caps text-label-caps mb-2 opacity-80">Besoin d'assistance ?</h4>
+<p class="font-support-sm text-support-sm mb-4 opacity-90">Nos agents sont disponibles pour vous guider dans votre démarche administrative.</p>
+<a href="{{ url_for('public.contact') }}" class="w-full bg-white text-primary py-3 rounded-sm font-label-md text-label-md hover:bg-opacity-90 transition-all">
+                        Contacter le support
+                    </a>
 </div>
 </div>
 </div>
 </main>
-<!-- Footer -->
-<footer class="bg-on-background w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center mt-auto border-t-[8px] border-secondary">
-<div class="flex flex-col items-center md:items-start gap-2 mb-4 md:mb-0">
-<span class="text-headline-sm font-headline-sm text-on-primary">Watiq</span>
-<p class="text-body-md font-body-md text-on-primary">© {{ year }} Tunisian Government. Watiq National Portal.</p>
+<!-- Sign Language Assistant (TSL) -->
+<div class="fixed bottom-8 right-8 z-[100] w-64 md:w-80 group" id="tsl-module">
+<div class="glass-panel rounded-xl overflow-hidden shadow-2xl border-2 border-secondary-fixed/50 hover:border-secondary-fixed transition-all duration-300 transform group-hover:-translate-y-2">
+<div class="relative aspect-video bg-black/10">
+<img class="w-full h-full object-cover" alt="A focused close-up video frame of a professional Tunisian Sign Language interpreter wearing neutral professional attire." src="{{ url_for('static', filename='img/img-c60bf991956e.jpg') }}"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+<span class="text-[10px] font-bold text-white uppercase tracking-widest">TSL Assistant Direct</span>
 </div>
-<div class="flex flex-wrap justify-center gap-6 text-label-sm font-label-sm text-surface-container hover:text-primary-fixed transition-colors">
-<a class="hover:text-primary-fixed transition-colors text-surface-container" href="{{ url_for('public.terms') }}">Legal</a>
-<a class="hover:text-primary-fixed transition-colors text-surface-container" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="hover:text-primary-fixed transition-colors text-surface-container" href="{{ url_for('public.accessibility') }}">Accessibility</a>
-<a class="hover:text-primary-fixed transition-colors text-surface-container" href="{{ url_for('public.contact') }}">Contact Us</a>
+</div>
+<div class="p-3 flex justify-between items-center bg-primary text-white">
+<div class="flex gap-2">
+<button class="p-1 hover:text-secondary-fixed transition-colors" data-action="a11y-play" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+</button>
+<button class="p-1 hover:text-secondary-fixed transition-colors" data-action="a11y-pause" type="button">
+<span class="material-symbols-outlined text-[18px]">pause</span>
+</button>
+</div>
+<button class="flex items-center gap-1 font-label-caps text-[10px] hover:text-secondary-fixed transition-colors" data-action="a11y-expand" type="button">
+<span class="material-symbols-outlined text-[16px]">open_in_full</span>
+                    AGRANDIR
+                </button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-on-surface text-surface-container py-12 mt-20 border-t border-outline">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-surface-container-lowest uppercase tracking-widest">République Tunisienne</span>
+<p class="font-caption text-caption text-surface-container-highest opacity-70">
+                    © {{ year }} République Tunisienne - Portail National des Services
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-6 font-caption text-caption">
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.terms') }}">Terms of Service</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.terms') }}">Security Protocols</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.contact') }}">Contact Support</a>
+</div>
 </div>
 </footer>
-<!-- Interpreter Overlay Slot (Reserved bottom-right) -->
-<div aria-hidden="true" class="fixed bottom-4 right-4 w-[320px] h-[240px] bg-inverse-surface border border-surface-variant rounded shadow-lg overflow-hidden hidden md:block z-50 hidden">
-<!-- Placeholder for interpreter video feed -->
-<div class="w-full h-full flex items-center justify-center text-on-tertiary">
-<span class="material-symbols-outlined mr-2">interpreter_mode</span> Interpreter Feed Offline
-        </div>
-</div>
 {% endblock %}
-
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/pages/submit_request.js') }}" defer></script>
 {% endblock %}

@@ -1,21 +1,32 @@
-/* book_appointment.html — page-scoped rules, lifted verbatim from the mockup's
- * <style> block. Kept in its own file rather than merged into watiq.css:
- * several pages define the same class with different values, so a merge
- * would silently change how they render. theme() calls are resolved to the
- * literal token values the Tailwind build would have produced. */
-
-.step-active { border-color: #b8000d; background-color: #ffdad5; color: #410001; }
-.step-completed { border-color: #4e5e81; background-color: #d8e2ff; color: #081b3a; }
-.step-inactive { border-color: #e9bcb6; background-color: #f7fafc; color: #5f3f3b; }
-
-.card-hover:hover {
-    border-color: #081b3a;
-    border-width: 2px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
-    margin: -1px; /* Offset the 2px border so layout doesn't shift */
-}
-
-.focus-ring:focus-within, .focus-ring:focus {
-    outline: 3px solid #e70013;
-    outline-offset: 3px;
-}
+/* book_appointment.html — rules lifted from frontend/searchabale_appointment_map.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #f8f9ff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .institutional-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+            width: 600px;
+        }
+        .secure-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 27, 61, 0.1), 0 2px 4px -1px rgba(0, 27, 61, 0.06);
+        }
+        .sovereign-header {
+            border-top: 4px solid #001b3d;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }

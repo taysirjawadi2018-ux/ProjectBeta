@@ -1,33 +1,28 @@
-/* submit_request.html — behaviour lifted verbatim from the mockup's inline
- * <script> block. Externalised because the production CSP is
- * script-src 'self' with no 'unsafe-inline', which blocks inline scripts
- * exactly as it blocks inline styles. */
+/* submit_request.html — behaviour lifted from frontend/crimanel_record_B3_application.html.
+ * Inline <script> is blocked by script-src 'self', so it lives here
+ * and is loaded with defer from the page's scripts block.
+ */
+// Simple interaction for form inputs
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('focus', () => {
+                element.parentElement.querySelector('label')?.classList.add('text-primary');
+            });
+            element.addEventListener('blur', () => {
+                element.parentElement.querySelector('label')?.classList.remove('text-primary');
+            });
+        });
 
-// Simple drag and drop visual feedback
-const dropzone = document.getElementById('dropzone');
-if(dropzone) {
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        dropzone.addEventListener(eventName, preventDefaults, false);
-    });
-
-    function preventDefaults (e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropzone.addEventListener(eventName, highlight, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        dropzone.addEventListener(eventName, unhighlight, false);
-    });
-
-    function highlight(e) {
-        dropzone.classList.add('drag-active');
-    }
-
-    function unhighlight(e) {
-        dropzone.classList.remove('drag-active');
-    }
-}
+        // Micro-interaction for TSL module expansion
+        const tslModule = document.getElementById('tsl-module');
+        let isExpanded = false;
+        
+        tslModule.querySelector('button:last-child').addEventListener('click', () => {
+            isExpanded = !isExpanded;
+            if(isExpanded) {
+                tslModule.classList.remove('w-64', 'md:w-80');
+                tslModule.classList.add('w-96', 'md:w-[450px]');
+            } else {
+                tslModule.classList.add('w-64', 'md:w-80');
+                tslModule.classList.remove('w-96', 'md:w-[450px]');
+            }
+        });

@@ -28,13 +28,17 @@ FIXTURES: dict[str, Any] = {
         "last_name": "Ben Salah",
         "email": "amal@example.tn",
     },
+    # StaffMeOut has a single `name` column, unlike the citizen profile —
+    # see backend/app/modules/staff/repository.py _GET_ME.
     "GET /api/v1/staff/me": {
         "id": 7,
-        "first_name": "Karim",
-        "last_name": "Trabelsi",
+        "name": "Karim Trabelsi",
+        "email": "karim@watiq.tn",
         "office_id": 1,
         "office_name": "Tunis Municipality",
         "role_code": "admin",
+        "role_name": "Administrator",
+        "is_active": True,
     },
     "GET /api/v1/staff/me/permissions": {"permissions": ["request.review", "request.assign"]},
     "GET /api/v1/catalog/services": [
@@ -49,7 +53,20 @@ FIXTURES: dict[str, Any] = {
     ],
     "GET /api/v1/catalog/categories": [{"id": 1, "code": "civil", "name": "Civil Status"}],
     "GET /api/v1/catalog/offices": [
-        {"id": 1, "name": "Tunis Municipality", "governorate": "Tunis", "city": "Tunis"}
+        {"id": 1, "name": "Tunis Municipality", "name_fr": "Municipalité de Tunis",
+         "type": "municipality", "governorate": "Tunis", "city": "Tunis",
+         "address": "Place de la Kasbah", "phone": "+216 71 000 000",
+         "email": None, "latitude": None, "longitude": None, "opening_hours": None}
+    ],
+    # OfficeServiceOut: `id` is the office_service_id a request or an
+    # appointment is filed against, and `catalog_id` points back at the service.
+    "GET /api/v1/catalog/offices/1/services": [
+        {"id": 31, "office_id": 1, "catalog_id": 1, "is_available": True,
+         "fee_override": None, "processing_time_override": None, "notes": None,
+         "code": "civil.birth_certificate", "slug": "birth-certificate",
+         "name": "Birth Certificate", "name_fr": "Acte de naissance",
+         "description": None, "base_fee": 5.0, "currency": "TND",
+         "processing_time": 3, "is_digital": True}
     ],
     "GET /api/v1/requests": {
         "items": [
@@ -75,9 +92,14 @@ FIXTURES: dict[str, Any] = {
     "GET /api/v1/requests/11/history": [
         {"status_name": "Submitted", "changed_at": "2026-07-30T09:12:00Z", "note": None}
     ],
+    # DocumentOut carries no URL on purpose — the storage key never crosses the
+    # boundary, so downloads go through GET /documents/{id}/download.
     "GET /api/v1/requests/11/documents": [
-        {"id": 3, "filename": "cin-scan.pdf", "is_verified": None}
+        {"id": 3, "document_type": "National ID scan", "mime_type": "application/pdf",
+         "file_size_bytes": 245760, "status": "pending",
+         "uploaded_at": "2026-07-30T09:12:30Z", "verified_at": None}
     ],
+    "GET /api/v1/documents/3/download": {"presigned_url": "https://storage.example/d/3"},
     "GET /api/v1/requests/office/queue": {
         "items": [
             {
@@ -107,8 +129,10 @@ FIXTURES: dict[str, Any] = {
     },
     "GET /api/v1/appointments/slots": [
         {
+            # office_service_id points at the office_services row (id 31), not
+            # at the catalogue service — same key the booking payload carries.
             "id": 21, "office_id": 1, "office_name": "Tunis Municipality",
-            "governorate": "Tunis", "office_service_id": 1, "slot_date": "2026-08-10",
+            "governorate": "Tunis", "office_service_id": 31, "slot_date": "2026-08-10",
             "time_slot": "09:00–09:30", "capacity": 4, "booked_count": 1, "seats_left": 3,
         }
     ],
@@ -116,15 +140,18 @@ FIXTURES: dict[str, Any] = {
         {"id": 4, "slot_date": "2026-08-10", "time_slot": "09:00–09:30",
          "status": "booked", "service_name": "Birth Certificate"}
     ],
+    # Cursor-paginated, with no total — see NotificationListOut.
     "GET /api/v1/notifications": {
         "items": [
-            {"id": 5, "title": "Your request was received",
-             "body": "We have your birth certificate request.",
-             "created_at": "2026-07-30T09:13:00Z", "is_read": False}
+            {"id": 5, "type": "request_update", "title": "Your request was received",
+             "message": "We have your birth certificate request.",
+             "is_read": False, "request_id": 11, "sent_via": "in_app",
+             "created_at": "2026-07-30T09:13:00Z"}
         ],
-        "total": 1,
+        "next_cursor": "eyJpZCI6NX0",
+        "unread_count": 2,
     },
-    "GET /api/v1/notifications/unread-count": {"count": 2},
+    "GET /api/v1/notifications/unread-count": {"unread_count": 2},
     "GET /api/v1/payments": {
         "items": [
             {"id": 9, "amount": 5.0, "currency": "TND", "status": "completed",
@@ -161,8 +188,28 @@ FIXTURES: dict[str, Any] = {
 }
 
 
+# Every call the BFF makes, so a test can assert on the payload it sent and
+# not just on the page it rendered. Several of the write paths were posting
+# fields the API does not accept, which no render-only test can see.
+SENT: list[dict[str, Any]] = []
+
+
 def _handler(request: httpx.Request) -> httpx.Response:
     key = f"{request.method} {request.url.path}"
+    body: Any = None
+    if request.content:
+        try:
+            body = json.loads(request.content)
+        except ValueError:
+            body = request.content.decode("utf-8", "replace")
+    SENT.append(
+        {
+            "method": request.method,
+            "path": request.url.path,
+            "params": dict(request.url.params),
+            "json": body,
+        }
+    )
     if key in FIXTURES:
         return httpx.Response(200, json=FIXTURES[key])
     if request.method in ("POST", "PATCH", "DELETE"):
@@ -215,6 +262,13 @@ def app(monkeypatch: pytest.MonkeyPatch) -> Any:
 @pytest.fixture()
 def client(app: Any) -> Any:
     return app.test_client()
+
+
+@pytest.fixture()
+def sent(app: Any) -> Any:
+    """The list of upstream API calls made during the test."""
+    SENT.clear()
+    return SENT
 
 
 @pytest.fixture()

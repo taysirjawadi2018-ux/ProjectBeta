@@ -1,23 +1,161 @@
-{% extends "_page.html" %}
-
-{% block title %}Watiq National Portal - Verification{% endblock %}
-
-{% block page %}
-<section class="max-w-md mx-auto">
-<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-variant">
-<div class="text-center mb-8">
-<span aria-hidden="true" class="material-symbols-outlined text-primary text-[48px]">verified_user</span>
-<h1 class="font-headline-md text-headline-md text-on-surface mb-2 mt-4">Two-step verification</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Enter the 6-digit code from your authenticator app to finish signing in.</p>
+{% extends 'base.html' %}
+{% set html_class = 'light tk-staff-mfa-verification' %}
+{% block title %}Watiq Staff Portal | Sovereign MFA{% endblock %}
+{% block body_class %}flex flex-col min-h-screen relative overflow-x-hidden{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/mfa.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<!-- Fluid 12-Column Grid Watermark Layer -->
+<div class="fixed inset-0 emblem-bg pointer-events-none z-0"></div>
+<!-- Header -->
+<header class="h-20 flex items-center px-margin-desktop bg-primary/95 border-b border-white/5 relative z-20 backdrop-blur-md">
+<div class="flex items-center justify-between max-w-container-max mx-auto w-full">
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 flex items-center justify-center">
+<img alt="Tunisian Flag" class="h-full rounded-sm" src="{{ url_for('static', filename='img/img-2144e62bed30.jpg') }}"/>
 </div>
-<form action="{{ url_for('public.mfa') }}" class="space-y-6" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
-<div>
-<label class="block font-label-md text-label-md text-on-surface mb-2" for="code">Verification code</label>
-<input aria-required="true" autocomplete="one-time-code" class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-lg text-body-lg tracking-[0.5em] text-center focus-ring" id="code" inputmode="numeric" maxlength="6" name="code" pattern="[0-9]{6}" required="" type="text"/>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-white leading-none tracking-tight">Watiq</span>
+<span class="text-[10px] font-bold text-accent-gold uppercase tracking-[0.2em] mt-1">Republic of Tunisia</span>
 </div>
-<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-3 px-4 rounded hover:bg-primary transition-colors focus-ring" type="submit">Verify</button>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex items-center gap-6 text-label-md font-medium text-white/70">
+<a class="hover:text-accent-gold transition-colors" href="{{ url_for('public.index') }}">E-Government</a>
+<a class="hover:text-accent-gold transition-colors" href="{{ url_for('public.privacy') }}">Security</a>
+<a class="hover:text-accent-gold transition-colors" href="{{ url_for('public.contact') }}">Support</a>
+</nav>
+<div class="h-8 w-[1px] bg-white/10 mx-2"></div>
+<div class="flex items-center gap-2 px-4 py-1.5 bg-accent-gold/5 border border-accent-gold/20 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-gold animate-pulse"></span>
+<span class="text-[10px] font-extrabold text-accent-gold uppercase tracking-widest">Sovereign Cloud Secured</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center p-margin-mobile md:p-gutter relative z-10">
+<div class="w-full max-w-md">
+<!-- MFA Card -->
+<div class="glass-card sovereign-border rounded-xl p-8 md:p-10 relative overflow-hidden">
+<!-- Status Badge -->
+<div class="absolute top-0 right-0">
+<div class="flex items-center gap-1.5 px-4 py-1 bg-accent-gold rounded-bl-xl shadow-lg">
+<span class="icon-filled material-symbols-outlined text-[14px] text-primary">lock</span>
+<span class="text-[10px] font-extrabold tracking-widest text-primary uppercase">Staff Restricted</span>
+</div>
+</div>
+<!-- Identity Header -->
+<div class="text-center mb-10 mt-4">
+<div class="relative inline-block mb-6">
+<div class="w-20 h-20 rounded-full bg-accent-gold flex items-center justify-center shadow-[0_0_40px_rgba(197,160,89,0.3)]">
+<span class="icon-filled material-symbols-outlined text-primary text-[40px]">shield_person</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-7 h-7 bg-mediterranean-cerulean rounded-full flex items-center justify-center border-2 border-primary">
+<span class="icon-filled material-symbols-outlined text-white text-[14px]">verified</span>
+</div>
+</div>
+<h1 class="font-headline-md text-headline-md text-white tracking-tight mb-2">Identity Verification</h1>
+<div class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg">
+<span class="text-label-md font-semibold text-accent-gold">{{ (profile|display_name if profile else none) or session.get('staff_name') or 'Staff member' }}</span>
+<span class="w-1 h-1 rounded-full bg-white/30"></span>
+<span class="text-caption text-white/50">{{ (profile.office_name if profile else none) or 'Institutional access' }}</span>
+</div>
+</div>
+{% include 'partials/_flash.html' %}
+{#- Each box carries name="code"; the view joins request.form.getlist("code"),
+    so the form submits a complete code with or without JavaScript. -#}
+<!-- OTP Input Form -->
+<form action="{{ url_for('public.mfa') }}" class="space-y-8" id="mfa-form" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<div class="space-y-4">
+<label class="block text-label-md font-medium text-white/60 text-center" for="otp-code">
+                            Enter security code from your <span class="text-white">Institutional Authenticator</span>
+</label>
+<div class="flex justify-center gap-2 md:gap-3" id="otp-container">
+<input autocomplete="one-time-code" autofocus="" class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" id="otp-code" inputmode="numeric" maxlength="1" name="code" pattern="[0-9]*" type="text">
+<input autocomplete="one-time-code" name="code" class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text">
+<input autocomplete="one-time-code" name="code" class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text">
+<div class="flex items-center justify-center w-4 text-accent-gold/40 font-bold">-</div>
+<input autocomplete="one-time-code" name="code" class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text">
+<input autocomplete="one-time-code" name="code" class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text">
+<input autocomplete="one-time-code" name="code" class="otp-input w-12 h-16 text-center text-headline-md font-bold bg-white/5 border border-white/10 rounded-lg text-white focus:ring-0 focus:bg-white/10 transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="text">
+</div>
+</div>
+<!-- Action Area -->
+<div class="space-y-5">
+<button class="w-full h-14 bg-accent-gold text-primary font-bold text-label-md rounded-lg shadow-[0_4px_20px_rgba(197,160,89,0.4)] hover:brightness-110 hover:translate-y-[-1px] active:translate-y-[1px] transition-all flex items-center justify-center gap-3 group" type="submit">
+<span class="tracking-widest">AUTHORIZE ACCESS</span>
+<span class="material-symbols-outlined text-[20px] transition-transform group-hover:rotate-12">lock_open</span>
+</button>
+<div class="flex items-center justify-between px-1">
+<a href="{{ url_for('public.contact') }}" class="text-caption font-bold text-accent-gold/80 hover:text-accent-gold flex items-center gap-2 group">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span class="border-b border-accent-gold/30 group-hover:border-accent-gold">Use Recovery Code</span>
+</a>
+<div class="flex items-center gap-2 text-accent-gold timer-warning" id="timer-container">
+<span class="material-symbols-outlined text-[18px]">av_timer</span>
+<span class="font-label-md tabular-nums font-bold" id="timer-display">00:29</span>
+</div>
+</div>
+</div>
 </form>
+<!-- Security Protocol Footer -->
+<div class="mt-10 pt-6 border-t border-white/5 text-center">
+<div class="flex items-center justify-center gap-3">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-primary bg-accent-gold/20 flex items-center justify-center"><span class="material-symbols-outlined text-[12px] text-accent-gold">shield</span></div>
+<div class="w-6 h-6 rounded-full border-2 border-primary bg-mediterranean-cerulean/20 flex items-center justify-center"><span class="material-symbols-outlined text-[12px] text-mediterranean-cerulean">lock</span></div>
 </div>
-</section>
+<span class="text-[10px] font-bold text-white/40 tracking-wider uppercase">AES-256-GCM Sovereign Encryption Active</span>
+</div>
+</div>
+</div>
+<!-- Global Support Links -->
+<div class="mt-8 flex justify-center gap-8">
+<a class="text-caption font-bold text-white/30 hover:text-accent-gold transition-colors" href="{{ url_for('public.about') }}">System Status</a>
+<a class="text-caption font-bold text-white/30 hover:text-accent-gold transition-colors" href="{{ url_for('public.terms') }}">Legal Policy</a>
+<a class="text-caption font-bold text-white/30 hover:text-accent-gold transition-colors" href="{{ url_for('public.contact') }}">IT Support</a>
+</div>
+</div>
+<!-- TSL Accessibility Component (PIP Style) -->
+<div class="fixed bottom-gutter right-gutter w-56 aspect-video rounded-xl overflow-hidden tsl-pip hidden md:block z-50 group border border-white/20 transition-all duration-300 hover:w-72 hover:border-accent-gold/50 cursor-pointer">
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-transparent transition-colors">
+<img alt="TSL Support" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<div class="absolute top-2 right-2 bg-red-500 w-2 h-2 rounded-full animate-pulse shadow-[0_0_8px_#ef4444]"></div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 bg-primary/90 backdrop-blur-sm py-1.5 px-3 flex items-center justify-between">
+<span class="text-[9px] font-extrabold text-accent-gold uppercase tracking-tighter">TSL Institutional Support</span>
+<span class="icon-filled material-symbols-outlined text-[14px] text-accent-gold">sign_language</span>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="bg-black/40 border-t border-white/5 relative z-20 backdrop-blur-md">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-8 w-full max-w-container-max mx-auto gap-6">
+<div class="flex flex-col gap-2 text-center md:text-left">
+<span class="text-caption font-bold text-white/50 tracking-wide">Digital Sovereignty Department</span>
+<p class="text-[11px] text-white/30 max-w-md leading-relaxed">
+                    © {{ year }} Republic of Tunisia. Access to this platform is governed by the National Sovereign Legal Infrastructure and monitored for security compliance.
+                </p>
+</div>
+<div class="flex gap-8 opacity-40 hover:opacity-100 transition-opacity">
+<div class="flex flex-col items-center gap-1 group cursor-help">
+<span class="icon-filled material-symbols-outlined text-accent-gold text-[20px]">shield_person</span>
+<span class="text-[8px] font-bold text-white/50 uppercase">Identity</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-help">
+<span class="icon-filled material-symbols-outlined text-accent-gold text-[20px]">policy</span>
+<span class="text-[8px] font-bold text-white/50 uppercase">Audit</span>
+</div>
+<div class="flex flex-col items-center gap-1 group cursor-help">
+<span class="icon-filled material-symbols-outlined text-accent-gold text-[20px]">assured_workload</span>
+<span class="text-[8px] font-bold text-white/50 uppercase">Federal</span>
+</div>
+</div>
+</div>
+</footer>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/mfa.js') }}" defer></script>
 {% endblock %}

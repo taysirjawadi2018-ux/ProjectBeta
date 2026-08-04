@@ -58,7 +58,7 @@
 <div class="flex-1 max-w-md mx-4 md:mx-8">
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">search</span>
-<input aria-label="Search Requests" class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-surface-variant rounded-full text-body-md font-body-md focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all" placeholder="Search Request ID or Citizen Name..." type="text"/>
+<input aria-label="Search Requests" class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-surface-variant rounded-full text-body-md font-body-md focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all" placeholder="Search Request ID or Citizen Name..." type="text">
 </div>
 </div>
 <!-- Header Actions -->
@@ -155,11 +155,12 @@
 <button aria-pressed="false" class="px-3 py-1.5 text-label-sm font-label-md rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors" data-action="filter" data-filter-group="status" data-filter-value="verification" type="button">Verification</button>
 <button aria-pressed="false" class="px-3 py-1.5 text-label-sm font-label-md rounded-DEFAULT text-on-surface-variant hover:bg-surface-container transition-colors" data-action="filter" data-filter-group="status" data-filter-value="payment" type="button">Payment</button>
 </div>
+{#- The mockup also had an "Export Data" button here. The API exposes no
+    export endpoint, and a download control that produces nothing is worse on
+    a caseload screen than no control at all, so it is not rendered. Print
+    below covers the same intent and genuinely works. -#}
 <!-- Utilities -->
-<button aria-label="Export Data" class="p-2 text-on-surface-variant border border-surface-variant rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors ml-auto sm:ml-2" data-action="export" type="button">
-<span class="material-symbols-outlined text-xl">download</span>
-</button>
-<button aria-label="Print List" class="p-2 text-on-surface-variant border border-surface-variant rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors" data-action="print" type="button">
+<button aria-label="Print List" class="p-2 text-on-surface-variant border border-surface-variant rounded-lg hover:bg-surface-container hover:text-on-surface transition-colors ml-auto sm:ml-2" data-action="print" type="button">
 <span class="material-symbols-outlined text-xl">print</span>
 </button>
 </div>
@@ -170,7 +171,7 @@
 <thead>
 <tr class="bg-secondary text-on-secondary text-label-md font-label-md">
 <th class="py-3 px-4 w-12 text-center" scope="col">
-<input aria-label="Select all requests" class="rounded border-secondary-fixed bg-secondary-fixed/20 text-primary-container focus:ring-primary-container w-4 h-4" type="checkbox"/>
+<input aria-label="Select all requests" class="rounded border-secondary-fixed bg-secondary-fixed/20 text-primary-container focus:ring-primary-container w-4 h-4" type="checkbox">
 </th>
 <th class="py-3 px-4" scope="col">Request ID</th>
 <th class="py-3 px-4" scope="col">Citizen Name</th>
@@ -185,7 +186,7 @@
 {%- for req in queue %}
 <tr class="{% if loop.index is odd %}bg-slate-50{% else %}bg-surface{% endif %} hover:bg-surface-container-low transition-colors group">
 <td class="py-3 px-4 text-center">
-<input aria-label="Select request {{ req.tracking_code }}" class="rounded border-outline bg-surface text-primary-container focus:ring-primary-container w-4 h-4" name="request_id" type="checkbox" value="{{ req.id }}"/>
+<input aria-label="Select request {{ req.tracking_code }}" class="rounded border-outline bg-surface text-primary-container focus:ring-primary-container w-4 h-4" name="request_id" type="checkbox" value="{{ req.id }}">
 </td>
 <td class="py-3 px-4 font-label-md">{{ req.tracking_code }}</td>
 <td class="py-3 px-4 font-medium">{{ req.citizen_name or '—' }}</td>

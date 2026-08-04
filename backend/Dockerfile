@@ -4,10 +4,12 @@
 #
 # Base images are pinned by digest, not tag: a tag is a moving pointer, so an
 # unpinned rebuild can silently ship a different base than the one that was
-# scanned. Refresh these with:
+# scanned. The digest is what Docker enforces; the tag in front of it is there
+# so a human can see which release is pinned without resolving the hash.
+# Refresh these with:
 #   docker buildx imagetools inspect python:3.12-slim-bookworm
-#   docker buildx imagetools inspect ghcr.io/astral-sh/uv:latest
-# Resolved 2026-08-02.
+#   docker buildx imagetools inspect ghcr.io/astral-sh/uv:latest   # note the version it reports
+# Resolved 2026-08-04 (uv 0.12.1).
 FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3136726336b2a4c657aa30b AS builder
 # UV_PROJECT_ENVIRONMENT puts the venv at its FINAL path during the build.
 # Console scripts (alembic, gunicorn, arq) bake an absolute shebang pointing at
@@ -17,7 +19,7 @@ FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3
 # misleading "no such file or directory".
 ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy \
   UV_PROJECT_ENVIRONMENT=/opt/watiq/.venv
-COPY --from=ghcr.io/astral-sh/uv@sha256:cf4eedcaa81655197f625739489effcbe71b61ceb1506f332c3facae5deceded /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.12.1@sha256:cf4eedcaa81655197f625739489effcbe71b61ceb1506f332c3facae5deceded /uv /bin/uv
 WORKDIR /build
 COPY pyproject.toml uv.lock alembic.ini ./
 RUN uv sync --frozen --no-dev --no-install-project
