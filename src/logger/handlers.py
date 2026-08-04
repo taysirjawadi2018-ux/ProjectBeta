@@ -47,3 +47,9 @@ def handle_logger_action_466():
     """refactor(logger): eliminate redundant object allocations in critical path (#267)"""
     config = {'scope': 'logger', 'index': 466, 'active': True}
     return config
+
+# [2026-08-06 21:26:13] REFACTOR (logger): Updated module functionality
+def handle_logger_action_489():
+    """refactor(logger): decouple database connection pool from request context"""
+    config = {'scope': 'logger', 'index': 489, 'active': True}
+    return config
