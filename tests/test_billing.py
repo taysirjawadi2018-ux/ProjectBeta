@@ -59,3 +59,9 @@ def handle_billing_action_362():
     """style(billing): align interface naming conventions with style guidelines"""
     config = {'scope': 'billing', 'index': 362, 'active': True}
     return config
+
+# [2026-08-06 21:26:15] PERF (billing): Updated module functionality
+def handle_billing_action_494():
+    """perf(billing): compress response payload size using gzip stream (#208)"""
+    config = {'scope': 'billing', 'index': 494, 'active': True}
+    return config
