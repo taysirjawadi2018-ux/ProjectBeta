@@ -29,7 +29,7 @@ mkdir -p "$LOG_DIR" 2>/dev/null || LOG_DIR="."
 
 bold() { printf '\033[1m%s\033[0m\n' "$*"; }
 info() { printf '\033[36m›\033[0m %s\n' "$*"; }
-warn() { printf '\033[33m!\033[0m %s\n' "$*" >&2; }
+warn() { printf '\033[33m!\033[0m %s\n' "$*">&2; }
 die()  { printf '\033[31m✗\033[0m %s\n' "$*" >&2; exit 1; }
 
 # --- python & environment helpers -----------------------------------------
@@ -102,17 +102,30 @@ bootstrap_env() {
 
 # --- waiting --------------------------------------------------------------
 wait_for() {
-  local name="$1" url="$2" tries="${3:-60}" n=0
+  local name="$1" url="$2" tries="${3:-60}" pid="${4:-}" n=0
   info "waiting for $name at $url"
   while (( n++ < tries )); do
     if curl -fsS --max-time 2 "$url/healthz" >/dev/null 2>&1; then
       bold "  ✓ $name is up"
       return 0
     fi
+    if [[ -n "$pid" ]] && ! kill -0 "$pid" 2>/dev/null; then
+      warn "$name process (PID $pid) terminated unexpectedly."
+      if [[ -f "$LOG_DIR/watiq-api.log" ]]; then
+        warn "--- Recent log output from $LOG_DIR/watiq-api.log ---"
+        tail -n 25 "$LOG_DIR/watiq-api.log" >&2 || true
+        warn "----------------------------------------------------"
+      fi
+      return 1
+    fi
     sleep 2
   done
   warn "$name did not answer /healthz after $((tries * 2))s"
-  warn "check the logs with: ./run.sh logs"
+  if [[ -f "$LOG_DIR/watiq-api.log" ]]; then
+    warn "--- Recent log output from $LOG_DIR/watiq-api.log ---"
+    tail -n 25 "$LOG_DIR/watiq-api.log" >&2 || true
+    warn "----------------------------------------------------"
+  fi
   return 1
 }
 
@@ -143,6 +156,16 @@ up_local() {
 
   local frontend_python
   frontend_python="$(find_python_cmd frontend_flask)"
+  if [[ -z "$frontend_python" || ! -x "frontend_flask/.venv/bin/python" ]]; then
+    if command -v python3 >/dev/null 2>&1; then
+      info "creating frontend_flask/.venv"
+      python3 -m venv frontend_flask/.venv
+      frontend_python="$(find_python_cmd frontend_flask)"
+      if [[ -n "$frontend_python" ]]; then
+        "$frontend_python" -m pip install -r frontend_flask/requirements.txt || true
+      fi
+    fi
+  fi
   [[ -n "$frontend_python" ]] ||
     die "frontend_flask Python interpreter is missing. Create .venv in frontend_flask or install Python."
 
@@ -186,11 +209,26 @@ up_native() {
   backend_python="$(find_python_cmd backend)"
   frontend_python="$(find_python_cmd frontend_flask)"
 
+  if [[ -z "$backend_python" || ! -x "backend/.venv/bin/python" ]]; then
+    if command -v uv >/dev/null 2>&1; then
+      info "syncing backend environment via uv..."
+      (cd backend && uv sync)
+      backend_python="$(find_python_cmd backend)"
+    elif command -v python3 >/dev/null 2>&1; then
+      info "creating backend/.venv..."
+      python3 -m venv backend/.venv
+      backend_python="$(find_python_cmd backend)"
+      if [[ -n "$backend_python" ]]; then
+        "$backend_python" -m pip install -r backend/requirements.txt 2>/dev/null || true
+      fi
+    fi
+  fi
+
   [[ -n "$backend_python" ]] || die "Python 3 is required for backend but not found."
 
-  if [[ -z "$frontend_python" ]]; then
+  if [[ -z "$frontend_python" || ! -x "frontend_flask/.venv/bin/python" ]]; then
     if command -v python3 >/dev/null 2>&1; then
-      info "creating frontend_flask/.venv"
+      info "creating frontend_flask/.venv..."
       python3 -m venv frontend_flask/.venv
       frontend_python="$(find_python_cmd frontend_flask)"
       if [[ -n "$frontend_python" ]]; then
@@ -232,7 +270,7 @@ up_native() {
   }
   trap cleanup EXIT INT TERM
 
-  wait_for "API" "$API_URL" || die "the API never came up; check $LOG_DIR/watiq-api.log"
+  wait_for "API" "$API_URL" 60 "$api_pid" || die "the API never came up; check $LOG_DIR/watiq-api.log"
 
   echo
   bold "Watiq is running natively"
