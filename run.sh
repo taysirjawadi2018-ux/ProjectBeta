@@ -53,6 +53,73 @@ find_python_cmd() {
   fi
 }
 
+ensure_backend_env() {
+  local py_cmd
+  py_cmd="$(find_python_cmd backend)"
+
+  if [[ -z "$py_cmd" || "$py_cmd" == "python3" || "$py_cmd" == "python" || "$py_cmd" == "py" ]]; then
+    if [[ ! -d "$ROOT/backend/.venv" ]]; then
+      if command -v uv >/dev/null 2>&1; then
+        info "syncing backend environment via uv..."
+        (cd "$ROOT/backend" && uv sync >/dev/null 2>&1 || true)
+      elif command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+        info "creating backend/.venv..."
+        local base_py
+        base_py="$(command -v python3 || command -v python)"
+        "$base_py" -m venv "$ROOT/backend/.venv"
+      fi
+      py_cmd="$(find_python_cmd backend)"
+    fi
+  fi
+
+  [[ -n "$py_cmd" ]] || die "Python 3 is required for backend but not found."
+
+  if ! "$py_cmd" -c "import uvicorn" >/dev/null 2>&1; then
+    info "installing backend dependencies into $py_cmd..."
+    if command -v uv >/dev/null 2>&1; then
+      (cd "$ROOT/backend" && uv sync)
+    else
+      "$py_cmd" -m pip install -e "$ROOT/backend" 2>/dev/null || \
+      "$py_cmd" -m pip install uvicorn fastapi structlog asyncpg pydantic pydantic-settings sqlalchemy httpx alembic arq pyotp 2>/dev/null || \
+      die "failed to install backend dependencies (uvicorn). Please check python pip setup."
+    fi
+  fi
+
+  echo "$py_cmd"
+}
+
+ensure_frontend_env() {
+  local py_cmd
+  py_cmd="$(find_python_cmd frontend_flask)"
+
+  if [[ -z "$py_cmd" || "$py_cmd" == "python3" || "$py_cmd" == "python" || "$py_cmd" == "py" ]]; then
+    if [[ ! -d "$ROOT/frontend_flask/.venv" ]]; then
+      if command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+        info "creating frontend_flask/.venv..."
+        local base_py
+        base_py="$(command -v python3 || command -v python)"
+        "$base_py" -m venv "$ROOT/frontend_flask/.venv"
+        py_cmd="$(find_python_cmd frontend_flask)"
+      fi
+    fi
+  fi
+
+  if [[ -z "$py_cmd" ]]; then
+    py_cmd="$(find_python_cmd backend)"
+  fi
+
+  [[ -n "$py_cmd" ]] || die "Python 3 is required for frontend but not found."
+
+  if ! "$py_cmd" -c "import flask" >/dev/null 2>&1; then
+    info "installing frontend dependencies into $py_cmd..."
+    "$py_cmd" -m pip install -r "$ROOT/frontend_flask/requirements.txt" 2>/dev/null || \
+    "$py_cmd" -m pip install flask flask-session flask-wtf httpx redis 2>/dev/null || \
+    die "failed to install frontend dependencies."
+  fi
+
+  echo "$py_cmd"
+}
+
 # --- prerequisites --------------------------------------------------------
 compose() {
   if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
@@ -91,7 +158,7 @@ bootstrap_env() {
 
   warn ".env has no JWT_PRIVATE_KEY — generating a DEV-ONLY keypair"
   local py_cmd
-  py_cmd="$(find_python_cmd backend)"
+  py_cmd="$(ensure_backend_env)"
   if command -v uv >/dev/null 2>&1; then
     uv run --project backend python ops/dev/gen_dev_keys.py
   elif [[ -n "$py_cmd" ]]; then
@@ -162,21 +229,7 @@ up_local() {
   trap cleanup EXIT INT TERM
 
   local frontend_python
-  frontend_python="$(find_python_cmd frontend_flask)"
-  if [[ -z "$frontend_python" || ! -f "$frontend_python" ]]; then
-    if command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
-      info "creating frontend_flask/.venv"
-      local base_py
-      base_py="$(command -v python3 || command -v python)"
-      "$base_py" -m venv "$ROOT/frontend_flask/.venv"
-      frontend_python="$(find_python_cmd frontend_flask)"
-      if [[ -n "$frontend_python" ]]; then
-        "$frontend_python" -m pip install -r "$ROOT/frontend_flask/requirements.txt" || true
-      fi
-    fi
-  fi
-  [[ -n "$frontend_python" ]] ||
-    die "frontend_flask Python interpreter is missing. Create .venv in frontend_flask or install Python."
+  frontend_python="$(ensure_frontend_env)"
 
   info "starting the API and its dependencies in Docker"
   compose up -d api
@@ -219,46 +272,8 @@ up_native() {
 
   local backend_python
   local frontend_python
-  backend_python="$(find_python_cmd backend)"
-  frontend_python="$(find_python_cmd frontend_flask)"
-
-  if [[ -z "$backend_python" || "$backend_python" == "python3" || "$backend_python" == "python" || "$backend_python" == "py" ]]; then
-    if [[ ! -d "$ROOT/backend/.venv" ]]; then
-      if command -v uv >/dev/null 2>&1; then
-        info "syncing backend environment via uv..."
-        (cd "$ROOT/backend" && uv sync)
-        backend_python="$(find_python_cmd backend)"
-      elif command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
-        info "creating backend/.venv..."
-        local base_py
-        base_py="$(command -v python3 || command -v python)"
-        "$base_py" -m venv "$ROOT/backend/.venv"
-        backend_python="$(find_python_cmd backend)"
-        if [[ -n "$backend_python" ]]; then
-          "$backend_python" -m pip install -r "$ROOT/backend/requirements.txt" 2>/dev/null || true
-        fi
-      fi
-    fi
-  fi
-
-  [[ -n "$backend_python" ]] || die "Python 3 is required for backend but not found."
-
-  if [[ -z "$frontend_python" || "$frontend_python" == "python3" || "$frontend_python" == "python" || "$frontend_python" == "py" ]]; then
-    if [[ ! -d "$ROOT/frontend_flask/.venv" ]]; then
-      if command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
-        info "creating frontend_flask/.venv..."
-        local base_py
-        base_py="$(command -v python3 || command -v python)"
-        "$base_py" -m venv "$ROOT/frontend_flask/.venv"
-        frontend_python="$(find_python_cmd frontend_flask)"
-        if [[ -n "$frontend_python" ]]; then
-          "$frontend_python" -m pip install -r "$ROOT/frontend_flask/requirements.txt" || true
-        fi
-      else
-        frontend_python="$backend_python"
-      fi
-    fi
-  fi
+  backend_python="$(ensure_backend_env)"
+  frontend_python="$(ensure_frontend_env)"
 
   if [[ ! -s frontend_flask/static/css/watiq.css ]] && command -v npm >/dev/null 2>&1; then
     info "compiling the stylesheet for the first time"
