@@ -30,7 +30,7 @@ services:
     networks: [watiq_edge]
 
   api:
-    image: watiq-api:${VERSION}
+    image: watiq-api:${VERSION:-latest}
     read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=64m
@@ -71,7 +71,7 @@ services:
       watiq_data:
 
   frontend:
-    image: watiq-frontend:${VERSION}
+    image: watiq-frontend:${VERSION:-latest}
     read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=32m
@@ -116,7 +116,7 @@ services:
     networks: [watiq_app]
 
   worker:
-    image: watiq-api:${VERSION}
+    image: watiq-api:${VERSION:-latest}
     command: ["arq", "app.workers.settings.WorkerSettings"]
     read_only: true
     tmpfs:
@@ -202,12 +202,12 @@ services:
       mc retention set local/watiq-documents --config-dir /tmp governance 1d
       "
     environment:
-      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
-      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-watiq-admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-watiq-admin-secret}
     networks: [watiq_data]
 
   migrate:
-    image: watiq-api:${VERSION}
+    image: watiq-api:${VERSION:-latest}
     entrypoint: ["alembic", "upgrade", "head"]
     read_only: true
     cap_drop: [ALL]

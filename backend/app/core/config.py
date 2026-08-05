@@ -25,7 +25,7 @@ class Settings(BaseSettings):
         env_file=_REPO_ROOT / ".env",   # repo root, regardless of CWD
         env_nested_delimiter="__",
         secrets_dir=_SECRETS_DIR,       # Docker secrets take precedence over env
-        extra="forbid",                 # an unknown key is a typo, not a feature
+        extra="ignore",                 # allow extra env vars (e.g. WATIQ_MIGRATE_DSN)
     )
 
     env: Literal["dev", "staging", "prod"] = "dev"

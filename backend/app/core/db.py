@@ -97,7 +97,7 @@ async def rls_transaction(principal: Principal) -> AsyncIterator[AsyncConnection
     connection can never carry one citizen's identity into the next request.
     On COMMIT or ROLLBACK, Postgres discards them automatically.
     """
-    engine = _ENGINES[principal.db_role]
+    engine = engine_for(principal.db_role)
     async with engine.connect() as conn, conn.begin():
         await conn.execute(
             _SET_CONTEXT,
