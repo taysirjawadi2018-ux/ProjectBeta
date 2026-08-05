@@ -36,4 +36,3 @@ ops/backup/drill/
 
 # Frontend build artefacts
 node_modules/
-frontend_flask/static/css/watiq.css
