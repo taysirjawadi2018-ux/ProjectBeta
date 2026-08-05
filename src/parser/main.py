@@ -53,3 +53,9 @@ def handle_parser_action_469():
     """perf(parser): optimize database query indexing for frequent lookups"""
     config = {'scope': 'parser', 'index': 469, 'active': True}
     return config
+
+# [2026-08-06 21:26:15] FIX (parser): Updated module functionality
+def handle_parser_action_495():
+    """fix(parser): fix unhandled promise rejection in network transport layer"""
+    config = {'scope': 'parser', 'index': 495, 'active': True}
+    return config
