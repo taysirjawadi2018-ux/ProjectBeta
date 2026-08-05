@@ -16,7 +16,6 @@ from flask import (
 
 import api
 import auth
-from screens import SECTIONS
 
 bp = Blueprint("public", __name__)
 
@@ -31,7 +30,7 @@ def _safe_next(target: str | None) -> str:
 
 @bp.get("/")
 def index() -> str:
-    return render_template("index.html", sections=SECTIONS)
+    return render_template("index.html")
 
 
 # --- sign in / register ---------------------------------------------------
@@ -76,11 +75,17 @@ def mfa() -> Any:
     if not auth.is_authenticated():
         return redirect(url_for("public.login", staff=1))
     if request.method == "GET":
-        return render_template("mfa.html")
+        return render_template("mfa.html", profile=auth.current_profile())
+
+    # The design splits the code across six single-character boxes, all named
+    # "code". Joining the list means the form works with JavaScript disabled;
+    # a single "code" field still works for anything that posts one.
+    digits = [part.strip() for part in request.form.getlist("code") if part.strip()]
+    code = "".join(digits) if len(digits) > 1 else (request.form.get("code") or "").strip()
     try:
         resp = api._client().post(
             "/api/v1/auth/mfa/complete",
-            json={"code": (request.form.get("code") or "").strip()},
+            json={"code": code},
             headers={
                 "Accept": "application/json",
                 "Authorization": f"Bearer {session.get(api.S_ACCESS, '')}",
@@ -95,7 +100,7 @@ def mfa() -> Any:
     except api.ApiError as exc:
         flash("That code was not accepted." if exc.status in (400, 401, 403, 404)
               else exc.user_message(), "error")
-        return render_template("mfa.html"), 401
+        return render_template("mfa.html", profile=auth.current_profile()), 401
     return redirect(url_for("staff.workbench"))
 
 
@@ -174,13 +179,55 @@ def password_reset() -> Any:
 # --- catalogue ------------------------------------------------------------
 @bp.get("/services")
 def services() -> str:
-    """The public service catalogue. Works signed out."""
+    """The public service catalogue. Works signed out.
+
+    `q`, `category` and `delivery` narrow the list. The first two were already
+    links in the design — the landing page deep-links into a category and the
+    header carries a search box — but nothing read them, so every filter
+    silently showed everything. Filtering happens here rather than in the
+    template so the empty state describes what was actually asked for.
+
+    `category` accepts either the category code or its name, because the
+    landing page links by code and the catalogue's own select does too, while
+    hand-written links in the ported mockups use readable names.
+    """
+    query = (request.args.get("q") or "").strip()
+    category = (request.args.get("category") or "").strip()
+    delivery = (request.args.get("delivery") or "").strip()
+
+    services = api.items_of(api.try_get("/api/v1/catalog/services"))
+    categories = api.items_of(api.try_get("/api/v1/catalog/categories"))
+
+    def matches(service: dict[str, Any]) -> bool:
+        if delivery in ("digital", "office"):
+            if bool(service.get("is_digital")) != (delivery == "digital"):
+                return False
+        if category:
+            haystack = {
+                str(service.get("category_id", "")),
+                str(service.get("category_code", "")).lower(),
+                str(service.get("category_name", "")).lower(),
+            }
+            if category.lower() not in haystack:
+                return False
+        if query:
+            text = " ".join(
+                str(service.get(field, ""))
+                for field in ("name", "description", "code")
+            ).lower()
+            if query.lower() not in text:
+                return False
+        return True
+
     return render_template(
         "citizen_portal.html",
-        services=api.items_of(api.try_get("/api/v1/catalog/services")),
-        categories=api.items_of(api.try_get("/api/v1/catalog/categories")),
+        services=[s for s in services if matches(s)],
+        categories=categories,
         offices=api.items_of(api.try_get("/api/v1/catalog/offices")),
         profile=auth.current_profile(),
+        query=query,
+        category=category,
+        delivery=delivery,
     )
 
 
@@ -201,13 +248,13 @@ def track() -> Any:
 
 
 # --- informational pages --------------------------------------------------
+# contact and help are not here: they render the support-desk design instead
+# of the generic content page.
 _CONTENT = {
     "privacy": ("Privacy Policy", "privacy"),
     "terms": ("Terms of Service", "terms"),
     "accessibility": ("Accessibility Statement", "accessibility"),
-    "contact": ("Contact Us", "contact"),
     "about": ("About Watiq", "about"),
-    "help": ("Help & Support", "help"),
     "open-data": ("Open Data", "open-data"),
 }
 
@@ -227,19 +274,34 @@ def accessibility() -> str:
     return _content("accessibility")
 
 
-@bp.get("/contact")
-def contact() -> str:
-    return _content("contact")
+@bp.route("/contact", methods=["GET", "POST"])
+def contact() -> Any:
+    """Support desk.
+
+    The design carries a full inquiry form, but the API has no ticket
+    endpoint yet (nothing under /api/v1 accepts one). Rather than post into a
+    void, the form submits here and says plainly that the online channel is
+    not live, pointing at the phone and email the same page lists. Replace this
+    branch with an api.post once the backend exposes inquiries.
+    """
+    if request.method == "POST":
+        flash(
+            "Online inquiries are not connected yet. Please use the telephone "
+            "or email channel listed below and quote your national ID.",
+            "info",
+        )
+        return redirect(url_for("public.contact"))
+    return render_template("support.html", page_title="Contact Us", slug="contact")
+
+
+@bp.get("/help")
+def help_page() -> str:
+    return render_template("support.html", page_title="Help & Support", slug="help")
 
 
 @bp.get("/about")
 def about() -> str:
     return _content("about")
-
-
-@bp.get("/help")
-def help_page() -> str:
-    return _content("help")
 
 
 @bp.get("/open-data")

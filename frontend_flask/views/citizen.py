@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import date, timedelta
 from typing import Any
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
@@ -17,10 +18,23 @@ bp = Blueprint("citizen", __name__)
 @login_required
 def dashboard() -> str:
     """Panels degrade independently — one failing widget must not blank the page."""
+    requests_ = api.items_of(api.try_get("/api/v1/requests"))
+
+    # There is no "all my documents" endpoint — documents are listed per
+    # request — so the Recent Documents panel is assembled from the three most
+    # recent requests. Bounded on purpose: this is a dashboard, not an archive.
+    documents: list[dict[str, Any]] = []
+    for item in requests_[:3]:
+        for document in api.items_of(
+            api.try_get(f"/api/v1/requests/{item['id']}/documents")
+        ):
+            documents.append({**document, "request": item})
+
     return render_template(
         "citizen_dashboard.html",
         profile=auth.current_profile(),
-        requests=api.items_of(api.try_get("/api/v1/requests")),
+        requests=requests_[:4],
+        documents=documents[:4],
         appointments=api.items_of(api.try_get("/api/v1/appointments")),
         notifications=api.items_of(api.try_get("/api/v1/notifications"))[:5],
     )
@@ -59,17 +73,36 @@ def request_detail(request_id: int) -> str:
     )
 
 
+def _submit_context(office_id: int | None = None) -> dict[str, Any]:
+    """Catalogue data for the new-request form.
+
+    A request is filed against an office_service_id — the row that ties one
+    service to one office — and that is only listable per office, so the
+    office is chosen first and its services are fetched for it. Previously no
+    template rendered this field at all, so every POST to /requests/new failed
+    the `office_service_id` check and bounced straight back to the form.
+    """
+    if office_id is None:
+        office_id = request.args.get("office_id", type=int)
+    office_services = (
+        api.items_of(api.try_get(f"/api/v1/catalog/offices/{office_id}/services"))
+        if office_id
+        else []
+    )
+    return {
+        "services": api.items_of(api.try_get("/api/v1/catalog/services")),
+        "offices": api.items_of(api.try_get("/api/v1/catalog/offices")),
+        "office_services": [s for s in office_services if s.get("is_available", True)],
+        "office_id": office_id,
+        "profile": auth.current_profile(),
+    }
+
+
 @bp.route("/requests/new", methods=["GET", "POST"])
 @login_required
 def submit_request() -> Any:
     if request.method == "GET":
-        return render_template(
-            "submit_request.html",
-            services=api.items_of(api.try_get("/api/v1/catalog/services")),
-            offices=api.items_of(api.try_get("/api/v1/catalog/offices")),
-            profile=auth.current_profile(),
-            form={},
-        )
+        return render_template("submit_request.html", form={}, **_submit_context())
 
     office_service_id = request.form.get("office_service_id", type=int)
     if not office_service_id:
@@ -79,7 +112,7 @@ def submit_request() -> Any:
     # Everything not a control field is application data. The API enforces the
     # real limits on this (64 KB, depth 8, 200 keys) in requests/formdata.py;
     # this is only about not forwarding our own control fields.
-    reserved = {"csrf_token", "office_service_id", "priority_id"}
+    reserved = {"csrf_token", "office_service_id", "priority_id", "office_id"}
     form_data = {
         k: v for k, v in request.form.items() if k not in reserved and v.strip()
     }
@@ -97,10 +130,8 @@ def submit_request() -> Any:
         flash(exc.user_message(), "error")
         return render_template(
             "submit_request.html",
-            services=api.items_of(api.try_get("/api/v1/catalog/services")),
-            offices=api.items_of(api.try_get("/api/v1/catalog/offices")),
-            profile=auth.current_profile(),
             form=request.form,
+            **_submit_context(request.form.get("office_id", type=int)),
         ), exc.status
 
     flash(
@@ -142,6 +173,28 @@ def confirm_document(document_id: int) -> Any:
     return redirect(request.referrer or url_for("citizen.requests_list"))
 
 
+@bp.get("/documents/<int:document_id>/download")
+@login_required
+def download_document(document_id: int) -> Any:
+    """Hand the browser the presigned URL as a redirect.
+
+    The file is never proxied through this process, and the storage key never
+    reaches the page: the API mints a 300-second presigned GET and we bounce
+    to it. It is a redirect rather than an <img src> or a fetch because the
+    CSP is default-src 'none' — a cross-origin object-storage URL would be
+    refused as a subresource, but a top-level navigation is unaffected.
+
+    Authorisation is the API's: it enforces owner-RLS for citizens and the
+    document.download permission for staff, so both roles use this one route.
+    """
+    presigned = api.try_get(f"/api/v1/documents/{document_id}/download", default={}) or {}
+    url = presigned.get("presigned_url") if isinstance(presigned, dict) else None
+    if not url:
+        flash("That document is not available for download right now.", "error")
+        return redirect(request.referrer or url_for("citizen.requests_list"))
+    return redirect(url)
+
+
 @bp.post("/documents/<int:document_id>/delete")
 @login_required
 def delete_document(document_id: int) -> Any:
@@ -154,13 +207,40 @@ def delete_document(document_id: int) -> Any:
 @bp.route("/appointments/book", methods=["GET", "POST"])
 @login_required
 def book_appointment() -> Any:
+    """The three-step booking wizard, driven by the query string.
+
+    The mockup ran the steps in JavaScript over hardcoded offices and slots.
+    They are decided here instead — no office_id means step 1, an office but no
+    slot means step 2, a slot means step 3 — so the flow is bookmarkable, the
+    back button works, and it does not depend on scripting.
+
+    GET /appointments/slots requires *both* office_id and slot_date; sending
+    neither returned 422 on every load, which is why no slot ever appeared.
+    """
     if request.method == "POST":
         slot_id = request.form.get("slot_id", type=int)
+        office_service_id = request.form.get("office_service_id", type=int)
         if not slot_id:
             flash("Choose a time slot to continue.", "error")
             return redirect(url_for("citizen.book_appointment"))
+        if not office_service_id:
+            flash("Choose which service the appointment is for.", "error")
+            return redirect(
+                url_for(
+                    "citizen.book_appointment",
+                    office_id=request.form.get("office_id", type=int),
+                    slot_date=request.form.get("slot_date"),
+                    slot_id=slot_id,
+                )
+            )
+        payload: dict[str, Any] = {
+            "slot_id": slot_id,
+            "office_service_id": office_service_id,
+        }
+        if (request.form.get("reason") or "").strip():
+            payload["reason"] = request.form["reason"].strip()[:2000]
         try:
-            api.post("/api/v1/appointments", json={"slot_id": slot_id})
+            api.post("/api/v1/appointments", json=payload)
         except api.ApiError as exc:
             flash(
                 "That slot has just been taken. Please choose another."
@@ -172,21 +252,71 @@ def book_appointment() -> Any:
         flash("Your appointment is booked.", "success")
         return redirect(url_for("citizen.appointments"))
 
-    params = {
-        k: v
-        for k, v in (
-            ("office_id", request.args.get("office_id", type=int)),
-            ("service_id", request.args.get("service_id", type=int)),
-            ("date_from", request.args.get("date_from")),
+    office_id = request.args.get("office_id", type=int)
+    slot_id = request.args.get("slot_id", type=int)
+    today = date.today()
+    try:
+        slot_date = date.fromisoformat(request.args.get("slot_date") or "")
+    except ValueError:
+        slot_date = today
+    slot_date = max(slot_date, today)
+
+    slots: list[Any] = []
+    if office_id:
+        slots = (
+            api.try_get(
+                "/api/v1/appointments/slots",
+                default=[],
+                params={"office_id": office_id, "slot_date": slot_date.isoformat()},
+            )
+            or []
         )
-        if v
-    }
+
+    offices = api.items_of(api.try_get("/api/v1/catalog/offices"))
+    # The chosen office is resolved before the search filter is applied, so a
+    # leftover ?q= cannot make the office of an in-progress booking vanish.
+    office = next((o for o in offices if o.get("id") == office_id), None)
+
+    # The office directory has no search endpoint, and it is a short list, so
+    # the search box in the design filters the fetched rows here.
+    query = (request.args.get("q") or "").strip()
+    if query:
+        needle = query.lower()
+        offices = [
+            o
+            for o in offices
+            if needle
+            in " ".join(
+                str(o.get(field) or "")
+                for field in ("name", "name_fr", "city", "governorate", "address")
+            ).lower()
+        ]
+
+    # The week strip runs Monday..Sunday around the chosen day, matching the
+    # seven-column calendar in the design.
+    week_start = slot_date - timedelta(days=slot_date.weekday())
     return render_template(
         "book_appointment.html",
-        slots=api.try_get("/api/v1/appointments/slots", default=[], params=params) or [],
-        offices=api.items_of(api.try_get("/api/v1/catalog/offices")),
-        services=api.items_of(api.try_get("/api/v1/catalog/services")),
-        selected=params,
+        offices=offices,
+        q=query,
+        prev_week=(week_start - timedelta(days=7)).isoformat(),
+        next_week=(week_start + timedelta(days=7)).isoformat(),
+        office=office,
+        office_id=office_id,
+        office_services=[
+            s
+            for s in api.items_of(
+                api.try_get(f"/api/v1/catalog/offices/{office_id}/services")
+            )
+            if s.get("is_available", True)
+        ]
+        if office_id
+        else [],
+        slots=slots,
+        slot=next((s for s in slots if s.get("id") == slot_id), None),
+        slot_date=slot_date,
+        week=[week_start + timedelta(days=offset) for offset in range(7)],
+        today=today,
         profile=auth.current_profile(),
     )
 
@@ -214,11 +344,27 @@ def cancel_appointment(appointment_id: int) -> Any:
 @bp.get("/notifications")
 @login_required
 def notifications() -> str:
-    data = api.try_get("/api/v1/notifications", default={}) or {}
+    """Notifications are cursor-paginated, not page-numbered.
+
+    The list endpoint answers with {items, next_cursor, unread_count} and no
+    total, so `next_cursor` is handed to the template and the "Load more"
+    control becomes a link to the next page rather than a button that had
+    nothing behind it.
+    """
+    cursor = request.args.get("cursor") or None
+    data = (
+        api.try_get(
+            "/api/v1/notifications",
+            default={},
+            params={"cursor": cursor} if cursor else None,
+        )
+        or {}
+    )
     return render_template(
         "notification_center.html",
         notifications=api.items_of(data),
-        total=api.total_of(data),
+        next_cursor=data.get("next_cursor") if isinstance(data, dict) else None,
+        unread=data.get("unread_count") if isinstance(data, dict) else None,
         profile=auth.current_profile(),
     )
 

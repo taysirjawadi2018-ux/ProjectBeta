@@ -1,0 +1,46 @@
+/* support.html — rules lifted from frontend/support_and_inquiries.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+.material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .national-watermark {
+            position: fixed;
+            bottom: -100px;
+            right: -100px;
+            width: 800px;
+            height: 800px;
+            background-image: url(../../img/img-856c5560ee42.jpg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .tsl-module {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 280px;
+            height: 180px;
+            z-index: 100;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .tsl-module:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+
+/* Backgrounds the mockup set with an inline style attribute, which
+ * style-src blocks. The element carries data-bgclass and the class is
+ * applied from the page script. */
+.bg-asset-support-1 {
+  background-image: url('../../img/img-c8c2e12af5e7.jpg');
+}

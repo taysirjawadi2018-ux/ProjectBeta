@@ -1,14 +1,37 @@
-/* payment_confirmation.html — page-scoped rules, lifted verbatim from the mockup's
- * <style> block. Kept in its own file rather than merged into watiq.css:
- * several pages define the same class with different values, so a merge
- * would silently change how they render. theme() calls are resolved to the
- * literal token values the Tailwind build would have produced. */
-
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-.material-symbols-outlined.filled {
-    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
-
-.bg-asset-payment-confirmation-1 { background-image: url('../../img/img-cddc10fb877b.jpg'); }
+/* payment_confirmation.html — rules lifted from frontend/secure_paiment_and_receipting.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+body {
+            font-family: "Public Sans", sans-serif;
+            background-color: #f8f9ff;
+        }
+        .watermark-bg {
+            background-image: url('../../img/img-595ac872c895.jpg');
+            background-repeat: no-repeat;
+            background-position: center 60%;
+            background-attachment: fixed;
+            background-size: 40%;
+            opacity: 0.03;
+            pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+        }
+        .secure-shadow {
+            box-shadow: 0 4px 20px -2px rgba(0, 27, 61, 0.12), 0 2px 10px -1px rgba(0, 27, 61, 0.08);
+        }
+        .sovereign-border {
+            border-top: 4px solid #735c00;
+        }
+        .redacted {
+            background-color: #001b3d;
+            color: transparent;
+            border-radius: 2px;
+            user-select: none;
+        }
+        .tsl-module {
+            border: 2px solid #735c00;
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }

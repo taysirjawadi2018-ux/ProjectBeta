@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% set html_class = 'light tk-system-maintenance icons-w300' %}
+{% block title %}{{ title }} | Watiq National Portal{% endblock %}
+{% block body_class %}bg-surface text-on-surface min-h-screen flex flex-col items-center justify-between{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/error_maintenance.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<!-- National Emblem Watermark -->
+<div class="bg-asset-error-maintenance-1 emblem-watermark"></div>
+<!-- Top Navigation Anchor (Suppressed for focused state, but keeping brand identity) -->
+<header class="w-full h-20 px-margin-desktop flex items-center justify-between z-10">
+<div class="flex items-center gap-unit-2">
+<span class="material-symbols-outlined text-primary text-3xl">shield</span>
+<span class="font-headline-md text-headline-md font-extrabold text-primary tracking-widest">WATIQ</span>
+</div>
+<div class="hidden md:flex gap-unit-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Sovereign Digital Authority</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center justify-center w-full max-w-container-max-width px-margin-mobile md:px-margin-desktop z-10 text-center">
+<!-- Status Indicator -->
+<div class="mb-unit-4 flex items-center gap-unit-2 bg-secondary-container/20 border border-secondary-fixed text-on-secondary-container px-unit-3 py-unit-1 rounded-full status-pulse">
+<span class="icon-filled material-symbols-outlined text-[18px]">update</span>
+<span class="font-label-caps text-label-caps">Scheduled Infrastructure Update</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-primary-container max-w-4xl mb-unit-3">
+            {{ title }}
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-unit-8">
+            {{ message }}
+        </p>
+<!-- Bento Layout for Maintenance Info -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter w-full max-w-5xl">
+<!-- Countdown / Timer Card -->
+<div class="md:col-span-7 glass-panel rounded-xl p-gutter flex flex-col items-start text-left shadow-md">
+<span class="font-label-caps text-label-caps text-secondary mb-unit-2">EXPECTED SERVICE RESTORATION</span>
+<div class="flex items-baseline gap-unit-1 mb-unit-4">
+<span class="font-headline-lg text-headline-lg" id="countdown">04:00</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant">UTC</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden mb-unit-2">
+<div class="bg-primary-container h-full w-2/3 transition-all duration-1000"></div>
+</div>
+<p class="font-support-sm text-support-sm text-on-surface-variant">Current Progress: 68% - Security layers successfully validated.</p>
+</div>
+<!-- Quick Links / Actions -->
+<div class="md:col-span-5 flex flex-col gap-unit-2">
+<a class="group glass-panel rounded-xl p-unit-3 flex items-center justify-between hover:bg-primary-container hover:text-white transition-all duration-300 shadow-sm" href="{{ url_for('public.about') }}">
+<div class="flex items-center gap-unit-3">
+<div class="w-10 h-10 rounded-sm bg-surface-container-highest flex items-center justify-center group-hover:bg-on-primary-container">
+<span class="material-symbols-outlined">dashboard</span>
+</div>
+<div class="text-left">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-white/70">REAL-TIME UPDATES</p>
+<p class="font-body-md text-body-md font-bold">Status Dashboard</p>
+</div>
+</div>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+<a class="group border border-primary-container/20 rounded-xl p-unit-3 flex items-center justify-between hover:bg-primary-container hover:text-white transition-all duration-300 shadow-sm bg-white" href="{{ url_for('public.contact') }}">
+<div class="flex items-center gap-unit-3">
+<div class="w-10 h-10 rounded-sm bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div class="text-left">
+<p class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-white/70">JUDICIAL EMERGENCY</p>
+<p class="font-body-md text-body-md font-bold">Priority Support Line</p>
+</div>
+</div>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">phone_in_talk</span>
+</a>
+</div>
+</div>
+</main>
+<!-- Floating Sign Language Module -->
+<div class="fixed bottom-8 right-8 z-[100] flex flex-col overflow-hidden bg-surface/80 backdrop-blur-xl rounded-xl w-64 border-2 border-secondary-fixed shadow-2xl">
+<div class="aspect-video relative overflow-hidden bg-black/10">
+<img class="w-full h-full object-cover" alt="A professional video of a sign language interpreter providing accessibility for a national portal." src="{{ url_for('static', filename='img/img-c34fd2651ed8.jpg') }}"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-2 left-2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></div>
+<span class="font-label-caps text-label-caps text-white">Active TSL Translation</span>
+</div>
+</div>
+<div class="p-unit-2 flex justify-between items-center bg-primary-container">
+<div class="flex gap-unit-1">
+<button class="p-1 hover:bg-white/10 rounded transition-colors" data-action="a11y-pause" type="button">
+<span class="material-symbols-outlined text-white text-sm">pause</span>
+</button>
+<button class="p-1 hover:bg-white/10 rounded transition-colors" data-action="a11y-unmute" type="button">
+<span class="material-symbols-outlined text-white text-sm">volume_off</span>
+</button>
+</div>
+<button class="p-1 hover:bg-white/10 rounded transition-colors" data-action="a11y-expand" type="button">
+<span class="material-symbols-outlined text-white text-sm">open_in_full</span>
+</button>
+</div>
+</div>
+<!-- Footer Identity -->
+<footer class="w-full bg-primary-container text-on-primary-container flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter z-10">
+<div class="flex flex-col md:flex-row items-center gap-unit-4">
+<span class="font-label-caps text-label-caps uppercase text-secondary-fixed">DIGITAL SOVEREIGNTY UNIT</span>
+<p class="font-support-sm text-support-sm text-white/60">
+                © {{ year }} Republic of Tunisia. All Rights Reserved. 
+            </p>
+</div>
+<div class="flex gap-unit-4 mt-unit-2 md:mt-0">
+<a class="font-support-sm text-support-sm text-white/60 hover:text-secondary-fixed transition-colors" href="{{ url_for('public.terms') }}">Security Protocol</a>
+<a class="font-support-sm text-support-sm text-white/60 hover:text-secondary-fixed transition-colors" href="{{ url_for('public.open_data') }}">Official Gazettes</a>
+</div>
+</footer>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/error_maintenance.js') }}" defer></script>
+{% endblock %}

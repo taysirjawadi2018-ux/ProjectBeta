@@ -1,0 +1,84 @@
+{
+ "index.html": {
+  "inline_style": 4,
+  "inline_handler": 2,
+  "dead_href": 12,
+  "dead_button": 9
+ },
+ "login.html": {
+  "inline_style": 1,
+  "dead_href": 2,
+  "dead_button": 3,
+  "form_without_action": 1
+ },
+ "register.html": {
+  "inline_style": 3,
+  "inline_handler": 5,
+  "dead_href": 11,
+  "dead_button": 3
+ },
+ "password_reset.html": {
+  "inline_style": 3,
+  "inline_handler": 4,
+  "dead_href": 7,
+  "dead_button": 10
+ },
+ "mfa.html": {
+  "inline_style": 7,
+  "dead_href": 6,
+  "dead_button": 1,
+  "form_without_action": 1
+ },
+ "citizen_dashboard.html": {
+  "inline_style": 8,
+  "inline_handler": 1,
+  "dead_href": 19,
+  "dead_button": 4
+ },
+ "citizen_portal.html": {
+  "inline_style": 2,
+  "dead_href": 16,
+  "dead_button": 7
+ },
+ "submit_request.html": {
+  "inline_style": 2,
+  "dead_href": 9,
+  "dead_button": 8
+ },
+ "book_appointment.html": {
+  "inline_style": 12,
+  "inline_handler": 10,
+  "dead_href": 7,
+  "dead_button": 13
+ },
+ "payment_confirmation.html": {
+  "inline_style": 3,
+  "dead_href": 11,
+  "dead_button": 4
+ },
+ "profile.html": {
+  "inline_style": 3,
+  "dead_href": 17,
+  "dead_button": 13
+ },
+ "support.html": {
+  "inline_style": 1,
+  "dead_href": 15,
+  "dead_button": 8,
+  "form_without_action": 1
+ },
+ "staff_audit.html": {
+  "inline_style": 4,
+  "dead_href": 16,
+  "dead_button": 4
+ },
+ "_error_blocked.html": {
+  "inline_style": 2,
+  "dead_button": 4
+ },
+ "_error_maintenance.html": {
+  "inline_style": 1,
+  "dead_href": 4,
+  "dead_button": 3
+ }
+}

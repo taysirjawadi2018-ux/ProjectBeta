@@ -25,7 +25,7 @@
 <ul class="flex gap-6">
 {% for key, label, icon in [('users','Citizens','group'), ('staff','Staff','how_to_reg'), ('roles','Roles','settings_account_box')] %}
 <li>
-<a class="inline-flex items-center gap-2 py-3 font-label-md text-label-md focus-ring rounded-DEFAULT transition-colors {% if tab == key %}text-primary border-b-2 border-primary{% else %}text-secondary hover:text-primary{% endif %}"{% if tab == key %} aria-current="page"{% endif %} href="{{ url_for('admin.index', tab=key) }}">
+<a class="inline-flex items-center gap-2 py-3 font-label-md text-label-md focus-ring rounded-DEFAULT transition-colors {% if tab == key %}text-primary border-b-2 border-primary{% else %}text-secondary hover:text-primary{% endif %}" if tab key aria-current="page" endif href="{{ url_for('admin.index', tab=key) }}">
 <span aria-hidden="true" class="material-symbols-outlined">{{ icon }}</span>
 {{ label }}
 </a>
@@ -37,13 +37,13 @@
 {# ---------------------------------------------------------------- users #}
 {% if tab == 'users' %}
 <form action="{{ url_for('admin.index') }}" class="flex flex-col sm:flex-row gap-3" method="get">
-<input name="tab" type="hidden" value="users"/>
+<input name="tab" type="hidden" value="users">
 <div class="relative flex-grow focus-ring rounded">
 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 <span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant">search</span>
 </div>
 <label class="sr-only" for="q">Search citizens</label>
-<input class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md" id="q" name="q" placeholder="National ID, name or email" type="search" value="{{ query }}"/>
+<input class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md" id="q" name="q" placeholder="National ID, name or email" type="search" value="{{ query }}">
 </div>
 <button class="bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring" type="submit">Search</button>
 </form>
@@ -72,12 +72,12 @@
 <div class="flex flex-wrap justify-end items-center gap-2">
 {% if u.is_active %}
 <form action="{{ url_for('admin.deactivate_user', user_id=u.id) }}" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="border border-outline-variant text-on-surface font-label-sm text-label-sm py-2 px-3 rounded hover:bg-surface-container-low transition-colors focus-ring" type="submit">Deactivate</button>
 </form>
 {% else %}
 <form action="{{ url_for('admin.reactivate_user', user_id=u.id) }}" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="border border-outline-variant text-on-surface font-label-sm text-label-sm py-2 px-3 rounded hover:bg-surface-container-low transition-colors focus-ring" type="submit">Reactivate</button>
 </form>
 {% endif %}
@@ -89,16 +89,16 @@
    panel is convenience, not the guard. #}
 <div class="hidden mt-4 p-4 rounded-xl border border-error bg-error-container text-left" id="erase-{{ u.id }}">
 <form action="{{ url_for('admin.anonymize_user', user_id=u.id) }}" class="space-y-3" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
-<input name="expected_national_id" type="hidden" value="{{ u.national_id }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<input name="expected_national_id" type="hidden" value="{{ u.national_id }}">
 <p class="font-label-md text-label-md text-on-error-container">Permanently anonymise this account</p>
 <p class="font-body-sm text-on-surface-variant">This overwrites the citizen's identifying fields and cannot be undone. Purge their stored documents from object storage <strong>before</strong> running this: anonymising first orphans those files, and they can no longer be located for deletion.</p>
 <div>
 <label class="block font-label-sm text-label-sm text-on-surface mb-1" for="confirm-{{ u.id }}">Type the national ID {{ u.national_id }} to confirm</label>
-<input autocomplete="off" class="block w-full px-3 py-2 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="confirm-{{ u.id }}" name="confirm_national_id" required="" type="text"/>
+<input autocomplete="off" class="block w-full px-3 py-2 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="confirm-{{ u.id }}" name="confirm_national_id" required="" type="text">
 </div>
 <label class="flex items-start gap-2 font-body-sm text-on-surface">
-<input class="mt-1" name="blobs_purged" required="" type="checkbox" value="yes"/>
+<input class="mt-1" name="blobs_purged" required="" type="checkbox" value="yes">
                         I confirm the citizen's stored documents have already been purged.
                     </label>
 <button class="bg-error text-on-error font-label-md text-label-md py-2 px-4 rounded hover:bg-on-error-container transition-colors focus-ring" type="submit">Anonymise permanently</button>
@@ -122,18 +122,18 @@
 <section class="bg-surface-container-lowest rounded-xl p-6 border border-surface-variant">
 <h2 class="font-headline-sm text-headline-sm text-on-surface mb-4">Add a staff member</h2>
 <form action="{{ url_for('admin.create_staff') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2" for="first_name">First name</label>
-<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="first_name" name="first_name" required="" type="text"/>
+<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="first_name" name="first_name" required="" type="text">
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2" for="last_name">Last name</label>
-<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="last_name" name="last_name" required="" type="text"/>
+<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="last_name" name="last_name" required="" type="text">
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2" for="email">Work email</label>
-<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="email" name="email" required="" type="email"/>
+<input class="block w-full px-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md focus-ring" id="email" name="email" required="" type="email">
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface mb-2" for="role_id">Role</label>
@@ -172,12 +172,12 @@
 <td class="p-4 text-right">
 {% if s.is_active %}
 <form action="{{ url_for('admin.deactivate_staff', staff_id=s.id) }}" class="inline" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="border border-outline-variant text-on-surface font-label-sm text-label-sm py-2 px-3 rounded hover:bg-surface-container-low transition-colors focus-ring" type="submit">Deactivate</button>
 </form>
 {% else %}
 <form action="{{ url_for('admin.reactivate_staff', staff_id=s.id) }}" class="inline" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="border border-outline-variant text-on-surface font-label-sm text-label-sm py-2 px-3 rounded hover:bg-surface-container-low transition-colors focus-ring" type="submit">Reactivate</button>
 </form>
 {% endif %}
@@ -208,11 +208,11 @@
 <h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">{{ r.name or r.code }}</h2>
 {% if r.description %}<p class="font-body-sm text-on-surface-variant mb-4">{{ r.description }}</p>{% endif %}
 <form action="{{ url_for('admin.update_role_permissions', role_id=r.id) }}" class="space-y-4" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
 {% for p in permissions %}
 <label class="flex items-start gap-2 p-2 rounded hover:bg-surface-container-low transition-colors font-body-sm text-on-surface">
-<input class="mt-1" name="permission" type="checkbox" value="{{ p.code }}"{% if p.code in (r.permissions or []) %} checked{% endif %}/>
+<input class="mt-1" name="permission" type="checkbox" value="{{ p.code }}" if p code in r permissions or checked endif>
 <span>
 <span class="font-label-sm text-label-sm block">{{ p.code }}</span>
 {% if p.description %}<span class="text-on-surface-variant">{{ p.description }}</span>{% endif %}

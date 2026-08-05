@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% set html_class = 'light tk-support-and-inquiries' %}
+{% block title %}Support Ticket - Watiq Sovereign Portal{% endblock %}
+{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex flex-col{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/support.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<div class="national-watermark"></div>
+<!-- TopNavBar -->
+<header class="bg-primary-container sticky top-0 z-50 border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-md">
+<span class="font-headline-lg text-headline-lg font-bold text-on-primary-fixed tracking-tight">Watiq</span>
+<nav class="hidden md:flex gap-md items-center ml-lg">
+<a class="text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors duration-200 font-body-md" href="{{ url_for('public.index') }}">E-Government</a>
+<a class="text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors duration-200 font-body-md" href="{{ url_for('public.open_data') }}">Transparency</a>
+<a class="text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors duration-200 font-body-md" href="{{ url_for('public.services') }}">National Services</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-on-primary-fixed hover:text-primary-fixed transition-colors" data-action="search-focus" type="button">
+<span class="material-symbols-outlined">search</span>
+</button>
+<a href="{{ url_for('citizen.notifications') }}" class="text-on-primary-fixed hover:text-primary-fixed transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</a>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden ml-sm">
+<img class="w-full h-full object-cover" alt="Citizen Profile" src="{{ url_for('static', filename='img/img-0c74281dcb64.jpg') }}"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 max-w-container-max mx-auto w-full">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant p-md space-y-md shrink-0">
+<div class="flex flex-col items-center py-lg border-b border-outline-variant mb-md">
+<div class="w-16 h-16 bg-primary-container rounded-lg flex items-center justify-center mb-sm">
+<span class="material-symbols-outlined text-white text-3xl">account_balance</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary text-center">Citizen Space</h2>
+<p class="font-label-sm text-label-sm opacity-70">Secure Portal</p>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="{{ url_for('citizen.dashboard') }}">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm">Applications</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-label-sm">My Documents</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="{{ url_for('public.contact') }}">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-sm">Legal Support</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-secondary font-bold border-l-4 border-sovereign-gold bg-secondary-fixed/10 rounded-r-lg" href="{{ url_for('public.contact') }}">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm">Institutional Support</span>
+</a>
+</nav>
+<div class="pt-md border-t border-outline-variant">
+<a href="{{ url_for('citizen.submit_request') }}" class="w-full py-sm bg-primary text-white rounded font-label-sm flex items-center justify-center gap-sm mb-md hover:bg-opacity-90">
+<span class="material-symbols-outlined text-sm">add</span>
+                    New Request
+                </a>
+<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button aria-label="Sign out" class="flex items-center gap-sm p-sm text-error hover:bg-error-container/20 rounded-lg" type="submit">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-sm">Sign Out</span>
+</button></form>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-md lg:p-lg relative z-10">
+<header class="mb-lg">
+<nav class="flex items-center gap-xs text-on-surface-variant font-label-sm mb-xs">
+<span>Citizen Space</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-secondary">Institutional Support</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Institutional Support &amp; Inquiries</h1>
+<p class="text-on-surface-variant font-body-md mt-xs max-w-2xl">Access direct channels to the Watiq administrative framework. Your inquiries are handled with sovereign priority and legal transparency.</p>
+</div>
+<div class="flex gap-sm">
+<div class="px-sm py-1 bg-sovereign-gold/10 text-sovereign-gold border border-sovereign-gold/20 rounded-full font-label-sm flex items-center gap-xs h-fit">
+<span class="icon-filled material-symbols-outlined text-[14px]">verified</span>
+                            Sovereign Priority
+                        </div>
+</div>
+</div>
+</header>
+<div class="bento-grid">
+<!-- Inquiry Form Section -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-lowest border border-outline-variant p-lg rounded-xl relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-sovereign-gold"></div>
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-mediterranean-cerulean">edit_document</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">New Official Inquiry</h3>
+</div>
+{% include 'partials/_flash.html' %}
+{#- Every field is named and the form posts to public.contact with a CSRF
+    token, so the submission is a real one. What happens on the other side is
+    the honest part: there is no ticket endpoint under /api/v1 yet, so the view
+    answers with a message saying the online channel is not live and points at
+    the telephone and email listed further down this page. See views/public.py
+    contact() — that is the single branch to replace with an api.post. -#}
+<form action="{{ url_for('public.contact') }}" class="space-y-lg" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant" for="category">Inquiry Category</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded p-sm font-body-md focus:ring-1 focus:ring-mediterranean-cerulean outline-none" id="category" name="category">
+<option>Technical Infrastructure</option>
+<option>Document Validation Query</option>
+<option>Appointment Coordination</option>
+<option>Legal Archive Access</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant" for="priority">Priority Level</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded p-sm font-body-md focus:ring-1 focus:ring-mediterranean-cerulean outline-none" id="priority" name="priority">
+<option>Standard Administrative</option>
+<option>Priority Sovereign</option>
+<option>Urgent Legal Proceeding</option>
+</select>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant" for="subject">Subject Reference</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded p-sm font-body-md focus:ring-1 focus:ring-mediterranean-cerulean outline-none" id="subject" maxlength="200" name="subject" placeholder="Summary of institutional inquiry" required type="text">
+</div>
+<div class="space-y-xs">
+<label class="font-label-sm text-on-surface-variant" for="message">Detailed Context</label>
+<textarea class="w-full bg-surface-container border border-outline-variant rounded p-sm font-body-md focus:ring-1 focus:ring-mediterranean-cerulean outline-none min-h-[160px]" id="message" maxlength="4000" name="message" placeholder="Provide comprehensive details for formal review..." required></textarea>
+</div>
+<div class="pt-md border-t border-outline-variant flex flex-col gap-md">
+<button class="w-full py-md bg-mediterranean-cerulean text-white rounded font-label-sm font-bold tracking-widest uppercase hover:bg-opacity-90 transition-all flex items-center justify-center gap-sm" type="submit">
+                                Lodge Formal Inquiry <span aria-hidden="true" class="material-symbols-outlined">send</span>
+</button>
+<p class="text-center font-label-sm text-on-surface-variant italic">Do not include passwords or card details in this form. Watiq will never ask for them.</p>
+</div>
+</form>
+</section>
+<!-- Active Inquiries Sidebar -->
+<section class="col-span-12 lg:col-span-4 space-y-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant p-lg rounded-xl">
+{#- The mockup listed two support tickets with reference numbers and dates.
+    There is no ticket store to read them from, and this page is reachable
+    signed out, so both rows would have been fabricated. What a visitor can
+    genuinely look up is a request, by its tracking code — so that is what the
+    panel offers. -#}
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-sovereign-gold">history</span>
+                                Track a Request
+                            </h3>
+</div>
+<div class="space-y-md">
+<p class="font-label-sm text-on-surface-variant">Enter the tracking code from your submission receipt to see where a request has reached. No sign-in needed.</p>
+<form action="{{ url_for('public.track') }}" class="space-y-sm" method="get">
+<label class="sr-only" for="tracking-code">Tracking code</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded p-sm font-body-md focus:ring-1 focus:ring-mediterranean-cerulean outline-none" id="tracking-code" name="code" placeholder="WTQ-0000-000000" required type="text">
+<button class="w-full py-sm bg-surface-container border border-outline-variant rounded font-label-sm font-bold uppercase tracking-widest text-on-surface hover:border-sovereign-gold transition-colors" type="submit">Check status</button>
+</form>
+<p class="font-label-sm text-on-surface-variant pt-md border-t border-outline-variant">
+                                    Inquiries sent with the form on this page are not tracked online yet.
+                                    Use the telephone or email channel below if you need a reference number.
+                                </p>
+</div>
+</div>
+<!-- Sovereign Guarantee Box -->
+<div class="bg-primary-container p-lg rounded-xl text-on-primary-fixed border border-on-primary-container">
+<div class="flex items-center gap-sm mb-md text-sovereign-gold">
+<span class="material-symbols-outlined">verified_user</span>
+<h4 class="font-label-sm font-bold uppercase tracking-widest">Sovereign Guarantee</h4>
+</div>
+<p class="font-body-md opacity-80 leading-relaxed">Watiq will never ask for your password, PIN or card details — not by email, SMS or telephone. Anything sent through this portal travels over an encrypted connection.</p>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Floating TSL Sign Language Module -->
+<div class="tsl-module bg-primary-container rounded-xl overflow-hidden shadow-2xl flex flex-col border border-on-primary-container">
+<div class="flex-1 relative bg-black/40">
+<div class="bg-asset-support-1 w-full h-full bg-cover bg-center"></div>
+<div class="absolute top-2 right-2">
+<button class="w-6 h-6 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-error transition-colors" data-action="a11y-close" type="button">
+<span class="material-symbols-outlined text-xs">close</span>
+</button>
+</div>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-sovereign-gold text-white rounded font-label-sm text-[8px] flex items-center gap-1 uppercase tracking-tighter">
+<span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> Live TSL Assistant
+            </div>
+</div>
+<div class="bg-primary px-3 py-2 flex items-center justify-between border-t border-on-primary-container/20">
+<div class="flex gap-2">
+<button class="material-symbols-outlined text-white text-sm" data-action="a11y-play" type="button">play_arrow</button>
+<button class="material-symbols-outlined text-white text-sm" data-action="a11y-mute" type="button">volume_up</button>
+</div>
+<a href="{{ url_for('citizen.profile') }}" class="material-symbols-outlined text-white text-sm">settings</a>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-primary-container w-full py-lg mt-auto border-t border-outline-variant/30">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg px-lg max-w-container-max mx-auto">
+<div class="flex flex-col gap-sm">
+<span class="font-headline-md text-headline-md font-bold text-on-primary-fixed">Watiq</span>
+<p class="font-label-sm text-on-primary-fixed-variant">Digital Sovereignty Department</p>
+<p class="font-body-md text-on-primary-fixed-variant mt-sm">© {{ year }} Tunisian Republic</p>
+</div>
+<div class="flex flex-col gap-xs">
+<h4 class="font-label-sm text-primary-fixed mb-sm uppercase">Legal &amp; Compliance</h4>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="{{ url_for('public.terms') }}">Security Protocols</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed text-sovereign-gold underline" href="{{ url_for('public.accessibility') }}">Accessibility Standards</a>
+</div>
+<div class="flex flex-col gap-xs">
+<h4 class="font-label-sm text-primary-fixed mb-sm uppercase">Resources</h4>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="{{ url_for('public.help_page') }}">User Manuals</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="{{ url_for('public.open_data') }}">Developer API</a>
+<a class="font-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed" href="{{ url_for('public.index') }}">Institutional Portal</a>
+</div>
+<div class="flex flex-col gap-sm">
+<h4 class="font-label-sm text-primary-fixed mb-xs uppercase">Connect</h4>
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer">public</span>
+<span class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer">alternate_email</span>
+<span class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer">shield</span>
+</div>
+<div class="mt-md p-sm bg-on-primary-fixed/5 rounded border border-on-primary-container">
+<p class="text-[10px] text-on-primary-container leading-relaxed">Sovereign inquiries are monitored by the Digital Compliance Commission.</p>
+</div>
+</div>
+</div>
+</footer>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/support.js') }}" defer></script>
+{% endblock %}

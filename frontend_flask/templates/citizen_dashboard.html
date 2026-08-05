@@ -1,129 +1,335 @@
-{% extends "base.html" %}
-{% set html_class = 'light' %}
-
-{% block title %}Watiq Citizen Dashboard{% endblock %}
-{% block body_class %}bg-background text-on-background min-h-screen flex flex-col font-body-md{% endblock %}
-
+{% extends 'base.html' %}
+{% set html_class = 'light tk-citizen-dashboard' %}
+{% block title %}Watiq | Citizen Space{% endblock %}
+{% block body_class %}bg-background text-on-background font-body-md selection:bg-secondary-fixed{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/citizen_dashboard.css') }}" rel="stylesheet"/>
+{% endblock %}
 {% block content %}
-<!-- TopNavBar -->
-<header class="bg-surface dark:bg-on-background text-primary dark:text-primary-fixed-dim docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows z-50">
-<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
-<div class="flex items-center gap-4">
-<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Watiq</span>
+<!-- National Emblem Watermark -->
+<div class="national-watermark">
+<img class="w-full" alt="A large, highly detailed vector engraving of the Tunisian Republic national emblem, featuring the lion, galley, and scal" src="{{ url_for('static', filename='img/img-38f60b15eb9a.jpg') }}"/>
 </div>
-<nav class="hidden md:flex items-center gap-6 text-label-md font-label-md">
-<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors px-3 py-2 rounded-DEFAULT" href="{{ url_for('public.services') }}">Services</a>
-<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors px-3 py-2 rounded-DEFAULT" href="{{ url_for('citizen.requests_list') }}">My Requests</a>
-<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors px-3 py-2 rounded-DEFAULT" href="{{ url_for('citizen.book_appointment') }}">Appointments</a>
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-surface-container border-r border-outline-variant flex flex-col p-md space-y-md hidden md:flex z-40">
+<div class="flex items-center space-x-sm mb-lg">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center rounded">
+<span class="icon-filled material-symbols-outlined text-on-primary">account_balance</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Watiq</h1>
+<p class="font-label-sm text-label-sm opacity-60">Citizen Space</p>
+</div>
+</div>
+<nav class="flex-1 space-y-xs">
+<a class="flex items-center px-md py-sm rounded-lg text-secondary font-bold border-l-4 border-tertiary-fixed-dim bg-secondary-fixed/20 transition-soft group" href="{{ url_for('citizen.dashboard') }}">
+<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="description">description</span>
+<span class="font-label-sm text-label-sm">Applications</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-sm text-label-sm">My Documents</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('public.contact') }}">
+<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="gavel">gavel</span>
+<span class="font-label-sm text-label-sm">Legal Support</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('citizen.profile') }}">
+<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
 </nav>
-<div class="flex items-center gap-4">
-<button aria-label="Voice Commands" class="hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors p-2 rounded-full flex items-center justify-center opacity-80 transition-all duration-200" data-action="a11y-narration" type="button">
-<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
-</button>
-<button aria-label="Sign Language Interpreter" class="hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors p-2 rounded-full flex items-center justify-center" data-action="a11y-interpreter" type="button">
-<span class="material-symbols-outlined" data-icon="interpreter_mode">interpreter_mode</span>
-</button>
-<button aria-label="Language Options" class="hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors p-2 rounded-full flex items-center justify-center" data-action="language" type="button">
-<span class="material-symbols-outlined" data-icon="language">language</span>
-</button>
-<img alt="National Crest of Tunisia" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="National Crest of Tunisia emblem used as profile picture for a government portal, clean professional design on a white background." src="{{ url_for('static', filename='img/img-636a400a6b6d.jpg') }}"/>
+<div class="pt-md border-t border-outline-variant space-y-xs">
+<a href="{{ url_for('public.contact') }}" class="w-full bg-primary-container text-on-primary py-sm rounded font-label-sm flex items-center justify-center space-x-xs hover:opacity-90 transition-soft">
+<span class="material-symbols-outlined text-[18px]">emergency</span>
+<span>Emergency Support</span>
+</a>
+<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft" href="{{ url_for('public.help_page') }}">
+<span class="material-symbols-outlined mr-md" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Help Center</span>
+</a>
+<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button aria-label="Sign out" class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft" type="submit">
+<span class="material-symbols-outlined mr-md" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm">Sign Out</span>
+</button></form>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen relative z-10 flex flex-col">
+<!-- Top Bar Shell -->
+<header class="bg-primary-container sticky top-0 z-30 border-b border-outline-variant">
+<div class="max-w-container-max mx-auto px-lg py-sm flex justify-between items-center">
+<div class="flex items-center space-x-md">
+<span class="md:hidden material-symbols-outlined text-on-primary-fixed" data-action="menu">menu</span>
+<h2 class="font-headline-md text-headline-md font-bold text-on-primary-fixed tracking-tight">Citizen Portal</h2>
+</div>
+<div class="hidden lg:flex space-x-lg">
+<a class="font-label-sm text-primary-fixed border-b-2 border-tertiary-fixed-dim pb-1 transition-soft" href="{{ url_for('public.index') }}">E-Government</a>
+<a class="font-label-sm text-on-primary-container opacity-80 hover:text-primary-fixed transition-soft" href="{{ url_for('public.open_data') }}">Transparency</a>
+<a class="font-label-sm text-on-primary-container opacity-80 hover:text-primary-fixed transition-soft" href="{{ url_for('public.services') }}">National Services</a>
+</div>
+<div class="flex items-center space-x-md">
+<form action="{{ url_for('public.services') }}" class="hidden sm:flex items-center bg-surface-container-low px-sm py-xs rounded-lg space-x-xs text-on-surface-variant" method="get" role="search">
+<label class="sr-only" for="dashboard-search">Search services</label>
+<button aria-label="Search services" class="material-symbols-outlined text-[20px]" type="submit">search</button>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-32 xl:w-64" id="dashboard-search" name="q" placeholder="Search services..." type="search">
+</form>
+<a aria-label="Notifications{% if unread_count %} ({{ unread_count }} unread){% endif %}" class="text-on-primary-fixed hover:scale-105 transition-all relative" href="{{ url_for('citizen.notifications') }}">
+<span aria-hidden="true" class="material-symbols-outlined">notifications</span>
+{%- if unread_count %}
+<span class="absolute -top-1 -right-1 bg-tertiary-fixed-dim text-on-tertiary-fixed font-label-sm text-[10px] rounded-full min-w-4 h-4 px-1 flex items-center justify-center">{{ unread_count }}</span>
+{%- endif %}
+</a>
+<a aria-label="Account and security settings" class="text-on-primary-fixed hover:scale-105 transition-all" href="{{ url_for('citizen.profile') }}">
+<span aria-hidden="true" class="material-symbols-outlined">security</span>
+</a>
+<a aria-label="Your profile" class="block w-10 h-10 rounded-full border-2 border-primary-fixed overflow-hidden" href="{{ url_for('citizen.profile') }}">
+<img class="w-full h-full object-cover" alt="" src="{{ url_for('static', filename='img/img-e020e64fece9.jpg') }}"/>
+</a>
 </div>
 </div>
 </header>
-<main class="flex-grow flex flex-col md:flex-row max-w-container-max mx-auto w-full px-gutter py-8 gap-8 relative">
-<!-- Main Content Canvas -->
-<div class="flex-grow flex flex-col gap-8">
-<!-- Welcome Section -->
-<section class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 flex flex-col md:flex-row justify-between items-start md:items-center">
-<div>
-<h1 class="text-headline-md font-headline-md text-on-surface mb-2">Welcome{% if profile %}, {{ profile.first_name }} {{ profile.last_name }}{% endif %}</h1>
-<p class="text-body-md font-body-md text-on-surface-variant">Here is a summary of your recent interactions with government services.</p>
+<!-- Dashboard Canvas -->
+<section class="flex-1 p-md lg:p-lg space-y-lg">
+<!-- Greeting & Summary -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="md:col-span-2 space-y-xs">
+<h3 class="font-headline-lg text-headline-lg text-primary tracking-tight">Welcome{% if profile and profile.first_name %}, {{ profile.first_name }}{% endif %}.</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your digital identity and sovereign documents securely.</p>
 </div>
-<div class="mt-4 md:mt-0 flex gap-4">
-<a class="bg-primary hover:bg-on-primary-fixed-variant text-on-primary font-label-md text-label-md px-6 py-2 rounded-DEFAULT transition-colors inline-flex items-center" href="{{ url_for('citizen.profile') }}">Complete Profile</a>
+<!-- Upcoming Appointments Card (Gold Accents) -->
+{%- set next_appointment = appointments[0] if appointments else None %}
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg relative overflow-hidden group hover:shadow-lg transition-soft">
+<div class="absolute top-0 left-0 w-full h-1 bg-tertiary-fixed-dim"></div>
+<div class="flex justify-between items-start mb-sm">
+<span class="font-label-sm text-on-tertiary-container uppercase tracking-wider">Upcoming Appointment</span>
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-tertiary-fixed-dim">event_available</span>
+</div>
+{%- if next_appointment %}
+<p class="font-headline-md text-headline-md text-on-surface mb-xs">{{ next_appointment.service_name or 'Appointment' }}</p>
+<p class="font-label-sm text-on-surface-variant">
+{{- next_appointment.slot_date or '' }}{% if next_appointment.time_slot %} • {{ next_appointment.time_slot }}{% endif %}
+{%- if next_appointment.queue_number %} • Queue {{ next_appointment.queue_number }}{% endif -%}
+                    </p>
+<a href="{{ url_for('citizen.appointments') }}" class="mt-md text-secondary font-bold text-sm hover:underline flex items-center">
+                        View appointment <span aria-hidden="true" class="material-symbols-outlined ml-xs text-[18px]">arrow_forward</span>
+</a>
+{%- else %}
+<p class="font-headline-md text-headline-md text-on-surface mb-xs">Nothing booked</p>
+<p class="font-label-sm text-on-surface-variant">You have no appointments scheduled.</p>
+<a href="{{ url_for('citizen.book_appointment') }}" class="mt-md text-secondary font-bold text-sm hover:underline flex items-center">
+                        Book an appointment <span aria-hidden="true" class="material-symbols-outlined ml-xs text-[18px]">arrow_forward</span>
+</a>
+{%- endif %}
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left: In-Progress & Documents -->
+<div class="lg:col-span-8 space-y-lg">
+<!-- In-Progress Requests -->
+<div class="space-y-md">
+<h4 class="font-headline-md text-headline-md text-primary flex items-center">
+<span class="material-symbols-outlined mr-sm text-secondary">pending_actions</span>
+                            In-Progress Requests
+                        </h4>
+{#- The progress bar reflects where the request sits in the workflow that
+    Watiq.sql seeds, keyed by status name. The widths are spelled out as
+    literal classes because Tailwind scans this file as text — a computed
+    w-[{{ n }}%] would never be generated. An unrecognised status simply gets
+    no bar rather than an invented percentage. -#}
+{%- set progress = {
+  'submitted': 'w-[12%]', 'under review': 'w-[25%]',
+  'pending documents': 'w-[37%]', 'approved': 'w-[50%]',
+  'payment required': 'w-[62%]', 'processing': 'w-[75%]',
+  'ready for pickup': 'w-[87%]', 'completed': 'w-full',
+} %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+{%- for item in requests %}
+{%- set status = (item.status_name or '')|lower %}
+{%- set bar = progress.get(status) %}
+<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg space-y-md">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-headline-md text-sm font-bold text-on-surface">{{ item.service_name or 'Request' }}</p>
+<p class="text-xs text-on-surface-variant">Tracking code: {{ item.tracking_code }}</p>
+</div>
+<span class="px-xs py-1 rounded text-[10px] font-bold uppercase tracking-tighter shrink-0
+{{- ' bg-error-container text-error' if status in ('rejected', 'cancelled') else ' bg-secondary-fixed text-on-secondary-fixed-variant' }}">{{ item.status_name or 'Submitted' }}</span>
+</div>
+{%- if bar %}
+<div class="space-y-xs">
+<div class="flex justify-between text-xs font-label-sm">
+<span>Progress</span>
+<span>{{ item.status_name }}</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="{{ bar }} bg-secondary h-full transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+{%- endif %}
+{%- if status == 'payment required' %}
+<a href="{{ url_for('citizen.payments') }}" class="block text-center w-full py-xs border border-secondary text-secondary font-bold rounded text-sm hover:bg-secondary-fixed/20 transition-soft">
+                                    Pay Fees
+                                </a>
+{%- else %}
+<p class="text-xs text-on-surface-variant flex items-center">
+<span aria-hidden="true" class="material-symbols-outlined text-[14px] mr-1">info</span>
+{%- if item.estimated_ready_date %}
+                                    Expected ready by {{ item.estimated_ready_date }}.
+{%- else %}
+                                    <a class="ml-1 text-secondary hover:underline" href="{{ url_for('citizen.request_detail', request_id=item.id) }}">View details</a>
+{%- endif %}
+                                </p>
+{%- endif %}
+</div>
+{%- else %}
+<div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant p-lg rounded-lg text-center space-y-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-3xl">inbox</span>
+<p class="font-body-md text-body-md text-on-surface-variant">You have no requests in progress.</p>
+<a class="inline-block text-secondary font-bold text-sm hover:underline" href="{{ url_for('public.services') }}">Browse the service catalogue</a>
+</div>
+{%- endfor %}
+</div>
+</div>
+<!-- Recent Documents Bento Grid -->
+<div class="space-y-md">
+<div class="flex justify-between items-end">
+<h4 class="font-headline-md text-headline-md text-primary">Recent Documents</h4>
+<a class="text-secondary font-bold text-sm hover:underline" href="{{ url_for('citizen.requests_list') }}">View Digital Vault</a>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-md">
+{%- for document in documents %}
+<a class="bg-white border border-outline-variant p-md rounded-lg flex flex-col items-center justify-center space-y-sm hover:border-secondary transition-soft group focus:outline-none focus:ring-2 focus:ring-secondary" href="{{ url_for('citizen.download_document', document_id=document.id) }}" rel="noopener" target="_blank">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 duration-150">
+{{- 'image' if (document.mime_type or '').startswith('image/') else 'picture_as_pdf' if document.mime_type == 'application/pdf' else 'history_edu' -}}
+</span>
+<p class="font-label-sm text-center">{{ document.document_type or 'Document' }}</p>
+<p class="text-[10px] text-on-surface-variant text-center">{{ document.request.tracking_code }}</p>
+</a>
+{%- else %}
+<div class="col-span-2 sm:col-span-4 bg-white border border-outline-variant p-lg rounded-lg text-center space-y-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-3xl">folder_open</span>
+<p class="font-label-sm text-on-surface-variant">No documents uploaded yet. They appear here once you attach them to a request.</p>
+</div>
+{%- endfor %}
+</div>
+</div>
+</div>
+<!-- Right: Security Log Sidebar -->
+<div class="lg:col-span-4 space-y-lg">
+<div class="glass-panel p-md rounded-lg flex flex-col h-full border-l-4 border-primary-container">
+{#- The mockup put a per-device security log here — successful logins, failed
+    attempts, session expiries. The access log is staff-only (GET
+    /audit/access-log requires the audit permission), so a citizen has no
+    endpoint behind it and every row would have had to be invented. This shows
+    the citizen's own notification feed instead, which is real and is what
+    tells them something happened to their account. -#}
+<div class="flex items-center space-x-sm mb-md pb-xs border-b border-outline-variant">
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-secondary">notifications_active</span>
+<h4 class="font-headline-md text-sm font-bold text-on-surface">Recent Activity</h4>
+</div>
+<div class="flex-1 space-y-md">
+{%- for note in notifications %}
+<div class="flex space-x-md items-start">
+<div aria-hidden="true" class="w-2 h-2 mt-2 rounded-full shrink-0 {{ 'bg-secondary' if not note.is_read else 'bg-surface-variant' }}"></div>
+<div class="space-y-1">
+<p class="font-label-sm {{ 'text-on-surface' if not note.is_read else 'text-on-surface-variant opacity-60' }}">{{ note.title }}</p>
+{%- if note.message %}
+<p class="text-[11px] text-on-surface-variant">{{ note.message }}</p>
+{%- endif %}
+<p class="text-[10px] text-on-surface-variant font-label-sm uppercase tracking-tight">{{ (note.created_at or '')[:16]|replace('T', ' ') }}</p>
+</div>
+</div>
+{%- else %}
+<p class="font-label-sm text-on-surface-variant">Nothing to report yet.</p>
+{%- endfor %}
+</div>
+<a href="{{ url_for('citizen.notifications') }}" class="mt-lg block text-center w-full py-xs text-on-surface-variant border border-outline-variant rounded font-label-sm text-xs hover:bg-surface-variant transition-soft">
+                            View All Notifications
+                        </a>
+</div>
+</div>
 </div>
 </section>
-<!-- Quick Stats Bento -->
-<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<!-- Active Requests -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 hover:border-secondary hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all flex flex-col justify-between">
-<div class="flex justify-between items-start mb-4">
-<span class="material-symbols-outlined text-primary text-[32px]" data-icon="pending_actions">pending_actions</span>
-<span class="text-display-lg font-display-lg text-on-surface">{{ requests|length }}</span>
+<!-- Footer Shell -->
+<footer class="bg-primary-container border-t border-tertiary-fixed/30 mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg px-lg py-lg max-w-container-max mx-auto text-on-primary-fixed">
+<div class="space-y-sm">
+<h5 class="font-headline-md text-headline-md font-bold text-on-primary-fixed tracking-tight">Watiq</h5>
+<p class="font-label-sm text-label-sm text-on-primary-fixed-variant">Digital Sovereignty Department of the Tunisian Republic.</p>
 </div>
-<div>
-<h3 class="text-label-md font-label-md text-on-surface mb-1">Active Requests</h3>
-<p class="text-label-sm font-label-sm text-on-surface-variant">{% if requests %}{{ requests[0].service_name or 'Request' }} — {{ requests[0].status_name }}.{% else %}No requests in progress.{% endif %}</p>
+<div class="space-y-xs">
+<h6 class="font-label-sm font-bold opacity-60 uppercase tracking-widest text-[10px]">Portal Links</h6>
+<ul class="space-y-1">
+<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.terms') }}">Security Protocols</a></li>
+<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.privacy') }}">Privacy Policy</a></li>
+</ul>
 </div>
+<div class="space-y-xs">
+<h6 class="font-label-sm font-bold opacity-60 uppercase tracking-widest text-[10px]">Resources</h6>
+<ul class="space-y-1">
+<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.accessibility') }}">Accessibility Standards</a></li>
+<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.terms') }}">Legal Notice</a></li>
+</ul>
 </div>
-<!-- Upcoming Appointments -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 hover:border-secondary hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all flex flex-col justify-between">
-<div class="flex justify-between items-start mb-4">
-<span class="material-symbols-outlined text-secondary text-[32px]" data-icon="event">event</span>
-<span class="text-display-lg font-display-lg text-on-surface">{{ appointments|length }}</span>
-</div>
-<div>
-<h3 class="text-label-md font-label-md text-on-surface mb-1">Upcoming Appointments</h3>
-<p class="text-label-sm font-label-sm text-on-surface-variant">{% if appointments %}{{ appointments[0].office_name or 'Office' }}, {{ appointments[0].slot_date }}.{% else %}Nothing scheduled.{% endif %}</p>
-</div>
-</div>
-<!-- New Notifications -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 hover:border-secondary hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all flex flex-col justify-between relative overflow-hidden">
-<div class="absolute top-0 right-0 w-16 h-16 bg-primary-fixed rounded-bl-full -z-10 opacity-50"></div>
-<div class="flex justify-between items-start mb-4 relative z-10">
-<span class="material-symbols-outlined text-primary text-[32px]" data-icon="notifications_active">notifications_active</span>
-<span class="text-display-lg font-display-lg text-on-surface">{{ unread_count or 0 }}</span>
-</div>
-<div class="relative z-10">
-<h3 class="text-label-md font-label-md text-on-surface mb-1">New Notifications</h3>
-<p class="text-label-sm font-label-sm text-on-surface-variant">{% if notifications %}{{ notifications[0].title }}{% else %}Nothing new.{% endif %}</p>
+<div class="flex flex-col justify-end">
+<p class="font-label-sm text-label-sm text-on-primary-fixed-variant opacity-80">
+                        © {{ year }} Tunisian Republic • All Rights Reserved
+                    </p>
 </div>
 </div>
-</section>
-<!-- Quick Actions Grid -->
-<section class="grid grid-cols-2 md:grid-cols-4 gap-4">
-<a class="bg-surface-container-lowest border border-surface-variant hover:border-secondary hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all rounded-lg p-4 flex flex-col items-center justify-center gap-2 text-center group" href="{{ url_for('citizen.submit_request') }}">
-<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors" data-icon="add_circle">add_circle</span>
-<span class="text-label-md font-label-md text-on-surface">New Request</span>
-</a>
-<a class="bg-surface-container-lowest border border-surface-variant hover:border-secondary hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all rounded-lg p-4 flex flex-col items-center justify-center gap-2 text-center group" href="{{ url_for('citizen.book_appointment') }}">
-<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors" data-icon="calendar_add_on">calendar_add_on</span>
-<span class="text-label-md font-label-md text-on-surface">Book Appointment</span>
-</a>
-<a class="bg-surface-container-lowest border border-surface-variant hover:border-secondary hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all rounded-lg p-4 flex flex-col items-center justify-center gap-2 text-center group" href="{{ url_for('public.track') }}">
-<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors" data-icon="track_changes">track_changes</span>
-<span class="text-label-md font-label-md text-on-surface">Track Status</span>
-</a>
-<a class="bg-surface-container-lowest border border-surface-variant hover:border-secondary hover:shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all rounded-lg p-4 flex flex-col items-center justify-center gap-2 text-center group" href="{{ url_for('citizen.requests_list') }}">
-<span class="material-symbols-outlined text-secondary group-hover:text-primary transition-colors" data-icon="folder_open">folder_open</span>
-<span class="text-label-md font-label-md text-on-surface">My Documents</span>
-</a>
-</section>
-</div>
-</main>
-<!-- Footer -->
-<footer class="bg-on-background dark:bg-surface-container-lowest text-on-primary dark:text-on-surface w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center mt-auto border-t-8 border-secondary dark:border-surface-container-high">
-<div class="mb-4 md:mb-0 text-center md:text-left">
-<span class="text-headline-sm font-headline-sm text-on-primary block mb-2">Watiq</span>
-<p class="text-body-md font-body-md opacity-80">© {{ year }} Tunisian Government. Watiq National Portal.</p>
-</div>
-<nav class="flex gap-6 text-label-sm font-label-sm">
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.terms') }}">Legal</a>
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.accessibility') }}">Accessibility</a>
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.contact') }}">Contact Us</a>
-</nav>
 </footer>
-<!-- Accessibility Overlays -->
-<!-- Voice Narration Toggle -->
-<div aria-label="Toggle Screen Reader" class="fixed top-24 right-6 z-40 bg-surface-container-lowest border border-secondary shadow-lg rounded-full p-3 flex items-center justify-center cursor-pointer hover:bg-surface-container transition-colors">
-<span class="material-symbols-outlined text-secondary" data-icon="hearing">hearing</span>
+</main>
+<!-- Floating TSL Sign Language Module -->
+<div class="fixed bottom-lg right-lg z-50 group">
+<div class="glass-panel w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-xl border-2 border-secondary relative hover:w-64 hover:h-48 transition-all duration-300 overflow-hidden" id="tsl-container">
+<!-- Icon/Indicator -->
+<div class="absolute inset-0 flex items-center justify-center group-hover:opacity-0 transition-opacity">
+<span class="material-symbols-outlined text-secondary text-3xl">interpreter_mode</span>
 </div>
-<!-- Sign Language Interpreter Slot -->
-<div class="fixed bottom-6 right-6 w-interpreter-slot-width h-48 bg-black border-2 border-secondary rounded-lg overflow-hidden z-40 shadow-xl hidden md:block">
-<div class="absolute top-2 left-2 bg-primary text-on-primary text-label-sm font-label-sm px-2 py-1 rounded-sm z-10 flex items-center gap-1">
-<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Live Interpreter
-        </div>
-<img alt="Sign Language Interpreter Video Feed" class="w-full h-full object-cover opacity-80" data-alt="A high-contrast video feed frame showing a professional sign language interpreter against a dark grey background. The interpreter is clearly lit, ensuring high visibility of hand gestures for accessibility purposes within a digital portal interface." src="{{ url_for('static', filename='img/img-1a528547ef9a.jpg') }}"/>
+<!-- Expanded Content -->
+<div class="opacity-0 group-hover:opacity-100 p-md flex flex-col space-y-md w-full h-full justify-between pointer-events-none group-hover:pointer-events-auto">
+<div class="flex justify-between items-center">
+<span class="font-label-sm font-bold text-on-surface">TSL Support</span>
+<span class="material-symbols-outlined text-secondary">close</span>
 </div>
+<div class="bg-surface-container rounded h-24 flex items-center justify-center relative">
+<img class="h-full object-contain" alt="A small digital avatar performing Tunisian Sign Language (TSL) in a clear, high-contrast visual style." src="{{ url_for('static', filename='img/img-f39f8dd070ec.jpg') }}"/>
+<div class="absolute bottom-2 right-2 flex space-x-1">
+<div class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
+<div class="anim-delay-200 w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
+<div class="anim-delay-400 w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
+</div>
+</div>
+<p class="text-[10px] font-label-sm text-center">Translation Active (Real-time)</p>
+</div>
+</div>
+</div>
+<!-- Mobile Bottom Nav (Filter Applied: Persistent on Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-primary-container flex justify-around items-center py-sm border-t border-tertiary-fixed/30 z-50">
+<a class="flex flex-col items-center space-y-1 text-primary-fixed" href="{{ url_for('public.index') }}">
+<span class="icon-filled material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center space-y-1 text-on-primary-container opacity-80" href="{{ url_for('public.services') }}">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] font-label-sm">Services</span>
+</a>
+<a class="flex flex-col items-center space-y-1 text-on-primary-container opacity-80" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="text-[10px] font-label-sm">Docs</span>
+</a>
+<a class="flex flex-col items-center space-y-1 text-on-primary-container opacity-80" href="{{ url_for('citizen.profile') }}">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-label-sm">Profile</span>
+</a>
+</nav>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/citizen_dashboard.js') }}" defer></script>
 {% endblock %}

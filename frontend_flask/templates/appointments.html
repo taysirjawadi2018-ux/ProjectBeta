@@ -31,7 +31,7 @@
 <span class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm py-1 px-3 rounded-full">{{ appt.status or 'Booked' }}</span>
 {% if appt.status not in ('cancelled', 'completed') %}
 <form action="{{ url_for('citizen.cancel_appointment', appointment_id=appt.id) }}" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="border border-outline-variant text-on-surface font-label-md text-label-md py-2 px-4 rounded hover:bg-surface-container-low transition-colors focus-ring" type="submit">Cancel</button>
 </form>
 {% endif %}

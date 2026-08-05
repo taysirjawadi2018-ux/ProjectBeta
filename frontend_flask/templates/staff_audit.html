@@ -1,60 +1,294 @@
-{% extends "_page.html" %}
-
-{% block title %}Watiq National Portal - Access Log{% endblock %}
-
-{% block page %}
-<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-variant pb-6">
-<div>
-<h1 class="font-headline-md text-headline-md text-on-surface">Access log</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Who read or changed what, and when.</p>
+{% extends 'base.html' %}
+{% set html_class = 'light tk-auditor-security-dashboard' %}
+{% block title %}Anomalous Access Detection - Sovereign Institutional Pro{% endblock %}
+{% block body_class %}bg-surface font-body-md text-on-surface watermark-bg min-h-screen{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/staff_audit.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<!-- TopNavBar -->
+<header class="bg-primary-container border-b border-secondary/20 shadow-md top-0 sticky z-50 h-20 flex items-center">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary text-3xl">account_balance</span>
+<h1 class="font-headline-md text-xl font-bold text-white uppercase tracking-[0.2em]">Tunisian Republic</h1>
 </div>
-<a class="inline-flex items-center gap-2 text-secondary font-label-md text-label-md hover:text-primary focus-ring rounded-DEFAULT" href="{{ url_for('staff.workbench') }}">
-<span aria-hidden="true" class="material-symbols-outlined">arrow_back</span>
-    Back to workbench
+<nav class="hidden md:flex items-center gap-gutter">
+<a class="text-white/80 hover:text-secondary transition-colors font-label-md text-sm uppercase tracking-wider" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
+<a class="text-white/80 hover:text-secondary transition-colors font-label-md text-sm uppercase tracking-wider" href="{{ url_for('public.services', category='identity') }}">Identity</a>
+<a class="text-white/80 hover:text-secondary transition-colors font-label-md text-sm uppercase tracking-wider" href="{{ url_for('public.services', category='justice') }}">Justice</a>
+<a class="text-white/80 hover:text-secondary transition-colors font-label-md text-sm uppercase tracking-wider" href="{{ url_for('public.services', category='admin') }}">Admin</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-4 py-1.5 bg-secondary/10 border border-secondary/30 rounded-full">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-[10px] font-bold text-secondary uppercase tracking-wider">Sovereign Cloud Secured</span>
+</div>
+<a href="{{ url_for('citizen.notifications') }}" class="p-2 text-white/70 hover:text-secondary transition-all">
+<span class="material-symbols-outlined">notifications</span>
 </a>
+<div class="h-10 w-10 rounded-full border-2 border-secondary overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-994322b696a6.jpg') }}"/>
+</div>
+</div>
+</div>
 </header>
-
-{% if entries %}
+<div class="flex min-h-[calc(100vh-80px)]">
+<!-- SideNavBar -->
+<aside class="w-64 bg-primary/95 text-white/90 border-r border-secondary/20 flex flex-col py-8 gap-2 sticky top-20 h-[calc(100vh-80px)]">
+<div class="px-6 mb-8 border-l-4 border-secondary ml-4">
+<h2 class="font-headline-md text-lg text-secondary">Citizen Space</h2>
+<p class="text-white/50 text-[10px] uppercase tracking-widest mt-1 flex items-center gap-1">
+<span class="icon-filled material-symbols-outlined text-xs">verified_user</span> Secure Session
+            </p>
+</div>
+<nav class="flex-grow px-2">
+<a class="flex items-center gap-3 py-3 px-4 hover:bg-white/5 rounded-lg transition-all font-label-md text-sm" href="{{ url_for('citizen.dashboard') }}">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="flex items-center gap-3 py-3 px-4 bg-secondary text-primary rounded-lg shadow-lg font-bold text-sm" href="{{ url_for('citizen.dashboard') }}">
+<span class="material-symbols-outlined">analytics</span> Auditor Dashboard
+            </a>
+<a class="flex items-center gap-3 py-3 px-4 hover:bg-white/5 rounded-lg transition-all font-label-md text-sm" href="{{ url_for('staff.audit') }}">
+<span class="material-symbols-outlined">security</span> Security Log
+            </a>
+<a class="flex items-center gap-3 py-3 px-4 hover:bg-white/5 rounded-lg transition-all font-label-md text-sm" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined">description</span> Applications
+            </a>
+<a class="flex items-center gap-3 py-3 px-4 hover:bg-white/5 rounded-lg transition-all font-label-md text-sm" href="{{ url_for('citizen.profile') }}">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+</nav>
+<div class="mt-auto pt-8 border-t border-white/10 px-2">
+<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button aria-label="Sign out" class="flex items-center gap-3 py-3 px-4 hover:bg-red-900/20 text-red-200 rounded-lg transition-all font-label-md text-sm" type="submit">
+<span class="material-symbols-outlined">logout</span> Logout
+            </button></form>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-grow p-gutter relative overflow-x-hidden">
+<div class="max-w-container-max mx-auto space-y-gutter">
+<!-- Page Header & Metrics Bar -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-secondary/30 pb-6">
+<div>
+<nav class="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-secondary mb-2">
+<span>Admin</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-primary/60">Anomalous Detection</span>
+</nav>
+<h2 class="font-headline-lg text-3xl font-bold text-primary">Anomalous Access Detection</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-secondary font-bold text-xs uppercase tracking-wider">Institutional Audit Level 4</span>
+<span class="h-1 w-1 bg-secondary rounded-full"></span>
+<span class="text-primary/60 text-xs">A4 Sector Monitoring</span>
+</div>
+</div>
+<!-- Real-time Security Metrics -->
+<div class="flex flex-wrap gap-4">
+<div class="glass-card gold-accent-border px-5 py-4 min-w-[150px]">
+<p class="text-[10px] font-bold text-primary/60 uppercase tracking-widest">RLS Volume</p>
+<p class="text-2xl font-bold text-primary mt-1">2.4M<span class="text-xs text-green-600 font-bold ml-1">▲ 8%</span></p>
+</div>
+<div class="glass-card gold-accent-border px-5 py-4 min-w-[150px]">
+<p class="text-[10px] font-bold text-primary/60 uppercase tracking-widest">Anomalies</p>
+<p class="text-2xl font-bold text-error mt-1">12<span class="text-[10px] text-error/70 font-bold block leading-tight">Critical Alerts</span></p>
+</div>
+<div class="glass-card gold-accent-border px-5 py-4 min-w-[150px]">
+<p class="text-[10px] font-bold text-primary/60 uppercase tracking-widest">Protocols</p>
+<p class="text-2xl font-bold text-primary mt-1">AES-4096</p>
+</div>
+<div class="glass-card gold-accent-border px-5 py-4 min-w-[150px] flex items-center justify-between">
+<div>
+<p class="text-[10px] font-bold text-primary/60 uppercase tracking-widest">RLS Status</p>
+<p class="text-sm font-bold text-green-600 uppercase tracking-tighter mt-1">Isolated</p>
+</div>
+<span class="icon-filled material-symbols-outlined text-green-600">verified</span>
+</div>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="bento-grid">
+<!-- Access Spikes Chart -->
+<div class="col-span-12 lg:col-span-8 glass-card p-8 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-secondary"></div>
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-md text-primary font-bold flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl">analytics</span> Access Frequency Analysis
+                        </h3>
+<div class="flex gap-3">
+<span class="text-[10px] font-bold text-primary bg-secondary/20 px-4 py-1.5 rounded-full border border-secondary/20 uppercase tracking-widest">24H Cycle</span>
+<span class="text-[10px] font-bold text-white bg-primary px-4 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></span> Live
+                            </span>
+</div>
+</div>
+<div class="h-72 flex items-end gap-3 border-b border-l border-secondary/20 px-4 pb-1 relative">
+<!-- Simulated Chart Bars -->
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[40%] rounded-t-sm cursor-help border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[35%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[55%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[45%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-error h-[95%] rounded-t-sm relative shadow-[0_0_25px_rgba(186,26,26,0.2)]">
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-error text-white text-[10px] font-bold px-3 py-1.5 rounded-md whitespace-nowrap shadow-xl border border-white/20">CRITICAL SPIKE (3.2σ)</div>
+</div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[30%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[50%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[42%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[38%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[60%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[52%] rounded-t-sm border-x border-t border-secondary/10"></div>
+<div class="w-full bg-primary/5 hover:bg-secondary/30 transition-all h-[44%] rounded-t-sm border-x border-t border-secondary/10"></div>
+</div>
+<div class="flex justify-between mt-6 px-4 text-[11px] text-primary/40 font-bold uppercase tracking-[0.2em]">
+<span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span>
+</div>
+</div>
+<!-- Real-time Log -->
+<div class="col-span-12 lg:col-span-4 bg-primary-container text-white rounded-xl border border-secondary/20 shadow-2xl flex flex-col h-[480px] overflow-hidden">
+<div class="p-5 border-b border-secondary/20 flex items-center justify-between bg-primary/50">
+<h3 class="text-xs font-bold uppercase tracking-[0.2em] text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm animate-pulse">radio_button_checked</span> Real-time Stream
+                        </h3>
+<span class="text-[9px] font-mono text-secondary/50 uppercase tracking-widest">sec_audit_pro_v4</span>
+</div>
+<div class="flex-grow overflow-y-auto p-5 font-mono text-[12px] space-y-3 custom-scrollbar leading-relaxed" id="access-log">
+<p class="text-green-400/90">[14:22:01] AUTH_SUCCESS: USER_ID=***429 IP=197.***.***.11</p>
+<p class="text-white/40">[14:22:05] GET /api/v1/justice/records/771*** [REDACTED]</p>
+<p class="text-white/40">[14:22:08] GET /api/v1/identity/civil_status [REDACTED]</p>
+<p class="text-error font-bold bg-error/10 border-l-2 border-error pl-3 py-1">[14:22:12] ALERT: ANOMALY - IP_MISMATCH_GEOLOC</p>
+<p class="text-white/40">[14:22:15] GET /api/v1/justice/records/771*** [REDACTED]</p>
+<p class="text-green-400/90">[14:22:20] AUTH_SUCCESS: USER_ID=***912 IP=196.***.***.45</p>
+<p class="text-white/40">[14:22:24] POST /api/v1/admin/access_grant [REDACTED]</p>
+<p class="text-secondary/70 font-bold">[14:22:28] RLS_TRIGGER: SECURITY_POLICY_B4 ACTIVE</p>
+</div>
+<div class="p-4 bg-primary text-[10px] text-center text-white/30 uppercase tracking-widest border-t border-secondary/10">
+                        Encryption: RSA-4096 / AES-256-GCM / SHA-512
+                    </div>
+</div>
+<!-- Staff Table -->
+<div class="col-span-12 glass-card rounded-xl overflow-hidden border border-secondary/20">
+<div class="bg-primary text-secondary p-6 flex items-center justify-between border-b border-secondary/30">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl">shield_person</span>
+<div>
+<h3 class="font-bold uppercase tracking-[0.15em] text-sm">Staff Review Queue</h3>
+<p class="text-[10px] text-white/40 mt-0.5 font-medium">3σ DEVIANCE THRESHOLD MONITORING</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[10px] text-white/50 font-bold uppercase tracking-widest border border-white/20 px-3 py-1 rounded">Filter: HIGH_RISK_ONLY</span>
+</div>
+</div>
 <div class="overflow-x-auto">
-<table class="w-full min-w-[760px] border border-surface-variant rounded-xl overflow-hidden">
-<caption class="sr-only">Access log entries</caption>
-<thead class="bg-surface-container">
+<table class="w-full text-left border-collapse">
+<thead class="bg-primary/5 border-b border-secondary/20">
 <tr>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">When</th>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Actor</th>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Action</th>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Resource</th>
+<th class="p-6 font-bold text-primary/60 uppercase text-[10px] tracking-[0.15em]">Staff Identity</th>
+<th class="p-6 font-bold text-primary/60 uppercase text-[10px] tracking-[0.15em]">Resource</th>
+<th class="p-6 font-bold text-primary/60 uppercase text-[10px] tracking-[0.15em] text-center">Occurred</th>
+<th class="p-6 font-bold text-primary/60 uppercase text-[10px] tracking-[0.15em]">Action</th>
+<th class="p-6 font-bold text-primary/60 uppercase text-[10px] tracking-[0.15em] text-right">Manage</th>
 </tr>
 </thead>
-<tbody>
-{% for e in entries %}
-<tr class="border-t border-surface-variant bg-surface-container-lowest">
-<td class="p-4 font-body-md text-body-md text-on-surface-variant">{{ e.created_at or e.accessed_at }}</td>
-<td class="p-4 font-body-md text-body-md text-on-surface">{{ e.actor_label or e.staff_id or e.user_id or '—' }}</td>
-<td class="p-4 font-body-md text-body-md text-on-surface">{{ e.action }}</td>
-<td class="p-4 font-body-md text-body-md text-on-surface-variant">{{ e.resource_type }}{% if e.resource_id %} #{{ e.resource_id }}{% endif %}</td>
+<tbody class="divide-y divide-secondary/10">
+{%- for entry in entries %}
+{%- set actor = entry.staff_id or entry.user_id %}
+<tr class="hover:bg-secondary/5 transition-colors group">
+<td class="p-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-primary text-secondary flex items-center justify-center font-bold text-xs border border-secondary/30 shadow-sm">{{ 'S' if entry.staff_id else 'C' }}{{ actor or '?' }}</div>
+<div>
+<p class="font-bold text-primary text-sm">{{ 'Staff' if entry.staff_id else 'Citizen' }} #{{ actor or 'unattributed' }}</p>
+<p class="text-[10px] text-primary/40 font-bold tracking-tight">IP: {{ entry.ip_address or 'not recorded' }}</p>
+</div>
+</div>
+</td>
+<td class="p-6 text-primary/80 font-bold text-xs uppercase tracking-wider">{{ entry.resource_type or '-' }}{% if entry.resource_id %} #{{ entry.resource_id }}{% endif %}</td>
+<td class="p-6 text-center text-primary/70 text-xs font-medium tabular-nums">{{ (entry.occurred_at or '')|replace('T', ' ')|truncate(19, true, '') }}</td>
+<td class="p-6">
+<span class="px-4 py-1.5 bg-error/10 text-error text-[10px] font-bold border border-error/20 rounded-sm uppercase tracking-wider">{{ entry.action|replace('_', ' ') }}</span>
+</td>
+<td class="p-6 text-right">
+{%- if entry.staff_id %}
+<form action="{{ url_for('admin.deactivate_staff', staff_id=entry.staff_id) }}" class="inline" data-confirm="Suspend this staff account?" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<button class="bg-primary text-secondary px-6 py-2.5 font-bold text-[10px] uppercase tracking-[0.2em] border border-secondary/40 hover:bg-secondary hover:text-primary transition-all shadow-md active:scale-95" type="submit">Restrict Access</button>
+</form>
+{%- else %}
+<span class="text-[10px] text-primary/30 uppercase tracking-widest">Not a staff action</span>
+{%- endif %}
+</td>
 </tr>
-{% endfor %}
+{%- else %}
+<tr>
+<td class="p-10 text-center text-primary/50 text-xs uppercase tracking-widest" colspan="5">No access-log entries recorded for this period.</td>
+</tr>
+{%- endfor %}
 </tbody>
 </table>
 </div>
-<div class="flex items-center justify-between gap-4">
-<p class="font-label-sm text-label-sm text-on-surface-variant">{{ total }} entries.</p>
-<div class="flex gap-2">
-{% if page > 1 %}
-<a class="inline-flex items-center gap-1 border border-outline-variant text-on-surface font-label-md text-label-md py-2 px-4 rounded hover:bg-surface-container-low transition-colors focus-ring" href="{{ url_for('staff.audit', page=page-1) }}">
-<span aria-hidden="true" class="material-symbols-outlined">chevron_left</span> Previous</a>
-{% endif %}
-{% if entries|length >= 50 %}
-<a class="inline-flex items-center gap-1 border border-outline-variant text-on-surface font-label-md text-label-md py-2 px-4 rounded hover:bg-surface-container-low transition-colors focus-ring" href="{{ url_for('staff.audit', page=page+1) }}">
-Next <span aria-hidden="true" class="material-symbols-outlined">chevron_right</span></a>
-{% endif %}
+<div class="bg-primary/5 p-4 text-center">
+<a href="{{ url_for('staff.audit') }}" class="text-[10px] font-bold text-primary/60 uppercase tracking-[0.25em] hover:text-secondary transition-colors">View All Anomalous Activities (42 Total)</a>
 </div>
 </div>
-{% else %}
-<div class="bg-surface-container-low p-8 rounded-xl border border-surface-variant text-center space-y-3">
-<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-[48px]">history</span>
-<p class="font-body-lg text-body-lg text-on-surface-variant">No entries available, or your role does not include audit access.</p>
 </div>
-{% endif %}
+</div>
+</main>
+</div>
+<!-- Floating TSL Module -->
+<div class="fixed bottom-8 right-8 w-80 glass-card rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,27,61,0.3)] border-2 border-secondary z-[60] group cursor-pointer hover:scale-[1.02] transition-all">
+<div class="aspect-video relative bg-primary-container overflow-hidden">
+<div class="absolute inset-0 bg-primary/30 pointer-events-none group-hover:bg-transparent transition-all duration-500 z-10"></div>
+<img alt="Tunisian Sign Language Interpreter" class="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-700" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<div class="absolute top-3 left-3 bg-secondary text-primary px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest z-20 shadow-lg">TSL Active</div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+<span class="material-symbols-outlined text-white text-4xl shadow-xl">expand_content</span>
+</div>
+</div>
+<div class="p-4 bg-primary text-white border-t border-secondary/30">
+<p class="text-[11px] font-medium leading-relaxed italic text-white/90">"Attention: Unauthorized access attempt detected within the Justice Department data clusters. Initiating audit protocols."</p>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-primary text-white/70 border-t border-secondary/30 w-full py-16 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-2xl">account_balance</span>
+<span class="font-bold text-lg text-white uppercase tracking-[0.2em]">Tunisian Republic</span>
+</div>
+<p class="text-[11px] text-white/40 uppercase tracking-widest leading-loose">
+                Digital Sovereignty Department<br/>
+                Institutional Security Operations Center<br/>
+                © {{ year }} All Rights Reserved
+            </p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-secondary font-bold text-[10px] uppercase tracking-[0.2em] mb-2">Security Protocols</h4>
+<a class="text-[11px] font-medium hover:text-secondary transition-all" href="{{ url_for('public.terms') }}">Cryptographic Standards</a>
+<a class="text-[11px] font-medium hover:text-secondary transition-all" href="{{ url_for('public.terms') }}">Data Locality Policy</a>
+<a class="text-[11px] font-medium hover:text-secondary transition-all" href="{{ url_for('public.terms') }}">Audit Requirements</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-secondary font-bold text-[10px] uppercase tracking-[0.2em] mb-2">Resources</h4>
+<a class="text-[11px] font-medium hover:text-secondary transition-all" href="{{ url_for('public.help_page') }}">Technical Manuals</a>
+<a class="text-[11px] font-medium hover:text-secondary transition-all" href="{{ url_for('public.about') }}">System Status</a>
+<a class="text-[11px] font-medium hover:text-secondary transition-all" href="{{ url_for('public.open_data') }}">API Documentation</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-secondary font-bold text-[10px] uppercase tracking-[0.2em] mb-2">Connect</h4>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-white/40 hover:text-secondary transition-all cursor-pointer">public</span>
+<span class="material-symbols-outlined text-white/40 hover:text-secondary transition-all cursor-pointer">alternate_email</span>
+<span class="material-symbols-outlined text-white/40 hover:text-secondary transition-all cursor-pointer">shield</span>
+</div>
+<div class="mt-4 p-4 bg-white/5 border border-white/10 rounded">
+<p class="text-[10px] text-white/50 leading-relaxed italic">Secure Transmission: All traffic is encrypted via TLS 1.3 / AES-256-GCM.</p>
+</div>
+</div>
+</div>
+</footer>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/staff_audit.js') }}" defer></script>
 {% endblock %}

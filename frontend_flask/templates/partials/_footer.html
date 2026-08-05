@@ -1,20 +1,42 @@
 {#
-  Shared footer for the screens that had no design of their own. Lifted from
-  index.html, with the two dead links now pointing at real pages. The twelve
-  ported mockups keep their own footers (five variants) — this partial does not
-  touch them.
+  Shared footer for the screens that had no design of their own. This is the
+  national-portal footer from the redesign, reduced to the columns those
+  screens need and pointed at real routes. The fifteen ported mockups keep
+  their own footers — this partial does not touch them.
 #}
-<footer class="w-full py-8 px-margin-mobile md:px-margin-desktop bg-secondary dark:bg-on-secondary-fixed-variant text-on-secondary mt-auto">
-<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-<div class="text-headline-sm font-headline-sm font-bold text-on-secondary">Watiq National Portal</div>
-<div class="text-body-md font-body-md">
-                 © {{ year }} Watiq National Portal. Official Tunisian Government Platform.
-             </div>
-<div class="flex flex-wrap justify-center gap-4">
-<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.accessibility') }}">Accessibility</a>
-<a class="text-secondary-fixed-dim hover:text-white transition-colors focus:outline-2 focus:outline-primary-fixed text-label-sm font-label-sm" href="{{ url_for('public.contact') }}">Contact Us</a>
+<footer class="bg-primary-container text-on-primary-fixed w-full py-lg mt-auto border-t border-tertiary-fixed/30">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg px-margin-mobile md:px-gutter max-w-container-max mx-auto">
+<div>
+<span class="font-headline-md text-headline-md font-bold text-on-primary-fixed mb-md block">Watiq</span>
+<p class="font-body-md text-body-md text-on-primary-fixed-variant">Advancing the digital sovereignty of the Tunisian Republic through secure, accessible, and high-performance infrastructure.</p>
 </div>
+<div>
+<h2 class="font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-md">Resources</h2>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.services') }}">National Services Catalog</a></li>
+<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.track') }}">Track a Request</a></li>
+<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.help_page') }}">Help &amp; Support</a></li>
+</ul>
+</div>
+<div>
+<h2 class="font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-md">Sovereignty</h2>
+<ul class="space-y-sm">
+<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.terms') }}">Terms of Service</a></li>
+<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.privacy') }}">Privacy Policy</a></li>
+<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.accessibility') }}">Accessibility Standards</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-md">
+<h2 class="font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-md">Connect</h2>
+<div class="flex gap-md">
+<a aria-label="Accessibility and language options" class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed focus-ring rounded" href="{{ url_for('public.accessibility') }}">language</a>
+<a aria-label="Contact us" class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed focus-ring rounded" href="{{ url_for('public.contact') }}">mail</a>
+<a aria-label="Open data" class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed focus-ring rounded" href="{{ url_for('public.open_data') }}">public</a>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-lg pt-lg border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-md">
+<p class="font-label-sm text-label-sm text-on-primary-fixed-variant opacity-60">© {{ year }} Tunisian Republic • Digital Sovereignty Department</p>
+<a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed underline focus-ring rounded" href="{{ url_for('public.about') }}">About this portal</a>
 </div>
 </footer>

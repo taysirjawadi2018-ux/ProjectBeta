@@ -1,209 +1,302 @@
-{% extends "base.html" %}
-{% set html_class = 'light' %}
-
-{% block title %}Watiq National Portal - Services{% endblock %}
-{% block body_class %}bg-background text-on-surface min-h-screen flex flex-col relative overflow-x-hidden font-body-md text-body-md{% endblock %}
-
+{% extends 'base.html' %}
+{% set html_class = 'light tk-service-catalogue' %}
+{% block title %}Watiq - National Services Catalogue{% endblock %}
+{% block body_class %}min-h-screen flex bg-surface font-body-md text-on-surface{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/citizen_portal.css') }}" rel="stylesheet"/>
 {% endblock %}
-
 {% block content %}
-<!-- TopNavBar -->
-<nav class="bg-surface dark:bg-on-background docked full-width top-0 z-50 sticky border-b border-outline-variant dark:border-outline flat no shadows">
-<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
-<div class="flex items-center gap-4">
-<a aria-label="Watiq Home" class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed focus-ring rounded-DEFAULT flex items-center gap-2" href="{{ url_for('public.index') }}">
-<span aria-hidden="true" class="material-symbols-outlined icon-filled">account_balance</span>
-                    Watiq
-                </a>
+<div class="watermark-bg"></div>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant p-6 space-y-6 fixed left-0 top-0 z-50 overflow-y-auto">
+<div class="flex flex-col items-center py-8 border-b border-outline-variant mb-4">
+<div class="w-16 h-16 bg-primary-container rounded-lg flex items-center justify-center mb-4 shadow-lg">
+<span class="material-symbols-outlined text-white text-3xl">account_balance</span>
 </div>
-<!-- Desktop Nav -->
-<div class="hidden md:flex items-center h-full space-x-6">
-<a aria-current="page" class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 h-full flex items-center font-label-md text-label-md focus-ring px-2 transition-all duration-200 opacity-80" href="{{ url_for('public.services') }}">Services</a>
-<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary h-full flex items-center hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring px-2 rounded-DEFAULT" href="{{ url_for('citizen.requests_list') }}">My Requests</a>
-<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary h-full flex items-center hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring px-2 rounded-DEFAULT" href="{{ url_for('citizen.book_appointment') }}">Appointments</a>
+<h1 class="font-headline-lg text-xl font-bold text-primary tracking-tight">Citizen Space</h1>
+<p class="font-label-sm text-[10px] uppercase tracking-widest opacity-70">Sovereign Portal</p>
 </div>
-<div class="flex items-center gap-2">
-<button aria-label="Accessibility Settings" class="p-2 text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors rounded-full focus-ring" data-action="a11y-narration" type="button">
-<span aria-hidden="true" class="material-symbols-outlined">record_voice_over</span>
-</button>
-<button aria-label="Interpreter Mode" class="p-2 text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors rounded-full focus-ring" data-action="a11y-interpreter" type="button">
-<span aria-hidden="true" class="material-symbols-outlined">interpreter_mode</span>
-</button>
-<button aria-label="Language" class="p-2 text-secondary dark:text-secondary-fixed-dim hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors rounded-full focus-ring" data-action="language" type="button">
-<span aria-hidden="true" class="material-symbols-outlined">language</span>
-</button>
-<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2 flex-shrink-0 bg-surface-container">
-<img alt="National Crest of Tunisia" class="w-full h-full object-cover" data-alt="A small circular icon representing the National Crest of Tunisia in a minimalist, flat design style. The crest features a lion, scales of justice, and a galley ship in subtle gold and red tones against a neutral background." src="{{ url_for('static', filename='img/img-039e78dcc774.jpg') }}"/>
-</div>
-<!-- Mobile Menu Button -->
-<button aria-label="Menu" class="md:hidden p-2 text-secondary focus-ring rounded-full ml-2" data-action="menu" type="button">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all group" href="{{ url_for('citizen.dashboard') }}">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-secondary font-bold border-l-4 border-sovereign-gold bg-secondary/5 rounded-r-lg" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined">apps</span>
+<span class="font-medium">Applications</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all group" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-medium">My Documents</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all group" href="{{ url_for('public.contact') }}">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-medium">Legal Support</span>
+</a>
 </nav>
-<!-- Main Content Canvas -->
-<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-gutter py-margin-desktop space-y-12 pb-32">
-<!-- Hero Section -->
-<section class="bg-surface-container-lowest rounded-xl p-8 md:p-12 interactive-card text-center max-w-4xl mx-auto relative overflow-hidden">
-<!-- Subtle background pattern or tonal shift could go here if needed, keeping it minimal -->
-<div class="relative z-10 space-y-6">
-<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-on-surface mb-4">
-                    What service are you looking for?
-                </h1>
-<p class="text-body-lg font-body-lg text-secondary max-w-2xl mx-auto">
-                    Access government services quickly and securely. Search by keyword or browse categories below.
-                </p>
-<!-- Global Search -->
-<div class="max-w-2xl mx-auto relative group">
-<label class="sr-only" for="global-search">Search services</label>
-<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-<span class="material-symbols-outlined text-secondary">search</span>
-</div>
-<input class="w-full pl-12 pr-4 py-4 rounded-full border-2 border-surface-variant focus:border-primary-container focus:ring-0 bg-surface-container-lowest text-on-surface text-body-lg font-body-lg shadow-sm transition-all focus-ring placeholder-secondary" id="global-search" placeholder="e.g. Renew Passport, Tax Return" type="text"/>
-<button class="absolute inset-y-2 right-2 px-6 bg-primary-container hover:bg-primary text-on-primary rounded-full text-label-md font-label-md transition-colors focus-ring" type="submit">
-                        Search
-                    </button>
-</div>
-</div>
-</section>
-<!-- Service Categories - Bento Grid Style -->
-<section aria-labelledby="categories-heading" class="space-y-6">
-<div class="flex items-center justify-between">
-<h2 class="text-headline-md font-headline-md text-on-surface" id="categories-heading">Browse by Category</h2>
-<a class="text-primary font-label-md text-label-md hover:underline focus-ring rounded-DEFAULT px-2 py-1 flex items-center gap-1" href="{{ url_for('public.services') }}">
-                    View All Services <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+<div class="pt-6 border-t border-outline-variant space-y-1">
+<a href="{{ url_for('public.contact') }}" class="w-full py-3 bg-mediterranean-cerulean text-white rounded font-bold flex items-center justify-center gap-2 mb-4 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">emergency</span>
+                Emergency Support
+            </a>
+{#- The mockup linked a "Security Log" here. /staff/audit is staff-only and
+    answers 404 for a citizen, so this points at the account security panel
+    on the profile page, which is the equivalent a citizen can actually see. -#}
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-surface-variant rounded-lg" href="{{ url_for('citizen.profile') }}">
+<span class="material-symbols-outlined">security</span>
+<span class="font-medium">Account Security</span>
 </a>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Civil Status -->
-<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='civil') }}">
-<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
-<span aria-hidden="true" class="material-symbols-outlined text-[28px]">family_restroom</span>
-</div>
-<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Civil Status</h3>
-<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Birth certificates, marriage registration, and family records.</p>
-</a>
-<!-- Identity -->
-<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='identity') }}">
-<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
-<span aria-hidden="true" class="material-symbols-outlined text-[28px]">id_card</span>
-</div>
-<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Identity</h3>
-<p class="text-body-md font-body-md text-on-surface-variant mt-auto">National ID cards, passports, and digital identity management.</p>
-</a>
-<!-- Transport -->
-<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='transport') }}">
-<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
-<span aria-hidden="true" class="material-symbols-outlined text-[28px]">directions_car</span>
-</div>
-<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Transport</h3>
-<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Driver's licenses, vehicle registration, and traffic fines.</p>
-</a>
-<!-- Taxation -->
-<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='tax') }}">
-<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
-<span aria-hidden="true" class="material-symbols-outlined text-[28px]">account_balance_wallet</span>
-</div>
-<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Taxation</h3>
-<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Tax declarations, payments, and financial certificates.</p>
-</a>
-<!-- Health -->
-<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none" href="{{ url_for('public.services', category='health') }}">
-<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
-<span aria-hidden="true" class="material-symbols-outlined text-[28px]">medical_services</span>
-</div>
-<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Health</h3>
-<p class="text-body-md font-body-md text-on-surface-variant mt-auto">Medical records, insurance status, and clinic appointments.</p>
-</a>
-<!-- Education -->
-<a class="bg-surface-container-lowest p-6 rounded-xl interactive-card flex flex-col h-full focus-ring group decoration-none md:col-span-1 lg:col-span-3" href="{{ url_for('public.services', category='education') }}">
-<div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-<div class="w-12 h-12 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
-<span aria-hidden="true" class="material-symbols-outlined text-[28px]">school</span>
-</div>
-<div>
-<h3 class="text-headline-sm font-headline-sm text-secondary font-bold mb-2 group-hover:text-primary transition-colors">Education &amp; Employment</h3>
-<p class="text-body-md font-body-md text-on-surface-variant">University enrollment, diploma verification, and job seeker registration.</p>
-</div>
-</div>
-</a>
-</div>
-</section>
-<!-- Track Request Section - Asymmetric Layout -->
-<section aria-labelledby="track-heading" class="bg-surface-container-low rounded-xl overflow-hidden border border-surface-variant grid grid-cols-1 md:grid-cols-5">
-<div class="p-8 md:p-12 md:col-span-3 flex flex-col justify-center">
-<div class="flex items-center gap-3 mb-4">
-<span aria-hidden="true" class="material-symbols-outlined text-primary text-3xl">local_shipping</span>
-<h2 class="text-headline-md font-headline-md text-on-surface" id="track-heading">Track Your Request</h2>
-</div>
-<p class="text-body-lg font-body-lg text-on-surface-variant mb-6">
-                    Enter your 12-digit tracking code to check the real-time status of your submitted application or document request.
-                </p>
-<form action="#" class="flex flex-col sm:flex-row gap-4" method="GET">
-<div class="flex-grow">
-<label class="block text-label-md font-label-md text-on-surface mb-1" for="tracking-code">Tracking Code</label>
-<input aria-required="true" class="w-full px-4 py-3 rounded-lg border border-outline focus:border-primary focus:ring-0 bg-surface-container-lowest text-on-surface text-body-md font-body-md focus-ring" id="tracking-code" name="tracking-code" placeholder="e.g. 1234-5678-9012" required="" type="text"/>
-</div>
-<div class="flex items-end">
-<button class="w-full sm:w-auto px-6 py-3 bg-secondary hover:bg-on-secondary-fixed-variant text-on-secondary rounded-lg font-label-md text-label-md transition-colors focus-ring whitespace-nowrap" type="submit">
-                            Check Status
-                        </button>
-</div>
-</form>
-</div>
-<div class="hidden md:block md:col-span-2 relative bg-surface-container">
-<img alt="Tracking illustration" class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A clean, minimalist 3D rendering of a document folder with a magnifying glass hovering over it, set against a soft slate background. The lighting is bright and studio-like, casting soft shadows, emphasizing themes of search, tracking, and government transparency." src="{{ url_for('static', filename='img/img-7cbf358d494a.jpg') }}"/>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-on-background dark:bg-surface-container-lowest mt-auto w-full">
-<div class="w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto border-t-[8px] border-secondary dark:border-surface-container-high flat no shadows">
-<div class="mb-4 md:mb-0 text-center md:text-left">
-<div class="text-headline-sm font-headline-sm text-on-primary font-bold mb-1 flex items-center justify-center md:justify-start gap-2">
-<span aria-hidden="true" class="material-symbols-outlined icon-filled">account_balance</span>
-                    Watiq
-                </div>
-<p class="text-body-md font-body-md text-surface-container dark:text-on-surface-variant">
-                    © {{ year }} Tunisian Government. Watiq National Portal.
-                </p>
-</div>
-<nav aria-label="Footer Navigation">
-<ul class="flex flex-wrap justify-center gap-6">
-<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.terms') }}">Legal</a></li>
-<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.privacy') }}">Privacy Policy</a></li>
-<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.accessibility') }}">Accessibility</a></li>
-<li><a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors text-label-sm font-label-sm focus-ring rounded-DEFAULT p-1" href="{{ url_for('public.contact') }}">Contact Us</a></li>
-</ul>
-</nav>
-</div>
-</footer>
-<!-- Accessibility Overlay: Sign Language Interpreter Placeholder -->
-<aside aria-label="Sign Language Interpreter Video" class="fixed bottom-4 right-4 z-50 w-[320px] rounded-xl overflow-hidden shadow-lg border-2 border-surface-variant bg-surface-container-lowest hidden md:block">
-<div class="bg-secondary text-on-secondary px-3 py-2 flex justify-between items-center cursor-move" id="interpreter-drag-handle">
-<span class="text-label-sm font-label-sm font-bold flex items-center gap-2">
-<span aria-hidden="true" class="material-symbols-outlined text-[16px]">interpreter_mode</span>
-                Sign Language
-            </span>
-<button aria-label="Close Interpreter Video" class="text-on-secondary hover:text-primary-fixed transition-colors focus-ring rounded-full p-1" data-action="dismiss" type="button">
-<span class="material-symbols-outlined text-[16px]">close</span>
-</button>
-</div>
-<div class="aspect-video bg-surface-dim relative">
-<!-- Placeholder for actual video feed -->
-<div class="absolute inset-0 flex items-center justify-center flex-col text-on-surface-variant p-4 text-center">
-<span class="material-symbols-outlined text-4xl mb-2 opacity-50">videocam_off</span>
-<p class="text-label-sm font-label-sm">Interpreter feed placeholder.</p>
-</div>
-<img alt="Sign language interpretation broadcast" class="absolute inset-0 w-full h-full object-cover" data-alt="A professional sign language interpreter, dressed in a minimal navy blue suit, standing in front of a neutral grey background. The lighting is even and soft to ensure hand gestures and facial expressions are clearly visible, representing official government accessibility communications." src="{{ url_for('static', filename='img/img-80cd4f09347d.jpg') }}"/>
+<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button aria-label="Sign out" class="flex items-center gap-3 p-3 text-error hover:bg-error/5 rounded-lg" type="submit">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-medium">Logout</span>
+</button></form>
 </div>
 </aside>
-<!-- Floating Voice Narration Toggle (Top Right, below nav) -->
-<button aria-label="Enable Voice Narration" class="fixed top-20 right-4 z-40 bg-surface-container-lowest border border-outline-variant shadow-sm hover:border-primary-container p-3 rounded-full text-secondary hover:text-primary-container transition-all focus-ring group" title="Enable Voice Narration" data-action="a11y-narration" type="button">
-<span aria-hidden="true" class="material-symbols-outlined">volume_up</span>
-<span class="sr-only">Toggle Screen Reader Audio</span>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 min-h-screen flex flex-col relative">
+<!-- TopAppBar -->
+<header class="bg-primary-container sticky top-0 z-40 h-20 border-b border-outline-variant px-6 md:px-12 flex justify-between items-center w-full">
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-primary-container opacity-80 hover:text-white transition-colors text-sm font-medium" href="{{ url_for('public.index') }}">E-Government</a>
+<a class="text-on-primary-container opacity-80 hover:text-white transition-colors text-sm font-medium" href="{{ url_for('public.open_data') }}">Transparency</a>
+<a class="text-on-primary-container opacity-80 hover:text-white transition-colors text-sm font-medium" href="{{ url_for('public.services') }}">National Services</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<form action="{{ url_for('public.services') }}" class="hidden lg:flex items-center bg-white/10 px-4 py-2 rounded-full border border-white/20 focus-within:border-white transition-all" method="get" role="search">
+<label class="sr-only" for="catalogue-search">Search services</label>
+<button aria-label="Search" class="material-symbols-outlined text-white/60 hover:text-white transition-colors" type="submit">search</button>
+{%- if category %}<input name="category" type="hidden" value="{{ category }}">{% endif %}
+<input class="bg-transparent border-none focus:ring-0 text-white text-sm w-64 ml-2 placeholder:text-white/40" id="catalogue-search" name="q" placeholder="Search services..." type="search" value="{{ query }}">
+</form>
+<div class="flex items-center gap-4">
+<a href="{{ url_for('citizen.notifications') }}" class="w-10 h-10 rounded-full flex items-center justify-center text-white/80 hover:bg-white/10 transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-primary-container"></span>
+</a>
+<a aria-label="Your profile" class="block w-10 h-10 rounded-full border border-white/20 overflow-hidden hover:border-white transition-all" href="{{ url_for('citizen.profile') }}">
+<img alt="" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-747a922b9d4b.jpg') }}"/>
+</a>
+</div>
+</div>
+</header>
+<!-- Service Catalogue Content -->
+<section class="p-6 md:p-12 max-w-container-max mx-auto w-full flex-1">
+<header class="mb-12">
+<nav class="flex items-center gap-2 text-on-surface-variant text-xs font-medium mb-2">
+<span>National Portal</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-secondary">Service Catalogue</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h2 class="font-headline-lg text-4xl text-primary font-extrabold tracking-tight">National Digital Services</h2>
+<p class="text-on-surface-variant text-lg mt-2 font-medium">Access official government resources and institutional applications.</p>
+</div>
+<div class="sovereign-badge text-[10px] font-bold px-4 py-2 rounded-full uppercase tracking-widest text-white flex items-center gap-2">
+<span class="icon-filled material-symbols-outlined text-[16px]">verified_user</span>
+                        Sovereign Encrypted
+                    </div>
+</div>
+</header>
+<!-- Filters -->
+{#- The mockup's second select was "Region". Services in this catalogue are
+    national — the regional dimension belongs to offices, which are chosen
+    later when a request is filed — so that control had nothing to filter on.
+    It is bound to `is_digital` instead, which is the distinction the
+    catalogue actually carries. Both selects submit the form on change; the
+    Apply button is the no-JavaScript fallback. -#}
+<form action="{{ url_for('public.services') }}" class="flex flex-wrap gap-4 items-center mb-10 pb-6 border-b border-outline-variant" method="get">
+{%- if query %}<input name="q" type="hidden" value="{{ query }}">{% endif %}
+<div class="flex items-center gap-3">
+<label class="text-sm font-bold text-primary" for="filter-category">Service Type:</label>
+<select class="bg-surface-container-lowest border-outline-variant rounded py-1.5 px-4 text-sm font-medium focus:ring-secondary focus:border-secondary transition-all" data-action="submit-form" id="filter-category" name="category">
+<option value="">All Categories</option>
+{%- for item in categories %}
+<option value="{{ item.code }}"{% if item.code == category %} selected{% endif %}>{{ item.name_fr or item.name }}</option>
+{%- endfor %}
+</select>
+</div>
+<div class="flex items-center gap-3">
+<label class="text-sm font-bold text-primary" for="filter-delivery">Delivery:</label>
+<select class="bg-surface-container-lowest border-outline-variant rounded py-1.5 px-4 text-sm font-medium focus:ring-secondary focus:border-secondary transition-all" data-action="submit-form" id="filter-delivery" name="delivery">
+<option value="">National Territory</option>
+<option value="digital"{% if delivery == 'digital' %} selected{% endif %}>Fully digital</option>
+<option value="office"{% if delivery == 'office' %} selected{% endif %}>Requires an office visit</option>
+</select>
+</div>
+<button class="ml-auto flex items-center gap-2 text-secondary font-bold text-sm hover:underline decoration-sovereign-gold underline-offset-8 decoration-2 transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Apply Filters
+                </button>
+{%- if query or category or delivery %}
+<a class="flex items-center gap-2 text-on-surface-variant font-bold text-sm hover:text-primary transition-all" href="{{ url_for('public.services') }}">
+<span class="material-symbols-outlined text-[18px]">close</span>
+                    Clear
+                </a>
+{%- endif %}
+</form>
+{#- 12-Column Fluid Grid. The mockup hardcoded four services; the catalogue
+    is served by the API, so the three card archetypes it drew — one feature,
+    one tall companion, then a row of compact tiles — are kept and the real
+    services are dealt into them in order. Category icons come from
+    CategoryOut.icon; `description` is the only long copy the API carries. -#}
+{%- set category_icons = {} %}
+{%- for item in categories %}{% set _ = category_icons.update({item.code: item.icon}) %}{% endfor %}
+{%- if services %}
+<div class="bento-grid">
+{%- for service in services %}
+{%- set icon = category_icons.get(service.category_code) or 'description' %}
+{%- set title = service.name_fr or service.name %}
+{%- set summary = service.description_fr or service.description %}
+{%- set href = url_for('citizen.submit_request', service_id=service.id) %}
+{%- if loop.first %}
+<!-- Featured -->
+<div class="col-span-12 lg:col-span-8 group bg-surface-container-lowest rounded-xl p-10 border border-outline-variant relative overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="absolute top-0 left-0 w-1.5 h-full bg-sovereign-gold"></div>
+<div aria-hidden="true" class="absolute top-0 right-0 w-48 h-48 opacity-[0.03] -mr-8 -mt-8">
+<span class="material-symbols-outlined text-[200px]">public</span>
+</div>
+<div class="relative z-10">
+<div class="w-16 h-16 bg-surface-container-high rounded-lg flex items-center justify-center mb-8 shadow-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-3xl">{{ icon }}</span>
+</div>
+<h4 class="font-headline-lg text-3xl text-primary font-bold mb-4">{{ title }}</h4>
+<p class="text-on-surface-variant text-lg max-w-2xl mb-10 leading-relaxed">{{ summary or 'Official government service. Full details are provided during the application.' }}</p>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 border-t border-outline-variant">
+<div>
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Processing Fee</p>
+<p class="text-2xl font-bold text-sovereign-gold">{% if service.base_fee is not none %}{{ '%.3f'|format(service.base_fee) }} {{ service.currency }}{% else %}Free{% endif %}</p>
+</div>
+<div>
+<p class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Standard Duration</p>
+<p class="text-2xl font-bold text-primary">{% if service.processing_time %}{{ service.processing_time }} Day{{ '' if service.processing_time == 1 else 's' }}{% else %}Immediate{% endif %}</p>
+</div>
+<div class="col-span-2 flex items-center justify-end">
+<a href="{{ href }}" class="bg-primary text-white px-10 py-4 rounded font-bold text-sm hover:bg-midnight-navy hover:shadow-lg transition-all active:scale-95 flex items-center gap-3">
+                                    Initialize Application
+                                    <span aria-hidden="true" class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+{%- elif loop.index == 2 %}
+<!-- Tall companion -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-low rounded-xl p-8 border border-outline-variant flex flex-col justify-between group hover:bg-surface-container transition-all duration-300">
+<div>
+<div class="w-14 h-14 bg-white rounded-lg flex items-center justify-center mb-8 shadow-sm group-hover:scale-110 transition-transform">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary text-2xl">{{ icon }}</span>
+</div>
+<h4 class="font-headline-lg text-2xl text-primary font-bold mb-3">{{ title }}</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-8">{{ summary or 'Official government service.' }}</p>
+</div>
+<div class="pt-6 border-t border-outline-variant/30">
+<div class="flex justify-between items-center mb-6">
+<span class="text-xs font-bold text-on-surface-variant uppercase tracking-widest">{% if service.base_fee is not none %}{{ '%.3f'|format(service.base_fee) }} {{ service.currency }}{% else %}Free{% endif %}</span>
+{%- if service.is_digital %}
+<span class="text-xs font-bold text-secondary uppercase tracking-widest flex items-center gap-1">
+<span aria-hidden="true" class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                Digital Delivery
+                            </span>
+{%- endif %}
+</div>
+<a href="{{ href }}" class="block text-center w-full py-3 border-2 border-primary text-primary rounded font-bold text-sm hover:bg-primary hover:text-white transition-all active:scale-95">
+                            Start Application
+                        </a>
+</div>
+</div>
+{%- else %}
+<!-- Compact tile -->
+<a class="col-span-12 md:col-span-4 bg-white rounded-xl p-8 border border-outline-variant shadow-sm hover:shadow-md transition-all group flex flex-col" href="{{ href }}">
+<span aria-hidden="true" class="material-symbols-outlined text-primary mb-6 text-4xl block group-hover:scale-110 transition-transform">{{ icon }}</span>
+<h5 class="text-xl font-bold text-primary mb-3">{{ title }}</h5>
+<p class="text-sm text-on-surface-variant mb-8 leading-relaxed flex-1">{{ summary or 'Official government service.' }}</p>
+<div class="flex justify-between items-center pt-4 border-t border-outline-variant/30">
+<span class="text-xs font-bold text-secondary uppercase tracking-widest">{% if service.processing_time %}{{ service.processing_time }} Work Day{{ '' if service.processing_time == 1 else 's' }}{% else %}Immediate{% endif %}</span>
+<span aria-hidden="true" class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-all">open_in_new</span>
+</div>
+</a>
+{%- endif %}
+{%- endfor %}
+</div>
+{%- else %}
+<div class="bg-surface-container-lowest rounded-xl p-12 border border-outline-variant text-center">
+<span aria-hidden="true" class="material-symbols-outlined text-outline-variant text-5xl mb-4 block">search_off</span>
+<h4 class="font-headline-lg text-2xl text-primary font-bold mb-3">No services match this search</h4>
+<p class="text-on-surface-variant mb-8">
+{%- if query or category or delivery %}
+                        Nothing in the catalogue matches the filters you applied.
+{%- else %}
+                        The service catalogue is temporarily unavailable. Please try again shortly.
+{%- endif %}
+                    </p>
+{%- if query or category or delivery %}
+<a class="inline-flex items-center gap-2 bg-primary text-white px-8 py-3 rounded font-bold text-sm hover:bg-midnight-navy transition-all" href="{{ url_for('public.services') }}">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">refresh</span>
+                    Show all services
+                </a>
+{%- endif %}
+</div>
+{%- endif %}
+<!-- TSL Module -->
+<div class="fixed bottom-8 right-8 z-50 group">
+<div class="relative overflow-hidden glass-panel rounded-xl shadow-2xl border-2 border-sovereign-gold/30 w-72 h-40 md:w-80 md:h-44 transition-all duration-500 hover:scale-[1.02] hover:border-sovereign-gold">
+<img alt="TSL Sign Language Interpreter" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+<p class="font-label-sm text-[10px] text-white uppercase tracking-widest font-bold">Live Translation — TSL</p>
+</div>
+<div class="absolute top-3 right-3 flex gap-2">
+<button class="bg-primary/90 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-primary transition-all shadow-lg" data-action="a11y-pause" type="button">
+<span class="material-symbols-outlined text-[16px]">pause</span>
 </button>
+<button class="bg-primary/90 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-primary transition-all shadow-lg" data-action="a11y-expand" type="button">
+<span class="material-symbols-outlined text-[16px]">fullscreen</span>
+</button>
+</div>
+</div>
+<div class="absolute -top-4 -right-4 bg-sovereign-gold text-white w-10 h-10 rounded-full flex items-center justify-center shadow-2xl border-4 border-surface ring-2 ring-sovereign-gold/20">
+<span class="icon-filled material-symbols-outlined text-[20px]">interpreter_mode</span>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-16 bg-primary-container text-on-primary-container border-t border-white/10 mt-auto">
+<div class="max-w-container-max mx-auto px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+<div class="flex flex-col gap-4">
+<span class="font-headline-lg text-2xl font-bold text-white tracking-tight">Watiq</span>
+<p class="text-sm font-medium opacity-60">Digital Sovereignty Department</p>
+<p class="text-xs opacity-40 mt-4">© {{ year }} Tunisian Republic. All institutional data is protected by national-grade encryption.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-xs font-bold text-white uppercase tracking-widest mb-2">Legal &amp; Compliance</h4>
+<a class="text-sm hover:text-white transition-all opacity-70" href="{{ url_for('public.terms') }}">Security Protocols</a>
+<a class="text-sm hover:text-white transition-all opacity-70" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="text-sm hover:text-white transition-all font-bold text-sovereign-gold" href="{{ url_for('public.accessibility') }}">Accessibility Standards</a>
+<a class="text-sm hover:text-white transition-all opacity-70" href="{{ url_for('public.terms') }}">Legal Notice</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-xs font-bold text-white uppercase tracking-widest mb-2">Resources</h4>
+<a class="text-sm hover:text-white transition-all opacity-70" href="{{ url_for('public.help_page') }}">User Manuals</a>
+<a class="text-sm hover:text-white transition-all opacity-70" href="{{ url_for('public.open_data') }}">Developer API</a>
+<a class="text-sm hover:text-white transition-all opacity-70" href="{{ url_for('public.index') }}">Institutional Portal</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-xs font-bold text-white uppercase tracking-widest mb-2">Connect</h4>
+<div class="flex gap-6">
+<a aria-label="Open data" class="material-symbols-outlined hover:text-white transition-all opacity-70" href="{{ url_for('public.open_data') }}">public</a>
+<a aria-label="Contact support" class="material-symbols-outlined hover:text-white transition-all opacity-70" href="{{ url_for('public.contact') }}">alternate_email</a>
+<a aria-label="Security and privacy" class="material-symbols-outlined hover:text-white transition-all opacity-70" href="{{ url_for('public.privacy') }}">shield</a>
+</div>
+<div class="mt-4 p-4 bg-white/5 rounded border border-white/10">
+<p class="text-[10px] leading-relaxed opacity-60 italic">Identity transactions on this platform are secured by national-grade end-to-end encryption and biometric verification.</p>
+</div>
+</div>
+</div>
+</footer>
+</main>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/citizen_portal.js') }}" defer></script>
 {% endblock %}

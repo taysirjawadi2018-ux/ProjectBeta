@@ -1,242 +1,382 @@
-{% extends "base.html" %}
-{% set html_class = '' %}
-
-{% block title %}Watiq - Book Appointment{% endblock %}
-{% block body_class %}bg-background text-on-background min-h-screen flex flex-col relative font-body-md{% endblock %}
-
+{% extends 'base.html' %}
+{% set html_class = 'light tk-searchabale-appointment-map' %}
+{% block title %}Passport Booking - Sovereign Citizen Portal{% endblock %}
+{% block body_class %}bg-surface text-on-surface{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/book_appointment.css') }}" rel="stylesheet"/>
 {% endblock %}
-
 {% block content %}
-<!-- TopNavBar -->
-<header class="bg-surface dark:bg-on-background docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows z-50">
-<div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-16">
-<div class="flex items-center gap-8">
-<a class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed" href="{{ url_for('public.index') }}">Watiq</a>
-<nav class="hidden md:flex gap-6">
-<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors py-2 px-1 rounded-DEFAULT" href="{{ url_for('public.services') }}">Services</a>
-<a class="text-secondary dark:text-secondary-fixed-dim font-label-md hover:text-primary hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors py-2 px-1 rounded-DEFAULT" href="{{ url_for('citizen.requests_list') }}">My Requests</a>
-<a aria-current="page" class="text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 font-label-md opacity-80 transition-all duration-200 py-2 px-1 rounded-DEFAULT" href="{{ url_for('citizen.book_appointment') }}">Appointments</a>
+<!-- Institutional Watermark -->
+<img alt="National Emblem of Tunisia" class="institutional-watermark" src="{{ url_for('static', filename='img/img-390468e5c770.jpg') }}"/>
+<!-- SideNavBar -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant shadow-md flex-col py-8 gap-2 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-xl font-bold text-primary uppercase tracking-tight">Citizen Space</h1>
+<p class="text-[10px] text-secondary font-bold uppercase tracking-wider">Secure Session Active</p>
+</div>
+<nav class="flex-grow flex flex-col gap-1 px-3">
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="{{ url_for('citizen.dashboard') }}">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="bg-primary text-on-primary shadow-lg flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="{{ url_for('citizen.appointments') }}">
+<span class="material-symbols-outlined mr-3 text-tertiary">calendar_month</span>
+<span class="text-sm font-semibold">Appointments</span>
+</a>
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined mr-3">description</span>
+<span class="text-sm font-semibold">Applications</span>
+</a>
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined mr-3">folder_shared</span>
+<span class="text-sm font-semibold">My Documents</span>
+</a>
+<a class="text-on-surface/70 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg transition-all duration-200" href="{{ url_for('public.contact') }}">
+<span class="material-symbols-outlined mr-3">gavel</span>
+<span class="text-sm font-semibold">Legal Support</span>
+</a>
 </nav>
+<!-- TSL Accessibility Widget -->
+<div class="px-4 mb-4">
+<div class="rounded-lg overflow-hidden border border-outline-variant bg-white p-2 shadow-sm">
+<p class="text-[9px] uppercase tracking-widest text-primary mb-2 font-bold px-1">Sign Language Support</p>
+<div class="aspect-video bg-black rounded relative overflow-hidden group cursor-pointer">
+<img alt="Tunisian Sign Language Video Support" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<div class="absolute inset-0 flex items-center justify-center bg-primary/20">
+<span class="material-symbols-outlined text-white text-3xl drop-shadow-md">play_circle</span>
 </div>
+</div>
+</div>
+</div>
+<div class="mt-auto border-t border-outline-variant pt-4 px-3 flex flex-col gap-1">
+{#- The mockup linked a "Security Log" here. /staff/audit is staff-only and
+    answers 404 for a citizen, so this points at the account security panel
+    on the profile page, which is the equivalent a citizen can actually see. -#}
+<a class="text-on-surface/60 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg" href="{{ url_for('citizen.profile') }}">
+<span class="material-symbols-outlined mr-3">security</span>
+<span class="text-sm font-semibold text-primary">Account Security</span>
+</a>
+<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button aria-label="Sign out" class="text-on-surface/60 hover:bg-surface-container-high flex items-center px-4 py-3 rounded-lg" type="submit">
+<span class="material-symbols-outlined mr-3">logout</span>
+<span class="text-sm font-semibold">Logout</span>
+</button></form>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md border-b border-outline-variant h-20 flex justify-between items-center px-margin-mobile lg:px-margin-desktop sticky top-0 z-40">
 <div class="flex items-center gap-4">
-<div class="hidden sm:flex gap-2 text-primary dark:text-primary-fixed-dim">
-<button aria-label="Voice Over" class="p-2 hover:bg-surface-container-low rounded-full transition-colors focus-ring" data-action="a11y-narration" type="button">
-<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
-</button>
-<button aria-label="Interpreter Mode" class="p-2 hover:bg-surface-container-low rounded-full transition-colors focus-ring" data-action="a11y-interpreter" type="button">
-<span class="material-symbols-outlined" data-icon="interpreter_mode">interpreter_mode</span>
-</button>
-<button aria-label="Language" class="p-2 hover:bg-surface-container-low rounded-full transition-colors focus-ring" data-action="language" type="button">
-<span class="material-symbols-outlined" data-icon="language">language</span>
-</button>
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg shadow-md border-b-2 border-tertiary">
+<span class="icon-filled material-symbols-outlined text-tertiary">shield</span>
 </div>
-<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant flex-shrink-0">
-<img alt="National Crest of Tunisia" class="w-full h-full object-cover" data-alt="The National Crest of Tunisia, a professional, high-contrast vector illustration used as an avatar. Set against a clean white background in a well-lit, minimalist UI style. The crest is sharp and authoritative, representing institutional trust and clarity." src="{{ url_for('static', filename='img/img-e8d2b46fe000.jpg') }}"/>
+<div class="flex flex-col">
+<span class="text-sm lg:text-lg font-extrabold text-primary uppercase tracking-widest">Republic of Tunisia</span>
+<span class="text-[10px] font-bold text-tertiary uppercase tracking-tighter">Ministry of Interior</span>
+</div>
+</div>
+<div class="flex items-center gap-4 lg:gap-6">
+<div class="hidden md:flex items-center gap-2 px-4 py-2 bg-surface-container rounded-full border border-outline-variant">
+<span class="icon-filled material-symbols-outlined text-tertiary text-sm">verified_user</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-primary">Sovereign Cloud Secured</span>
+</div>
+<div class="flex items-center gap-3">
+<a href="{{ url_for('citizen.notifications') }}" class="w-10 h-10 rounded-full hover:bg-surface-container-high flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</a>
+<div class="w-10 h-10 rounded-full border-2 border-tertiary overflow-hidden shadow-sm">
+<img alt="Citizen Profile" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-4c9acf02e04b.jpg') }}"/>
 </div>
 </div>
 </div>
 </header>
-<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-<!-- Main Content Area -->
-<div class="lg:col-span-8 flex flex-col gap-8">
-<!-- Page Header -->
-<div>
-<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg-mobile md:font-display-lg text-on-background mb-2">Book an Appointment</h1>
-<p class="text-body-lg font-body-lg text-on-surface-variant">Schedule an in-person visit at a government office for services that require physical verification or document collection.</p>
-</div>
-<!-- Stepper -->
-<div class="flex items-center justify-between relative mb-4">
-<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-0.5 bg-outline-variant z-0"></div>
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full flex items-center justify-center border-2 step-completed font-label-md font-bold">1</div>
-<span class="text-label-sm font-label-sm text-on-background hidden sm:block">Service</span>
-</div>
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full flex items-center justify-center border-2 step-active font-label-md font-bold">2</div>
-<span class="text-label-sm font-label-sm text-on-background hidden sm:block font-bold">Location</span>
-</div>
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full flex items-center justify-center border-2 step-inactive font-label-md font-bold">3</div>
-<span class="text-label-sm font-label-sm text-on-surface-variant hidden sm:block">Date &amp; Time</span>
-</div>
-<div class="relative z-10 flex flex-col items-center gap-2">
-<div class="w-8 h-8 rounded-full flex items-center justify-center border-2 step-inactive font-label-md font-bold">4</div>
-<span class="text-label-sm font-label-sm text-on-surface-variant hidden sm:block">Review</span>
-</div>
-</div>
-<!-- Flow Content Container -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6 lg:p-8">
-<h2 class="text-headline-sm font-headline-sm text-on-background mb-6">Select Office Location</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-<div class="flex flex-col gap-2">
-<label class="text-label-md font-label-md text-on-background" for="governorate">Governorate</label>
-<select class="w-full h-12 px-4 border border-outline-variant rounded-DEFAULT bg-surface text-body-md focus-ring focus:border-transparent outline-none" id="governorate">
-<option value="">Select Governorate</option>
-{%- for gov in offices | map(attribute='governorate') | select | unique | sort %}
-<option value="{{ gov }}">{{ gov }}</option>
-{%- endfor %}
-</select>
-</div>
-<div class="flex flex-col gap-2">
-<label class="text-label-md font-label-md text-on-background" for="delegation">Delegation (Optional)</label>
-<select class="w-full h-12 px-4 border border-outline-variant rounded-DEFAULT bg-surface text-body-md focus-ring focus:border-transparent outline-none" id="delegation">
-<option value="">All Delegations</option>
-<option value="carthage">Carthage</option>
-<option value="el-menzah">El Menzah</option>
-</select>
-</div>
-</div>
-<!-- Bento Map/List Layout -->
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 h-[400px]">
-<!-- List View -->
-<div class="lg:col-span-1 overflow-y-auto flex flex-col gap-3 pr-2 custom-scrollbar">
-<!-- Office list: GET /api/v1/catalog/offices -->
-{%- for office in offices %}
-<label class="block relative cursor-pointer group">
-<input class="peer sr-only" form="booking-form" name="office_id" type="radio" value="{{ office.id }}"{% if selected.office_id == office.id %} checked=""{% endif %}/>
-<div class="p-4 border border-outline-variant rounded-lg bg-surface-container-lowest card-hover peer-checked:border-primary peer-checked:bg-primary-fixed peer-checked:text-on-primary-fixed transition-colors">
-<div class="flex justify-between items-start mb-1">
-<h3 class="text-label-md font-label-md text-on-background group-hover:text-on-secondary-fixed">{{ office.name }}</h3>
-<span class="material-symbols-outlined text-outline text-[20px]" data-icon="location_on">location_on</span>
-</div>
-<p class="text-body-md font-body-md text-on-surface-variant text-sm mb-2">{{ office.address or office.city or '' }}{% if office.governorate %}, {{ office.governorate }}{% endif %}</p>
-<div class="flex items-center gap-1 text-label-sm font-label-sm text-secondary">
-<span class="material-symbols-outlined text-[16px]" data-icon="directions_walk">directions_walk</span>
-<span>{{ office.city or office.governorate or '' }}</span>
-</div>
-</div>
-</label>
+<!-- Booking Workflow Container -->
+<div class="flex-grow p-margin-mobile lg:p-margin-desktop max-w-container-max mx-auto w-full">
+{#- The wizard runs on the query string, not on JavaScript: no office_id is
+    step 1, an office without a chosen slot is step 2, a slot is step 3. The
+    mockup drove the same three sections from a script over hardcoded offices,
+    slots and a fixed October 2024 calendar. -#}
+{%- set step = 3 if slot else 2 if office else 1 %}
+<!-- Workflow Navigation -->
+<div class="mb-12 flex justify-center">
+<ol class="flex items-center gap-4 lg:gap-12">
+{%- for index, label in [(1, 'Office'), (2, 'Schedule'), (3, 'Confirm')] %}
+{%- if index > 1 %}
+<li aria-hidden="true" class="h-[2px] w-8 lg:w-20 bg-outline-variant mt-[-18px]"></li>
+{%- endif %}
+<li class="flex flex-col items-center gap-2">
+{%- if index < step %}
+<span class="w-10 h-10 rounded-full bg-tertiary text-white flex items-center justify-center font-bold text-lg shadow-lg border-2 border-tertiary">
+<span aria-hidden="true" class="material-symbols-outlined text-white text-lg">check</span>
+</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">{{ label }}</span>
+{%- elif index == step %}
+<span aria-current="step" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-lg shadow-lg border-2 border-tertiary">{{ index }}</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">{{ label }}</span>
 {%- else %}
-<p class="p-4 font-body-md text-body-md text-on-surface-variant">No offices available.</p>
+<span class="w-10 h-10 rounded-full border-2 border-outline-variant text-on-surface/40 flex items-center justify-center font-bold text-lg bg-white">{{ index }}</span>
+<span class="text-[10px] font-bold text-on-surface/40 uppercase tracking-widest">{{ label }}</span>
+{%- endif %}
+</li>
 {%- endfor %}
+</ol>
 </div>
-<!-- Map View Placeholder -->
-<div class="lg:col-span-2 rounded-lg overflow-hidden border border-surface-variant relative bg-surface-container-low hidden md:block">
-<img class="w-full h-full object-cover" data-alt="A clean, minimalist digital map of Tunis, Tunisia. The map uses a light-mode color palette with soft gray roads, subtle blue water features, and pure white blocks for landmasses to ensure high contrast and readability. A prominent, bold red location pin marks the Bardo Regional Bureau, standing out clearly against the professional, uncluttered background." data-location="Tunis" src="{{ url_for('static', filename='img/img-396a29717c55.jpg') }}"/>
-<!-- Overlay map controls -->
-<div class="absolute bottom-4 right-4 flex flex-col gap-2">
-<button class="w-10 h-10 bg-surface-container-lowest rounded-DEFAULT border border-surface-variant shadow-sm flex items-center justify-center hover:bg-surface-container-low focus-ring text-on-background" data-action="step-up" type="button">
-<span class="material-symbols-outlined" data-icon="add">add</span>
-</button>
-<button class="w-10 h-10 bg-surface-container-lowest rounded-DEFAULT border border-surface-variant shadow-sm flex items-center justify-center hover:bg-surface-container-low focus-ring text-on-background" data-action="step-down" type="button">
-<span class="material-symbols-outlined" data-icon="remove">remove</span>
-</button>
+{% include 'partials/_flash.html' %}
+{%- if step == 1 %}
+<!-- Step 1: Office Selection -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="step-1">
+<div class="md:col-span-12 mb-6">
+<h2 class="text-2xl lg:text-3xl font-extrabold text-primary mb-1">Select Appointment Office</h2>
+<p class="text-sm lg:text-lg text-on-surface/70">Choose the office where you would like to be seen.</p>
 </div>
+<!-- Search -->
+<form action="{{ url_for('citizen.book_appointment') }}" class="md:col-span-12 mb-6 flex flex-col md:flex-row gap-4" method="get" role="search">
+<div class="relative flex-grow">
+<label class="sr-only" for="office-search">Search offices</label>
+<span aria-hidden="true" class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface/40">search</span>
+<input class="w-full pl-12 pr-4 py-4 rounded-lg border border-outline-variant bg-white focus:ring-2 focus:ring-secondary focus:border-secondary transition-all shadow-sm" id="office-search" name="q" placeholder="Search by city, governorate, or office name..." type="search" value="{{ q }}">
 </div>
-</div>
-<!-- Available times: GET /api/v1/appointments/slots
-     The mockup only designed step 1 (choose an office); date and time were a
-     later step that was never drawn. This uses the same card treatment as the
-     office list so it sits inside the existing design language. -->
-<h2 class="text-headline-sm font-headline-sm text-on-background mt-8 mb-6">Select Date &amp; Time</h2>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-{%- for slot in slots %}
-<label class="block relative cursor-pointer group">
-<input class="peer sr-only" form="booking-form" name="slot_id" required="" type="radio" value="{{ slot.id }}"/>
-<div class="p-4 border border-outline-variant rounded-lg bg-surface-container-lowest card-hover peer-checked:border-primary peer-checked:bg-primary-fixed peer-checked:text-on-primary-fixed transition-colors">
-<div class="flex items-center gap-2 mb-1">
-<span class="material-symbols-outlined text-outline text-[20px]" data-icon="event">event</span>
-<span class="text-label-md font-label-md text-on-background">{{ slot.slot_date }}</span>
-</div>
-<p class="text-body-md font-body-md text-on-surface-variant">{{ slot.time_slot }}</p>
-<p class="text-label-sm font-label-sm text-secondary mt-1">{{ slot.seats_left }} of {{ slot.capacity }} places left</p>
-</div>
-</label>
-{%- else %}
-<p class="sm:col-span-2 lg:col-span-3 p-4 font-body-md text-body-md text-on-surface-variant">
-                            No times are available for this selection. Choose a different office, or check back later.
-                        </p>
-{%- endfor %}
-</div>
-<form action="{{ url_for('citizen.book_appointment') }}" id="booking-form" method="post">
-<input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+<button class="flex items-center justify-center gap-2 px-8 py-4 bg-white border border-outline-variant rounded-lg hover:bg-surface-container-high transition-all font-bold text-primary shadow-sm" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary">filter_list</span>
+                        Search
+                    </button>
 </form>
-<!-- Navigation Actions -->
-<div class="mt-8 pt-6 border-t border-surface-variant flex justify-between items-center">
-<button class="px-6 py-3 border border-secondary text-secondary font-label-md bg-transparent rounded-DEFAULT hover:bg-surface-container-low transition-colors focus-ring" data-action="step-back" type="button">Back</button>
-<button form="booking-form" class="px-6 py-3 bg-primary text-on-primary font-label-md rounded-DEFAULT hover:bg-on-primary-fixed-variant transition-colors shadow-sm focus-ring" type="submit">Continue to Date &amp; Time</button>
-</div>
-</div>
-</div>
-<!-- Sidebar / Contextual Information -->
-<div class="lg:col-span-4 flex flex-col gap-6">
-<!-- Summary Card -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6">
-<h3 class="text-headline-sm font-headline-sm text-on-background border-b border-surface-variant pb-4 mb-4">Booking Summary</h3>
-<div class="flex flex-col gap-4">
+<!-- Illustrative map. The office network is listed beside it; nothing on the
+     image is clickable, so no pin claims to be a real location. -->
+<div class="md:col-span-8 h-[500px] lg:h-[650px] rounded-xl overflow-hidden border border-outline-variant bg-white secure-shadow relative">
+<div class="absolute top-4 left-4 z-10 glass-panel p-3 border-l-4 border-tertiary rounded shadow-lg">
+<div class="flex items-center gap-3">
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-tertiary">location_on</span>
 <div>
-<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Service Selected</p>
-<p class="text-body-md font-body-md text-on-background font-medium">{% set svc = services | selectattr('id', 'equalto', selected.service_id) | first %}{{ svc.name if svc else 'Not selected yet' }}</p>
+<p class="text-[9px] font-bold text-primary uppercase tracking-widest">Office Network</p>
+<p class="font-bold text-xs">{{ offices|length }} office{{ '' if offices|length == 1 else 's' }} nationwide</p>
 </div>
+</div>
+</div>
+<div class="w-full h-full bg-[#f0f2f5] relative">
+<img alt="" class="w-full h-full object-cover grayscale-[0.2] contrast-[0.9]" src="{{ url_for('static', filename='img/img-cee0cf905f74.jpg') }}"/>
+</div>
+</div>
+<!-- Office Details Side-Panel -->
+<div class="md:col-span-4 flex flex-col gap-4 max-h-[650px] overflow-y-auto">
+{%- for item in offices %}
+<a class="bg-white p-6 rounded-xl border border-outline-variant hover:border-tertiary transition-all group block focus:outline-none focus:ring-2 focus:ring-secondary{{ ' secure-shadow sovereign-header border-t-primary' if loop.first }}" href="{{ url_for('citizen.book_appointment', office_id=item.id) }}">
+<div class="flex justify-between items-start mb-4">
 <div>
-<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Location</p>
-<p class="text-body-md font-body-md text-on-background font-medium">{% set off = offices | selectattr('id', 'equalto', selected.office_id) | first %}{{ off.name if off else 'Not selected yet' }}</p>
+<h3 class="text-lg font-bold text-primary">{{ item.name_fr or item.name }}</h3>
+<p class="text-xs text-on-surface/60">{{ item.address or item.city }}{% if item.governorate %}, {{ item.governorate }}{% endif %}</p>
 </div>
+<span class="bg-tertiary/10 text-tertiary text-[9px] font-extrabold px-2 py-1 rounded uppercase tracking-widest border border-tertiary/20 shrink-0">{{ item.type or 'Office' }}</span>
+</div>
+<div class="flex flex-wrap items-center gap-4 text-[10px] font-bold text-on-surface/60 uppercase tracking-wider">
+{%- if item.phone %}
+<span class="flex items-center gap-2"><span aria-hidden="true" class="material-symbols-outlined text-sm text-secondary">call</span> {{ item.phone }}</span>
+{%- endif %}
+<span class="flex items-center gap-2 text-primary"><span aria-hidden="true" class="icon-filled material-symbols-outlined text-sm text-tertiary">event_available</span> Check availability</span>
+</div>
+</a>
+{%- else %}
+<div class="bg-white p-8 rounded-xl border border-outline-variant text-center">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface/40 text-4xl">location_off</span>
+<p class="text-sm text-on-surface/70 mt-2">{% if q %}No office matches “{{ q }}”.{% else %}The office directory is unavailable right now.{% endif %}</p>
+{%- if q %}
+<a class="inline-block mt-4 text-secondary font-bold text-xs uppercase tracking-widest hover:underline" href="{{ url_for('citizen.book_appointment') }}">Show all offices</a>
+{%- endif %}
+</div>
+{%- endfor %}
+</div>
+</section>
+{%- elif step == 2 %}
+<!-- Step 2: Date & Time -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter" id="step-2">
+<div class="lg:col-span-12 mb-6 flex items-center gap-4">
+<a aria-label="Back to office selection" class="w-12 h-12 rounded-lg border border-outline-variant flex items-center justify-center hover:bg-surface-container-high transition-all bg-white shadow-sm" href="{{ url_for('citizen.book_appointment') }}">
+<span aria-hidden="true" class="material-symbols-outlined text-primary">arrow_back</span>
+</a>
 <div>
-<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Date &amp; Time</p>
-<p class="text-body-md font-body-md text-on-surface-variant italic">To be selected</p>
+<h2 class="text-2xl lg:text-3xl font-extrabold text-primary">Schedule Appointment</h2>
+<p class="text-sm lg:text-lg text-on-surface/70">Location: <span class="font-bold text-secondary">{{ office.name_fr or office.name }}</span></p>
+</div>
+</div>
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Calendar Panel -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant secure-shadow sovereign-header">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-xl font-bold text-primary uppercase tracking-tight">{{ slot_date.strftime('%B %Y') }}</h3>
+<div class="flex gap-2">
+{%- if week[0] > today %}
+<a aria-label="Previous week" class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=prev_week) }}"><span aria-hidden="true" class="material-symbols-outlined text-primary">chevron_left</span></a>
+{%- else %}
+<span aria-hidden="true" class="p-2 border border-outline-variant rounded opacity-30"><span class="material-symbols-outlined text-primary">chevron_left</span></span>
+{%- endif %}
+<a aria-label="Next week" class="p-2 border border-outline-variant rounded hover:bg-surface-container-high transition-colors" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=next_week) }}"><span aria-hidden="true" class="material-symbols-outlined text-primary">chevron_right</span></a>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-3">
+{%- for day in week %}
+{%- if day < today %}
+<div class="flex flex-col items-center p-3 rounded-lg border border-outline-variant opacity-30 bg-surface-container-low"><span class="text-[9px] font-bold uppercase">{{ day.strftime('%a %d') }}</span></div>
+{%- elif day == slot_date %}
+<div aria-current="date" class="flex flex-col items-center p-4 rounded-lg border-2 border-tertiary bg-primary text-white shadow-xl scale-105">
+<span class="text-[9px] font-bold uppercase text-tertiary mb-1">{{ day.strftime('%a') }}</span>
+<span class="text-2xl font-bold">{{ day.day }}</span>
+</div>
+{%- else %}
+<a class="flex flex-col items-center p-3 rounded-lg border border-outline-variant hover:border-secondary hover:bg-surface-container-high transition-all bg-white focus:outline-none focus:ring-2 focus:ring-secondary" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=day.isoformat()) }}">
+<span class="text-[9px] font-bold uppercase text-on-surface/60 mb-1">{{ day.strftime('%a') }}</span>
+<span class="text-xl font-bold text-primary">{{ day.day }}</span>
+</a>
+{%- endif %}
+{%- endfor %}
+</div>
+</div>
+<!-- Slot Grid -->
+<div class="bg-white p-8 rounded-xl border border-outline-variant shadow-sm">
+<h3 class="text-sm font-bold text-primary mb-6 flex items-center gap-3 uppercase tracking-widest">
+<span aria-hidden="true" class="w-1 h-4 bg-tertiary rounded-full"></span>
+                            Available Slots • {{ slot_date.strftime('%d %b') }}
+                        </h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+{%- for item in slots %}
+{%- set full = item.seats_left is not none and item.seats_left < 1 %}
+{%- if full %}
+<span class="py-4 rounded-lg border border-outline-variant bg-surface-container-low text-on-surface/30 font-bold cursor-not-allowed line-through text-sm text-center block">{{ item.time_slot }}</span>
+{%- else %}
+<a class="py-4 rounded-lg border-2 border-outline-variant hover:border-secondary font-bold text-primary transition-all bg-white text-sm text-center block focus:outline-none focus:ring-2 focus:ring-secondary" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=slot_date.isoformat(), slot_id=item.id) }}">
+{{ item.time_slot }}
+{%- if item.seats_left is not none %}<span class="block text-[9px] font-medium text-on-surface/50 uppercase tracking-widest mt-1">{{ item.seats_left }} left</span>{% endif %}
+</a>
+{%- endif %}
+{%- else %}
+<p class="col-span-2 md:col-span-4 text-sm text-on-surface/70 text-center py-6">No slots are open at this office on {{ slot_date.strftime('%d %B') }}. Try another day.</p>
+{%- endfor %}
 </div>
 </div>
 </div>
-<!-- Payment Info Card (Contextual) -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
-<h3 class="text-label-md font-label-md text-on-background">Payment Required</h3>
+<div class="lg:col-span-4">
+<div class="bg-primary text-white p-8 rounded-xl border-b-4 border-tertiary shadow-xl sticky top-24">
+<div class="flex items-center gap-3 mb-6">
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-tertiary">security</span>
+<span class="font-bold uppercase text-[10px] tracking-widest">What to bring</span>
 </div>
-<p class="text-body-md font-body-md text-on-surface-variant mb-4">This service requires a booking fee. Payment will be collected in the final step.</p>
-<div class="flex justify-between items-center border-t border-surface-variant pt-4">
-<span class="text-body-md font-body-md text-on-background">Booking Fee</span>
-<span class="text-label-md font-label-md text-on-background font-bold">{% if svc and svc.base_fee %}{{ '%.2f'|format(svc.base_fee) }} {{ svc.currency or 'TND' }}{% else %}—{% endif %}</span>
-</div>
-</div>
-<!-- Required Documents -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-6">
-<div class="flex items-center gap-3 mb-4">
-<span class="material-symbols-outlined text-secondary" data-icon="description">description</span>
-<h3 class="text-label-md font-label-md text-on-background">Required to Bring</h3>
-</div>
-<ul class="list-disc list-inside text-body-md font-body-md text-on-surface-variant space-y-2">
-<li>Current National ID Card</li>
-<li>Birth Certificate (Extract)</li>
-<li>Proof of Residence</li>
-<li>2 Recent Passport Photos</li>
+<ul class="flex flex-col gap-6">
+<li class="flex gap-4 items-start">
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-tertiary mt-0.5 text-lg">check_circle</span>
+<span class="text-xs font-medium leading-relaxed text-on-primary/80">Your original Tunisian National ID (CIN).</span>
+</li>
+<li class="flex gap-4 items-start">
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-tertiary mt-0.5 text-lg">check_circle</span>
+<span class="text-xs font-medium leading-relaxed text-on-primary/80">Any supporting documents your service requires.</span>
+</li>
 </ul>
+{%- if office.opening_hours %}
+<div class="mt-8 pt-8 border-t border-white/10">
+<p class="text-[9px] text-white/50 uppercase tracking-widest leading-relaxed">Opening hours are published by {{ office.name_fr or office.name }}.</p>
+</div>
+{%- endif %}
 </div>
 </div>
-</main>
-<!-- Footer -->
-<footer class="bg-on-background dark:bg-surface-container-lowest w-full py-base px-gutter flex flex-col md:flex-row justify-between items-center mt-auto border-t border-secondary dark:border-surface-container-high flat no shadows z-40">
-<div class="text-headline-sm font-headline-sm text-on-primary mb-4 md:mb-0">
-            Watiq
-        </div>
-<div class="text-body-md font-body-md text-on-primary dark:text-on-surface mb-4 md:mb-0 text-center md:text-left">
-            © {{ year }} Tunisian Government. Watiq National Portal.
-        </div>
-<nav class="flex flex-wrap justify-center gap-4 text-label-sm font-label-sm">
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.terms') }}">Legal</a>
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.accessibility') }}">Accessibility</a>
-<a class="text-surface-container dark:text-on-surface-variant hover:text-primary-fixed transition-colors" href="{{ url_for('public.contact') }}">Contact Us</a>
-</nav>
-</footer>
-<!-- Persistent Accessibility Overlay (Interpreter Slot) -->
-<div aria-label="Sign Language Interpreter Video Feed" class="fixed bottom-4 right-4 z-[100] w-[320px] rounded-lg overflow-hidden border-2 border-outline shadow-lg bg-on-background hidden lg:block">
-<div class="bg-on-background text-on-primary px-3 py-1 flex justify-between items-center text-label-sm font-label-sm">
-<span>Sign Language Interpretation</span>
-<button aria-label="Close Interpreter Video" class="hover:text-primary-fixed focus-ring" data-action="dismiss" type="button">
-<span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
+</section>
+{%- else %}
+<!-- Step 3: Confirmation -->
+<section class="max-w-4xl mx-auto" id="step-3">
+<div class="text-center mb-10">
+<div class="w-16 h-16 bg-tertiary/10 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-tertiary shadow-sm">
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-3xl text-tertiary">verified</span>
+</div>
+<h2 class="text-3xl font-extrabold text-primary">Review &amp; Confirm</h2>
+<p class="text-on-surface/60 text-sm">Check the details below before booking.</p>
+</div>
+<form action="{{ url_for('citizen.book_appointment') }}" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<input name="slot_id" type="hidden" value="{{ slot.id }}">
+<input name="office_id" type="hidden" value="{{ office_id }}">
+<input name="slot_date" type="hidden" value="{{ slot_date.isoformat() }}">
+<div class="bg-white border border-outline-variant rounded-2xl overflow-hidden shadow-2xl sovereign-header border-t-primary relative">
+<div class="p-10 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div>
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-2 block">Citizen Applicant</span>
+<p class="text-xl font-bold text-primary">{{ profile|display_name }}</p>
+{%- if profile.national_id %}
+<p class="text-[10px] text-tertiary font-extrabold mt-1 uppercase">CIN {{ profile.national_id }}</p>
+{%- endif %}
+</div>
+<div class="md:text-right">
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-2 block">Slot Reference</span>
+<p class="text-lg font-mono bg-surface-container px-3 py-1.5 rounded inline-block border border-outline-variant text-primary font-bold">#{{ slot.id }}</p>
+</div>
+<div aria-hidden="true" class="md:col-span-2 h-px bg-outline-variant"></div>
+<div class="flex gap-4">
+<div aria-hidden="true" class="w-12 h-12 rounded bg-surface-container flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+</div>
+<div>
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-1 block">Office Location</span>
+<p class="font-bold text-primary">{{ office.name_fr or office.name }}</p>
+<p class="text-[10px] text-on-surface/60">{{ office.address or office.city }}{% if office.governorate %}, {{ office.governorate }}{% endif %}</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div aria-hidden="true" class="w-12 h-12 rounded bg-surface-container flex items-center justify-center border border-outline-variant">
+<span class="icon-filled material-symbols-outlined text-tertiary">calendar_today</span>
+</div>
+<div>
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-1 block">Date &amp; Time Slot</span>
+<p class="font-bold text-primary">{{ slot_date.strftime('%A, %d %B %Y') }}</p>
+<p class="text-[10px] text-on-surface/60">{{ slot.time_slot }} (local time)</p>
+</div>
+</div>
+{#- A booking must name an office_service_id. Slots opened for one specific
+    service already carry it; slots open to any service leave the choice to
+    the citizen, so the select only appears in that case. -#}
+<div class="md:col-span-2">
+{%- if slot.office_service_id %}
+<input name="office_service_id" type="hidden" value="{{ slot.office_service_id }}">
+<span class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-1 block">Service</span>
+{%- set pinned = (office_services | selectattr('id', 'equalto', slot.office_service_id) | list | first) %}
+<p class="font-bold text-primary">
+{{- (pinned.name_fr or pinned.name) if pinned else 'Reserved for a specific service' -}}
+</p>
+{%- else %}
+<label class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-1 block" for="office_service_id">Service required</label>
+<select class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 text-sm font-bold text-primary focus:ring-2 focus:ring-secondary focus:border-secondary" id="office_service_id" name="office_service_id" required>
+<option value="">— Choose a service —</option>
+{%- for service in office_services %}
+<option value="{{ service.id }}">{{ service.name_fr or service.name }}</option>
+{%- endfor %}
+</select>
+{%- if not office_services %}
+<p class="text-xs text-error mt-2">This office has no bookable services listed, so the appointment cannot be completed here.</p>
+{%- endif %}
+{%- endif %}
+</div>
+<div class="md:col-span-2">
+<label class="text-[9px] font-bold text-on-surface/40 uppercase tracking-widest mb-1 block" for="reason">Reason for the visit (optional)</label>
+<textarea class="w-full bg-white border border-outline-variant rounded-lg px-4 py-3 text-sm resize-none h-20 focus:ring-2 focus:ring-secondary focus:border-secondary" id="reason" maxlength="2000" name="reason" placeholder="Anything the office should know in advance."></textarea>
+</div>
+</div>
+<div class="mt-12 bg-surface-container-low p-6 rounded-xl border-l-4 border-primary flex gap-5">
+<span aria-hidden="true" class="icon-filled material-symbols-outlined text-primary">gavel</span>
+<div>
+<p class="text-[11px] text-primary font-bold uppercase tracking-widest mb-1">Official Declaration</p>
+<p class="text-xs text-on-surface/70 leading-relaxed">
+                                    By confirming this appointment you certify that the information provided is accurate and that you will bring the documents listed for your service.
+                                </p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-outline-variant">
+<a class="px-6 py-3 font-bold text-on-surface/60 hover:text-secondary transition-all text-sm" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=slot_date.isoformat()) }}">Modify Selection</a>
+<button class="w-full md:w-auto bg-primary text-on-primary px-12 py-4 rounded-lg font-bold shadow-xl hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3 border-b-4 border-tertiary disabled:opacity-40" type="submit"{% if not slot.office_service_id and not office_services %} disabled{% endif %}>
+                            CONFIRM APPOINTMENT <span aria-hidden="true" class="material-symbols-outlined text-tertiary">lock</span>
 </button>
 </div>
-<div class="w-full aspect-video bg-surface-variant relative">
-<img class="w-full h-full object-cover" data-alt="A professional sign language interpreter in a well-lit studio environment. The interpreter is standing against a clean, solid dark blue background to ensure high contrast for hand gestures. They are wearing a neutral, dark-colored business outfit. The lighting is soft and even, typical of an official government broadcast, instilling clarity and trust." src="{{ url_for('static', filename='img/img-237da6621ae1.jpg') }}"/>
-<div class="absolute bottom-2 right-2 bg-on-background/70 px-2 py-0.5 rounded text-[10px] text-on-primary font-label-sm">LIVE</div>
 </div>
-</div>
-<!-- Voice Narration Toggle (Persistent) -->
-<button aria-label="Toggle Audio Narration" class="fixed top-24 right-4 z-[90] w-12 h-12 bg-surface-container-lowest border-2 border-outline-variant rounded-full shadow-lg flex items-center justify-center text-secondary hover:border-primary hover:text-primary focus-ring transition-colors" title="Toggle Audio Narration" data-action="a11y-narration" type="button">
-<span class="material-symbols-outlined" data-icon="volume_up">volume_up</span>
-</button>
+</form>
+</section>
+{%- endif %}
 {% endblock %}
+{#- No page script. The wizard is server-driven now, so the mockup's
+    goToStep2/selectTime/completeBooking helpers had nothing left to drive and
+    static/js/pages/book_appointment.js was removed with them. -#}

@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import logging
 import uuid
-from datetime import date
+from datetime import date, datetime, timezone
 from typing import Any
 
 import httpx
@@ -141,12 +141,35 @@ def _register_hooks(app: Flask) -> None:
 
     app.teardown_appcontext(api.close_client)
 
+    @app.template_filter("display_name")
+    def _display_name(profile: object) -> str:
+        """Readable name for either kind of profile.
+
+        The two /me endpoints disagree: GET /auth/me returns first_name and
+        last_name, GET /staff/me returns a single `name` column. Templates that
+        greet the signed-in person are rendered for both, so the difference is
+        resolved once here instead of in every greeting.
+        """
+        if not isinstance(profile, dict):
+            return ""
+        name = (profile.get("name") or "").strip()
+        if name:
+            return name
+        parts = [
+            str(profile.get(field) or "").strip()
+            for field in ("first_name", "last_name")
+        ]
+        return " ".join(part for part in parts if part)
+
     @app.context_processor
     def _globals() -> dict[str, object]:
         import auth
 
         return {
             "year": date.today().year,
+            # Rendered as the starting value of the clock on the blocked page,
+            # so it is correct before (and without) JavaScript.
+            "now_utc": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
             "is_authenticated": auth.is_authenticated(),
             "is_staff": auth.is_staff(),
             "current_role": auth.role(),
@@ -162,7 +185,10 @@ def _unread_count() -> int | None:
         return None
     data = api.try_get("/api/v1/notifications/unread-count", default=None)
     if isinstance(data, dict):
-        return int(data.get("count", 0) or 0)
+        # The endpoint answers {"unread_count": n}. Reading "count" instead
+        # meant the badge was always 0 and never rendered.
+        value = data.get("unread_count", data.get("count"))
+        return int(value or 0)
     return int(data) if isinstance(data, int) else None
 
 

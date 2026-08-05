@@ -36,9 +36,13 @@
 <button aria-label="Interpreter Mode" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" data-action="a11y-interpreter" type="button">
 <span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">interpreter_mode</span>
 </button>
-<button aria-label="Language" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring" data-action="language" type="button">
+{#- The mockup drew a language switcher, but there is no translation layer to
+    switch to — the app ships one locale. Rather than a control that changes
+    nothing, this points at the accessibility page, which is where language
+    and assistive options are actually documented. -#}
+<a aria-label="Language and accessibility options" class="p-2 rounded-full hover:bg-surface-container-low dark:hover:bg-tertiary-container transition-colors focus-ring inline-flex" href="{{ url_for('public.accessibility') }}">
 <span class="material-symbols-outlined text-secondary dark:text-secondary-fixed-dim">language</span>
-</button>
+</a>
 </div>
 </div>
 </div>
@@ -56,7 +60,7 @@
 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
 <span class="material-symbols-outlined text-on-surface-variant">search</span>
 </div>
-<input aria-label="Search Requests" class="block w-full pl-10 pr-3 py-3 border border-surface-variant rounded-DEFAULT leading-5 bg-surface-container-lowest placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-primary-container sm:text-sm transition duration-150 ease-in-out text-body-md font-body-md" placeholder="Search by Tracking Code or Service..." type="text"/>
+<input aria-label="Search Requests" class="block w-full pl-10 pr-3 py-3 border border-surface-variant rounded-DEFAULT leading-5 bg-surface-container-lowest placeholder-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-primary-container sm:text-sm transition duration-150 ease-in-out text-body-md font-body-md" placeholder="Search by Tracking Code or Service..." type="text">
 </div>
 </div>
 <!-- Filters -->

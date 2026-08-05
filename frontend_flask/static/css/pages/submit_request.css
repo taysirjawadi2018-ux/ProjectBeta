@@ -1,46 +1,51 @@
-/* submit_request.html — page-scoped rules, lifted verbatim from the mockup's
- * <style> block. Kept in its own file rather than merged into watiq.css:
- * several pages define the same class with different values, so a merge
- * would silently change how they render. theme() calls are resolved to the
- * literal token values the Tailwind build would have produced. */
-
-/* Base styles */
+/* submit_request.html — rules lifted from frontend/crimanel_record_B3_application.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
 body {
-    background-color: #f7fafc;
-    color: #181c1e;
-}
-
-/* Focus styles */
-*:focus-visible {
-    outline: 3px solid #e70013;
-    outline-offset: 3px;
-}
-
-/* Material Symbols */
-.material-symbols-outlined {
-    font-family: 'Material Symbols Outlined';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
-    display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-feature-settings:"liga";
-    font-feature-settings: "liga";
-    -webkit-font-smoothing: antialiased;
-}
-
-/* Interactive Card Level 2 Hover */
-.card-interactive:hover {
-    border: 2px solid #4e5e81;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
-}
-
-.drag-active {
-    border-color: #e70013;
-    background-color: #e5e9eb;
-}
+            font-family: 'Public Sans', sans-serif;
+            background-color: #f8f9ff;
+            color: #0b1c30;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(11, 28, 48, 0.05);
+        }
+        .national-watermark {
+            position: fixed;
+            bottom: -50px;
+            right: -50px;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+            width: 600px;
+            height: 600px;
+        }
+        .step-active {
+            color: #000000;
+            font-weight: 700;
+        }
+        .step-line {
+            height: 2px;
+            flex-grow: 1;
+            background: #c4c6cf;
+        }
+        .step-line-active {
+            background: #000000;
+        }
+        /* `ring` is a Tailwind utility name, not a CSS property — the browser
+           dropped it, so these fields removed their outline and replaced it
+           with nothing but a border-colour change. box-shadow is what the
+           utility compiles to, and it keeps a visible focus indicator. */
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 1px #000000;
+        }

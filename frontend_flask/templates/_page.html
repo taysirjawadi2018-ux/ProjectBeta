@@ -1,7 +1,13 @@
 {#
   Layout for screens that had no mockup of their own: nav + flash + main +
-  footer, all from existing design-system components. The twelve ported screens
-  do NOT use this — they extend base.html directly and keep their own markup.
+  footer, all from existing design-system components. The fifteen ported
+  screens do NOT use this — they extend base.html directly and keep their own
+  markup.
+
+  No tk-* class here on purpose: :root in static/src/_tokens.css already holds
+  the value each token takes on the majority of the redesigned screens, so
+  these pages inherit the house palette without pinning themselves to any one
+  mockup's overrides.
 #}
 {% extends "base.html" %}
 {% set html_class = 'light' %}

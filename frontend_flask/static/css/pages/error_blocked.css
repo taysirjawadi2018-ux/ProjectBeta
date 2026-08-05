@@ -1,0 +1,52 @@
+/* _error_blocked.html — rules lifted from frontend/security_acces_blocked.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+body {
+    background-color: #f8f9ff;
+    color: #0b1c30;
+    overflow-x: hidden
+    }
+.national-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vh;
+    height: 80vh;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+    background-image: url(../../img/img-61cef45cc4c2.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain
+    }
+.glass-panel {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(11, 28, 48, 0.05)
+    }
+.scanline {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #ba1a1a, transparent);
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: scan 4s linear infinite
+    }
+@keyframes scan {
+    0% {
+        top: 0;
+        opacity: 0;
+        } 10% {
+        opacity: 1;
+        } 90% {
+        opacity: 1;
+        } 100% {
+        top: 100%;
+        opacity: 0;
+        }
+    }

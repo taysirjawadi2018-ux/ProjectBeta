@@ -1,16 +1,35 @@
-{% extends "_page.html" %}
+{#
+  One error template, three designs.
 
-{% block title %}Watiq National Portal - {{ title }}{% endblock %}
+  The redesign supplied a dedicated screen for two failure modes — a security
+  lockout and a maintenance window — so the status decides which one renders
+  rather than every failure landing on the same generic page. Everything the
+  three share (`code`, `title`, `message`) is passed by the handlers in
+  app.py, so the parent is chosen here rather than in four separate
+  render_template calls.
 
+    401 / 403 / 429  -> the "access restricted" design
+    502 / 503 / 504  -> the "maintenance" design
+    everything else  -> the shared page shell, which keeps 404 plain
+#}
+{% extends
+     'error_blocked.html' if code in (401, 403, 429)
+     else 'error_maintenance.html' if code in (502, 503, 504)
+     else '_page.html' %}
+
+{% block title %}{{ title }} | Watiq National Portal{% endblock %}
+
+{# Only reached by the generic branch; the two designed screens render their
+   own content block and ignore this. #}
 {% block page %}
 <section class="max-w-2xl mx-auto text-center py-12 space-y-6">
-<span aria-hidden="true" class="material-symbols-outlined text-primary text-[64px]">{% if code == 404 %}search_off{% elif code == 403 %}lock{% elif code == 429 %}timer{% else %}warning{% endif %}</span>
-<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface">{{ title }}</h1>
+<span aria-hidden="true" class="material-symbols-outlined text-primary text-[64px]">{% if code == 404 %}search_off{% elif code == 409 %}history{% else %}warning{% endif %}</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">{{ title }}</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant">{{ message }}</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Reference: {{ code }}</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Reference: {{ code }}{% if g.request_id %} · {{ g.request_id[:8] }}{% endif %}</p>
 <div class="flex flex-wrap justify-center gap-4 pt-4">
 <a class="inline-flex items-center gap-2 bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring" href="{{ url_for('public.index') }}">
-<span aria-hidden="true" class="material-symbols-outlined">home_work</span>
+<span aria-hidden="true" class="material-symbols-outlined">account_balance</span>
                 Return to the portal
             </a>
 <a class="inline-flex items-center gap-2 border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-6 rounded hover:bg-surface-container-low transition-colors focus-ring" href="{{ url_for('public.help_page') }}">
