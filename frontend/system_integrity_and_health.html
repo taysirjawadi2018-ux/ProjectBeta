@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Watiq Portal - Security Log & Diagnostics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-container-highest": "#d3e4fe",
+                            "on-surface-variant": "#44474e",
+                            "surface": "#f8f9ff",
+                            "on-secondary-fixed": "#241a00",
+                            "on-tertiary-fixed-variant": "#444749",
+                            "on-error-container": "#93000a",
+                            "surface-variant": "#d3e4fe",
+                            "primary": "#000000",
+                            "inverse-surface": "#213145",
+                            "on-error": "#ffffff",
+                            "on-primary-fixed-variant": "#31476b",
+                            "secondary-fixed": "#ffe088",
+                            "on-secondary-container": "#745c00",
+                            "tertiary-fixed": "#e0e3e5",
+                            "on-background": "#0b1c30",
+                            "tertiary": "#000000",
+                            "primary-fixed-dim": "#b1c7f2",
+                            "error-container": "#ffdad6",
+                            "on-primary": "#ffffff",
+                            "tertiary-fixed-dim": "#c4c7c9",
+                            "secondary-container": "#fed65b",
+                            "on-tertiary": "#ffffff",
+                            "surface-dim": "#cbdbf5",
+                            "on-secondary": "#ffffff",
+                            "surface-bright": "#f8f9ff",
+                            "on-secondary-fixed-variant": "#574500",
+                            "secondary-fixed-dim": "#e9c349",
+                            "surface-container-low": "#eff4ff",
+                            "error": "#ba1a1a",
+                            "surface-tint": "#495f84",
+                            "primary-container": "#001b3d",
+                            "on-surface": "#0b1c30",
+                            "surface-container-lowest": "#ffffff",
+                            "on-tertiary-fixed": "#191c1e",
+                            "primary-fixed": "#d6e3ff",
+                            "secondary": "#735c00",
+                            "inverse-on-surface": "#eaf1ff",
+                            "inverse-primary": "#b1c7f2",
+                            "outline-variant": "#c4c6cf",
+                            "surface-container": "#e5eeff",
+                            "surface-container-high": "#dce9ff",
+                            "background": "#f8f9ff",
+                            "on-primary-container": "#6f84ac",
+                            "tertiary-container": "#191c1e",
+                            "outline": "#74777f",
+                            "on-tertiary-container": "#818486",
+                            "on-primary-fixed": "#001b3d"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "margin-desktop": "64px",
+                            "unit": "8px",
+                            "gutter": "24px",
+                            "margin-mobile": "20px",
+                            "container-max-width": "1440px"
+                    },
+                    "fontFamily": {
+                            "body-md": ["Public Sans"],
+                            "headline-lg-mobile": ["Public Sans"],
+                            "support-sm": ["Public Sans"],
+                            "label-caps": ["Public Sans"],
+                            "body-lg": ["Public Sans"],
+                            "headline-lg": ["Public Sans"],
+                            "headline-md": ["Public Sans"],
+                            "mono": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                            "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                            "headline-lg-mobile": ["30px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                            "support-sm": ["14px", {"lineHeight": "1.4", "fontWeight": "300"}],
+                            "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                            "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "300"}],
+                            "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                            "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}]
+                    },
+                    "boxShadow": {
+                        "soft": "0 4px 20px rgba(11, 28, 48, 0.04)"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .watermark {
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" stroke="%230b1c30" stroke-width="2" fill="none" opacity="0.03"/><path d="M50 20 L50 80 M20 50 L80 50" stroke="%230b1c30" stroke-width="2" opacity="0.03"/></svg>');
+            background-repeat: no-repeat;
+            background-position: bottom right;
+            background-size: 300px;
+        }
+        .code-panel {
+            font-family: 'JetBrains Mono', monospace;
+            scrollbar-width: thin;
+            scrollbar-color: #6f84ac #001b3d;
+        }
+        .code-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+        .code-panel::-webkit-scrollbar-track {
+            background: #001b3d;
+        }
+        .code-panel::-webkit-scrollbar-thumb {
+            background-color: #6f84ac;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container-low text-secondary font-label-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col p-4 gap-2 z-20 hidden md:flex">
+<div class="mb-8 px-4 flex flex-col gap-2 mt-4">
+<!-- Simulated Avatar/Emblem via img -->
+<img alt="Tunisian National Emblem" class="w-12 h-12 mb-2 object-contain rounded-full" data-alt="A highly detailed, official-looking crest or emblem design representing state authority, rendered in crisp monochromatic lines against a light background. The style is formal, modern corporate vector art, conveying a sense of established trust and unwavering security. Minimalist aesthetic with high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtjgFO0c43g3fRHY6B4NpTQ7bsdNa3ya7sBFaXzeRMVs-c_RrJsP0V-wEMwP9aKSqDDqwncHUZQ5KgERvctRKc_2CnIxSGL6al8kW4jYDsoOdGW5dZZp3FUL98ttCf4Kk1MZTS2C9qeoH09nUQFeFjB4WnlE0xf9KJHNNwumy1U61MFZ-7FYlmcHKWLGgMiGtzO5b2201nJTh186t1QMWO80hfk0Rv9f43xXmg1-vsr4Mls0fPo-4"/>
+<h1 class="font-headline-md text-headline-md text-on-surface">Watiq Portal</h1>
+<p class="font-support-sm text-support-sm text-on-surface-variant">State-Grade Security</p>
+</div>
+<button class="bg-primary text-on-primary font-label-caps py-3 px-4 rounded-sm mb-6 hover:opacity-90 transition-opacity">
+            New Request
+        </button>
+<ul class="flex flex-col gap-1 w-full">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
+<span>Documents</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">event</span>
+<span>Appointments</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">gavel</span>
+<span>Legal Archive</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary-container text-on-secondary-container font-bold translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span>Security Log</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-4 py-4 border-t border-outline-variant/30 flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">verified_user</span>
+<span class="text-on-surface-variant text-sm">Auditor Acc.</span>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 p-margin-mobile md:p-gutter xl:p-margin-desktop min-h-screen relative overflow-x-hidden">
+<!-- Subtle Global Watermark -->
+<div class="absolute inset-0 pointer-events-none watermark z-0"></div>
+<!-- Header -->
+<header class="mb-12 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/50 pb-6">
+<div>
+<h2 class="font-label-caps text-label-caps text-primary uppercase mb-2 tracking-widest">System Diagnostics</h2>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Auditor Monitoring Console</h1>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-highest px-4 py-2 rounded-sm border border-outline-variant/20">
+<div class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></div>
+<span class="font-support-sm text-support-sm text-on-surface font-semibold tracking-wide">SYSTEM NOMINAL</span>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
+<!-- Uptime Metric (Span 4) -->
+<div class="col-span-1 md:col-span-4 bg-surface rounded-xl p-6 shadow-soft border border-primary/5 flex flex-col justify-between h-48">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Core Server Uptime</span>
+<span class="material-symbols-outlined text-primary">dns</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-primary">99.99<span class="text-headline-md text-on-surface-variant">%</span></div>
+<p class="font-support-sm text-support-sm text-on-surface-variant mt-1">Last downtime: 142 days ago</p>
+</div>
+</div>
+<!-- Threat Mitigation Metric (Span 4) -->
+<div class="col-span-1 md:col-span-4 bg-primary-container text-on-primary-container rounded-xl p-6 shadow-soft h-48 flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-transparent to-primary/20 pointer-events-none"></div>
+<div class="flex justify-between items-start relative z-10">
+<span class="font-label-caps text-label-caps text-on-primary-fixed">Active Threat Mitigation</span>
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div class="relative z-10">
+<div class="font-headline-lg text-headline-lg text-on-primary">1,248</div>
+<p class="font-support-sm text-support-sm text-on-primary-fixed mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> 
+                        CrowdSec Signals / 24h
+                    </p>
+</div>
+</div>
+<!-- Network Load Chart Placeholder (Span 4) -->
+<div class="col-span-1 md:col-span-4 bg-surface rounded-xl p-6 shadow-soft border border-primary/5 h-48 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Network I/O</span>
+<span class="material-symbols-outlined text-primary text-[20px]">router</span>
+</div>
+<div aria-hidden="true" class="flex-1 w-full bg-surface-container-lowest rounded-sm border border-outline-variant/30 flex items-end p-2 gap-1 overflow-hidden">
+<!-- Fake chart bars -->
+<div class="w-1/6 bg-primary-fixed-dim/40 h-[40%] rounded-t-sm"></div>
+<div class="w-1/6 bg-primary-fixed-dim/50 h-[60%] rounded-t-sm"></div>
+<div class="w-1/6 bg-primary-fixed-dim/30 h-[30%] rounded-t-sm"></div>
+<div class="w-1/6 bg-primary-fixed-dim/80 h-[85%] rounded-t-sm"></div>
+<div class="w-1/6 bg-primary/40 h-[50%] rounded-t-sm"></div>
+<div class="w-1/6 bg-primary/60 h-[70%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- CPU & Memory Load (Span 6) -->
+<div class="col-span-1 md:col-span-6 bg-surface rounded-xl p-6 shadow-soft border border-primary/5 min-h-[300px]">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">Hardware Allocation</h3>
+<button class="text-primary text-sm hover:underline font-semibold">View Detail</button>
+</div>
+<div class="space-y-6">
+<!-- CPU -->
+<div>
+<div class="flex justify-between font-support-sm text-support-sm mb-2">
+<span class="font-semibold text-on-background">CPU Load (Cluster A)</span>
+<span class="text-on-surface-variant">42%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 42%;"></div>
+</div>
+</div>
+<!-- Memory -->
+<div>
+<div class="flex justify-between font-support-sm text-support-sm mb-2">
+<span class="font-semibold text-on-background">Memory Usage (RAM)</span>
+<span class="text-on-surface-variant">78% - 248GB / 320GB</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 78%;"></div>
+</div>
+</div>
+<!-- Storage -->
+<div>
+<div class="flex justify-between font-support-sm text-support-sm mb-2">
+<span class="font-semibold text-on-background">Encrypted Storage Array</span>
+<span class="text-on-surface-variant">61% - 1.2PB / 2.0PB</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-on-surface-variant h-full rounded-full" style="width: 61%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Diagnostic Terminal (Span 6) -->
+<div class="col-span-1 md:col-span-6 bg-primary-container rounded-xl shadow-soft border border-primary-fixed-dim/30 overflow-hidden flex flex-col min-h-[300px]">
+<div class="bg-on-background/40 px-4 py-3 flex items-center justify-between border-b border-primary-fixed-dim/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed text-[18px]">terminal</span>
+<span class="font-label-caps text-label-caps text-primary-fixed tracking-wider">Live System Logs</span>
+</div>
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-outline"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-outline"></div>
+</div>
+</div>
+<div class="p-4 flex-1 overflow-y-auto code-panel bg-primary-container text-left text-sm text-[#a3b8cc] leading-relaxed">
+<div class="animate-pulse mb-2 text-primary-fixed">[SYSTEM] Tail connection established. Waiting for logs...</div>
+<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">2024-05-14 08:12:04</span> [INFO] SSH daemon reloaded successfully.</div>
+<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">2024-05-14 08:12:45</span> [WARN] High I/O wait detected on node-db-04. Volume: encrypted-vol-b.</div>
+<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">2024-05-14 08:13:12</span> [CROWDSEC] Blocked IP 192.0.2.144 - Trigger: ssh-bf. Duration: 4h.</div>
+<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">2024-05-14 08:15:00</span> [CRON] Task execution completed: backup_postgres_daily.sh (0m12s)</div>
+<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">2024-05-14 08:17:22</span> [INFO] Identity verify API latency spike detected (450ms). Autoscaling triggered.</div>
+<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">2024-05-14 08:17:35</span> [INFO] Container instance web-auth-6b8f spawned on node-app-02.</div>
+<div class="text-[#bb9af7] mt-2"><span class="text-[#7aa2f7]">2024-05-14 08:18:01</span> [AUDIT] Administrator session 'watiq_admin_jdoe' authenticated via MFA.</div>
+<div class="flex items-center mt-2">
+<span class="text-[#7dcfff] mr-2">root@watiq-monitor:~#</span>
+<span class="w-2 h-4 bg-on-primary animate-pulse inline-block"></span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

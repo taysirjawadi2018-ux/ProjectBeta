@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Successful - République Tunisienne</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#d3e4fe",
+                        "on-surface-variant": "#44474e",
+                        "surface": "#f8f9ff",
+                        "on-secondary-fixed": "#241a00",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#d3e4fe",
+                        "primary": "#000000",
+                        "inverse-surface": "#213145",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#31476b",
+                        "secondary-fixed": "#ffe088",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-background": "#0b1c30",
+                        "tertiary": "#000000",
+                        "primary-fixed-dim": "#b1c7f2",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "secondary-container": "#fed65b",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#cbdbf5",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-container-low": "#eff4ff",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#495f84",
+                        "primary-container": "#001b3d",
+                        "on-surface": "#0b1c30",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary": "#735c00",
+                        "inverse-on-surface": "#eaf1ff",
+                        "inverse-primary": "#b1c7f2",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container": "#e5eeff",
+                        "surface-container-high": "#dce9ff",
+                        "background": "#f8f9ff",
+                        "on-primary-container": "#6f84ac",
+                        "tertiary-container": "#191c1e",
+                        "outline": "#74777f",
+                        "on-tertiary-container": "#818486",
+                        "on-primary-fixed": "#001b3d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "container-max-width": "1440px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Public Sans"],
+                        "headline-lg-mobile": ["Public Sans"],
+                        "support-sm": ["Public Sans"],
+                        "label-caps": ["Public Sans"],
+                        "body-lg": ["Public Sans"],
+                        "headline-lg": ["Public Sans"],
+                        "headline-md": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["30px", { "lineHeight": "1.2", "fontWeight": "800" }],
+                        "support-sm": ["14px", { "lineHeight": "1.4", "fontWeight": "300" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "300" }],
+                        "headline-lg": ["40px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-body-md text-on-background relative overflow-x-hidden">
+<!-- Watermark -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center z-0">
+<img class="w-[800px] h-auto object-contain" data-alt="The official national emblem of the Tunisian Republic, rendered as a subtle watermark. The intricate details of the shield, scales, and lion are visible in a high-fidelity line art style. It sits centrally on a clean white background, blending seamlessly to provide a sense of authority and institutional presence without distracting from foreground content. The style is strictly monochromatic black and white, suitable for a sophisticated, modern government interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxuIMR-z8lgtYYOzrew6-4hN42dNw-k_X9nsUr87OoOyZhVIgL10UR9hc-vM-XE8BzmZY1QqmyUKQgiEgnnFFl8E36n5Xf0jYu3hepzGy-AVyRjJ9tSZ4ux3AvPiDhuqPTn6fc1IanXVzZEZEb75YzZ7MzevRt7WLoYRkSGltDg2OxVYPH2c5zZY3gq09nPh4TqntS7D5jk1BbrJswuo4E0t6tZHbGCQlzUC49Kn8vhGSGpnrwwqY"/>
+</div>
+<!-- Main Content Canvas (No Nav Shell as per instructions for Transactional/Success screen) -->
+<main class="flex-grow flex items-center justify-center py-20 px-margin-mobile md:px-margin-desktop z-10 relative">
+<div class="max-w-3xl w-full">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-[#0b1c30]/5 overflow-hidden backdrop-blur-md relative">
+<div class="p-12 flex flex-col items-center text-center">
+<!-- Success Icon -->
+<div class="w-24 h-24 rounded-full bg-secondary-fixed flex items-center justify-center mb-8 shadow-sm">
+<span class="material-symbols-outlined text-[48px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">
+                            check_circle
+                        </span>
+</div>
+<!-- Headline -->
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">
+                        Payment Successful
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                        Your transaction has been securely processed. A copy of the receipt has been sent to your registered email address.
+                    </p>
+<!-- Receipt Details Card -->
+<div class="w-full bg-surface rounded-lg border border-outline-variant p-6 mb-10 text-left">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 pb-2 border-b border-outline-variant/50">Transaction Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+<div>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Transaction ID</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold tracking-wide">TRX-9482-771B</span>
+</div>
+<div>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Date &amp; Time</span>
+<span class="font-body-md text-body-md text-on-surface" id="current-datetime">Oct 26, 2024 • 14:32</span>
+</div>
+<div>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Service Type</span>
+<span class="font-body-md text-body-md text-on-surface">Civil Registry Extract</span>
+</div>
+<div>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Payment Method</span>
+<span class="font-body-md text-body-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">credit_card</span>
+                                    •••• 4242
+                                </span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/50 flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface">Total Paid</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">15.00 TND</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+<button class="bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md py-3 px-8 rounded-sm transition-colors flex items-center justify-center gap-2 w-full sm:w-auto">
+<span class="material-symbols-outlined">download</span>
+                            Download PDF Receipt
+                        </button>
+<button class="bg-surface hover:bg-surface-container-high border border-primary text-primary font-body-md text-body-md py-3 px-8 rounded-sm transition-colors w-full sm:w-auto">
+                            Return to Dashboard
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sign Language Module (Floating) -->
+<div class="fixed bottom-gutter right-gutter z-50 w-72 bg-surface-container-lowest/90 backdrop-blur-md rounded-xl shadow-lg border border-primary-container/10 overflow-hidden transition-all duration-300" id="tsl-module">
+<div class="bg-primary-container text-on-primary-container px-4 py-2 flex justify-between items-center cursor-move" id="tsl-header">
+<span class="font-label-caps text-label-caps flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">sign_language</span>
+                TSL Support Active
+            </span>
+<button class="hover:opacity-80 transition-opacity" onclick="document.getElementById('tsl-module').style.display='none'">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="p-2 relative group">
+<div class="w-full h-40 bg-surface-container-highest rounded-lg flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional sign language interpreter providing translation for a digital government service interface. The interpreter is framed in a small video window, well-lit with high contrast against a neutral backdrop to ensure hand movements are clearly visible. The overall mood is helpful, accessible, and institutional, fitting within a secure government portal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj4jZJ9yqq5PUWrRsC5Ub6gwe8vJ1aAC794X6Sh0xbTq9leeQJC0VGiB5yQjAyemmz6a65JM5ZARC2yrSam5mIAGavX-WLD-J9-5Xhvud9-7efzqvUkvo4lDXFV_978J3NOQtl8x_jzZG1Sf1TyceVrvv7w-YJ2RkNnc01st0igewoyusIh84CxrsuW3IvBRDrnAT66k1ayp6JgPLUymg4wgLZ0W5rFa7bssl4KQOSQHITNTmiaQ8"/>
+</div>
+<!-- Overlay Controls -->
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 rounded-lg m-2">
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-on-surface text-surface-container w-full py-12 border-t border-outline relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="font-label-md text-label-md text-surface-container-lowest">
+                © <span id="dynamic-year"></span> République Tunisienne - Portail National des Services
+            </div>
+<div class="flex flex-wrap gap-6 justify-center">
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="#">Security Protocols</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+<script>
+        // Set dynamic year in footer
+        document.getElementById('dynamic-year').textContent = new Date().getFullYear();
+
+        // Format current date/time for receipt
+        const now = new Date();
+        const options = { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+        document.getElementById('current-datetime').textContent = now.toLocaleDateString('en-US', options).replace(',', ' •');
+    </script>
+</body></html>
