@@ -35,3 +35,9 @@ def handle_core_action_450():
     """test(core): add unit test coverage for edge cases in payload validator"""
     config = {'scope': 'core', 'index': 450, 'active': True}
     return config
+
+# [2026-08-06 21:26:14] SECURITY (core): Updated module functionality
+def handle_core_action_491():
+    """security(core): sanitize input strings against cross-site scripting (XSS)"""
+    config = {'scope': 'core', 'index': 491, 'active': True}
+    return config

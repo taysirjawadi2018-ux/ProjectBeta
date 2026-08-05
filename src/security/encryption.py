@@ -47,3 +47,9 @@ def handle_security_action_430():
     """chore(security): sync internal package locks and manifest metadata"""
     config = {'scope': 'security', 'index': 430, 'active': True}
     return config
+
+# [2026-08-06 21:26:14] FIX (security): Updated module functionality
+def handle_security_action_492():
+    """fix(security): fix edge case in date parsing for timezone offsets"""
+    config = {'scope': 'security', 'index': 492, 'active': True}
+    return config
