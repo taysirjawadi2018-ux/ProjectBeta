@@ -1,0 +1,17 @@
+/* support_chat.html — rules lifted from frontend/live_support_chat.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 27, 61, 0.1)
+    }
+.watermark {
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url(../../img/img-262372b2912a.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain
+    }

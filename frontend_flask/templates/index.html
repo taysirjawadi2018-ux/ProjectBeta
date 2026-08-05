@@ -1,198 +1,244 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-national-portal' %}
-{% block title %}Watiq | National Digital Portal{% endblock %}
-{% block body_class %}bg-background text-on-background font-body-md{% endblock %}
+{% block title %}Watiq National Portal | Republic of Tunisia{% endblock %}
+{% block body_class %}bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed overflow-x-hidden{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/index.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+<!-- Watermark Background -->
+<img alt="Tunisian National Emblem Watermark" class="watermark-emblem" src="{{ url_for('static', filename='img/img-a5f82587302e.jpg') }}"/>
 <!-- TopNavBar -->
-<header class="bg-primary-container fixed top-0 w-full z-50 border-b border-outline-variant/20">
-<nav class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto">
-<div class="flex items-center gap-md">
-<a class="font-headline-lg text-headline-lg font-bold text-on-primary-fixed tracking-tight focus-ring rounded" href="{{ url_for('public.index') }}">Watiq</a>
-<div class="hidden md:flex gap-md ml-lg">
-<a aria-current="page" class="font-body-md text-body-md text-primary-fixed border-b-2 border-tertiary-fixed-dim pb-1 hover:text-primary-fixed transition-colors" href="{{ url_for('public.index') }}">E-Government</a>
-<a class="font-body-md text-body-md text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors" href="{{ url_for('public.open_data') }}">Transparency</a>
-<a class="font-body-md text-body-md text-on-primary-container opacity-80 hover:text-primary-fixed transition-colors" href="{{ url_for('public.services') }}">National Services</a>
+<header class="fixed top-0 w-full h-20 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm z-50 flex items-center">
+<div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<a class="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider focus-ring rounded" href="{{ url_for('public.index') }}">
+                    Republic of Tunisia
+                </a>
 </div>
-</div>
-<div class="flex items-center gap-md">
-<form action="{{ url_for('public.services') }}" class="hidden lg:flex items-center bg-surface-container-lowest/10 px-sm py-xs rounded border border-outline-variant/10" method="get" role="search">
-<label class="sr-only" for="portal-search">Search national portal</label>
-<span aria-hidden="true" class="material-symbols-outlined text-on-primary-container mr-xs" data-icon="search">search</span>
-<input class="bg-transparent border-none focus:ring-0 text-label-sm font-label-sm text-on-primary-container placeholder:text-on-primary-container/50 w-48" id="portal-search" name="q" placeholder="Search national portal..." type="search">
-</form>
-<div class="flex gap-sm">
-<a aria-label="Notifications" class="material-symbols-outlined text-on-primary-container hover:text-primary-fixed transition-all focus-ring rounded" data-icon="notifications" href="{{ url_for('citizen.notifications') }}">notifications</a>
-<a aria-label="Security and privacy" class="material-symbols-outlined text-on-primary-container hover:text-primary-fixed transition-all focus-ring rounded" data-icon="security" href="{{ url_for('public.privacy') }}">security</a>
-</div>
-<a aria-label="{% if is_authenticated %}Your profile{% else %}Sign in{% endif %}" class="focus-ring rounded-full" href="{{ url_for('citizen.profile') if is_authenticated else url_for('public.login') }}">
-<img class="w-10 h-10 rounded-full border-2 border-tertiary-fixed-dim object-cover" alt="A professional high-resolution headshot of a person for a digital ID avatar, presented in a minimalist, corporate style" src="{{ url_for('static', filename='img/img-b0f63fb07899.jpg') }}"/>
-</a>
-</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='identity') }}">Identity</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='justice') }}">Justice</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='admin') }}">Admin</a>
 </nav>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<a aria-label="About the national institutions" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('public.about') }}">account_balance</a>
+<a aria-label="Notifications" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.notifications') }}">notifications</a>
+<a aria-label="{% if is_authenticated %}Your profile{% else %}Sign in{% endif %}" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.profile') if is_authenticated else url_for('public.login') }}">account_circle</a>
+</div>
+</div>
+</div>
 </header>
 <main class="pt-20">
-<div class="max-w-container-max mx-auto px-lg">{% include 'partials/_flash.html' %}</div>
+<div class="max-w-container-max mx-auto px-margin-desktop">{% include 'partials/_flash.html' %}</div>
 <!-- Hero Section -->
-<section class="hero-gradient relative overflow-hidden py-xl lg:py-40">
-<div class="absolute inset-0 opacity-10 pointer-events-none">
-<div class="dot-grid w-full h-full"></div>
+<section class="relative min-h-[85vh] flex items-center overflow-hidden" id="hero">
+<div class="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop grid grid-cols-12 gap-gutter">
+<div class="col-span-12 lg:col-span-7 flex flex-col justify-center gap-8">
+<div class="inline-flex items-center gap-2 bg-secondary-fixed px-3 py-1 rounded-sm w-fit">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled text-[16px]">verified_user</span>
+<span class="font-label-caps text-label-caps text-on-secondary-fixed uppercase">Sovereign Gateway Verified</span>
 </div>
-<div class="max-w-container-max mx-auto px-lg relative z-10 grid grid-cols-12 gap-gutter items-center">
-<div class="col-span-12 lg:col-span-7">
-<span class="inline-block px-sm py-xs bg-tertiary-container text-on-tertiary-fixed-variant font-label-sm text-label-sm rounded mb-md uppercase tracking-widest border border-tertiary-fixed/30">Official Sovereign Portal</span>
-<h1 class="font-display-lg text-display-lg text-on-primary-fixed mb-md leading-tight">Secure Access to <br/><span class="text-secondary-container">National Services</span></h1>
-<p class="font-body-lg text-body-lg text-on-primary-container max-w-xl mb-lg opacity-90">Experience the next generation of digital governance. Watiq provides an immutable, high-security gateway for all Tunisian citizens to manage their identity and legal affairs.</p>
-<div class="flex flex-wrap gap-md">
-<a class="bg-secondary text-on-primary px-lg py-md font-headline-md text-headline-md rounded-lg flex items-center gap-sm hover:bg-secondary/90 transition-all active:scale-95 shadow-lg shadow-black/20 focus-ring" href="{{ url_for('citizen.dashboard') if is_authenticated else url_for('public.login') }}">
-                            Access Citizen Space
-                            <span aria-hidden="true" class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">
+                        Secure Access to <br/>
+<span class="text-primary-container">National Services</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        Welcome to Watiq, the unified portal of the Republic of Tunisia. A trusted infrastructure for your administrative, legal, and civil status procedures.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-primary-container text-on-primary px-8 py-4 rounded-sm font-headline-md text-body-md hover:shadow-xl active:scale-95 transition-all flex items-center gap-3 focus-ring" href="{{ url_for('citizen.dashboard') if is_authenticated else url_for('public.login') }}">
+                            Access Portal
+                            <span aria-hidden="true" class="material-symbols-outlined">login</span>
 </a>
-<a class="border border-outline-variant text-on-primary-fixed px-lg py-md font-headline-md text-headline-md rounded-lg hover:bg-white/5 transition-all focus-ring" href="{{ url_for('public.track') }}">
-                            Verify Document
+<a class="border border-primary-container text-primary-container px-8 py-4 rounded-sm font-headline-md text-body-md hover:bg-surface-container-low transition-all focus-ring" href="{{ url_for('public.help_page') }}">
+                            View Documentation
                         </a>
 </div>
-<!-- Stats Row -->
-<div class="mt-xl flex flex-wrap gap-lg pt-lg border-t border-white/10">
-<div class="flex items-center gap-sm">
-<span class="icon-filled material-symbols-outlined text-tertiary-fixed-dim text-3xl" data-icon="shield_lock">shield_lock</span>
-<div>
-<p class="text-on-primary-fixed font-bold font-headline-md">256-bit AES</p>
-<p class="text-on-primary-container text-label-sm font-label-sm">Active Encryption</p>
+<div class="mt-12 flex gap-8 items-center border-t border-outline-variant pt-8">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Uptime</span>
+<span class="font-headline-md text-headline-md">99.99%</span>
+</div>
+<div class="h-10 w-px bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Encryption</span>
+<span class="font-headline-md text-headline-md">AES-256-GCM</span>
+</div>
+<div class="h-10 w-px bg-outline-variant"></div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-outline uppercase">Status</span>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="font-headline-md text-headline-md">Operational</span>
 </div>
 </div>
-<div class="flex items-center gap-sm">
-<span class="icon-filled material-symbols-outlined text-secondary-container text-3xl" data-icon="bolt">bolt</span>
-<div>
-<p class="text-on-primary-fixed font-bold font-headline-md">99.9% Uptime</p>
-<p class="text-on-primary-container text-label-sm font-label-sm">Real-time Service Monitoring</p>
+</div>
+</div>
+<!-- Featured Card / Visual -->
+<div class="hidden lg:flex col-span-5 items-center justify-center">
+<div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl glass-panel p-1">
+<div class="h-full w-full rounded-lg sovereign-gradient relative overflow-hidden flex flex-col p-10 text-surface">
+<div class="absolute top-0 right-0 p-8">
+<span aria-hidden="true" class="material-symbols-outlined text-6xl opacity-20">shield</span>
+</div>
+<span class="font-label-caps text-label-caps text-secondary-fixed mb-4">SYSTEM ARCHITECTURE</span>
+<h3 class="font-headline-md text-headline-md mb-6">Watiq Sovereign Cloud</h3>
+<div class="space-y-6">
+<div class="flex gap-4">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">cloud_done</span>
+<p class="font-support-sm text-support-sm opacity-80">Infrastructure hosted exclusively on national territory.</p>
+</div>
+<div class="flex gap-4">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">fingerprint</span>
+<p class="font-support-sm text-support-sm opacity-80">Biometric identification and certified electronic signature.</p>
+</div>
+<div class="flex gap-4">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">database</span>
+<p class="font-support-sm text-support-sm opacity-80">Real-time interoperability with civil status registries.</p>
+</div>
+</div>
+<div class="mt-auto border-t border-white/10 pt-6">
+<p class="font-label-caps text-[10px] opacity-50 mb-2">AUTH_TOKEN_ACTIVE</p>
+<div class="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+<div class="h-full w-2/3 bg-secondary-fixed"></div>
 </div>
 </div>
 </div>
-</div>
-<div class="hidden lg:col-span-5 lg:flex justify-end">
-<div class="relative w-full aspect-square max-w-md">
-<div class="absolute inset-0 bg-secondary/10 rounded-full blur-3xl"></div>
-<img class="w-full h-full object-contain relative z-10 drop-shadow-2xl" alt="A highly detailed, futuristic 3D render of a national seal or crest suspended in a void." src="{{ url_for('static', filename='img/img-89f25699ce29.jpg') }}"/>
 </div>
 </div>
 </div>
 </section>
-<!-- Universal Access Section -->
-<section class="py-xl bg-white">
-<div class="max-w-container-max mx-auto px-lg">
-<div class="flex flex-col md:flex-row md:items-end justify-between mb-xl gap-md">
-<div class="max-w-2xl">
-<h2 class="font-headline-xl text-headline-xl text-primary mb-sm">Universal Access to Digital Administration</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Centralized modules designed for efficiency, transparency, and legal integrity. Access your life's vital documentation with sovereign precision.</p>
+<!-- Service Bento Grid -->
+<section class="py-24 bg-surface-container-low relative" id="services">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-col mb-16 text-center items-center">
+<span class="font-label-caps text-label-caps text-secondary uppercase mb-4">Service Categories</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface max-w-2xl">Universal access to digital administration</h2>
 </div>
-<a class="text-secondary font-headline-md text-headline-md flex items-center gap-xs hover:gap-sm transition-all focus-ring rounded" href="{{ url_for('public.services') }}">
-                        View All Services <span aria-hidden="true" class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
-</a>
-</div>
-{#- The four pillars are editorial content, not catalogue rows: they group the
-    backend's service categories into the sections the design calls out. Each
-    CTA deep-links into the catalogue filtered to that category. -#}
-{%- set pillars = [
-  ('family_history', 'Civil Status', 'Manage birth, marriage, and personal status certificates with instant digital delivery.', 'GET STARTED', 'civil'),
-  ('badge', 'Identity', 'National ID renewal, passport applications, and biometric data management protocols.', 'REQUEST RENEWAL', 'identity'),
-  ('gavel', 'Justice', 'Secure access to legal proceedings, criminal records, and judicial consultations.', 'LEGAL PORTAL', 'justice'),
-  ('account_balance', 'Admin', 'Tax filing, property registry, and municipal authorizations in one unified dashboard.', 'OPEN REGISTRY', 'admin'),
+{#- The four categories are the mockup's own copy, not catalogue rows: each
+    card deep-links into the catalogue filtered to that category. -#}
+{%- set categories = [
+  ('civil', 'diversity_3', 'Civil Status', 'Birth, marriage, death certificates and certified family documents.'),
+  ('identity', 'badge', 'Identity', 'CIN renewal, passport applications, and secure residency certificates.'),
+  ('justice', 'gavel', 'Justice', 'Criminal record certificates and legal case tracking.'),
+  ('admin', 'business_center', 'Admin', 'Tax declarations, administrative permits, and centralized licensing.'),
 ] %}
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
-{%- for icon, title, blurb, cta, category in pillars %}
-<div class="bento-card group p-md bg-surface-container-low border border-outline-variant rounded-xl relative overflow-hidden">
-<div class="gold-accent-line absolute top-0 left-0 w-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-<div class="w-12 h-12 bg-secondary/10 rounded flex items-center justify-center mb-md text-secondary group-hover:bg-secondary group-hover:text-white transition-all">
-<span aria-hidden="true" class="material-symbols-outlined text-2xl" data-icon="{{ icon }}">{{ icon }}</span>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+{%- for code, icon, title, blurb in categories %}
+<a class="group bg-surface hover:bg-primary-container hover:text-on-primary transition-all duration-500 p-8 rounded-xl border border-outline-variant flex flex-col gap-6 cursor-pointer shadow-sm hover:shadow-2xl focus-ring" href="{{ url_for('public.services', category=code) }}">
+<span aria-hidden="true" class="material-symbols-outlined text-4xl text-primary-container group-hover:text-secondary-fixed transition-colors">{{ icon }}</span>
+<div>
+<h3 class="font-headline-md text-headline-md mb-2">{{ title }}</h3>
+<p class="font-body-md text-on-surface-variant group-hover:text-surface-variant">{{ blurb }}</p>
 </div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">{{ title }}</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-md">{{ blurb }}</p>
-<a class="text-label-sm font-label-sm font-bold text-secondary flex items-center gap-xs focus-ring rounded" href="{{ url_for('public.services', category=category) }}">
-                            {{ cta }} <span aria-hidden="true" class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<div class="mt-auto flex items-center gap-2 font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity">
+                            Open Service <span aria-hidden="true" class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
 </a>
-</div>
 {%- endfor %}
 </div>
 </div>
 </section>
-<!-- National Trust Section -->
-<section class="py-xl bg-surface-container-low border-y border-outline-variant/30">
-<div class="max-w-container-max mx-auto px-lg text-center">
-<div class="flex flex-col items-center max-w-3xl mx-auto">
-<span class="material-symbols-outlined text-5xl text-on-surface-variant mb-md opacity-30" data-icon="verified_user">verified_user</span>
-<h2 class="font-headline-xl text-headline-xl text-primary mb-md">Protected by National Trust Infrastructure</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Every transaction on the Watiq portal is anchored to the Tunisian Republic's sovereign blockchain and verified through multi-factor biometric authentication, ensuring absolute data integrity.</p>
-<div class="flex flex-wrap justify-center gap-lg">
-<div class="flex items-center gap-xs text-on-surface-variant opacity-60 grayscale hover:grayscale-0 transition-all">
-<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
-<span class="font-label-sm text-label-sm tracking-widest uppercase">Biometric Secure</span>
+<!-- Technical Spec / Sovereign Cloud Section -->
+<section class="py-24 bg-white overflow-hidden relative" id="technical">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-12 gap-gutter items-center">
+<div class="col-span-12 md:col-span-6 order-2 md:order-1">
+<div class="p-8 border border-outline-variant rounded-sm bg-surface-container-lowest relative overflow-hidden">
+<div class="absolute -right-10 -top-10">
+<span aria-hidden="true" class="material-symbols-outlined text-[180px] text-surface-container">memory</span>
 </div>
-<div class="flex items-center gap-xs text-on-surface-variant opacity-60 grayscale hover:grayscale-0 transition-all">
-<span class="material-symbols-outlined" data-icon="dataset">dataset</span>
-<span class="font-label-sm text-label-sm tracking-widest uppercase">Sovereign Data</span>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-8">Technical Specifications</h3>
+<div class="grid grid-cols-1 gap-6">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-sm bg-primary-container flex items-center justify-center text-on-primary shrink-0">
+<span aria-hidden="true" class="material-symbols-outlined">security</span>
 </div>
-<div class="flex items-center gap-xs text-on-surface-variant opacity-60 grayscale hover:grayscale-0 transition-all">
-<span class="material-symbols-outlined" data-icon="encrypted">encrypted</span>
-<span class="font-label-sm text-label-sm tracking-widest uppercase">End-to-End Encryption</span>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">Zero Trust Architecture</h4>
+<p class="font-support-sm text-support-sm text-on-surface-variant">Every request is authenticated, authorized, and continuously inspected.</p>
 </div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-sm bg-primary-container flex items-center justify-center text-on-primary shrink-0">
+<span aria-hidden="true" class="material-symbols-outlined">api</span>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">X-Road Standard</h4>
+<p class="font-support-sm text-support-sm text-on-surface-variant">Secure interoperability layer ensuring the integrity of data exchanges.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-sm bg-primary-container flex items-center justify-center text-on-primary shrink-0">
+<span aria-hidden="true" class="material-symbols-outlined">lan</span>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">Multi-Hosting</h4>
+<p class="font-support-sm text-support-sm text-on-surface-variant">Geographical redundancy across three isolated national data centers.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-6 order-1 md:order-2 flex flex-col gap-6">
+<span class="font-label-caps text-label-caps text-primary uppercase">Sovereign Cloud Secured</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Protected by National Trust Infrastructure</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                        Watiq is not just a portal; it is the backbone of Tunisian digital sovereignty. Our systems are audited quarterly by the ANSI to ensure the highest level of protection for citizen data.
+                    </p>
+<div class="flex gap-4">
+<img alt="ANSI Logo" class="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60" src="{{ url_for('static', filename='img/img-59b136c5decd.jpg') }}"/>
+<img alt="Sovereign Cloud Infrastructure Logo" class="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60" src="{{ url_for('static', filename='img/img-9d8a79b731d0.jpg') }}"/>
 </div>
 </div>
 </div>
 </section>
 </main>
-<!-- Floating TSL Module -->
-<div class="fixed bottom-lg right-lg z-50 flex flex-col items-end gap-sm">
-<div class="hidden bg-primary-container text-on-primary-fixed p-sm rounded shadow-2xl mb-xs border border-tertiary-fixed-dim/30 max-w-xs transition-opacity duration-300" id="tsl-tooltip">
-<p class="font-label-sm text-label-sm text-tertiary-fixed-dim mb-1">Accessibility Assist</p>
-<p class="font-body-md text-body-md">Enable Tunisian Sign Language (TSL) video support for this page.</p>
+<!-- Sign Language Module (TSL) -->
+<div class="fixed bottom-margin-mobile right-margin-mobile z-[100] group">
+<div class="relative">
+<!-- Label Tag -->
+<div class="absolute -top-10 right-0 bg-primary-container text-on-primary text-[10px] font-label-caps py-1 px-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
+                ACCESSIBILITY TSL
+            </div>
+<!-- Video Container -->
+<a aria-label="Tunisian Sign Language support" class="block w-48 md:w-64 aspect-[1.79] rounded-xl overflow-hidden shadow-2xl glass-panel border-2 border-secondary-fixed relative cursor-pointer active:scale-95 transition-transform focus-ring" href="{{ url_for('public.accessibility') }}">
+<img alt="TSL Interpreter" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<div class="absolute inset-0 bg-primary-container/20 group-hover:bg-transparent transition-colors"></div>
+<div class="absolute bottom-2 right-2 flex gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-ping"></div>
 </div>
-<button aria-label="Tunisian Sign Language support" class="floating-module w-16 h-16 bg-tertiary-fixed-dim text-on-tertiary-fixed rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 border-4 border-white" data-action="a11y-interpreter" data-hover-hide="tsl-tooltip" data-hover-show="tsl-tooltip" data-target="tsl-tooltip" type="button">
-<span aria-hidden="true" class="material-symbols-outlined text-3xl" data-icon="sign_language">sign_language</span>
-</button>
+<!-- Play Overlay -->
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span aria-hidden="true" class="material-symbols-outlined text-white text-4xl">play_circle</span>
+</div>
+</a>
+</div>
 </div>
 <!-- Footer -->
-<footer class="bg-primary-container text-on-primary-fixed w-full py-lg mt-auto border-t border-tertiary-fixed/30">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg px-lg max-w-container-max mx-auto">
-<div class="col-span-1 lg:col-span-1">
-<span class="font-headline-md text-headline-md font-bold text-on-primary-fixed mb-md block">Watiq</span>
-<p class="font-body-md text-body-md text-on-primary-fixed-variant mb-md">Advancing the digital sovereignty of the Tunisian Republic through secure, accessible, and high-performance infrastructure.</p>
+<footer class="bg-on-surface dark:bg-on-background border-t border-outline dark:border-outline-variant w-full py-12 relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-label-md text-label-md text-surface-container-lowest font-bold tracking-widest uppercase">
+                    Watiq Portal
+                </div>
+<p class="font-caption text-caption text-surface-container-highest opacity-60 text-center md:text-left">
+                    © {{ year }} Republic of Tunisia - National Services Portal
+                </p>
 </div>
-<div>
-<h4 class="font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-md">Resources</h4>
-<ul class="space-y-sm">
-<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors" href="{{ url_for('public.services') }}">National Services Catalog</a></li>
-<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors" href="{{ url_for('public.contact') }}">Citizen Support Portal</a></li>
-<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors" href="{{ url_for('public.open_data') }}">Developer API Docs</a></li>
-</ul>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.about') }}">Security Protocols</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
 </div>
-<div>
-<h4 class="font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-md">Sovereignty</h4>
-<ul class="space-y-sm">
-<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors" href="{{ url_for('public.terms') }}">Security Protocols</a></li>
-<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors" href="{{ url_for('public.privacy') }}">Privacy Policy</a></li>
-<li><a class="font-body-md text-body-md text-on-primary-fixed-variant hover:text-on-primary-fixed transition-colors" href="{{ url_for('public.accessibility') }}">Accessibility Standards</a></li>
-</ul>
-</div>
-<div class="flex flex-col gap-md">
-<h4 class="font-label-sm text-label-sm text-tertiary-fixed-dim uppercase tracking-widest mb-md">Connect</h4>
-<div class="flex gap-md">
-<a aria-label="Accessibility and language options" class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer focus-ring rounded" data-icon="language" href="{{ url_for('public.accessibility') }}">language</a>
-<a aria-label="Contact us" class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer focus-ring rounded" data-icon="mail" href="{{ url_for('public.contact') }}">mail</a>
-<a aria-label="About the portal" class="material-symbols-outlined text-on-primary-fixed-variant hover:text-on-primary-fixed cursor-pointer focus-ring rounded" data-icon="public" href="{{ url_for('public.about') }}">public</a>
-</div>
-<div class="mt-auto">
-<p class="font-label-sm text-label-sm text-on-primary-fixed-variant">System Status: <span class="text-green-400">All Operational</span></p>
-</div>
-</div>
-</div>
-<div class="max-w-container-max mx-auto px-lg mt-lg pt-lg border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-md">
-<p class="font-label-sm text-label-sm text-on-primary-fixed-variant opacity-60">© {{ year }} Tunisian Republic • Digital Sovereignty Department</p>
-<div class="flex gap-md">
-<a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed underline" href="{{ url_for('public.terms') }}">Legal Notice</a>
-<a class="font-label-sm text-label-sm text-on-primary-fixed-variant hover:text-on-primary-fixed underline" href="{{ url_for('public.privacy') }}">Cookie Policy</a>
+<div class="flex gap-4">
+<a aria-label="Watiq on social media" class="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.contact') }}">facebook</a>
+<a aria-label="Language and accessibility options" class="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.accessibility') }}">language</a>
 </div>
 </div>
 </footer>

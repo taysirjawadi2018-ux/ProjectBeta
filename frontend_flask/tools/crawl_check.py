@@ -4,9 +4,11 @@
 Stands in for a browser: catches missing images, 500s, dangling links and any
 asset the CSP would reject, none of which the template tests can see.
 """
-import re, sys, urllib.request, urllib.error, collections
+import os, re, sys, urllib.request, urllib.error, collections
 
-BASE = "http://127.0.0.1:5000"
+# Override when 5000 is occupied by another run:
+#   CRAWL_BASE=http://127.0.0.1:5001 python tools/crawl_check.py
+BASE = os.environ.get("CRAWL_BASE", "http://127.0.0.1:5000").rstrip("/")
 PAGES = ["/", "/login", "/login?staff=1", "/register", "/password-reset",
          "/password-reset?stage=confirm", "/services", "/services?category=civil",
          "/services?q=passport", "/track", "/contact", "/help", "/about",

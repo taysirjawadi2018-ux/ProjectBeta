@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from datetime import date, timedelta
 from typing import Any
 
@@ -12,6 +13,30 @@ import auth
 from auth import login_required
 
 bp = Blueprint("citizen", __name__)
+
+
+def _split_by_half_day(slots: list[Any]) -> list[tuple[str, str, list[Any]]]:
+    """Group slots into the Morning/Afternoon blocks the design draws.
+
+    time_slot is a label, not a time — the API has shipped both "09:00–09:30"
+    and "09:00 AM" — so the hour is parsed out and an unparseable label falls
+    into the afternoon rather than disappearing from the page.
+    """
+    morning: list[Any] = []
+    afternoon: list[Any] = []
+    for item in slots:
+        label = str(item.get("time_slot") or "")
+        head = re.match(r"\s*(\d{1,2})", label)
+        hour = int(head.group(1)) if head else 12
+        if "pm" in label.lower() and hour < 12:
+            hour += 12
+        elif "am" in label.lower() and hour == 12:
+            hour = 0
+        (morning if hour < 12 else afternoon).append(item)
+    return [
+        ("Morning", "light_mode", morning),
+        ("Afternoon", "partly_cloudy_day", afternoon),
+    ]
 
 
 @bp.get("/dashboard")
@@ -165,6 +190,104 @@ def upload_document(request_id: int) -> Any:
     return {"upload": presigned}, 200
 
 
+@bp.get("/requests/<int:request_id>/documents/new")
+@login_required
+def upload_page(request_id: int) -> str:
+    """The upload screen. POSTs to upload_document above, which brokers the
+    presigned PUT — the file never passes through this process."""
+    return render_template(
+        "document_upload.html",
+        request_item=api.get(f"/api/v1/requests/{request_id}"),
+        documents=api.items_of(
+            api.try_get(f"/api/v1/requests/{request_id}/documents")
+        ),
+        profile=auth.current_profile(),
+    )
+
+
+# --- documents ------------------------------------------------------------
+@bp.get("/documents")
+@login_required
+def documents() -> str:
+    """Every document the citizen holds, assembled request by request.
+
+    There is no "all my documents" endpoint — documents are listed per request
+    — so this walks the request list and collects them. That is the whole
+    reason the design's "My Documents" links used to point at /requests: the
+    screen could not be built. It is bounded by the request page size rather
+    than unbounded, and each document keeps a back-reference to its request so
+    the detail route can address it without a second lookup.
+    """
+    requests_ = api.items_of(api.try_get("/api/v1/requests", params={"size": 50}))
+    collected: list[dict[str, Any]] = []
+    for item in requests_:
+        for document in api.items_of(
+            api.try_get(f"/api/v1/requests/{item['id']}/documents")
+        ):
+            collected.append({**document, "request": item})
+
+    kind = (request.args.get("status") or "").strip().lower()
+    if kind in ("verified", "pending", "rejected"):
+        collected = [d for d in collected if str(d.get("status")) == kind]
+
+    return render_template(
+        "my_documents.html",
+        documents=collected,
+        status=kind,
+        counts={
+            key: sum(1 for d in collected if str(d.get("status")) == key)
+            for key in ("verified", "pending", "rejected")
+        },
+        profile=auth.current_profile(),
+    )
+
+
+@bp.get("/requests/<int:request_id>/documents/<int:document_id>")
+@login_required
+def document_detail(request_id: int, document_id: int) -> Any:
+    """One document, with the seal and audit trail its mockup draws.
+
+    Addressed through its request because the API publishes no
+    GET /documents/{id} — only the per-request listing — so the document is
+    picked out of that list rather than fetched directly.
+    """
+    documents_ = api.items_of(
+        api.try_get(f"/api/v1/requests/{request_id}/documents")
+    )
+    document = next((d for d in documents_ if d.get("id") == document_id), None)
+    if document is None:
+        flash("That document is not on this request.", "error")
+        return redirect(url_for("citizen.documents"))
+    return render_template(
+        "document_detail.html",
+        document=document,
+        request_item=api.get(f"/api/v1/requests/{request_id}"),
+        history=api.items_of(api.try_get(f"/api/v1/requests/{request_id}/history")),
+        profile=auth.current_profile(),
+    )
+
+
+# --- security ------------------------------------------------------------
+@bp.get("/security-log")
+@login_required
+def security_log() -> str:
+    """The citizen's own access log.
+
+    /api/v1/audit/access-log is the only access-event feed the API exposes and
+    it is authorised server-side; whether a citizen may read their own rows is
+    the API's call, not this one's. try_get means a 403 renders the empty state
+    rather than an error page, so the screen is honest either way — and it
+    lights up on its own the day the endpoint is scoped to self.
+    """
+    data = api.try_get("/api/v1/audit/access-log", default={}, params={"size": 50}) or {}
+    return render_template(
+        "security_log.html",
+        entries=api.items_of(data),
+        notifications=api.items_of(api.try_get("/api/v1/notifications"))[:5],
+        profile=auth.current_profile(),
+    )
+
+
 @bp.post("/documents/<int:document_id>/confirm")
 @login_required
 def confirm_document(document_id: int) -> Any:
@@ -292,6 +415,19 @@ def book_appointment() -> Any:
             ).lower()
         ]
 
+    # The design's checkbox group. It is offered over the `type` column the
+    # directory actually publishes ('municipality', 'court', ...) rather than
+    # the mockup's hardcoded service names, which nothing in the API can match
+    # an office against — a filter that can only ever return nothing is a dead
+    # control with extra steps. The options come from the rows themselves, so
+    # the list is never a box the citizen can tick to empty the results.
+    office_types = sorted(
+        {str(o.get("type")) for o in offices if o.get("type")}
+    )
+    selected_types = [t for t in request.args.getlist("type") if t in office_types]
+    if selected_types:
+        offices = [o for o in offices if str(o.get("type")) in selected_types]
+
     # The week strip runs Monday..Sunday around the chosen day, matching the
     # seven-column calendar in the design.
     week_start = slot_date - timedelta(days=slot_date.weekday())
@@ -299,6 +435,8 @@ def book_appointment() -> Any:
         "book_appointment.html",
         offices=offices,
         q=query,
+        office_types=office_types,
+        selected_types=selected_types,
         prev_week=(week_start - timedelta(days=7)).isoformat(),
         next_week=(week_start + timedelta(days=7)).isoformat(),
         office=office,
@@ -313,6 +451,11 @@ def book_appointment() -> Any:
         if office_id
         else [],
         slots=slots,
+        # The design groups the day into Morning and Afternoon. Splitting here
+        # rather than in the template because the hour has to be parsed out of
+        # a label, and a lexicographic compare in Jinja gets "9:00" wrong the
+        # moment the API stops zero-padding.
+        slot_groups=_split_by_half_day(slots),
         slot=next((s for s in slots if s.get("id") == slot_id), None),
         slot_date=slot_date,
         week=[week_start + timedelta(days=offset) for offset in range(7)],
@@ -328,6 +471,28 @@ def appointments() -> str:
     return render_template(
         "appointments.html",
         appointments=api.items_of(data),
+        profile=auth.current_profile(),
+    )
+
+
+@bp.get("/appointments/<int:appointment_id>")
+@login_required
+def appointment_detail(appointment_id: int) -> Any:
+    """One appointment.
+
+    The API publishes no GET /appointments/{id} — only the list, plus cancel
+    and status — so the row is picked out of the list the citizen can already
+    see. That keeps the authorisation exactly where it was: if it is not in
+    their list, it is not theirs to read.
+    """
+    items = api.items_of(api.try_get("/api/v1/appointments", default={}))
+    appointment = next((a for a in items if a.get("id") == appointment_id), None)
+    if appointment is None:
+        flash("That appointment is not on your record.", "error")
+        return redirect(url_for("citizen.appointments"))
+    return render_template(
+        "appointment_detail.html",
+        appointment=appointment,
         profile=auth.current_profile(),
     )
 

@@ -191,3 +191,49 @@ def audit() -> str:
         page=page,
         staff=api.try_get("/api/v1/staff/me"),
     )
+
+
+@bp.get("/health")
+@staff_required
+def health() -> str:
+    """The auditor's monitoring console.
+
+    Every tile here is a probe this process can actually make, timed on the
+    spot: the BFF is up by definition (it is answering), the API is asked for
+    its own /healthz, and the four data surfaces are the endpoints the portal
+    depends on. Nothing is a stored metric — there is no metrics endpoint — so
+    the page reports reachability and latency, and says so rather than drawing
+    a CPU gauge it would have to invent.
+    """
+    import time
+
+    def probe(label: str, path: str, *, auth_required: bool = True) -> dict[str, Any]:
+        started = time.perf_counter()
+        try:
+            if auth_required:
+                api.get(path)
+            else:
+                api.request("GET", path, auth=False, retry_auth=False)
+            status = "ok"
+        except Exception as exc:  # noqa: BLE001
+            status = "degraded" if isinstance(exc, api.ApiError) else "down"
+        return {
+            "label": label,
+            "path": path,
+            "status": status,
+            "ms": round((time.perf_counter() - started) * 1000),
+        }
+
+    checks = [
+        probe("Upstream API", "/healthz", auth_required=False),
+        probe("Service catalogue", "/api/v1/catalog/services"),
+        probe("Office directory", "/api/v1/catalog/offices"),
+        probe("Request store", "/api/v1/requests/office/queue"),
+        probe("Access log", "/api/v1/audit/access-log"),
+    ]
+    return render_template(
+        "staff_health.html",
+        checks=checks,
+        healthy=sum(1 for c in checks if c["status"] == "ok"),
+        staff=api.try_get("/api/v1/staff/me"),
+    )

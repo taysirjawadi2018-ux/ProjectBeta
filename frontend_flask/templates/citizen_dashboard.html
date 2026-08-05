@@ -1,142 +1,120 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-citizen-dashboard' %}
-{% block title %}Watiq | Citizen Space{% endblock %}
-{% block body_class %}bg-background text-on-background font-body-md selection:bg-secondary-fixed{% endblock %}
+{% block title %}National Portal - Citizen Watiq{% endblock %}
+{% block body_class %}bg-surface text-on-surface min-h-screen flex flex-col overflow-x-hidden{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/citizen_dashboard.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 <!-- National Emblem Watermark -->
-<div class="national-watermark">
-<img class="w-full" alt="A large, highly detailed vector engraving of the Tunisian Republic national emblem, featuring the lion, galley, and scal" src="{{ url_for('static', filename='img/img-38f60b15eb9a.jpg') }}"/>
-</div>
+<div class="fixed inset-0 watermark-overlay z-0"></div>
 <!-- Side Navigation Shell -->
-<aside class="fixed left-0 top-0 h-full w-64 bg-surface-container border-r border-outline-variant flex flex-col p-md space-y-md hidden md:flex z-40">
-<div class="flex items-center space-x-sm mb-lg">
-<div class="w-10 h-10 bg-primary-container flex items-center justify-center rounded">
-<span class="icon-filled material-symbols-outlined text-on-primary">account_balance</span>
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant shadow-md flex flex-col py-8 gap-2 z-20">
+<div class="px-6 mb-8">
+<h1 class="font-headline-sm text-headline-sm text-primary uppercase tracking-wider">Citizen Space</h1>
+<p class="font-support-sm text-support-sm text-on-surface-variant opacity-70">Secure Session</p>
 </div>
-<div>
-<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Watiq</h1>
-<p class="font-label-sm text-label-sm opacity-60">Citizen Space</p>
-</div>
-</div>
-<nav class="flex-1 space-y-xs">
-<a class="flex items-center px-md py-sm rounded-lg text-secondary font-bold border-l-4 border-tertiary-fixed-dim bg-secondary-fixed/20 transition-soft group" href="{{ url_for('citizen.dashboard') }}">
-<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="dashboard">dashboard</span>
-<span class="font-label-sm text-label-sm">Dashboard</span>
+<nav class="flex-1 space-y-1">
+<a aria-current="page" class="bg-primary text-on-primary rounded-lg mx-2 flex items-center gap-3 px-4 py-3 transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('citizen.dashboard') }}">
+<span aria-hidden="true" class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
 </a>
-<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('citizen.requests_list') }}">
-<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="description">description</span>
-<span class="font-label-sm text-label-sm">Applications</span>
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('citizen.requests_list') }}">
+<span aria-hidden="true" class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Applications</span>
 </a>
-<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('citizen.requests_list') }}">
-<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="folder_shared">folder_shared</span>
-<span class="font-label-sm text-label-sm">My Documents</span>
+{#- There is no "all my documents" endpoint — documents hang off a request —
+    so My Documents lands on the request list, where each row opens its own
+    document set. -#}
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('citizen.requests_list') }}">
+<span aria-hidden="true" class="material-symbols-outlined">folder_shared</span>
+<span class="font-label-md text-label-md">My Documents</span>
 </a>
-<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('public.contact') }}">
-<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="gavel">gavel</span>
-<span class="font-label-sm text-label-sm">Legal Support</span>
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('public.services', category='justice') }}">
+<span aria-hidden="true" class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Legal Support</span>
 </a>
-<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft group" href="{{ url_for('citizen.profile') }}">
-<span class="material-symbols-outlined mr-md group-hover:translate-x-1 duration-150" data-icon="settings">settings</span>
-<span class="font-label-sm text-label-sm">Settings</span>
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('citizen.profile') }}">
+<span aria-hidden="true" class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
 </a>
 </nav>
-<div class="pt-md border-t border-outline-variant space-y-xs">
-<a href="{{ url_for('public.contact') }}" class="w-full bg-primary-container text-on-primary py-sm rounded font-label-sm flex items-center justify-center space-x-xs hover:opacity-90 transition-soft">
-<span class="material-symbols-outlined text-[18px]">emergency</span>
-<span>Emergency Support</span>
+<div class="mt-auto pt-4 border-t border-outline-variant mx-2">
+<a class="text-on-surface-variant hover:bg-surface-container-highest flex items-center gap-3 px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('citizen.profile') }}">
+<span aria-hidden="true" class="material-symbols-outlined">security</span>
+<span class="font-label-md text-label-md">Security Log</span>
 </a>
-<a class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft" href="{{ url_for('public.help_page') }}">
-<span class="material-symbols-outlined mr-md" data-icon="help">help</span>
-<span class="font-label-sm text-label-sm">Help Center</span>
-</a>
-<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button aria-label="Sign out" class="flex items-center px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-soft" type="submit">
-<span class="material-symbols-outlined mr-md" data-icon="logout">logout</span>
-<span class="font-label-sm text-label-sm">Sign Out</span>
-</button></form>
+{#- Signing out mutates session state, so it is a POST with a CSRF token
+    rather than the mockup's <a href="/logout">. `contents` keeps the form out
+    of the flex flow so the button still sits exactly where the link did. -#}
+<form action="{{ url_for('public.logout') }}" class="contents" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<button class="text-error hover:bg-error-container flex items-center gap-3 px-4 py-3 rounded-lg transition-all focus-ring w-full" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</button>
+</form>
 </div>
 </aside>
 <!-- Main Content Area -->
-<main class="md:ml-64 min-h-screen relative z-10 flex flex-col">
-<!-- Top Bar Shell -->
-<header class="bg-primary-container sticky top-0 z-30 border-b border-outline-variant">
-<div class="max-w-container-max mx-auto px-lg py-sm flex justify-between items-center">
-<div class="flex items-center space-x-md">
-<span class="md:hidden material-symbols-outlined text-on-primary-fixed" data-action="menu">menu</span>
-<h2 class="font-headline-md text-headline-md font-bold text-on-primary-fixed tracking-tight">Citizen Portal</h2>
+<main class="ml-64 flex-1 relative z-10 flex flex-col">
+<!-- Top Navigation -->
+<header class="h-20 bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center w-full px-margin-desktop sticky top-0 z-30">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md text-primary uppercase tracking-wider">Republic of Tunisia</span>
+<nav class="hidden lg:flex gap-6 items-center h-full">
+<a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
+<a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="{{ url_for('public.services', category='identity') }}">Identity</a>
+<a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="{{ url_for('public.services', category='justice') }}">Justice</a>
+<a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="{{ url_for('public.services', category='admin') }}">Admin</a>
+</nav>
 </div>
-<div class="hidden lg:flex space-x-lg">
-<a class="font-label-sm text-primary-fixed border-b-2 border-tertiary-fixed-dim pb-1 transition-soft" href="{{ url_for('public.index') }}">E-Government</a>
-<a class="font-label-sm text-on-primary-container opacity-80 hover:text-primary-fixed transition-soft" href="{{ url_for('public.open_data') }}">Transparency</a>
-<a class="font-label-sm text-on-primary-container opacity-80 hover:text-primary-fixed transition-soft" href="{{ url_for('public.services') }}">National Services</a>
-</div>
-<div class="flex items-center space-x-md">
-<form action="{{ url_for('public.services') }}" class="hidden sm:flex items-center bg-surface-container-low px-sm py-xs rounded-lg space-x-xs text-on-surface-variant" method="get" role="search">
-<label class="sr-only" for="dashboard-search">Search services</label>
-<button aria-label="Search services" class="material-symbols-outlined text-[20px]" type="submit">search</button>
-<input class="bg-transparent border-none focus:ring-0 text-sm w-32 xl:w-64" id="dashboard-search" name="q" placeholder="Search services..." type="search">
-</form>
-<a aria-label="Notifications{% if unread_count %} ({{ unread_count }} unread){% endif %}" class="text-on-primary-fixed hover:scale-105 transition-all relative" href="{{ url_for('citizen.notifications') }}">
+<div class="flex items-center gap-4">
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-sm font-label-caps text-label-caps flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled text-[14px]">verified_user</span>
+                    SOVEREIGN CLOUD SECURED
+                </div>
+<div class="flex gap-2">
+<a aria-label="About the national institutions" class="p-2 hover:bg-surface-container-high rounded-full transition-all focus-ring" href="{{ url_for('public.about') }}">
+<span aria-hidden="true" class="material-symbols-outlined">account_balance</span>
+</a>
+<a aria-label="Notifications{% if unread_count %} ({{ unread_count }} unread){% endif %}" class="p-2 hover:bg-surface-container-high rounded-full transition-all relative focus-ring" href="{{ url_for('citizen.notifications') }}">
 <span aria-hidden="true" class="material-symbols-outlined">notifications</span>
 {%- if unread_count %}
-<span class="absolute -top-1 -right-1 bg-tertiary-fixed-dim text-on-tertiary-fixed font-label-sm text-[10px] rounded-full min-w-4 h-4 px-1 flex items-center justify-center">{{ unread_count }}</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
 {%- endif %}
 </a>
-<a aria-label="Account and security settings" class="text-on-primary-fixed hover:scale-105 transition-all" href="{{ url_for('citizen.profile') }}">
-<span aria-hidden="true" class="material-symbols-outlined">security</span>
-</a>
-<a aria-label="Your profile" class="block w-10 h-10 rounded-full border-2 border-primary-fixed overflow-hidden" href="{{ url_for('citizen.profile') }}">
-<img class="w-full h-full object-cover" alt="" src="{{ url_for('static', filename='img/img-e020e64fece9.jpg') }}"/>
+{%- set given = (profile.first_name if profile else '') or '' %}
+{%- set family = (profile.last_name if profile else '') or '' %}
+<a aria-label="Your profile" class="flex items-center gap-2 p-1 pl-3 hover:bg-surface-container-high rounded-full border border-outline-variant transition-all focus-ring" href="{{ url_for('citizen.profile') }}">
+<span class="font-label-md text-label-md">{{ (given ~ ' ' ~ family)|trim or 'Your account' }}</span>
+<div class="w-8 h-8 rounded-full bg-on-primary-container text-white flex items-center justify-center font-bold">{{ ((given[:1] ~ family[:1])|upper) or 'W' }}</div>
 </a>
 </div>
 </div>
 </header>
 <!-- Dashboard Canvas -->
-<section class="flex-1 p-md lg:p-lg space-y-lg">
-<!-- Greeting & Summary -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
-<div class="md:col-span-2 space-y-xs">
-<h3 class="font-headline-lg text-headline-lg text-primary tracking-tight">Welcome{% if profile and profile.first_name %}, {{ profile.first_name }}{% endif %}.</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Manage your digital identity and sovereign documents securely.</p>
-</div>
-<!-- Upcoming Appointments Card (Gold Accents) -->
-{%- set next_appointment = appointments[0] if appointments else None %}
-<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg relative overflow-hidden group hover:shadow-lg transition-soft">
-<div class="absolute top-0 left-0 w-full h-1 bg-tertiary-fixed-dim"></div>
-<div class="flex justify-between items-start mb-sm">
-<span class="font-label-sm text-on-tertiary-container uppercase tracking-wider">Upcoming Appointment</span>
-<span aria-hidden="true" class="icon-filled material-symbols-outlined text-tertiary-fixed-dim">event_available</span>
-</div>
-{%- if next_appointment %}
-<p class="font-headline-md text-headline-md text-on-surface mb-xs">{{ next_appointment.service_name or 'Appointment' }}</p>
-<p class="font-label-sm text-on-surface-variant">
-{{- next_appointment.slot_date or '' }}{% if next_appointment.time_slot %} • {{ next_appointment.time_slot }}{% endif %}
-{%- if next_appointment.queue_number %} • Queue {{ next_appointment.queue_number }}{% endif -%}
-                    </p>
-<a href="{{ url_for('citizen.appointments') }}" class="mt-md text-secondary font-bold text-sm hover:underline flex items-center">
-                        View appointment <span aria-hidden="true" class="material-symbols-outlined ml-xs text-[18px]">arrow_forward</span>
-</a>
-{%- else %}
-<p class="font-headline-md text-headline-md text-on-surface mb-xs">Nothing booked</p>
-<p class="font-label-sm text-on-surface-variant">You have no appointments scheduled.</p>
-<a href="{{ url_for('citizen.book_appointment') }}" class="mt-md text-secondary font-bold text-sm hover:underline flex items-center">
-                        Book an appointment <span aria-hidden="true" class="material-symbols-outlined ml-xs text-[18px]">arrow_forward</span>
-</a>
-{%- endif %}
+<div class="p-margin-desktop max-w-container-max w-full mx-auto space-y-gutter">
+{% include 'partials/_flash.html' %}
+<!-- Page Header -->
+<div class="flex flex-col gap-2 mb-8">
+<h2 class="font-headline-lg text-headline-lg">Citizen Dashboard</h2>
+<div class="flex items-center gap-4">
+<p class="font-body-lg text-body-lg opacity-80">Welcome back{% if family %}, Mr. {{ family }}{% elif given %}, {{ given }}{% endif %}. All services are active and secure.</p>
+<div class="h-px flex-1 bg-outline-variant opacity-30"></div>
 </div>
 </div>
-<!-- Main Content Grid -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
-<!-- Left: In-Progress & Documents -->
-<div class="lg:col-span-8 space-y-lg">
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter auto-rows-[minmax(180px,_auto)]">
 <!-- In-Progress Requests -->
-<div class="space-y-md">
-<h4 class="font-headline-md text-headline-md text-primary flex items-center">
-<span class="material-symbols-outlined mr-sm text-secondary">pending_actions</span>
-                            In-Progress Requests
-                        </h4>
+<section class="col-span-8 bg-surface-container-lowest glass-panel rounded-xl shadow-sm overflow-hidden flex flex-col border border-outline-variant/10">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-low/30">
+<h3 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled text-primary">pending_actions</span>
+                            IN-PROGRESS REQUESTS
+                        </h3>
+<a class="text-primary font-label-md text-label-md hover:underline focus-ring rounded" href="{{ url_for('citizen.requests_list') }}">View All</a>
+</div>
 {#- The progress bar reflects where the request sits in the workflow that
     Watiq.sql seeds, keyed by status name. The widths are spelled out as
     literal classes because Tailwind scans this file as text — a computed
@@ -148,187 +126,205 @@
   'payment required': 'w-[62%]', 'processing': 'w-[75%]',
   'ready for pickup': 'w-[87%]', 'completed': 'w-full',
 } %}
-<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="p-6 space-y-4">
 {%- for item in requests %}
 {%- set status = (item.status_name or '')|lower %}
 {%- set bar = progress.get(status) %}
-<div class="bg-surface-container-lowest border border-outline-variant p-md rounded-lg space-y-md">
-<div class="flex justify-between items-start">
+<a class="flex items-center justify-between p-4 rounded-lg bg-surface hover:shadow-md transition-shadow cursor-pointer group focus-ring" href="{{ url_for('citizen.request_detail', request_id=item.id) }}">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-sm bg-primary-fixed flex items-center justify-center">
+<span aria-hidden="true" class="material-symbols-outlined text-on-primary-fixed">description</span>
+</div>
 <div>
-<p class="font-headline-md text-sm font-bold text-on-surface">{{ item.service_name or 'Request' }}</p>
-<p class="text-xs text-on-surface-variant">Tracking code: {{ item.tracking_code }}</p>
+<h4 class="font-headline-sm text-[18px]">{{ item.service_name or 'Request' }}</h4>
+<p class="font-support-sm text-support-sm opacity-60">Ref: {{ item.tracking_code }}{% if item.estimated_ready_date %} • Ready by {{ item.estimated_ready_date }}{% endif %}</p>
 </div>
-<span class="px-xs py-1 rounded text-[10px] font-bold uppercase tracking-tighter shrink-0
-{{- ' bg-error-container text-error' if status in ('rejected', 'cancelled') else ' bg-secondary-fixed text-on-secondary-fixed-variant' }}">{{ item.status_name or 'Submitted' }}</span>
 </div>
+<div class="flex flex-col items-end gap-1">
+<span class="{{ 'bg-error-container text-on-error-container' if status in ('rejected', 'cancelled') else 'bg-secondary-container text-on-secondary-container' }} px-2 py-0.5 rounded-sm font-label-caps text-[10px]">{{ (item.status_name or 'Submitted')|upper }}</span>
 {%- if bar %}
-<div class="space-y-xs">
-<div class="flex justify-between text-xs font-label-sm">
-<span>Progress</span>
-<span>{{ item.status_name }}</span>
-</div>
-<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
-<div class="{{ bar }} bg-secondary h-full transition-all duration-1000 ease-out"></div>
-</div>
+<div class="w-32 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="bg-secondary h-full {{ bar }}"></div>
 </div>
 {%- endif %}
-{%- if status == 'payment required' %}
-<a href="{{ url_for('citizen.payments') }}" class="block text-center w-full py-xs border border-secondary text-secondary font-bold rounded text-sm hover:bg-secondary-fixed/20 transition-soft">
-                                    Pay Fees
-                                </a>
-{%- else %}
-<p class="text-xs text-on-surface-variant flex items-center">
-<span aria-hidden="true" class="material-symbols-outlined text-[14px] mr-1">info</span>
-{%- if item.estimated_ready_date %}
-                                    Expected ready by {{ item.estimated_ready_date }}.
-{%- else %}
-                                    <a class="ml-1 text-secondary hover:underline" href="{{ url_for('citizen.request_detail', request_id=item.id) }}">View details</a>
-{%- endif %}
-                                </p>
-{%- endif %}
 </div>
-{%- else %}
-<div class="md:col-span-2 bg-surface-container-lowest border border-outline-variant p-lg rounded-lg text-center space-y-sm">
-<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-3xl">inbox</span>
-<p class="font-body-md text-body-md text-on-surface-variant">You have no requests in progress.</p>
-<a class="inline-block text-secondary font-bold text-sm hover:underline" href="{{ url_for('public.services') }}">Browse the service catalogue</a>
-</div>
-{%- endfor %}
-</div>
-</div>
-<!-- Recent Documents Bento Grid -->
-<div class="space-y-md">
-<div class="flex justify-between items-end">
-<h4 class="font-headline-md text-headline-md text-primary">Recent Documents</h4>
-<a class="text-secondary font-bold text-sm hover:underline" href="{{ url_for('citizen.requests_list') }}">View Digital Vault</a>
-</div>
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-md">
-{%- for document in documents %}
-<a class="bg-white border border-outline-variant p-md rounded-lg flex flex-col items-center justify-center space-y-sm hover:border-secondary transition-soft group focus:outline-none focus:ring-2 focus:ring-secondary" href="{{ url_for('citizen.download_document', document_id=document.id) }}" rel="noopener" target="_blank">
-<span aria-hidden="true" class="material-symbols-outlined text-secondary text-3xl group-hover:scale-110 duration-150">
-{{- 'image' if (document.mime_type or '').startswith('image/') else 'picture_as_pdf' if document.mime_type == 'application/pdf' else 'history_edu' -}}
-</span>
-<p class="font-label-sm text-center">{{ document.document_type or 'Document' }}</p>
-<p class="text-[10px] text-on-surface-variant text-center">{{ document.request.tracking_code }}</p>
 </a>
 {%- else %}
-<div class="col-span-2 sm:col-span-4 bg-white border border-outline-variant p-lg rounded-lg text-center space-y-sm">
-<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-3xl">folder_open</span>
-<p class="font-label-sm text-on-surface-variant">No documents uploaded yet. They appear here once you attach them to a request.</p>
+<div class="flex flex-col items-center gap-3 p-8 rounded-lg bg-surface text-center">
+<span aria-hidden="true" class="material-symbols-outlined text-3xl text-on-surface-variant opacity-40">inbox</span>
+<p class="font-support-sm text-support-sm opacity-60">You have no requests in progress.</p>
+<a class="text-primary font-label-md text-label-md hover:underline focus-ring rounded" href="{{ url_for('public.services') }}">Browse the service catalogue</a>
 </div>
 {%- endfor %}
 </div>
+</section>
+<!-- Upcoming Appointments -->
+<section class="col-span-4 bg-on-surface text-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col relative">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span aria-hidden="true" class="material-symbols-outlined text-8xl">calendar_today</span>
 </div>
+<div class="p-6 border-b border-surface-variant/10">
+<h3 class="font-label-caps text-label-caps flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled">event</span>
+                            UPCOMING APPOINTMENTS
+                        </h3>
 </div>
-<!-- Right: Security Log Sidebar -->
-<div class="lg:col-span-4 space-y-lg">
-<div class="glass-panel p-md rounded-lg flex flex-col h-full border-l-4 border-primary-container">
-{#- The mockup put a per-device security log here — successful logins, failed
-    attempts, session expiries. The access log is staff-only (GET
-    /audit/access-log requires the audit permission), so a citizen has no
-    endpoint behind it and every row would have had to be invented. This shows
-    the citizen's own notification feed instead, which is real and is what
-    tells them something happened to their account. -#}
-<div class="flex items-center space-x-sm mb-md pb-xs border-b border-outline-variant">
-<span aria-hidden="true" class="icon-filled material-symbols-outlined text-secondary">notifications_active</span>
-<h4 class="font-headline-md text-sm font-bold text-on-surface">Recent Activity</h4>
+<div class="p-6 flex-1 flex flex-col justify-between">
+{#- slot_date arrives as an ISO date string, so the month tile is sliced out
+    of it rather than reformatted server-side. -#}
+{%- set months = {
+  '01': 'JAN', '02': 'FEB', '03': 'MAR', '04': 'APR', '05': 'MAY', '06': 'JUN',
+  '07': 'JUL', '08': 'AUG', '09': 'SEP', '10': 'OCT', '11': 'NOV', '12': 'DEC',
+} %}
+<div class="space-y-6">
+{%- for appointment in appointments[:2] %}
+{%- set slot = appointment.slot_date or '' %}
+<div class="flex gap-4">
+<div class="flex flex-col items-center justify-center bg-surface-container-highest/20 rounded-sm w-16 h-16 border border-surface-variant/20">
+<span class="font-label-caps text-label-caps">{{ months.get(slot[5:7], '—') }}</span>
+<span class="font-headline-md text-headline-md leading-none">{{ slot[8:10] or '--' }}</span>
 </div>
-<div class="flex-1 space-y-md">
-{%- for note in notifications %}
-<div class="flex space-x-md items-start">
-<div aria-hidden="true" class="w-2 h-2 mt-2 rounded-full shrink-0 {{ 'bg-secondary' if not note.is_read else 'bg-surface-variant' }}"></div>
-<div class="space-y-1">
-<p class="font-label-sm {{ 'text-on-surface' if not note.is_read else 'text-on-surface-variant opacity-60' }}">{{ note.title }}</p>
-{%- if note.message %}
-<p class="text-[11px] text-on-surface-variant">{{ note.message }}</p>
-{%- endif %}
-<p class="text-[10px] text-on-surface-variant font-label-sm uppercase tracking-tight">{{ (note.created_at or '')[:16]|replace('T', ' ') }}</p>
+<div>
+<h4 class="font-headline-sm text-[18px]">{{ appointment.office_name or appointment.service_name or 'Appointment' }}</h4>
+<p class="font-support-sm text-support-sm opacity-70">
+{{- appointment.service_name or 'Scheduled visit' }}{% if appointment.time_slot %} • {{ appointment.time_slot }}{% endif -%}
+</p>
 </div>
 </div>
 {%- else %}
-<p class="font-label-sm text-on-surface-variant">Nothing to report yet.</p>
+<div class="flex gap-4 items-center">
+<div class="flex flex-col items-center justify-center bg-surface-container-highest/20 rounded-sm w-16 h-16 border border-surface-variant/20">
+<span aria-hidden="true" class="material-symbols-outlined opacity-60">event_busy</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-[18px]">Nothing scheduled</h4>
+<p class="font-support-sm text-support-sm opacity-70">Book a slot at your regional office.</p>
+</div>
+</div>
 {%- endfor %}
 </div>
-<a href="{{ url_for('citizen.notifications') }}" class="mt-lg block text-center w-full py-xs text-on-surface-variant border border-outline-variant rounded font-label-sm text-xs hover:bg-surface-variant transition-soft">
-                            View All Notifications
+<a class="block text-center w-full mt-8 py-3 bg-secondary-fixed text-on-secondary-fixed rounded-sm font-label-md text-label-md hover:bg-secondary-fixed-dim transition-colors focus-ring" href="{{ url_for('citizen.appointments') }}">
+                            Manage Appointments
                         </a>
 </div>
+</section>
+<!-- Recent Documents -->
+<section class="col-span-12 lg:col-span-9 bg-surface-container-lowest glass-panel rounded-xl shadow-sm border border-outline-variant/10">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled text-primary">description</span>
+                            RECENT DOCUMENTS
+                        </h3>
+<div class="flex gap-2">
+<a class="px-3 py-1 bg-surface-container-high rounded-full text-support-sm font-support-sm focus-ring" href="{{ url_for('citizen.requests_list') }}">Verified Only</a>
+<a class="px-3 py-1 bg-primary text-white rounded-full text-support-sm font-support-sm focus-ring" href="{{ url_for('citizen.submit_request') }}">New Upload</a>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-6 p-6">
+{%- for document in documents %}
+{%- set mime = document.mime_type or '' %}
+<div class="p-4 rounded-lg border border-outline-variant/20 bg-surface flex flex-col gap-3 group hover:border-primary transition-all">
+<div class="flex justify-between items-start">
+<span aria-hidden="true" class="material-symbols-outlined text-3xl text-primary opacity-40 group-hover:opacity-100 transition-opacity">
+{{- 'image' if mime.startswith('image/') else 'policy' if document.status == 'verified' else 'article' -}}
+</span>
+{%- if document.status == 'verified' %}
+<div class="bg-secondary-container text-on-secondary-container px-1.5 py-0.5 rounded-sm font-label-caps text-[8px]">SOVEREIGN</div>
+{%- else %}
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant/30">star</span>
+{%- endif %}
+</div>
+<div>
+<h5 class="font-headline-sm text-[16px] truncate">{{ document.document_type or 'Document' }}</h5>
+<p class="font-support-sm text-support-sm opacity-60">{{ 'Verified Official Copy' if document.status == 'verified' else 'Awaiting verification' }}</p>
+</div>
+<div class="mt-2 flex justify-between items-center pt-3 border-t border-outline-variant/10">
+<span class="text-[12px] font-support-sm">{{ document.file_size_bytes|filesizeformat if document.file_size_bytes else document.request.tracking_code }}</span>
+<a aria-label="Download {{ document.document_type or 'document' }}" class="p-1 hover:bg-primary-fixed rounded focus-ring" href="{{ url_for('citizen.download_document', document_id=document.id) }}" rel="noopener" target="_blank">
+<span aria-hidden="true" class="material-symbols-outlined text-lg">download</span>
+</a>
+</div>
+</div>
+{%- else %}
+<div class="col-span-3 p-8 rounded-lg border border-outline-variant/20 bg-surface flex flex-col items-center gap-3 text-center">
+<span aria-hidden="true" class="material-symbols-outlined text-3xl text-primary opacity-40">folder_off</span>
+<p class="font-support-sm text-support-sm opacity-60">No documents have been filed against your recent requests yet.</p>
+</div>
+{%- endfor %}
+</div>
+</section>
+<!-- Security Log Summary -->
+<section class="col-span-12 lg:col-span-3 bg-surface-container shadow-sm rounded-xl overflow-hidden flex flex-col border border-outline-variant/20">
+<div class="p-6 bg-primary-container text-on-primary-container">
+<h3 class="font-label-caps text-label-caps flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">security</span>
+                            SECURITY LOG
+                        </h3>
+</div>
+{#- The API exposes no per-citizen security feed; notifications are the only
+    account event stream there is, so the panel renders those rather than the
+    mockup's invented login rows. -#}
+<div class="p-6 flex-1 space-y-4">
+{%- for note in notifications[:3] %}
+<div class="flex gap-3">
+<div class="w-2 h-2 mt-1.5 rounded-full shrink-0 {{ 'bg-secondary' if not note.is_read else 'bg-outline' }}"></div>
+<div>
+<p class="font-label-md text-label-md">{{ note.title }}</p>
+<p class="font-support-sm text-support-sm opacity-60">{{ (note.created_at or '')[:16]|replace('T', ' ') }}</p>
+</div>
+</div>
+{%- else %}
+<div class="flex gap-3">
+<div class="w-2 h-2 mt-1.5 rounded-full bg-outline shrink-0"></div>
+<div>
+<p class="font-label-md text-label-md">No recent activity</p>
+<p class="font-support-sm text-support-sm opacity-60">Nothing has touched this account.</p>
+</div>
+</div>
+{%- endfor %}
+<div class="mt-6 pt-4 border-t border-outline-variant/20">
+<p class="font-support-sm text-support-sm italic">Session opened {{ now_utc }}</p>
 </div>
 </div>
 </section>
+</div>
+</div>
+<!-- TSL Module (Sign Language) -->
+<div class="fixed bottom-margin-mobile right-margin-mobile z-50 group" data-a11y-panel>
+<div class="bg-surface glass-panel rounded-xl shadow-2xl border-2 border-secondary-fixed w-64 overflow-hidden transition-all duration-300 transform group-hover:scale-105">
+<div class="relative aspect-[1.79]">
+<img alt="TSL Interpreter" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<div class="absolute top-2 left-2 flex items-center gap-1.5 px-2 py-0.5 bg-on-surface/80 backdrop-blur rounded-full">
+<span class="w-2 h-2 bg-secondary rounded-full animate-pulse"></span>
+<span class="text-[10px] font-label-caps text-white">TSL LIVE</span>
+</div>
+<div class="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<button aria-label="Play interpreter" class="material-symbols-outlined text-white text-lg hover:scale-110" data-action="a11y-play" type="button">play_arrow</button>
+<button aria-label="Pause interpreter" class="material-symbols-outlined text-white text-lg hover:scale-110" data-action="a11y-pause" type="button">pause</button>
+<button aria-label="Expand interpreter" class="material-symbols-outlined text-white text-lg hover:scale-110" data-action="a11y-expand" type="button">open_in_full</button>
+</div>
+</div>
+</div>
+<div class="mt-2 text-right">
+<span class="bg-on-surface text-white px-3 py-1 rounded-full text-[12px] font-label-caps shadow-lg">TSL Accessibility</span>
+</div>
+</div>
 <!-- Footer Shell -->
-<footer class="bg-primary-container border-t border-tertiary-fixed/30 mt-auto">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg px-lg py-lg max-w-container-max mx-auto text-on-primary-fixed">
-<div class="space-y-sm">
-<h5 class="font-headline-md text-headline-md font-bold text-on-primary-fixed tracking-tight">Watiq</h5>
-<p class="font-label-sm text-label-sm text-on-primary-fixed-variant">Digital Sovereignty Department of the Tunisian Republic.</p>
+<footer class="mt-auto bg-on-surface text-surface-container border-t border-outline-variant/10 w-full py-12 px-margin-desktop z-10">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-surface-container-lowest uppercase">Republic of Tunisia</span>
+<p class="font-caption text-caption opacity-60">© {{ year }} National Services Portal - Secure Environment</p>
 </div>
-<div class="space-y-xs">
-<h6 class="font-label-sm font-bold opacity-60 uppercase tracking-widest text-[10px]">Portal Links</h6>
-<ul class="space-y-1">
-<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.terms') }}">Security Protocols</a></li>
-<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.privacy') }}">Privacy Policy</a></li>
-</ul>
-</div>
-<div class="space-y-xs">
-<h6 class="font-label-sm font-bold opacity-60 uppercase tracking-widest text-[10px]">Resources</h6>
-<ul class="space-y-1">
-<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.accessibility') }}">Accessibility Standards</a></li>
-<li><a class="font-label-sm text-sm hover:text-on-primary-fixed transition-soft" href="{{ url_for('public.terms') }}">Legal Notice</a></li>
-</ul>
-</div>
-<div class="flex flex-col justify-end">
-<p class="font-label-sm text-label-sm text-on-primary-fixed-variant opacity-80">
-                        © {{ year }} Tunisian Republic • All Rights Reserved
-                    </p>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.about') }}">Security Protocols</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
 </div>
 </div>
 </footer>
 </main>
-<!-- Floating TSL Sign Language Module -->
-<div class="fixed bottom-lg right-lg z-50 group">
-<div class="glass-panel w-16 h-16 rounded-full flex items-center justify-center cursor-pointer shadow-xl border-2 border-secondary relative hover:w-64 hover:h-48 transition-all duration-300 overflow-hidden" id="tsl-container">
-<!-- Icon/Indicator -->
-<div class="absolute inset-0 flex items-center justify-center group-hover:opacity-0 transition-opacity">
-<span class="material-symbols-outlined text-secondary text-3xl">interpreter_mode</span>
-</div>
-<!-- Expanded Content -->
-<div class="opacity-0 group-hover:opacity-100 p-md flex flex-col space-y-md w-full h-full justify-between pointer-events-none group-hover:pointer-events-auto">
-<div class="flex justify-between items-center">
-<span class="font-label-sm font-bold text-on-surface">TSL Support</span>
-<span class="material-symbols-outlined text-secondary">close</span>
-</div>
-<div class="bg-surface-container rounded h-24 flex items-center justify-center relative">
-<img class="h-full object-contain" alt="A small digital avatar performing Tunisian Sign Language (TSL) in a clear, high-contrast visual style." src="{{ url_for('static', filename='img/img-f39f8dd070ec.jpg') }}"/>
-<div class="absolute bottom-2 right-2 flex space-x-1">
-<div class="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
-<div class="anim-delay-200 w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
-<div class="anim-delay-400 w-1.5 h-1.5 bg-secondary rounded-full animate-pulse"></div>
-</div>
-</div>
-<p class="text-[10px] font-label-sm text-center">Translation Active (Real-time)</p>
-</div>
-</div>
-</div>
-<!-- Mobile Bottom Nav (Filter Applied: Persistent on Mobile) -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full bg-primary-container flex justify-around items-center py-sm border-t border-tertiary-fixed/30 z-50">
-<a class="flex flex-col items-center space-y-1 text-primary-fixed" href="{{ url_for('public.index') }}">
-<span class="icon-filled material-symbols-outlined">dashboard</span>
-<span class="text-[10px] font-label-sm">Home</span>
-</a>
-<a class="flex flex-col items-center space-y-1 text-on-primary-container opacity-80" href="{{ url_for('public.services') }}">
-<span class="material-symbols-outlined">description</span>
-<span class="text-[10px] font-label-sm">Services</span>
-</a>
-<a class="flex flex-col items-center space-y-1 text-on-primary-container opacity-80" href="{{ url_for('citizen.requests_list') }}">
-<span class="material-symbols-outlined">folder_shared</span>
-<span class="text-[10px] font-label-sm">Docs</span>
-</a>
-<a class="flex flex-col items-center space-y-1 text-on-primary-container opacity-80" href="{{ url_for('citizen.profile') }}">
-<span class="material-symbols-outlined">settings</span>
-<span class="text-[10px] font-label-sm">Profile</span>
-</a>
-</nav>
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/pages/citizen_dashboard.js') }}" defer></script>

@@ -81,6 +81,30 @@ BUTTONS: dict[str, tuple[str, str]] = {
     "key Recovery Key": (ACTION, "use-recovery-key"),
     "Revoke All Access": (ACTION, "revoke-sessions"),
     "10:00 AM": (ACTION, "select-time"),
+    # --- second mockup drop ------------------------------------------------
+    # Anything data-driven is deliberately absent: the calendar day numbers,
+    # the time slots and the pagination digits become Jinja loops over real
+    # rows during the merge, so wiring them from a label here would only have
+    # to be undone.
+    "account_circle": (NAV, "citizen.profile"),
+    "menu": (ACTION, "toggle"),
+    "minimize": (ACTION, "toggle"),
+    "sign_language": (ACTION, "a11y-interpreter"),
+    "more_vert": (ACTION, "toggle"),
+    "attach_file": (ACTION, "attach-file"),
+    "Send send": (SUBMIT, ""),
+    "Decline": (NAV, "public.index"),
+    "Accept &amp; Continue": (SUBMIT, ""),
+    "Return to Dashboard": (NAV, "citizen.dashboard"),
+    "View All History": (NAV, "citizen.security_log"),
+    "Enable 2FA Now": (NAV, "citizen.profile"),
+    "Terminate Session": (SUBMIT, ""),
+    "New Request": (NAV, "citizen.submit_request"),
+    "download Export": (ACTION, "print"),
+    "download Export CSV": (ACTION, "print"),
+    "picture_as_pdf Export PDF": (ACTION, "print"),
+    "download Download PDF Receipt": (ACTION, "print"),
+    "download Download Receipt": (ACTION, "print"),
 }
 
 # Buttons whose action needs an argument the label alone does not carry.
@@ -106,7 +130,12 @@ def main() -> None:
     counts = {NAV: 0, SUBMIT: 0, ACTION: 0}
     unmatched: list[tuple[str, str]] = []
 
-    for path in sorted(TEMPLATES.glob("*.html")):
+    # _staged/ holds a second-drop port waiting to be merged into an existing
+    # template; wiring it here means the merge is a content decision only.
+    paths = sorted(TEMPLATES.glob("*.html")) + sorted(
+        (TEMPLATES / "_staged").glob("*.html")
+    )
+    for path in paths:
         html = path.read_text(encoding="utf-8")
 
         # --- sign-out links become POST forms -----------------------------

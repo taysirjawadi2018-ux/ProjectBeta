@@ -146,7 +146,12 @@ def vendor_icon_font(icons: list[str]) -> str:
 
 def vendor_images() -> dict[str, str]:
     urls: set[str] = set()
-    pattern = re.compile(r"https://lh3\.googleusercontent\.com/[^\"')\s]+")
+    # Two hosts, not one: the appointment-map mockup pulls its map plate from
+    # images.unsplash.com rather than the generator's own CDN. img-src is
+    # 'self' data:, so that one has to come down too or the map renders blank.
+    pattern = re.compile(
+        r"https://(?:lh3\.googleusercontent\.com|images\.unsplash\.com)/[^\"')\s]+"
+    )
     for path in sorted(MOCKUPS.glob("*.html")):
         urls.update(pattern.findall(path.read_text(encoding="utf-8")))
 

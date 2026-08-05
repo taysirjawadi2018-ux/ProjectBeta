@@ -1,305 +1,123 @@
 {% extends 'base.html' %}
-{% set html_class = 'light tk-secure-paiment-and-receipting' %}
-{% block title %}Secure Payment - Bulletin No. 3 | Republic of Tunisia{% endblock %}
-{% block body_class %}flex min-h-screen overflow-x-hidden{% endblock %}
+{% set html_class = 'light tk-payment-success-receipt' %}
+{#
+  Ported from frontend/payment_success_receipt.html, which replaced the
+  payment_confirmation design in the second mockup drop.
+
+  PaymentOut carries id, amount, currency, status, paid_at and service_name —
+  no card details and no separate transaction reference. So "Payment Method"
+  reports the status the ledger actually holds instead of a masked PAN this
+  process never sees, and the transaction id is the payment id.
+#}
+{%- set paid = payment and payment.status == 'completed' %}
+{% block title %}Payment Successful - République Tunisienne{% endblock %}
+{% block body_class %}bg-background min-h-screen flex flex-col font-body-md text-body-md text-on-background relative overflow-x-hidden{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/payment_confirmation.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
-<!-- Watermark Background -->
-<div class="watermark-bg"></div>
-<!-- SideNavBar -->
-<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 flex-col py-8 gap-2 bg-surface-container-low border-r border-outline-variant z-20 shadow-md">
-<div class="px-6 mb-8">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-institutional-navy text-3xl">account_balance</span>
+<!-- Watermark -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center z-0">
+<img class="w-[800px] h-auto object-contain" alt="The official national emblem of the Tunisian Republic, rendered as a subtle watermark." src="{{ url_for('static', filename='img/img-1ed334683970.jpg') }}"/>
+</div>
+<!-- Main Content Canvas (No Nav Shell as per instructions for Transactional/Success screen) -->
+<main class="flex-grow flex items-center justify-center py-20 px-margin-mobile md:px-margin-desktop z-10 relative">
+<div class="max-w-3xl w-full">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-[#0b1c30]/5 overflow-hidden backdrop-blur-md relative">
+<div class="p-12 flex flex-col items-center text-center">
+<!-- Success Icon -->
+<div class="w-24 h-24 rounded-full bg-secondary-fixed flex items-center justify-center mb-8 shadow-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-[48px] text-on-secondary-container icon-filled">
+                            {{ "check_circle" if paid else "receipt_long" }}
+                        </span>
+</div>
+<!-- Headline -->
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">
+                        {{ "Payment Successful" if paid else "Payment Recorded" if payment else "No Payment Found" }}
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                        {% if paid %}Your transaction has been securely processed. Keep the reference below for the counter.{% elif payment %}This payment is on file with status “{{ payment.status }}”. It is not settled yet.{% else %}There is no payment on your record yet.{% endif %}
+                    </p>
+<!-- Receipt Details Card -->
+<div class="w-full bg-surface rounded-lg border border-outline-variant p-6 mb-10 text-left">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 pb-2 border-b border-outline-variant/50">Transaction Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
 <div>
-<h1 class="font-headline-sm text-[18px] font-bold text-institutional-navy">Citizen Space</h1>
-<p class="text-[10px] text-secondary uppercase tracking-widest font-bold">Secure Session</p>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Transaction ID</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold tracking-wide">{{ ("PAY-%06d"|format(payment.id)) if payment else "—" }}</span>
 </div>
-</div>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-3 py-3 px-4 bg-institutional-navy text-on-primary rounded-lg mx-2 transition-all" href="{{ url_for('citizen.dashboard') }}">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-container-highest mx-2 transition-all" href="{{ url_for('citizen.requests_list') }}">
-<span class="material-symbols-outlined">description</span>
-<span class="font-label-md text-label-md">Applications</span>
-</a>
-<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-container-highest mx-2 transition-all" href="{{ url_for('citizen.requests_list') }}">
-<span class="material-symbols-outlined">folder_shared</span>
-<span class="font-label-md text-label-md">My Documents</span>
-</a>
-<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-container-highest mx-2 transition-all" href="{{ url_for('public.contact') }}">
-<span class="material-symbols-outlined">gavel</span>
-<span class="font-label-md text-label-md">Legal Support</span>
-</a>
-{#- The mockup linked a "Security Log" here. /staff/audit is staff-only and
-    answers 404 for a citizen, so this points at the account security panel
-    on the profile page, which is the equivalent a citizen can actually see. -#}
-<a class="flex items-center gap-3 py-3 px-4 text-on-surface-variant hover:bg-surface-container-highest mx-2 transition-all" href="{{ url_for('citizen.profile') }}">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-label-md text-label-md">Settings</span>
-</a>
-</nav>
-<!-- Accessibility Module -->
-<div class="mx-4 mb-4">
-<div class="tsl-module p-2 rounded-lg relative overflow-hidden group">
-<div class="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer z-10">
-<span class="material-symbols-outlined text-white text-3xl">play_circle</span>
-</div>
-<img alt="Tunisian Sign Language Assistance" class="w-full h-24 object-cover rounded shadow-inner" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
-<div class="mt-2 text-center">
-<span class="text-[10px] font-bold text-institutional-navy uppercase tracking-tighter flex items-center justify-center gap-1">
-<span class="material-symbols-outlined text-xs">interpreter_mode</span>
-                    TSL Assistance
-                </span>
-</div>
-</div>
-</div>
-<div class="mt-auto pt-4 border-t border-outline-variant mx-4">
-<a class="flex items-center gap-3 py-2 px-2 text-on-surface-variant hover:text-institutional-navy transition-colors" href="{{ url_for('citizen.profile') }}">
-<span class="material-symbols-outlined text-sm">security</span>
-<span class="text-caption font-caption">Account Security</span>
-</a>
-<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button aria-label="Sign out" class="flex items-center gap-3 py-2 px-2 text-on-surface-variant hover:text-error transition-colors" type="submit">
-<span class="material-symbols-outlined text-sm">logout</span>
-<span class="text-caption font-caption">Logout</span>
-</button></form>
-</div>
-</aside>
-<!-- Main Content Canvas -->
-<main class="flex-1 lg:ml-64 relative z-10">
-<!-- TopNavBar -->
-<header class="h-20 bg-institutional-navy flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop sticky top-0 z-30 shadow-sm">
-<div class="flex items-center gap-4">
-<div class="bg-white p-1.5 rounded-sm">
-<img alt="Tunisian Emblem" class="h-10 w-10" src="{{ url_for('static', filename='img/img-a8e486b5f582.jpg') }}"/>
-</div>
-<div class="hidden sm:block">
-<span class="font-headline-md text-headline-md text-surface-container-lowest uppercase tracking-wider block leading-none">Republic of Tunisia</span>
-<span class="text-[10px] text-sovereign-gold font-bold uppercase tracking-[0.2em]">Ministry of Interior</span>
-</div>
-</div>
-<div class="flex items-center gap-3 md:gap-6">
-<div class="flex items-center bg-white/10 px-3 py-1.5 rounded-full border border-white/20 gap-2">
-<span class="icon-filled material-symbols-outlined text-sovereign-gold text-sm">verified</span>
-<span class="text-[10px] text-white font-bold uppercase tracking-widest hidden sm:inline">Sovereign Cloud Secured</span>
-<span class="text-[10px] text-white font-bold uppercase tracking-widest sm:hidden">Secured</span>
-</div>
-<div class="h-8 w-[1px] bg-white/20 hidden lg:block"></div>
-<div class="flex items-center gap-2 md:gap-4">
-<a href="{{ url_for('citizen.notifications') }}" class="text-white hover:bg-white/10 p-2 rounded-full transition-all">
-<span class="material-symbols-outlined">notifications</span>
-</a>
-<div class="flex items-center gap-2 pl-2 border-l border-white/20">
-<div class="h-8 w-8 rounded-full border border-sovereign-gold/40 bg-white/20 overflow-hidden">
-<img alt="Profile" class="h-full w-full object-cover" src="{{ url_for('static', filename='img/img-0679d8b494d9.jpg') }}"/>
-</div>
-<span class="hidden xl:block text-white font-label-md text-label-md">{{ profile|display_name }}</span>
-</div>
-</div>
-</div>
-</header>
-<!-- Content -->
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-{#- The mockup drew a checkout here: two payment-method radios and an
-    "Authorize Transaction" button. The payments API is read-only — list,
-    office list, get one — with no endpoint that initiates or captures a
-    charge, and this route is the *confirmation* landing page. A button that
-    looks like it takes money and does nothing is the one control that must
-    not ship on a government portal, so this column reports the status of the
-    payment record instead. The checkout belongs here once the gateway exists. -#}
-{%- set status = (payment.status if payment else '')|lower %}
-<!-- Left: Payment Status (Col span 7) -->
-<div class="md:col-span-12 lg:col-span-7 space-y-6">
-<div class="flex items-center justify-between mb-2">
-<div class="flex items-center gap-3">
-<span aria-hidden="true" class="material-symbols-outlined text-institutional-navy text-3xl">shield_lock</span>
-<h2 class="font-headline-lg text-headline-lg text-institutional-navy">Payment Status</h2>
-</div>
-</div>
-<!-- Status Summary -->
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-<div class="bg-white border border-outline-variant p-4 flex items-center gap-3 rounded-round-eight">
-<span aria-hidden="true" class="icon-filled material-symbols-outlined text-sovereign-gold">
-{{- 'check_circle' if status == 'completed' else 'schedule' -}}
-</span>
 <div>
-<p class="text-[10px] font-bold text-secondary uppercase">State</p>
-<p class="text-label-md font-bold text-institutional-navy">{{ payment.status|capitalize if payment else 'No payment on file' }}</p>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Date &amp; Time</span>
+<span class="font-body-md text-body-md text-on-surface">{{ ((payment.paid_at or "")[:16]|replace("T", " ") ~ " UTC") if payment and payment.paid_at else "Not settled" }}</span>
 </div>
-</div>
-<div class="bg-white border border-outline-variant p-4 flex items-center gap-3 rounded-round-eight">
-<span aria-hidden="true" class="icon-filled material-symbols-outlined text-sovereign-gold">account_balance</span>
 <div>
-<p class="text-[10px] font-bold text-secondary uppercase">Recorded</p>
-<p class="text-label-md font-bold text-institutional-navy">
-{%- if payment and payment.paid_at %}{{ payment.paid_at[:10] }}
-{%- elif payment and payment.created_at %}{{ payment.created_at[:10] }}
-{%- else %}—{% endif %}
-</p>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Service Type</span>
+<span class="font-body-md text-body-md text-on-surface">{{ (payment.service_name if payment else none) or "—" }}</span>
+</div>
+<div>
+<span class="font-support-sm text-support-sm text-outline block mb-1">Ledger Status</span>
+<span class="font-body-md text-body-md text-on-surface flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">{{ "verified" if paid else "schedule" }}</span>
+                                    {{ (payment.status if payment else "unknown")|title }}
+                                </span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/50 flex justify-between items-center">
+<span class="font-headline-md text-headline-md text-on-surface">Total Paid</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">{{ "%.2f"|format(payment.amount|float) ~ " " ~ (payment.currency or "TND") if payment else "—" }}</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+<button class="bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md py-3 px-8 rounded-sm transition-colors flex items-center justify-center gap-2 w-full sm:w-auto" data-action="print"  type="button">
+<span class="material-symbols-outlined">download</span>
+                            Download PDF Receipt
+                        </button>
+<a href="{{ url_for('citizen.dashboard') }}" class="bg-surface hover:bg-surface-container-high border border-primary text-primary font-body-md text-body-md py-3 px-8 rounded-sm transition-colors w-full sm:w-auto">
+                            Return to Dashboard
+                        </a>
 </div>
 </div>
 </div>
-<div class="bg-white border border-outline-variant sovereign-border secure-shadow p-6 md:p-8 rounded-round-eight">
-{%- if not payment %}
-<h3 class="font-headline-md text-headline-md text-institutional-navy mb-4">Nothing to show yet</h3>
-<p class="text-caption text-secondary leading-relaxed mb-6">No payment has been recorded on your account. Fees appear here once a request reaches the payment stage.</p>
-<a class="inline-flex items-center gap-2 py-3 px-6 bg-institutional-navy text-white font-bold text-label-md rounded-round-eight hover:brightness-110 transition-all" href="{{ url_for('citizen.requests_list') }}">
-                            View my requests
-                            <span aria-hidden="true" class="material-symbols-outlined">arrow_forward</span>
-</a>
-{%- elif status == 'completed' %}
-<h3 class="font-headline-md text-headline-md text-institutional-navy mb-4">Payment received</h3>
-<p class="text-caption text-secondary leading-relaxed mb-6">This fee has been settled. Keep the receipt beside this panel for your records; your request continues through processing automatically.</p>
-<div class="flex flex-wrap gap-3">
-<button class="inline-flex items-center gap-2 py-3 px-6 bg-institutional-navy text-white font-bold text-label-md rounded-round-eight hover:brightness-110 transition-all" data-action="print" type="button">
-<span aria-hidden="true" class="material-symbols-outlined">print</span>
-                                Print receipt
-                            </button>
-{%- if payment.request_id %}
-<a class="inline-flex items-center gap-2 py-3 px-6 border border-institutional-navy text-institutional-navy font-bold text-label-md rounded-round-eight hover:bg-surface-container-low transition-all" href="{{ url_for('citizen.request_detail', request_id=payment.request_id) }}">
-                                View the request
-                            </a>
-{%- endif %}
 </div>
-{%- else %}
-<h3 class="font-headline-md text-headline-md text-institutional-navy mb-4">Payment outstanding</h3>
-<p class="text-caption text-secondary leading-relaxed mb-6">
-                            This fee is recorded as <span class="font-bold text-institutional-navy">{{ payment.status }}</span>.
-                            Online settlement is not available on this portal yet — the fee is
-                            payable at the office handling your request, which can also confirm
-                            the amount shown here.
-                        </p>
-<div class="flex flex-wrap gap-3">
-<a class="inline-flex items-center gap-2 py-3 px-6 bg-institutional-navy text-white font-bold text-label-md rounded-round-eight hover:brightness-110 transition-all" href="{{ url_for('citizen.book_appointment') }}">
-<span aria-hidden="true" class="material-symbols-outlined">event</span>
-                                Book an office visit
-                            </a>
-<a class="inline-flex items-center gap-2 py-3 px-6 border border-institutional-navy text-institutional-navy font-bold text-label-md rounded-round-eight hover:bg-surface-container-low transition-all" href="{{ url_for('public.contact') }}">
-                                Contact support
-                            </a>
-</div>
-{%- endif %}
-<div class="mt-8 flex items-start gap-3 p-4 bg-surface-container-low rounded border border-outline-variant/30">
-<span aria-hidden="true" class="material-symbols-outlined text-institutional-navy text-sm mt-0.5">info</span>
-<p class="text-caption text-secondary leading-relaxed">Watiq never asks for card numbers, PINs or passwords by email, SMS or phone. Card details are never stored on this portal.</p>
-</div>
-</div>
-</div>
-<!-- Right: Summary & Receipt (Col span 5) -->
-<div class="md:col-span-12 lg:col-span-5 space-y-6">
-<h3 class="font-headline-md text-headline-md text-institutional-navy mb-2">Order Breakdown</h3>
-<!-- Receipt Card -->
-<div class="bg-white border border-outline-variant secure-shadow rounded-round-eight overflow-hidden flex flex-col">
-<div class="bg-institutional-navy p-4 flex justify-between items-center">
-<span class="text-caption font-bold text-white uppercase tracking-widest">
-{%- if payment %}Payment #{{ payment.id }}{% else %}No payment{% endif -%}
-</span>
-<button aria-label="Print this receipt" class="text-sovereign-gold hover:text-white transition-colors" data-action="print" type="button">
-<span aria-hidden="true" class="material-symbols-outlined">print</span>
+</main>
+<!-- Sign Language Module (Floating) -->
+<div class="fixed bottom-gutter right-gutter z-50 w-72 bg-surface-container-lowest/90 backdrop-blur-md rounded-xl shadow-lg border border-primary-container/10 overflow-hidden transition-all duration-300" id="tsl-module">
+<div class="bg-primary-container text-on-primary-container px-4 py-2 flex justify-between items-center cursor-move" id="tsl-header">
+<span class="font-label-caps text-label-caps flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">sign_language</span>
+                TSL Support Active
+            </span>
+<button class="hover:opacity-80 transition-opacity" data-action="a11y-close"  type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
 </button>
 </div>
-{#- PaymentOut carries only the masked reference and transaction values; the
-    full ones never cross the API boundary, so they are shown as given. There
-    is no fee breakdown in the model either — the mockup's split into an
-    administrative fee and a digital stamp was invented, so the recorded
-    amount is shown as the single figure it is. -#}
-<div class="p-8 space-y-6 relative bg-white">
-{%- if payment %}
-<div class="space-y-4">
-<div class="flex justify-between items-center border-b border-dashed border-outline/30 pb-2">
-<span class="text-label-md font-medium text-secondary">Applicant</span>
-<span class="text-label-md font-bold text-institutional-navy">{{ profile|display_name }}</span>
+<div class="p-2 relative group">
+<div class="w-full h-40 bg-surface-container-highest rounded-lg flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" alt="A professional sign language interpreter providing translation for a digital government service interface." src="{{ url_for('static', filename='img/img-9774767eaa06.jpg') }}"/>
 </div>
-{%- if payment.request_id %}
-<div class="flex justify-between items-center border-b border-dashed border-outline/30 pb-2">
-<span class="text-label-md font-medium text-secondary">Request</span>
-<a class="text-label-md font-mono font-bold text-institutional-navy hover:underline" href="{{ url_for('citizen.request_detail', request_id=payment.request_id) }}">#{{ payment.request_id }}</a>
-</div>
-{%- endif %}
-{%- if payment.reference_masked %}
-<div class="flex justify-between items-center border-b border-dashed border-outline/30 pb-2">
-<span class="text-label-md font-medium text-secondary">Reference</span>
-<span class="text-label-md font-mono font-bold text-institutional-navy">{{ payment.reference_masked }}</span>
-</div>
-{%- endif %}
-{%- if payment.transaction_masked %}
-<div class="flex justify-between items-center border-b border-dashed border-outline/30 pb-2">
-<span class="text-label-md font-medium text-secondary">Transaction</span>
-<span class="text-label-md font-mono font-bold text-institutional-navy">{{ payment.transaction_masked }}</span>
-</div>
-{%- endif %}
-</div>
-<div class="bg-surface-container-low p-5 rounded-round-eight border-l-4 border-sovereign-gold">
-<div class="flex justify-between items-center">
-<span class="text-label-md text-secondary">Status</span>
-<span class="text-label-md font-bold text-institutional-navy">{{ payment.status|capitalize }}</span>
-</div>
-<div class="mt-4 pt-4 border-t-2 border-institutional-navy flex justify-between items-center">
-<span class="font-extrabold text-institutional-navy uppercase tracking-wider">{{ 'Total Paid' if status == 'completed' else 'Total Due' }}</span>
-<div class="text-right">
-<span class="text-headline-md font-extrabold text-institutional-navy">{{ '%.3f'|format(payment.amount|float) }}</span>
-<span class="text-caption font-bold text-institutional-navy ml-1">{{ payment.currency }}</span>
-</div>
-</div>
-</div>
-<p class="text-[10px] text-secondary text-center italic max-w-[240px] mx-auto">
-{%- if status == 'completed' %}
-                                    Digital receipt. Your request continues through processing; the office will notify you when the document is ready.
-{%- else %}
-                                    This is not a receipt. It becomes one once the fee is settled and the status changes to completed.
-{%- endif %}
-                                </p>
-{%- else %}
-<div class="py-10 text-center space-y-3">
-<span aria-hidden="true" class="material-symbols-outlined text-outline-variant text-5xl">receipt_long</span>
-<p class="text-label-md text-secondary">No payment record to display.</p>
-</div>
-{%- endif %}
-</div>
-</div>
-<!-- Support Card -->
-<div class="bg-institutional-navy p-6 rounded-round-eight text-white relative overflow-hidden">
-<div class="absolute right-0 top-0 h-full w-24 bg-sovereign-gold/10 -skew-x-12 translate-x-12"></div>
-<div class="flex items-start gap-4 relative z-10">
-<span class="material-symbols-outlined text-sovereign-gold text-3xl">contact_support</span>
-<div>
-<h4 class="font-bold text-label-md mb-1">Institutional Support</h4>
-<p class="text-caption opacity-80 leading-relaxed">For transaction disputes or technical clearance issues, our sovereign support desk is operational 24/7.</p>
-<a href="{{ url_for('public.contact') }}" class="mt-4 text-caption font-bold text-sovereign-gold hover:text-white flex items-center gap-1 uppercase tracking-widest transition-colors">
-                                Lodge Official Inquiry
-                                <span class="material-symbols-outlined text-xs">open_in_new</span>
-</a>
-</div>
-</div>
-</div>
+<!-- Overlay Controls -->
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 rounded-lg m-2">
+<button class="w-10 h-10 rounded-full bg-surface-container-lowest text-primary flex items-center justify-center hover:scale-105 transition-transform" data-action="a11y-pause"  type="button">
+<span class="material-symbols-outlined icon-filled">pause</span>
+</button>
 </div>
 </div>
 </div>
 <!-- Footer -->
-<footer class="w-full py-12 bg-institutional-navy border-t border-sovereign-gold/30 text-surface-container mt-auto">
-<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
-<div class="flex flex-col gap-2">
-<div class="flex items-center gap-2">
-<img alt="Tunisian Emblem" class="h-6 w-6 brightness-0 invert" src="{{ url_for('static', filename='img/img-33890a7bce6c.jpg') }}"/>
-<span class="font-bold text-label-md text-white tracking-widest">REPUBLIC OF TUNISIA</span>
-</div>
-<p class="font-caption text-caption text-white/60">© {{ year }} National Digital Portal - Sovereign Infrastructure</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8">
-<a class="text-caption font-medium text-white/80 hover:text-sovereign-gold transition-colors" href="{{ url_for('public.privacy') }}">Privacy Governance</a>
-<a class="text-caption font-medium text-white/80 hover:text-sovereign-gold transition-colors" href="{{ url_for('public.terms') }}">Terms of Use</a>
-<a class="text-caption font-medium text-white/80 hover:text-sovereign-gold transition-colors" href="{{ url_for('public.terms') }}">Cybersecurity Ops</a>
-<a class="text-caption font-medium text-white/80 hover:text-sovereign-gold transition-colors" href="{{ url_for('public.contact') }}">Support</a>
+<footer class="bg-on-surface text-surface-container w-full py-12 border-t border-outline relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="font-label-md text-label-md text-surface-container-lowest">
+                © <span id="dynamic-year"></span> République Tunisienne - Portail National des Services
+            </div>
+<div class="flex flex-wrap gap-6 justify-center">
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Security Protocols</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
 </div>
 </div>
 </footer>
-</main>
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/pages/payment_confirmation.js') }}" defer></script>

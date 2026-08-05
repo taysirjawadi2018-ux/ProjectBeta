@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% set html_class = 'light tk-my-document-list' %}
+{% block title %}My Documents - République Tunisienne{% endblock %}
+{% block body_class %}flex bg-background min-h-screen{% endblock %}
+{% block page_style %}
+<link href="{{ url_for('static', filename='css/pages/my_documents.css') }}" rel="stylesheet"/>
+{% endblock %}
+{% block content %}
+<!-- SideNavBar -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant shadow-md flex-col py-8 gap-2 z-40">
+<div class="px-6 mb-8 flex items-center gap-4">
+<img class="w-10 h-10 object-contain rounded-full shadow-sm" alt="A highly detailed, ultra-realistic rendering of a national emblem or crest, rendered in polished gold and deep navy blue" src="{{ url_for('static', filename='img/img-0a01cf71020a.jpg') }}"/>
+<div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Citizen Space</h1>
+<p class="font-support-sm text-support-sm text-on-surface-variant">Secure Session</p>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-md text-label-md group" href="{{ url_for('citizen.dashboard') }}">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-md text-label-md group" href="{{ url_for('citizen.requests_list') }}">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">description</span>
+                Applications
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm" href="{{ url_for('citizen.documents') }}">
+<span class="material-symbols-outlined">folder_shared</span>
+                My Documents
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-md text-label-md group" href="{{ url_for('public.contact') }}">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">gavel</span>
+                Legal Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 mx-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-md text-label-md group" href="{{ url_for('citizen.profile') }}">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-md text-label-md group" href="{{ url_for('citizen.security_log') }}">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">security</span>
+                Security Log
+            </a>
+<form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/><button aria-label="Sign out" class="flex items-center gap-3 px-4 py-2 mx-2 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all font-label-md text-label-md group" type="submit">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">logout</span>
+                Logout
+            </button></form>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen relative overflow-hidden">
+<!-- TopNavBar (Mobile only for Nav, but acts as Header on Desktop) -->
+<header class="bg-surface sticky top-0 z-30 shadow-sm border-b border-outline-variant">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto h-20">
+<div class="md:hidden">
+<!-- Mobile Menu Trigger placeholder -->
+<button class="text-primary p-2" data-action="toggle" data-target="advanced-filters" type="button">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="font-headline-md text-headline-md text-primary uppercase tracking-wider font-extrabold hidden md:block">
+                    République Tunisienne
+                </div>
+<div class="flex items-center gap-4">
+<a href="{{ url_for('public.index') }}" class="text-secondary hover:text-primary hover:bg-surface-container-high p-2 rounded-full transition-all active:scale-95 duration-150">
+<span class="material-symbols-outlined">account_balance</span>
+</a>
+<a href="{{ url_for('citizen.notifications') }}" class="text-secondary hover:text-primary hover:bg-surface-container-high p-2 rounded-full transition-all active:scale-95 duration-150 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</a>
+<img class="w-8 h-8 rounded-full border border-outline-variant cursor-pointer hover:shadow-md transition-shadow" alt="A professional portrait of a citizen used for a profile picture on a government portal." src="{{ url_for('static', filename='img/img-f4e180a4d3ad.jpg') }}"/>
+</div>
+</div>
+</header>
+<div class="flex-1 px-margin-mobile md:px-margin-desktop py-12 max-w-[1440px] mx-auto w-full relative z-10">
+<!-- Background Watermark -->
+<div class="absolute inset-0 watermark-emblem z-[-1]"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">My Documents</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Access, verify, and download your official state records securely.</p>
+</div>
+<div class="w-full md:w-auto flex gap-4">
+<div class="relative flex-1 md:w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-sm py-3 pl-10 pr-4 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm placeholder:font-light" placeholder="Search by ID, name, or type..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-3 mb-8">
+{#- The mockup's chips were document *categories*; the API publishes a
+    verification status per document and no category, so the filter runs over
+    what exists. Each chip is a link, so a filtered view is a shareable URL. -#}
+{%- set chip_on = 'bg-primary text-on-primary' %}
+{%- set chip_off = 'bg-surface-container-lowest text-on-surface border border-outline-variant hover:bg-surface-container-low' %}
+<a class="{{ chip_on if not status else chip_off }} px-5 py-2 rounded-full font-label-caps text-label-caps tracking-wider transition-colors shadow-sm focus-ring" href="{{ url_for('citizen.documents') }}">All Documents</a>
+{%- for key, label in [('verified', 'Verified'), ('pending', 'Pending'), ('rejected', 'Rejected')] %}
+<a class="{{ chip_on if status == key else chip_off }} px-5 py-2 rounded-full font-label-caps text-label-caps tracking-wider transition-colors shadow-sm focus-ring" href="{{ url_for('citizen.documents', status=key) }}">{{ label }} ({{ counts[key] }})</a>
+{%- endfor %}
+</div>
+<!-- Documents Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+{%- for document in documents %}
+{%- set verified = document.status == 'verified' %}
+{%- set mime = document.mime_type or '' %}
+{%- set icon = 'image' if mime.startswith('image/') else 'badge' if 'id' in (document.document_type or '')|lower else 'description' %}
+<div class="card-surface rounded-xl p-6 flex flex-col relative overflow-hidden group">
+<div aria-hidden="true" class="absolute right-[-20px] top-[-20px] opacity-[0.02] pointer-events-none">
+<span class="material-symbols-outlined text-[120px] text-primary icon-filled">{{ icon }}</span>
+</div>
+<div class="flex justify-between items-start mb-6 z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary-container">
+<span aria-hidden="true" class="material-symbols-outlined icon-filled">{{ icon }}</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-primary leading-tight">{{ document.document_type or 'Document' }}</h3>
+<p class="font-support-sm text-support-sm text-outline">Ref: {{ document.request.tracking_code }}</p>
+</div>
+</div>
+{%- if verified %}
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-sm font-label-caps text-label-caps flex items-center gap-1 shadow-sm">
+<span aria-hidden="true" class="material-symbols-outlined text-[14px]">verified</span>
+                            Verified
+                        </span>
+{%- elif document.status == 'rejected' %}
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-sm font-label-caps text-label-caps flex items-center gap-1 border border-outline-variant">
+<span aria-hidden="true" class="material-symbols-outlined text-[14px]">cancel</span>
+                            Rejected
+                        </span>
+{%- else %}
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-sm font-label-caps text-label-caps flex items-center gap-1 border border-outline-variant">
+<span aria-hidden="true" class="material-symbols-outlined text-[14px]">pending</span>
+                            Awaiting review
+                        </span>
+{%- endif %}
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6 border-y border-outline-variant/30 py-4 z-10">
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">Uploaded</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">{{ (document.uploaded_at or '')[:10] or '—' }}</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-outline mb-1">Service</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">{{ document.request.service_name or 'Request' }}</p>
+</div>
+</div>
+<div class="mt-auto flex justify-end gap-3 z-10">
+<a class="px-4 py-2 text-primary font-label-md text-label-md hover:bg-surface-container-high rounded-sm transition-colors border border-transparent hover:border-outline-variant focus-ring" href="{{ url_for('citizen.document_detail', request_id=document.request.id, document_id=document.id) }}">View Details</a>
+{%- if verified %}
+<a class="px-4 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-sm hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm focus-ring" href="{{ url_for('citizen.download_document', document_id=document.id) }}" rel="noopener" target="_blank">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">download</span>
+                            Official Copy
+                        </a>
+{%- else %}
+<span class="px-4 py-2 bg-surface-container text-on-surface-variant font-label-md text-label-md rounded-sm border border-outline-variant cursor-not-allowed flex items-center gap-2 opacity-50">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">download</span>
+                            Not yet certified
+                        </span>
+{%- endif %}
+</div>
+</div>
+{%- else %}
+<div class="card-surface rounded-xl p-12 flex flex-col items-center text-center gap-3 lg:col-span-2">
+<span aria-hidden="true" class="material-symbols-outlined text-4xl text-outline">folder_off</span>
+<h3 class="font-headline-md text-headline-md text-primary">{% if status %}No {{ status }} documents{% else %}No documents yet{% endif %}</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Documents appear here once they are filed against one of your requests.</p>
+<a class="mt-2 px-5 py-2 bg-primary text-on-primary rounded-sm font-label-caps text-label-caps focus-ring" href="{{ url_for('citizen.requests_list') }}">Go to my requests</a>
+</div>
+{%- endfor %}
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-on-surface w-full py-12 border-t border-outline mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
+<div class="font-label-md text-label-md text-surface-container-lowest">
+                    © <span id="current-year">2024</span> République Tunisienne - Portail National des Services
+                </div>
+<div class="flex flex-wrap gap-6 justify-center">
+<a class="font-caption text-caption text-surface-container hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
+<a class="font-caption text-caption text-surface-container hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
+<a class="font-caption text-caption text-surface-container hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Security Protocols</a>
+<a class="font-caption text-caption text-surface-container hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
+</div>
+</div>
+</footer>
+<!-- TSL Module (Sign Language) -->
+<div class="fixed bottom-6 right-6 z-50 glass-panel rounded-xl p-2 shadow-lg w-48 transition-all hover:shadow-xl focus-within:ring-2 focus-within:ring-secondary-container">
+<div class="relative w-full h-32 bg-primary-container rounded-lg overflow-hidden mb-2">
+<!-- Placeholder for Sign Language Video/Avatar -->
+<div class="absolute inset-0 flex items-center justify-center text-on-primary-container opacity-50">
+<span class="material-symbols-outlined text-[40px]">sign_language</span>
+</div>
+</div>
+<div class="flex justify-between items-center px-1">
+<button aria-label="Play Sign Language Translation" class="text-primary hover:text-primary-container transition-colors" data-action="a11y-play"  type="button">
+<span class="material-symbols-outlined">play_arrow</span>
+</button>
+<span class="font-label-caps text-label-caps text-primary">TSL Active</span>
+<button aria-label="Expand Module" class="text-primary hover:text-primary-container transition-colors" data-action="a11y-expand"  type="button">
+<span class="material-symbols-outlined">open_in_full</span>
+</button>
+</div>
+</div>
+</main>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/pages/my_documents.js') }}" defer></script>
+{% endblock %}

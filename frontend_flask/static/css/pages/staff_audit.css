@@ -1,39 +1,39 @@
-/* staff_audit.html — rules lifted from frontend/auditor_security_dashboard.html.
+/* staff_audit.html — rules lifted from frontend/user_activity_audit.html.
  * Kept out of the shared sheet because several mockups define the same
  * class with different values. Loaded from the page's page_style block.
  */
-.material-symbols-outlined {
-            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
-        }
-        .watermark-bg {
-            background-image: linear-gradient(rgba(248, 249, 255, 0.98), rgba(248, 249, 255, 0.98)), url('../../img/img-0096697d3efb.jpg');
-            background-repeat: no-repeat;
-            background-position: center 20%;
-            background-size: 600px;
-            background-attachment: fixed;
-        }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(175, 121, 47, 0.15);
-            box-shadow: 0 4px 20px -2px rgba(0, 27, 61, 0.05);
-        }
-        .gold-accent-border {
-            border-top: 3px solid #af792f;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 4px
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #af792f;
-            border-radius: 10px
-        }
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 24px;
-        }
+/* Optical Layering classes based on Style Guidance */
+.surface-1 {
+    background-color: #fff
+    }
+.surface-2 {
+    border: 1px solid rgba(0, 27, 61, 0.05);
+    /* Midnight Navy at 5% */
+    box-shadow: 0 4px 20px rgba(0, 27, 61, 0.04)
+    }
+.surface-3 {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px)
+    }
+.watermark-emblem {
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url(../../img/img-f85a57f5c30b.jpg);
+    /* Placeholder for Tunisian National Emblem */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain
+    }
+.watermark-emblem-small {
+    opacity: 0.02;
+    pointer-events: none;
+    background-image: url(../../img/img-5cb4eca77731.jpg);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 30%
+    }
+/* Material Symbols Weight adjustment utility */
+.material-symbols-outlined[data-weight="fill"] {
+    font-variation-settings: "FILL" 1
+    }

@@ -71,6 +71,44 @@ M = {
     "Justice": "{{ url_for('public.services', category='justice') }}",
     "E-Justice": "{{ url_for('public.services', category='justice') }}",
     "Admin": "{{ url_for('public.services', category='admin') }}",
+    # --- second mockup drop ------------------------------------------------
+    # These labels only appear on the twelve screens that arrived later, and
+    # several of them finally have a real destination: "My Documents" used to
+    # fall through to the request list because no document route existed.
+    "Knowledge Base": "{{ url_for('public.help_page') }}",
+    "FAQ": "{{ url_for('public.help_page') }}",
+    "Frequently Asked Questions": "{{ url_for('public.help_page') }}",
+    "Live Chat": "{{ url_for('public.support_chat') }}",
+    "Start Chat": "{{ url_for('public.support_chat') }}",
+    "Chat with an agent": "{{ url_for('public.support_chat') }}",
+    "System Health": "{{ url_for('staff.health') }}",
+    "Diagnostics": "{{ url_for('staff.health') }}",
+    "Integrity Monitor": "{{ url_for('staff.health') }}",
+    "Audit Logs": "{{ url_for('staff.audit') }}",
+    "Verification Portal": "{{ url_for('public.track') }}",
+    "Track Request": "{{ url_for('public.track') }}",
+    "Payments": "{{ url_for('citizen.payments') }}",
+    "Payment History": "{{ url_for('citizen.payments') }}",
+    "Notifications": "{{ url_for('citizen.notifications') }}",
+}
+
+# Labels whose destination depends on who is looking. "My Documents" and
+# "Security Log" both exist twice — a citizen-facing one and a staff-facing
+# one — so they are resolved per template rather than globally.
+BY_TEMPLATE = {
+    "My Documents": {
+        None: "{{ url_for('citizen.documents') }}",
+        "staff_audit.html": "{{ url_for('staff.workbench') }}",
+        "staff_health.html": "{{ url_for('staff.workbench') }}",
+        "verify_request.html": "{{ url_for('staff.workbench') }}",
+    },
+    "Security Log": {
+        None: "{{ url_for('citizen.security_log') }}",
+        "staff_audit.html": "{{ url_for('staff.audit') }}",
+        "staff_health.html": "{{ url_for('staff.audit') }}",
+        "verify_request.html": "{{ url_for('staff.audit') }}",
+        "staff_workbench.html": "{{ url_for('staff.audit') }}",
+    },
 }
 # Ligature text of a leading icon <span>, which is not part of the label.
 ICONS = re.compile(r"^(dashboard|description|folder_shared|gavel|security|settings|"
@@ -81,12 +119,22 @@ def label_of(inner: str) -> str:
     return ICONS.sub("", text).strip()
 
 changed = total = skipped = 0
-for path in sorted(pathlib.Path("templates").glob("*.html")):
+# _staged/ holds a second-drop port waiting to be merged into a template that
+# already exists; wiring it here saves doing the same links twice by hand.
+paths = sorted(pathlib.Path("templates").glob("*.html")) + sorted(
+    pathlib.Path("templates/_staged").glob("*.html")
+)
+for path in paths:
     html = path.read_text(encoding="utf-8")
     def wire(match):
         global changed, skipped
         tag, inner = match.group(1), match.group(2)
         label = label_of(inner)
+        for key, choices in BY_TEMPLATE.items():
+            if label == key:
+                changed += 1
+                url = choices.get(path.name, choices[None])
+                return match.group(0).replace('href="#"', f'href="{url}"', 1)
         for key, url in M.items():
             if label == key or label.endswith(" " + key) or label.startswith(key):
                 changed += 1

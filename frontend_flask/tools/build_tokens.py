@@ -229,7 +229,11 @@ def write_config(token_keys: dict[str, list[str]]) -> None:
         " *   cdn.tailwindcss.com?plugins=forms,container-queries\n"
         " */\n"
         'module.exports = {\n  darkMode: "class",\n'
-        '  content: ["./templates/**/*.html"],\n'
+        # The page scripts add utilities at runtime (the landing page's header
+        # swaps h-20 for h-16/bg-surface/95/backdrop-blur-md on scroll). Those
+        # class names appear nowhere in a template, so without this glob the
+        # scanner never emits them and the scroll state renders unstyled.
+        '  content: ["./templates/**/*.html", "./static/js/**/*.js"],\n'
         "  theme: {\n    extend: {\n"
         f"{body}\n"
         "    },\n  },\n"

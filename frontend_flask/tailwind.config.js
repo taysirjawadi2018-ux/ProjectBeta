@@ -15,7 +15,7 @@
  */
 module.exports = {
   darkMode: "class",
-  content: ["./templates/**/*.html"],
+  content: ["./templates/**/*.html", "./static/js/**/*.js"],
   theme: {
     extend: {
       colors: {
@@ -98,6 +98,7 @@ module.exports = {
       fontFamily: {
         "body-lg": "var(--w-ff-body-lg)",
         "body-md": "var(--w-ff-body-md)",
+        "body-sm": "var(--w-ff-body-sm)",
         "caption": "var(--w-ff-caption)",
         "display-lg": "var(--w-ff-display-lg)",
         "display-lg-mobile": "var(--w-ff-display-lg-mobile)",
@@ -109,6 +110,7 @@ module.exports = {
         "label-caps": "var(--w-ff-label-caps)",
         "label-md": "var(--w-ff-label-md)",
         "label-sm": "var(--w-ff-label-sm)",
+        "mono": "var(--w-ff-mono)",
         "support-sm": "var(--w-ff-support-sm)",
       },
       fontSize: {
@@ -126,6 +128,14 @@ module.exports = {
             lineHeight: "var(--w-lh-body-md)",
             letterSpacing: "var(--w-ls-body-md)",
             fontWeight: "var(--w-fw-body-md)",
+          },
+        ],
+        "body-sm": [
+          "var(--w-fs-body-sm)",
+          {
+            lineHeight: "var(--w-lh-body-sm)",
+            letterSpacing: "var(--w-ls-body-sm)",
+            fontWeight: "var(--w-fw-body-sm)",
           },
         ],
         "caption": [

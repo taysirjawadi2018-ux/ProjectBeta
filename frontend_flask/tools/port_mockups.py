@@ -51,6 +51,25 @@ TARGETS = {
     "auditor_security_dashboard": ("staff_audit.html", ""),
     "security_acces_blocked": ("_error_blocked.html", ""),
     "system_maintenance": ("_error_maintenance.html", "icons-w300"),
+    # --- second drop -------------------------------------------------------
+    # Twelve more mockups arrived after the first port. Four of them describe
+    # screens the app had no route for at all; those routes were added with
+    # them. `document_verification_and_details` moved off request_detail when
+    # `application_detail` turned up, because that one is the native design
+    # for a service request while the former is a *document* view.
+    "select_appointment_slot": ("book_appointment.html", ""),
+    "application_detail": ("request_detail.html", ""),
+    "payment_success_receipt": ("payment_confirmation.html", ""),
+    "user_activity_audit": ("staff_audit.html", ""),
+    "terms_and_conditions": ("content_page.html", ""),
+    "frequently_asked_questions": ("faq.html", ""),
+    "live_support_chat": ("support_chat.html", ""),
+    "document_upload": ("document_upload.html", ""),
+    "my_document_list": ("my_documents.html", ""),
+    "document_verification_and_details": ("document_detail.html", ""),
+    "security_log": ("security_log.html", ""),
+    "appointment_detail": ("appointment_detail.html", ""),
+    "system_integrity_and_health": ("staff_health.html", ""),
 }
 
 
@@ -63,14 +82,36 @@ def page_name(stem: str) -> str:
 
 
 def main() -> None:
+    # Every template here has been hand-finished since its first pass, so a
+    # bare re-run would throw that away. Naming the mockups to port is now
+    # required, and a second drop stages into templates/_staged/ rather than
+    # overwriting a template that already exists:
+    #
+    #   python tools/port_mockups.py --only application_detail security_log
+    #
+    # Pass --overwrite only for a mockup whose template has never been touched.
+    argv = sys.argv[1:]
+    overwrite = "--overwrite" in argv
+    argv = [a for a in argv if a != "--overwrite"]
+    if not argv or argv[0] != "--only" or len(argv) < 2:
+        sys.exit(
+            "usage: port_mockups.py --only <mockup-stem> [...] [--overwrite]\n"
+            f"known stems: {', '.join(sorted(TARGETS))}"
+        )
+    wanted = argv[1:]
+    if unknown := [stem for stem in wanted if stem not in TARGETS]:
+        sys.exit(f"not in TARGETS: {', '.join(unknown)}")
+
     manifest = json.loads(
         (ROOT / "static" / "img" / "manifest.json").read_text(encoding="utf-8")
     )
     PAGE_CSS.mkdir(parents=True, exist_ok=True)
     PAGE_JS.mkdir(parents=True, exist_ok=True)
+    staged = TEMPLATES / "_staged"
     report: dict[str, dict] = {}
 
-    for stem, (template, extra_classes) in TARGETS.items():
+    for stem in wanted:
+        template, extra_classes = TARGETS[stem]
         source = MOCKUPS / f"{stem}.html"
         html = source.read_text(encoding="utf-8")
         page = page_name(stem)
@@ -184,14 +225,20 @@ def main() -> None:
                 " * applied from the page script. */",
                 "\n".join(extra_css),
             ]
-        (PAGE_CSS / f"{page}.css").write_text(
+        css_target = PAGE_CSS / f"{page}.css"
+        if css_target.exists() and not overwrite:
+            css_target = PAGE_CSS / f"{page}.staged.css"
+        css_target.write_text(
             "\n".join(css_parts).strip() + "\n", encoding="utf-8"
         )
 
         # --- write the page script -----------------------------------------
         if scripts:
             js = "\n\n".join(script.strip() for script in scripts)
-            (PAGE_JS / f"{page}.js").write_text(
+            js_target = PAGE_JS / f"{page}.js"
+            if js_target.exists() and not overwrite:
+                js_target = PAGE_JS / f"{page}.staged.js"
+            js_target.write_text(
                 f"/* {template} — behaviour lifted from frontend/{stem}.html.\n"
                 " * Inline <script> is blocked by script-src 'self', so it lives here\n"
                 " * and is loaded with defer from the page's scripts block.\n"
@@ -221,10 +268,14 @@ def main() -> None:
                 f'<script src="{static_url("js/pages/" + page + ".js")}" defer></script>',
                 "{% endblock %}",
             ]
-        (TEMPLATES / template).write_text("\n".join(out) + "\n", encoding="utf-8")
+        target = TEMPLATES / template
+        if target.exists() and not overwrite:
+            staged.mkdir(parents=True, exist_ok=True)
+            target = staged / template
+        target.write_text("\n".join(out) + "\n", encoding="utf-8")
 
         report[template] = {k: len(v) for k, v in issues.items() if v}
-        print(f"{template:<28} <- {stem}")
+        print(f"{target.relative_to(ROOT)!s:<44} <- {stem}")
         for key, values in sorted(issues.items()):
             if values:
                 print(f"    {key:<24} {len(values)}")

@@ -1,0 +1,28 @@
+/* request_detail.html — rules lifted from frontend/application_detail.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+body {
+    background-color: rgb(var(--w-c-background));
+    color: rgb(var(--w-c-on-background))
+    }
+.watermark {
+    background-image: url(../../img/img-f4b7b336f20d.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.03;
+    pointer-events: none
+    }
+.glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05)
+    }
+.tsl-module {
+    transition: all 0.3s ease
+    }
+.tsl-module:focus-within {
+    box-shadow: 0 0 0 2px rgb(var(--w-c-secondary-container))
+    }

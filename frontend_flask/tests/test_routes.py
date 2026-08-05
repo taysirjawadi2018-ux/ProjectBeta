@@ -10,6 +10,11 @@ PUBLIC_GETS = [
     "/", "/login", "/register", "/services", "/track",
     "/legal/privacy", "/legal/terms", "/accessibility",
     "/contact", "/about", "/help", "/password-reset",
+    # The second mockup drop split /help off support.html into its own
+    # knowledge base, and gave live chat a route; both filter on the query
+    # string, so the filtered and empty forms are covered too.
+    "/help?topic=Payments", "/help?q=receipt", "/help?q=nothingmatchesthis",
+    "/support/chat",
 ]
 
 CITIZEN_GETS = [
@@ -25,9 +30,16 @@ CITIZEN_GETS = [
     "/appointments/book?office_id=1",
     "/appointments/book?office_id=1&slot_date=2026-08-10",
     "/appointments/book?office_id=1&slot_date=2026-08-10&slot_id=21",
+    # Routes added with the second mockup drop.
+    "/documents", "/documents?status=verified", "/documents?status=pending",
+    "/requests/11/documents/3", "/requests/11/documents/new",
+    "/security-log", "/appointments/4",
 ]
 
-STAFF_GETS = ["/staff", "/staff/review", "/staff/review/11", "/staff/appointments"]
+STAFF_GETS = [
+    "/staff", "/staff/review", "/staff/review/11", "/staff/appointments",
+    "/staff/audit", "/staff/health",
+]
 
 
 @pytest.mark.parametrize("path", PUBLIC_GETS)
