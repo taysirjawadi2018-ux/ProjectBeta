@@ -105,7 +105,7 @@ services:
     # serve traffic (Structure.md §6, Security.md §10.1).
     entrypoint: ["alembic", "upgrade", "head"]
     environment:
-      WATIQ_MIGRATE_DSN: ${WATIQ_MIGRATE_DSN:-postgresql+asyncpg://watiq_migrate:watiq-dev-migrate@postgres:5432/watiq}
+      WATIQ_MIGRATE_DSN: ${WATIQ_MIGRATE_DSN:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
     depends_on:
       postgres:
         condition: service_healthy
@@ -137,11 +137,11 @@ services:
     environment: &api_env
       ENV: dev
       DEBUG: "false"
-      DSN_CITIZEN: ${DSN_CITIZEN:-postgresql+asyncpg://watiq_app_citizen:watiq-dev-citizen@postgres:5432/watiq}
-      DSN_STAFF: ${DSN_STAFF:-postgresql+asyncpg://watiq_app_staff:watiq-dev-staff@postgres:5432/watiq}
-      DSN_AUTH: ${DSN_AUTH:-postgresql+asyncpg://watiq_app_auth:watiq-dev-auth@postgres:5432/watiq}
-      DSN_AUDITOR: ${DSN_AUDITOR:-postgresql+asyncpg://watiq_app_auditor:watiq-dev-auditor@postgres:5432/watiq}
-      DSN_ADMIN: ${DSN_ADMIN:-postgresql+asyncpg://watiq_app_admin:watiq-dev-admin@postgres:5432/watiq}
+      DSN_CITIZEN: ${DSN_CITIZEN:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
+      DSN_STAFF: ${DSN_STAFF:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
+      DSN_AUTH: ${DSN_AUTH:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
+      DSN_AUDITOR: ${DSN_AUDITOR:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
+      DSN_ADMIN: ${DSN_ADMIN:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
       REDIS_DSN: redis://redis:6379/0
       S3_ENDPOINT: http://minio:9000
       S3_BUCKET_DOCUMENTS: watiq-documents

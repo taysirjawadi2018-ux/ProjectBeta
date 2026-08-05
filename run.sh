@@ -35,12 +35,13 @@ die()  { printf '\033[31m✗\033[0m %s\n' "$*" >&2; exit 1; }
 # --- python & environment helpers -----------------------------------------
 find_python_cmd() {
   local dir="${1:-.}"
-  if [[ -x "$dir/.venv/bin/python" ]]; then
-    echo "$dir/.venv/bin/python"
-  elif [[ -f "$dir/.venv/Scripts/python.exe" ]]; then
-    echo "$dir/.venv/Scripts/python.exe"
-  elif [[ -f "$dir/.venv/Scripts/python" ]]; then
-    echo "$dir/.venv/Scripts/python"
+  local abs_dir="$ROOT/$dir"
+  if [[ -x "$abs_dir/.venv/bin/python" ]]; then
+    echo "$abs_dir/.venv/bin/python"
+  elif [[ -f "$abs_dir/.venv/Scripts/python.exe" ]]; then
+    echo "$abs_dir/.venv/Scripts/python.exe"
+  elif [[ -f "$abs_dir/.venv/Scripts/python" ]]; then
+    echo "$abs_dir/.venv/Scripts/python"
   elif command -v python3 >/dev/null 2>&1; then
     command -v python3
   elif command -v python >/dev/null 2>&1; then
@@ -154,15 +155,23 @@ up_local() {
   require_docker
   bootstrap_env
 
+  local watcher_pid=""
+  cleanup() {
+    [[ -n "${watcher_pid:-}" ]] && kill "${watcher_pid}" 2>/dev/null || true
+  }
+  trap cleanup EXIT INT TERM
+
   local frontend_python
   frontend_python="$(find_python_cmd frontend_flask)"
-  if [[ -z "$frontend_python" || ! -x "frontend_flask/.venv/bin/python" ]]; then
-    if command -v python3 >/dev/null 2>&1; then
+  if [[ -z "$frontend_python" || ! -f "$frontend_python" ]]; then
+    if command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
       info "creating frontend_flask/.venv"
-      python3 -m venv frontend_flask/.venv
+      local base_py
+      base_py="$(command -v python3 || command -v python)"
+      "$base_py" -m venv "$ROOT/frontend_flask/.venv"
       frontend_python="$(find_python_cmd frontend_flask)"
       if [[ -n "$frontend_python" ]]; then
-        "$frontend_python" -m pip install -r frontend_flask/requirements.txt || true
+        "$frontend_python" -m pip install -r "$ROOT/frontend_flask/requirements.txt" || true
       fi
     fi
   fi
@@ -178,19 +187,13 @@ up_local() {
     (cd frontend_flask && npm install --no-audit --no-fund && npm run build)
   fi
 
-  local watcher=""
   if command -v npm >/dev/null 2>&1; then
     info "watching static/src and templates for CSS changes"
     (cd frontend_flask && npm run watch >"$LOG_DIR/watiq-tailwind.log" 2>&1) &
-    watcher=$!
+    watcher_pid=$!
   else
     warn "npm not found — CSS will not rebuild as you edit templates"
   fi
-
-  cleanup() {
-    [[ -n "$watcher" ]] && kill "$watcher" 2>/dev/null || true
-  }
-  trap cleanup EXIT INT TERM
 
   echo
   bold "Frontend (native) → $FRONTEND_URL   API (docker) → $API_URL"
@@ -204,38 +207,56 @@ up_local() {
 up_native() {
   bootstrap_env
 
+  local watcher_pid=""
+  local api_pid=""
+
+  cleanup() {
+    info "shutting down native processes..."
+    [[ -n "${watcher_pid:-}" ]] && kill "${watcher_pid}" 2>/dev/null || true
+    [[ -n "${api_pid:-}" ]] && kill "${api_pid}" 2>/dev/null || true
+  }
+  trap cleanup EXIT INT TERM
+
   local backend_python
   local frontend_python
   backend_python="$(find_python_cmd backend)"
   frontend_python="$(find_python_cmd frontend_flask)"
 
-  if [[ -z "$backend_python" || ! -x "backend/.venv/bin/python" ]]; then
-    if command -v uv >/dev/null 2>&1; then
-      info "syncing backend environment via uv..."
-      (cd backend && uv sync)
-      backend_python="$(find_python_cmd backend)"
-    elif command -v python3 >/dev/null 2>&1; then
-      info "creating backend/.venv..."
-      python3 -m venv backend/.venv
-      backend_python="$(find_python_cmd backend)"
-      if [[ -n "$backend_python" ]]; then
-        "$backend_python" -m pip install -r backend/requirements.txt 2>/dev/null || true
+  if [[ -z "$backend_python" || "$backend_python" == "python3" || "$backend_python" == "python" || "$backend_python" == "py" ]]; then
+    if [[ ! -d "$ROOT/backend/.venv" ]]; then
+      if command -v uv >/dev/null 2>&1; then
+        info "syncing backend environment via uv..."
+        (cd "$ROOT/backend" && uv sync)
+        backend_python="$(find_python_cmd backend)"
+      elif command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+        info "creating backend/.venv..."
+        local base_py
+        base_py="$(command -v python3 || command -v python)"
+        "$base_py" -m venv "$ROOT/backend/.venv"
+        backend_python="$(find_python_cmd backend)"
+        if [[ -n "$backend_python" ]]; then
+          "$backend_python" -m pip install -r "$ROOT/backend/requirements.txt" 2>/dev/null || true
+        fi
       fi
     fi
   fi
 
   [[ -n "$backend_python" ]] || die "Python 3 is required for backend but not found."
 
-  if [[ -z "$frontend_python" || ! -x "frontend_flask/.venv/bin/python" ]]; then
-    if command -v python3 >/dev/null 2>&1; then
-      info "creating frontend_flask/.venv..."
-      python3 -m venv frontend_flask/.venv
-      frontend_python="$(find_python_cmd frontend_flask)"
-      if [[ -n "$frontend_python" ]]; then
-        "$frontend_python" -m pip install -r frontend_flask/requirements.txt || true
+  if [[ -z "$frontend_python" || "$frontend_python" == "python3" || "$frontend_python" == "python" || "$frontend_python" == "py" ]]; then
+    if [[ ! -d "$ROOT/frontend_flask/.venv" ]]; then
+      if command -v python3 >/dev/null 2>&1 || command -v python >/dev/null 2>&1; then
+        info "creating frontend_flask/.venv..."
+        local base_py
+        base_py="$(command -v python3 || command -v python)"
+        "$base_py" -m venv "$ROOT/frontend_flask/.venv"
+        frontend_python="$(find_python_cmd frontend_flask)"
+        if [[ -n "$frontend_python" ]]; then
+          "$frontend_python" -m pip install -r "$ROOT/frontend_flask/requirements.txt" || true
+        fi
+      else
+        frontend_python="$backend_python"
       fi
-    else
-      frontend_python="$backend_python"
     fi
   fi
 
@@ -244,7 +265,6 @@ up_native() {
     (cd frontend_flask && npm install --no-audit --no-fund && npm run build)
   fi
 
-  local watcher_pid=""
   if command -v npm >/dev/null 2>&1; then
     info "watching static/src and templates for CSS changes"
     (cd frontend_flask && npm run watch >"$LOG_DIR/watiq-tailwind.log" 2>&1) &
@@ -254,7 +274,6 @@ up_native() {
   fi
 
   info "starting API server natively on port ${API_PORT}"
-  local api_pid=""
   if command -v uv >/dev/null 2>&1; then
     (cd backend && uv run uvicorn app.main:app --host 127.0.0.1 --port "${API_PORT}" >"$LOG_DIR/watiq-api.log" 2>&1) &
     api_pid=$!
@@ -262,13 +281,6 @@ up_native() {
     (cd backend && "$backend_python" -m uvicorn app.main:app --host 127.0.0.1 --port "${API_PORT}" >"$LOG_DIR/watiq-api.log" 2>&1) &
     api_pid=$!
   fi
-
-  cleanup() {
-    info "shutting down native processes..."
-    [[ -n "$watcher_pid" ]] && kill "$watcher_pid" 2>/dev/null || true
-    [[ -n "$api_pid" ]] && kill "$api_pid" 2>/dev/null || true
-  }
-  trap cleanup EXIT INT TERM
 
   wait_for "API" "$API_URL" 60 "$api_pid" || die "the API never came up; check $LOG_DIR/watiq-api.log"
 
