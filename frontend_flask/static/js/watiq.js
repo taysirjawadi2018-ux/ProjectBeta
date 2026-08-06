@@ -29,6 +29,7 @@
  *   submit-form        on a <select>             re-submit the enclosing form
  *   data-hover-show / data-hover-hide="<id>"     hover-revealed tooltip
  *   data-confirm="message" on a <form>           confirm before submitting
+ *   data-a11y-controls on a <form>               theme / text-size preferences
  *
  * submit-form is the one action driven by "change" rather than "click", since
  * clicking a <select> only opens it. It is an enhancement in the strict sense:
@@ -284,6 +285,69 @@
       event.preventDefault();
     }
   });
+
+  /* Reader preferences (templates/partials/_a11y.html).
+   *
+   * The control is a real form and the server sets the same cookie, so this is
+   * strictly an upgrade: it applies the change in place instead of costing a
+   * round trip and a scroll position. If anything here is unavailable —
+   * event.submitter on an older browser — the listener bows out and the form
+   * posts as it would have anyway.
+   */
+  var SCALES = ["100", "125", "150"];
+
+  function remember(name, value) {
+    document.cookie =
+      name + "=" + value + ";path=/;max-age=31536000;samesite=Lax";
+  }
+
+  function applyTheme(button, value) {
+    var dark = value === "dark";
+    document.documentElement.classList.toggle("dark", dark);
+    remember("watiq_theme", value);
+
+    // The button offers the *other* theme, so everything on it flips.
+    button.value = dark ? "light" : "dark";
+    button.setAttribute("aria-pressed", dark ? "true" : "false");
+    button.querySelectorAll("[data-a11y-icon]").forEach(function (icon) {
+      icon.classList.toggle(
+        "hidden",
+        icon.getAttribute("data-a11y-icon") === (dark ? "dark" : "light")
+      );
+    });
+  }
+
+  function applyScale(group, value) {
+    var root = document.documentElement;
+    SCALES.forEach(function (step) {
+      root.classList.toggle(
+        "text-scale-" + step,
+        step === value && step !== "100"
+      );
+    });
+    remember("watiq_text_scale", value);
+    group.querySelectorAll("button[value]").forEach(function (button) {
+      button.setAttribute(
+        "aria-pressed",
+        button.value === value ? "true" : "false"
+      );
+    });
+  }
+
+  var preferences = document.querySelector("[data-a11y-controls]");
+  if (preferences) {
+    preferences.addEventListener("submit", function (event) {
+      var button = event.submitter;
+      if (!button || !button.name) return; // let it post for real
+      if (button.name === "theme") {
+        event.preventDefault();
+        applyTheme(button, button.value);
+      } else if (button.name === "text_scale" && SCALES.indexOf(button.value) > -1) {
+        event.preventDefault();
+        applyScale(preferences.querySelector("[data-a11y-sizes]"), button.value);
+      }
+    });
+  }
 
   /* Mark the current nav item when a page did not set it server-side. */
   document.querySelectorAll("nav a[href]").forEach(function (link) {

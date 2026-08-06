@@ -6,15 +6,17 @@
 <link href="{{ url_for('static', filename='css/pages/index.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <!-- Watermark Background -->
 <img alt="Tunisian National Emblem Watermark" class="watermark-emblem" src="{{ url_for('static', filename='img/img-a5f82587302e.jpg') }}"/>
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full h-20 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm z-50 flex items-center">
 <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
 <div class="flex items-center gap-4">
-<a class="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider focus-ring rounded" href="{{ url_for('public.index') }}">
-                    Republic of Tunisia
-                </a>
+<a class="flex items-center gap-3 focus-ring rounded" href="{{ url_for('public.index') }}">
+{{ mark(size='h-9') }}
+<span class="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider">Republic of Tunisia</span>
+</a>
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
@@ -27,6 +29,9 @@
 <a aria-label="About the national institutions" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('public.about') }}">account_balance</a>
 <a aria-label="Notifications" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.notifications') }}">notifications</a>
 <a aria-label="{% if is_authenticated %}Your profile{% else %}Sign in{% endif %}" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.profile') if is_authenticated else url_for('public.login') }}">account_circle</a>
+{%- if not is_authenticated %}
+<a class="font-label-md text-label-md text-on-primary bg-primary-container px-4 py-2 rounded-sm hover:shadow-lg transition-all focus-ring" href="{{ url_for('public.register') }}">Register</a>
+{%- endif %}
 </div>
 </div>
 </div>
@@ -55,6 +60,10 @@
 </a>
 <a class="border border-primary-container text-primary-container px-8 py-4 rounded-sm font-headline-md text-body-md hover:bg-surface-container-low transition-all focus-ring" href="{{ url_for('public.help_page') }}">
                             View Documentation
+                        </a>
+<a class="border border-primary-container text-primary-container px-8 py-4 rounded-sm font-headline-md text-body-md hover:bg-surface-container-low transition-all focus-ring flex items-center gap-3" href="{{ url_for('citizen.book_appointment') }}">
+                            Book Appointment
+                            <span aria-hidden="true" class="material-symbols-outlined">event_available</span>
                         </a>
 </div>
 <div class="mt-12 flex gap-8 items-center border-t border-outline-variant pt-8">
@@ -233,8 +242,9 @@
 <div class="flex flex-wrap justify-center gap-8">
 <a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
 <a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.about') }}">Security Protocols</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Security Protocols</a>
 <a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.status') }}">System Status</a>
 </div>
 <div class="flex gap-4">
 <a aria-label="Watiq on social media" class="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.contact') }}">facebook</a>

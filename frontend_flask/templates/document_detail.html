@@ -18,13 +18,14 @@
 <link href="{{ url_for('static', filename='css/pages/document_detail.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 {%- set certified = document.status == 'verified' %}
 {%- set primary = document %}
 <!-- SideNavBar -->
 <aside class="h-screen w-64 fixed left-0 top-0 bg-white border-r border-outline-variant flex flex-col py-8 gap-2 z-50">
 <div class="px-6 mb-8">
 <h1 class="font-bold text-xl text-primary flex items-center gap-2">
-<span aria-hidden="true" class="material-symbols-outlined gold-text">account_balance</span>
+{{ mark(size='h-6') }}
             Citizen Space
         </h1>
 <div class="mt-1 flex items-center gap-1.5">
@@ -45,7 +46,7 @@
 <span aria-hidden="true" class="material-symbols-outlined mr-3 gold-text">folder_shared</span>
 <span class="font-label-md text-label-md">My Documents</span>
 </a>
-<a class="text-on-surface-variant hover:bg-surface-container-low mx-3 flex items-center px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('public.services', category='justice') }}">
+<a class="text-on-surface-variant hover:bg-surface-container-low mx-3 flex items-center px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('public.contact') }}">
 <span aria-hidden="true" class="material-symbols-outlined mr-3">gavel</span>
 <span class="font-label-md text-label-md">Legal Support</span>
 </a>
@@ -335,7 +336,7 @@
 <div class="flex flex-col gap-4">
 <h5 class="text-[11px] font-bold uppercase tracking-widest gold-text">Trust Services</h5>
 <a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.track') }}">Verification Portal</a>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('citizen.notifications') }}">Audit Logs</a>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('citizen.security_log') }}">Audit Logs</a>
 <a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.open_data') }}">API Access</a>
 </div>
 <div class="flex flex-col gap-4">

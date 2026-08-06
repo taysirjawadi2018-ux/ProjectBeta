@@ -1,4 +1,4 @@
-/* content_page.html — behaviour lifted from frontend/terms_and_conditions.html.
+/* terms.html — behaviour lifted from frontend/terms_and_conditions.html.
  * Inline <script> is blocked by script-src 'self', so it lives here
  * and is loaded with defer from the page's scripts block.
  */

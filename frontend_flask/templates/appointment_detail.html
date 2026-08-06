@@ -16,7 +16,11 @@
 <div class="mb-12">
 <a aria-label="Back to appointments" class="flex items-center text-primary hover:text-primary-container transition-colors mb-6 focus-ring rounded" href="{{ url_for('citizen.appointments') }}">
 <span class="material-symbols-outlined mr-2" data-icon="arrow_back">arrow_back</span>
-<span class="font-label-caps uppercase tracking-wider">Back to Dashboard</span>
+<span class="font-label-caps uppercase tracking-wider">Back to appointments</span>
+</a>
+<a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors mb-6 ml-6 focus-ring rounded" href="{{ url_for('citizen.dashboard') }}">
+<span aria-hidden="true" class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps uppercase tracking-wider">Dashboard</span>
 </a>
 <h1 class="font-headline-lg-mobile md:font-headline-lg text-primary mb-2">Appointment Confirmed</h1>
 <p class="font-body-lg text-on-surface-variant max-w-2xl">Your booking is secured. Please review the details below and present the QR code upon arrival.</p>

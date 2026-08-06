@@ -29,6 +29,7 @@
 </div>
 <div class="flex items-center gap-3">
 <span class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm py-1 px-3 rounded-full">{{ appt.status or 'Booked' }}</span>
+<a class="border border-outline-variant text-on-surface font-label-md text-label-md py-2 px-4 rounded hover:bg-surface-container-low transition-colors focus-ring" href="{{ url_for('citizen.appointment_detail', appointment_id=appt.id) }}">Details</a>
 {% if appt.status not in ('cancelled', 'completed') %}
 <form action="{{ url_for('citizen.cancel_appointment', appointment_id=appt.id) }}" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">

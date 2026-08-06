@@ -436,6 +436,76 @@ def open_data() -> str:
     return _content("open-data")
 
 
+@bp.post("/preferences")
+def preferences() -> Any:
+    """Persist the reader's theme / text-size choice.
+
+    The floating controls are a real form posting here, so they work with
+    JavaScript off — the whole point of the text-size control is that it
+    reaches people who are least likely to be on a current browser. watiq.js
+    intercepts the submit and applies the change in place; this is what happens
+    when it cannot.
+
+    A year-long cookie rather than the session: the preference has to survive
+    signing out, and it is not a secret.
+    """
+    from app import THEME_COOKIE, THEMES, TEXT_SCALE_COOKIE, TEXT_SCALES
+
+    # Same relative-path rule as _safe_next, but landing on the portal rather
+    # than the dashboard: this route is reachable signed out, and bouncing an
+    # anonymous reader to a login screen for changing the text size would be
+    # a strange answer to the request.
+    target = request.form.get("next") or ""
+    if not target.startswith("/") or target.startswith("//"):
+        target = url_for("public.index")
+    response = redirect(target)
+
+    theme = request.form.get("theme")
+    if theme in THEMES:
+        response.set_cookie(
+            THEME_COOKIE, theme, max_age=31536000, samesite="Lax", httponly=False
+        )
+
+    scale = request.form.get("text_scale")
+    if scale and scale.isdigit() and int(scale) in TEXT_SCALES:
+        response.set_cookie(
+            TEXT_SCALE_COOKIE, scale, max_age=31536000, samesite="Lax", httponly=False
+        )
+    return response
+
+
+@bp.get("/status")
+def status() -> str:
+    """Platform status — the link map's `system_maintenance.html`.
+
+    The screen was ported but never routed, so the "System Status" affordance
+    the national portal is specified to carry had nowhere to point. It is a
+    normal 200 page, not an error handler: people reach it to check whether an
+    outage is known, and a status page that answers 503 cannot be read by the
+    monitors that most want it.
+
+    Live degradation is read from the same upstream probe /readyz uses, so the
+    banner reflects the API rather than a hand-edited constant.
+    """
+    try:
+        api.request("GET", "/healthz", auth=False, retry_auth=False)
+        degraded = False
+    except Exception:  # noqa: BLE001 - any failure is a degraded upstream
+        degraded = True
+    return render_template(
+        "error_maintenance.html",
+        title="Scheduled Maintenance" if not degraded else "Service Degraded",
+        message=(
+            "Core services are operating normally. Planned maintenance windows "
+            "are published here before they begin."
+            if not degraded
+            else "The records service is not responding. Submissions may fail "
+            "or be delayed. No action is needed on your part."
+        ),
+        degraded=degraded,
+    )
+
+
 def _content(key: str) -> str:
     title, slug = _CONTENT[key]
     return render_template("content_page.html", page_title=title, slug=slug)

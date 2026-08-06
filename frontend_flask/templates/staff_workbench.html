@@ -39,7 +39,7 @@
 </a>
 </div>
 <div class="p-4 mt-auto border-t border-outline-variant">
-<a class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-transparent border border-secondary text-secondary rounded-DEFAULT hover:bg-surface-container-highest transition-colors font-label-md text-label-md" href="{{ url_for('staff.audit') }}">
+<a class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-transparent border border-secondary text-secondary rounded-DEFAULT hover:bg-surface-container-highest transition-colors font-label-md text-label-md" href="{{ url_for('staff.health') }}">
 <span class="material-symbols-outlined text-sm">monitor_heart</span>
                 System Status
             </a>
@@ -67,9 +67,15 @@
 <span class="material-symbols-outlined">notifications</span>
 <span class="absolute top-1 right-1 w-2 h-2 bg-primary-container rounded-full"></span>
 </a>
-<div class="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-label-md border border-outline-variant overflow-hidden">
+<a aria-label="Your profile" class="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-label-md border border-outline-variant overflow-hidden focus-ring" href="{{ url_for('citizen.profile') }}">
 <img alt="Admin Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a government administrative worker in modern business attire against a neutral light gray background, providing a clean, authoritative yet approachable look suitable for an enterprise dashboard profile image." src="{{ url_for('static', filename='img/img-500cd167ebb8.jpg') }}"/>
-</div>
+</a>
+<form action="{{ url_for('public.logout') }}" class="inline" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<button aria-label="Sign out" class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined">logout</span>
+</button>
+</form>
 </div>
 </header>
 <!-- Scrollable Canvas -->
@@ -133,7 +139,7 @@
 <h4 class="text-label-md font-label-md mb-1">Schedule Appointment</h4>
 <p class="text-label-sm font-label-sm text-secondary-fixed-dim">Book walk-in citizen requests manually.</p>
 </div>
-<a class="mt-4 bg-on-secondary text-secondary px-4 py-2 rounded-DEFAULT text-label-sm font-label-md font-bold flex items-center gap-2 hover:bg-surface-container-lowest transition-colors w-full justify-center" href="{{ url_for('citizen.book_appointment') }}">
+<a class="mt-4 bg-on-secondary text-secondary px-4 py-2 rounded-DEFAULT text-label-sm font-label-md font-bold flex items-center gap-2 hover:bg-surface-container-lowest transition-colors w-full justify-center" href="{{ url_for('staff.office_appointments') }}">
 <span class="material-symbols-outlined text-sm">calendar_add_on</span>
                                 New Booking
                             </a>

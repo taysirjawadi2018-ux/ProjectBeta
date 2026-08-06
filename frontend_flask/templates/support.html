@@ -6,6 +6,7 @@
 <link href="{{ url_for('static', filename='css/pages/support.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <div class="national-watermark"></div>
 <!-- TopNavBar -->
 <header class="bg-primary-container sticky top-0 z-50 border-b border-outline-variant">
@@ -37,7 +38,7 @@
 <aside class="hidden lg:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant p-md space-y-md shrink-0">
 <div class="flex flex-col items-center py-lg border-b border-outline-variant mb-md">
 <div class="w-16 h-16 bg-primary-container rounded-lg flex items-center justify-center mb-sm">
-<span class="material-symbols-outlined text-white text-3xl">account_balance</span>
+{{ mark(size='h-9') }}
 </div>
 <h2 class="font-headline-md text-headline-md font-bold text-primary text-center">Citizen Space</h2>
 <p class="font-label-sm text-label-sm opacity-70">Secure Portal</p>
@@ -51,7 +52,7 @@
 <span class="material-symbols-outlined">description</span>
 <span class="font-label-sm">Applications</span>
 </a>
-<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="{{ url_for('citizen.requests_list') }}">
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all" href="{{ url_for('citizen.documents') }}">
 <span class="material-symbols-outlined">folder_shared</span>
 <span class="font-label-sm">My Documents</span>
 </a>
@@ -62,6 +63,14 @@
 <a class="flex items-center gap-sm p-sm text-secondary font-bold border-l-4 border-sovereign-gold bg-secondary-fixed/10 rounded-r-lg" href="{{ url_for('public.contact') }}">
 <span class="material-symbols-outlined">support_agent</span>
 <span class="font-label-sm">Institutional Support</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="{{ url_for('public.help_page') }}">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-sm">Knowledge Base</span>
+</a>
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors" href="{{ url_for('public.support_chat') }}">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-sm">Live Chat</span>
 </a>
 </nav>
 <div class="pt-md border-t border-outline-variant">

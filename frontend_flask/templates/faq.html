@@ -112,9 +112,15 @@
 <h3 class="font-headline-md text-headline-md text-primary mb-2">Still need help?</h3>
 <p class="font-body-md text-body-md text-on-surface-variant">Our support team is available 24/7 to assist you with any inquiries.</p>
 </div>
+<div class="flex flex-col sm:flex-row gap-3">
 <a class="whitespace-nowrap px-6 py-3 bg-primary text-on-primary rounded-sm font-body-md font-semibold hover:bg-primary-container transition-colors shadow-sm focus-ring" href="{{ url_for('public.contact') }}">
                     Contact Support
                 </a>
+<a class="whitespace-nowrap px-6 py-3 border border-primary text-primary rounded-sm font-body-md font-semibold hover:bg-surface-container-high transition-colors focus-ring flex items-center gap-2" href="{{ url_for('public.support_chat') }}">
+<span aria-hidden="true" class="material-symbols-outlined">headset_mic</span>
+                    Live Chat
+                </a>
+</div>
 </section>
 </div>
 </main>

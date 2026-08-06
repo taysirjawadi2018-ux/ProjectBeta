@@ -15,6 +15,10 @@
  *   _fonts.css   tools/vendor_assets.py  (self-hosted @font-face rules)
  *   _tokens.css  tools/build_tokens.py   (design tokens + per-page overrides)
  *
+ * _theme.css is hand-written and must stay imported last of the three: it
+ * rebinds the same variables for the dark scheme, and beats the per-page
+ * .tk-* overrides only by being later in source order.
+ *
  * Rules that belong to ONE page live in static/css/pages/<page>.css and are
  * linked from that page's `page_style` block. They are deliberately not merged
  * in here: several pages define the same class with different values (login's
@@ -23,6 +27,7 @@
  */
 @import "_fonts.css";
 @import "_tokens.css";
+@import "_theme.css";
 
 @tailwind base;
 @tailwind components;

@@ -6,6 +6,7 @@
 <link href="{{ url_for('static', filename='css/pages/citizen_dashboard.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <!-- National Emblem Watermark -->
 <div class="fixed inset-0 watermark-overlay z-0"></div>
 <!-- Side Navigation Shell -->
@@ -23,14 +24,15 @@
 <span aria-hidden="true" class="material-symbols-outlined">description</span>
 <span class="font-label-md text-label-md">Applications</span>
 </a>
-{#- There is no "all my documents" endpoint — documents hang off a request —
-    so My Documents lands on the request list, where each row opens its own
-    document set. -#}
-<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('citizen.requests_list') }}">
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('citizen.documents') }}">
 <span aria-hidden="true" class="material-symbols-outlined">folder_shared</span>
 <span class="font-label-md text-label-md">My Documents</span>
 </a>
-<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('public.services', category='justice') }}">
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('citizen.payments') }}">
+<span aria-hidden="true" class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Payments</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 flex items-center gap-3 px-4 py-3 rounded-lg transition-all active:translate-x-1 duration-200 focus-ring" href="{{ url_for('public.contact') }}">
 <span aria-hidden="true" class="material-symbols-outlined">gavel</span>
 <span class="font-label-md text-label-md">Legal Support</span>
 </a>
@@ -40,7 +42,7 @@
 </a>
 </nav>
 <div class="mt-auto pt-4 border-t border-outline-variant mx-2">
-<a class="text-on-surface-variant hover:bg-surface-container-highest flex items-center gap-3 px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('citizen.profile') }}">
+<a class="text-on-surface-variant hover:bg-surface-container-highest flex items-center gap-3 px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('citizen.security_log') }}">
 <span aria-hidden="true" class="material-symbols-outlined">security</span>
 <span class="font-label-md text-label-md">Security Log</span>
 </a>
@@ -61,7 +63,11 @@
 <!-- Top Navigation -->
 <header class="h-20 bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center w-full px-margin-desktop sticky top-0 z-30">
 <div class="flex items-center gap-8">
+{# PDF spec: the "Republic of Tunisia" masthead returns to the national portal. #}
+<a class="flex items-center gap-3 focus-ring rounded" href="{{ url_for('public.index') }}">
+{{ mark(size='h-9') }}
 <span class="font-headline-md text-headline-md text-primary uppercase tracking-wider">Republic of Tunisia</span>
+</a>
 <nav class="hidden lg:flex gap-6 items-center h-full">
 <a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
 <a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md" href="{{ url_for('public.services', category='identity') }}">Identity</a>
@@ -75,7 +81,7 @@
                     SOVEREIGN CLOUD SECURED
                 </div>
 <div class="flex gap-2">
-<a aria-label="About the national institutions" class="p-2 hover:bg-surface-container-high rounded-full transition-all focus-ring" href="{{ url_for('public.about') }}">
+<a aria-label="About the national institutions" class="p-2 hover:bg-surface-container-high rounded-full transition-all focus-ring" href="{{ url_for('public.index') }}">
 <span aria-hidden="true" class="material-symbols-outlined">account_balance</span>
 </a>
 <a aria-label="Notifications{% if unread_count %} ({{ unread_count }} unread){% endif %}" class="p-2 hover:bg-surface-container-high rounded-full transition-all relative focus-ring" href="{{ url_for('citizen.notifications') }}">
@@ -216,7 +222,7 @@
                             RECENT DOCUMENTS
                         </h3>
 <div class="flex gap-2">
-<a class="px-3 py-1 bg-surface-container-high rounded-full text-support-sm font-support-sm focus-ring" href="{{ url_for('citizen.requests_list') }}">Verified Only</a>
+<a class="px-3 py-1 bg-surface-container-high rounded-full text-support-sm font-support-sm focus-ring" href="{{ url_for('citizen.documents', status='verified') }}">Verified Only</a>
 <a class="px-3 py-1 bg-primary text-white rounded-full text-support-sm font-support-sm focus-ring" href="{{ url_for('citizen.submit_request') }}">New Upload</a>
 </div>
 </div>

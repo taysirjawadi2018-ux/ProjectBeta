@@ -11,18 +11,19 @@
   `active` selects the underlined item; `unread_count` and `is_authenticated`
   come from the context processor in app.py.
 #}
+{% from 'partials/_logo.html' import lockup %}
 <header class="bg-primary-container sticky top-0 w-full z-50 border-b border-outline-variant/20">
 <nav aria-label="Primary" class="flex justify-between items-center w-full px-margin-mobile md:px-gutter py-3 max-w-container-max mx-auto">
 <div class="flex items-center gap-6">
-<a aria-label="Watiq home" class="font-headline-md text-headline-md font-bold text-on-primary-fixed tracking-tight flex items-center gap-2 focus-ring rounded" href="{{ url_for('public.index') }}">
-<span aria-hidden="true" class="material-symbols-outlined icon-filled text-tertiary-fixed-dim">account_balance</span>
-                Watiq
-            </a>
+<a aria-label="Watiq home" class="flex items-center focus-ring rounded" href="{{ url_for('public.index') }}">
+{{ lockup(size='h-9', tone='light') }}
+</a>
 <div class="hidden md:flex gap-6">
 {%- set items = [
   ('services', url_for('public.services'), 'Services'),
   ('requests', url_for('citizen.requests_list'), 'My Requests'),
   ('appointments', url_for('citizen.appointments'), 'Appointments'),
+  ('payments', url_for('citizen.payments'), 'Payments'),
 ] %}
 {%- for key, href, label in items %}
 {%- if key == active %}
@@ -56,7 +57,7 @@
 </button>
 </form>
 {%- else %}
-<a class="font-label-sm text-label-sm text-on-primary-fixed border border-outline-variant/40 hover:bg-white/5 px-4 py-2 rounded focus-ring transition-colors" href="{{ url_for('public.login') }}">Sign In</a>
+<a class="font-label-sm text-label-sm text-primary-fixed border border-outline-variant/40 hover:bg-white/5 px-4 py-2 rounded focus-ring transition-colors" href="{{ url_for('public.login') }}">Sign In</a>
 {%- endif %}
 </div>
 </nav>

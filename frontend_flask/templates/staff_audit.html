@@ -12,6 +12,7 @@
 <link href="{{ url_for('static', filename='css/pages/staff_audit.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <!-- Watermark Background -->
 <div class="fixed inset-0 watermark-emblem z-0" alt="A highly detailed illustration of the Tunisian National Emblem, rendered in a crisp, monochromatic style suitable for a"></div>
 <!-- SideNavBar (Desktop Only) -->
@@ -19,7 +20,7 @@
 <!-- Header -->
 <div class="flex items-center gap-4 px-2 py-6 mb-4">
 <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined" data-weight="fill">account_balance</span>
+{{ mark(size='h-6') }}
 </div>
 <div>
 <h1 class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface">Watiq Portal</h1>
@@ -28,7 +29,7 @@
 </div>
 <!-- Navigation Links -->
 <div class="flex-1 overflow-y-auto">
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('citizen.dashboard') }}">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
 <span class="font-label-md text-label-md">Dashboard</span>
 </a>
@@ -36,13 +37,13 @@
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
 <span class="font-label-md text-label-md">Documents</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('citizen.appointments') }}">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.office_appointments') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">event</span>
 <span class="font-label-md text-label-md">Appointments</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.audit') }}">
-<span class="material-symbols-outlined group-hover:text-primary transition-colors">gavel</span>
-<span class="font-label-md text-label-md">Legal Archive</span>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.health') }}">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">monitor_heart</span>
+<span class="font-label-md text-label-md">System Health</span>
 </a>
 <!-- Active State -->
 <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg translate-x-1 transition-transform group" href="{{ url_for('staff.audit') }}">
@@ -60,6 +61,13 @@
 <span class="material-symbols-outlined text-[18px]">add</span>
                 New Request
             </a>
+<form action="{{ url_for('public.logout') }}" class="contents" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<button class="w-full mt-2 flex items-center justify-center gap-2 py-3 rounded-sm text-error hover:bg-error-container/20 transition-colors font-label-caps text-label-caps" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined text-[18px]">logout</span>
+                Sign Out
+            </button>
+</form>
 </div>
 </nav>
 <!-- Main Content Canvas -->

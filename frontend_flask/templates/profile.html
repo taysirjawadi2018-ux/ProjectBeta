@@ -6,6 +6,7 @@
 <link href="{{ url_for('static', filename='css/pages/profile.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <!-- TopNavBar from JSON -->
 <header class="bg-primary-container docked full-width top-0 z-50 border-b border-outline-variant">
 <div class="flex justify-between items-center w-full px-lg py-sm max-w-container-max mx-auto h-20">
@@ -36,7 +37,7 @@
 <aside class="hidden lg:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant p-md space-y-md shrink-0">
 <div class="flex flex-col items-center py-lg border-b border-outline-variant mb-md">
 <div class="w-16 h-16 bg-primary-container rounded-lg flex items-center justify-center mb-sm">
-<span class="material-symbols-outlined text-white text-3xl" data-icon="account_balance">account_balance</span>
+{{ mark(size='h-9') }}
 </div>
 <h2 class="font-headline-md text-headline-md font-bold text-primary">Citizen Space</h2>
 <p class="font-label-sm text-label-sm opacity-70">Secure Portal</p>
@@ -50,7 +51,7 @@
 <span class="material-symbols-outlined" data-icon="description">description</span>
 <span class="font-label-sm">Applications</span>
 </a>
-<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all hover:translate-x-1 duration-150" href="{{ url_for('citizen.requests_list') }}">
+<a class="flex items-center gap-sm p-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all hover:translate-x-1 duration-150" href="{{ url_for('citizen.documents') }}">
 <span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
 <span class="font-label-sm">My Documents</span>
 </a>

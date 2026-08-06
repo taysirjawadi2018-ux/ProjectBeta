@@ -6,6 +6,7 @@
 <link href="{{ url_for('static', filename='css/pages/security_log.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <!-- Global Watermark -->
 <div class="fixed inset-0 watermark z-0" alt="A highly abstract, extremely subtle line-art representation of the Tunisian National Emblem."></div>
 <!-- SideNavBar (Web/Desktop) -->
@@ -13,7 +14,7 @@
 <div class="px-gutter mb-6">
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
-<span class="material-symbols-outlined icon-filled">account_balance</span>
+{{ mark(size='h-6') }}
 </div>
 <div>
 <h1 class="font-headline-sm text-headline-sm text-primary">Citizen Space</h1>

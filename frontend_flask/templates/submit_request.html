@@ -29,9 +29,15 @@
 <a href="{{ url_for('citizen.notifications') }}" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 duration-150">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </a>
-<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<a aria-label="Your profile" class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant block focus-ring" href="{{ url_for('citizen.profile') }}">
 <img class="w-full h-full object-cover" alt="A professional, high-quality corporate headshot of a person with a neutral, calm expression, representing a Citizen Prof" src="{{ url_for('static', filename='img/img-71d688a49052.jpg') }}"/>
-</div>
+</a>
+<form action="{{ url_for('public.logout') }}" class="inline" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<button aria-label="Sign out" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-all focus-ring" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined">logout</span>
+</button>
+</form>
 </div>
 </div>
 </header>

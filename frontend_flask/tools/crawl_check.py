@@ -13,6 +13,7 @@ PAGES = ["/", "/login", "/login?staff=1", "/register", "/password-reset",
          "/password-reset?stage=confirm", "/services", "/services?category=civil",
          "/services?q=passport", "/track", "/contact", "/help", "/about",
          "/legal/privacy", "/legal/terms", "/accessibility", "/open-data",
+         "/status",
          "/no-such-page"]
 
 def fetch(path):

@@ -57,6 +57,10 @@
 <span class="material-symbols-outlined">security</span>
 <span class="font-label-md text-label-md">Security Log</span>
 </a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest mx-2 p-3 rounded-lg flex items-center gap-3 transition-all" href="{{ url_for('public.help_page') }}">
+<span aria-hidden="true" class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">View FAQ</span>
+</a>
 <form action="{{ url_for('public.logout') }}" class="contents" method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/><button aria-label="Sign out" class="text-error hover:bg-error-container mx-2 p-3 rounded-lg flex items-center gap-3 transition-all" type="submit">
 <span class="material-symbols-outlined">logout</span>
 <span class="font-label-md text-label-md">Logout</span>

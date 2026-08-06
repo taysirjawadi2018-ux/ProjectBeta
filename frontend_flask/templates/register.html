@@ -6,6 +6,7 @@
 <link href="{{ url_for('static', filename='css/pages/register.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <!-- Watermark Background -->
 <img alt="Tunisian National Emblem Watermark" class="watermark" src="{{ url_for('static', filename='img/img-2bb77862248b.jpg') }}"/>
 <!-- TSL Component -->
@@ -23,7 +24,7 @@
 <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
 <div class="flex items-center gap-6">
 <div class="w-11 h-11 bg-white/5 flex items-center justify-center rounded-lg border border-white/10">
-<span class="icon-filled material-symbols-outlined text-secondary text-2xl">account_balance</span>
+{{ mark(size='h-7') }}
 </div>
 <div>
 <h1 class="text-2xl font-bold text-white tracking-tight">Watiq <span class="text-secondary font-light">Pro</span></h1>

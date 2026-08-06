@@ -6,12 +6,13 @@
 <link href="{{ url_for('static', filename='css/pages/citizen_portal.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <div class="watermark-bg"></div>
 <!-- SideNavBar -->
 <aside class="hidden lg:flex flex-col h-full w-64 bg-surface-container border-r border-outline-variant p-6 space-y-6 fixed left-0 top-0 z-50 overflow-y-auto">
 <div class="flex flex-col items-center py-8 border-b border-outline-variant mb-4">
 <div class="w-16 h-16 bg-primary-container rounded-lg flex items-center justify-center mb-4 shadow-lg">
-<span class="material-symbols-outlined text-white text-3xl">account_balance</span>
+{{ mark(size='h-9') }}
 </div>
 <h1 class="font-headline-lg text-xl font-bold text-primary tracking-tight">Citizen Space</h1>
 <p class="font-label-sm text-[10px] uppercase tracking-widest opacity-70">Sovereign Portal</p>

@@ -165,7 +165,16 @@ def _register_hooks(app: Flask) -> None:
     def _globals() -> dict[str, object]:
         import auth
 
+        theme, scale = _preferences()
         return {
+            # Reader preferences, rendered onto <html> by base.html. They come
+            # from a cookie rather than localStorage because the CSP forbids
+            # the inline <head> script that would otherwise apply them before
+            # first paint; the server already knows, so nothing flashes.
+            "theme": theme,
+            "text_scale": scale,
+            "theme_class": "dark" if theme == "dark" else "",
+            "text_scale_class": "" if scale == 100 else f"text-scale-{scale}",
             "year": date.today().year,
             # Rendered as the starting value of the clock on the blocked page,
             # so it is correct before (and without) JavaScript.
@@ -176,6 +185,31 @@ def _register_hooks(app: Flask) -> None:
             # Rendered in every nav that shows a bell; None when signed out.
             "unread_count": _unread_count(),
         }
+
+
+THEME_COOKIE = "watiq_theme"
+TEXT_SCALE_COOKIE = "watiq_text_scale"
+THEMES = ("light", "dark")
+TEXT_SCALES = (100, 125, 150)
+
+
+def _preferences() -> tuple[str, int]:
+    """The reader's theme and text size, from cookies, both always valid.
+
+    Anyone can hand these cookies any value they like, and they are rendered
+    straight into a class attribute, so an unrecognised one is discarded rather
+    than escaped: the set of legal values is small and closed.
+    """
+    theme = request.cookies.get(THEME_COOKIE, "")
+    if theme not in THEMES:
+        theme = "light"
+    try:
+        scale = int(request.cookies.get(TEXT_SCALE_COOKIE, ""))
+    except (TypeError, ValueError):
+        scale = 100
+    if scale not in TEXT_SCALES:
+        scale = 100
+    return theme, scale
 
 
 def _unread_count() -> int | None:
@@ -193,11 +227,32 @@ def _unread_count() -> int | None:
 
 
 def _register_error_handlers(app: Flask) -> None:
+    def _blocked(status: int, message: str) -> tuple[str, int]:
+        """The dedicated access-denied screen.
+
+        403 and 429 both mean "this identity may not proceed", which is the one
+        refusal the design treats as its own screen rather than a line of body
+        text: it shows the session reference and timestamp someone has to quote
+        when they ask for the block to be reviewed. Every other status stays on
+        the generic error page.
+        """
+        return (
+            render_template(
+                "error_blocked.html",
+                code=status,
+                title=_TITLES.get(status, "Access denied"),
+                message=message,
+            ),
+            status,
+        )
+
     @app.errorhandler(api.ApiError)
     def _api_error(exc: api.ApiError) -> tuple[str, int]:
         if exc.status == 401:
             session.clear()
         status = exc.status if exc.status in (401, 403, 404, 409, 429) else 502
+        if status in (403, 429):
+            return _blocked(status, exc.user_message())
         return (
             render_template(
                 "error.html",
@@ -206,6 +261,14 @@ def _register_error_handlers(app: Flask) -> None:
                 message=exc.user_message(),
             ),
             status,
+        )
+
+    @app.errorhandler(403)
+    def _forbidden(_e: Any) -> tuple[str, int]:
+        return _blocked(
+            403,
+            "This account does not hold the clearance required for that area "
+            "of the portal. The attempt has been recorded.",
         )
 
     @app.errorhandler(httpx.HTTPError)
@@ -249,7 +312,7 @@ def _register_error_handlers(app: Flask) -> None:
 
 _TITLES = {
     401: "Session expired",
-    403: "Not permitted",
+    403: "Access Restricted",
     404: "Page not found",
     409: "Conflict",
     429: "Too many requests",

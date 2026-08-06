@@ -19,7 +19,7 @@
         </a>
 <ul class="flex flex-col gap-1 w-full">
 <li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('citizen.dashboard') }}">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
 <span>Dashboard</span>
 </a>
@@ -31,15 +31,15 @@
 </a>
 </li>
 <li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('citizen.appointments') }}">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.office_appointments') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">event</span>
 <span>Appointments</span>
 </a>
 </li>
 <li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.audit') }}">
-<span class="material-symbols-outlined group-hover:text-primary transition-colors">gavel</span>
-<span>Legal Archive</span>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.health') }}">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">monitor_heart</span>
+<span>System Health</span>
 </a>
 </li>
 <li>
@@ -53,6 +53,13 @@
 <span class="material-symbols-outlined text-on-surface-variant">verified_user</span>
 <span class="text-on-surface-variant text-sm">Auditor Acc.</span>
 </div>
+<form action="{{ url_for('public.logout') }}" class="mt-auto" method="post">
+<input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
+<button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-error hover:bg-error-container/20 transition-colors" type="submit">
+<span aria-hidden="true" class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Sign Out</span>
+</button>
+</form>
 </nav>
 <!-- Main Content Canvas -->
 <main class="flex-1 ml-0 md:ml-64 p-margin-mobile md:p-gutter xl:p-margin-desktop min-h-screen relative overflow-x-hidden">

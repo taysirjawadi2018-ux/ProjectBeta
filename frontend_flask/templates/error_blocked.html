@@ -6,6 +6,7 @@
 <link href="{{ url_for('static', filename='css/pages/error_blocked.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
+{% from 'partials/_logo.html' import mark %}
 <!-- Global Watermark -->
 <div class="national-watermark"></div>
 <!-- Header / Top Bar (Simplified for Transactional/Blocked State) -->
@@ -14,6 +15,7 @@
 <div class="w-12 h-12 flex items-center justify-center bg-on-surface text-surface rounded-sm">
 <span class="icon-filled material-symbols-outlined">policy</span>
 </div>
+{{ mark(size='h-9') }}
 <div class="flex flex-col">
 <span class="font-headline-md text-headline-md tracking-wider uppercase text-on-surface leading-tight">République Tunisienne</span>
 <span class="font-label-caps text-label-caps text-on-surface-variant">Portail National des Services</span>
@@ -62,9 +64,17 @@
 <span class="material-symbols-outlined">send</span>
                         Lodge Official Appeal
                     </a>
-<a href="{{ url_for('public.contact') }}" class="w-full md:w-auto px-10 py-4 border-2 border-primary text-primary font-headline-md text-headline-md rounded-sm hover:bg-surface-container-highest transition-all active:scale-95 flex items-center justify-center gap-3">
-<span class="material-symbols-outlined">support_agent</span>
-                        Contact Support
+{#- The link map gives this screen three ways out, not two: appeal the block,
+    try a different identity, or leave. The second button used to be a second
+    route to the support desk, which left someone whose only problem was being
+    signed in as the wrong account with nowhere to go. -#}
+<a href="{{ url_for('public.login') }}" class="w-full md:w-auto px-10 py-4 border-2 border-primary text-primary font-headline-md text-headline-md rounded-sm hover:bg-surface-container-highest transition-all active:scale-95 flex items-center justify-center gap-3">
+<span class="material-symbols-outlined">account_circle</span>
+                        Sign in as someone else
+                    </a>
+<a href="{{ url_for('public.index') }}" class="w-full md:w-auto px-10 py-4 text-on-surface-variant font-headline-md text-headline-md rounded-sm hover:bg-surface-container-highest transition-all active:scale-95 flex items-center justify-center gap-3 focus-ring">
+<span class="material-symbols-outlined">account_balance</span>
+                        Return to the portal
                     </a>
 </div>
 </div>

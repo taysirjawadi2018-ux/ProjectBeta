@@ -26,7 +26,7 @@
 <a aria-current="page" class="text-primary border-b-2 border-primary pb-1 font-bold font-label-md text-label-md" href="{{ url_for('public.services', category='admin') }}">Admin</a>
 </nav>
 <div class="flex items-center gap-4">
-<a aria-label="Institutional Search" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 focus-ring" href="{{ url_for('public.services') }}">
+<a aria-label="Institutional Search" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 focus-ring" href="{{ url_for('public.index') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-primary">account_balance</span>
 </a>
 <a aria-label="Notifications" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 focus-ring" href="{{ url_for('citizen.notifications') }}">
@@ -48,17 +48,17 @@
 <span aria-hidden="true" class="material-symbols-outlined">dashboard</span>
 <span class="font-label-md text-label-md">Dashboard</span>
 </a>
-<a aria-current="page" class="flex items-center gap-3 py-3 px-4 mx-2 bg-primary text-on-primary rounded-lg institutional-border-left focus-ring" href="{{ url_for('citizen.appointments') }}">
+<a aria-current="page" class="flex items-center gap-3 py-3 px-4 mx-2 bg-primary text-on-primary rounded-lg institutional-border-left focus-ring" href="{{ url_for('citizen.requests_list') }}">
 <span aria-hidden="true" class="material-symbols-outlined">description</span>
 <span class="font-label-md text-label-md">Applications</span>
 </a>
 {#- Documents hang off a request, so "My Documents" lands on the request list
     where each row opens its own document set. -#}
-<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.requests_list') }}">
+<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.documents') }}">
 <span aria-hidden="true" class="material-symbols-outlined">folder_shared</span>
 <span class="font-label-md text-label-md">My Documents</span>
 </a>
-<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('public.services', category='justice') }}">
+<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('public.contact') }}">
 <span aria-hidden="true" class="material-symbols-outlined">gavel</span>
 <span class="font-label-md text-label-md">Legal Support</span>
 </a>
@@ -71,7 +71,7 @@
 {#- The mockup linked a "Security Log" here. /staff/audit is staff-only and
     answers 404 for a citizen, so this points at the account security panel on
     the profile page, which is the equivalent a citizen can actually see. -#}
-<a class="flex items-center gap-3 py-2 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest text-label-sm font-label-sm focus-ring rounded" href="{{ url_for('citizen.profile') }}">
+<a class="flex items-center gap-3 py-2 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest text-label-sm font-label-sm focus-ring rounded" href="{{ url_for('citizen.security_log') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-sm">security</span>
 <span class="">Security Log</span>
 </a>
@@ -494,7 +494,7 @@
 </section>
 </main>
 <!-- Floating TSL Accessibility Module -->
-<div class="fixed bottom-10 left-margin-desktop z-[60] w-64 md:w-80 group" id="lst-module">
+<div class="fixed bottom-10 right-margin-desktop z-[60] w-64 md:w-80 group" id="lst-module">
 <div class="bg-inverse-surface rounded-xl overflow-hidden shadow-2xl border-2 border-primary-container relative" data-a11y-panel>
 <div class="absolute top-2 right-2 z-10">
 <button aria-label="Fermer le module LST" class="bg-black/50 text-white rounded-full p-1 hover:bg-black transition-colors focus-ring" data-action="toggle" data-target="lst-module" id="close-lst-module" type="button">
@@ -533,7 +533,7 @@
 <div class="flex gap-8">
 <a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
 <a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.about') }}">Security Protocols</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.terms') }}">Security Protocols</a>
 <a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.contact') }}">Contact Support</a>
 </div>
 </div>

@@ -4,7 +4,7 @@
   "private": true,
   "description": "Tailwind build for the Watiq National Portal Flask frontend. Replaces the Tailwind Play CDN, which JIT-compiles in the browser and cannot satisfy the production CSP (script-src 'self').",
   "scripts": {
-    "build": "tailwindcss -i static/src/watiq.css -o static/css/watiq.css --minify",
+    "build": "tailwindcss -i static/src/watiq.css -o static/css/watiq.css --minify && node tools/scale-text.js static/css/watiq.css",
     "watch": "tailwindcss -i static/src/watiq.css -o static/css/watiq.css --watch"
   },
   "devDependencies": {
