@@ -89,3 +89,9 @@
 - **Type**: `feat`
 - **Scope**: `types`
 - **Change**: feat(types): introduce generic retry logic with exponential backoff (#124)
+
+
+### Contribution Update #497 - 2026-08-06 21:26:15
+- **Type**: `fix`
+- **Scope**: `types`
+- **Change**: fix(types): resolve memory leak during session cleanup routine (#183)
