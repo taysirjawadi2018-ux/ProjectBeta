@@ -11,7 +11,7 @@
 #}
 {%- set paid = payment and payment.status == 'completed' %}
 {% block title %}{{ _('Payment Successful - République Tunisienne') }}{% endblock %}
-{% block body_class %}{{ _('bg-background min-h-screen flex flex-col font-body-md text-body-md text-on-background relative overflow-x-hidden') }}{% endblock %}
+{% block body_class %}bg-background min-h-screen flex flex-col font-body-md text-body-md text-on-background relative overflow-x-hidden{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/payment_confirmation.css') }}" rel="stylesheet"/>
 {% endblock %}

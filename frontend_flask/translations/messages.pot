@@ -1,14 +1,14 @@
-# Translations template for PROJECT.
-# Copyright (C) 2026 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
+# Translations template for Watiq.
+# Copyright (C) 2026 Republic of Tunisia
+# This file is distributed under the same license as the Watiq project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: Watiq VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-06 16:41+0100\n"
+"POT-Creation-Date: 2026-08-06 17:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,21 +23,6 @@ msgstr ""
 msgid ""
 ",\n"
 "                without signing in."
-msgstr ""
-
-msgid ", Mr."
-msgstr ""
-
-msgid ". All services are active and secure."
-msgstr ""
-
-msgid ". Essayez un autre jour."
-msgstr ""
-
-msgid ". Quote your national ID so the officer can find your file."
-msgstr ""
-
-msgid ". Try a different term, or ask the support desk."
 msgstr ""
 
 msgid "09:30 AM"
@@ -332,6 +317,18 @@ msgstr ""
 msgid "Account Security"
 msgstr ""
 
+msgid "Account anonymised. This cannot be undone."
+msgstr ""
+
+msgid "Account created. Please sign in."
+msgstr ""
+
+msgid "Account deactivated."
+msgstr ""
+
+msgid "Account reactivated."
+msgstr ""
+
 msgid "Accounts, staff and role permissions."
 msgstr ""
 
@@ -421,10 +418,16 @@ msgstr ""
 msgid "All Requests"
 msgstr ""
 
+msgid "All notifications marked as read."
+msgstr ""
+
 msgid "All topics"
 msgstr ""
 
 msgid "Amount"
+msgstr ""
+
+msgid "An unexpected error occurred. The incident has been logged."
 msgstr ""
 
 msgid "Analytics"
@@ -470,6 +473,12 @@ msgstr ""
 msgid "Appointment Detail - République Tunisienne"
 msgstr ""
 
+msgid "Appointment cancelled."
+msgstr ""
+
+msgid "Appointment updated."
+msgstr ""
+
 msgid "Appointments"
 msgstr ""
 
@@ -489,9 +498,6 @@ msgid "Attached Documents"
 msgstr ""
 
 msgid "Aucun bureau ne correspond à «"
-msgstr ""
-
-msgid "Aucun créneau ouvert dans ce bureau le"
 msgstr ""
 
 msgid "Audit"
@@ -553,6 +559,9 @@ msgstr ""
 msgid "Biometric identification and certified electronic signature."
 msgstr ""
 
+msgid "Birth, marriage, death certificates and certified family documents."
+msgstr ""
+
 msgid "Blocked"
 msgstr ""
 
@@ -608,6 +617,9 @@ msgstr ""
 msgid "CIN en cours de validité"
 msgstr ""
 
+msgid "CIN renewal, passport applications, and secure residency certificates."
+msgstr ""
+
 msgid "Cancel"
 msgstr ""
 
@@ -649,6 +661,24 @@ msgid "Check-In Pass"
 msgstr ""
 
 msgid "Check-in QR Code"
+msgstr ""
+
+msgid "Choose a decision before submitting."
+msgstr ""
+
+msgid "Choose a file to upload."
+msgstr ""
+
+msgid "Choose a service and an office before submitting."
+msgstr ""
+
+msgid "Choose a time slot to continue."
+msgstr ""
+
+msgid "Choose whether the citizen attended."
+msgstr ""
+
+msgid "Choose which service the appointment is for."
 msgstr ""
 
 msgid "Chrome 120.0"
@@ -800,7 +830,11 @@ msgstr ""
 msgid "Create staff account"
 msgstr ""
 
-msgid "Current Progress: 68% - Security layers successfully validated."
+msgid "Criminal record certificates and legal case tracking."
+msgstr ""
+
+#, python-format
+msgid "Current Progress: 68%% - Security layers successfully validated."
 msgstr ""
 
 msgid "Current Session"
@@ -859,6 +893,9 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
+msgid "Decision recorded."
+msgstr ""
+
 msgid "Decline"
 msgstr ""
 
@@ -913,6 +950,15 @@ msgid "Document Fingerprint (SHA-256)"
 msgstr ""
 
 msgid "Document Validation Query"
+msgstr ""
+
+msgid "Document accepted."
+msgstr ""
+
+msgid "Document removed."
+msgstr ""
+
+msgid "Document uploaded. It will be checked by an officer."
 msgstr ""
 
 msgid "Documents"
@@ -1000,6 +1046,9 @@ msgid ""
 "needed."
 msgstr ""
 
+msgid "Enter your credentials to continue."
+msgstr ""
+
 msgid "Enter your official credentials as appearing on your national documents."
 msgstr ""
 
@@ -1010,6 +1059,14 @@ msgid "Entry"
 msgstr ""
 
 msgid "Erase&hellip;"
+msgstr ""
+
+msgid ""
+"Erasure cancelled: confirm that stored documents were purged first. "
+"Anonymising before purging orphans them permanently."
+msgstr ""
+
+msgid "Erasure cancelled: the national ID typed did not match the account."
 msgstr ""
 
 msgid "Establish your high-security access credentials for the sovereign portal."
@@ -1230,13 +1287,19 @@ msgid ""
 "registered contact details."
 msgstr ""
 
+msgid "If that account exists, a reset code has been sent."
+msgstr ""
+
 msgid "Immediate"
 msgstr ""
 
 msgid "In Progress"
 msgstr ""
 
-msgid "In the meantime the desk answers by telephone on"
+#, python-format
+msgid ""
+"In the meantime the desk answers by telephone on %(phone)s and by email "
+"at %(email)s. Quote your national ID so the officer can find your file."
 msgstr ""
 
 msgid ""
@@ -1340,7 +1403,13 @@ msgstr ""
 msgid "Lancer l'interprète LST"
 msgstr ""
 
+msgid "Language"
+msgstr ""
+
 msgid "Language and accessibility options"
+msgstr ""
+
+msgid "Large text size"
 msgstr ""
 
 msgid "Last name"
@@ -1393,6 +1462,9 @@ msgid ""
 "through the national civil registry."
 msgstr ""
 
+msgid "Lieu / Place of Birth:"
+msgstr ""
+
 msgid "Live Chat"
 msgstr ""
 
@@ -1412,6 +1484,11 @@ msgid "Live TSL Support"
 msgstr ""
 
 msgid "Live Translation — TSL"
+msgstr ""
+
+msgid ""
+"Live chat is not connected yet. Please use the telephone or email channel"
+" listed on the contact page and quote your national ID."
 msgstr ""
 
 msgid "Livraison"
@@ -1623,7 +1700,25 @@ msgstr ""
 msgid "No appointments scheduled."
 msgstr ""
 
-msgid "No article matches"
+#, python-format
+msgid ""
+"No article matches under %(topic)s. Try a different term, or ask the "
+"support desk."
+msgstr ""
+
+#, python-format
+msgid ""
+"No article matches “%(query)s” under %(topic)s. Try a different term, or "
+"ask the support desk."
+msgstr ""
+
+#, python-format
+msgid ""
+"No article matches “%(query)s”. Try a different term, or ask the support "
+"desk."
+msgstr ""
+
+msgid "No article matches. Try a different term, or ask the support desk."
 msgstr ""
 
 msgid "No audit entries yet"
@@ -1667,6 +1762,10 @@ msgstr ""
 msgid "No services match this search"
 msgstr ""
 
+#, python-format
+msgid "No slots are open at this office on %(date)s. Try another day."
+msgstr ""
+
 msgid "No staff accounts to show."
 msgstr ""
 
@@ -1674,6 +1773,12 @@ msgid "No status recorded yet"
 msgstr ""
 
 msgid "Nom (en arabe)"
+msgstr ""
+
+msgid "Nom / Surname:"
+msgstr ""
+
+msgid "Normal text size"
 msgstr ""
 
 msgid ""
@@ -1712,6 +1817,9 @@ msgid "Notifications"
 msgstr ""
 
 msgid "Numéro de la CIN"
+msgstr ""
+
+msgid "Né(e) le / Date of Birth:"
 msgstr ""
 
 msgid "Objet"
@@ -1753,6 +1861,11 @@ msgstr ""
 msgid "Official Support"
 msgstr ""
 
+msgid ""
+"Online inquiries are not connected yet. Please use the telephone or email"
+" channel listed below and quote your national ID."
+msgstr ""
+
 msgid "Open Data"
 msgstr ""
 
@@ -1787,6 +1900,9 @@ msgid "PDF"
 msgstr ""
 
 msgid "PNG"
+msgstr ""
+
+msgid "Page not found"
 msgstr ""
 
 msgid "Paiement électronique (Timbre fiscal)"
@@ -1954,6 +2070,9 @@ msgstr ""
 msgid "Prénom (en arabe)"
 msgstr ""
 
+msgid "Prénom / First Name:"
+msgstr ""
+
 msgid "Quantum Encryption"
 msgstr ""
 
@@ -2082,6 +2201,9 @@ msgstr ""
 msgid "Request a correction"
 msgstr ""
 
+msgid "Request assigned to you."
+msgstr ""
+
 msgid "Require biometric e-signature handshake for this session"
 msgstr ""
 
@@ -2205,6 +2327,9 @@ msgid "Schedule Appointment"
 msgstr ""
 
 msgid "Scheduled Infrastructure Update"
+msgstr ""
+
+msgid "Scheduled Maintenance"
 msgstr ""
 
 msgid "Scheduled visits for"
@@ -2372,6 +2497,9 @@ msgstr ""
 msgid "Service demandé"
 msgstr ""
 
+msgid "Service unavailable"
+msgstr ""
+
 msgid "Services"
 msgstr ""
 
@@ -2442,6 +2570,9 @@ msgid ""
 "Signing out ends this session on the server. If you think someone\n"
 "                                    else has access to your account, sign"
 " out and change your password."
+msgstr ""
+
+msgid "Something went wrong"
 msgstr ""
 
 msgid "Soumettre la demande"
@@ -2516,10 +2647,19 @@ msgstr ""
 msgid "Staff Workbench"
 msgstr ""
 
+msgid "Staff account deactivated."
+msgstr ""
+
+msgid "Staff account reactivated."
+msgstr ""
+
 msgid "Staff accounts"
 msgstr ""
 
 msgid "Staff email"
+msgstr ""
+
+msgid "Staff member created."
 msgstr ""
 
 msgid ""
@@ -2690,6 +2830,9 @@ msgstr ""
 msgid "TUNISIE"
 msgstr ""
 
+msgid "Tax declarations, administrative permits, and centralized licensing."
+msgstr ""
+
 msgid "Technical Infrastructure"
 msgstr ""
 
@@ -2709,6 +2852,24 @@ msgid "Terms of Service"
 msgstr ""
 
 msgid "Text size"
+msgstr ""
+
+msgid "That appointment is not on your record."
+msgstr ""
+
+msgid "That code was not accepted."
+msgstr ""
+
+msgid "That document is not available for download right now."
+msgstr ""
+
+msgid "That document is not on this request."
+msgstr ""
+
+msgid "That page does not exist, or you do not have access to it."
+msgstr ""
+
+msgid "That slot has just been taken. Please choose another."
 msgstr ""
 
 msgid ""
@@ -2739,6 +2900,11 @@ msgid ""
 "subtle watermark."
 msgstr ""
 
+msgid ""
+"The portal cannot reach the records service right now. Please try again "
+"in a few minutes."
+msgstr ""
+
 msgid "The queue is empty — there is nothing awaiting review."
 msgstr ""
 
@@ -2751,6 +2917,9 @@ msgstr ""
 msgid ""
 "The service catalogue is temporarily unavailable. Please try again "
 "shortly."
+msgstr ""
+
+msgid "The two passwords do not match."
 msgstr ""
 
 msgid ""
@@ -2802,6 +2971,9 @@ msgid "This record is held by the issuing authority and cannot be edited here."
 msgstr ""
 
 msgid "This request was submitted without additional form data."
+msgstr ""
+
+msgid "Those credentials were not recognised."
 msgstr ""
 
 msgid "Timestamp"
@@ -2987,6 +3159,9 @@ msgid ""
 "Registry to proceed."
 msgstr ""
 
+msgid "Very large text size"
+msgstr ""
+
 msgid "Veuillez préciser l'institution destinataire..."
 msgstr ""
 
@@ -3108,13 +3283,20 @@ msgid ""
 "services."
 msgstr ""
 
-msgid "Welcome back"
+#, python-format
+msgid "Welcome back, %(name)s. All services are active and secure."
+msgstr ""
+
+msgid "Welcome back. All services are active and secure."
 msgstr ""
 
 msgid ""
 "Welcome to Watiq, the unified portal of the Republic of Tunisia. A "
 "trusted infrastructure for your administrative, legal, and civil status "
 "procedures."
+msgstr ""
+
+msgid "Welcome to Watiq. Your account is ready."
 msgstr ""
 
 msgid "What is in place today"
@@ -3138,6 +3320,9 @@ msgstr ""
 msgid ""
 "You can check the status of any submission yourself using its tracking\n"
 "                code on the"
+msgstr ""
+
+msgid "You have been signed out."
 msgstr ""
 
 msgid "You have no appointments booked."
@@ -3170,6 +3355,9 @@ msgid ""
 "protection."
 msgstr ""
 
+msgid "Your appointment is booked."
+msgstr ""
+
 msgid ""
 "Your booking is secured. Please review the details below and present the "
 "QR code upon arrival."
@@ -3182,6 +3370,9 @@ msgid ""
 msgstr ""
 
 msgid "Your message"
+msgstr ""
+
+msgid "Your password has been changed. Please sign in."
 msgstr ""
 
 msgid "Your payment history"
@@ -3225,111 +3416,13 @@ msgstr ""
 msgid "account_circle"
 msgstr ""
 
-msgid "and by email at"
-msgstr ""
-
 msgid "and we will provide an alternative route to that service."
 msgstr ""
 
 msgid "articles"
 msgstr ""
 
-msgid "auth-bg min-h-screen flex flex-col relative overflow-y-auto"
-msgstr ""
-
 msgid "before"
-msgstr ""
-
-msgid ""
-"bg-background min-h-screen flex flex-col font-body-md text-body-md text-"
-"on-background relative overflow-x-hidden"
-msgstr ""
-
-msgid "bg-background text-on-background"
-msgstr ""
-
-msgid ""
-"bg-background text-on-background font-body-md antialiased min-h-screen "
-"flex flex-col relative overflow-x-hidden"
-msgstr ""
-
-msgid "bg-background text-on-background font-body-md min-h-screen flex"
-msgstr ""
-
-msgid "bg-background text-on-background font-body-md min-h-screen flex flex-col"
-msgstr ""
-
-msgid ""
-"bg-background text-on-background font-body-md min-h-screen flex flex-col "
-"relative overflow-hidden"
-msgstr ""
-
-msgid ""
-"bg-background text-on-background font-body-md min-h-screen flex flex-col "
-"relative overflow-x-hidden"
-msgstr ""
-
-msgid ""
-"bg-background text-on-background font-body-md min-h-screen flex h-full "
-"overflow-hidden"
-msgstr ""
-
-msgid "bg-background text-on-background h-full flex font-body-md overflow-hidden"
-msgstr ""
-
-msgid "bg-background text-on-surface"
-msgstr ""
-
-msgid ""
-"bg-background text-on-surface flex flex-col min-h-screen relative "
-"selection:bg-tertiary/20"
-msgstr ""
-
-msgid ""
-"bg-background text-on-surface font-body-md antialiased min-h-screen flex "
-"flex-col md:flex-row relative"
-msgstr ""
-
-msgid ""
-"bg-background text-on-surface font-body-md min-h-screen flex flex-col md"
-":flex-row relative"
-msgstr ""
-
-msgid ""
-"bg-background text-on-surface font-body-md min-h-screen flex flex-col "
-"relative overflow-x-hidden"
-msgstr ""
-
-msgid ""
-"bg-background text-on-surface font-body-md selection:bg-secondary-fixed "
-"selection:text-on-secondary-fixed overflow-x-hidden"
-msgstr ""
-
-msgid "bg-background text-on-surface min-h-screen flex"
-msgstr ""
-
-msgid ""
-"bg-background text-on-surface min-h-screen flex flex-col relative "
-"overflow-x-hidden font-body-md text-body-md"
-msgstr ""
-
-msgid "bg-surface text-on-surface"
-msgstr ""
-
-msgid "bg-surface text-on-surface min-h-screen flex flex-col"
-msgstr ""
-
-msgid ""
-"bg-surface text-on-surface min-h-screen flex flex-col items-center "
-"justify-between"
-msgstr ""
-
-msgid "bg-surface text-on-surface min-h-screen flex flex-col overflow-x-hidden"
-msgstr ""
-
-msgid ""
-"bg-surface text-on-surface min-h-screen flex flex-col relative "
-"overflow-x-hidden"
 msgstr ""
 
 msgid "book an appointment"
@@ -3359,27 +3452,7 @@ msgstr ""
 msgid "file"
 msgstr ""
 
-msgid "flex bg-background min-h-screen"
-msgstr ""
-
-msgid "flex flex-col min-h-screen relative font-body-md text-body-md"
-msgstr ""
-
-msgid "flex flex-col min-h-screen relative overflow-x-hidden"
-msgstr ""
-
-msgid ""
-"font-body-md text-body-md selection:bg-primary-fixed selection:text-on-"
-"primary-fixed"
-msgstr ""
-
 msgid "listé"
-msgstr ""
-
-msgid "min-h-screen flex bg-surface font-body-md text-on-surface"
-msgstr ""
-
-msgid "min-h-screen flex flex-col font-body-md"
 msgstr ""
 
 msgid "ms"
@@ -3408,16 +3481,10 @@ msgid ""
 "longer be located for deletion."
 msgstr ""
 
-msgid "support@watiq.tn"
-msgstr ""
-
 msgid "to confirm"
 msgstr ""
 
 msgid "tracking page"
-msgstr ""
-
-msgid "under"
 msgstr ""
 
 msgid "user@watiq.tn"

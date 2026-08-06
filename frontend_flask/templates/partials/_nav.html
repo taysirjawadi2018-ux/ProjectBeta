@@ -20,10 +20,10 @@
 </a>
 <div class="hidden md:flex gap-6">
 {%- set items = [
-  ('services', url_for('public.services'), 'Services'),
-  ('requests', url_for('citizen.requests_list'), 'My Requests'),
-  ('appointments', url_for('citizen.appointments'), 'Appointments'),
-  ('payments', url_for('citizen.payments'), 'Payments'),
+  ('services', url_for('public.services'), _('Services')),
+  ('requests', url_for('citizen.requests_list'), _('My Requests')),
+  ('appointments', url_for('citizen.appointments'), _('Appointments')),
+  ('payments', url_for('citizen.payments'), _('Payments')),
 ] %}
 {%- for key, href, label in items %}
 {%- if key == active %}

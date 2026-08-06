@@ -1,0 +1,3792 @@
+# Arabic translations for Watiq.
+# Copyright (C) 2026 Republic of Tunisia
+# This file is distributed under the same license as the Watiq project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Watiq VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-08-06 17:09+0100\n"
+"PO-Revision-Date: 2026-08-06 16:51+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ar\n"
+"Language-Team: ar <LL@li.org>\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : "
+"n%100>=3 && n%100<=10 ? 3 : n%100>=0 && n%100<=2 ? 4 : 5);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+msgid "(heure locale)"
+msgstr "(التوقيت المحلي)"
+
+msgid ""
+",\n"
+"                without signing in."
+msgstr ""
+"،\n"
+"                دون تسجيل الدخول."
+
+msgid "09:30 AM"
+msgstr "09:30 ص"
+
+msgid "45 Avenue Habib Bourguiba"
+msgstr "45 شارع الحبيب بورقيبة"
+
+msgid "60 Active"
+msgstr "60 نشط"
+
+msgid "8-digit identity code"
+msgstr "رمز هوية من 8 أرقام"
+
+msgid ""
+"A clean, minimalist vector rendering of the National Crest of Tunisia in "
+"white and deep navy on a subtle background. Highly professional."
+msgstr ""
+"رسم متجهي نظيف ومبسّط لشعار تونس، بالأبيض والأزرق الداكن على خلفية خفيفة."
+" مهني جدا."
+
+msgid ""
+"A focused close-up video frame of a professional Tunisian Sign Language "
+"interpreter wearing neutral professional attire."
+msgstr "لقطة فيديو قريبة لمترجم محترف بلغة الإشارة التونسية بلباس مهني محايد."
+
+msgid ""
+"A high-quality studio recording frame of a professional Tunisian Sign "
+"Language interpreter performing official translati"
+msgstr ""
+"لقطة استوديو عالية الجودة لمترجم محترف بلغة الإشارة التونسية يؤدي ترجمة "
+"رسمية"
+
+msgid ""
+"A highly abstract, extremely subtle line-art representation of the "
+"Tunisian National Emblem."
+msgstr "تمثيل خطي مجرّد وخفيف جدا للشعار الوطني التونسي."
+
+msgid ""
+"A highly detailed illustration of the Tunisian National Emblem, rendered "
+"in a crisp, monochromatic style suitable for a"
+msgstr "رسم عالي التفصيل للشعار الوطني التونسي، بأسلوب أحادي اللون واضح يناسب"
+
+msgid ""
+"A highly detailed, high-fidelity technical rendering of the Tunisian "
+"National Emblem used as a watermark."
+msgstr "رسم تقني عالي الدقة للشعار الوطني التونسي مستعمل كعلامة مائية."
+
+msgid ""
+"A highly detailed, intricate monochromatic rendering of the Tunisian "
+"National Emblem, presented as a subtle watermark."
+msgstr "رسم أحادي اللون عالي التفصيل للشعار الوطني التونسي، مقدَّم كعلامة مائية."
+
+msgid ""
+"A highly detailed, official-looking crest or emblem design representing "
+"state authority, rendered in crisp monochromatic"
+msgstr "شعار رسمي عالي التفصيل يمثّل سلطة الدولة، بأسلوب أحادي اللون واضح"
+
+msgid ""
+"A highly detailed, professional vector illustration of the Tunisian "
+"National Emblem, featuring the lion, galley, and sca"
+msgstr ""
+"رسم متجهي مهني عالي التفصيل للشعار الوطني التونسي، يضم الأسد والسفينة "
+"والميزان"
+
+msgid ""
+"A highly detailed, ultra-realistic rendering of a national emblem or "
+"crest, rendered in polished gold and deep navy blue"
+msgstr "رسم فائق الواقعية وعالي التفصيل لشعار وطني، بالذهب المصقول والأزرق الداكن"
+
+msgid ""
+"A medium shot of a professional sign language interpreter in a studio "
+"setting with a clean, dark blue background, looking directly at the "
+"camera while signing, well-lit to clearly show hand gestures for "
+"accessibility."
+msgstr ""
+"لقطة متوسطة لمترجم محترف بلغة الإشارة في استوديو بخلفية زرقاء داكنة، ينظر"
+" إلى الكاميرا أثناء الإشارة، بإضاءة جيدة تُظهر حركات اليدين بوضوح."
+
+msgid ""
+"A professional close-up portrait of a Mediterranean citizen for a high-"
+"security government profile."
+msgstr "صورة شخصية مهنية قريبة لمواطن متوسطي لملف حكومي عالي الأمان."
+
+msgid ""
+"A professional headshot of a government administrative worker in modern "
+"business attire against a neutral light gray background, providing a "
+"clean, authoritative yet approachable look suitable for an enterprise "
+"dashboard profile image."
+msgstr ""
+"صورة شخصية مهنية لعون إداري بلباس عصري على خلفية رمادية فاتحة محايدة، "
+"بمظهر نظيف وموثوق وودود يناسب صورة ملف في لوحة تحكم."
+
+msgid "A professional portrait of a Tunisian government support agent."
+msgstr "صورة مهنية لعون دعم حكومي تونسي."
+
+msgid ""
+"A professional portrait of a citizen used for a profile picture on a "
+"government portal."
+msgstr "صورة مهنية لمواطن تُستعمل كصورة ملف على بوابة حكومية."
+
+msgid ""
+"A professional sign language interpreter against a plain, neutral "
+"backdrop, clearly translating information."
+msgstr "مترجم محترف بلغة الإشارة على خلفية محايدة، يترجم المعلومات بوضوح."
+
+msgid "A professional sign language interpreter in a dark studio setting."
+msgstr "مترجم محترف بلغة الإشارة في استوديو داكن."
+
+msgid ""
+"A professional sign language interpreter in official uniform standing "
+"against a clean, plain blue backdrop, well-lit in a studio setting, "
+"providing accessible translation services in a modern governmental "
+"context."
+msgstr ""
+"مترجم محترف بلغة الإشارة بزي رسمي على خلفية زرقاء بسيطة، بإضاءة استوديو "
+"جيدة، يقدّم خدمة ترجمة ميسّرة في سياق حكومي حديث."
+
+msgid ""
+"A professional sign language interpreter providing translation for a "
+"digital government service interface."
+msgstr "مترجم محترف بلغة الإشارة يترجم واجهة خدمة حكومية رقمية."
+
+msgid ""
+"A professional sign language interpreter, an elegant woman in a dark "
+"corporate blazer, performing Tunisian Sign Language"
+msgstr "مترجمة محترفة بلغة الإشارة، بسترة داكنة أنيقة، تؤدي لغة الإشارة التونسية"
+
+msgid ""
+"A professional sign language interpreter, dressed in dark formal attire, "
+"positioned against a stark white background."
+msgstr "مترجم محترف بلغة الإشارة بلباس رسمي داكن على خلفية بيضاء."
+
+msgid ""
+"A professional sign language interpreter, presented from the waist up in "
+"a well-lit studio setting against a neutral gre"
+msgstr ""
+"مترجم محترف بلغة الإشارة، مصوّر من الخصر في استوديو جيد الإضاءة على خلفية"
+" رمادية محايدة"
+
+msgid ""
+"A professional sign language interpreter, viewed from the chest up "
+"against a plain, soft grey background."
+msgstr "مترجم محترف بلغة الإشارة، مصوّر من الصدر على خلفية رمادية بسيطة."
+
+msgid ""
+"A professional video frame showing a Tunisian Sign Language (TSL) "
+"interpreter against a clean, corporate background with"
+msgstr ""
+"لقطة فيديو مهنية تُظهر مترجم لغة الإشارة التونسية على خلفية مؤسساتية "
+"نظيفة مع"
+
+msgid ""
+"A professional video of a sign language interpreter providing "
+"accessibility for a national portal."
+msgstr "فيديو مهني لمترجم لغة الإشارة يوفّر النفاذية للبوابة الوطنية."
+
+msgid ""
+"A professional, high-quality corporate headshot of a person with a "
+"neutral, calm expression, representing a Citizen Prof"
+msgstr "صورة شخصية مهنية عالية الجودة لشخص بتعبير محايد وهادئ، تمثّل ملف مواطن"
+
+msgid ""
+"A refined, minimalist logo icon for the République Tunisienne portal, "
+"featuring abstract geometric forms hinting at a fl"
+msgstr ""
+"أيقونة شعار أنيقة ومبسّطة لبوابة الجمهورية التونسية، بأشكال هندسية مجردة "
+"توحي براية"
+
+msgid ""
+"A small, professional portrait photograph of an individual, suitable for "
+"a user profile avatar."
+msgstr "صورة شخصية مهنية صغيرة، مناسبة كصورة ملف المستخدم."
+
+msgid ""
+"A small, stylized video feed frame designed to display a sign language "
+"interpreter."
+msgstr "إطار فيديو صغير مخصص لعرض مترجم لغة الإشارة."
+
+msgid "A stark, high-contrast black and white QR code graphic."
+msgstr "رمز QR بالأبيض والأسود بتباين عال."
+
+msgid ""
+"A stylized, clean, minimalist illustration of the Tunisian National "
+"Emblem."
+msgstr "رسم مبسّط وأنيق للشعار الوطني التونسي."
+
+msgid ""
+"A stylized, low-opacity vector rendering of the Tunisian National Emblem "
+"serving as a subtle watermark."
+msgstr "رسم متجهي مبسّط وخفيف الشفافية للشعار الوطني التونسي كعلامة مائية."
+
+msgid ""
+"A subtle, high-fidelity national emblem of the Tunisian Republic, "
+"rendered in a sophisticated, minimalist outline style."
+msgstr "الشعار الوطني للجمهورية التونسية، برسم خطي مبسّط وأنيق."
+
+msgid ""
+"A subtle, high-fidelity watermark of the Tunisian National Emblem, "
+"serving as a background texture on a light mode insti"
+msgstr "علامة مائية خفيفة للشعار الوطني التونسي تُستعمل كخلفية في الوضع الفاتح"
+
+msgid ""
+"A subtle, minimalist watermark of scales of justice, rendered in ultra-"
+"light grey on a stark white background."
+msgstr "علامة مائية بسيطة لميزان العدالة، برمادي فاتح جدا على خلفية بيضاء."
+
+msgid "A verified number lets the office reach you about your requests."
+msgstr "رقم مُحقّق يتيح للمكتب الاتصال بك بخصوص مطالبك."
+
+msgid "ACCESS KEY"
+msgstr "مفتاح النفاذ"
+
+msgid "ACCESSIBILITY TSL"
+msgstr "نفاذية لغة الإشارة"
+
+msgid "AES-256-GCM"
+msgstr "AES-256-GCM"
+
+msgid "AES-256-GCM Sovereign Encryption Active"
+msgstr "التشفير السيادي AES-256-GCM مفعّل"
+
+msgid "AGRANDIR"
+msgstr "تكبير"
+
+msgid "ANCE DIGITAL SEAL"
+msgstr "الختم الرقمي"
+
+msgid "ANSI Logo"
+msgstr "شعار الوكالة"
+
+msgid "API Access"
+msgstr "النفاذ إلى API"
+
+msgid "AUTHORIZE ACCESS"
+msgstr "الترخيص بالنفاذ"
+
+msgid "AUTH_TOKEN_ACTIVE"
+msgstr "AUTH_TOKEN_ACTIVE"
+
+msgid "About"
+msgstr "حول"
+
+msgid "About the national institutions"
+msgstr "حول المؤسسات الوطنية"
+
+msgid "About this portal"
+msgstr "حول هذه البوابة"
+
+msgid "Accept"
+msgstr "قبول"
+
+msgid "Access Portal"
+msgstr "الدخول إلى البوابة"
+
+msgid ""
+"Access Tunisiene Sign Language support for all government documents and "
+"profile settings."
+msgstr "انفذ إلى دعم لغة الإشارة التونسية لكل الوثائق الحكومية وإعدادات الملف."
+
+msgid ""
+"Access direct channels to the Watiq administrative framework. Your "
+"inquiries are handled with sovereign priority and legal transparency."
+msgstr ""
+"انفذ إلى القنوات المباشرة للإطار الإداري لوثيق. تُعالج استفساراتك بأولوية"
+" سيادية وشفافية قانونية."
+
+msgid "Access official government resources and institutional applications."
+msgstr "انفذ إلى الموارد الحكومية والتطبيقات المؤسساتية."
+
+msgid ""
+"Access to the National Services Portal (\"The Platform\") is granted "
+"solely for the execution of official civil, legal, and administrative "
+"procedures within the jurisdiction of the République Tunisienne. Users "
+"must utilize the Platform in accordance with national laws governing "
+"digital identity and electronic communication."
+msgstr ""
+"يُمنح النفاذ إلى بوابة الخدمات الوطنية («المنصة») حصريا لإنجاز الإجراءات "
+"المدنية والقانونية والإدارية الرسمية ضمن الولاية القضائية للجمهورية "
+"التونسية. على المستعملين استخدام المنصة طبقا للقوانين الوطنية المنظمة "
+"للهوية الرقمية والاتصال الإلكتروني."
+
+msgid "Access, verify, and download your official state records securely."
+msgstr "اطّلع على سجلاتك الرسمية وتحقق منها ونزّلها بأمان."
+
+msgid "Accessibility"
+msgstr "إمكانية الوصول"
+
+msgid "Accessibility &amp; Inclusion"
+msgstr "النفاذية والإدماج"
+
+msgid "Accessibility Standards"
+msgstr "معايير النفاذية"
+
+msgid "Accessibility Statement"
+msgstr "بيان النفاذية"
+
+msgid "Accessibility and language options"
+msgstr "خيارات النفاذية واللغة"
+
+msgid "Accessibility settings"
+msgstr "إعدادات النفاذية"
+
+msgid "Accessibilité"
+msgstr "إمكانية الوصول"
+
+msgid "Accessibilité Vidéo"
+msgstr "نفاذية الفيديو"
+
+msgid "Account Password"
+msgstr "كلمة مرور الحساب"
+
+msgid "Account Recovery | Watiq National Portal"
+msgstr "استرجاع الحساب | وثيق البوابة الوطنية"
+
+msgid "Account Security"
+msgstr "أمان الحساب"
+
+msgid "Account anonymised. This cannot be undone."
+msgstr "تم إخفاء هوية الحساب. لا يمكن التراجع."
+
+msgid "Account created. Please sign in."
+msgstr "تم إنشاء الحساب. يرجى تسجيل الدخول."
+
+msgid "Account deactivated."
+msgstr "تم تعطيل الحساب."
+
+msgid "Account reactivated."
+msgstr "تم إعادة تفعيل الحساب."
+
+msgid "Accounts, staff and role permissions."
+msgstr "الحسابات والأعوان وأذونات الأدوار."
+
+msgid "Accès Mobilité Réduite"
+msgstr "نفاذ ذوي الإعاقة الحركية"
+
+msgid "Action"
+msgstr "الإجراء"
+
+msgid "Action Type"
+msgstr "نوع الإجراء"
+
+msgid "Actions"
+msgstr "الإجراءات"
+
+msgid ""
+"Actions performed on this Platform, including the submission of forms and"
+" acceptance of terms, carry the equivalent legal weight of a physical "
+"signature under the Digital Economy Act."
+msgstr ""
+"للأعمال المنجزة على هذه المنصة، بما فيها إيداع الاستمارات وقبول الشروط، "
+"نفس القيمة القانونية للإمضاء المادي بمقتضى قانون الاقتصاد الرقمي."
+
+msgid "Active TSL Translation"
+msgstr "ترجمة لغة الإشارة نشطة"
+
+msgid "Actor"
+msgstr "الفاعل"
+
+msgid "Add a staff member"
+msgstr "إضافة عون"
+
+msgid "Add notes regarding discrepancies or required actions..."
+msgstr "أضف ملاحظات حول التباينات أو الإجراءات المطلوبة…"
+
+msgid "Admin"
+msgstr "الإدارة"
+
+msgid "Admin Console"
+msgstr "لوحة الإدارة"
+
+msgid "Admin Dashboard"
+msgstr "لوحة تحكم الإدارة"
+
+msgid "Admin Profile"
+msgstr "ملف المدير"
+
+msgid "Admin Settings"
+msgstr "إعدادات الإدارة"
+
+msgid "Administration"
+msgstr "الإدارة"
+
+msgid "Administration sections"
+msgstr "أقسام الإدارة"
+
+msgid "Adresse de livraison exacte en Tunisie"
+msgstr "عنوان التسليم الدقيق بتونس"
+
+msgid ""
+"Advancing the digital sovereignty of the Tunisian Republic through "
+"secure, accessible, and high-performance infrastructure."
+msgstr ""
+"النهوض بالسيادة الرقمية للجمهورية التونسية عبر بنية تحتية آمنة وميسّرة "
+"وعالية الأداء."
+
+msgid "Afficher le module d'interprétation LST"
+msgstr "إظهار وحدة الترجمة بلغة الإشارة"
+
+msgid "Afficher les services"
+msgstr "عرض الخدمات"
+
+msgid "Afficher tous les bureaux"
+msgstr "عرض كل المكاتب"
+
+msgid "Agent Status: Active"
+msgstr "حالة العون: نشط"
+
+msgid "All"
+msgstr "الكل"
+
+msgid "All Actions"
+msgstr "كل الإجراءات"
+
+msgid "All Categories"
+msgstr "كل الفئات"
+
+msgid "All Documents"
+msgstr "كل الوثائق"
+
+msgid "All Requests"
+msgstr "كل المطالب"
+
+msgid "All notifications marked as read."
+msgstr "تم تعليم كل الإشعارات كمقروءة."
+
+msgid "All topics"
+msgstr "كل المواضيع"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "An unexpected error occurred. The incident has been logged."
+msgstr "حدث خطأ غير متوقع. تم تسجيل الحادث."
+
+msgid "Analytics"
+msgstr "الإحصائيات"
+
+msgid "Anonymise permanently"
+msgstr "إخفاء الهوية نهائيا"
+
+msgid ""
+"Any unauthorized access, attempt to manipulate data, or circumvention of "
+"security protocols constitutes a violation of national cybersecurity "
+"mandates and is subject to immediate legal action under Sovereign "
+"Authority regulations."
+msgstr ""
+"يشكّل كل نفاذ غير مرخص أو محاولة للتلاعب بالمعطيات أو الالتفاف على "
+"بروتوكولات الأمان خرقا للالتزامات الوطنية للسلامة المعلوماتية، ويعرّض "
+"صاحبه لتتبعات قانونية فورية بمقتضى تراتيب السلطة السيادية."
+
+msgid "Applicant:"
+msgstr "مقدّم المطلب:"
+
+msgid "Application Data"
+msgstr "بيانات المطلب"
+
+msgid "Application Details - Citizen Space"
+msgstr "تفاصيل المطلب — فضاء المواطن"
+
+msgid "Application Reference:"
+msgstr "مرجع المطلب:"
+
+msgid "Applications"
+msgstr "المطالب"
+
+msgid "Appliquer les filtres"
+msgstr "تطبيق عوامل التصفية"
+
+msgid "Apply Filters"
+msgstr "تطبيق عوامل التصفية"
+
+msgid "Appointment Confirmed"
+msgstr "تم تأكيد الموعد"
+
+msgid "Appointment Coordination"
+msgstr "تنسيق المواعيد"
+
+msgid "Appointment Detail - République Tunisienne"
+msgstr "تفاصيل الموعد — الجمهورية التونسية"
+
+msgid "Appointment cancelled."
+msgstr "تم إلغاء الموعد."
+
+msgid "Appointment updated."
+msgstr "تم تحديث الموعد."
+
+msgid "Appointments"
+msgstr "المواعيد"
+
+msgid "Approve Request"
+msgstr "الموافقة على المطلب"
+
+msgid "Architecture"
+msgstr "البنية"
+
+msgid "Assistance LST (Langue des Signes)"
+msgstr "مساعدة بلغة الإشارة"
+
+msgid "Assistance LST Direct"
+msgstr "دعم لغة الإشارة المباشر"
+
+msgid "Attached Documents"
+msgstr "الوثائق المرفقة"
+
+msgid "Aucun bureau ne correspond à «"
+msgstr "لا يوجد مكتب مطابق لـ «"
+
+msgid "Audit"
+msgstr "التدقيق"
+
+msgid "Audit Logs"
+msgstr "سجلات التدقيق"
+
+msgid "Auditor Acc."
+msgstr "حساب المدقّق"
+
+msgid "Auditor Monitoring Console"
+msgstr "لوحة مراقبة المدقّق"
+
+msgid "Authentication"
+msgstr "المصادقة"
+
+msgid "Availability:"
+msgstr "التوفر:"
+
+msgid "Available"
+msgstr "متاح"
+
+msgid "Avis Institutionnel"
+msgstr "إشعار مؤسساتي"
+
+msgid "Awaiting Verification"
+msgstr "في انتظار التحقق"
+
+msgid "Awaiting review"
+msgstr "في انتظار المراجعة"
+
+msgid "BIO-PROTECTED"
+msgstr "محمي بيومتريا"
+
+msgid "Back"
+msgstr "رجوع"
+
+msgid "Back to appointments"
+msgstr "العودة إلى المواعيد"
+
+msgid "Back to the portal"
+msgstr "العودة إلى البوابة"
+
+msgid "Back to workbench"
+msgstr "العودة إلى مساحة العمل"
+
+msgid "Before you contact us"
+msgstr "قبل الاتصال بنا"
+
+msgid "Besoin d'assistance ?"
+msgstr "أتحتاج مساعدة؟"
+
+msgid ""
+"Biometric and recovery-key resets are handled by the support desk, which "
+"verifies your identity in person or by telephone."
+msgstr ""
+"يتولى مكتب الدعم إعادة تعيين البصمة ومفتاح الاسترجاع، بعد التثبّت من "
+"هويتك حضوريا أو هاتفيا."
+
+msgid "Biometric identification and certified electronic signature."
+msgstr "تعريف بيومتري وإمضاء إلكتروني مُصادق عليه."
+
+msgid "Birth, marriage, death certificates and certified family documents."
+msgstr "شهادات الولادة والزواج والوفاة والوثائق العائلية المُصادق عليها."
+msgid "Blocked"
+msgstr "محظور"
+
+msgid ""
+"Bonjour. This channel is not staffed yet — live chat is still being "
+"connected to the support desk."
+msgstr ""
+"مرحبا. لا يوجد أعوان على هذه القناة بعد — الدردشة المباشرة ما تزال قيد "
+"الربط بمكتب الدعم."
+
+msgid "Book Appointment"
+msgstr "حجز موعد"
+
+msgid "Book a slot at your regional office."
+msgstr "احجز فترة في مكتبك الجهوي."
+
+msgid "Book an appointment"
+msgstr "حجز موعد"
+
+msgid "Book walk-in citizen requests manually."
+msgstr "تسجيل مطالب المواطنين الحضوريين يدويا."
+
+msgid "Book your first appointment"
+msgstr "احجز موعدك الأول"
+
+msgid "Breadcrumb"
+msgstr "مسار التصفح"
+
+msgid ""
+"Browse our frequently asked questions or search for specific topics "
+"related to national services."
+msgstr "تصفّح الأسئلة الشائعة أو ابحث عن مواضيع محددة تتعلق بالخدمات الوطنية."
+
+msgid "Browse the service catalogue"
+msgstr "تصفّح دليل الخدمات"
+
+msgid "Browser:"
+msgstr "المتصفح:"
+
+msgid "Bureau"
+msgstr "المكتب"
+
+msgid "Bureau compétent"
+msgstr "المكتب المختص"
+
+msgid "Bureau et Service"
+msgstr "المكتب والخدمة"
+
+msgid "CERTIFIÉ CONFORME"
+msgstr "نسخة مطابقة للأصل"
+
+msgid "CIN"
+msgstr "بطاقة التعريف الوطنية"
+
+msgid "CIN en cours de validité"
+msgstr "بطاقة تعريف وطنية سارية"
+
+msgid "CIN renewal, passport applications, and secure residency certificates."
+msgstr "تجديد بطاقة التعريف الوطنية ومطالب جواز السفر وشهادات الإقامة الآمنة."
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Cancel Booking"
+msgstr "إلغاء الحجز"
+
+msgid "Cannot receive the code?"
+msgstr "لا تصلك الرسالة؟"
+
+msgid "Categories"
+msgstr "الفئات"
+
+msgid ""
+"Ce bureau ne propose actuellement aucun service en ligne. Choisissez un "
+"autre bureau."
+msgstr "لا يوفّر هذا المكتب حاليا أي خدمة عن بعد. اختر مكتبا آخر."
+
+msgid ""
+"Ce bureau ne publie aucun service réservable, le rendez-vous ne peut pas "
+"être finalisé ici."
+msgstr "لا ينشر هذا المكتب أي خدمة قابلة للحجز، ولا يمكن إتمام الموعد هنا."
+
+msgid "Ce que le bureau devrait savoir à l'avance."
+msgstr "ما ينبغي أن يعرفه المكتب مسبقا."
+
+msgid "Change it through the verified reset flow."
+msgstr "غيّرها عبر مسار إعادة التعيين المُوثّق."
+
+msgid "Channel opened"
+msgstr "تم فتح القناة"
+
+msgid "Check National Portal"
+msgstr "زيارة البوابة الوطنية"
+
+msgid "Check status"
+msgstr "التحقق من الحالة"
+
+msgid "Check-In Pass"
+msgstr "بطاقة الدخول"
+
+msgid "Check-in QR Code"
+msgstr "رمز الدخول"
+
+msgid "Choose a decision before submitting."
+msgstr "اختر قرارا قبل الإرسال."
+
+msgid "Choose a file to upload."
+msgstr "اختر ملفا للتحميل."
+
+msgid "Choose a service and an office before submitting."
+msgstr "اختر خدمة ومكتبا قبل الإرسال."
+
+msgid "Choose a time slot to continue."
+msgstr "اختر فترة زمنية للمتابعة."
+
+msgid "Choose whether the citizen attended."
+msgstr "حدّد ما إذا حضر المواطن."
+
+msgid "Choose which service the appointment is for."
+msgstr "حدّد الخدمة المعنية بالموعد."
+
+msgid "Chrome 120.0"
+msgstr "Chrome 120.0"
+
+msgid "Citizen Dashboard"
+msgstr "لوحة تحكم المواطن"
+
+msgid "Citizen Name"
+msgstr "اسم المواطن"
+
+msgid "Citizen Profile"
+msgstr "ملف المواطن"
+
+msgid "Citizen Registry"
+msgstr "سجل المواطنين"
+
+msgid "Citizen Space"
+msgstr "فضاء المواطن"
+
+msgid "Citizen Space - Secure Document Upload"
+msgstr "فضاء المواطن — تحميل آمن للوثائق"
+
+msgid "Citizen Support Chat - République Tunisienne"
+msgstr "دردشة دعم المواطن — الجمهورية التونسية"
+
+msgid "Citizen accounts"
+msgstr "حسابات المواطنين"
+
+msgid "Citizens"
+msgstr "المواطنون"
+
+msgid ""
+"Citizens retain the right to audit their access logs via the 'Security "
+"Log' feature available in the user dashboard."
+msgstr ""
+"يحتفظ المواطنون بحق تدقيق سجلات نفاذهم عبر خاصية «سجل الأمان» المتاحة في "
+"لوحة التحكم."
+
+msgid "Civil Status"
+msgstr "الحالة المدنية"
+
+msgid "Clear"
+msgstr "مسح"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Close Interpreter"
+msgstr "إغلاق المترجم"
+
+msgid "Close interpreter"
+msgstr "إغلاق المترجم"
+
+msgid "Cloud Secured"
+msgstr "سحابة مؤمّنة"
+
+msgid "Complet"
+msgstr "ممتلئ"
+
+msgid "Complete Recovery Process"
+msgstr "إتمام عملية الاسترجاع"
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Completed (Today)"
+msgstr "مكتمل (اليوم)"
+
+msgid ""
+"Completing this step will reset your current session and require you to "
+"sign in again."
+msgstr "إتمام هذه الخطوة سيُنهي جلستك الحالية وسيتطلب منك تسجيل الدخول مجددا."
+
+msgid "Confidentiality Protocol Active"
+msgstr "بروتوكول السرية مفعّل"
+
+msgid "Confirm Master Password"
+msgstr "تأكيد كلمة المرور الرئيسية"
+
+msgid "Confirmer le rendez-vous"
+msgstr "تأكيد الموعد"
+
+msgid ""
+"Conformément à la réglementation en vigueur, toute demande fait l'objet "
+"d'une vérification judiciaire rigoureuse. Les délais de traitement "
+"varient entre 24h et 72h ouvrables."
+msgstr ""
+"طبقا للتراتيب الجاري بها العمل، يخضع كل مطلب لتدقيق قضائي صارم. تتراوح "
+"آجال المعالجة بين 24 و72 ساعة عمل."
+
+msgid "Connect"
+msgstr "تواصل معنا"
+
+msgid "Contact"
+msgstr "الاتصال"
+
+msgid "Contact Access"
+msgstr "النفاذ إلى الاتصال"
+
+msgid "Contact Gov"
+msgstr "الاتصال بالإدارة"
+
+msgid "Contact Information"
+msgstr "معطيات الاتصال"
+
+msgid "Contact Official"
+msgstr "الاتصال بعون"
+
+msgid "Contact Support"
+msgstr "الاتصال بالدعم"
+
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+msgid "Contact desk"
+msgstr "مكتب الاتصال"
+
+msgid ""
+"Contact details for the national helpdesk and for individual\n"
+"                governorate offices belong here. Office addresses and "
+"opening hours are\n"
+"                available from the catalogue when you"
+msgstr ""
+"معطيات الاتصال بمكتب المساعدة الوطني وبمكاتب كل\n"
+"                ولاية مكانها هنا. عناوين المكاتب وأوقات فتحها\n"
+"                متوفرة في الدليل عندما"
+
+msgid "Contact support"
+msgstr "الاتصال بالدعم"
+
+msgid "Contact support desk"
+msgstr "الاتصال بمكتب الدعم"
+
+msgid "Contact the support desk to confirm your number."
+msgstr "اتصل بمكتب الدعم لتأكيد رقمك."
+
+msgid "Contact us"
+msgstr "اتصل بنا"
+
+msgid "Contacter le support"
+msgstr "الاتصال بالدعم"
+
+msgid "Continue to Step 2"
+msgstr "المتابعة إلى الخطوة 2"
+
+msgid "Continue to registration"
+msgstr "المتابعة إلى التسجيل"
+
+msgid "Contrôlez les détails avant de réserver."
+msgstr "تحقق من التفاصيل قبل الحجز."
+
+msgid "Copy the document fingerprint"
+msgstr "نسخ بصمة الوثيقة"
+
+msgid "Create staff account"
+msgstr "إنشاء حساب عون"
+
+msgid "Criminal record certificates and legal case tracking."
+msgstr "مضامين السجل العدلي وتتبّع القضايا القانونية."
+#, python-format
+msgid "Current Progress: 68%% - Security layers successfully validated."
+msgstr "التقدّم الحالي: 68%% — تم التثبّت من طبقات الأمان."
+
+msgid "Current Session"
+msgstr "الجلسة الحالية"
+
+msgid "DIGITAL SOVEREIGNTY UNIT"
+msgstr "وحدة السيادة الرقمية"
+
+msgid "DOWNLOAD CERTIFIED PDF"
+msgstr "تنزيل PDF مُصادق عليه"
+
+msgid "Dark theme"
+msgstr "المظهر الداكن"
+
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+msgid "Data Modification"
+msgstr "تعديل البيانات"
+
+msgid "Data Privacy &amp; Transparency"
+msgstr "خصوصية المعطيات والشفافية"
+
+msgid "Data Verification"
+msgstr "التحقق من البيانات"
+
+msgid ""
+"Data is encrypted at rest and in transit using advanced national "
+"cryptographic standards."
+msgstr ""
+"المعطيات مشفّرة عند التخزين وأثناء النقل وفق المعايير التعميثية الوطنية "
+"المتقدمة."
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Date &amp; Time"
+msgstr "التاريخ والساعة"
+
+msgid "Date &amp; créneau"
+msgstr "التاريخ والفترة"
+
+msgid "Date Range"
+msgstr "الفترة"
+
+msgid "Date Submitted"
+msgstr "تاريخ الإيداع"
+
+msgid "Date de Délivrance"
+msgstr "تاريخ التسليم"
+
+msgid "Date of Birth"
+msgstr "تاريخ الولادة"
+
+msgid "Day"
+msgstr "اليوم"
+
+msgid "Deactivate"
+msgstr "تعطيل"
+
+msgid "Decision recorded."
+msgstr "تم تسجيل القرار."
+
+msgid "Decline"
+msgstr "رفض"
+
+msgid "Delivery:"
+msgstr "التسليم:"
+
+msgid "Demande d'Extrait de Casier Judiciaire (B3) - République Tunisienne"
+msgstr "مطلب مضمون من السجل العدلي (بطاقة عدد 3) — الجمهورية التونسية"
+
+msgid "Demande de Bulletin N°3"
+msgstr "مطلب بطاقة عدد 3"
+
+msgid "Demandeur"
+msgstr "مقدّم المطلب"
+
+msgid "Detailed Context"
+msgstr "السياق التفصيلي"
+
+msgid "Details"
+msgstr "التفاصيل"
+
+msgid "Developer API"
+msgstr "واجهة المطورين"
+
+msgid "Digital Delivery"
+msgstr "التسليم الرقمي"
+
+msgid "Digital Signature &amp; Liability"
+msgstr "الإمضاء الرقمي والمسؤولية"
+
+msgid "Digital Sovereignty Department"
+msgstr "إدارة السيادة الرقمية"
+
+msgid "Direct verification with sovereign database v4.2 active."
+msgstr "تحقق مباشر مع قاعدة البيانات السيادية v4.2 مفعّل."
+
+msgid "Display settings"
+msgstr "إعدادات العرض"
+
+msgid "Disponibilité Limitée"
+msgstr "توفر محدود"
+
+msgid ""
+"Do not include passwords or card details in this form. Watiq will never "
+"ask for them."
+msgstr ""
+"لا تُدرج كلمات المرور أو بيانات البطاقة في هذه الاستمارة. لن تطلبها وثيق "
+"أبدا."
+
+msgid "Doc Downloaded"
+msgstr "تم تنزيل الوثيقة"
+
+msgid "Document Fingerprint (SHA-256)"
+msgstr "بصمة الوثيقة (SHA-256)"
+
+msgid "Document Validation Query"
+msgstr "طلب المصادقة على وثيقة"
+
+msgid "Document accepted."
+msgstr "تم قبول الوثيقة."
+
+msgid "Document removed."
+msgstr "تم حذف الوثيقة."
+
+msgid "Document uploaded. It will be checked by an officer."
+msgstr "تم تحميل الوثيقة. سيتحقق منها عون."
+
+msgid "Documents"
+msgstr "الوثائق"
+
+msgid "Documents appear here once they are filed against one of your requests."
+msgstr "تظهر الوثائق هنا بمجرد إيداعها ضمن أحد مطالبك."
+
+msgid "Donnée non encore publiée par le répertoire des bureaux."
+msgstr "معطى لم ينشره دليل المكاتب بعد."
+
+msgid "Download PDF Receipt"
+msgstr "تنزيل الوصل بصيغة PDF"
+
+msgid "Download Receipt"
+msgstr "تنزيل الوصل"
+
+msgid "Drag &amp; Drop files here"
+msgstr "اسحب الملفات وأفلتها هنا"
+
+msgid "Due"
+msgstr "الأجل"
+
+msgid "Déclaration officielle"
+msgstr "تصريح رسمي"
+
+msgid "E-Government"
+msgstr "الحكومة الرقمية"
+
+msgid "E-Justice"
+msgstr "العدالة الرقمية"
+
+msgid "E-Services"
+msgstr "الخدمات الرقمية"
+
+msgid "ETAT CIVIL"
+msgstr "الحالة المدنية"
+
+msgid "EXPECTED SERVICE RESTORATION"
+msgstr "الاستئناف المتوقع للخدمة"
+
+msgid "Edge Protection"
+msgstr "الحماية الطرفية"
+
+msgid "Emergency Support"
+msgstr "الدعم الاستعجالي"
+
+msgid ""
+"En confirmant ce rendez-vous, vous certifiez que les informations "
+"fournies sont exactes et que vous apporterez les documents requis par "
+"votre service."
+msgstr ""
+"بتأكيدك هذا الموعد، تشهد أن المعلومات المقدَّمة صحيحة وأنك ستُحضر الوثائق"
+" التي تطلبها الخدمة."
+
+msgid "Enable 2FA Now"
+msgstr "تفعيل المصادقة الثنائية"
+
+msgid "Enable Screen Reader Narration"
+msgstr "تفعيل السرد الصوتي لقارئ الشاشة"
+
+msgid "Encryption"
+msgstr "التشفير"
+
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+msgid "End-to-end institutional grade protocols enabled."
+msgstr "بروتوكولات مؤسساتية شاملة مفعّلة."
+
+msgid "Enhance Your Account Security"
+msgstr "عزّز أمان حسابك"
+
+msgid "Enter ID, Name, or Resource hash..."
+msgstr "أدخل المعرّف أو الاسم أو بصمة المورد…"
+
+msgid "Enter security code from your"
+msgstr "أدخل رمز الأمان من"
+
+msgid ""
+"Enter the tracking code from your submission receipt to see where a "
+"request has reached. No sign-in needed."
+msgstr ""
+"أدخل رمز التتبّع الوارد في وصل الإيداع لمعرفة مآل المطلب. لا حاجة لتسجيل "
+"الدخول."
+
+msgid ""
+"Enter the tracking code you were given when you submitted. No sign-in "
+"needed."
+msgstr "أدخل رمز التتبّع الذي مُنح لك عند الإيداع. لا حاجة لتسجيل الدخول."
+
+msgid "Enter your credentials to continue."
+msgstr "أدخل بيانات اعتمادك للمتابعة."
+
+msgid "Enter your official credentials as appearing on your national documents."
+msgstr "أدخل بيانات اعتمادك الرسمية كما تظهر في وثائقك الوطنية."
+
+msgid "Enter your official credentials to proceed."
+msgstr "أدخل بيانات اعتمادك الرسمية للمتابعة."
+
+msgid "Entry"
+msgstr "مُدخل"
+
+msgid "Erase&hellip;"
+msgstr "مسح…"
+
+msgid ""
+"Erasure cancelled: confirm that stored documents were purged first. "
+"Anonymising before purging orphans them permanently."
+msgstr ""
+"أُلغي المحو: أكّد أولا حذف الوثائق المخزّنة. الإخفاء قبل الحذف يجعلها "
+"يتيمة نهائيا."
+
+msgid "Erasure cancelled: the national ID typed did not match the account."
+msgstr "أُلغي المحو: المعرّف الوطني المُدخل لا يطابق الحساب."
+
+msgid "Establish your high-security access credentials for the sovereign portal."
+msgstr "أنشئ بيانات نفاذك عالية الأمان للبوابة السيادية."
+
+msgid "Estimated ready"
+msgstr "الجاهزية المتوقعة"
+
+msgid "Event"
+msgstr "الحدث"
+
+msgid "Every change the registry makes appears here."
+msgstr "يظهر هنا كل تغيير يجريه السجل."
+
+msgid "Every request is authenticated, authorized, and continuously inspected."
+msgstr "كل طلب يخضع للمصادقة والترخيص والفحص المتواصل."
+
+msgid ""
+"Every screen is built against the Watiq design system's high-contrast\n"
+"                requirements. A reserved overlay slot for a sign language"
+" interpreter\n"
+"                feed is mandated across the primary citizen journeys, and"
+" all\n"
+"                interactive controls expose visible focus indicators and "
+"accessible\n"
+"                labels."
+msgstr ""
+"كل شاشة مبنية وفق متطلبات التباين العالي في\n"
+"                نظام تصميم وثيق. يُفرض حيّز مخصص لبث مترجم\n"
+"                لغة الإشارة في المسارات الأساسية للمواطن، وكل\n"
+"                عناصر التفاعل تُظهر مؤشر تركيز مرئيا وتسمية\n"
+"                ميسّرة."
+
+msgid "Expand Module"
+msgstr "توسيع الوحدة"
+
+msgid "Expand Window"
+msgstr "توسيع النافذة"
+
+msgid "Expand interpreter"
+msgstr "توسيع المترجم"
+
+msgid "Export"
+msgstr "تصدير"
+
+msgid "Export CSV"
+msgstr "تصدير CSV"
+
+msgid "Export PDF"
+msgstr "تصدير PDF"
+
+msgid "Extrait de Casier Judiciaire (B3)"
+msgstr "مضمون من السجل العدلي (بطاقة عدد 3)"
+
+msgid "Failed Attempt"
+msgstr "محاولة فاشلة"
+
+msgid "Family Name (Latin)"
+msgstr "اللقب (بالحروف اللاتينية)"
+
+msgid "Federal"
+msgstr "اتحادي"
+
+msgid "Fees paid for your service requests."
+msgstr "المعاليم المدفوعة لمطالب خدماتك."
+
+msgid "Fermer le module LST"
+msgstr "إغلاق وحدة لغة الإشارة"
+
+msgid "File"
+msgstr "الملف"
+
+msgid "Filtre non disponible"
+msgstr "عامل التصفية غير متوفر"
+
+msgid "Finalité du document"
+msgstr "الغرض من الوثيقة"
+
+msgid "First name"
+msgstr "الاسم"
+
+msgid "First time accessing the portal?"
+msgstr "أول مرة تدخل البوابة؟"
+
+msgid ""
+"Follow our high-security protocol to securely recover your Watiq "
+"credentials. Your sovereign data is protected by the Republic of "
+"Tunisia's encryption standards."
+msgstr ""
+"اتبع بروتوكولنا عالي الأمان لاسترجاع بيانات اعتمادك في وثيق. معطياتك "
+"السيادية محمية بمعايير التشفير للجمهورية التونسية."
+
+msgid "Forte Disponibilité"
+msgstr "توفر مرتفع"
+
+msgid "Free"
+msgstr "مجاني"
+
+msgid "Full"
+msgstr "ممتلئ"
+
+msgid "Full Legal Name (Latin)"
+msgstr "الاسم الكامل (بالحروف اللاتينية)"
+
+msgid "Fully digital"
+msgstr "رقمي بالكامل"
+
+msgid "Geographical redundancy across three isolated national data centers."
+msgstr "تكرار جغرافي عبر ثلاثة مراكز بيانات وطنية معزولة."
+
+msgid "Get Directions"
+msgstr "الاتجاهات"
+
+msgid "Get help"
+msgstr "الحصول على مساعدة"
+
+msgid "Given Name(s) (Latin)"
+msgstr "الاسم (بالحروف اللاتينية)"
+
+msgid "Go to my requests"
+msgstr "الذهاب إلى مطالبي"
+
+msgid "Governance"
+msgstr "الحوكمة"
+
+msgid "Government Staff Portal"
+msgstr "بوابة أعوان الدولة"
+
+msgid "Governorate"
+msgstr "الولاية"
+
+msgid ""
+"Granular audit trail for staff actions and automated system events. All "
+"records are cryptographically signed."
+msgstr ""
+"مسار تدقيق تفصيلي لإجراءات الأعوان وأحداث النظام. كل السجلات ممضاة "
+"تعميثيا."
+
+msgid "Guichet 4, 2nd Floor"
+msgstr "الشباك 4، الطابق الثاني"
+
+msgid "Guidance for using the portal, and what to do when something goes wrong."
+msgstr "إرشادات استخدام البوابة، وما العمل عند حدوث خلل."
+
+msgid "Hardware-level encryption enabled."
+msgstr "تم تفعيل التشفير العتادي."
+
+msgid "Help"
+msgstr "مساعدة"
+
+msgid "Help &amp; Support"
+msgstr "المساعدة والدعم"
+
+msgid "Help Center"
+msgstr "مركز المساعدة"
+
+msgid "Home"
+msgstr "الرئيسية"
+
+msgid "How Watiq contacts you, and what it will never ask for."
+msgstr "كيف تتصل بك وثيق، وما لن تطلبه منك أبدا."
+
+msgid "How can we help you?"
+msgstr "كيف يمكننا مساعدتك؟"
+
+msgid ""
+"How the Watiq National Portal collects, uses and protects your personal "
+"data."
+msgstr "كيف تجمع بوابة وثيق الوطنية معطياتك الشخصية وتستعملها وتحميها."
+
+msgid "How to reach the Watiq support team and your local office."
+msgstr "كيفية الاتصال بفريق دعم وثيق وبمكتبك المحلي."
+
+msgid "I confirm the citizen's stored documents have already been purged."
+msgstr "أؤكد أن وثائق المواطن المخزّنة قد حُذفت مسبقا."
+
+msgid "I have read and agree to the Terms"
+msgstr "قرأت الشروط وأوافق عليها"
+
+msgid "ID:"
+msgstr "المعرّف:"
+
+msgid "IN-PROGRESS REQUESTS"
+msgstr "مطالب قيد المعالجة"
+
+msgid "IP Address"
+msgstr "عنوان IP"
+
+msgid "IP Address:"
+msgstr "عنوان IP:"
+
+msgid "IP:"
+msgstr "عنوان IP:"
+
+msgid "ISO/IEC 27001 COMPLIANT"
+msgstr "مطابق لمعيار ISO/IEC 27001"
+
+msgid "IT Support"
+msgstr "الدعم التقني"
+
+msgid "Identity"
+msgstr "الهوية"
+
+msgid "Identity Verification"
+msgstr "التحقق من الهوية"
+
+msgid ""
+"Identity transactions on this platform are secured by national-grade end-"
+"to-end encryption and biometric verification."
+msgstr "معاملات الهوية مؤمّنة بتشفير شامل بمستوى وطني وبالتحقق البيومتري."
+
+msgid ""
+"Identity transactions on this platform are secured by national-grade end-"
+"to-end encryption."
+msgstr "معاملات الهوية على هذه المنصة مؤمّنة بتشفير شامل بمستوى وطني."
+
+msgid "Identité"
+msgstr "الهوية"
+
+msgid ""
+"If any part of this portal prevents you from completing a service,\n"
+"                contact us through the details on the"
+msgstr ""
+"إذا منعك أي جزء من هذه البوابة من إتمام خدمة،\n"
+"                فاتصل بنا عبر المعطيات الواردة في"
+
+msgid ""
+"If that account exists we have sent a 6-digit verification code to its "
+"registered contact details."
+msgstr ""
+"إن كان هذا الحساب موجودا، فقد أرسلنا رمز تحقق من 6 أرقام إلى معطيات "
+"الاتصال المسجّلة."
+
+msgid "If that account exists, a reset code has been sent."
+msgstr "إن كان هذا الحساب موجودا، فقد أُرسل رمز إعادة تعيين."
+
+msgid "Immediate"
+msgstr "فوري"
+
+msgid "In Progress"
+msgstr "قيد المعالجة"
+
+#, python-format
+msgid ""
+"In the meantime the desk answers by telephone on %(phone)s and by email "
+"at %(email)s. Quote your national ID so the officer can find your file."
+msgstr ""
+"في الأثناء، يجيب المكتب هاتفيا على %(phone)s وبالبريد على %(email)s. اذكر"
+" معرّفك الوطني ليتمكن العون من إيجاد ملفك."
+
+msgid ""
+"Information is shared between authorized governmental entities only when "
+"strictly necessary for service fulfillment."
+msgstr ""
+"لا تُتبادل المعلومات بين الجهات الحكومية المرخصة إلا عند الضرورة القصوى "
+"لإنجاز الخدمة."
+
+msgid "Informations Personnelles"
+msgstr "المعطيات الشخصية"
+
+msgid "Infrastructure hosted exclusively on national territory."
+msgstr "بنية تحتية مستضافة حصريا على التراب الوطني."
+
+msgid ""
+"Infrastructure sécurisée opérée par l'Agence Nationale de Certification "
+"Électronique (ANCE) en collaboration avec le Ministère des Technologies "
+"de la Communication."
+msgstr ""
+"بنية آمنة تديرها الوكالة الوطنية للمصادقة الإلكترونية بالتعاون مع وزارة "
+"تكنولوجيات الاتصال."
+
+msgid "Initialize Application"
+msgstr "بدء المطلب"
+
+msgid ""
+"Inquiries sent with the form on this page are not tracked online yet.\n"
+"                                    Use the telephone or email channel "
+"below if you need a reference number."
+msgstr ""
+"الاستفسارات المرسلة عبر استمارة هذه الصفحة غير متتبَّعة عن بعد بعد.\n"
+"                                    استعمل الهاتف أو البريد أدناه إن "
+"احتجت رقم مرجع."
+
+msgid "Inquiry Category"
+msgstr "صنف الاستفسار"
+
+msgid "Institutional"
+msgstr "مؤسساتي"
+
+msgid "Institutional Audit Trail"
+msgstr "مسار التدقيق المؤسساتي"
+
+msgid "Institutional Authenticator"
+msgstr "أداة المصادقة المؤسساتية"
+
+msgid "Institutional Excellence"
+msgstr "التميّز المؤسساتي"
+
+msgid "Institutional Notice:"
+msgstr "إشعار مؤسساتي:"
+
+msgid "Institutional Portal"
+msgstr "البوابة المؤسساتية"
+
+msgid "Institutional Seal"
+msgstr "الختم المؤسساتي"
+
+msgid "Institutional Search"
+msgstr "البحث المؤسساتي"
+
+msgid "Institutional Support"
+msgstr "الدعم المؤسساتي"
+
+msgid "Institutional Support &amp; Inquiries"
+msgstr "الدعم المؤسساتي والاستفسارات"
+
+msgid "Interactive Verification"
+msgstr "تحقق تفاعلي"
+
+msgid "Interpreter Feed"
+msgstr "بث المترجم"
+
+msgid "Interpreter Mode"
+msgstr "وضع المترجم"
+
+msgid "Interprète disponible pour vous guider dans la recherche de bureau."
+msgstr "مترجم متاح لإرشادك في البحث عن مكتب."
+
+msgid "Interprète en langue des signes tunisienne"
+msgstr "مترجم لغة الإشارة التونسية"
+
+msgid "JPG"
+msgstr "JPG"
+
+msgid "JUDICIAL EMERGENCY"
+msgstr "طوارئ قضائية"
+
+msgid "Justice"
+msgstr "العدالة"
+
+msgid "KB"
+msgstr "كيلوبايت"
+
+msgid "Keeping Your Account Safe"
+msgstr "حماية حسابك"
+
+msgid "Knowledge Base"
+msgstr "قاعدة المعرفة"
+
+msgid "Knowledge Base - République Tunisienne"
+msgstr "قاعدة المعرفة — الجمهورية التونسية"
+
+msgid "LIVE"
+msgstr "مباشر"
+
+msgid "Lancer l'interprète LST"
+msgstr "تشغيل مترجم لغة الإشارة"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Language and accessibility options"
+msgstr "خيارات اللغة والنفاذية"
+
+msgid "Large text size"
+msgstr "حجم نص كبير"
+
+msgid "Last name"
+msgstr "اللقب"
+
+msgid "Launch Live Interpreter"
+msgstr "تشغيل المترجم المباشر"
+
+msgid "Le répertoire des bureaux est indisponible."
+msgstr "دليل المكاتب غير متوفر."
+
+msgid "Le répertoire des bureaux ne publie aucun type pour le moment."
+msgstr "لا ينشر دليل المكاتب أي نوع في الوقت الحالي."
+
+msgid "Ledger Status"
+msgstr "حالة السجل"
+
+msgid "Legal"
+msgstr "قانوني"
+
+msgid "Legal &amp; Compliance"
+msgstr "القانون والامتثال"
+
+msgid "Legal Archive Access"
+msgstr "النفاذ إلى الأرشيف القانوني"
+
+msgid "Legal Framework"
+msgstr "الإطار القانوني"
+
+msgid "Legal Notice"
+msgstr "إشعار قانوني"
+
+msgid "Legal Policy"
+msgstr "السياسة القانونية"
+
+msgid "Legal Support"
+msgstr "المساندة القانونية"
+
+msgid "Legal Vault"
+msgstr "الخزنة القانونية"
+
+msgid "Legal terms · in force"
+msgstr "الشروط القانونية · سارية"
+
+msgid "Legally Binding Signatures"
+msgstr "إمضاءات ملزمة قانونا"
+
+msgid ""
+"Legally binding digital certificate issued by the Ministry of Interior "
+"through the national civil registry."
+msgstr ""
+"شهادة رقمية ملزمة قانونا صادرة عن وزارة الداخلية عبر السجل الوطني للحالة "
+"المدنية."
+
+msgid "Lieu / Place of Birth:"
+msgstr "مكان الولادة:"
+msgid "Live Chat"
+msgstr "الدردشة المباشرة"
+
+msgid "Live Interpretation"
+msgstr "ترجمة مباشرة"
+
+msgid "Live Interpreter"
+msgstr "مترجم مباشر"
+
+msgid "Live Support"
+msgstr "الدعم المباشر"
+
+msgid "Live TSL Assistant"
+msgstr "مساعد لغة الإشارة المباشر"
+
+msgid "Live TSL Support"
+msgstr "دعم لغة الإشارة مباشرة"
+
+msgid "Live Translation — TSL"
+msgstr "ترجمة مباشرة — لغة الإشارة"
+
+msgid ""
+"Live chat is not connected yet. Please use the telephone or email channel"
+" listed on the contact page and quote your national ID."
+msgstr ""
+"الدردشة المباشرة غير مربوطة بعد. استعمل الهاتف أو البريد المذكور في صفحة "
+"الاتصال واذكر معرّفك الوطني."
+
+msgid "Livraison"
+msgstr "التسليم"
+
+msgid "Load More"
+msgstr "تحميل المزيد"
+
+msgid "Localisez l'administration la plus proche et réservez votre créneau."
+msgstr "حدّد أقرب إدارة واحجز فترتك."
+
+msgid "Location"
+msgstr "الموقع"
+
+msgid "Lodge Formal Inquiry"
+msgstr "تقديم استفسار رسمي"
+
+msgid "Lodge Official Appeal"
+msgstr "تقديم طعن رسمي"
+
+msgid "Logout"
+msgstr "الخروج"
+
+msgid "Logs"
+msgstr "السجلات"
+
+msgid "Légende"
+msgstr "المفتاح"
+
+msgid "MacBook Pro"
+msgstr "MacBook Pro"
+
+msgid "Manage Appointment"
+msgstr "إدارة الموعد"
+
+msgid "Manage Appointments"
+msgstr "إدارة المواعيد"
+
+msgid "Manage Booking"
+msgstr "إدارة الحجز"
+
+msgid "Manage your official state identity and security protocols."
+msgstr "أدر هويتك الرسمية وبروتوكولات أمانك."
+
+msgid "Map indicating bureau location"
+msgstr "خريطة تحدد موقع المكتب"
+
+msgid "Mark all as read"
+msgstr "تعليم الكل كمقروء"
+
+msgid "Mark as read"
+msgstr "تعليم كمقروء"
+
+msgid "Maximum file size: 10MB per document"
+msgstr "الحجم الأقصى: 10 ميغابايت لكل وثيقة"
+
+msgid "Metadata Audit"
+msgstr "تدقيق البيانات الوصفية"
+
+msgid "Minimize"
+msgstr "تصغير"
+
+msgid "Modifier la sélection"
+msgstr "تعديل الاختيار"
+
+msgid ""
+"Monitor your account activity, active sessions, and recent "
+"authentications to ensure your data remains secure."
+msgstr "راقب نشاط حسابك وجلساتك النشطة ومصادقاتك الأخيرة لضمان بقاء معطياتك آمنة."
+
+msgid "Motif de la visite (facultatif)"
+msgstr "سبب الزيارة (اختياري)"
+
+msgid "Multi-Hosting"
+msgstr "استضافة متعددة"
+
+msgid "Mute Audio"
+msgstr "كتم الصوت"
+
+msgid "My Appointments"
+msgstr "مواعيدي"
+
+msgid "My Documents"
+msgstr "وثائقي"
+
+msgid "My Documents - République Tunisienne"
+msgstr "وثائقي — الجمهورية التونسية"
+
+msgid "My Location"
+msgstr "موقعي"
+
+msgid "My Office Summary"
+msgstr "ملخص مكتبي"
+
+msgid "My Requests"
+msgstr "مطالبي"
+
+msgid "My Requests - Watiq National Portal"
+msgstr "مطالبي — وثيق البوابة الوطنية"
+
+msgid "My appointments"
+msgstr "مواعيدي"
+
+msgid "NO DOCUMENT TO DOWNLOAD"
+msgstr "لا توجد وثيقة للتنزيل"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Narration"
+msgstr "السرد الصوتي"
+
+msgid "National Archive"
+msgstr "الأرشيف الوطني"
+
+msgid "National Crest of Tunisia"
+msgstr "شعار الجمهورية التونسية"
+
+msgid "National Digital Services"
+msgstr "الخدمات الرقمية الوطنية"
+
+msgid "National Emblem Watermark"
+msgstr "علامة مائية للشعار الوطني"
+
+msgid "National Grade Encryption"
+msgstr "تشفير بمستوى وطني"
+
+msgid "National ID"
+msgstr "المعرّف الوطني"
+
+msgid "National ID (CIN)"
+msgstr "المعرّف الوطني (ب.ت.و)"
+
+msgid "National ID Number (CIN)"
+msgstr "رقم بطاقة التعريف الوطنية"
+
+msgid "National ID, name or email"
+msgstr "المعرّف الوطني أو الاسم أو البريد"
+
+msgid "National Identity Number (CIN)"
+msgstr "رقم بطاقة التعريف الوطنية"
+
+msgid "National Portal"
+msgstr "البوابة الوطنية"
+
+msgid "National Portal - Citizen Watiq"
+msgstr "البوابة الوطنية — فضاء المواطن وثيق"
+
+msgid "National Portal Management"
+msgstr "إدارة البوابة الوطنية"
+
+msgid "National Registry Sync"
+msgstr "مزامنة السجل الوطني"
+
+msgid "National Services"
+msgstr "الخدمات الوطنية"
+
+msgid "National Services Catalog"
+msgstr "دليل الخدمات الوطنية"
+
+msgid "National Services Portal - Secure Environment"
+msgstr "بوابة الخدمات الوطنية — بيئة آمنة"
+
+msgid "National Services Portal. All rights reserved."
+msgstr "بوابة الخدمات الوطنية. كل الحقوق محفوظة."
+
+msgid "National Territory"
+msgstr "التراب الوطني"
+
+msgid "New Booking"
+msgstr "حجز جديد"
+
+msgid "New Official Inquiry"
+msgstr "استفسار رسمي جديد"
+
+msgid "New Password"
+msgstr "كلمة المرور الجديدة"
+
+msgid "New Request"
+msgstr "مطلب جديد"
+
+msgid "New Upload"
+msgstr "تحميل جديد"
+
+msgid "Next Step"
+msgstr "الخطوة التالية"
+
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+msgid "No"
+msgstr "لا"
+
+msgid ""
+"No access-log entries were returned. The API authorises this feed, so an\n"
+"                                    account without the audit permission "
+"sees nothing here."
+msgstr ""
+"لم تُرجَع أي مُدخلات من سجل النفاذ. الواجهة البرمجية هي من يرخّص هذا "
+"البث،\n"
+"                                    فالحساب الذي لا يملك إذن التدقيق لا "
+"يرى شيئا هنا."
+
+msgid "No accounts match that search."
+msgstr "لا توجد حسابات مطابقة لهذا البحث."
+
+msgid "No accounts to show."
+msgstr "لا توجد حسابات للعرض."
+
+msgid "No additional information was submitted with this request."
+msgstr "لم تُقدّم أي معلومات إضافية مع هذا المطلب."
+
+msgid "No appointments scheduled."
+msgstr "لا توجد مواعيد مبرمجة."
+
+#, python-format
+msgid ""
+"No article matches under %(topic)s. Try a different term, or ask the "
+"support desk."
+msgstr "لا يوجد مقال مطابق ضمن %(topic)s. جرّب مصطلحا آخر، أو اتصل بمكتب الدعم."
+
+#, python-format
+msgid ""
+"No article matches “%(query)s” under %(topic)s. Try a different term, or "
+"ask the support desk."
+msgstr ""
+"لا يوجد مقال مطابق لـ «%(query)s» ضمن %(topic)s. جرّب مصطلحا آخر، أو اتصل"
+" بمكتب الدعم."
+
+#, python-format
+msgid ""
+"No article matches “%(query)s”. Try a different term, or ask the support "
+"desk."
+msgstr "لا يوجد مقال مطابق لـ «%(query)s». جرّب مصطلحا آخر، أو اتصل بمكتب الدعم."
+
+msgid "No article matches. Try a different term, or ask the support desk."
+msgstr "لا يوجد مقال مطابق. جرّب مصطلحا آخر، أو اتصل بمكتب الدعم."
+
+msgid "No audit entries yet"
+msgstr "لا توجد مُدخلات تدقيق بعد"
+
+msgid "No document has been filed against this request yet."
+msgstr "لم تُودع أي وثيقة لهذا المطلب بعد."
+
+msgid "No documents attached to this request."
+msgstr "لا توجد وثائق مرفقة بهذا المطلب."
+
+msgid "No documents have been filed against your recent requests yet."
+msgstr "لم تُودع أي وثائق لمطالبك الأخيرة بعد."
+
+msgid "No documents have been uploaded for this request."
+msgstr "لم تُحمّل أي وثيقة لهذا المطلب."
+
+msgid "No documents yet"
+msgstr "لا توجد وثائق بعد"
+
+msgid ""
+"No log tail is wired: this build ships no log shipper, so nothing beyond "
+"these probes is observable from here."
+msgstr ""
+"لا يوجد بث للسجلات: هذه النسخة لا تتضمن ناقل سجلات، فلا شيء غير هذه "
+"الفحوصات قابل للملاحظة هنا."
+
+msgid "No recent activity"
+msgstr "لا يوجد نشاط حديث"
+
+msgid "No request loaded"
+msgstr "لم يتم تحميل أي مطلب"
+
+msgid "No request matches that tracking code."
+msgstr "لا يوجد مطلب مطابق لرمز التتبّع هذا."
+
+msgid "No requests with that status."
+msgstr "لا توجد مطالب بهذه الحالة."
+
+msgid "No roles to show."
+msgstr "لا توجد أدوار للعرض."
+
+msgid "No services match this search"
+msgstr "لا توجد خدمات مطابقة لهذا البحث"
+
+#, python-format
+msgid "No slots are open at this office on %(date)s. Try another day."
+msgstr "لا توجد فترات متاحة في هذا المكتب يوم %(date)s. جرّب يوما آخر."
+
+msgid "No staff accounts to show."
+msgstr "لا توجد حسابات أعوان للعرض."
+
+msgid "No status recorded yet"
+msgstr "لم تُسجّل أي حالة بعد"
+
+msgid "Nom (en arabe)"
+msgstr "اللقب (بالعربية)"
+
+msgid "Nom / Surname:"
+msgstr "اللقب:"
+msgid "Normal text size"
+msgstr "حجم نص عادي"
+
+msgid ""
+"Nos agents sont disponibles pour vous guider dans votre démarche "
+"administrative."
+msgstr "أعواننا متاحون لإرشادك في إجراءاتك الإدارية."
+
+msgid "Not yet certified"
+msgstr "غير مُصادق عليه بعد"
+
+msgid "Note on Liability:"
+msgstr "ملاحظة حول المسؤولية:"
+
+msgid "Nothing has touched this account."
+msgstr "لم يمسّ أحد هذا الحساب."
+
+msgid "Nothing in the catalogue matches the filters you applied."
+msgstr "لا شيء في الدليل يطابق عوامل التصفية المطبقة."
+
+msgid "Nothing matched"
+msgstr "لا توجد نتائج"
+
+msgid "Nothing scheduled"
+msgstr "لا شيء مبرمج"
+
+msgid "Notification Center"
+msgstr "مركز الإشعارات"
+
+msgid "Notification Center - Watiq National Portal"
+msgstr "مركز الإشعارات — وثيق البوابة الوطنية"
+
+msgid "Notification Settings"
+msgstr "إعدادات الإشعارات"
+
+msgid "Notifications"
+msgstr "الإشعارات"
+
+msgid "Numéro de la CIN"
+msgstr "رقم بطاقة التعريف الوطنية"
+
+msgid "Né(e) le / Date of Birth:"
+msgstr "تاريخ الولادة:"
+msgid "Objet"
+msgstr "الموضوع"
+
+msgid "Objet de la demande"
+msgstr "موضوع المطلب"
+
+msgid "Oct 18, 11:20 AM"
+msgstr "18 أكتوبر، 11:20"
+
+msgid "Oct 20, 09:05 AM"
+msgstr "20 أكتوبر، 09:05"
+
+msgid "Oct 21, 02:15 AM"
+msgstr "21 أكتوبر، 02:15"
+
+msgid "Oct 23, 14:32 PM"
+msgstr "23 أكتوبر، 14:32"
+
+msgid "Oct 24, 08:14 AM"
+msgstr "24 أكتوبر، 08:14"
+
+msgid "Office"
+msgstr "المكتب"
+
+msgid "Office appointments"
+msgstr "مواعيد المكتب"
+
+msgid "Official Copy"
+msgstr "نسخة رسمية"
+
+msgid "Official Email"
+msgstr "البريد الرسمي"
+
+msgid "Official Gazettes"
+msgstr "الرائد الرسمي"
+
+msgid "Official Support"
+msgstr "الدعم الرسمي"
+
+msgid ""
+"Online inquiries are not connected yet. Please use the telephone or email"
+" channel listed below and quote your national ID."
+msgstr ""
+"الاستفسارات عن بعد غير مربوطة بعد. استعمل الهاتف أو البريد المذكور أدناه "
+"واذكر معرّفك الوطني."
+
+msgid "Open Data"
+msgstr "البيانات المفتوحة"
+
+msgid "Open Data Policy"
+msgstr "سياسة البيانات المفتوحة"
+
+msgid "Open Service"
+msgstr "فتح الخدمة"
+
+msgid "Open data"
+msgstr "البيانات المفتوحة"
+
+msgid "Open document"
+msgstr "فتح الوثيقة"
+
+msgid "Open the inquiry form instead"
+msgstr "افتح استمارة الاستفسار عوضا عن ذلك"
+
+msgid "Operational"
+msgstr "قيد التشغيل"
+
+msgid "Our commitment to making government services usable by everyone."
+msgstr "التزامنا بجعل الخدمات العمومية قابلة للاستعمال من الجميع."
+
+msgid "Our support team is available 24/7 to assist you with any inquiries."
+msgstr "فريق الدعم متاح على مدار الساعة للإجابة عن استفساراتك."
+
+msgid "Overview"
+msgstr "نظرة عامة"
+
+msgid "PDF"
+msgstr "PDF"
+
+msgid "PNG"
+msgstr "PNG"
+
+msgid "Page not found"
+msgstr "الصفحة غير موجودة"
+
+msgid "Paiement électronique (Timbre fiscal)"
+msgstr "دفع إلكتروني (الطابع الجبائي)"
+
+msgid "Password Changed"
+msgstr "تم تغيير كلمة المرور"
+
+msgid "Pause Translation"
+msgstr "إيقاف الترجمة مؤقتا"
+
+msgid "Pause interpreter"
+msgstr "إيقاف المترجم مؤقتا"
+
+msgid "Payment"
+msgstr "الدفع"
+
+msgid "Payment Successful - République Tunisienne"
+msgstr "تم الدفع بنجاح — الجمهورية التونسية"
+
+msgid "Payments"
+msgstr "الدفوعات"
+
+msgid "Pending Payment"
+msgstr "في انتظار الدفع"
+
+msgid "Pending Requests"
+msgstr "المطالب المعلّقة"
+
+msgid "Pending Review"
+msgstr "في انتظار المراجعة"
+
+msgid "Permanently anonymise this account"
+msgstr "إخفاء هوية هذا الحساب نهائيا"
+
+msgid "Permission changes apply at next sign-in"
+msgstr "تسري تغييرات الأذونات عند الدخول القادم"
+
+msgid "Personal Information"
+msgstr "المعطيات الشخصية"
+
+msgid "Phone"
+msgstr "الهاتف"
+
+msgid "Phone not verified"
+msgstr "الهاتف غير مُحقّق"
+
+msgid "Phone verified"
+msgstr "تم التحقق من الهاتف"
+
+msgid "Placeholder content"
+msgstr "محتوى مؤقت"
+
+msgid ""
+"Plateforme officielle de demande d'extrait de casier judiciaire. Ce "
+"service sécurisé permet aux citoyens tunisiens d'obtenir leur document "
+"légal par voie postale."
+msgstr ""
+"المنصة الرسمية لطلب مضمون من السجل العدلي. تمكّن هذه الخدمة الآمنة "
+"المواطنين التونسيين من الحصول على وثيقتهم القانونية عبر البريد."
+
+msgid "Platform Usage &amp; Sovereignty"
+msgstr "استخدام المنصة والسيادة"
+
+msgid "Play"
+msgstr "تشغيل"
+
+msgid "Play Sign Language Translation"
+msgstr "تشغيل الترجمة بلغة الإشارة"
+
+msgid "Play interpreter"
+msgstr "تشغيل المترجم"
+
+msgid ""
+"Please bring your current ID card, proof of address (utility bill within "
+"last 3 months), and two recent passport-sized photographs."
+msgstr ""
+"أحضر بطاقة تعريفك السارية، وما يثبت العنوان (فاتورة لا تتجاوز 3 أشهر)، "
+"وصورتين شمسيتين حديثتين."
+
+msgid ""
+"Please provide the necessary verification files. Ensure all documents are"
+" clear and legible."
+msgstr ""
+"يرجى تقديم ملفات التحقق اللازمة. تأكد من وضوح كل الوثائق وقابليتها "
+"للقراءة."
+
+msgid "Portail National des Services"
+msgstr "البوابة الوطنية للخدمات"
+
+msgid "Portail Souverain -"
+msgstr "البوابة السيادية —"
+
+msgid "Prendre Rendez-vous"
+msgstr "حجز موعد"
+
+msgid "Prendre Rendez-vous - Portail National"
+msgstr "حجز موعد — البوابة الوطنية"
+
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+msgid "Primary"
+msgstr "أساسي"
+
+msgid "Print"
+msgstr "طباعة"
+
+msgid "Print List"
+msgstr "طباعة القائمة"
+
+msgid "Print Profile"
+msgstr "طباعة الملف"
+
+msgid "Priority Level"
+msgstr "مستوى الأولوية"
+
+msgid "Priority Sovereign"
+msgstr "أولوية سيادية"
+
+msgid "Priority Support Line"
+msgstr "خط الدعم ذو الأولوية"
+
+msgid "Privacy Hub"
+msgstr "مركز الخصوصية"
+
+msgid "Privacy Policy"
+msgstr "سياسة الخصوصية"
+
+msgid "Privacy and security"
+msgstr "الخصوصية والأمان"
+
+msgid "Pro"
+msgstr "برو"
+
+msgid "Probe Transcript"
+msgstr "نص الفحص"
+
+msgid "Probed"
+msgstr "تم الفحص"
+
+msgid "Processing Fee"
+msgstr "معلوم المعالجة"
+
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+msgid "Profile Management"
+msgstr "إدارة الملف الشخصي"
+
+msgid "Profile Settings"
+msgstr "إعدادات الملف"
+
+msgid "Protected by National Trust Infrastructure"
+msgstr "محمي بالبنية الوطنية للثقة"
+
+msgid ""
+"Provide authenticated communication channels for secure transaction "
+"updates."
+msgstr "وفّر قنوات اتصال موثّقة لمتابعة المعاملات بأمان."
+
+msgid "Provide comprehensive details for formal review..."
+msgstr "قدّم تفاصيل وافية للمراجعة الرسمية…"
+
+msgid "Pré-requis"
+msgstr "الشروط المسبقة"
+
+msgid "Précisions supplémentaires (Champ Sécurisé)"
+msgstr "توضيحات إضافية (حقل آمن)"
+
+msgid "Prénom (en arabe)"
+msgstr "الاسم (بالعربية)"
+
+msgid "Prénom / First Name:"
+msgstr "الاسم:"
+msgid "Quantum Encryption"
+msgstr "التشفير الكمّي"
+
+msgid "Quick Links"
+msgstr "روابط سريعة"
+
+msgid "REAL-TIME UPDATES"
+msgstr "تحديثات فورية"
+
+msgid "RECENT DOCUMENTS"
+msgstr "الوثائق الأخيرة"
+
+msgid "RECOVER ACCESS"
+msgstr "استرجاع النفاذ"
+
+msgid "REPUBLIQUE TUNISIENNE"
+msgstr "الجمهورية التونسية"
+
+msgid "Reactivate"
+msgstr "إعادة التفعيل"
+
+msgid "Read"
+msgstr "مقروء"
+
+msgid "Reading: Section 1"
+msgstr "القراءة: القسم 1"
+
+msgid "Real-time interoperability with civil status registries."
+msgstr "تشغيل بيني آني مع سجلات الحالة المدنية."
+
+msgid "Reason for Restriction"
+msgstr "سبب التقييد"
+
+msgid "Recent Authentication Events"
+msgstr "أحداث المصادقة الأخيرة"
+
+msgid "Rechercher un bureau"
+msgstr "البحث عن مكتب"
+
+msgid "Rechercher une ville ou un code postal..."
+msgstr "ابحث عن مدينة أو رمز بريدي…"
+
+msgid "Record Access"
+msgstr "النفاذ إلى السجلات"
+
+msgid "Recovery Key"
+msgstr "مفتاح الاسترجاع"
+
+msgid "Ref:"
+msgstr "المرجع:"
+
+msgid "Reference"
+msgstr "المرجع"
+
+msgid "Reference ID"
+msgstr "معرّف المرجع"
+
+msgid "Reference:"
+msgstr "المرجع:"
+
+msgid "Refresh Status"
+msgstr "تحديث الحالة"
+
+msgid "Regain Access to Your Digital Identity"
+msgstr "استعد النفاذ إلى هويتك الرقمية"
+
+msgid "Register"
+msgstr "التسجيل"
+
+msgid "Register Digital Identity"
+msgstr "تسجيل الهوية الرقمية"
+
+msgid "Reject"
+msgstr "رفض"
+
+msgid "Rejected"
+msgstr "مرفوض"
+
+msgid "Report Issue"
+msgstr "الإبلاغ عن مشكل"
+
+msgid "Report suspicious activity"
+msgstr "الإبلاغ عن نشاط مشبوه"
+
+msgid "Reporting a barrier"
+msgstr "الإبلاغ عن عائق"
+
+msgid "Reports"
+msgstr "التقارير"
+
+msgid "Republic of Tunisia"
+msgstr "الجمهورية التونسية"
+
+msgid "Republic of Tunisia - National Services Portal"
+msgstr "الجمهورية التونسية — بوابة الخدمات الوطنية"
+
+msgid "Republic of Tunisia - Secured by National Legal Infrastructure"
+msgstr "الجمهورية التونسية — مؤمّن بالبنية القانونية الوطنية"
+
+msgid "Republic of Tunisia — National Digital Sovereignty Department."
+msgstr "الجمهورية التونسية — إدارة السيادة الرقمية."
+
+msgid ""
+"Republic of Tunisia. Access to this platform is governed by the National "
+"Sovereign Legal Infrastructure and monitored for security compliance."
+msgstr ""
+"الجمهورية التونسية. يخضع النفاذ إلى هذه المنصة للبنية القانونية السيادية "
+"الوطنية ويُراقب للامتثال الأمني."
+
+msgid "Republic of Tunisia. All Rights Reserved."
+msgstr "الجمهورية التونسية. كل الحقوق محفوظة."
+
+msgid "Republic of Tunisia. All Rights Reserved. Digital Sovereignty Unit."
+msgstr "الجمهورية التونسية. كل الحقوق محفوظة. وحدة السيادة الرقمية."
+
+msgid "Request ID"
+msgstr "معرّف المطلب"
+
+msgid "Request Resubmission"
+msgstr "طلب إعادة الإيداع"
+
+msgid "Request Status"
+msgstr "حالة المطلب"
+
+msgid "Request a Correction"
+msgstr "طلب تصحيح"
+
+msgid "Request a correction"
+msgstr "طلب تصحيح"
+
+msgid "Request assigned to you."
+msgstr "تم إسناد المطلب إليك."
+
+msgid "Require biometric e-signature handshake for this session"
+msgstr "اشتراط الإمضاء الإلكتروني البيومتري لهذه الجلسة"
+
+msgid "Required Documents"
+msgstr "الوثائق المطلوبة"
+
+msgid "Requires Action"
+msgstr "يتطلب إجراء"
+
+msgid "Requires an office visit"
+msgstr "يتطلب زيارة المكتب"
+
+msgid "Reschedule Appointment"
+msgstr "إعادة برمجة الموعد"
+
+msgid "Resend Code"
+msgstr "إعادة إرسال الرمز"
+
+msgid "Resource"
+msgstr "المورد"
+
+msgid "Resources"
+msgstr "الموارد"
+
+msgid "Response Time by Surface"
+msgstr "زمن الاستجابة حسب الواجهة"
+
+msgid "Retention"
+msgstr "مدة الحفظ"
+
+msgid ""
+"Retention periods for submitted requests, uploaded documents and access\n"
+"                logs are set by the operating authority and belong in "
+"this section."
+msgstr ""
+"مدد حفظ المطالب المودعة والوثائق المحمَّلة وسجلات\n"
+"                النفاذ تحددها السلطة المشغّلة ومكانها هذا القسم."
+
+msgid "Retour"
+msgstr "رجوع"
+
+msgid "Retour à la liste des bureaux"
+msgstr "العودة إلى قائمة المكاتب"
+
+msgid "Return to Dashboard"
+msgstr "العودة إلى لوحة التحكم"
+
+msgid "Return to the portal"
+msgstr "العودة إلى البوابة"
+
+msgid "Reveal national identity number"
+msgstr "إظهار رقم بطاقة التعريف"
+
+msgid "Review"
+msgstr "مراجعة"
+
+msgid "Review Request:"
+msgstr "مراجعة المطلب:"
+
+msgid "Reviewer Notes (recorded with the decision)"
+msgstr "ملاحظات المراجع (تُسجّل مع القرار)"
+
+msgid "Role"
+msgstr "الدور"
+
+msgid "Round-trip Latency"
+msgstr "زمن الاستجابة"
+
+msgid "Rpublique Tunisienne"
+msgstr "الجمهورية التونسية"
+
+msgid "Rpublique Tunisienne - Portail National des Services"
+msgstr "الجمهورية التونسية — البوابة الوطنية للخدمات"
+
+msgid "Réf."
+msgstr "المرجع"
+
+msgid "Référence du créneau"
+msgstr "مرجع الفترة"
+
+msgid "République Tunisienne"
+msgstr "الجمهورية التونسية"
+
+msgid "République Tunisienne - Portail National des Services"
+msgstr "الجمهورية التونسية — البوابة الوطنية للخدمات"
+
+msgid ""
+"République Tunisienne - Portail National des Services. Strict Compliance "
+"Enforced."
+msgstr "الجمهورية التونسية — البوابة الوطنية للخدمات. الامتثال الصارم مطبّق."
+
+msgid "Résultats Proches ("
+msgstr "النتائج القريبة ("
+
+msgid "SECURE SHARE"
+msgstr "مشاركة آمنة"
+
+msgid "SECURITY LOG"
+msgstr "سجل الأمان"
+
+msgid "SOVEREIGN"
+msgstr "سيادي"
+
+msgid "SOVEREIGN CLOUD SECURED"
+msgstr "سحابة سيادية مؤمّنة"
+
+msgid "STATE COMPLIANT"
+msgstr "مطابق لمعايير الدولة"
+
+msgid "SYSTEM ARCHITECTURE"
+msgstr "بنية النظام"
+
+msgid "Save permissions"
+msgstr "حفظ الأذونات"
+
+msgid "Scan upon arrival at the kiosk."
+msgstr "امسحه عند وصولك إلى الشباك."
+
+msgid "Sceau National Tunisien"
+msgstr "الختم الوطني التونسي"
+
+msgid "Schedule Appointment"
+msgstr "برمجة موعد"
+
+msgid "Scheduled Infrastructure Update"
+msgstr "تحديث مبرمج للبنية التحتية"
+
+msgid "Scheduled Maintenance"
+msgstr "صيانة مبرمجة"
+
+msgid "Scheduled visits for"
+msgstr "زيارات مبرمجة لـ"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search Actor or Resource"
+msgstr "البحث عن فاعل أو مورد"
+
+msgid "Search Request ID or Citizen Name..."
+msgstr "ابحث بمعرّف المطلب أو اسم المواطن…"
+
+msgid "Search Requests"
+msgstr "البحث في المطالب"
+
+msgid "Search by ID, name, or type..."
+msgstr "ابحث بالمعرّف أو الاسم أو النوع…"
+
+msgid "Search by Tracking Code or Service..."
+msgstr "ابحث برمز التتبّع أو الخدمة…"
+
+msgid "Search citizens"
+msgstr "البحث عن مواطنين"
+
+msgid "Search services"
+msgstr "البحث عن خدمات"
+
+msgid "Search services..."
+msgstr "البحث عن خدمات…"
+
+msgid "Search the knowledge base"
+msgstr "البحث في قاعدة المعرفة"
+
+msgid "Search the knowledge base..."
+msgstr "البحث في قاعدة المعرفة…"
+
+msgid "Search..."
+msgstr "بحث…"
+
+msgid "Secondary Verification"
+msgstr "تحقق ثانوي"
+
+msgid "Section content to be supplied by the content owner."
+msgstr "محتوى القسم يوفّره المسؤول عن المحتوى."
+
+msgid "Secure Access to"
+msgstr "نفاذ آمن إلى"
+
+msgid "Secure Document Upload"
+msgstr "تحميل آمن للوثائق"
+
+msgid "Secure Email Address"
+msgstr "عنوان بريد آمن"
+
+msgid "Secure Login"
+msgstr "دخول آمن"
+
+msgid "Secure Master Password"
+msgstr "كلمة المرور الرئيسية"
+
+msgid "Secure Portal"
+msgstr "بوابة آمنة"
+
+msgid "Secure Registration Flow"
+msgstr "مسار تسجيل آمن"
+
+msgid "Secure Session"
+msgstr "جلسة آمنة"
+
+msgid "Secure Session Protocol v2.4"
+msgstr "بروتوكول الجلسة الآمنة v2.4"
+
+msgid "Secure interoperability layer ensuring the integrity of data exchanges."
+msgstr "طبقة تشغيل بيني آمنة تضمن سلامة تبادل المعطيات."
+
+msgid "Secured by National Cybersecurity Agency (ANSI) &amp; Ministry of Justice"
+msgstr "مؤمّن من الوكالة الوطنية للسلامة المعلوماتية ووزارة العدل"
+
+msgid "Security"
+msgstr "الأمان"
+
+msgid "Security &amp; Credentials"
+msgstr "الأمان وبيانات الاعتماد"
+
+msgid "Security Core"
+msgstr "نواة الأمان"
+
+msgid "Security Credentials"
+msgstr "بيانات اعتماد الأمان"
+
+msgid "Security Log"
+msgstr "سجل الأمان"
+
+msgid "Security Log - Citizen Space"
+msgstr "سجل الأمان — فضاء المواطن"
+
+msgid "Security Log - Watiq Staff Portal"
+msgstr "سجل الأمان — بوابة أعوان وثيق"
+
+msgid "Security Password"
+msgstr "كلمة مرور الأمان"
+
+msgid "Security Protocol"
+msgstr "بروتوكول الأمان"
+
+msgid "Security Protocol v2.4 Active"
+msgstr "بروتوكول الأمان v2.4 مفعّل"
+
+msgid "Security Protocols"
+msgstr "بروتوكولات الأمان"
+
+msgid "Security Status: Secure"
+msgstr "الحالة الأمنية: آمنة"
+
+msgid "Security Warning"
+msgstr "تحذير أمني"
+
+msgid "Security and privacy"
+msgstr "الأمان والخصوصية"
+
+msgid "Select Date &amp; Time"
+msgstr "اختر التاريخ والساعة"
+
+msgid "Select a role&hellip;"
+msgstr "اختر دورا…"
+
+msgid "Select all requests"
+msgstr "تحديد كل المطالب"
+
+msgid "Semaine précédente"
+msgstr "الأسبوع الماضي"
+
+msgid "Semaine suivante"
+msgstr "الأسبوع القادم"
+
+msgid "Send"
+msgstr "إرسال"
+
+msgid ""
+"Sensitive personally identifiable information (PII) is currently masked "
+"in this view. Access to unmasked records requires Level 4 clearance and "
+"secondary biometric authentication."
+msgstr ""
+"المعطيات الشخصية الحساسة مخفية حاليا في هذا العرض. يتطلب النفاذ إلى "
+"السجلات غير المخفية تصريحا من المستوى 4 ومصادقة بيومترية ثانوية."
+
+msgid "Service"
+msgstr "الخدمة"
+
+msgid "Service Catalogue"
+msgstr "دليل الخدمات"
+
+msgid "Service Categories"
+msgstr "أصناف الخدمات"
+
+msgid "Service Requests"
+msgstr "مطالب الخدمات"
+
+msgid "Service Type"
+msgstr "نوع الخدمة"
+
+msgid "Service Type:"
+msgstr "نوع الخدمة:"
+
+msgid "Service demandé"
+msgstr "الخدمة المطلوبة"
+
+msgid "Service unavailable"
+msgstr "الخدمة غير متوفرة"
+
+msgid "Services"
+msgstr "الخدمات"
+
+msgid "Session opened"
+msgstr "تم فتح الجلسة"
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Sfax, TUN"
+msgstr "صفاقس، تونس"
+
+msgid "Show all"
+msgstr "عرض الكل"
+
+msgid "Show all services"
+msgstr "عرض كل الخدمات"
+
+msgid "Showing"
+msgstr "عرض"
+
+msgid "Showing 1 to 4 of 2,491 records"
+msgstr "عرض 1 إلى 4 من 2491 سجلا"
+
+msgid "Sign In"
+msgstr "تسجيل الدخول"
+
+msgid "Sign Language Assist"
+msgstr "مساعدة بلغة الإشارة"
+
+msgid "Sign Language Interpreter Connected"
+msgstr "مترجم لغة الإشارة متصل"
+
+msgid "Sign Language Interpreter Panel"
+msgstr "لوحة مترجم لغة الإشارة"
+
+msgid "Sign Language Interpreter Video Feed"
+msgstr "بث فيديو مترجم لغة الإشارة"
+
+msgid "Sign Language Interpreter Video Feed Resides Here"
+msgstr "يُعرض هنا بث مترجم لغة الإشارة"
+
+msgid "Sign Language Interpreter Window"
+msgstr "نافذة مترجم لغة الإشارة"
+
+msgid "Sign Out"
+msgstr "تسجيل الخروج"
+
+msgid "Sign Out of This Session"
+msgstr "الخروج من هذه الجلسة"
+
+msgid "Sign in as someone else"
+msgstr "الدخول بحساب آخر"
+
+msgid "Sign in to see the full record, documents and history."
+msgstr "سجّل الدخول للاطلاع على الملف الكامل والوثائق والسجل."
+
+msgid "Sign out"
+msgstr "تسجيل الخروج"
+
+msgid "Signature Numérique ANCE"
+msgstr "الإمضاء الرقمي"
+
+msgid "Signed in"
+msgstr "متصل"
+
+msgid ""
+"Signing out ends this session on the server. If you think someone\n"
+"                                    else has access to your account, sign"
+" out and change your password."
+msgstr ""
+"تسجيل الخروج يُنهي هذه الجلسة على الخادم. إن كنت تعتقد أن شخصا\n"
+"                                    آخر ينفذ إلى حسابك، فسجّل الخروج "
+"وغيّر كلمة مرورك."
+
+msgid "Something went wrong"
+msgstr "حدث خطأ ما"
+
+msgid "Soumettre la demande"
+msgstr "إيداع المطلب"
+
+msgid "Sovereign Authority"
+msgstr "السلطة السيادية"
+
+msgid "Sovereign Cloud Infrastructure Logo"
+msgstr "شعار البنية السحابية السيادية"
+
+msgid "Sovereign Cloud Secured"
+msgstr "سحابة سيادية مؤمّنة"
+
+msgid "Sovereign Digital Authority"
+msgstr "الهيئة الرقمية السيادية"
+
+msgid "Sovereign Document Infrastructure"
+msgstr "البنية التحتية السيادية للوثائق"
+
+msgid "Sovereign Encrypted"
+msgstr "مشفّر سياديا"
+
+msgid "Sovereign Encryption Active"
+msgstr "التشفير السيادي مفعّل"
+
+msgid "Sovereign Gateway Verified"
+msgstr "بوابة سيادية مُحقّقة"
+
+msgid "Sovereign Guarantee"
+msgstr "ضمان سيادي"
+
+msgid "Sovereign Infrastructure Secured by Watiq Protocol."
+msgstr "بنية سيادية مؤمّنة ببروتوكول وثيق."
+
+msgid "Sovereign National Identity"
+msgstr "الهوية الوطنية السيادية"
+
+msgid "Sovereign Portal"
+msgstr "البوابة السيادية"
+
+msgid "Sovereign Priority"
+msgstr "أولوية سيادية"
+
+msgid "Sovereign Secure"
+msgstr "أمان سيادي"
+
+msgid "Sovereign Shield"
+msgstr "الدرع السيادي"
+
+msgid "Sovereign inquiries are monitored by the Digital Compliance Commission."
+msgstr "تشرف لجنة الامتثال الرقمي على الاستفسارات السيادية."
+
+msgid "Sovereignty"
+msgstr "السيادة"
+
+msgid "Staff Access"
+msgstr "نفاذ الأعوان"
+
+msgid "Staff Access Portal"
+msgstr "بوابة نفاذ الأعوان"
+
+msgid "Staff Document Review - Watiq National Portal"
+msgstr "مراجعة الوثائق من الأعوان — وثيق البوابة الوطنية"
+
+msgid "Staff Management"
+msgstr "إدارة الأعوان"
+
+msgid "Staff Restricted"
+msgstr "مخصص للأعوان"
+
+msgid "Staff Workbench"
+msgstr "مساحة عمل الأعوان"
+
+msgid "Staff account deactivated."
+msgstr "تم تعطيل حساب العون."
+
+msgid "Staff account reactivated."
+msgstr "تم إعادة تفعيل حساب العون."
+
+msgid "Staff accounts"
+msgstr "حسابات الأعوان"
+
+msgid "Staff email"
+msgstr "بريد العون"
+
+msgid "Staff member created."
+msgstr "تم إنشاء العون."
+
+msgid ""
+"Staff permissions are carried inside the access token, so a change here "
+"takes effect when that person's session is next refreshed — not "
+"immediately. If access must stop now, deactivate the account instead."
+msgstr ""
+"تُحمل أذونات الأعوان داخل رمز النفاذ، لذا يسري أي تغيير هنا عند تحديث "
+"جلسة الشخص لاحقا لا فورا. إن وجب إيقاف النفاذ حالا، فعطّل الحساب عوضا عن "
+"ذلك."
+
+msgid "Standard Administrative"
+msgstr "إداري عادي"
+
+msgid "Standard Duration"
+msgstr "المدة العادية"
+
+msgid "Start Application"
+msgstr "بدء المطلب"
+
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+msgid "Start a new request"
+msgstr "بدء مطلب جديد"
+
+msgid "Started:"
+msgstr "بدأ:"
+
+msgid "State Infrastructure"
+msgstr "البنية التحتية للدولة"
+
+msgid "State Registry Link"
+msgstr "الرابط بالسجل الوطني"
+
+msgid "State Verified"
+msgstr "مُصادق من الدولة"
+
+msgid "State-Grade Security"
+msgstr "أمان بمستوى الدولة"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Status Timeline"
+msgstr "تسلسل الحالات"
+
+msgid "Status for appointment"
+msgstr "حالة الموعد"
+
+msgid "Statut Souverain Vérifié"
+msgstr "وضع سيادي مُحقّق"
+
+msgid "Stay updated on your requests and appointments."
+msgstr "ابق على اطلاع بمطالبك ومواعيدك."
+
+msgid "Step"
+msgstr "الخطوة"
+
+msgid "Still need help?"
+msgstr "أتحتاج مزيدا من المساعدة؟"
+
+msgid "Subject Reference"
+msgstr "مرجع الموضوع"
+
+msgid "Submitted"
+msgstr "تم الإيداع"
+
+msgid "Submitted Documents"
+msgstr "الوثائق المودعة"
+
+msgid "Success"
+msgstr "نجاح"
+
+msgid "Successful Login"
+msgstr "دخول ناجح"
+
+msgid "Summary of institutional inquiry"
+msgstr "ملخص الاستفسار المؤسساتي"
+
+msgid "Support"
+msgstr "الدعم"
+
+msgid "Support Center"
+msgstr "مركز الدعم"
+
+msgid "Support Ticket - Watiq Sovereign Portal"
+msgstr "تذكرة دعم — بوابة وثيق السيادية"
+
+msgid "Support channels"
+msgstr "قنوات الدعم"
+
+msgid "Surfaces Not Answering"
+msgstr "واجهات لا تستجيب"
+
+msgid "Surfaces Responding"
+msgstr "الواجهات المستجيبة"
+
+msgid "Switch colour theme"
+msgstr "تغيير المظهر"
+
+msgid "System Diagnostics"
+msgstr "تشخيص النظام"
+
+msgid "System Event"
+msgstr "حدث النظام"
+
+msgid "System Health"
+msgstr "صحة النظام"
+
+msgid "System Security Log"
+msgstr "سجل أمان النظام"
+
+msgid "System Status"
+msgstr "حالة النظام"
+
+msgid "TN-PRIME-0922"
+msgstr "TN-PRIME-0922"
+
+msgid "TND"
+msgstr "د.ت"
+
+msgid "TSL ASSISTANCE ACTIVE"
+msgstr "دعم لغة الإشارة مفعّل"
+
+msgid "TSL Accessibility"
+msgstr "نفاذية لغة الإشارة"
+
+msgid "TSL Active"
+msgstr "لغة الإشارة مفعّلة"
+
+msgid "TSL Assistant"
+msgstr "مساعد لغة الإشارة"
+
+msgid "TSL Assistant Direct"
+msgstr "مساعد لغة الإشارة المباشر"
+
+msgid "TSL INTERPRETER"
+msgstr "مترجم لغة الإشارة"
+
+msgid "TSL Institutional Support"
+msgstr "الدعم المؤسساتي بلغة الإشارة"
+
+msgid "TSL Interpretation"
+msgstr "الترجمة بلغة الإشارة"
+
+msgid "TSL Interpreter"
+msgstr "مترجم لغة الإشارة"
+
+msgid "TSL LIVE"
+msgstr "لغة الإشارة مباشرة"
+
+msgid "TSL Mode"
+msgstr "وضع لغة الإشارة"
+
+msgid "TSL Module"
+msgstr "وحدة لغة الإشارة"
+
+msgid "TSL Sign Language Interpreter"
+msgstr "مترجم لغة الإشارة"
+
+msgid "TSL Support"
+msgstr "دعم لغة الإشارة"
+
+msgid "TSL Support Active"
+msgstr "دعم لغة الإشارة مفعّل"
+
+msgid "TSL Translation Active"
+msgstr "ترجمة لغة الإشارة نشطة"
+
+msgid "TUNISIE"
+msgstr "تونس"
+
+msgid "Tax declarations, administrative permits, and centralized licensing."
+msgstr "التصاريح الجبائية والرخص الإدارية والتراخيص المركزية."
+msgid "Technical Infrastructure"
+msgstr "البنية التحتية التقنية"
+
+msgid "Technical Specifications"
+msgstr "المواصفات التقنية"
+
+msgid "Terminate Session"
+msgstr "إنهاء الجلسة"
+
+msgid "Terms &amp; Conditions"
+msgstr "الشروط والأحكام"
+
+msgid "Terms and Conditions | République Tunisienne"
+msgstr "الشروط والأحكام | الجمهورية التونسية"
+
+msgid "Terms of Service"
+msgstr "شروط الاستخدام"
+
+msgid "Text size"
+msgstr "حجم النص"
+
+msgid "That appointment is not on your record."
+msgstr "هذا الموعد غير مسجّل في ملفك."
+
+msgid "That code was not accepted."
+msgstr "لم يُقبل هذا الرمز."
+
+msgid "That document is not available for download right now."
+msgstr "هذه الوثيقة غير متاحة للتنزيل حاليا."
+
+msgid "That document is not on this request."
+msgstr "هذه الوثيقة ليست ضمن هذا المطلب."
+
+msgid "That page does not exist, or you do not have access to it."
+msgstr "هذه الصفحة غير موجودة، أو لا تملك حق النفاذ إليها."
+
+msgid "That slot has just been taken. Please choose another."
+msgstr "حُجزت هذه الفترة للتو. يرجى اختيار أخرى."
+
+msgid ""
+"The République Tunisienne is committed to ensuring equal access to "
+"digital services. This platform integrates adaptive technologies, "
+"including the omnipresent Sign Language Module (TSL), to facilitate "
+"communication for all citizens."
+msgstr ""
+"تلتزم الجمهورية التونسية بضمان نفاذ متكافئ إلى الخدمات الرقمية. تدمج هذه "
+"المنصة تقنيات تكييفية، منها وحدة لغة الإشارة الحاضرة في كل الصفحات، "
+"لتيسير التواصل مع كل المواطنين."
+
+msgid "The browser you are using now"
+msgstr "المتصفح الذي تستعمله الآن"
+
+msgid "The conditions that apply when you use this platform."
+msgstr "الشروط المنطبقة عند استخدام هذه المنصة."
+
+msgid ""
+"The conditions that apply when you use this platform. Creating an account"
+" accepts them."
+msgstr "الشروط المنطبقة عند استخدام هذه المنصة. إنشاء حساب يعني قبولها."
+
+msgid ""
+"The official national emblem of the Republic of Tunisia, depicted in a "
+"highly detailed, monochrome line-art style."
+msgstr ""
+"الشعار الوطني الرسمي للجمهورية التونسية، برسم خطي أحادي اللون عالي "
+"التفصيل."
+
+msgid ""
+"The official national emblem of the Tunisian Republic, rendered as a "
+"subtle watermark."
+msgstr "الشعار الوطني الرسمي للجمهورية التونسية، كعلامة مائية خفيفة."
+
+msgid ""
+"The portal cannot reach the records service right now. Please try again "
+"in a few minutes."
+msgstr "لا تستطيع البوابة الوصول إلى خدمة السجلات حاليا. يرجى المحاولة بعد دقائق."
+
+msgid "The queue is empty — there is nothing awaiting review."
+msgstr "قائمة الانتظار فارغة — لا شيء ينتظر المراجعة."
+
+msgid "The queue is empty."
+msgstr "قائمة الانتظار فارغة."
+
+msgid "The registry records every status change here."
+msgstr "يسجّل السجل هنا كل تغيير في الحالة."
+
+msgid ""
+"The service catalogue is temporarily unavailable. Please try again "
+"shortly."
+msgstr "دليل الخدمات غير متوفر مؤقتا. يرجى المحاولة بعد قليل."
+
+msgid "The two passwords do not match."
+msgstr "كلمتا المرور غير متطابقتين."
+
+msgid ""
+"The unified national portal for citizen identity and secure institutional"
+" services. Governed by the principles of digital sovereignty and data "
+"integrity."
+msgstr ""
+"البوابة الوطنية الموحّدة لهوية المواطن وللخدمات المؤسساتية الآمنة. تحكمها"
+" مبادئ السيادة الرقمية وسلامة المعطيات."
+
+msgid ""
+"The unified secure gateway for Tunisian citizens. Access e-government "
+"services, manage digital credentials, and interact with the legal "
+"infrastructure of the Republic."
+msgstr ""
+"البوابة الآمنة الموحّدة للمواطنين التونسيين. انفذ إلى خدمات الحكومة "
+"الرقمية، وأدر بيانات اعتمادك الرقمية، وتفاعل مع البنية القانونية "
+"للجمهورية."
+
+msgid ""
+"The user is solely responsible for maintaining the confidentiality of "
+"their Secure Session credentials. The State is not liable for "
+"unauthorized actions resulting from user negligence."
+msgstr ""
+"المستعمل وحده مسؤول عن الحفاظ على سرية بيانات جلسته الآمنة. لا تتحمل "
+"الدولة مسؤولية الأعمال غير المرخصة الناتجة عن إهمال المستعمل."
+
+msgid "There is no payment on your record yet."
+msgstr "لا يوجد أي دفع مسجّل بعد."
+
+msgid "This Session"
+msgstr "هذه الجلسة"
+
+msgid "This document has not been verified yet"
+msgstr "لم يتم التحقق من هذه الوثيقة بعد"
+
+msgid ""
+"This overwrites the citizen's identifying fields and cannot be undone. "
+"Purge their stored documents from object storage"
+msgstr ""
+"تطمس هذه العملية حقول تعريف المواطن ولا يمكن التراجع عنها. احذف وثائقه من"
+" التخزين"
+
+msgid ""
+"This page exists so that no link in the portal is dead, and so the\n"
+"                    route, layout and navigation are in place. The "
+"wording below is a\n"
+"                    structural placeholder and has not been reviewed by a"
+" legal or\n"
+"                    content owner. Replace it before this platform serves"
+" the public."
+msgstr ""
+"توجد هذه الصفحة كي لا يكون أي رابط في البوابة معطّلا، وكي يكون\n"
+"                    المسار والتخطيط والتنقل جاهزا. النص أدناه محتوى\n"
+"                    مؤقت لم يراجعه مسؤول قانوني أو مسؤول عن\n"
+"                    المحتوى. استبدله قبل أن تخدم هذه المنصة العموم."
+
+msgid "This payment is on file with status “"
+msgstr "هذا الدفع مسجّل بالحالة «"
+
+msgid "This record is held by the issuing authority and cannot be edited here."
+msgstr "هذا السجل بحوزة الجهة المُصدرة ولا يمكن تعديله هنا."
+
+msgid "This request was submitted without additional form data."
+msgstr "أُودع هذا المطلب دون بيانات استمارة إضافية."
+
+msgid "Those credentials were not recognised."
+msgstr "لم يتم التعرف على بيانات الاعتماد هذه."
+
+msgid "Timestamp"
+msgstr "الطابع الزمني"
+
+msgid "Timestamp (UTC)"
+msgstr "الطابع الزمني (ت.ع.م)"
+
+msgid "Today, 08:14 AM"
+msgstr "اليوم، 08:14"
+
+msgid "Toggle Narration"
+msgstr "تبديل السرد الصوتي"
+
+msgid "Toggle Voice Narration"
+msgstr "تبديل السرد الصوتي"
+
+msgid "Toggle captions"
+msgstr "تبديل الترجمة النصية"
+
+msgid "Total Paid"
+msgstr "إجمالي المدفوع"
+
+msgid "Track"
+msgstr "تتبّع"
+
+msgid "Track a Request"
+msgstr "تتبّع مطلب"
+
+msgid "Track a request"
+msgstr "تتبّع مطلب"
+
+msgid "Track the status of your official documents and services."
+msgstr "تتبّع حالة وثائقك وخدماتك الرسمية."
+
+msgid "Tracking Code"
+msgstr "رمز التتبّع"
+
+msgid "Tracking code"
+msgstr "رمز التتبّع"
+
+msgid "Transaction Details"
+msgstr "تفاصيل المعاملة"
+
+msgid "Transaction ID"
+msgstr "معرّف المعاملة"
+
+msgid "Translating: Status Timeline"
+msgstr "الترجمة: تسلسل الحالات"
+
+msgid "Transparency"
+msgstr "الشفافية"
+
+msgid "Trust Services"
+msgstr "خدمات الثقة"
+
+msgid "Tunis 1001, Tunisia"
+msgstr "تونس 1001، تونس"
+
+msgid "Tunis District"
+msgstr "إقليم تونس"
+
+msgid "Tunis, TUN"
+msgstr "تونس، تونس"
+
+msgid "Tunis, Tunisia"
+msgstr "تونس، تونس"
+
+msgid "Tunisian Flag"
+msgstr "العلم التونسي"
+
+msgid "Tunisian Government. Watiq National Portal."
+msgstr "الحكومة التونسية. وثيق البوابة الوطنية."
+
+msgid "Tunisian National Emblem"
+msgstr "الشعار الوطني التونسي"
+
+msgid "Tunisian National Emblem Watermark"
+msgstr "علامة مائية للشعار الوطني التونسي"
+
+msgid "Tunisian Republic"
+msgstr "الجمهورية التونسية"
+
+msgid "Tunisian Republic • Digital Sovereignty Department"
+msgstr "الجمهورية التونسية • إدارة السيادة الرقمية"
+
+msgid ""
+"Tunisian Republic. All institutional data is protected by national-grade "
+"encryption."
+msgstr "الجمهورية التونسية. كل المعطيات المؤسساتية محمية بتشفير بمستوى وطني."
+
+msgid "Tunisian Sign Language Interpreter"
+msgstr "مترجم لغة الإشارة التونسية"
+
+msgid "Tunisian Sign Language support"
+msgstr "دعم لغة الإشارة التونسية"
+
+msgid "Type de Service"
+msgstr "نوع الخدمة"
+
+msgid "Type the national ID"
+msgstr "أدخل المعرّف الوطني"
+
+msgid "Type your secure message here..."
+msgstr "اكتب رسالتك الآمنة هنا…"
+
+msgid "UNAFFECTED SERVICES"
+msgstr "خدمات غير متأثرة"
+
+msgid "UPCOMING APPOINTMENTS"
+msgstr "المواعيد القادمة"
+
+msgid "UTC"
+msgstr "ت.ع.م"
+
+msgid ""
+"Unauthorized recovery attempts are strictly monitored. Identity theft is "
+"a felony under digital sovereignty law."
+msgstr ""
+"تُراقب محاولات الاسترجاع غير المرخصة بصرامة. انتحال الهوية جريمة بمقتضى "
+"قانون السيادة الرقمية."
+
+msgid "Universal access to digital administration"
+msgstr "نفاذ شامل إلى الإدارة الرقمية"
+
+msgid "Unread"
+msgstr "غير مقروء"
+
+msgid "Unverified"
+msgstr "غير مُصادق عليه"
+
+msgid "Upcoming and past visits to a government office."
+msgstr "الزيارات القادمة والسابقة إلى مكتب إداري."
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "Upload one"
+msgstr "حمّل وثيقة"
+
+msgid "Uploaded"
+msgstr "تم التحميل"
+
+msgid "Uptime"
+msgstr "زمن التشغيل"
+
+msgid "Urgent Legal Proceeding"
+msgstr "إجراء قضائي مستعجل"
+
+msgid "Use Biometrics"
+msgstr "استخدام البصمة"
+
+msgid "Use Recovery Code"
+msgstr "استخدام رمز الاسترجاع"
+
+msgid "User Manuals"
+msgstr "أدلة الاستخدام"
+
+msgid "Verification"
+msgstr "التحقق"
+
+msgid "Verification Portal"
+msgstr "بوابة التحقق"
+
+msgid "Verified"
+msgstr "مُصادق عليه"
+
+msgid "Verified Only"
+msgstr "المُصادق عليها فقط"
+
+msgid "Verified Phone Number"
+msgstr "رقم هاتف مُحقّق"
+
+msgid "Verified Session"
+msgstr "جلسة مُوثّقة"
+
+msgid "Verified by the Tunisian National Registry on"
+msgstr "تم التحقق من طرف السجل الوطني التونسي في"
+
+msgid "Verify and Submit"
+msgstr "التحقق والإرسال"
+
+msgid ""
+"Verify your official credentials against the National Identification "
+"Registry to proceed."
+msgstr "تحقق من بيانات اعتمادك الرسمية لدى السجل الوطني للتعريف للمتابعة."
+
+msgid "Very large text size"
+msgstr "حجم نص كبير جدا"
+
+msgid "Veuillez préciser l'institution destinataire..."
+msgstr "يرجى تحديد المؤسسة المرسل إليها…"
+
+msgid "View All"
+msgstr "عرض الكل"
+
+msgid "View All History"
+msgstr "عرض كل السجل"
+
+msgid "View Application Status"
+msgstr "عرض حالة المطلب"
+
+msgid "View Details"
+msgstr "عرض التفاصيل"
+
+msgid "View Documentation"
+msgstr "الاطّلاع على الوثائق"
+
+msgid "View FAQ"
+msgstr "عرض الأسئلة الشائعة"
+
+msgid "View access log"
+msgstr "عرض سجل النفاذ"
+
+msgid "View receipt"
+msgstr "عرض الوصل"
+
+msgid "Voir les créneaux"
+msgstr "عرض الفترات المتاحة"
+
+msgid "Vérifier &amp; Confirmer"
+msgstr "التحقق والتأكيد"
+
+msgid "WTQ-0000-000000"
+msgstr "WTQ-0000-000000"
+
+msgid "Watiq"
+msgstr "وثيق"
+
+msgid "Watiq - National Services Catalogue"
+msgstr "وثيق — دليل الخدمات الوطنية"
+
+msgid "Watiq - Staff Workbench"
+msgstr "وثيق — مساحة عمل الأعوان"
+
+msgid "Watiq Digital Identity"
+msgstr "الهوية الرقمية وثيق"
+
+msgid "Watiq National Portal"
+msgstr "وثيق — البوابة الوطنية"
+
+msgid "Watiq National Portal -"
+msgstr "وثيق — البوابة الوطنية —"
+
+msgid "Watiq National Portal - Administration"
+msgstr "وثيق البوابة الوطنية — الإدارة"
+
+msgid "Watiq National Portal - My Appointments"
+msgstr "وثيق البوابة الوطنية — مواعيدي"
+
+msgid "Watiq National Portal - Office Appointments"
+msgstr "وثيق البوابة الوطنية — مواعيد المكتب"
+
+msgid "Watiq National Portal - Payments"
+msgstr "وثيق — البوابة الوطنية — الدفوعات"
+
+msgid "Watiq National Portal - Track a Request"
+msgstr "وثيق البوابة الوطنية — تتبّع مطلب"
+
+msgid "Watiq National Portal | Republic of Tunisia"
+msgstr "وثيق البوابة الوطنية | الجمهورية التونسية"
+
+msgid "Watiq National Portal | Secure Login"
+msgstr "وثيق البوابة الوطنية | دخول آمن"
+
+msgid "Watiq National Portal. Official Tunisian Government Platform."
+msgstr "وثيق البوابة الوطنية. المنصة الرسمية للحكومة التونسية."
+
+msgid "Watiq Portal"
+msgstr "بوابة وثيق"
+
+msgid "Watiq Portal - Security Log & Diagnostics"
+msgstr "بوابة وثيق — سجل الأمان والتشخيص"
+
+msgid "Watiq Sovereign Cloud"
+msgstr "السحابة السيادية وثيق"
+
+msgid "Watiq Staff Portal | Sovereign MFA"
+msgstr "بوابة أعوان وثيق | المصادقة الثنائية"
+
+msgid "Watiq home"
+msgstr "الصفحة الرئيسية لوثيق"
+
+msgid ""
+"Watiq is not just a portal; it is the backbone of Tunisian digital "
+"sovereignty. Our systems are audited quarterly by the ANSI to ensure the "
+"highest level of protection for citizen data."
+msgstr ""
+"وثيق ليست مجرد بوابة، بل هي العمود الفقري للسيادة الرقمية التونسية. تخضع "
+"أنظمتنا لتدقيق فصلي من الوكالة الوطنية للسلامة المعلوماتية لضمان أعلى "
+"مستوى من حماية معطيات المواطنين."
+
+msgid "Watiq on social media"
+msgstr "وثيق على شبكات التواصل"
+
+msgid ""
+"Watiq will never ask for your password, PIN or card details — not by "
+"email, SMS or telephone. Anything sent through this portal travels over "
+"an encrypted connection."
+msgstr ""
+"لن تطلب وثيق أبدا كلمة مرورك أو رمزك السري أو بيانات بطاقتك — لا بالبريد "
+"ولا بالرسائل القصيرة ولا بالهاتف. كل ما يمر عبر هذه البوابة ينتقل عبر "
+"اتصال مشفّر."
+
+msgid "Watiq | Citizen Registration - Sovereign Institutional Pro"
+msgstr "وثيق | تسجيل المواطن — البوابة المؤسساتية السيادية"
+
+msgid "Watiq | Citizen Space - Profile Management"
+msgstr "وثيق | فضاء المواطن — إدارة الملف"
+
+msgid ""
+"We operate under a mandate of Modern Transparency. Personal data "
+"collected during registration and subsequent use of the Platform is "
+"processed strictly for the execution of requested administrative "
+"services."
+msgstr ""
+"نعمل بموجب التزام بالشفافية الحديثة. تُعالَج المعطيات الشخصية المجمَّعة "
+"عند التسجيل وأثناء استخدام المنصة حصريا لإنجاز الخدمات الإدارية المطلوبة."
+
+#, python-format
+msgid "Welcome back, %(name)s. All services are active and secure."
+msgstr "مرحبا بعودتك، %(name)s. كل الخدمات نشطة وآمنة."
+
+msgid "Welcome back. All services are active and secure."
+msgstr "مرحبا بعودتك. كل الخدمات نشطة وآمنة."
+
+msgid ""
+"Welcome to Watiq, the unified portal of the Republic of Tunisia. A "
+"trusted infrastructure for your administrative, legal, and civil status "
+"procedures."
+msgstr ""
+"مرحبا بك في وثيق، البوابة الموحّدة للجمهورية التونسية. بنية موثوقة "
+"لإجراءاتك الإدارية والقانونية والمتعلقة بالحالة المدنية."
+
+msgid "Welcome to Watiq. Your account is ready."
+msgstr "مرحبا بك في وثيق. حسابك جاهز."
+
+msgid "What is in place today"
+msgstr "ما هو متوفر اليوم"
+
+msgid "What the Watiq National Portal is and who operates it."
+msgstr "ما هي بوابة وثيق الوطنية ومن يديرها."
+
+msgid "Work Day"
+msgstr "يوم عمل"
+
+msgid "Work email"
+msgstr "البريد المهني"
+
+msgid "Workbench"
+msgstr "مساحة العمل"
+
+msgid "X-Road Standard"
+msgstr "معيار X-Road"
+
+msgid ""
+"You can check the status of any submission yourself using its tracking\n"
+"                code on the"
+msgstr ""
+"يمكنك التحقق بنفسك من حالة أي إيداع باستعمال رمز\n"
+"                التتبّع في"
+
+msgid "You have been signed out."
+msgstr "تم تسجيل خروجك."
+
+msgid "You have no appointments booked."
+msgstr "ليس لديك أي مواعيد محجوزة."
+
+msgid "You have no notifications."
+msgstr "ليس لديك أي إشعارات."
+
+msgid "You have no payments yet."
+msgstr "ليس لديك أي دفوعات بعد."
+
+msgid "You have no requests in progress."
+msgstr "ليس لديك مطالب قيد المعالجة."
+
+msgid "You have not submitted any requests yet."
+msgstr "لم تودع أي مطلب بعد."
+
+msgid ""
+"You may request a copy of the personal data held about you, ask for\n"
+"                inaccurate data to be corrected, and request erasure of "
+"your account.\n"
+"                Erasure is irreversible: identifying fields are "
+"permanently overwritten\n"
+"                and the account can no longer be recovered."
+msgstr ""
+"يمكنك طلب نسخة من المعطيات الشخصية المحفوظة عنك، وطلب\n"
+"                تصحيح المعطيات غير الدقيقة، وطلب محو حسابك.\n"
+"                المحو لا رجعة فيه: تُطمس حقول التعريف نهائيا\n"
+"                ولا يمكن استرجاع الحساب بعد ذلك."
+
+msgid ""
+"Your account is currently protected by standard authentication. We "
+"recommend enabling Two-Factor Authentication (2FA) for Sovereign-level "
+"protection."
+msgstr ""
+"حسابك محمي حاليا بمصادقة عادية. ننصح بتفعيل المصادقة الثنائية للحصول على "
+"حماية بمستوى سيادي."
+
+msgid "Your appointment is booked."
+msgstr "تم حجز موعدك."
+
+msgid ""
+"Your booking is secured. Please review the details below and present the "
+"QR code upon arrival."
+msgstr "تم تأمين حجزك. راجع التفاصيل أدناه وقدّم رمز QR عند وصولك."
+
+msgid ""
+"Your identity data is synchronized directly with the Ministry of "
+"Interior. Any discrepancies will require a manual update request at a "
+"regional office as per the Digital Sovereignty Act."
+msgstr ""
+"تُزامَن معطيات هويتك مباشرة مع وزارة الداخلية. يتطلب أي تباين مطلب تحيين "
+"يدوي لدى مكتب جهوي طبقا لقانون السيادة الرقمية."
+
+msgid "Your message"
+msgstr "رسالتك"
+
+msgid "Your password has been changed. Please sign in."
+msgstr "تم تغيير كلمة مرورك. يرجى تسجيل الدخول."
+
+msgid "Your payment history"
+msgstr "سجل دفوعاتك"
+
+msgid "Your profile"
+msgstr "ملفك الشخصي"
+
+msgid "Your rights"
+msgstr "حقوقك"
+
+msgid ""
+"Your transaction has been securely processed. Keep the reference below "
+"for the counter."
+msgstr "تمت معالجة معاملتك بأمان. احتفظ بالمرجع أدناه لتقديمه في الشباك."
+
+msgid "Zero Trust Architecture"
+msgstr "بنية انعدام الثقة"
+
+msgid "Zoom In"
+msgstr "تكبير"
+
+msgid "Zoom Out"
+msgstr "تصغير"
+
+msgid "[AUDIT] Console opened by"
+msgstr "[تدقيق] فُتحت اللوحة من قبل"
+
+msgid "[SYSTEM]"
+msgstr "[النظام]"
+
+msgid "] GET"
+msgstr "] GET"
+
+msgid "account(s)."
+msgstr "حساب/حسابات."
+
+msgid "account_balance"
+msgstr "account_balance"
+
+msgid "account_circle"
+msgstr "account_circle"
+
+msgid "and we will provide an alternative route to that service."
+msgstr "وسنوفّر لك مسارا بديلا إلى تلك الخدمة."
+
+msgid "articles"
+msgstr "مقالات"
+
+msgid "before"
+msgstr "قبل"
+
+msgid "book an appointment"
+msgstr "حجز موعد"
+
+msgid "bureau"
+msgstr "مكتب"
+
+msgid "contact page"
+msgstr "صفحة الاتصال"
+
+msgid "documents"
+msgstr "وثائق"
+
+msgid "e.g. MOHAMED AMINE"
+msgstr "مثال: محمد أمين"
+
+msgid "e.g. SELMI"
+msgstr "مثال: السلمي"
+
+msgid "e.g. WTQ-2026-000123"
+msgstr "مثال: WTQ-2026-000123"
+
+msgid "entries"
+msgstr "مُدخلات"
+
+msgid "file"
+msgstr "ملف"
+
+msgid "listé"
+msgstr "مُدرج"
+
+msgid "ms"
+msgstr "مللي ثانية"
+
+msgid "ms ·"
+msgstr "مللي ثانية ·"
+
+msgid "notifications"
+msgstr "إشعارات"
+
+msgid "of"
+msgstr "من"
+
+msgid "of 3"
+msgstr "من 3"
+
+msgid "or click to browse from your device"
+msgstr "أو انقر للاختيار من جهازك"
+
+msgid "probes issued from the BFF at request time."
+msgstr "فحوصات صادرة عن الواجهة الخلفية عند الطلب."
+
+msgid ""
+"running this: anonymising first orphans those files, and they can no "
+"longer be located for deletion."
+msgstr ""
+"قبل تنفيذ هذا: الإخفاء أولا يجعل تلك الملفات يتيمة ولا يمكن تحديد موقعها "
+"للحذف بعد ذلك."
+
+msgid "to confirm"
+msgstr "للتأكيد"
+
+msgid "tracking page"
+msgstr "صفحة التتبّع"
+
+msgid "user@watiq.tn"
+msgstr "user@watiq.tn"
+
+msgid "| Watiq National Portal"
+msgstr "| وثيق — البوابة الوطنية"
+
+msgid "— Choisir un bureau —"
+msgstr "— اختر مكتبا —"
+
+msgid "— Choisir un service —"
+msgstr "— اختر خدمة —"
+
+msgid "”. It is not settled yet."
+msgstr "”. لم تُسوَّ بعد."
+
+msgid "• Ready by"
+msgstr "• جاهز في"
+
+msgid "• Submitted:"
+msgstr "• تم الإيداع:"
+
+msgid "• uploaded"
+msgstr "• تم تحميله"
+
+#~ msgid "auth-bg min-h-screen flex flex-col relative overflow-y-auto"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background min-h-screen flex flex-col"
+#~ " font-body-md text-body-md "
+#~ "text-on-background relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-background"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md antialiased min-h-screen flex"
+#~ " flex-col relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-background font-body-md min-h-screen flex"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex flex-"
+#~ "col"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex flex-"
+#~ "col relative overflow-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex flex-"
+#~ "col relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex h-full "
+#~ "overflow-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background h-full"
+#~ " flex font-body-md overflow-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-surface"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface flex "
+#~ "flex-col min-h-screen relative selection"
+#~ ":bg-tertiary/20"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md antialiased min-h-screen flex "
+#~ "flex-col md:flex-row relative"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md min-h-screen flex flex-col "
+#~ "md:flex-row relative"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md min-h-screen flex flex-col "
+#~ "relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md selection:bg-secondary-fixed "
+#~ "selection:text-on-secondary-fixed "
+#~ "overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-surface min-h-screen flex"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface "
+#~ "min-h-screen flex flex-col relative "
+#~ "overflow-x-hidden font-body-md text-"
+#~ "body-md"
+#~ msgstr ""
+
+#~ msgid "bg-surface text-on-surface"
+#~ msgstr ""
+
+#~ msgid "bg-surface text-on-surface min-h-screen flex flex-col"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-surface text-on-surface min-h-screen"
+#~ " flex flex-col items-center "
+#~ "justify-between"
+#~ msgstr ""
+
+#~ msgid "bg-surface text-on-surface min-h-screen flex flex-col overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-surface text-on-surface min-h-screen"
+#~ " flex flex-col relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "flex bg-background min-h-screen"
+#~ msgstr ""
+
+#~ msgid "flex flex-col min-h-screen relative font-body-md text-body-md"
+#~ msgstr ""
+
+#~ msgid "flex flex-col min-h-screen relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "font-body-md text-body-md "
+#~ "selection:bg-primary-fixed selection:text-"
+#~ "on-primary-fixed"
+#~ msgstr ""
+
+#~ msgid "min-h-screen flex bg-surface font-body-md text-on-surface"
+#~ msgstr ""
+
+#~ msgid "min-h-screen flex flex-col font-body-md"
+#~ msgstr ""
+

@@ -1,5 +1,5 @@
 {#
-  Reader controls: colour scheme and text size.
+  Reader controls: language, colour scheme and text size.
 
   Included once from base.html, which is the only thing all 38 screens share —
   the site has seven nav archetypes and several screens (login, MFA, blocked,
@@ -13,8 +13,9 @@
   current browser, so it has to work before watiq.js has loaded and still work
   if it never does; watiq.js upgrades it to apply the change without a reload.
 
-  Selected state is carried by aria-pressed alone, styled in _theme.css, so the
-  enhancement only has to flip an attribute rather than juggle utility classes.
+  Selected state is carried by aria-pressed, so the enhancement only has to
+  flip an attribute rather than juggle utility classes. Language is the one
+  control that always round-trips: its output is server-rendered markup.
 
   `theme`, `text_scale` and the *_class values come from the context processor
   in app.py, which reads the cookie this form sets.
@@ -41,8 +42,26 @@
 
 <span aria-hidden="true" class="my-1 w-px bg-outline-variant"></span>
 
+{#- Language. Unlike theme and text size this cannot be applied in the browser:
+    the translated markup is rendered server-side, so choosing a language is a
+    real navigation. These stay plain submits and watiq.js leaves them alone.
+
+    Each name is written in its own language — someone hunting for Arabic is
+    looking for "العربية", not for the word "Arabic" in a script they may not
+    read — and lang= on the button tells a screen reader to switch voice. -#}
+<div aria-label="{{ _('Language') }}" class="flex items-center gap-1" role="group">
+{%- for code, meta in languages.items() %}
+<button aria-pressed="{{ 'true' if locale == code else 'false' }}" class="flex h-9 items-center justify-center rounded-full px-2.5 font-bold leading-none transition-colors focus-ring {{ 'bg-primary-container text-primary-fixed' if locale == code else 'text-on-surface hover:bg-surface-container-high' }}" lang="{{ code }}" name="lang" title="{{ meta.native }}" type="submit" value="{{ code }}">
+<span aria-hidden="true" class="text-[12px] uppercase tracking-wide">{{ code }}</span>
+<span class="sr-only">{{ meta.native }}</span>
+</button>
+{%- endfor %}
+</div>
+
+<span aria-hidden="true" class="my-1 w-px bg-outline-variant"></span>
+
 <div aria-label="{{ _('Text size') }}" class="flex items-center gap-1" data-a11y-sizes role="group">
-{%- for value, label, size in [(100, 'Normal text size', 'text-[13px]'), (125, 'Large text size', 'text-[15px]'), (150, 'Very large text size', 'text-[18px]')] %}
+{%- for value, label, size in [(100, _('Normal text size'), 'text-[13px]'), (125, _('Large text size'), 'text-[15px]'), (150, _('Very large text size'), 'text-[18px]')] %}
 <button aria-pressed="{{ 'true' if text_scale == value else 'false' }}" class="flex h-9 w-9 items-center justify-center rounded-full font-bold leading-none text-on-surface transition-colors hover:bg-surface-container-high focus-ring" name="text_scale" title="{{ label }}" type="submit" value="{{ value }}">
 <span aria-hidden="true" class="{{ size }}">A</span>
 <span class="sr-only">{{ label }}</span>

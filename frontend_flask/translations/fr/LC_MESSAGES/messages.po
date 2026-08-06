@@ -1,0 +1,3948 @@
+# French translations for Watiq.
+# Copyright (C) 2026 Republic of Tunisia
+# This file is distributed under the same license as the Watiq project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Watiq VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-08-06 17:09+0100\n"
+"PO-Revision-Date: 2026-08-06 16:51+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+msgid "(heure locale)"
+msgstr "(heure locale)"
+
+msgid ""
+",\n"
+"                without signing in."
+msgstr ""
+",\n"
+"                sans vous connecter."
+
+msgid "09:30 AM"
+msgstr "09:30"
+
+msgid "45 Avenue Habib Bourguiba"
+msgstr "45 avenue Habib Bourguiba"
+
+msgid "60 Active"
+msgstr "60 actifs"
+
+msgid "8-digit identity code"
+msgstr "Code d'identité à 8 chiffres"
+
+msgid ""
+"A clean, minimalist vector rendering of the National Crest of Tunisia in "
+"white and deep navy on a subtle background. Highly professional."
+msgstr ""
+"Rendu vectoriel épuré des armoiries de la Tunisie, en blanc et bleu "
+"marine sur fond discret. Très professionnel."
+
+msgid ""
+"A focused close-up video frame of a professional Tunisian Sign Language "
+"interpreter wearing neutral professional attire."
+msgstr ""
+"Gros plan vidéo d'un interprète professionnel en langue des signes "
+"tunisienne, en tenue neutre."
+
+msgid ""
+"A high-quality studio recording frame of a professional Tunisian Sign "
+"Language interpreter performing official translati"
+msgstr ""
+"Image studio de haute qualité d'un interprète professionnel en langue des"
+" signes tunisienne assurant une traduction officielle"
+
+msgid ""
+"A highly abstract, extremely subtle line-art representation of the "
+"Tunisian National Emblem."
+msgstr ""
+"Représentation en trait très épurée et abstraite de l'emblème national "
+"tunisien."
+
+msgid ""
+"A highly detailed illustration of the Tunisian National Emblem, rendered "
+"in a crisp, monochromatic style suitable for a"
+msgstr ""
+"Illustration très détaillée de l'emblème national tunisien, dans un style"
+" monochrome net adapté à"
+
+msgid ""
+"A highly detailed, high-fidelity technical rendering of the Tunisian "
+"National Emblem used as a watermark."
+msgstr ""
+"Rendu technique très détaillé de l'emblème national tunisien utilisé en "
+"filigrane."
+
+msgid ""
+"A highly detailed, intricate monochromatic rendering of the Tunisian "
+"National Emblem, presented as a subtle watermark."
+msgstr ""
+"Rendu monochrome très détaillé de l'emblème national tunisien, présenté "
+"en filigrane discret."
+
+msgid ""
+"A highly detailed, official-looking crest or emblem design representing "
+"state authority, rendered in crisp monochromatic"
+msgstr ""
+"Emblème officiel très détaillé représentant l'autorité de l'État, en "
+"monochrome net"
+
+msgid ""
+"A highly detailed, professional vector illustration of the Tunisian "
+"National Emblem, featuring the lion, galley, and sca"
+msgstr ""
+"Illustration vectorielle professionnelle très détaillée de l'emblème "
+"national tunisien, avec le lion, la galère et la balance"
+
+msgid ""
+"A highly detailed, ultra-realistic rendering of a national emblem or "
+"crest, rendered in polished gold and deep navy blue"
+msgstr ""
+"Rendu ultra-réaliste très détaillé d'un emblème national, en or poli et "
+"bleu marine profond"
+
+msgid ""
+"A medium shot of a professional sign language interpreter in a studio "
+"setting with a clean, dark blue background, looking directly at the "
+"camera while signing, well-lit to clearly show hand gestures for "
+"accessibility."
+msgstr ""
+"Plan moyen d'un interprète professionnel en langue des signes en studio "
+"sur fond bleu foncé, regardant la caméra en signant, bien éclairé pour "
+"montrer clairement les gestes."
+
+msgid ""
+"A professional close-up portrait of a Mediterranean citizen for a high-"
+"security government profile."
+msgstr ""
+"Portrait professionnel rapproché d'un citoyen méditerranéen pour un "
+"profil public à haute sécurité."
+
+msgid ""
+"A professional headshot of a government administrative worker in modern "
+"business attire against a neutral light gray background, providing a "
+"clean, authoritative yet approachable look suitable for an enterprise "
+"dashboard profile image."
+msgstr ""
+"Portrait professionnel d'un agent administratif en tenue moderne sur fond"
+" gris clair neutre, à l'allure nette, sérieuse et accessible, adaptée à "
+"une photo de profil."
+
+msgid "A professional portrait of a Tunisian government support agent."
+msgstr "Portrait professionnel d'un agent d'assistance du gouvernement tunisien."
+
+msgid ""
+"A professional portrait of a citizen used for a profile picture on a "
+"government portal."
+msgstr ""
+"Portrait professionnel d'un citoyen utilisé comme photo de profil sur un "
+"portail public."
+
+msgid ""
+"A professional sign language interpreter against a plain, neutral "
+"backdrop, clearly translating information."
+msgstr ""
+"Interprète professionnel en langue des signes sur fond neutre, traduisant"
+" clairement l'information."
+
+msgid "A professional sign language interpreter in a dark studio setting."
+msgstr "Interprète professionnel en langue des signes dans un studio sombre."
+
+msgid ""
+"A professional sign language interpreter in official uniform standing "
+"against a clean, plain blue backdrop, well-lit in a studio setting, "
+"providing accessible translation services in a modern governmental "
+"context."
+msgstr ""
+"Interprète professionnel en langue des signes, en tenue officielle sur "
+"fond bleu uni, bien éclairé en studio, assurant un service de traduction "
+"accessible dans un contexte administratif moderne."
+
+msgid ""
+"A professional sign language interpreter providing translation for a "
+"digital government service interface."
+msgstr ""
+"Interprète professionnel en langue des signes traduisant une interface de"
+" service public numérique."
+
+msgid ""
+"A professional sign language interpreter, an elegant woman in a dark "
+"corporate blazer, performing Tunisian Sign Language"
+msgstr ""
+"Interprète professionnelle en langue des signes, en blazer sombre "
+"élégant, pratiquant la langue des signes tunisienne"
+
+msgid ""
+"A professional sign language interpreter, dressed in dark formal attire, "
+"positioned against a stark white background."
+msgstr ""
+"Interprète professionnel en langue des signes, en tenue formelle sombre, "
+"sur fond blanc."
+
+msgid ""
+"A professional sign language interpreter, presented from the waist up in "
+"a well-lit studio setting against a neutral gre"
+msgstr ""
+"Interprète professionnel en langue des signes, cadré à mi-corps dans un "
+"studio bien éclairé sur fond gris neutre"
+
+msgid ""
+"A professional sign language interpreter, viewed from the chest up "
+"against a plain, soft grey background."
+msgstr ""
+"Interprète professionnel en langue des signes, cadré à mi-buste sur fond "
+"gris uni."
+
+msgid ""
+"A professional video frame showing a Tunisian Sign Language (TSL) "
+"interpreter against a clean, corporate background with"
+msgstr ""
+"Image vidéo professionnelle montrant un interprète en langue des signes "
+"tunisienne sur un fond institutionnel épuré avec"
+
+msgid ""
+"A professional video of a sign language interpreter providing "
+"accessibility for a national portal."
+msgstr ""
+"Vidéo professionnelle d'un interprète en langue des signes assurant "
+"l'accessibilité du portail national."
+
+msgid ""
+"A professional, high-quality corporate headshot of a person with a "
+"neutral, calm expression, representing a Citizen Prof"
+msgstr ""
+"Portrait professionnel de haute qualité d'une personne à l'expression "
+"neutre et calme, représentant un profil citoyen"
+
+msgid ""
+"A refined, minimalist logo icon for the République Tunisienne portal, "
+"featuring abstract geometric forms hinting at a fl"
+msgstr ""
+"Icône de logo minimaliste et raffinée pour le portail de la République "
+"Tunisienne, aux formes géométriques abstraites évoquant un drapeau"
+
+msgid ""
+"A small, professional portrait photograph of an individual, suitable for "
+"a user profile avatar."
+msgstr ""
+"Petite photographie professionnelle d'une personne, adaptée à un avatar "
+"de profil."
+
+msgid ""
+"A small, stylized video feed frame designed to display a sign language "
+"interpreter."
+msgstr "Petit cadre vidéo stylisé affichant un interprète en langue des signes."
+
+msgid "A stark, high-contrast black and white QR code graphic."
+msgstr "Un QR code en noir et blanc à fort contraste."
+
+msgid ""
+"A stylized, clean, minimalist illustration of the Tunisian National "
+"Emblem."
+msgstr "Illustration épurée et minimaliste de l'emblème national tunisien."
+
+msgid ""
+"A stylized, low-opacity vector rendering of the Tunisian National Emblem "
+"serving as a subtle watermark."
+msgstr ""
+"Rendu vectoriel stylisé et peu opaque de l'emblème national tunisien, en "
+"filigrane discret."
+
+msgid ""
+"A subtle, high-fidelity national emblem of the Tunisian Republic, "
+"rendered in a sophisticated, minimalist outline style."
+msgstr ""
+"Emblème national de la République Tunisienne, en trait minimaliste et "
+"raffiné."
+
+msgid ""
+"A subtle, high-fidelity watermark of the Tunisian National Emblem, "
+"serving as a background texture on a light mode insti"
+msgstr ""
+"Filigrane discret de l'emblème national tunisien servant de texture de "
+"fond en mode clair"
+
+msgid ""
+"A subtle, minimalist watermark of scales of justice, rendered in ultra-"
+"light grey on a stark white background."
+msgstr ""
+"Filigrane minimaliste d'une balance de la justice, en gris très clair sur"
+" fond blanc."
+
+msgid "A verified number lets the office reach you about your requests."
+msgstr ""
+"Un numéro vérifié permet au bureau de vous joindre au sujet de vos "
+"demandes."
+
+msgid "ACCESS KEY"
+msgstr "CLÉ D'ACCÈS"
+
+msgid "ACCESSIBILITY TSL"
+msgstr "ACCESSIBILITÉ LST"
+
+msgid "AES-256-GCM"
+msgstr "AES-256-GCM"
+
+msgid "AES-256-GCM Sovereign Encryption Active"
+msgstr "Chiffrement souverain AES-256-GCM actif"
+
+msgid "AGRANDIR"
+msgstr "AGRANDIR"
+
+msgid "ANCE DIGITAL SEAL"
+msgstr "SCEAU NUMÉRIQUE ANCE"
+
+msgid "ANSI Logo"
+msgstr "Logo ANSI"
+
+msgid "API Access"
+msgstr "Accès API"
+
+msgid "AUTHORIZE ACCESS"
+msgstr "AUTORISER L'ACCÈS"
+
+msgid "AUTH_TOKEN_ACTIVE"
+msgstr "AUTH_TOKEN_ACTIVE"
+
+msgid "About"
+msgstr "À propos"
+
+msgid "About the national institutions"
+msgstr "À propos des institutions nationales"
+
+msgid "About this portal"
+msgstr "À propos de ce portail"
+
+msgid "Accept"
+msgstr "Accepter"
+
+msgid "Access Portal"
+msgstr "Accéder au portail"
+
+msgid ""
+"Access Tunisiene Sign Language support for all government documents and "
+"profile settings."
+msgstr ""
+"Accédez à l'assistance en langue des signes tunisienne pour tous les "
+"documents et paramètres."
+
+msgid ""
+"Access direct channels to the Watiq administrative framework. Your "
+"inquiries are handled with sovereign priority and legal transparency."
+msgstr ""
+"Accédez aux canaux directs du cadre administratif Watiq. Vos demandes "
+"sont traitées avec priorité souveraine et transparence juridique."
+
+msgid "Access official government resources and institutional applications."
+msgstr "Accédez aux ressources publiques et aux applications institutionnelles."
+
+msgid ""
+"Access to the National Services Portal (\"The Platform\") is granted "
+"solely for the execution of official civil, legal, and administrative "
+"procedures within the jurisdiction of the République Tunisienne. Users "
+"must utilize the Platform in accordance with national laws governing "
+"digital identity and electronic communication."
+msgstr ""
+"L'accès au portail des services nationaux (« la plateforme ») est accordé"
+" uniquement pour l'accomplissement de procédures civiles, juridiques et "
+"administratives officielles relevant de la juridiction de la République "
+"Tunisienne. Les utilisateurs doivent l'utiliser conformément aux lois "
+"nationales régissant l'identité numérique et la communication "
+"électronique."
+
+msgid "Access, verify, and download your official state records securely."
+msgstr "Consultez, vérifiez et téléchargez vos actes officiels en toute sécurité."
+
+msgid "Accessibility"
+msgstr "Accessibilité"
+
+msgid "Accessibility &amp; Inclusion"
+msgstr "Accessibilité et inclusion"
+
+msgid "Accessibility Standards"
+msgstr "Normes d'accessibilité"
+
+msgid "Accessibility Statement"
+msgstr "Déclaration d'accessibilité"
+
+msgid "Accessibility and language options"
+msgstr "Options d'accessibilité et de langue"
+
+msgid "Accessibility settings"
+msgstr "Paramètres d'accessibilité"
+
+msgid "Accessibilité"
+msgstr "Accessibilité"
+
+msgid "Accessibilité Vidéo"
+msgstr "Accessibilité vidéo"
+
+msgid "Account Password"
+msgstr "Mot de passe du compte"
+
+msgid "Account Recovery | Watiq National Portal"
+msgstr "Récupération de compte | Watiq Portail national"
+
+msgid "Account Security"
+msgstr "Sécurité du compte"
+
+msgid "Account anonymised. This cannot be undone."
+msgstr "Compte anonymisé. Cette action est irréversible."
+
+msgid "Account created. Please sign in."
+msgstr "Compte créé. Veuillez vous connecter."
+
+msgid "Account deactivated."
+msgstr "Compte désactivé."
+
+msgid "Account reactivated."
+msgstr "Compte réactivé."
+
+msgid "Accounts, staff and role permissions."
+msgstr "Comptes, agents et permissions des rôles."
+
+msgid "Accès Mobilité Réduite"
+msgstr "Accès mobilité réduite"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Action Type"
+msgstr "Type d'action"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid ""
+"Actions performed on this Platform, including the submission of forms and"
+" acceptance of terms, carry the equivalent legal weight of a physical "
+"signature under the Digital Economy Act."
+msgstr ""
+"Les actions effectuées sur cette plateforme, y compris le dépôt de "
+"formulaires et l'acceptation des conditions, ont la même valeur juridique"
+" qu'une signature manuscrite au sens de la loi sur l'économie numérique."
+
+msgid "Active TSL Translation"
+msgstr "Traduction LST active"
+
+msgid "Actor"
+msgstr "Auteur"
+
+msgid "Add a staff member"
+msgstr "Ajouter un agent"
+
+msgid "Add notes regarding discrepancies or required actions..."
+msgstr "Ajoutez des notes sur les écarts ou les actions requises…"
+
+msgid "Admin"
+msgstr "Administration"
+
+msgid "Admin Console"
+msgstr "Console d'administration"
+
+msgid "Admin Dashboard"
+msgstr "Tableau de bord d'administration"
+
+msgid "Admin Profile"
+msgstr "Profil administrateur"
+
+msgid "Admin Settings"
+msgstr "Paramètres d'administration"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Administration sections"
+msgstr "Sections d'administration"
+
+msgid "Adresse de livraison exacte en Tunisie"
+msgstr "Adresse de livraison exacte en Tunisie"
+
+msgid ""
+"Advancing the digital sovereignty of the Tunisian Republic through "
+"secure, accessible, and high-performance infrastructure."
+msgstr ""
+"Faire progresser la souveraineté numérique de la République Tunisienne "
+"par une infrastructure sûre, accessible et performante."
+
+msgid "Afficher le module d'interprétation LST"
+msgstr "Afficher le module d'interprétation LST"
+
+msgid "Afficher les services"
+msgstr "Afficher les services"
+
+msgid "Afficher tous les bureaux"
+msgstr "Afficher tous les bureaux"
+
+msgid "Agent Status: Active"
+msgstr "Statut de l'agent : actif"
+
+msgid "All"
+msgstr "Tous"
+
+msgid "All Actions"
+msgstr "Toutes les actions"
+
+msgid "All Categories"
+msgstr "Toutes les catégories"
+
+msgid "All Documents"
+msgstr "Tous les documents"
+
+msgid "All Requests"
+msgstr "Toutes les demandes"
+
+msgid "All notifications marked as read."
+msgstr "Toutes les notifications ont été marquées comme lues."
+
+msgid "All topics"
+msgstr "Tous les sujets"
+
+msgid "Amount"
+msgstr "Montant"
+
+msgid "An unexpected error occurred. The incident has been logged."
+msgstr "Une erreur inattendue est survenue. L'incident a été enregistré."
+
+msgid "Analytics"
+msgstr "Statistiques"
+
+msgid "Anonymise permanently"
+msgstr "Anonymiser définitivement"
+
+msgid ""
+"Any unauthorized access, attempt to manipulate data, or circumvention of "
+"security protocols constitutes a violation of national cybersecurity "
+"mandates and is subject to immediate legal action under Sovereign "
+"Authority regulations."
+msgstr ""
+"Tout accès non autorisé, toute tentative de manipulation de données ou de"
+" contournement des protocoles de sécurité constitue une violation des "
+"obligations nationales de cybersécurité et expose à des poursuites "
+"immédiates au titre de la réglementation de l'autorité souveraine."
+
+msgid "Applicant:"
+msgstr "Demandeur :"
+
+msgid "Application Data"
+msgstr "Données de la demande"
+
+msgid "Application Details - Citizen Space"
+msgstr "Détails de la demande — Espace citoyen"
+
+msgid "Application Reference:"
+msgstr "Référence de la demande :"
+
+msgid "Applications"
+msgstr "Demandes"
+
+msgid "Appliquer les filtres"
+msgstr "Appliquer les filtres"
+
+msgid "Apply Filters"
+msgstr "Appliquer les filtres"
+
+msgid "Appointment Confirmed"
+msgstr "Rendez-vous confirmé"
+
+msgid "Appointment Coordination"
+msgstr "Coordination des rendez-vous"
+
+msgid "Appointment Detail - République Tunisienne"
+msgstr "Détail du rendez-vous — République Tunisienne"
+
+msgid "Appointment cancelled."
+msgstr "Rendez-vous annulé."
+
+msgid "Appointment updated."
+msgstr "Rendez-vous mis à jour."
+
+msgid "Appointments"
+msgstr "Rendez-vous"
+
+msgid "Approve Request"
+msgstr "Approuver la demande"
+
+msgid "Architecture"
+msgstr "Architecture"
+
+msgid "Assistance LST (Langue des Signes)"
+msgstr "Assistance LST (langue des signes)"
+
+msgid "Assistance LST Direct"
+msgstr "Assistance LST directe"
+
+msgid "Attached Documents"
+msgstr "Documents joints"
+
+msgid "Aucun bureau ne correspond à «"
+msgstr "Aucun bureau ne correspond à «"
+
+msgid "Audit"
+msgstr "Audit"
+
+msgid "Audit Logs"
+msgstr "Journaux d'audit"
+
+msgid "Auditor Acc."
+msgstr "Compte auditeur"
+
+msgid "Auditor Monitoring Console"
+msgstr "Console de supervision de l'auditeur"
+
+msgid "Authentication"
+msgstr "Authentification"
+
+msgid "Availability:"
+msgstr "Disponibilité :"
+
+msgid "Available"
+msgstr "Disponible"
+
+msgid "Avis Institutionnel"
+msgstr "Avis institutionnel"
+
+msgid "Awaiting Verification"
+msgstr "En attente de vérification"
+
+msgid "Awaiting review"
+msgstr "En attente d'examen"
+
+msgid "BIO-PROTECTED"
+msgstr "BIO-PROTÉGÉ"
+
+msgid "Back"
+msgstr "Retour"
+
+msgid "Back to appointments"
+msgstr "Retour aux rendez-vous"
+
+msgid "Back to the portal"
+msgstr "Retour au portail"
+
+msgid "Back to workbench"
+msgstr "Retour au plan de travail"
+
+msgid "Before you contact us"
+msgstr "Avant de nous contacter"
+
+msgid "Besoin d'assistance ?"
+msgstr "Besoin d'assistance ?"
+
+msgid ""
+"Biometric and recovery-key resets are handled by the support desk, which "
+"verifies your identity in person or by telephone."
+msgstr ""
+"Les réinitialisations biométriques et de clé de récupération sont "
+"traitées par le guichet d'assistance, qui vérifie votre identité en "
+"personne ou par téléphone."
+
+msgid "Biometric identification and certified electronic signature."
+msgstr "Identification biométrique et signature électronique certifiée."
+
+msgid "Birth, marriage, death certificates and certified family documents."
+msgstr "Actes de naissance, de mariage, de décès et documents familiaux certifiés."
+msgid "Blocked"
+msgstr "Bloqué"
+
+msgid ""
+"Bonjour. This channel is not staffed yet — live chat is still being "
+"connected to the support desk."
+msgstr ""
+"Bonjour. Ce canal n'est pas encore doté d'agents — le chat en direct est "
+"en cours de raccordement au guichet d'assistance."
+
+msgid "Book Appointment"
+msgstr "Prendre rendez-vous"
+
+msgid "Book a slot at your regional office."
+msgstr "Réservez un créneau dans votre bureau régional."
+
+msgid "Book an appointment"
+msgstr "Prendre un rendez-vous"
+
+msgid "Book walk-in citizen requests manually."
+msgstr "Enregistrer manuellement les demandes sans rendez-vous."
+
+msgid "Book your first appointment"
+msgstr "Prenez votre premier rendez-vous"
+
+msgid "Breadcrumb"
+msgstr "Fil d'Ariane"
+
+msgid ""
+"Browse our frequently asked questions or search for specific topics "
+"related to national services."
+msgstr ""
+"Parcourez notre foire aux questions ou recherchez un sujet précis lié aux"
+" services nationaux."
+
+msgid "Browse the service catalogue"
+msgstr "Parcourir le catalogue des services"
+
+msgid "Browser:"
+msgstr "Navigateur :"
+
+msgid "Bureau"
+msgstr "Bureau"
+
+msgid "Bureau compétent"
+msgstr "Bureau compétent"
+
+msgid "Bureau et Service"
+msgstr "Bureau et service"
+
+msgid "CERTIFIÉ CONFORME"
+msgstr "CERTIFIÉ CONFORME"
+
+msgid "CIN"
+msgstr "CIN"
+
+msgid "CIN en cours de validité"
+msgstr "CIN en cours de validité"
+
+msgid "CIN renewal, passport applications, and secure residency certificates."
+msgstr "Renouvellement de CIN, demandes de passeport et certificats de résidence sécurisés."
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Cancel Booking"
+msgstr "Annuler la réservation"
+
+msgid "Cannot receive the code?"
+msgstr "Vous ne recevez pas le code ?"
+
+msgid "Categories"
+msgstr "Catégories"
+
+msgid ""
+"Ce bureau ne propose actuellement aucun service en ligne. Choisissez un "
+"autre bureau."
+msgstr ""
+"Ce bureau ne propose actuellement aucun service en ligne. Choisissez un "
+"autre bureau."
+
+msgid ""
+"Ce bureau ne publie aucun service réservable, le rendez-vous ne peut pas "
+"être finalisé ici."
+msgstr ""
+"Ce bureau ne publie aucun service réservable, le rendez-vous ne peut pas "
+"être finalisé ici."
+
+msgid "Ce que le bureau devrait savoir à l'avance."
+msgstr "Ce que le bureau devrait savoir à l'avance."
+
+msgid "Change it through the verified reset flow."
+msgstr "Modifiez-le via la procédure de réinitialisation vérifiée."
+
+msgid "Channel opened"
+msgstr "Canal ouvert"
+
+msgid "Check National Portal"
+msgstr "Consulter le portail national"
+
+msgid "Check status"
+msgstr "Vérifier l'état"
+
+msgid "Check-In Pass"
+msgstr "Laissez-passer"
+
+msgid "Check-in QR Code"
+msgstr "QR code d'enregistrement"
+
+msgid "Choose a decision before submitting."
+msgstr "Choisissez une décision avant d'envoyer."
+
+msgid "Choose a file to upload."
+msgstr "Choisissez un fichier à téléverser."
+
+msgid "Choose a service and an office before submitting."
+msgstr "Choisissez un service et un bureau avant d'envoyer."
+
+msgid "Choose a time slot to continue."
+msgstr "Choisissez un créneau pour continuer."
+
+msgid "Choose whether the citizen attended."
+msgstr "Indiquez si le citoyen s'est présenté."
+
+msgid "Choose which service the appointment is for."
+msgstr "Indiquez le service concerné par le rendez-vous."
+
+msgid "Chrome 120.0"
+msgstr "Chrome 120.0"
+
+msgid "Citizen Dashboard"
+msgstr "Tableau de bord citoyen"
+
+msgid "Citizen Name"
+msgstr "Nom du citoyen"
+
+msgid "Citizen Profile"
+msgstr "Profil du citoyen"
+
+msgid "Citizen Registry"
+msgstr "Registre des citoyens"
+
+msgid "Citizen Space"
+msgstr "Espace citoyen"
+
+msgid "Citizen Space - Secure Document Upload"
+msgstr "Espace citoyen — Téléversement sécurisé"
+
+msgid "Citizen Support Chat - République Tunisienne"
+msgstr "Chat d'assistance citoyenne — République Tunisienne"
+
+msgid "Citizen accounts"
+msgstr "Comptes citoyens"
+
+msgid "Citizens"
+msgstr "Citoyens"
+
+msgid ""
+"Citizens retain the right to audit their access logs via the 'Security "
+"Log' feature available in the user dashboard."
+msgstr ""
+"Les citoyens conservent le droit d'auditer leurs journaux d'accès via la "
+"fonction « Journal de sécurité » du tableau de bord."
+
+msgid "Civil Status"
+msgstr "État civil"
+
+msgid "Clear"
+msgstr "Effacer"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Close Interpreter"
+msgstr "Fermer l'interprète"
+
+msgid "Close interpreter"
+msgstr "Fermer l'interprète"
+
+msgid "Cloud Secured"
+msgstr "Cloud sécurisé"
+
+msgid "Complet"
+msgstr "Complet"
+
+msgid "Complete Recovery Process"
+msgstr "Terminer la récupération"
+
+msgid "Completed"
+msgstr "Terminé"
+
+msgid "Completed (Today)"
+msgstr "Terminé (aujourd'hui)"
+
+msgid ""
+"Completing this step will reset your current session and require you to "
+"sign in again."
+msgstr ""
+"Terminer cette étape réinitialisera votre session et vous devrez vous "
+"reconnecter."
+
+msgid "Confidentiality Protocol Active"
+msgstr "Protocole de confidentialité actif"
+
+msgid "Confirm Master Password"
+msgstr "Confirmer le mot de passe maître"
+
+msgid "Confirmer le rendez-vous"
+msgstr "Confirmer le rendez-vous"
+
+msgid ""
+"Conformément à la réglementation en vigueur, toute demande fait l'objet "
+"d'une vérification judiciaire rigoureuse. Les délais de traitement "
+"varient entre 24h et 72h ouvrables."
+msgstr ""
+"Conformément à la réglementation en vigueur, toute demande fait l'objet "
+"d'une vérification judiciaire rigoureuse. Les délais de traitement "
+"varient entre 24h et 72h ouvrables."
+
+msgid "Connect"
+msgstr "Nous suivre"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Contact Access"
+msgstr "Accès au contact"
+
+msgid "Contact Gov"
+msgstr "Contacter l'administration"
+
+msgid "Contact Information"
+msgstr "Coordonnées"
+
+msgid "Contact Official"
+msgstr "Contacter un agent"
+
+msgid "Contact Support"
+msgstr "Contacter le support"
+
+msgid "Contact Us"
+msgstr "Nous contacter"
+
+msgid "Contact desk"
+msgstr "Guichet de contact"
+
+msgid ""
+"Contact details for the national helpdesk and for individual\n"
+"                governorate offices belong here. Office addresses and "
+"opening hours are\n"
+"                available from the catalogue when you"
+msgstr ""
+"Les coordonnées du service d'assistance national et des bureaux de chaque"
+"\n"
+"                gouvernorat ont leur place ici. Les adresses et horaires "
+"des bureaux sont\n"
+"                disponibles dans le catalogue lorsque vous"
+
+msgid "Contact support"
+msgstr "Contacter le support"
+
+msgid "Contact support desk"
+msgstr "Contacter le guichet d'assistance"
+
+msgid "Contact the support desk to confirm your number."
+msgstr "Contactez le guichet d'assistance pour confirmer votre numéro."
+
+msgid "Contact us"
+msgstr "Nous contacter"
+
+msgid "Contacter le support"
+msgstr "Contacter le support"
+
+msgid "Continue to Step 2"
+msgstr "Passer à l'étape 2"
+
+msgid "Continue to registration"
+msgstr "Continuer vers l'inscription"
+
+msgid "Contrôlez les détails avant de réserver."
+msgstr "Contrôlez les détails avant de réserver."
+
+msgid "Copy the document fingerprint"
+msgstr "Copier l'empreinte du document"
+
+msgid "Create staff account"
+msgstr "Créer un compte agent"
+
+msgid "Criminal record certificates and legal case tracking."
+msgstr "Extraits de casier judiciaire et suivi des affaires juridiques."
+#, python-format
+msgid "Current Progress: 68%% - Security layers successfully validated."
+msgstr "Progression actuelle : 68%% — couches de sécurité validées."
+
+msgid "Current Session"
+msgstr "Session en cours"
+
+msgid "DIGITAL SOVEREIGNTY UNIT"
+msgstr "UNITÉ DE SOUVERAINETÉ NUMÉRIQUE"
+
+msgid "DOWNLOAD CERTIFIED PDF"
+msgstr "TÉLÉCHARGER LE PDF CERTIFIÉ"
+
+msgid "Dark theme"
+msgstr "Thème sombre"
+
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+msgid "Data Modification"
+msgstr "Modification de données"
+
+msgid "Data Privacy &amp; Transparency"
+msgstr "Confidentialité des données et transparence"
+
+msgid "Data Verification"
+msgstr "Vérification des données"
+
+msgid ""
+"Data is encrypted at rest and in transit using advanced national "
+"cryptographic standards."
+msgstr ""
+"Les données sont chiffrées au repos et en transit selon les standards "
+"cryptographiques nationaux."
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Date &amp; Time"
+msgstr "Date et heure"
+
+msgid "Date &amp; créneau"
+msgstr "Date et créneau"
+
+msgid "Date Range"
+msgstr "Période"
+
+msgid "Date Submitted"
+msgstr "Date de dépôt"
+
+msgid "Date de Délivrance"
+msgstr "Date de délivrance"
+
+msgid "Date of Birth"
+msgstr "Date de naissance"
+
+msgid "Day"
+msgstr "Jour"
+
+msgid "Deactivate"
+msgstr "Désactiver"
+
+msgid "Decision recorded."
+msgstr "Décision enregistrée."
+
+msgid "Decline"
+msgstr "Refuser"
+
+msgid "Delivery:"
+msgstr "Livraison :"
+
+msgid "Demande d'Extrait de Casier Judiciaire (B3) - République Tunisienne"
+msgstr "Demande d'extrait de casier judiciaire (B3) — République Tunisienne"
+
+msgid "Demande de Bulletin N°3"
+msgstr "Demande de bulletin n°3"
+
+msgid "Demandeur"
+msgstr "Demandeur"
+
+msgid "Detailed Context"
+msgstr "Contexte détaillé"
+
+msgid "Details"
+msgstr "Détails"
+
+msgid "Developer API"
+msgstr "API développeur"
+
+msgid "Digital Delivery"
+msgstr "Livraison numérique"
+
+msgid "Digital Signature &amp; Liability"
+msgstr "Signature numérique et responsabilité"
+
+msgid "Digital Sovereignty Department"
+msgstr "Département de la souveraineté numérique"
+
+msgid "Direct verification with sovereign database v4.2 active."
+msgstr "Vérification directe avec la base souveraine v4.2 active."
+
+msgid "Display settings"
+msgstr "Paramètres d'affichage"
+
+msgid "Disponibilité Limitée"
+msgstr "Disponibilité limitée"
+
+msgid ""
+"Do not include passwords or card details in this form. Watiq will never "
+"ask for them."
+msgstr ""
+"N'indiquez ni mot de passe ni données bancaires dans ce formulaire. Watiq"
+" ne vous les demandera jamais."
+
+msgid "Doc Downloaded"
+msgstr "Document téléchargé"
+
+msgid "Document Fingerprint (SHA-256)"
+msgstr "Empreinte du document (SHA-256)"
+
+msgid "Document Validation Query"
+msgstr "Requête de validation de document"
+
+msgid "Document accepted."
+msgstr "Document accepté."
+
+msgid "Document removed."
+msgstr "Document supprimé."
+
+msgid "Document uploaded. It will be checked by an officer."
+msgstr "Document téléversé. Il sera vérifié par un agent."
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Documents appear here once they are filed against one of your requests."
+msgstr ""
+"Les documents apparaissent ici dès qu'ils sont déposés pour une de vos "
+"demandes."
+
+msgid "Donnée non encore publiée par le répertoire des bureaux."
+msgstr "Donnée non encore publiée par le répertoire des bureaux."
+
+msgid "Download PDF Receipt"
+msgstr "Télécharger le reçu PDF"
+
+msgid "Download Receipt"
+msgstr "Télécharger le reçu"
+
+msgid "Drag &amp; Drop files here"
+msgstr "Glissez-déposez vos fichiers ici"
+
+msgid "Due"
+msgstr "Échéance"
+
+msgid "Déclaration officielle"
+msgstr "Déclaration officielle"
+
+msgid "E-Government"
+msgstr "Administration électronique"
+
+msgid "E-Justice"
+msgstr "E-Justice"
+
+msgid "E-Services"
+msgstr "E-Services"
+
+msgid "ETAT CIVIL"
+msgstr "ÉTAT CIVIL"
+
+msgid "EXPECTED SERVICE RESTORATION"
+msgstr "RÉTABLISSEMENT PRÉVU DU SERVICE"
+
+msgid "Edge Protection"
+msgstr "Protection périmétrique"
+
+msgid "Emergency Support"
+msgstr "Assistance d'urgence"
+
+msgid ""
+"En confirmant ce rendez-vous, vous certifiez que les informations "
+"fournies sont exactes et que vous apporterez les documents requis par "
+"votre service."
+msgstr ""
+"En confirmant ce rendez-vous, vous certifiez que les informations "
+"fournies sont exactes et que vous apporterez les documents requis par "
+"votre service."
+
+msgid "Enable 2FA Now"
+msgstr "Activer la 2FA"
+
+msgid "Enable Screen Reader Narration"
+msgstr "Activer la narration du lecteur d'écran"
+
+msgid "Encryption"
+msgstr "Chiffrement"
+
+msgid "End Date"
+msgstr "Date de fin"
+
+msgid "End-to-end institutional grade protocols enabled."
+msgstr "Protocoles de niveau institutionnel de bout en bout activés."
+
+msgid "Enhance Your Account Security"
+msgstr "Renforcez la sécurité de votre compte"
+
+msgid "Enter ID, Name, or Resource hash..."
+msgstr "Saisissez un ID, un nom ou un hash de ressource…"
+
+msgid "Enter security code from your"
+msgstr "Saisissez le code de sécurité de votre"
+
+msgid ""
+"Enter the tracking code from your submission receipt to see where a "
+"request has reached. No sign-in needed."
+msgstr ""
+"Saisissez le code de suivi figurant sur votre reçu de dépôt pour voir où "
+"en est la demande. Aucune connexion requise."
+
+msgid ""
+"Enter the tracking code you were given when you submitted. No sign-in "
+"needed."
+msgstr ""
+"Saisissez le code de suivi qui vous a été remis lors du dépôt. Aucune "
+"connexion requise."
+
+msgid "Enter your credentials to continue."
+msgstr "Saisissez vos identifiants pour continuer."
+
+msgid "Enter your official credentials as appearing on your national documents."
+msgstr ""
+"Saisissez vos identifiants officiels tels qu'ils figurent sur vos "
+"documents nationaux."
+
+msgid "Enter your official credentials to proceed."
+msgstr "Saisissez vos identifiants officiels pour continuer."
+
+msgid "Entry"
+msgstr "Entrée"
+
+msgid "Erase&hellip;"
+msgstr "Effacer…"
+
+msgid ""
+"Erasure cancelled: confirm that stored documents were purged first. "
+"Anonymising before purging orphans them permanently."
+msgstr ""
+"Effacement annulé : confirmez d'abord la purge des documents stockés. "
+"Anonymiser avant de purger les rend définitivement orphelins."
+
+msgid "Erasure cancelled: the national ID typed did not match the account."
+msgstr ""
+"Effacement annulé : l'identifiant national saisi ne correspond pas au "
+"compte."
+
+msgid "Establish your high-security access credentials for the sovereign portal."
+msgstr "Créez vos identifiants d'accès haute sécurité pour le portail souverain."
+
+msgid "Estimated ready"
+msgstr "Prêt estimé"
+
+msgid "Event"
+msgstr "Événement"
+
+msgid "Every change the registry makes appears here."
+msgstr "Chaque modification du registre apparaît ici."
+
+msgid "Every request is authenticated, authorized, and continuously inspected."
+msgstr "Chaque requête est authentifiée, autorisée et inspectée en continu."
+
+msgid ""
+"Every screen is built against the Watiq design system's high-contrast\n"
+"                requirements. A reserved overlay slot for a sign language"
+" interpreter\n"
+"                feed is mandated across the primary citizen journeys, and"
+" all\n"
+"                interactive controls expose visible focus indicators and "
+"accessible\n"
+"                labels."
+msgstr ""
+"Chaque écran est construit selon les exigences de contraste élevé du\n"
+"                système de design Watiq. Un emplacement réservé au flux "
+"d'un interprète\n"
+"                en langue des signes est imposé sur les parcours citoyens"
+" principaux, et\n"
+"                tous les contrôles interactifs exposent un indicateur de "
+"focus visible et\n"
+"                un libellé accessible."
+
+msgid "Expand Module"
+msgstr "Agrandir le module"
+
+msgid "Expand Window"
+msgstr "Agrandir la fenêtre"
+
+msgid "Expand interpreter"
+msgstr "Agrandir l'interprète"
+
+msgid "Export"
+msgstr "Exporter"
+
+msgid "Export CSV"
+msgstr "Exporter en CSV"
+
+msgid "Export PDF"
+msgstr "Exporter en PDF"
+
+msgid "Extrait de Casier Judiciaire (B3)"
+msgstr "Extrait de casier judiciaire (B3)"
+
+msgid "Failed Attempt"
+msgstr "Tentative échouée"
+
+msgid "Family Name (Latin)"
+msgstr "Nom (en caractères latins)"
+
+msgid "Federal"
+msgstr "Fédéral"
+
+msgid "Fees paid for your service requests."
+msgstr "Frais payés pour vos demandes de service."
+
+msgid "Fermer le module LST"
+msgstr "Fermer le module LST"
+
+msgid "File"
+msgstr "Fichier"
+
+msgid "Filtre non disponible"
+msgstr "Filtre non disponible"
+
+msgid "Finalité du document"
+msgstr "Finalité du document"
+
+msgid "First name"
+msgstr "Prénom"
+
+msgid "First time accessing the portal?"
+msgstr "Première visite sur le portail ?"
+
+msgid ""
+"Follow our high-security protocol to securely recover your Watiq "
+"credentials. Your sovereign data is protected by the Republic of "
+"Tunisia's encryption standards."
+msgstr ""
+"Suivez notre protocole haute sécurité pour récupérer vos identifiants "
+"Watiq. Vos données souveraines sont protégées par les standards de "
+"chiffrement de la République Tunisienne."
+
+msgid "Forte Disponibilité"
+msgstr "Forte disponibilité"
+
+msgid "Free"
+msgstr "Gratuit"
+
+msgid "Full"
+msgstr "Complet"
+
+msgid "Full Legal Name (Latin)"
+msgstr "Nom complet légal (latin)"
+
+msgid "Fully digital"
+msgstr "Entièrement numérique"
+
+msgid "Geographical redundancy across three isolated national data centers."
+msgstr "Redondance géographique sur trois centres de données nationaux isolés."
+
+msgid "Get Directions"
+msgstr "Itinéraire"
+
+msgid "Get help"
+msgstr "Obtenir de l'aide"
+
+msgid "Given Name(s) (Latin)"
+msgstr "Prénom(s) (en caractères latins)"
+
+msgid "Go to my requests"
+msgstr "Aller à mes demandes"
+
+msgid "Governance"
+msgstr "Gouvernance"
+
+msgid "Government Staff Portal"
+msgstr "Portail des agents de l'État"
+
+msgid "Governorate"
+msgstr "Gouvernorat"
+
+msgid ""
+"Granular audit trail for staff actions and automated system events. All "
+"records are cryptographically signed."
+msgstr ""
+"Piste d'audit détaillée des actions des agents et des événements système."
+" Tous les enregistrements sont signés cryptographiquement."
+
+msgid "Guichet 4, 2nd Floor"
+msgstr "Guichet 4, 2e étage"
+
+msgid "Guidance for using the portal, and what to do when something goes wrong."
+msgstr "Aide à l'utilisation du portail, et que faire en cas de problème."
+
+msgid "Hardware-level encryption enabled."
+msgstr "Chiffrement matériel activé."
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "Help &amp; Support"
+msgstr "Aide et assistance"
+
+msgid "Help Center"
+msgstr "Centre d'aide"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "How Watiq contacts you, and what it will never ask for."
+msgstr "Comment Watiq vous contacte, et ce qu'il ne vous demandera jamais."
+
+msgid "How can we help you?"
+msgstr "Comment pouvons-nous vous aider ?"
+
+msgid ""
+"How the Watiq National Portal collects, uses and protects your personal "
+"data."
+msgstr ""
+"Comment le portail national Watiq collecte, utilise et protège vos "
+"données personnelles."
+
+msgid "How to reach the Watiq support team and your local office."
+msgstr "Comment joindre l'équipe d'assistance Watiq et votre bureau local."
+
+msgid "I confirm the citizen's stored documents have already been purged."
+msgstr "Je confirme que les documents stockés du citoyen ont déjà été purgés."
+
+msgid "I have read and agree to the Terms"
+msgstr "J'ai lu et j'accepte les conditions"
+
+msgid "ID:"
+msgstr "ID :"
+
+msgid "IN-PROGRESS REQUESTS"
+msgstr "DEMANDES EN COURS"
+
+msgid "IP Address"
+msgstr "Adresse IP"
+
+msgid "IP Address:"
+msgstr "Adresse IP :"
+
+msgid "IP:"
+msgstr "IP :"
+
+msgid "ISO/IEC 27001 COMPLIANT"
+msgstr "CONFORME ISO/IEC 27001"
+
+msgid "IT Support"
+msgstr "Support informatique"
+
+msgid "Identity"
+msgstr "Identité"
+
+msgid "Identity Verification"
+msgstr "Vérification d'identité"
+
+msgid ""
+"Identity transactions on this platform are secured by national-grade end-"
+"to-end encryption and biometric verification."
+msgstr ""
+"Les transactions d'identité sont protégées par un chiffrement de bout en "
+"bout de niveau national et une vérification biométrique."
+
+msgid ""
+"Identity transactions on this platform are secured by national-grade end-"
+"to-end encryption."
+msgstr ""
+"Les transactions d'identité sur cette plateforme sont protégées par un "
+"chiffrement de bout en bout de niveau national."
+
+msgid "Identité"
+msgstr "Identité"
+
+msgid ""
+"If any part of this portal prevents you from completing a service,\n"
+"                contact us through the details on the"
+msgstr ""
+"Si une partie de ce portail vous empêche d'accomplir une démarche,\n"
+"                contactez-nous via les coordonnées de la"
+
+msgid ""
+"If that account exists we have sent a 6-digit verification code to its "
+"registered contact details."
+msgstr ""
+"Si ce compte existe, nous avons envoyé un code de vérification à 6 "
+"chiffres aux coordonnées enregistrées."
+
+msgid "If that account exists, a reset code has been sent."
+msgstr "Si ce compte existe, un code de réinitialisation a été envoyé."
+
+msgid "Immediate"
+msgstr "Immédiat"
+
+msgid "In Progress"
+msgstr "En cours"
+
+#, python-format
+msgid ""
+"In the meantime the desk answers by telephone on %(phone)s and by email "
+"at %(email)s. Quote your national ID so the officer can find your file."
+msgstr ""
+"En attendant, le guichet répond par téléphone au %(phone)s et par e-mail "
+"à %(email)s. Indiquez votre identifiant national pour que l'agent "
+"retrouve votre dossier."
+
+msgid ""
+"Information is shared between authorized governmental entities only when "
+"strictly necessary for service fulfillment."
+msgstr ""
+"Les informations ne sont partagées entre entités publiques autorisées que"
+" lorsque c'est strictement nécessaire à l'exécution du service."
+
+msgid "Informations Personnelles"
+msgstr "Informations personnelles"
+
+msgid "Infrastructure hosted exclusively on national territory."
+msgstr "Infrastructure hébergée exclusivement sur le territoire national."
+
+msgid ""
+"Infrastructure sécurisée opérée par l'Agence Nationale de Certification "
+"Électronique (ANCE) en collaboration avec le Ministère des Technologies "
+"de la Communication."
+msgstr ""
+"Infrastructure sécurisée opérée par l'Agence Nationale de Certification "
+"Électronique (ANCE) en collaboration avec le Ministère des Technologies "
+"de la Communication."
+
+msgid "Initialize Application"
+msgstr "Initialiser la demande"
+
+msgid ""
+"Inquiries sent with the form on this page are not tracked online yet.\n"
+"                                    Use the telephone or email channel "
+"below if you need a reference number."
+msgstr ""
+"Les demandes envoyées via ce formulaire ne sont pas encore suivies en "
+"ligne.\n"
+"                                    Utilisez le téléphone ou l'e-mail ci-"
+"dessous si vous avez besoin d'un numéro de référence."
+
+msgid "Inquiry Category"
+msgstr "Catégorie de la demande"
+
+msgid "Institutional"
+msgstr "Institutionnel"
+
+msgid "Institutional Audit Trail"
+msgstr "Piste d'audit institutionnelle"
+
+msgid "Institutional Authenticator"
+msgstr "Authentificateur institutionnel"
+
+msgid "Institutional Excellence"
+msgstr "Excellence institutionnelle"
+
+msgid "Institutional Notice:"
+msgstr "Avis institutionnel :"
+
+msgid "Institutional Portal"
+msgstr "Portail institutionnel"
+
+msgid "Institutional Seal"
+msgstr "Sceau institutionnel"
+
+msgid "Institutional Search"
+msgstr "Recherche institutionnelle"
+
+msgid "Institutional Support"
+msgstr "Assistance institutionnelle"
+
+msgid "Institutional Support &amp; Inquiries"
+msgstr "Assistance institutionnelle et demandes"
+
+msgid "Interactive Verification"
+msgstr "Vérification interactive"
+
+msgid "Interpreter Feed"
+msgstr "Flux de l'interprète"
+
+msgid "Interpreter Mode"
+msgstr "Mode interprète"
+
+msgid "Interprète disponible pour vous guider dans la recherche de bureau."
+msgstr "Interprète disponible pour vous guider dans la recherche de bureau."
+
+msgid "Interprète en langue des signes tunisienne"
+msgstr "Interprète en langue des signes tunisienne"
+
+msgid "JPG"
+msgstr "JPG"
+
+msgid "JUDICIAL EMERGENCY"
+msgstr "URGENCE JUDICIAIRE"
+
+msgid "Justice"
+msgstr "Justice"
+
+msgid "KB"
+msgstr "Ko"
+
+msgid "Keeping Your Account Safe"
+msgstr "Protéger votre compte"
+
+msgid "Knowledge Base"
+msgstr "Base de connaissances"
+
+msgid "Knowledge Base - République Tunisienne"
+msgstr "Base de connaissances — République Tunisienne"
+
+msgid "LIVE"
+msgstr "EN DIRECT"
+
+msgid "Lancer l'interprète LST"
+msgstr "Lancer l'interprète LST"
+
+msgid "Language"
+msgstr "Langue"
+
+msgid "Language and accessibility options"
+msgstr "Options de langue et d'accessibilité"
+
+msgid "Large text size"
+msgstr "Grande taille de texte"
+
+msgid "Last name"
+msgstr "Nom"
+
+msgid "Launch Live Interpreter"
+msgstr "Lancer l'interprète en direct"
+
+msgid "Le répertoire des bureaux est indisponible."
+msgstr "Le répertoire des bureaux est indisponible."
+
+msgid "Le répertoire des bureaux ne publie aucun type pour le moment."
+msgstr "Le répertoire des bureaux ne publie aucun type pour le moment."
+
+msgid "Ledger Status"
+msgstr "État du registre"
+
+msgid "Legal"
+msgstr "Juridique"
+
+msgid "Legal &amp; Compliance"
+msgstr "Juridique et conformité"
+
+msgid "Legal Archive Access"
+msgstr "Accès aux archives juridiques"
+
+msgid "Legal Framework"
+msgstr "Cadre juridique"
+
+msgid "Legal Notice"
+msgstr "Mentions légales"
+
+msgid "Legal Policy"
+msgstr "Politique juridique"
+
+msgid "Legal Support"
+msgstr "Assistance juridique"
+
+msgid "Legal Vault"
+msgstr "Coffre juridique"
+
+msgid "Legal terms · in force"
+msgstr "Conditions juridiques · en vigueur"
+
+msgid "Legally Binding Signatures"
+msgstr "Signatures juridiquement contraignantes"
+
+msgid ""
+"Legally binding digital certificate issued by the Ministry of Interior "
+"through the national civil registry."
+msgstr ""
+"Certificat numérique juridiquement contraignant délivré par le ministère "
+"de l'Intérieur via le registre national d'état civil."
+
+msgid "Lieu / Place of Birth:"
+msgstr "Lieu / Place of Birth :"
+msgid "Live Chat"
+msgstr "Chat en direct"
+
+msgid "Live Interpretation"
+msgstr "Interprétation en direct"
+
+msgid "Live Interpreter"
+msgstr "Interprète en direct"
+
+msgid "Live Support"
+msgstr "Assistance en direct"
+
+msgid "Live TSL Assistant"
+msgstr "Assistant LST en direct"
+
+msgid "Live TSL Support"
+msgstr "Assistance LST en direct"
+
+msgid "Live Translation — TSL"
+msgstr "Traduction en direct — LST"
+
+msgid ""
+"Live chat is not connected yet. Please use the telephone or email channel"
+" listed on the contact page and quote your national ID."
+msgstr ""
+"Le chat en direct n'est pas encore raccordé. Utilisez le téléphone ou "
+"l'e-mail de la page de contact en indiquant votre identifiant national."
+
+msgid "Livraison"
+msgstr "Livraison"
+
+msgid "Load More"
+msgstr "Charger plus"
+
+msgid "Localisez l'administration la plus proche et réservez votre créneau."
+msgstr "Localisez l'administration la plus proche et réservez votre créneau."
+
+msgid "Location"
+msgstr "Lieu"
+
+msgid "Lodge Formal Inquiry"
+msgstr "Déposer une demande formelle"
+
+msgid "Lodge Official Appeal"
+msgstr "Déposer un recours officiel"
+
+msgid "Logout"
+msgstr "Déconnexion"
+
+msgid "Logs"
+msgstr "Journaux"
+
+msgid "Légende"
+msgstr "Légende"
+
+msgid "MacBook Pro"
+msgstr "MacBook Pro"
+
+msgid "Manage Appointment"
+msgstr "Gérer le rendez-vous"
+
+msgid "Manage Appointments"
+msgstr "Gérer les rendez-vous"
+
+msgid "Manage Booking"
+msgstr "Gérer la réservation"
+
+msgid "Manage your official state identity and security protocols."
+msgstr "Gérez votre identité officielle et vos protocoles de sécurité."
+
+msgid "Map indicating bureau location"
+msgstr "Carte indiquant l'emplacement du bureau"
+
+msgid "Mark all as read"
+msgstr "Tout marquer comme lu"
+
+msgid "Mark as read"
+msgstr "Marquer comme lu"
+
+msgid "Maximum file size: 10MB per document"
+msgstr "Taille maximale : 10 Mo par document"
+
+msgid "Metadata Audit"
+msgstr "Audit des métadonnées"
+
+msgid "Minimize"
+msgstr "Réduire"
+
+msgid "Modifier la sélection"
+msgstr "Modifier la sélection"
+
+msgid ""
+"Monitor your account activity, active sessions, and recent "
+"authentications to ensure your data remains secure."
+msgstr ""
+"Surveillez l'activité de votre compte, vos sessions actives et vos "
+"authentifications récentes pour garder vos données sûres."
+
+msgid "Motif de la visite (facultatif)"
+msgstr "Motif de la visite (facultatif)"
+
+msgid "Multi-Hosting"
+msgstr "Hébergement multiple"
+
+msgid "Mute Audio"
+msgstr "Couper le son"
+
+msgid "My Appointments"
+msgstr "Mes rendez-vous"
+
+msgid "My Documents"
+msgstr "Mes documents"
+
+msgid "My Documents - République Tunisienne"
+msgstr "Mes documents — République Tunisienne"
+
+msgid "My Location"
+msgstr "Ma position"
+
+msgid "My Office Summary"
+msgstr "Résumé de mon bureau"
+
+msgid "My Requests"
+msgstr "Mes demandes"
+
+msgid "My Requests - Watiq National Portal"
+msgstr "Mes demandes — Watiq Portail national"
+
+msgid "My appointments"
+msgstr "Mes rendez-vous"
+
+msgid "NO DOCUMENT TO DOWNLOAD"
+msgstr "AUCUN DOCUMENT À TÉLÉCHARGER"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Narration"
+msgstr "Narration"
+
+msgid "National Archive"
+msgstr "Archives nationales"
+
+msgid "National Crest of Tunisia"
+msgstr "Armoiries de la Tunisie"
+
+msgid "National Digital Services"
+msgstr "Services numériques nationaux"
+
+msgid "National Emblem Watermark"
+msgstr "Filigrane de l'emblème national"
+
+msgid "National Grade Encryption"
+msgstr "Chiffrement de niveau national"
+
+msgid "National ID"
+msgstr "Identifiant national"
+
+msgid "National ID (CIN)"
+msgstr "Identifiant national (CIN)"
+
+msgid "National ID Number (CIN)"
+msgstr "Numéro d'identité nationale (CIN)"
+
+msgid "National ID, name or email"
+msgstr "Identifiant national, nom ou e-mail"
+
+msgid "National Identity Number (CIN)"
+msgstr "Numéro d'identité nationale (CIN)"
+
+msgid "National Portal"
+msgstr "Portail national"
+
+msgid "National Portal - Citizen Watiq"
+msgstr "Portail national — Espace citoyen Watiq"
+
+msgid "National Portal Management"
+msgstr "Gestion du portail national"
+
+msgid "National Registry Sync"
+msgstr "Synchronisation du registre national"
+
+msgid "National Services"
+msgstr "Services nationaux"
+
+msgid "National Services Catalog"
+msgstr "Catalogue des services nationaux"
+
+msgid "National Services Portal - Secure Environment"
+msgstr "Portail des services nationaux — Environnement sécurisé"
+
+msgid "National Services Portal. All rights reserved."
+msgstr "Portail des services nationaux. Tous droits réservés."
+
+msgid "National Territory"
+msgstr "Territoire national"
+
+msgid "New Booking"
+msgstr "Nouvelle réservation"
+
+msgid "New Official Inquiry"
+msgstr "Nouvelle demande officielle"
+
+msgid "New Password"
+msgstr "Nouveau mot de passe"
+
+msgid "New Request"
+msgstr "Nouvelle demande"
+
+msgid "New Upload"
+msgstr "Nouveau téléversement"
+
+msgid "Next Step"
+msgstr "Étape suivante"
+
+msgid "Next page"
+msgstr "Page suivante"
+
+msgid "No"
+msgstr "Non"
+
+msgid ""
+"No access-log entries were returned. The API authorises this feed, so an\n"
+"                                    account without the audit permission "
+"sees nothing here."
+msgstr ""
+"Aucune entrée du journal d'accès n'a été renvoyée. L'API autorise ce flux"
+" :\n"
+"                                    un compte sans permission d'audit ne "
+"voit rien ici."
+
+msgid "No accounts match that search."
+msgstr "Aucun compte ne correspond à cette recherche."
+
+msgid "No accounts to show."
+msgstr "Aucun compte à afficher."
+
+msgid "No additional information was submitted with this request."
+msgstr "Aucune information supplémentaire n'a été fournie avec cette demande."
+
+msgid "No appointments scheduled."
+msgstr "Aucun rendez-vous programmé."
+
+#, python-format
+msgid ""
+"No article matches under %(topic)s. Try a different term, or ask the "
+"support desk."
+msgstr ""
+"Aucun article ne correspond dans %(topic)s. Essayez un autre terme, ou "
+"contactez l'assistance."
+
+#, python-format
+msgid ""
+"No article matches “%(query)s” under %(topic)s. Try a different term, or "
+"ask the support desk."
+msgstr ""
+"Aucun article ne correspond à « %(query)s » dans %(topic)s. Essayez un "
+"autre terme, ou contactez l'assistance."
+
+#, python-format
+msgid ""
+"No article matches “%(query)s”. Try a different term, or ask the support "
+"desk."
+msgstr ""
+"Aucun article ne correspond à « %(query)s ». Essayez un autre terme, ou "
+"contactez l'assistance."
+
+msgid "No article matches. Try a different term, or ask the support desk."
+msgstr ""
+"Aucun article ne correspond. Essayez un autre terme, ou contactez "
+"l'assistance."
+
+msgid "No audit entries yet"
+msgstr "Aucune entrée d'audit"
+
+msgid "No document has been filed against this request yet."
+msgstr "Aucun document n'a encore été déposé pour cette demande."
+
+msgid "No documents attached to this request."
+msgstr "Aucun document joint à cette demande."
+
+msgid "No documents have been filed against your recent requests yet."
+msgstr "Aucun document n'a encore été déposé pour vos demandes récentes."
+
+msgid "No documents have been uploaded for this request."
+msgstr "Aucun document n'a été téléversé pour cette demande."
+
+msgid "No documents yet"
+msgstr "Aucun document pour le moment"
+
+msgid ""
+"No log tail is wired: this build ships no log shipper, so nothing beyond "
+"these probes is observable from here."
+msgstr ""
+"Aucun flux de journaux n'est branché : cette version n'embarque pas de "
+"collecteur, rien au-delà de ces sondes n'est observable ici."
+
+msgid "No recent activity"
+msgstr "Aucune activité récente"
+
+msgid "No request loaded"
+msgstr "Aucune demande chargée"
+
+msgid "No request matches that tracking code."
+msgstr "Aucune demande ne correspond à ce code de suivi."
+
+msgid "No requests with that status."
+msgstr "Aucune demande avec cet état."
+
+msgid "No roles to show."
+msgstr "Aucun rôle à afficher."
+
+msgid "No services match this search"
+msgstr "Aucun service ne correspond à cette recherche"
+
+#, python-format
+msgid "No slots are open at this office on %(date)s. Try another day."
+msgstr ""
+"Aucun créneau n'est ouvert dans ce bureau le %(date)s. Essayez un autre "
+"jour."
+
+msgid "No staff accounts to show."
+msgstr "Aucun compte agent à afficher."
+
+msgid "No status recorded yet"
+msgstr "Aucun état enregistré"
+
+msgid "Nom (en arabe)"
+msgstr "Nom (en arabe)"
+
+msgid "Nom / Surname:"
+msgstr "Nom / Surname :"
+msgid "Normal text size"
+msgstr "Taille de texte normale"
+
+msgid ""
+"Nos agents sont disponibles pour vous guider dans votre démarche "
+"administrative."
+msgstr ""
+"Nos agents sont disponibles pour vous guider dans votre démarche "
+"administrative."
+
+msgid "Not yet certified"
+msgstr "Pas encore certifié"
+
+msgid "Note on Liability:"
+msgstr "Note sur la responsabilité :"
+
+msgid "Nothing has touched this account."
+msgstr "Rien n'a touché ce compte."
+
+msgid "Nothing in the catalogue matches the filters you applied."
+msgstr "Aucun élément du catalogue ne correspond aux filtres appliqués."
+
+msgid "Nothing matched"
+msgstr "Aucun résultat"
+
+msgid "Nothing scheduled"
+msgstr "Rien de planifié"
+
+msgid "Notification Center"
+msgstr "Centre de notifications"
+
+msgid "Notification Center - Watiq National Portal"
+msgstr "Centre de notifications — Watiq Portail national"
+
+msgid "Notification Settings"
+msgstr "Paramètres de notification"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Numéro de la CIN"
+msgstr "Numéro de la CIN"
+
+msgid "Né(e) le / Date of Birth:"
+msgstr "Né(e) le / Date of Birth :"
+msgid "Objet"
+msgstr "Objet"
+
+msgid "Objet de la demande"
+msgstr "Objet de la demande"
+
+msgid "Oct 18, 11:20 AM"
+msgstr "18 oct., 11:20"
+
+msgid "Oct 20, 09:05 AM"
+msgstr "20 oct., 09:05"
+
+msgid "Oct 21, 02:15 AM"
+msgstr "21 oct., 02:15"
+
+msgid "Oct 23, 14:32 PM"
+msgstr "23 oct., 14:32"
+
+msgid "Oct 24, 08:14 AM"
+msgstr "24 oct., 08:14"
+
+msgid "Office"
+msgstr "Bureau"
+
+msgid "Office appointments"
+msgstr "Rendez-vous du bureau"
+
+msgid "Official Copy"
+msgstr "Copie officielle"
+
+msgid "Official Email"
+msgstr "E-mail officiel"
+
+msgid "Official Gazettes"
+msgstr "Journaux officiels"
+
+msgid "Official Support"
+msgstr "Assistance officielle"
+
+msgid ""
+"Online inquiries are not connected yet. Please use the telephone or email"
+" channel listed below and quote your national ID."
+msgstr ""
+"Les demandes en ligne ne sont pas encore raccordées. Utilisez le "
+"téléphone ou l'e-mail ci-dessous en indiquant votre identifiant national."
+
+msgid "Open Data"
+msgstr "Données ouvertes"
+
+msgid "Open Data Policy"
+msgstr "Politique des données ouvertes"
+
+msgid "Open Service"
+msgstr "Ouvrir le service"
+
+msgid "Open data"
+msgstr "Données ouvertes"
+
+msgid "Open document"
+msgstr "Ouvrir le document"
+
+msgid "Open the inquiry form instead"
+msgstr "Ouvrir plutôt le formulaire de demande"
+
+msgid "Operational"
+msgstr "Opérationnel"
+
+msgid "Our commitment to making government services usable by everyone."
+msgstr "Notre engagement à rendre les services publics utilisables par tous."
+
+msgid "Our support team is available 24/7 to assist you with any inquiries."
+msgstr ""
+"Notre équipe d'assistance est disponible 24h/24 et 7j/7 pour toute "
+"demande."
+
+msgid "Overview"
+msgstr "Vue d'ensemble"
+
+msgid "PDF"
+msgstr "PDF"
+
+msgid "PNG"
+msgstr "PNG"
+
+msgid "Page not found"
+msgstr "Page introuvable"
+
+msgid "Paiement électronique (Timbre fiscal)"
+msgstr "Paiement électronique (timbre fiscal)"
+
+msgid "Password Changed"
+msgstr "Mot de passe modifié"
+
+msgid "Pause Translation"
+msgstr "Suspendre la traduction"
+
+msgid "Pause interpreter"
+msgstr "Suspendre l'interprète"
+
+msgid "Payment"
+msgstr "Paiement"
+
+msgid "Payment Successful - République Tunisienne"
+msgstr "Paiement réussi — République Tunisienne"
+
+msgid "Payments"
+msgstr "Paiements"
+
+msgid "Pending Payment"
+msgstr "Paiement en attente"
+
+msgid "Pending Requests"
+msgstr "Demandes en attente"
+
+msgid "Pending Review"
+msgstr "En attente d'examen"
+
+msgid "Permanently anonymise this account"
+msgstr "Anonymiser définitivement ce compte"
+
+msgid "Permission changes apply at next sign-in"
+msgstr "Les changements de permissions s'appliquent à la prochaine connexion"
+
+msgid "Personal Information"
+msgstr "Informations personnelles"
+
+msgid "Phone"
+msgstr "Téléphone"
+
+msgid "Phone not verified"
+msgstr "Téléphone non vérifié"
+
+msgid "Phone verified"
+msgstr "Téléphone vérifié"
+
+msgid "Placeholder content"
+msgstr "Contenu provisoire"
+
+msgid ""
+"Plateforme officielle de demande d'extrait de casier judiciaire. Ce "
+"service sécurisé permet aux citoyens tunisiens d'obtenir leur document "
+"légal par voie postale."
+msgstr ""
+"Plateforme officielle de demande d'extrait de casier judiciaire. Ce "
+"service sécurisé permet aux citoyens tunisiens d'obtenir leur document "
+"légal par voie postale."
+
+msgid "Platform Usage &amp; Sovereignty"
+msgstr "Utilisation de la plateforme et souveraineté"
+
+msgid "Play"
+msgstr "Lire"
+
+msgid "Play Sign Language Translation"
+msgstr "Lire la traduction en langue des signes"
+
+msgid "Play interpreter"
+msgstr "Lire l'interprète"
+
+msgid ""
+"Please bring your current ID card, proof of address (utility bill within "
+"last 3 months), and two recent passport-sized photographs."
+msgstr ""
+"Munissez-vous de votre carte d'identité en cours de validité, d'un "
+"justificatif de domicile (facture de moins de 3 mois) et de deux photos "
+"d'identité récentes."
+
+msgid ""
+"Please provide the necessary verification files. Ensure all documents are"
+" clear and legible."
+msgstr ""
+"Veuillez fournir les pièces de vérification nécessaires. Assurez-vous "
+"qu'elles sont nettes et lisibles."
+
+msgid "Portail National des Services"
+msgstr "Portail national des services"
+
+msgid "Portail Souverain -"
+msgstr "Portail souverain —"
+
+msgid "Prendre Rendez-vous"
+msgstr "Prendre rendez-vous"
+
+msgid "Prendre Rendez-vous - Portail National"
+msgstr "Prendre rendez-vous — Portail national"
+
+msgid "Previous page"
+msgstr "Page précédente"
+
+msgid "Primary"
+msgstr "Principal"
+
+msgid "Print"
+msgstr "Imprimer"
+
+msgid "Print List"
+msgstr "Imprimer la liste"
+
+msgid "Print Profile"
+msgstr "Imprimer le profil"
+
+msgid "Priority Level"
+msgstr "Niveau de priorité"
+
+msgid "Priority Sovereign"
+msgstr "Priorité souveraine"
+
+msgid "Priority Support Line"
+msgstr "Ligne d'assistance prioritaire"
+
+msgid "Privacy Hub"
+msgstr "Espace confidentialité"
+
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
+
+msgid "Privacy and security"
+msgstr "Confidentialité et sécurité"
+
+msgid "Pro"
+msgstr "Pro"
+
+msgid "Probe Transcript"
+msgstr "Transcription du sondage"
+
+msgid "Probed"
+msgstr "Sondé"
+
+msgid "Processing Fee"
+msgstr "Frais de traitement"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Profile Management"
+msgstr "Gestion du profil"
+
+msgid "Profile Settings"
+msgstr "Paramètres du profil"
+
+msgid "Protected by National Trust Infrastructure"
+msgstr "Protégé par l'infrastructure nationale de confiance"
+
+msgid ""
+"Provide authenticated communication channels for secure transaction "
+"updates."
+msgstr ""
+"Fournissez des canaux de communication authentifiés pour le suivi "
+"sécurisé des transactions."
+
+msgid "Provide comprehensive details for formal review..."
+msgstr "Fournissez des détails complets pour l'examen formel…"
+
+msgid "Pré-requis"
+msgstr "Pré-requis"
+
+msgid "Précisions supplémentaires (Champ Sécurisé)"
+msgstr "Précisions supplémentaires (champ sécurisé)"
+
+msgid "Prénom (en arabe)"
+msgstr "Prénom (en arabe)"
+
+msgid "Prénom / First Name:"
+msgstr "Prénom / First Name :"
+msgid "Quantum Encryption"
+msgstr "Chiffrement quantique"
+
+msgid "Quick Links"
+msgstr "Liens rapides"
+
+msgid "REAL-TIME UPDATES"
+msgstr "MISES À JOUR EN TEMPS RÉEL"
+
+msgid "RECENT DOCUMENTS"
+msgstr "DOCUMENTS RÉCENTS"
+
+msgid "RECOVER ACCESS"
+msgstr "RÉCUPÉRER L'ACCÈS"
+
+msgid "REPUBLIQUE TUNISIENNE"
+msgstr "RÉPUBLIQUE TUNISIENNE"
+
+msgid "Reactivate"
+msgstr "Réactiver"
+
+msgid "Read"
+msgstr "Lu"
+
+msgid "Reading: Section 1"
+msgstr "Lecture : section 1"
+
+msgid "Real-time interoperability with civil status registries."
+msgstr "Interopérabilité en temps réel avec les registres d'état civil."
+
+msgid "Reason for Restriction"
+msgstr "Motif de la restriction"
+
+msgid "Recent Authentication Events"
+msgstr "Événements d'authentification récents"
+
+msgid "Rechercher un bureau"
+msgstr "Rechercher un bureau"
+
+msgid "Rechercher une ville ou un code postal..."
+msgstr "Rechercher une ville ou un code postal…"
+
+msgid "Record Access"
+msgstr "Accès aux registres"
+
+msgid "Recovery Key"
+msgstr "Clé de récupération"
+
+msgid "Ref:"
+msgstr "Réf. :"
+
+msgid "Reference"
+msgstr "Référence"
+
+msgid "Reference ID"
+msgstr "Identifiant de référence"
+
+msgid "Reference:"
+msgstr "Référence :"
+
+msgid "Refresh Status"
+msgstr "Actualiser l'état"
+
+msgid "Regain Access to Your Digital Identity"
+msgstr "Retrouvez l'accès à votre identité numérique"
+
+msgid "Register"
+msgstr "S'inscrire"
+
+msgid "Register Digital Identity"
+msgstr "Créer une identité numérique"
+
+msgid "Reject"
+msgstr "Rejeter"
+
+msgid "Rejected"
+msgstr "Rejeté"
+
+msgid "Report Issue"
+msgstr "Signaler un problème"
+
+msgid "Report suspicious activity"
+msgstr "Signaler une activité suspecte"
+
+msgid "Reporting a barrier"
+msgstr "Signaler un obstacle"
+
+msgid "Reports"
+msgstr "Rapports"
+
+msgid "Republic of Tunisia"
+msgstr "République Tunisienne"
+
+msgid "Republic of Tunisia - National Services Portal"
+msgstr "République Tunisienne — Portail des services nationaux"
+
+msgid "Republic of Tunisia - Secured by National Legal Infrastructure"
+msgstr "République Tunisienne — Sécurisé par l'infrastructure juridique nationale"
+
+msgid "Republic of Tunisia — National Digital Sovereignty Department."
+msgstr "République Tunisienne — Département de la souveraineté numérique."
+
+msgid ""
+"Republic of Tunisia. Access to this platform is governed by the National "
+"Sovereign Legal Infrastructure and monitored for security compliance."
+msgstr ""
+"République Tunisienne. L'accès à cette plateforme est régi par "
+"l'infrastructure juridique souveraine nationale et contrôlé pour "
+"conformité."
+
+msgid "Republic of Tunisia. All Rights Reserved."
+msgstr "République Tunisienne. Tous droits réservés."
+
+msgid "Republic of Tunisia. All Rights Reserved. Digital Sovereignty Unit."
+msgstr ""
+"République Tunisienne. Tous droits réservés. Unité de souveraineté "
+"numérique."
+
+msgid "Request ID"
+msgstr "ID de la demande"
+
+msgid "Request Resubmission"
+msgstr "Demander une nouvelle soumission"
+
+msgid "Request Status"
+msgstr "État de la demande"
+
+msgid "Request a Correction"
+msgstr "Demander une correction"
+
+msgid "Request a correction"
+msgstr "Demander une correction"
+
+msgid "Request assigned to you."
+msgstr "Demande qui vous est assignée."
+
+msgid "Require biometric e-signature handshake for this session"
+msgstr "Exiger une signature électronique biométrique pour cette session"
+
+msgid "Required Documents"
+msgstr "Documents requis"
+
+msgid "Requires Action"
+msgstr "Action requise"
+
+msgid "Requires an office visit"
+msgstr "Nécessite une visite au bureau"
+
+msgid "Reschedule Appointment"
+msgstr "Reprogrammer le rendez-vous"
+
+msgid "Resend Code"
+msgstr "Renvoyer le code"
+
+msgid "Resource"
+msgstr "Ressource"
+
+msgid "Resources"
+msgstr "Ressources"
+
+msgid "Response Time by Surface"
+msgstr "Temps de réponse par surface"
+
+msgid "Retention"
+msgstr "Conservation"
+
+msgid ""
+"Retention periods for submitted requests, uploaded documents and access\n"
+"                logs are set by the operating authority and belong in "
+"this section."
+msgstr ""
+"Les durées de conservation des demandes déposées, des documents "
+"téléversés et\n"
+"                des journaux d'accès sont fixées par l'autorité "
+"exploitante et ont leur place ici."
+
+msgid "Retour"
+msgstr "Retour"
+
+msgid "Retour à la liste des bureaux"
+msgstr "Retour à la liste des bureaux"
+
+msgid "Return to Dashboard"
+msgstr "Retour au tableau de bord"
+
+msgid "Return to the portal"
+msgstr "Retour au portail"
+
+msgid "Reveal national identity number"
+msgstr "Afficher le numéro d'identité nationale"
+
+msgid "Review"
+msgstr "Examiner"
+
+msgid "Review Request:"
+msgstr "Examiner la demande :"
+
+msgid "Reviewer Notes (recorded with the decision)"
+msgstr "Notes de l'examinateur (enregistrées avec la décision)"
+
+msgid "Role"
+msgstr "Rôle"
+
+msgid "Round-trip Latency"
+msgstr "Latence aller-retour"
+
+msgid "Rpublique Tunisienne"
+msgstr "République Tunisienne"
+
+msgid "Rpublique Tunisienne - Portail National des Services"
+msgstr "République Tunisienne — Portail national des services"
+
+msgid "Réf."
+msgstr "Réf."
+
+msgid "Référence du créneau"
+msgstr "Référence du créneau"
+
+msgid "République Tunisienne"
+msgstr "République Tunisienne"
+
+msgid "République Tunisienne - Portail National des Services"
+msgstr "République Tunisienne — Portail national des services"
+
+msgid ""
+"République Tunisienne - Portail National des Services. Strict Compliance "
+"Enforced."
+msgstr ""
+"République Tunisienne — Portail national des services. Conformité stricte"
+" appliquée."
+
+msgid "Résultats Proches ("
+msgstr "Résultats proches ("
+
+msgid "SECURE SHARE"
+msgstr "PARTAGE SÉCURISÉ"
+
+msgid "SECURITY LOG"
+msgstr "JOURNAL DE SÉCURITÉ"
+
+msgid "SOVEREIGN"
+msgstr "SOUVERAIN"
+
+msgid "SOVEREIGN CLOUD SECURED"
+msgstr "CLOUD SOUVERAIN SÉCURISÉ"
+
+msgid "STATE COMPLIANT"
+msgstr "CONFORME À L'ÉTAT"
+
+msgid "SYSTEM ARCHITECTURE"
+msgstr "ARCHITECTURE DU SYSTÈME"
+
+msgid "Save permissions"
+msgstr "Enregistrer les permissions"
+
+msgid "Scan upon arrival at the kiosk."
+msgstr "À scanner à votre arrivée à la borne."
+
+msgid "Sceau National Tunisien"
+msgstr "Sceau national tunisien"
+
+msgid "Schedule Appointment"
+msgstr "Planifier un rendez-vous"
+
+msgid "Scheduled Infrastructure Update"
+msgstr "Mise à jour d'infrastructure planifiée"
+
+msgid "Scheduled Maintenance"
+msgstr "Maintenance planifiée"
+
+msgid "Scheduled visits for"
+msgstr "Visites planifiées pour"
+
+msgid "Search"
+msgstr "Rechercher"
+
+msgid "Search Actor or Resource"
+msgstr "Rechercher un auteur ou une ressource"
+
+msgid "Search Request ID or Citizen Name..."
+msgstr "Rechercher un ID de demande ou un nom…"
+
+msgid "Search Requests"
+msgstr "Rechercher des demandes"
+
+msgid "Search by ID, name, or type..."
+msgstr "Rechercher par ID, nom ou type…"
+
+msgid "Search by Tracking Code or Service..."
+msgstr "Rechercher par code de suivi ou service…"
+
+msgid "Search citizens"
+msgstr "Rechercher des citoyens"
+
+msgid "Search services"
+msgstr "Rechercher des services"
+
+msgid "Search services..."
+msgstr "Rechercher des services…"
+
+msgid "Search the knowledge base"
+msgstr "Rechercher dans la base de connaissances"
+
+msgid "Search the knowledge base..."
+msgstr "Rechercher dans la base de connaissances…"
+
+msgid "Search..."
+msgstr "Rechercher…"
+
+msgid "Secondary Verification"
+msgstr "Vérification secondaire"
+
+msgid "Section content to be supplied by the content owner."
+msgstr "Contenu de section à fournir par le responsable éditorial."
+
+msgid "Secure Access to"
+msgstr "Accès sécurisé aux"
+
+msgid "Secure Document Upload"
+msgstr "Téléversement sécurisé de documents"
+
+msgid "Secure Email Address"
+msgstr "Adresse e-mail sécurisée"
+
+msgid "Secure Login"
+msgstr "Connexion sécurisée"
+
+msgid "Secure Master Password"
+msgstr "Mot de passe maître sécurisé"
+
+msgid "Secure Portal"
+msgstr "Portail sécurisé"
+
+msgid "Secure Registration Flow"
+msgstr "Parcours d'inscription sécurisé"
+
+msgid "Secure Session"
+msgstr "Session sécurisée"
+
+msgid "Secure Session Protocol v2.4"
+msgstr "Protocole de session sécurisée v2.4"
+
+msgid "Secure interoperability layer ensuring the integrity of data exchanges."
+msgstr "Couche d'interopérabilité sécurisée garantissant l'intégrité des échanges."
+
+msgid "Secured by National Cybersecurity Agency (ANSI) &amp; Ministry of Justice"
+msgstr ""
+"Sécurisé par l'Agence nationale de cybersécurité (ANSI) et le ministère "
+"de la Justice"
+
+msgid "Security"
+msgstr "Sécurité"
+
+msgid "Security &amp; Credentials"
+msgstr "Sécurité et identifiants"
+
+msgid "Security Core"
+msgstr "Noyau de sécurité"
+
+msgid "Security Credentials"
+msgstr "Identifiants de sécurité"
+
+msgid "Security Log"
+msgstr "Journal de sécurité"
+
+msgid "Security Log - Citizen Space"
+msgstr "Journal de sécurité — Espace citoyen"
+
+msgid "Security Log - Watiq Staff Portal"
+msgstr "Journal de sécurité — Portail des agents Watiq"
+
+msgid "Security Password"
+msgstr "Mot de passe de sécurité"
+
+msgid "Security Protocol"
+msgstr "Protocole de sécurité"
+
+msgid "Security Protocol v2.4 Active"
+msgstr "Protocole de sécurité v2.4 actif"
+
+msgid "Security Protocols"
+msgstr "Protocoles de sécurité"
+
+msgid "Security Status: Secure"
+msgstr "État de sécurité : sécurisé"
+
+msgid "Security Warning"
+msgstr "Avertissement de sécurité"
+
+msgid "Security and privacy"
+msgstr "Sécurité et confidentialité"
+
+msgid "Select Date &amp; Time"
+msgstr "Choisir la date et l'heure"
+
+msgid "Select a role&hellip;"
+msgstr "Choisir un rôle…"
+
+msgid "Select all requests"
+msgstr "Sélectionner toutes les demandes"
+
+msgid "Semaine précédente"
+msgstr "Semaine précédente"
+
+msgid "Semaine suivante"
+msgstr "Semaine suivante"
+
+msgid "Send"
+msgstr "Envoyer"
+
+msgid ""
+"Sensitive personally identifiable information (PII) is currently masked "
+"in this view. Access to unmasked records requires Level 4 clearance and "
+"secondary biometric authentication."
+msgstr ""
+"Les données à caractère personnel sensibles sont actuellement masquées "
+"dans cette vue. L'accès aux enregistrements en clair exige une "
+"habilitation de niveau 4 et une authentification biométrique secondaire."
+
+msgid "Service"
+msgstr "Service"
+
+msgid "Service Catalogue"
+msgstr "Catalogue des services"
+
+msgid "Service Categories"
+msgstr "Catégories de services"
+
+msgid "Service Requests"
+msgstr "Demandes de service"
+
+msgid "Service Type"
+msgstr "Type de service"
+
+msgid "Service Type:"
+msgstr "Type de service :"
+
+msgid "Service demandé"
+msgstr "Service demandé"
+
+msgid "Service unavailable"
+msgstr "Service indisponible"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "Session opened"
+msgstr "Session ouverte"
+
+msgid "Settings"
+msgstr "Paramètres"
+
+msgid "Sfax, TUN"
+msgstr "Sfax, TUN"
+
+msgid "Show all"
+msgstr "Tout afficher"
+
+msgid "Show all services"
+msgstr "Afficher tous les services"
+
+msgid "Showing"
+msgstr "Affichage"
+
+msgid "Showing 1 to 4 of 2,491 records"
+msgstr "Affichage de 1 à 4 sur 2 491 enregistrements"
+
+msgid "Sign In"
+msgstr "Se connecter"
+
+msgid "Sign Language Assist"
+msgstr "Assistance en langue des signes"
+
+msgid "Sign Language Interpreter Connected"
+msgstr "Interprète en langue des signes connecté"
+
+msgid "Sign Language Interpreter Panel"
+msgstr "Panneau de l'interprète en langue des signes"
+
+msgid "Sign Language Interpreter Video Feed"
+msgstr "Flux vidéo de l'interprète en langue des signes"
+
+msgid "Sign Language Interpreter Video Feed Resides Here"
+msgstr "Le flux vidéo de l'interprète s'affiche ici"
+
+msgid "Sign Language Interpreter Window"
+msgstr "Fenêtre de l'interprète en langue des signes"
+
+msgid "Sign Out"
+msgstr "Se déconnecter"
+
+msgid "Sign Out of This Session"
+msgstr "Se déconnecter de cette session"
+
+msgid "Sign in as someone else"
+msgstr "Se connecter avec un autre compte"
+
+msgid "Sign in to see the full record, documents and history."
+msgstr ""
+"Connectez-vous pour voir le dossier complet, les documents et "
+"l'historique."
+
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+msgid "Signature Numérique ANCE"
+msgstr "Signature numérique ANCE"
+
+msgid "Signed in"
+msgstr "Connecté"
+
+msgid ""
+"Signing out ends this session on the server. If you think someone\n"
+"                                    else has access to your account, sign"
+" out and change your password."
+msgstr ""
+"La déconnexion met fin à cette session sur le serveur. Si vous pensez "
+"qu'une\n"
+"                                    autre personne a accès à votre "
+"compte, déconnectez-vous et changez votre mot de passe."
+
+msgid "Something went wrong"
+msgstr "Une erreur est survenue"
+
+msgid "Soumettre la demande"
+msgstr "Soumettre la demande"
+
+msgid "Sovereign Authority"
+msgstr "Autorité souveraine"
+
+msgid "Sovereign Cloud Infrastructure Logo"
+msgstr "Logo de l'infrastructure cloud souveraine"
+
+msgid "Sovereign Cloud Secured"
+msgstr "Cloud souverain sécurisé"
+
+msgid "Sovereign Digital Authority"
+msgstr "Autorité numérique souveraine"
+
+msgid "Sovereign Document Infrastructure"
+msgstr "Infrastructure documentaire souveraine"
+
+msgid "Sovereign Encrypted"
+msgstr "Chiffrement souverain"
+
+msgid "Sovereign Encryption Active"
+msgstr "Chiffrement souverain actif"
+
+msgid "Sovereign Gateway Verified"
+msgstr "Passerelle souveraine vérifiée"
+
+msgid "Sovereign Guarantee"
+msgstr "Garantie souveraine"
+
+msgid "Sovereign Infrastructure Secured by Watiq Protocol."
+msgstr "Infrastructure souveraine sécurisée par le protocole Watiq."
+
+msgid "Sovereign National Identity"
+msgstr "Identité nationale souveraine"
+
+msgid "Sovereign Portal"
+msgstr "Portail souverain"
+
+msgid "Sovereign Priority"
+msgstr "Priorité souveraine"
+
+msgid "Sovereign Secure"
+msgstr "Sécurité souveraine"
+
+msgid "Sovereign Shield"
+msgstr "Bouclier souverain"
+
+msgid "Sovereign inquiries are monitored by the Digital Compliance Commission."
+msgstr ""
+"Les demandes souveraines sont supervisées par la Commission de conformité"
+" numérique."
+
+msgid "Sovereignty"
+msgstr "Souveraineté"
+
+msgid "Staff Access"
+msgstr "Accès agent"
+
+msgid "Staff Access Portal"
+msgstr "Portail d'accès des agents"
+
+msgid "Staff Document Review - Watiq National Portal"
+msgstr "Examen des documents par les agents — Watiq Portail national"
+
+msgid "Staff Management"
+msgstr "Gestion des agents"
+
+msgid "Staff Restricted"
+msgstr "Réservé aux agents"
+
+msgid "Staff Workbench"
+msgstr "Plan de travail des agents"
+
+msgid "Staff account deactivated."
+msgstr "Compte agent désactivé."
+
+msgid "Staff account reactivated."
+msgstr "Compte agent réactivé."
+
+msgid "Staff accounts"
+msgstr "Comptes des agents"
+
+msgid "Staff email"
+msgstr "E-mail de l'agent"
+
+msgid "Staff member created."
+msgstr "Agent créé."
+
+msgid ""
+"Staff permissions are carried inside the access token, so a change here "
+"takes effect when that person's session is next refreshed — not "
+"immediately. If access must stop now, deactivate the account instead."
+msgstr ""
+"Les permissions des agents sont portées par le jeton d'accès : une "
+"modification ici prend effet au prochain rafraîchissement de leur "
+"session, pas immédiatement. Si l'accès doit cesser sur-le-champ, "
+"désactivez plutôt le compte."
+
+msgid "Standard Administrative"
+msgstr "Administratif standard"
+
+msgid "Standard Duration"
+msgstr "Durée standard"
+
+msgid "Start Application"
+msgstr "Commencer la demande"
+
+msgid "Start Date"
+msgstr "Date de début"
+
+msgid "Start a new request"
+msgstr "Commencer une nouvelle demande"
+
+msgid "Started:"
+msgstr "Débuté :"
+
+msgid "State Infrastructure"
+msgstr "Infrastructure de l'État"
+
+msgid "State Registry Link"
+msgstr "Lien vers le registre de l'État"
+
+msgid "State Verified"
+msgstr "Vérifié par l'État"
+
+msgid "State-Grade Security"
+msgstr "Sécurité de niveau étatique"
+
+msgid "Status"
+msgstr "État"
+
+msgid "Status Timeline"
+msgstr "Chronologie des états"
+
+msgid "Status for appointment"
+msgstr "État du rendez-vous"
+
+msgid "Statut Souverain Vérifié"
+msgstr "Statut souverain vérifié"
+
+msgid "Stay updated on your requests and appointments."
+msgstr "Restez informé de vos demandes et rendez-vous."
+
+msgid "Step"
+msgstr "Étape"
+
+msgid "Still need help?"
+msgstr "Besoin d'aide supplémentaire ?"
+
+msgid "Subject Reference"
+msgstr "Référence du sujet"
+
+msgid "Submitted"
+msgstr "Déposé"
+
+msgid "Submitted Documents"
+msgstr "Documents déposés"
+
+msgid "Success"
+msgstr "Succès"
+
+msgid "Successful Login"
+msgstr "Connexion réussie"
+
+msgid "Summary of institutional inquiry"
+msgstr "Résumé de la demande institutionnelle"
+
+msgid "Support"
+msgstr "Assistance"
+
+msgid "Support Center"
+msgstr "Centre d'assistance"
+
+msgid "Support Ticket - Watiq Sovereign Portal"
+msgstr "Ticket d'assistance — Portail souverain Watiq"
+
+msgid "Support channels"
+msgstr "Canaux d'assistance"
+
+msgid "Surfaces Not Answering"
+msgstr "Surfaces sans réponse"
+
+msgid "Surfaces Responding"
+msgstr "Surfaces répondantes"
+
+msgid "Switch colour theme"
+msgstr "Changer de thème"
+
+msgid "System Diagnostics"
+msgstr "Diagnostics système"
+
+msgid "System Event"
+msgstr "Événement système"
+
+msgid "System Health"
+msgstr "État du système"
+
+msgid "System Security Log"
+msgstr "Journal de sécurité du système"
+
+msgid "System Status"
+msgstr "État des services"
+
+msgid "TN-PRIME-0922"
+msgstr "TN-PRIME-0922"
+
+msgid "TND"
+msgstr "TND"
+
+msgid "TSL ASSISTANCE ACTIVE"
+msgstr "ASSISTANCE LST ACTIVE"
+
+msgid "TSL Accessibility"
+msgstr "Accessibilité LST"
+
+msgid "TSL Active"
+msgstr "LST active"
+
+msgid "TSL Assistant"
+msgstr "Assistant LST"
+
+msgid "TSL Assistant Direct"
+msgstr "Assistant LST direct"
+
+msgid "TSL INTERPRETER"
+msgstr "INTERPRÈTE LST"
+
+msgid "TSL Institutional Support"
+msgstr "Assistance institutionnelle LST"
+
+msgid "TSL Interpretation"
+msgstr "Interprétation LST"
+
+msgid "TSL Interpreter"
+msgstr "Interprète LST"
+
+msgid "TSL LIVE"
+msgstr "LST EN DIRECT"
+
+msgid "TSL Mode"
+msgstr "Mode LST"
+
+msgid "TSL Module"
+msgstr "Module LST"
+
+msgid "TSL Sign Language Interpreter"
+msgstr "Interprète en langue des signes LST"
+
+msgid "TSL Support"
+msgstr "Assistance LST"
+
+msgid "TSL Support Active"
+msgstr "Assistance LST active"
+
+msgid "TSL Translation Active"
+msgstr "Traduction LST active"
+
+msgid "TUNISIE"
+msgstr "TUNISIE"
+
+msgid "Tax declarations, administrative permits, and centralized licensing."
+msgstr "Déclarations fiscales, autorisations administratives et licences centralisées."
+msgid "Technical Infrastructure"
+msgstr "Infrastructure technique"
+
+msgid "Technical Specifications"
+msgstr "Spécifications techniques"
+
+msgid "Terminate Session"
+msgstr "Mettre fin à la session"
+
+msgid "Terms &amp; Conditions"
+msgstr "Conditions générales"
+
+msgid "Terms and Conditions | République Tunisienne"
+msgstr "Conditions générales | République Tunisienne"
+
+msgid "Terms of Service"
+msgstr "Conditions d'utilisation"
+
+msgid "Text size"
+msgstr "Taille du texte"
+
+msgid "That appointment is not on your record."
+msgstr "Ce rendez-vous ne figure pas dans votre dossier."
+
+msgid "That code was not accepted."
+msgstr "Ce code n'a pas été accepté."
+
+msgid "That document is not available for download right now."
+msgstr "Ce document n'est pas disponible au téléchargement pour le moment."
+
+msgid "That document is not on this request."
+msgstr "Ce document ne figure pas sur cette demande."
+
+msgid "That page does not exist, or you do not have access to it."
+msgstr "Cette page n'existe pas, ou vous n'y avez pas accès."
+
+msgid "That slot has just been taken. Please choose another."
+msgstr "Ce créneau vient d'être pris. Veuillez en choisir un autre."
+
+msgid ""
+"The République Tunisienne is committed to ensuring equal access to "
+"digital services. This platform integrates adaptive technologies, "
+"including the omnipresent Sign Language Module (TSL), to facilitate "
+"communication for all citizens."
+msgstr ""
+"La République Tunisienne s'engage à garantir un accès égal aux services "
+"numériques. Cette plateforme intègre des technologies adaptatives, dont "
+"le module omniprésent de langue des signes (LST), pour faciliter la "
+"communication de tous les citoyens."
+
+msgid "The browser you are using now"
+msgstr "Le navigateur que vous utilisez actuellement"
+
+msgid "The conditions that apply when you use this platform."
+msgstr "Les conditions applicables à l'utilisation de cette plateforme."
+
+msgid ""
+"The conditions that apply when you use this platform. Creating an account"
+" accepts them."
+msgstr ""
+"Les conditions applicables à l'utilisation de cette plateforme. Créer un "
+"compte vaut acceptation."
+
+msgid ""
+"The official national emblem of the Republic of Tunisia, depicted in a "
+"highly detailed, monochrome line-art style."
+msgstr ""
+"Emblème national officiel de la République Tunisienne, en trait "
+"monochrome très détaillé."
+
+msgid ""
+"The official national emblem of the Tunisian Republic, rendered as a "
+"subtle watermark."
+msgstr ""
+"Emblème national officiel de la République Tunisienne, en filigrane "
+"discret."
+
+msgid ""
+"The portal cannot reach the records service right now. Please try again "
+"in a few minutes."
+msgstr ""
+"Le portail ne peut pas joindre le service des registres pour le moment. "
+"Réessayez dans quelques minutes."
+
+msgid "The queue is empty — there is nothing awaiting review."
+msgstr "La file est vide — rien n'attend d'être examiné."
+
+msgid "The queue is empty."
+msgstr "La file d'attente est vide."
+
+msgid "The registry records every status change here."
+msgstr "Le registre consigne ici chaque changement d'état."
+
+msgid ""
+"The service catalogue is temporarily unavailable. Please try again "
+"shortly."
+msgstr ""
+"Le catalogue des services est temporairement indisponible. Réessayez sous"
+" peu."
+
+msgid "The two passwords do not match."
+msgstr "Les deux mots de passe ne correspondent pas."
+
+msgid ""
+"The unified national portal for citizen identity and secure institutional"
+" services. Governed by the principles of digital sovereignty and data "
+"integrity."
+msgstr ""
+"Le portail national unifié pour l'identité citoyenne et les services "
+"institutionnels sécurisés. Régi par les principes de souveraineté "
+"numérique et d'intégrité des données."
+
+msgid ""
+"The unified secure gateway for Tunisian citizens. Access e-government "
+"services, manage digital credentials, and interact with the legal "
+"infrastructure of the Republic."
+msgstr ""
+"La passerelle sécurisée unifiée pour les citoyens tunisiens. Accédez aux "
+"services d'administration électronique, gérez vos identifiants numériques"
+" et interagissez avec l'infrastructure juridique de la République."
+
+msgid ""
+"The user is solely responsible for maintaining the confidentiality of "
+"their Secure Session credentials. The State is not liable for "
+"unauthorized actions resulting from user negligence."
+msgstr ""
+"L'utilisateur est seul responsable de la confidentialité de ses "
+"identifiants de session sécurisée. L'État n'est pas responsable des "
+"actions non autorisées résultant d'une négligence de l'utilisateur."
+
+msgid "There is no payment on your record yet."
+msgstr "Aucun paiement n'est encore enregistré."
+
+msgid "This Session"
+msgstr "Cette session"
+
+msgid "This document has not been verified yet"
+msgstr "Ce document n'a pas encore été vérifié"
+
+msgid ""
+"This overwrites the citizen's identifying fields and cannot be undone. "
+"Purge their stored documents from object storage"
+msgstr ""
+"Cette opération écrase les champs identifiants du citoyen et est "
+"irréversible. Purgez ses documents du stockage objet"
+
+msgid ""
+"This page exists so that no link in the portal is dead, and so the\n"
+"                    route, layout and navigation are in place. The "
+"wording below is a\n"
+"                    structural placeholder and has not been reviewed by a"
+" legal or\n"
+"                    content owner. Replace it before this platform serves"
+" the public."
+msgstr ""
+"Cette page existe pour qu'aucun lien du portail ne soit mort et pour que\n"
+"                    la route, la mise en page et la navigation soient en "
+"place. Le texte\n"
+"                    ci-dessous est un contenu provisoire, non relu par un"
+" responsable\n"
+"                    juridique ou éditorial. Remplacez-le avant toute mise"
+" en service."
+
+msgid "This payment is on file with status “"
+msgstr "Ce paiement est enregistré avec l'état «"
+
+msgid "This record is held by the issuing authority and cannot be edited here."
+msgstr ""
+"Cet enregistrement est détenu par l'autorité émettrice et ne peut être "
+"modifié ici."
+
+msgid "This request was submitted without additional form data."
+msgstr "Cette demande a été déposée sans données de formulaire supplémentaires."
+
+msgid "Those credentials were not recognised."
+msgstr "Ces identifiants n'ont pas été reconnus."
+
+msgid "Timestamp"
+msgstr "Horodatage"
+
+msgid "Timestamp (UTC)"
+msgstr "Horodatage (UTC)"
+
+msgid "Today, 08:14 AM"
+msgstr "Aujourd'hui, 08:14"
+
+msgid "Toggle Narration"
+msgstr "Activer la narration"
+
+msgid "Toggle Voice Narration"
+msgstr "Activer la narration vocale"
+
+msgid "Toggle captions"
+msgstr "Activer les sous-titres"
+
+msgid "Total Paid"
+msgstr "Total payé"
+
+msgid "Track"
+msgstr "Suivre"
+
+msgid "Track a Request"
+msgstr "Suivre une demande"
+
+msgid "Track a request"
+msgstr "Suivre une demande"
+
+msgid "Track the status of your official documents and services."
+msgstr "Suivez l'état de vos documents et services officiels."
+
+msgid "Tracking Code"
+msgstr "Code de suivi"
+
+msgid "Tracking code"
+msgstr "Code de suivi"
+
+msgid "Transaction Details"
+msgstr "Détails de la transaction"
+
+msgid "Transaction ID"
+msgstr "ID de transaction"
+
+msgid "Translating: Status Timeline"
+msgstr "Traduction : chronologie des états"
+
+msgid "Transparency"
+msgstr "Transparence"
+
+msgid "Trust Services"
+msgstr "Services de confiance"
+
+msgid "Tunis 1001, Tunisia"
+msgstr "Tunis 1001, Tunisie"
+
+msgid "Tunis District"
+msgstr "District de Tunis"
+
+msgid "Tunis, TUN"
+msgstr "Tunis, TUN"
+
+msgid "Tunis, Tunisia"
+msgstr "Tunis, Tunisie"
+
+msgid "Tunisian Flag"
+msgstr "Drapeau tunisien"
+
+msgid "Tunisian Government. Watiq National Portal."
+msgstr "Gouvernement tunisien. Watiq Portail national."
+
+msgid "Tunisian National Emblem"
+msgstr "Emblème national tunisien"
+
+msgid "Tunisian National Emblem Watermark"
+msgstr "Filigrane de l'emblème national tunisien"
+
+msgid "Tunisian Republic"
+msgstr "République Tunisienne"
+
+msgid "Tunisian Republic • Digital Sovereignty Department"
+msgstr "République Tunisienne • Département de la souveraineté numérique"
+
+msgid ""
+"Tunisian Republic. All institutional data is protected by national-grade "
+"encryption."
+msgstr ""
+"République Tunisienne. Toutes les données institutionnelles sont "
+"protégées par un chiffrement de niveau national."
+
+msgid "Tunisian Sign Language Interpreter"
+msgstr "Interprète en langue des signes tunisienne"
+
+msgid "Tunisian Sign Language support"
+msgstr "Assistance en langue des signes tunisienne"
+
+msgid "Type de Service"
+msgstr "Type de service"
+
+msgid "Type the national ID"
+msgstr "Saisissez l'identifiant national"
+
+msgid "Type your secure message here..."
+msgstr "Saisissez votre message sécurisé ici…"
+
+msgid "UNAFFECTED SERVICES"
+msgstr "SERVICES NON AFFECTÉS"
+
+msgid "UPCOMING APPOINTMENTS"
+msgstr "PROCHAINS RENDEZ-VOUS"
+
+msgid "UTC"
+msgstr "UTC"
+
+msgid ""
+"Unauthorized recovery attempts are strictly monitored. Identity theft is "
+"a felony under digital sovereignty law."
+msgstr ""
+"Les tentatives de récupération non autorisées sont strictement "
+"surveillées. L'usurpation d'identité est un délit au regard de la loi sur"
+" la souveraineté numérique."
+
+msgid "Universal access to digital administration"
+msgstr "Un accès universel à l'administration numérique"
+
+msgid "Unread"
+msgstr "Non lu"
+
+msgid "Unverified"
+msgstr "Non vérifié"
+
+msgid "Upcoming and past visits to a government office."
+msgstr "Visites à venir et passées dans un bureau de l'administration."
+
+msgid "Update"
+msgstr "Mettre à jour"
+
+msgid "Upload one"
+msgstr "Téléverser un document"
+
+msgid "Uploaded"
+msgstr "Téléversé"
+
+msgid "Uptime"
+msgstr "Disponibilité"
+
+msgid "Urgent Legal Proceeding"
+msgstr "Procédure judiciaire urgente"
+
+msgid "Use Biometrics"
+msgstr "Utiliser la biométrie"
+
+msgid "Use Recovery Code"
+msgstr "Utiliser un code de récupération"
+
+msgid "User Manuals"
+msgstr "Manuels d'utilisation"
+
+msgid "Verification"
+msgstr "Vérification"
+
+msgid "Verification Portal"
+msgstr "Portail de vérification"
+
+msgid "Verified"
+msgstr "Vérifié"
+
+msgid "Verified Only"
+msgstr "Vérifiés uniquement"
+
+msgid "Verified Phone Number"
+msgstr "Numéro de téléphone vérifié"
+
+msgid "Verified Session"
+msgstr "Session vérifiée"
+
+msgid "Verified by the Tunisian National Registry on"
+msgstr "Vérifié par le registre national tunisien le"
+
+msgid "Verify and Submit"
+msgstr "Vérifier et envoyer"
+
+msgid ""
+"Verify your official credentials against the National Identification "
+"Registry to proceed."
+msgstr ""
+"Vérifiez vos identifiants officiels auprès du registre national "
+"d'identification pour continuer."
+
+msgid "Very large text size"
+msgstr "Très grande taille de texte"
+
+msgid "Veuillez préciser l'institution destinataire..."
+msgstr "Veuillez préciser l'institution destinataire…"
+
+msgid "View All"
+msgstr "Tout voir"
+
+msgid "View All History"
+msgstr "Voir tout l'historique"
+
+msgid "View Application Status"
+msgstr "Voir l'état de la demande"
+
+msgid "View Details"
+msgstr "Voir les détails"
+
+msgid "View Documentation"
+msgstr "Consulter la documentation"
+
+msgid "View FAQ"
+msgstr "Voir la FAQ"
+
+msgid "View access log"
+msgstr "Voir le journal d'accès"
+
+msgid "View receipt"
+msgstr "Voir le reçu"
+
+msgid "Voir les créneaux"
+msgstr "Voir les créneaux"
+
+msgid "Vérifier &amp; Confirmer"
+msgstr "Vérifier et confirmer"
+
+msgid "WTQ-0000-000000"
+msgstr "WTQ-0000-000000"
+
+msgid "Watiq"
+msgstr "Watiq"
+
+msgid "Watiq - National Services Catalogue"
+msgstr "Watiq — Catalogue des services nationaux"
+
+msgid "Watiq - Staff Workbench"
+msgstr "Watiq — Plan de travail des agents"
+
+msgid "Watiq Digital Identity"
+msgstr "Identité numérique Watiq"
+
+msgid "Watiq National Portal"
+msgstr "Watiq — Portail National"
+
+msgid "Watiq National Portal -"
+msgstr "Watiq — Portail national —"
+
+msgid "Watiq National Portal - Administration"
+msgstr "Watiq Portail national — Administration"
+
+msgid "Watiq National Portal - My Appointments"
+msgstr "Watiq Portail national — Mes rendez-vous"
+
+msgid "Watiq National Portal - Office Appointments"
+msgstr "Watiq Portail national — Rendez-vous du bureau"
+
+msgid "Watiq National Portal - Payments"
+msgstr "Watiq — Portail national — Paiements"
+
+msgid "Watiq National Portal - Track a Request"
+msgstr "Watiq Portail national — Suivre une demande"
+
+msgid "Watiq National Portal | Republic of Tunisia"
+msgstr "Watiq Portail national | République Tunisienne"
+
+msgid "Watiq National Portal | Secure Login"
+msgstr "Watiq Portail national | Connexion sécurisée"
+
+msgid "Watiq National Portal. Official Tunisian Government Platform."
+msgstr "Watiq Portail national. Plateforme officielle du gouvernement tunisien."
+
+msgid "Watiq Portal"
+msgstr "Portail Watiq"
+
+msgid "Watiq Portal - Security Log & Diagnostics"
+msgstr "Portail Watiq — Journal de sécurité et diagnostics"
+
+msgid "Watiq Sovereign Cloud"
+msgstr "Cloud souverain Watiq"
+
+msgid "Watiq Staff Portal | Sovereign MFA"
+msgstr "Portail des agents Watiq | MFA souveraine"
+
+msgid "Watiq home"
+msgstr "Accueil Watiq"
+
+msgid ""
+"Watiq is not just a portal; it is the backbone of Tunisian digital "
+"sovereignty. Our systems are audited quarterly by the ANSI to ensure the "
+"highest level of protection for citizen data."
+msgstr ""
+"Watiq n'est pas qu'un portail : c'est la colonne vertébrale de la "
+"souveraineté numérique tunisienne. Nos systèmes sont audités chaque "
+"trimestre par l'ANSI pour garantir le plus haut niveau de protection des "
+"données citoyennes."
+
+msgid "Watiq on social media"
+msgstr "Watiq sur les réseaux sociaux"
+
+msgid ""
+"Watiq will never ask for your password, PIN or card details — not by "
+"email, SMS or telephone. Anything sent through this portal travels over "
+"an encrypted connection."
+msgstr ""
+"Watiq ne vous demandera jamais votre mot de passe, votre code PIN ou vos "
+"données bancaires — ni par e-mail, ni par SMS, ni par téléphone. Tout ce "
+"qui transite par ce portail passe par une connexion chiffrée."
+
+msgid "Watiq | Citizen Registration - Sovereign Institutional Pro"
+msgstr "Watiq | Inscription citoyenne — Portail institutionnel souverain"
+
+msgid "Watiq | Citizen Space - Profile Management"
+msgstr "Watiq | Espace citoyen — Gestion du profil"
+
+msgid ""
+"We operate under a mandate of Modern Transparency. Personal data "
+"collected during registration and subsequent use of the Platform is "
+"processed strictly for the execution of requested administrative "
+"services."
+msgstr ""
+"Nous agissons sous un mandat de transparence moderne. Les données "
+"personnelles collectées lors de l'inscription et de l'utilisation de la "
+"plateforme sont traitées strictement pour l'exécution des services "
+"administratifs demandés."
+
+#, python-format
+msgid "Welcome back, %(name)s. All services are active and secure."
+msgstr "Bon retour, %(name)s. Tous les services sont actifs et sécurisés."
+
+msgid "Welcome back. All services are active and secure."
+msgstr "Bon retour. Tous les services sont actifs et sécurisés."
+
+msgid ""
+"Welcome to Watiq, the unified portal of the Republic of Tunisia. A "
+"trusted infrastructure for your administrative, legal, and civil status "
+"procedures."
+msgstr ""
+"Bienvenue sur Watiq, le portail unifié de la République Tunisienne. Une "
+"infrastructure de confiance pour vos démarches administratives, "
+"juridiques et d'état civil."
+
+msgid "Welcome to Watiq. Your account is ready."
+msgstr "Bienvenue sur Watiq. Votre compte est prêt."
+
+msgid "What is in place today"
+msgstr "Ce qui est en place aujourd'hui"
+
+msgid "What the Watiq National Portal is and who operates it."
+msgstr "Ce qu'est le portail national Watiq et qui l'exploite."
+
+msgid "Work Day"
+msgstr "Jour ouvré"
+
+msgid "Work email"
+msgstr "E-mail professionnel"
+
+msgid "Workbench"
+msgstr "Plan de travail"
+
+msgid "X-Road Standard"
+msgstr "Standard X-Road"
+
+msgid ""
+"You can check the status of any submission yourself using its tracking\n"
+"                code on the"
+msgstr ""
+"Vous pouvez vérifier vous-même l'état de tout dépôt à l'aide de son code "
+"de\n"
+"                suivi sur la"
+
+msgid "You have been signed out."
+msgstr "Vous avez été déconnecté."
+
+msgid "You have no appointments booked."
+msgstr "Vous n'avez aucun rendez-vous réservé."
+
+msgid "You have no notifications."
+msgstr "Vous n'avez aucune notification."
+
+msgid "You have no payments yet."
+msgstr "Vous n'avez encore aucun paiement."
+
+msgid "You have no requests in progress."
+msgstr "Vous n'avez aucune demande en cours."
+
+msgid "You have not submitted any requests yet."
+msgstr "Vous n'avez encore déposé aucune demande."
+
+msgid ""
+"You may request a copy of the personal data held about you, ask for\n"
+"                inaccurate data to be corrected, and request erasure of "
+"your account.\n"
+"                Erasure is irreversible: identifying fields are "
+"permanently overwritten\n"
+"                and the account can no longer be recovered."
+msgstr ""
+"Vous pouvez demander une copie des données personnelles vous concernant,\n"
+"                demander la rectification de données inexactes et "
+"demander l'effacement de\n"
+"                votre compte. L'effacement est irréversible : les champs "
+"identifiants sont\n"
+"                définitivement écrasés et le compte ne peut plus être "
+"récupéré."
+
+msgid ""
+"Your account is currently protected by standard authentication. We "
+"recommend enabling Two-Factor Authentication (2FA) for Sovereign-level "
+"protection."
+msgstr ""
+"Votre compte est actuellement protégé par une authentification standard. "
+"Nous recommandons d'activer l'authentification à deux facteurs (2FA) pour"
+" une protection de niveau souverain."
+
+msgid "Your appointment is booked."
+msgstr "Votre rendez-vous est réservé."
+
+msgid ""
+"Your booking is secured. Please review the details below and present the "
+"QR code upon arrival."
+msgstr ""
+"Votre réservation est confirmée. Vérifiez les détails ci-dessous et "
+"présentez le QR code à votre arrivée."
+
+msgid ""
+"Your identity data is synchronized directly with the Ministry of "
+"Interior. Any discrepancies will require a manual update request at a "
+"regional office as per the Digital Sovereignty Act."
+msgstr ""
+"Vos données d'identité sont synchronisées directement avec le ministère "
+"de l'Intérieur. Toute divergence nécessitera une demande de mise à jour "
+"manuelle auprès d'un bureau régional, conformément à la loi sur la "
+"souveraineté numérique."
+
+msgid "Your message"
+msgstr "Votre message"
+
+msgid "Your password has been changed. Please sign in."
+msgstr "Votre mot de passe a été modifié. Veuillez vous connecter."
+
+msgid "Your payment history"
+msgstr "Votre historique de paiements"
+
+msgid "Your profile"
+msgstr "Votre profil"
+
+msgid "Your rights"
+msgstr "Vos droits"
+
+msgid ""
+"Your transaction has been securely processed. Keep the reference below "
+"for the counter."
+msgstr ""
+"Votre transaction a été traitée en toute sécurité. Conservez la référence"
+" ci-dessous pour le guichet."
+
+msgid "Zero Trust Architecture"
+msgstr "Architecture Zero Trust"
+
+msgid "Zoom In"
+msgstr "Zoom avant"
+
+msgid "Zoom Out"
+msgstr "Zoom arrière"
+
+msgid "[AUDIT] Console opened by"
+msgstr "[AUDIT] Console ouverte par"
+
+msgid "[SYSTEM]"
+msgstr "[SYSTÈME]"
+
+msgid "] GET"
+msgstr "] GET"
+
+msgid "account(s)."
+msgstr "compte(s)."
+
+msgid "account_balance"
+msgstr "account_balance"
+
+msgid "account_circle"
+msgstr "account_circle"
+
+msgid "and we will provide an alternative route to that service."
+msgstr "et nous vous proposerons une autre voie d'accès à ce service."
+
+msgid "articles"
+msgstr "articles"
+
+msgid "before"
+msgstr "avant"
+
+msgid "book an appointment"
+msgstr "prendre un rendez-vous"
+
+msgid "bureau"
+msgstr "bureau"
+
+msgid "contact page"
+msgstr "page de contact"
+
+msgid "documents"
+msgstr "documents"
+
+msgid "e.g. MOHAMED AMINE"
+msgstr "ex. MOHAMED AMINE"
+
+msgid "e.g. SELMI"
+msgstr "ex. SELMI"
+
+msgid "e.g. WTQ-2026-000123"
+msgstr "ex. WTQ-2026-000123"
+
+msgid "entries"
+msgstr "entrées"
+
+msgid "file"
+msgstr "fichier"
+
+msgid "listé"
+msgstr "listé"
+
+msgid "ms"
+msgstr "ms"
+
+msgid "ms ·"
+msgstr "ms ·"
+
+msgid "notifications"
+msgstr "notifications"
+
+msgid "of"
+msgstr "sur"
+
+msgid "of 3"
+msgstr "sur 3"
+
+msgid "or click to browse from your device"
+msgstr "ou cliquez pour parcourir votre appareil"
+
+msgid "probes issued from the BFF at request time."
+msgstr "sondes émises depuis le BFF au moment de la requête."
+
+msgid ""
+"running this: anonymising first orphans those files, and they can no "
+"longer be located for deletion."
+msgstr ""
+"avant d'exécuter cette action : anonymiser d'abord rend ces fichiers "
+"orphelins et ils ne peuvent plus être localisés pour suppression."
+
+msgid "to confirm"
+msgstr "à confirmer"
+
+msgid "tracking page"
+msgstr "page de suivi"
+
+msgid "user@watiq.tn"
+msgstr "user@watiq.tn"
+
+msgid "| Watiq National Portal"
+msgstr "| Watiq — Portail national"
+
+msgid "— Choisir un bureau —"
+msgstr "— Choisir un bureau —"
+
+msgid "— Choisir un service —"
+msgstr "— Choisir un service —"
+
+msgid "”. It is not settled yet."
+msgstr "”. Il n'est pas encore réglé."
+
+msgid "• Ready by"
+msgstr "• Prêt le"
+
+msgid "• Submitted:"
+msgstr "• Déposé :"
+
+msgid "• uploaded"
+msgstr "• téléversé"
+
+#~ msgid "auth-bg min-h-screen flex flex-col relative overflow-y-auto"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background min-h-screen flex flex-col"
+#~ " font-body-md text-body-md "
+#~ "text-on-background relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-background"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md antialiased min-h-screen flex"
+#~ " flex-col relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-background font-body-md min-h-screen flex"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex flex-"
+#~ "col"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex flex-"
+#~ "col relative overflow-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex flex-"
+#~ "col relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background "
+#~ "font-body-md min-h-screen flex h-full "
+#~ "overflow-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-background h-full"
+#~ " flex font-body-md overflow-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-surface"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface flex "
+#~ "flex-col min-h-screen relative selection"
+#~ ":bg-tertiary/20"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md antialiased min-h-screen flex "
+#~ "flex-col md:flex-row relative"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md min-h-screen flex flex-col "
+#~ "md:flex-row relative"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md min-h-screen flex flex-col "
+#~ "relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface font-"
+#~ "body-md selection:bg-secondary-fixed "
+#~ "selection:text-on-secondary-fixed "
+#~ "overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "bg-background text-on-surface min-h-screen flex"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-background text-on-surface "
+#~ "min-h-screen flex flex-col relative "
+#~ "overflow-x-hidden font-body-md text-"
+#~ "body-md"
+#~ msgstr ""
+
+#~ msgid "bg-surface text-on-surface"
+#~ msgstr ""
+
+#~ msgid "bg-surface text-on-surface min-h-screen flex flex-col"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-surface text-on-surface min-h-screen"
+#~ " flex flex-col items-center "
+#~ "justify-between"
+#~ msgstr ""
+
+#~ msgid "bg-surface text-on-surface min-h-screen flex flex-col overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "bg-surface text-on-surface min-h-screen"
+#~ " flex flex-col relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid "flex bg-background min-h-screen"
+#~ msgstr ""
+
+#~ msgid "flex flex-col min-h-screen relative font-body-md text-body-md"
+#~ msgstr ""
+
+#~ msgid "flex flex-col min-h-screen relative overflow-x-hidden"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "font-body-md text-body-md "
+#~ "selection:bg-primary-fixed selection:text-"
+#~ "on-primary-fixed"
+#~ msgstr ""
+
+#~ msgid "min-h-screen flex bg-surface font-body-md text-on-surface"
+#~ msgstr ""
+
+#~ msgid "min-h-screen flex flex-col font-body-md"
+#~ msgstr ""
+

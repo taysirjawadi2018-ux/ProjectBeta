@@ -24,6 +24,7 @@ import httpx
 from flask import Flask, g, render_template, request, session
 
 import api
+from flask_babel import gettext as _, lazy_gettext as _l
 from config import Config, secret_key
 
 
@@ -355,12 +356,12 @@ def _register_error_handlers(app: Flask) -> None:
 
 
 _TITLES = {
-    401: "Session expired",
-    403: "Access Restricted",
-    404: "Page not found",
-    409: "Conflict",
-    429: "Too many requests",
-    502: "Service error",
+    401: _l("Session expired"),
+    403: _l("Access Restricted"),
+    404: _l("Page not found"),
+    409: _l("Conflict"),
+    429: _l("Too many requests"),
+    502: _l("Service error"),
 }
 
 

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-live-support-chat' %}
 {% block title %}{{ _('Citizen Support Chat - République Tunisienne') }}{% endblock %}
-{% block body_class %}{{ _('bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-hidden') }}{% endblock %}
+{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-hidden{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/support_chat.css') }}" rel="stylesheet"/>
 {% endblock %}

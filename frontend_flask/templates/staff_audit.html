@@ -7,7 +7,7 @@
   is no per-entry action to put in it — an audit row is a fact, not a task.
 #}
 {% block title %}{{ _('Security Log - Watiq Staff Portal') }}{% endblock %}
-{% block body_class %}{{ _('bg-background text-on-surface font-body-md min-h-screen flex flex-col md:flex-row relative') }}{% endblock %}
+{% block body_class %}bg-background text-on-surface font-body-md min-h-screen flex flex-col md:flex-row relative{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/staff_audit.css') }}" rel="stylesheet"/>
 {% endblock %}

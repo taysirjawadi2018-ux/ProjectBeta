@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-citizen-dashboard' %}
 {% block title %}{{ _('National Portal - Citizen Watiq') }}{% endblock %}
-{% block body_class %}{{ _('bg-surface text-on-surface min-h-screen flex flex-col overflow-x-hidden') }}{% endblock %}
+{% block body_class %}bg-surface text-on-surface min-h-screen flex flex-col overflow-x-hidden{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/citizen_dashboard.css') }}" rel="stylesheet"/>
 {% endblock %}

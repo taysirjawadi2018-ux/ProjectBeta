@@ -56,7 +56,7 @@ def login() -> Any:
         # One message for every failure mode. Distinguishing "no such account"
         # from "wrong password" turns this form into an account enumerator.
         flash(
-            _("Those credentials were not recognised.")if exc.status in (400, 401, 404)
+            _("Those credentials were not recognised.") if exc.status in (400, 401, 404)
             else exc.user_message(),
             "error",
         )
@@ -98,7 +98,7 @@ def mfa() -> Any:
         session[api.S_ACCESS] = body.get("access_token", "")
         session[api.S_MFA] = False
     except api.ApiError as exc:
-        flash(_("That code was not accepted.")if exc.status in (400, 401, 403, 404)
+        flash(_("That code was not accepted.") if exc.status in (400, 401, 403, 404)
               else exc.user_message(), "error")
         return render_template("mfa.html", profile=auth.current_profile()), 401
     return redirect(url_for("staff.workbench"))
@@ -254,75 +254,46 @@ def track() -> Any:
 # CMS or an API the moment there is one; it lives here because there is not.
 FAQ: list[dict[str, str]] = [
     {
-        "topic": "Digital ID",
+        "topic": _l("Digital ID"),
         "icon": "fingerprint",
-        "question": "How do I renew my digital identity?",
-        "answer": (
-            "To renew your digital identity, log in to your Citizen Space using "
-            "your current credentials. Navigate to the 'Identity' section and "
-            "select 'Renew Certificate'. You will need to complete a biometric "
-            "verification step using your smartphone camera."
-        ),
+        "question": _l("How do I renew my digital identity?"),
+        "answer": _l("To renew your digital identity, log in to your Citizen Space using your current credentials. Navigate to the 'Identity' section and select 'Renew Certificate'. You will need to complete a biometric verification step using your smartphone camera."),
     },
     {
-        "topic": "Digital ID",
+        "topic": _l("Digital ID"),
         "icon": "fingerprint",
-        "question": "What documents are required for initial setup?",
-        "answer": (
-            "You will need your National Identity Card (CIN) and a secondary "
-            "proof of address (utility bill or bank statement) issued within "
-            "the last three months. Both documents must be scanned clearly."
-        ),
+        "question": _l("What documents are required for initial setup?"),
+        "answer": _l("You will need your National Identity Card (CIN) and a secondary proof of address (utility bill or bank statement) issued within the last three months. Both documents must be scanned clearly."),
     },
     {
-        "topic": "Digital ID",
+        "topic": _l("Digital ID"),
         "icon": "fingerprint",
-        "question": "I have lost access to my account. What now?",
-        "answer": (
-            "Use the account recovery page. Recovery is verified against the "
-            "phone number registered to your CIN; if that number has changed, "
-            "recovery has to be done in person at any municipal office."
-        ),
+        "question": _l("I have lost access to my account. What now?"),
+        "answer": _l("Use the account recovery page. Recovery is verified against the phone number registered to your CIN; if that number has changed, recovery has to be done in person at any municipal office."),
     },
     {
-        "topic": "Appointments",
+        "topic": _l("Appointments"),
         "icon": "event_available",
-        "question": "How do I book an appointment?",
-        "answer": (
-            "Choose an office on the appointment map, pick a day from the week "
-            "strip and then a free slot. You will need to say which service the "
-            "appointment is for before it can be confirmed."
-        ),
+        "question": _l("How do I book an appointment?"),
+        "answer": _l("Choose an office on the appointment map, pick a day from the week strip and then a free slot. You will need to say which service the appointment is for before it can be confirmed."),
     },
     {
-        "topic": "Appointments",
+        "topic": _l("Appointments"),
         "icon": "event_available",
-        "question": "Can I cancel or change a booking?",
-        "answer": (
-            "Yes. Open the appointment from your appointment list and cancel it "
-            "there; the slot is released immediately and can be rebooked by "
-            "anyone, including you."
-        ),
+        "question": _l("Can I cancel or change a booking?"),
+        "answer": _l("Yes. Open the appointment from your appointment list and cancel it there; the slot is released immediately and can be rebooked by anyone, including you."),
     },
     {
-        "topic": "Payments",
+        "topic": _l("Payments"),
         "icon": "payments",
-        "question": "Which fees are payable online?",
-        "answer": (
-            "Any request whose status reaches Payment required can be paid from "
-            "the payments page. Requests that carry no fee never enter that "
-            "status."
-        ),
+        "question": _l("Which fees are payable online?"),
+        "answer": _l("Any request whose status reaches Payment required can be paid from the payments page. Requests that carry no fee never enter that status."),
     },
     {
-        "topic": "Payments",
+        "topic": _l("Payments"),
         "icon": "payments",
-        "question": "Where do I find my receipt?",
-        "answer": (
-            "Every completed payment has a receipt on the payments page. It "
-            "carries the transaction reference you will be asked for at the "
-            "counter."
-        ),
+        "question": _l("Where do I find my receipt?"),
+        "answer": _l("Every completed payment has a receipt on the payments page. It carries the transaction reference you will be asked for at the counter."),
     },
 ]
 
@@ -330,11 +301,11 @@ FAQ: list[dict[str, str]] = [
 # --- informational pages --------------------------------------------------
 # contact keeps the support-desk design; help renders the knowledge base.
 _CONTENT = {
-    "privacy": ("Privacy Policy", "privacy"),
-    "terms": ("Terms of Service", "terms"),
-    "accessibility": ("Accessibility Statement", "accessibility"),
-    "about": ("About Watiq", "about"),
-    "open-data": ("Open Data", "open-data"),
+    "privacy": (_l("Privacy Policy"), "privacy"),
+    "terms": (_l("Terms of Service"), "terms"),
+    "accessibility": (_l("Accessibility Statement"), "accessibility"),
+    "about": (_l("About Watiq"), "about"),
+    "open-data": (_l("Open Data"), "open-data"),
 }
 
 
@@ -505,7 +476,7 @@ def status() -> str:
         degraded = True
     return render_template(
         "error_maintenance.html",
-        title=_("Scheduled Maintenance")if not degraded else "Service Degraded",
+        title=_("Scheduled Maintenance") if not degraded else "Service Degraded",
         message=(
             "Core services are operating normally. Planned maintenance windows "
             "are published here before they begin."

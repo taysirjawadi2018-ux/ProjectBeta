@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-system-maintenance icons-w300' %}
 {% block title %}{{ title }} {{ _('| Watiq National Portal') }}{% endblock %}
-{% block body_class %}{{ _('bg-surface text-on-surface min-h-screen flex flex-col items-center justify-between') }}{% endblock %}
+{% block body_class %}bg-surface text-on-surface min-h-screen flex flex-col items-center justify-between{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/error_maintenance.css') }}" rel="stylesheet"/>
 {% endblock %}

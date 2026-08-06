@@ -13,7 +13,7 @@
   review workbench, a different actor doing a different job.
 #}
 {% block title %}{{ _('Portail Souverain -') }} {{ document.document_type or 'Document' }}{% endblock %}
-{% block body_class %}{{ _('bg-background text-on-background') }}{% endblock %}
+{% block body_class %}bg-background text-on-background{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/document_detail.css') }}" rel="stylesheet"/>
 {% endblock %}
@@ -138,10 +138,10 @@
 <!-- Document Fields -->
 <div class="space-y-8 flex-grow relative z-10">
 {%- set fields = [
-  ('Nom / Surname:', profile.last_name if profile else None),
-  ('Prénom / First Name:', profile.first_name if profile else None),
-  ('Né(e) le / Date of Birth:', profile.date_of_birth if profile else None),
-  ('Lieu / Place of Birth:', (profile.city if profile else None)),
+  (_('Nom / Surname:'), profile.last_name if profile else None),
+  (_('Prénom / First Name:'), profile.first_name if profile else None),
+  (_('Né(e) le / Date of Birth:'), profile.date_of_birth if profile else None),
+  (_('Lieu / Place of Birth:'), (profile.city if profile else None)),
 ] %}
 {%- for label, value in fields %}
 <div class="grid grid-cols-3 gap-4 border-b border-surface-container-highest pb-4">
