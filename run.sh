@@ -93,17 +93,15 @@ done
 find_python_cmd() {
   local dir="${1:-.}"
   local abs_dir="$ROOT/$dir"
-  if [[ -f "$abs_dir/.venv/bin/python" ]]; then
-    echo "$abs_dir/.venv/bin/python"
-  elif [[ -f "$abs_dir/.venv/Scripts/python.exe" ]]; then
-    echo "$abs_dir/.venv/Scripts/python.exe"
-  elif [[ -f "$abs_dir/.venv/Scripts/python" ]]; then
-    echo "$abs_dir/.venv/Scripts/python"
-  elif [[ -f "$ROOT/.venv/bin/python" ]]; then
-    echo "$ROOT/.venv/bin/python"
-  elif [[ -f "$ROOT/.venv/Scripts/python.exe" ]]; then
-    echo "$ROOT/.venv/Scripts/python.exe"
-  elif command -v python3 >/dev/null 2>&1; then
+  local candidate
+  for candidate in "$abs_dir/.venv/bin/python" "$abs_dir/.venv/Scripts/python.exe" "$abs_dir/.venv/Scripts/python" "$ROOT/.venv/bin/python" "$ROOT/.venv/Scripts/python.exe"; do
+    if [[ -f "$candidate" ]] && "$candidate" -c "import sys" >/dev/null 2>&1; then
+      echo "$candidate"
+      return 0
+    fi
+  done
+
+  if command -v python3 >/dev/null 2>&1; then
     command -v python3
   elif command -v python >/dev/null 2>&1; then
     command -v python
@@ -285,18 +283,20 @@ ensure_backend_env() {
   local py_cmd
   py_cmd="$(find_python_cmd backend)"
 
-  if [[ -z "$py_cmd" || "$py_cmd" == "python3" || "$py_cmd" == "python" || "$py_cmd" == "py" ]]; then
-    if [[ ! -d "$ROOT/backend/.venv" ]]; then
-      info "creating backend/.venv environment..."
-      if command -v uv >/dev/null 2>&1; then
-        (cd "$ROOT/backend" && uv venv .venv >/dev/null 2>&1 || true)
-      else
-        local base_py
-        base_py="$(get_base_python)"
-        "$base_py" -m venv "$ROOT/backend/.venv"
-      fi
-      py_cmd="$(find_python_cmd backend)"
+  if [[ -z "$py_cmd" || "$py_cmd" == "python3" || "$py_cmd" == "python" || "$py_cmd" == "py" || "$py_cmd" == *"/python3"* || "$py_cmd" == *"/python"* ]]; then
+    if [[ -d "$ROOT/backend/.venv" ]]; then
+      warn "Existing backend/.venv is invalid or from another machine; recreating..."
+      rm -rf "$ROOT/backend/.venv"
     fi
+    info "creating backend/.venv environment..."
+    if command -v uv >/dev/null 2>&1; then
+      (cd "$ROOT/backend" && uv venv .venv >/dev/null 2>&1 || true)
+    else
+      local base_py
+      base_py="$(get_base_python)"
+      "$base_py" -m venv "$ROOT/backend/.venv"
+    fi
+    py_cmd="$(find_python_cmd backend)"
   fi
 
   [[ -n "$py_cmd" ]] || die "Python environment for backend could not be created."
@@ -320,18 +320,20 @@ ensure_frontend_env() {
   local py_cmd
   py_cmd="$(find_python_cmd frontend_flask)"
 
-  if [[ -z "$py_cmd" || "$py_cmd" == "python3" || "$py_cmd" == "python" || "$py_cmd" == "py" ]]; then
-    if [[ ! -d "$ROOT/frontend_flask/.venv" ]]; then
-      info "creating frontend_flask/.venv environment..."
-      local base_py
-      base_py="$(get_base_python)"
-      if command -v uv >/dev/null 2>&1; then
-        (cd "$ROOT/frontend_flask" && uv venv .venv >/dev/null 2>&1 || "$base_py" -m venv "$ROOT/frontend_flask/.venv")
-      else
-        "$base_py" -m venv "$ROOT/frontend_flask/.venv"
-      fi
-      py_cmd="$(find_python_cmd frontend_flask)"
+  if [[ -z "$py_cmd" || "$py_cmd" == "python3" || "$py_cmd" == "python" || "$py_cmd" == "py" || "$py_cmd" == *"/python3"* || "$py_cmd" == *"/python"* ]]; then
+    if [[ -d "$ROOT/frontend_flask/.venv" ]]; then
+      warn "Existing frontend_flask/.venv is invalid or from another machine; recreating..."
+      rm -rf "$ROOT/frontend_flask/.venv"
     fi
+    info "creating frontend_flask/.venv environment..."
+    local base_py
+    base_py="$(get_base_python)"
+    if command -v uv >/dev/null 2>&1; then
+      (cd "$ROOT/frontend_flask" && uv venv .venv >/dev/null 2>&1 || "$base_py" -m venv "$ROOT/frontend_flask/.venv")
+    else
+      "$base_py" -m venv "$ROOT/frontend_flask/.venv"
+    fi
+    py_cmd="$(find_python_cmd frontend_flask)"
   fi
 
   if [[ -z "$py_cmd" ]]; then
