@@ -13,7 +13,7 @@
       .watermark-emblem {
         position: fixed;
         bottom: 5%;
-        right: 5%;
+        inset-inline-end: 5%;
         width: 300px;
         opacity: 0.03;
         pointer-events: none;

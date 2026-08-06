@@ -1,30 +1,30 @@
 {% extends "_page.html" %}
 
-{% block title %}Watiq National Portal - Track a Request{% endblock %}
+{% block title %}{{ _('Watiq National Portal - Track a Request') }}{% endblock %}
 
 {% block page %}
 <section class="max-w-2xl mx-auto space-y-8">
 <header class="text-center">
-<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-4">Track a request</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Enter the tracking code you were given when you submitted. No sign-in needed.</p>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-surface mb-4">{{ _('Track a request') }}</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">{{ _('Enter the tracking code you were given when you submitted. No sign-in needed.') }}</p>
 </header>
 
 <form action="{{ url_for('public.track') }}" class="flex flex-col sm:flex-row gap-4" method="get">
 <div class="relative flex-grow focus-ring rounded">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<div class="absolute inset-y-0 start-0 ps-3 flex items-center pointer-events-none">
 <span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant">track_changes</span>
 </div>
-<label class="sr-only" for="code">Tracking code</label>
-<input class="block w-full pl-10 pr-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md" id="code" name="code" placeholder="e.g. WTQ-2026-000123" required="" type="text" value="{{ code }}">
+<label class="sr-only" for="code">{{ _('Tracking code') }}</label>
+<input class="block w-full ps-10 pe-3 py-3 border border-outline-variant rounded bg-surface text-on-surface font-body-md text-body-md" id="code" name="code" placeholder="{{ _('e.g. WTQ-2026-000123') }}" required="" type="text" value="{{ code }}">
 </div>
-<button class="bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring" type="submit">Track</button>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring" type="submit">{{ _('Track') }}</button>
 </form>
 
 {% if result %}
 <div class="bg-surface-container-lowest rounded-xl p-6 border border-surface-variant space-y-4">
 <div class="flex items-center justify-between gap-4 border-b border-surface-variant pb-4">
 <div>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Tracking code</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">{{ _('Tracking code') }}</p>
 <p class="font-headline-sm text-headline-sm text-on-surface">{{ result.tracking_code }}</p>
 </div>
 <span class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container font-label-md text-label-md py-2 px-4 rounded-full">
@@ -34,27 +34,27 @@
 </div>
 <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 {% if result.service_name %}
-<div><dt class="font-label-sm text-label-sm text-on-surface-variant">Service</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.service_name }}</dd></div>
+<div><dt class="font-label-sm text-label-sm text-on-surface-variant">{{ _('Service') }}</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.service_name }}</dd></div>
 {% endif %}
 {% if result.submitted_at %}
-<div><dt class="font-label-sm text-label-sm text-on-surface-variant">Submitted</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.submitted_at }}</dd></div>
+<div><dt class="font-label-sm text-label-sm text-on-surface-variant">{{ _('Submitted') }}</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.submitted_at }}</dd></div>
 {% endif %}
 {% if result.estimated_ready_date %}
-<div><dt class="font-label-sm text-label-sm text-on-surface-variant">Estimated ready</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.estimated_ready_date }}</dd></div>
+<div><dt class="font-label-sm text-label-sm text-on-surface-variant">{{ _('Estimated ready') }}</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.estimated_ready_date }}</dd></div>
 {% endif %}
 {% if result.office_name %}
-<div><dt class="font-label-sm text-label-sm text-on-surface-variant">Office</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.office_name }}</dd></div>
+<div><dt class="font-label-sm text-label-sm text-on-surface-variant">{{ _('Office') }}</dt><dd class="font-body-md text-body-md text-on-surface">{{ result.office_name }}</dd></div>
 {% endif %}
 </dl>
 {# Deliberately no citizen name, national ID or form contents: this endpoint
    needs no authentication, so it shows progress only. #}
 <p class="font-label-sm text-label-sm text-on-surface-variant pt-2 border-t border-surface-variant">
-            Sign in to see the full record, documents and history.
+            {{ _('Sign in to see the full record, documents and history.') }}
         </p>
 </div>
 {% elif code %}
 <div class="bg-surface-container-low p-6 rounded-xl border border-surface-variant text-center">
-<p class="font-body-md text-body-md text-on-surface-variant">No request matches that tracking code.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">{{ _('No request matches that tracking code.') }}</p>
 </div>
 {% endif %}
 </section>

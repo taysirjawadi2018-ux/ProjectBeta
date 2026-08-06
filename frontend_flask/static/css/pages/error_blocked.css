@@ -34,7 +34,7 @@ body {
     background: linear-gradient(to right, transparent, #ba1a1a, transparent);
     position: absolute;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
     animation: scan 4s linear infinite
     }
 @keyframes scan {

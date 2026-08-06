@@ -29,7 +29,7 @@
             background-color: #10b981;
             border-radius: 50%;
             top: 50%;
-            right: -12px;
+            inset-inline-end: -12px;
             transform: translateY(-50%);
             box-shadow: 0 0 8px #10b981;
         }

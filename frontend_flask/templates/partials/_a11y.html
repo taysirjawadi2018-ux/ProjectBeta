@@ -19,13 +19,13 @@
   `theme`, `text_scale` and the *_class values come from the context processor
   in app.py, which reads the cookie this form sets.
 #}
-<form action="{{ url_for('public.preferences') }}" aria-label="Display settings" class="fixed bottom-4 left-4 z-[200] flex items-stretch gap-1 rounded-full border border-outline-variant bg-surface-container-lowest/95 p-1 shadow-lg backdrop-blur print:hidden" data-a11y-controls method="post">
+<form action="{{ url_for('public.preferences') }}" aria-label="{{ _('Display settings') }}" class="fixed bottom-4 start-4 z-[200] flex items-stretch gap-1 rounded-full border border-outline-variant bg-surface-container-lowest/95 p-1 shadow-lg backdrop-blur print:hidden" data-a11y-controls method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 {#- Where to return to when this posts without JavaScript. full_path keeps the
     query string, so a filtered list comes back still filtered. -#}
 <input name="next" type="hidden" value="{{ request.full_path if request.query_string else request.path }}">
 
-<button aria-pressed="{{ 'true' if theme == 'dark' else 'false' }}" class="flex items-center rounded-full px-3 py-2 text-on-surface transition-colors hover:bg-surface-container-high focus-ring" data-a11y-theme name="theme" title="Switch colour theme" type="submit" value="{{ 'light' if theme == 'dark' else 'dark' }}">
+<button aria-pressed="{{ 'true' if theme == 'dark' else 'false' }}" class="flex items-center rounded-full px-3 py-2 text-on-surface transition-colors hover:bg-surface-container-high focus-ring" data-a11y-theme name="theme" title="{{ _('Switch colour theme') }}" type="submit" value="{{ 'light' if theme == 'dark' else 'dark' }}">
 {#- Inline SVG rather than a ligature: the Material Symbols woff2 is subsetted
     to the glyphs found in templates (tools/vendor_assets.py) and carries
     light_mode but not dark_mode, and re-subsetting needs the network. Both are
@@ -36,12 +36,12 @@
     "Dark theme, pressed" is unambiguous, where a name that changes with
     the state announces as "Switch to light theme, pressed" and leaves the
     listener to work out which theme is actually on. -#}
-<span class="sr-only">Dark theme</span>
+<span class="sr-only">{{ _('Dark theme') }}</span>
 </button>
 
 <span aria-hidden="true" class="my-1 w-px bg-outline-variant"></span>
 
-<div aria-label="Text size" class="flex items-center gap-1" data-a11y-sizes role="group">
+<div aria-label="{{ _('Text size') }}" class="flex items-center gap-1" data-a11y-sizes role="group">
 {%- for value, label, size in [(100, 'Normal text size', 'text-[13px]'), (125, 'Large text size', 'text-[15px]'), (150, 'Very large text size', 'text-[18px]')] %}
 <button aria-pressed="{{ 'true' if text_scale == value else 'false' }}" class="flex h-9 w-9 items-center justify-center rounded-full font-bold leading-none text-on-surface transition-colors hover:bg-surface-container-high focus-ring" name="text_scale" title="{{ label }}" type="submit" value="{{ value }}">
 <span aria-hidden="true" class="{{ size }}">A</span>

@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_babel import gettext as _, lazy_gettext as _l
 
 import api
 import auth
@@ -100,7 +101,7 @@ def assign(request_id: int) -> Any:
     except api.ApiError as exc:
         flash(exc.user_message(), "error")
         return redirect(url_for("staff.review", request_id=request_id))
-    flash("Request assigned to you.", "success")
+    flash(_("Request assigned to you."), "success")
     return redirect(url_for("staff.review", request_id=request_id))
 
 
@@ -109,7 +110,7 @@ def assign(request_id: int) -> Any:
 def set_status(request_id: int) -> Any:
     status_code = (request.form.get("status_code") or "").strip()
     if status_code not in STATUS_CODES.values():
-        flash("Choose a decision before submitting.", "error")
+        flash(_("Choose a decision before submitting."), "error")
         return redirect(url_for("staff.review", request_id=request_id))
     payload: dict[str, Any] = {"new_status_code": status_code}
     # StatusUpdateIn caps the reason at 2000 characters and forbids extra keys,
@@ -122,7 +123,7 @@ def set_status(request_id: int) -> Any:
     except api.ApiError as exc:
         flash(exc.user_message(), "error")
         return redirect(url_for("staff.review", request_id=request_id))
-    flash("Decision recorded.", "success")
+    flash(_("Decision recorded."), "success")
     return redirect(url_for("staff.workbench"))
 
 
@@ -137,7 +138,7 @@ def verify_document(document_id: int) -> Any:
         flash(exc.user_message(), "error")
         return redirect(request.referrer or url_for("staff.workbench"))
     flash(
-        "Document accepted." if status == "verified" else "Document rejected.",
+        _("Document accepted.")if status == "verified" else "Document rejected.",
         "success",
     )
     return redirect(request.referrer or url_for("staff.workbench"))
@@ -159,7 +160,7 @@ def appointment_status(appointment_id: int) -> Any:
     """AppointmentStatusIn only accepts "completed" or "no_show"."""
     status = request.form.get("status", "")
     if status not in ("completed", "no_show"):
-        flash("Choose whether the citizen attended.", "error")
+        flash(_("Choose whether the citizen attended."), "error")
         return redirect(url_for("staff.office_appointments"))
     try:
         api.patch(
@@ -168,7 +169,7 @@ def appointment_status(appointment_id: int) -> Any:
     except api.ApiError as exc:
         flash(exc.user_message(), "error")
         return redirect(url_for("staff.office_appointments"))
-    flash("Appointment updated.", "success")
+    flash(_("Appointment updated."), "success")
     return redirect(url_for("staff.office_appointments"))
 
 

@@ -1,36 +1,36 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-national-portal' %}
-{% block title %}Watiq National Portal | Republic of Tunisia{% endblock %}
-{% block body_class %}bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed overflow-x-hidden{% endblock %}
+{% block title %}{{ _('Watiq National Portal | Republic of Tunisia') }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed overflow-x-hidden') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/index.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 {% from 'partials/_logo.html' import mark %}
 <!-- Watermark Background -->
-<img alt="Tunisian National Emblem Watermark" class="watermark-emblem" src="{{ url_for('static', filename='img/img-a5f82587302e.jpg') }}"/>
+<img alt="{{ _('Tunisian National Emblem Watermark') }}" class="watermark-emblem" src="{{ url_for('static', filename='img/img-a5f82587302e.jpg') }}"/>
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full h-20 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm z-50 flex items-center">
 <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
 <div class="flex items-center gap-4">
 <a class="flex items-center gap-3 focus-ring rounded" href="{{ url_for('public.index') }}">
 {{ mark(size='h-9') }}
-<span class="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider">Republic of Tunisia</span>
+<span class="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider">{{ _('Republic of Tunisia') }}</span>
 </a>
 </div>
 <nav class="hidden md:flex items-center gap-8">
-<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
-<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='identity') }}">Identity</a>
-<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='justice') }}">Justice</a>
-<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='admin') }}">Admin</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='civil') }}">{{ _('Civil Status') }}</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='identity') }}">{{ _('Identity') }}</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='justice') }}">{{ _('Justice') }}</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150" href="{{ url_for('public.services', category='admin') }}">{{ _('Admin') }}</a>
 </nav>
 <div class="flex items-center gap-6">
 <div class="flex items-center gap-4">
-<a aria-label="About the national institutions" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('public.about') }}">account_balance</a>
-<a aria-label="Notifications" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.notifications') }}">notifications</a>
+<a aria-label="{{ _('About the national institutions') }}" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('public.about') }}">account_balance</a>
+<a aria-label="{{ _('Notifications') }}" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.notifications') }}">notifications</a>
 <a aria-label="{% if is_authenticated %}Your profile{% else %}Sign in{% endif %}" class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.profile') if is_authenticated else url_for('public.login') }}">account_circle</a>
 {%- if not is_authenticated %}
-<a class="font-label-md text-label-md text-on-primary bg-primary-container px-4 py-2 rounded-sm hover:shadow-lg transition-all focus-ring" href="{{ url_for('public.register') }}">Register</a>
+<a class="font-label-md text-label-md text-on-primary bg-primary-container px-4 py-2 rounded-sm hover:shadow-lg transition-all focus-ring" href="{{ url_for('public.register') }}">{{ _('Register') }}</a>
 {%- endif %}
 </div>
 </div>
@@ -44,44 +44,44 @@
 <div class="col-span-12 lg:col-span-7 flex flex-col justify-center gap-8">
 <div class="inline-flex items-center gap-2 bg-secondary-fixed px-3 py-1 rounded-sm w-fit">
 <span aria-hidden="true" class="material-symbols-outlined icon-filled text-[16px]">verified_user</span>
-<span class="font-label-caps text-label-caps text-on-secondary-fixed uppercase">Sovereign Gateway Verified</span>
+<span class="font-label-caps text-label-caps text-on-secondary-fixed uppercase">{{ _('Sovereign Gateway Verified') }}</span>
 </div>
 <h1 class="font-headline-lg text-headline-lg text-on-surface">
-                        Secure Access to <br/>
-<span class="text-primary-container">National Services</span>
+                        {{ _('Secure Access to') }} <br/>
+<span class="text-primary-container">{{ _('National Services') }}</span>
 </h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-                        Welcome to Watiq, the unified portal of the Republic of Tunisia. A trusted infrastructure for your administrative, legal, and civil status procedures.
+                        {{ _('Welcome to Watiq, the unified portal of the Republic of Tunisia. A trusted infrastructure for your administrative, legal, and civil status procedures.') }}
                     </p>
 <div class="flex flex-wrap gap-4 pt-4">
 <a class="bg-primary-container text-on-primary px-8 py-4 rounded-sm font-headline-md text-body-md hover:shadow-xl active:scale-95 transition-all flex items-center gap-3 focus-ring" href="{{ url_for('citizen.dashboard') if is_authenticated else url_for('public.login') }}">
-                            Access Portal
+                            {{ _('Access Portal') }}
                             <span aria-hidden="true" class="material-symbols-outlined">login</span>
 </a>
 <a class="border border-primary-container text-primary-container px-8 py-4 rounded-sm font-headline-md text-body-md hover:bg-surface-container-low transition-all focus-ring" href="{{ url_for('public.help_page') }}">
-                            View Documentation
+                            {{ _('View Documentation') }}
                         </a>
 <a class="border border-primary-container text-primary-container px-8 py-4 rounded-sm font-headline-md text-body-md hover:bg-surface-container-low transition-all focus-ring flex items-center gap-3" href="{{ url_for('citizen.book_appointment') }}">
-                            Book Appointment
+                            {{ _('Book Appointment') }}
                             <span aria-hidden="true" class="material-symbols-outlined">event_available</span>
                         </a>
 </div>
 <div class="mt-12 flex gap-8 items-center border-t border-outline-variant pt-8">
 <div class="flex flex-col">
-<span class="font-label-caps text-label-caps text-outline uppercase">Uptime</span>
+<span class="font-label-caps text-label-caps text-outline uppercase">{{ _('Uptime') }}</span>
 <span class="font-headline-md text-headline-md">99.99%</span>
 </div>
 <div class="h-10 w-px bg-outline-variant"></div>
 <div class="flex flex-col">
-<span class="font-label-caps text-label-caps text-outline uppercase">Encryption</span>
-<span class="font-headline-md text-headline-md">AES-256-GCM</span>
+<span class="font-label-caps text-label-caps text-outline uppercase">{{ _('Encryption') }}</span>
+<span class="font-headline-md text-headline-md">{{ _('AES-256-GCM') }}</span>
 </div>
 <div class="h-10 w-px bg-outline-variant"></div>
 <div class="flex flex-col">
-<span class="font-label-caps text-label-caps text-outline uppercase">Status</span>
+<span class="font-label-caps text-label-caps text-outline uppercase">{{ _('Status') }}</span>
 <div class="flex items-center gap-2">
 <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-<span class="font-headline-md text-headline-md">Operational</span>
+<span class="font-headline-md text-headline-md">{{ _('Operational') }}</span>
 </div>
 </div>
 </div>
@@ -90,27 +90,27 @@
 <div class="hidden lg:flex col-span-5 items-center justify-center">
 <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl glass-panel p-1">
 <div class="h-full w-full rounded-lg sovereign-gradient relative overflow-hidden flex flex-col p-10 text-surface">
-<div class="absolute top-0 right-0 p-8">
+<div class="absolute top-0 end-0 p-8">
 <span aria-hidden="true" class="material-symbols-outlined text-6xl opacity-20">shield</span>
 </div>
-<span class="font-label-caps text-label-caps text-secondary-fixed mb-4">SYSTEM ARCHITECTURE</span>
-<h3 class="font-headline-md text-headline-md mb-6">Watiq Sovereign Cloud</h3>
+<span class="font-label-caps text-label-caps text-secondary-fixed mb-4">{{ _('SYSTEM ARCHITECTURE') }}</span>
+<h3 class="font-headline-md text-headline-md mb-6">{{ _('Watiq Sovereign Cloud') }}</h3>
 <div class="space-y-6">
 <div class="flex gap-4">
 <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">cloud_done</span>
-<p class="font-support-sm text-support-sm opacity-80">Infrastructure hosted exclusively on national territory.</p>
+<p class="font-support-sm text-support-sm opacity-80">{{ _('Infrastructure hosted exclusively on national territory.') }}</p>
 </div>
 <div class="flex gap-4">
 <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">fingerprint</span>
-<p class="font-support-sm text-support-sm opacity-80">Biometric identification and certified electronic signature.</p>
+<p class="font-support-sm text-support-sm opacity-80">{{ _('Biometric identification and certified electronic signature.') }}</p>
 </div>
 <div class="flex gap-4">
 <span aria-hidden="true" class="material-symbols-outlined text-secondary-fixed">database</span>
-<p class="font-support-sm text-support-sm opacity-80">Real-time interoperability with civil status registries.</p>
+<p class="font-support-sm text-support-sm opacity-80">{{ _('Real-time interoperability with civil status registries.') }}</p>
 </div>
 </div>
 <div class="mt-auto border-t border-white/10 pt-6">
-<p class="font-label-caps text-[10px] opacity-50 mb-2">AUTH_TOKEN_ACTIVE</p>
+<p class="font-label-caps text-[10px] opacity-50 mb-2">{{ _('AUTH_TOKEN_ACTIVE') }}</p>
 <div class="w-full h-1 bg-white/20 rounded-full overflow-hidden">
 <div class="h-full w-2/3 bg-secondary-fixed"></div>
 </div>
@@ -124,8 +124,8 @@
 <section class="py-24 bg-surface-container-low relative" id="services">
 <div class="max-w-container-max mx-auto px-margin-desktop">
 <div class="flex flex-col mb-16 text-center items-center">
-<span class="font-label-caps text-label-caps text-secondary uppercase mb-4">Service Categories</span>
-<h2 class="font-headline-lg text-headline-lg text-on-surface max-w-2xl">Universal access to digital administration</h2>
+<span class="font-label-caps text-label-caps text-secondary uppercase mb-4">{{ _('Service Categories') }}</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface max-w-2xl">{{ _('Universal access to digital administration') }}</h2>
 </div>
 {#- The four categories are the mockup's own copy, not catalogue rows: each
     card deep-links into the catalogue filtered to that category. -#}
@@ -144,7 +144,7 @@
 <p class="font-body-md text-on-surface-variant group-hover:text-surface-variant">{{ blurb }}</p>
 </div>
 <div class="mt-auto flex items-center gap-2 font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity">
-                            Open Service <span aria-hidden="true" class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                            {{ _('Open Service') }} <span aria-hidden="true" class="material-symbols-outlined text-[14px]">arrow_forward</span>
 </div>
 </a>
 {%- endfor %}
@@ -156,19 +156,19 @@
 <div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-12 gap-gutter items-center">
 <div class="col-span-12 md:col-span-6 order-2 md:order-1">
 <div class="p-8 border border-outline-variant rounded-sm bg-surface-container-lowest relative overflow-hidden">
-<div class="absolute -right-10 -top-10">
+<div class="absolute -end-10 -top-10">
 <span aria-hidden="true" class="material-symbols-outlined text-[180px] text-surface-container">memory</span>
 </div>
 <div class="relative z-10">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-8">Technical Specifications</h3>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-8">{{ _('Technical Specifications') }}</h3>
 <div class="grid grid-cols-1 gap-6">
 <div class="flex items-start gap-4">
 <div class="w-10 h-10 rounded-sm bg-primary-container flex items-center justify-center text-on-primary shrink-0">
 <span aria-hidden="true" class="material-symbols-outlined">security</span>
 </div>
 <div>
-<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">Zero Trust Architecture</h4>
-<p class="font-support-sm text-support-sm text-on-surface-variant">Every request is authenticated, authorized, and continuously inspected.</p>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">{{ _('Zero Trust Architecture') }}</h4>
+<p class="font-support-sm text-support-sm text-on-surface-variant">{{ _('Every request is authenticated, authorized, and continuously inspected.') }}</p>
 </div>
 </div>
 <div class="flex items-start gap-4">
@@ -176,8 +176,8 @@
 <span aria-hidden="true" class="material-symbols-outlined">api</span>
 </div>
 <div>
-<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">X-Road Standard</h4>
-<p class="font-support-sm text-support-sm text-on-surface-variant">Secure interoperability layer ensuring the integrity of data exchanges.</p>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">{{ _('X-Road Standard') }}</h4>
+<p class="font-support-sm text-support-sm text-on-surface-variant">{{ _('Secure interoperability layer ensuring the integrity of data exchanges.') }}</p>
 </div>
 </div>
 <div class="flex items-start gap-4">
@@ -185,8 +185,8 @@
 <span aria-hidden="true" class="material-symbols-outlined">lan</span>
 </div>
 <div>
-<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">Multi-Hosting</h4>
-<p class="font-support-sm text-support-sm text-on-surface-variant">Geographical redundancy across three isolated national data centers.</p>
+<h4 class="font-label-caps text-label-caps text-on-surface uppercase mb-1">{{ _('Multi-Hosting') }}</h4>
+<p class="font-support-sm text-support-sm text-on-surface-variant">{{ _('Geographical redundancy across three isolated national data centers.') }}</p>
 </div>
 </div>
 </div>
@@ -194,31 +194,31 @@
 </div>
 </div>
 <div class="col-span-12 md:col-span-6 order-1 md:order-2 flex flex-col gap-6">
-<span class="font-label-caps text-label-caps text-primary uppercase">Sovereign Cloud Secured</span>
-<h2 class="font-headline-lg text-headline-lg text-on-surface">Protected by National Trust Infrastructure</h2>
+<span class="font-label-caps text-label-caps text-primary uppercase">{{ _('Sovereign Cloud Secured') }}</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">{{ _('Protected by National Trust Infrastructure') }}</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant">
-                        Watiq is not just a portal; it is the backbone of Tunisian digital sovereignty. Our systems are audited quarterly by the ANSI to ensure the highest level of protection for citizen data.
+                        {{ _('Watiq is not just a portal; it is the backbone of Tunisian digital sovereignty. Our systems are audited quarterly by the ANSI to ensure the highest level of protection for citizen data.') }}
                     </p>
 <div class="flex gap-4">
-<img alt="ANSI Logo" class="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60" src="{{ url_for('static', filename='img/img-59b136c5decd.jpg') }}"/>
-<img alt="Sovereign Cloud Infrastructure Logo" class="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60" src="{{ url_for('static', filename='img/img-9d8a79b731d0.jpg') }}"/>
+<img alt="{{ _('ANSI Logo') }}" class="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60" src="{{ url_for('static', filename='img/img-59b136c5decd.jpg') }}"/>
+<img alt="{{ _('Sovereign Cloud Infrastructure Logo') }}" class="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60" src="{{ url_for('static', filename='img/img-9d8a79b731d0.jpg') }}"/>
 </div>
 </div>
 </div>
 </section>
 </main>
 <!-- Sign Language Module (TSL) -->
-<div class="fixed bottom-margin-mobile right-margin-mobile z-[100] group">
+<div class="fixed bottom-margin-mobile end-margin-mobile z-[100] group">
 <div class="relative">
 <!-- Label Tag -->
-<div class="absolute -top-10 right-0 bg-primary-container text-on-primary text-[10px] font-label-caps py-1 px-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
-                ACCESSIBILITY TSL
+<div class="absolute -top-10 end-0 bg-primary-container text-on-primary text-[10px] font-label-caps py-1 px-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
+                {{ _('ACCESSIBILITY TSL') }}
             </div>
 <!-- Video Container -->
-<a aria-label="Tunisian Sign Language support" class="block w-48 md:w-64 aspect-[1.79] rounded-xl overflow-hidden shadow-2xl glass-panel border-2 border-secondary-fixed relative cursor-pointer active:scale-95 transition-transform focus-ring" href="{{ url_for('public.accessibility') }}">
-<img alt="TSL Interpreter" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<a aria-label="{{ _('Tunisian Sign Language support') }}" class="block w-48 md:w-64 aspect-[1.79] rounded-xl overflow-hidden shadow-2xl glass-panel border-2 border-secondary-fixed relative cursor-pointer active:scale-95 transition-transform focus-ring" href="{{ url_for('public.accessibility') }}">
+<img alt="{{ _('TSL Interpreter') }}" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
 <div class="absolute inset-0 bg-primary-container/20 group-hover:bg-transparent transition-colors"></div>
-<div class="absolute bottom-2 right-2 flex gap-1">
+<div class="absolute bottom-2 end-2 flex gap-1">
 <div class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-ping"></div>
 </div>
 <!-- Play Overlay -->
@@ -233,22 +233,22 @@
 <div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
 <div class="flex flex-col items-center md:items-start gap-4">
 <div class="font-label-md text-label-md text-surface-container-lowest font-bold tracking-widest uppercase">
-                    Watiq Portal
+                    {{ _('Watiq Portal') }}
                 </div>
-<p class="font-caption text-caption text-surface-container-highest opacity-60 text-center md:text-left">
-                    © {{ year }} Republic of Tunisia - National Services Portal
+<p class="font-caption text-caption text-surface-container-highest opacity-60 text-center md:text-start">
+                    © {{ year }} {{ _('Republic of Tunisia - National Services Portal') }}
                 </p>
 </div>
 <div class="flex flex-wrap justify-center gap-8">
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Security Protocols</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.status') }}">System Status</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">{{ _('Privacy Policy') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Terms of Service') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Security Protocols') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">{{ _('Contact Support') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.status') }}">{{ _('System Status') }}</a>
 </div>
 <div class="flex gap-4">
-<a aria-label="Watiq on social media" class="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.contact') }}">facebook</a>
-<a aria-label="Language and accessibility options" class="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.accessibility') }}">language</a>
+<a aria-label="{{ _('Watiq on social media') }}" class="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.contact') }}">facebook</a>
+<a aria-label="{{ _('Language and accessibility options') }}" class="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded" href="{{ url_for('public.accessibility') }}">language</a>
 </div>
 </div>
 </footer>

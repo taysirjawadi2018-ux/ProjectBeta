@@ -8,7 +8,7 @@
         .national-watermark {
             position: fixed;
             bottom: -100px;
-            right: -100px;
+            inset-inline-end: -100px;
             width: 800px;
             height: 800px;
             background-image: url(../../img/img-856c5560ee42.jpg);
@@ -21,7 +21,7 @@
         .tsl-module {
             position: fixed;
             bottom: 32px;
-            right: 32px;
+            inset-inline-end: 32px;
             width: 280px;
             height: 180px;
             z-index: 100;

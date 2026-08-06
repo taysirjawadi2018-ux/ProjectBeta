@@ -1,24 +1,24 @@
 {% extends "_page.html" %}
 
-{% block title %}Watiq National Portal - Payments{% endblock %}
+{% block title %}{{ _('Watiq National Portal - Payments') }}{% endblock %}
 
 {% block page %}
 <header class="border-b border-surface-variant pb-6">
-<h1 class="font-headline-md text-headline-md text-on-surface">Payments</h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Fees paid for your service requests.</p>
+<h1 class="font-headline-md text-headline-md text-on-surface">{{ _('Payments') }}</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">{{ _('Fees paid for your service requests.') }}</p>
 </header>
 
 {% if payments %}
 <div class="overflow-x-auto">
 <table class="w-full min-w-[640px] border border-surface-variant rounded-xl overflow-hidden">
-<caption class="sr-only">Your payment history</caption>
+<caption class="sr-only">{{ _('Your payment history') }}</caption>
 <thead class="bg-surface-container">
 <tr>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Reference</th>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Service</th>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Date</th>
-<th class="text-right font-label-md text-label-md text-on-surface p-4" scope="col">Amount</th>
-<th class="text-left font-label-md text-label-md text-on-surface p-4" scope="col">Status</th>
+<th class="text-start font-label-md text-label-md text-on-surface p-4" scope="col">{{ _('Reference') }}</th>
+<th class="text-start font-label-md text-label-md text-on-surface p-4" scope="col">{{ _('Service') }}</th>
+<th class="text-start font-label-md text-label-md text-on-surface p-4" scope="col">{{ _('Date') }}</th>
+<th class="text-end font-label-md text-label-md text-on-surface p-4" scope="col">{{ _('Amount') }}</th>
+<th class="text-start font-label-md text-label-md text-on-surface p-4" scope="col">{{ _('Status') }}</th>
 </tr>
 </thead>
 <tbody>
@@ -27,11 +27,11 @@
 {# The full reference number is not printed in a list view; it is a
    sensitive identifier and only the detail page shows it. #}
 <td class="p-4 font-body-md text-body-md text-on-surface">
-<a class="text-secondary underline hover:text-primary focus-ring rounded-DEFAULT" href="{{ url_for('citizen.payment_confirmation', id=p.id) }}">View receipt</a>
+<a class="text-secondary underline hover:text-primary focus-ring rounded-DEFAULT" href="{{ url_for('citizen.payment_confirmation', id=p.id) }}">{{ _('View receipt') }}</a>
 </td>
 <td class="p-4 font-body-md text-body-md text-on-surface">{{ p.service_name or '—' }}</td>
 <td class="p-4 font-body-md text-body-md text-on-surface-variant">{{ p.paid_at or p.created_at or '—' }}</td>
-<td class="p-4 font-body-md text-body-md text-on-surface text-right">{{ p.amount }} {{ p.currency or 'TND' }}</td>
+<td class="p-4 font-body-md text-body-md text-on-surface text-end">{{ p.amount }} {{ p.currency or 'TND' }}</td>
 <td class="p-4">
 <span class="inline-flex items-center gap-2 font-label-sm text-label-sm py-1 px-3 rounded-full {% if p.status == 'completed' %}bg-secondary-container text-on-secondary-container{% else %}bg-surface-container text-on-surface-variant{% endif %}">{{ p.status or 'pending' }}</span>
 </td>
@@ -43,7 +43,7 @@
 {% else %}
 <div class="bg-surface-container-low p-8 rounded-xl border border-surface-variant text-center space-y-3">
 <span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-[48px]">payments</span>
-<p class="font-body-lg text-body-lg text-on-surface-variant">You have no payments yet.</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">{{ _('You have no payments yet.') }}</p>
 </div>
 {% endif %}
 {% endblock %}

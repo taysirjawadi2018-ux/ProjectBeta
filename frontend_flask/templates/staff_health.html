@@ -1,75 +1,75 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-system-integrity-and-health' %}
-{% block title %}Watiq Portal - Security Log & Diagnostics{% endblock %}
-{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex{% endblock %}
+{% block title %}{{ _('Watiq Portal - Security Log & Diagnostics') }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-background font-body-md min-h-screen flex') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/staff_health.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 <!-- SideNavBar (Shared Component) -->
-<nav class="bg-surface-container-low text-secondary font-label-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col p-4 gap-2 z-20 hidden md:flex">
+<nav class="bg-surface-container-low text-secondary font-label-md h-screen w-64 fixed start-0 top-0 border-e border-outline-variant flex flex-col p-4 gap-2 z-20 hidden md:flex">
 <div class="mb-8 px-4 flex flex-col gap-2 mt-4">
 <!-- Simulated Avatar/Emblem via img -->
-<img alt="Tunisian National Emblem" class="w-12 h-12 mb-2 object-contain rounded-full" alt="A highly detailed, official-looking crest or emblem design representing state authority, rendered in crisp monochromatic" src="{{ url_for('static', filename='img/img-32881f260751.jpg') }}"/>
-<h1 class="font-headline-md text-headline-md text-on-surface">Watiq Portal</h1>
-<p class="font-support-sm text-support-sm text-on-surface-variant">State-Grade Security</p>
+<img alt="{{ _('Tunisian National Emblem') }}" class="w-12 h-12 mb-2 object-contain rounded-full" alt="{{ _('A highly detailed, official-looking crest or emblem design representing state authority, rendered in crisp monochromatic') }}" src="{{ url_for('static', filename='img/img-32881f260751.jpg') }}"/>
+<h1 class="font-headline-md text-headline-md text-on-surface">{{ _('Watiq Portal') }}</h1>
+<p class="font-support-sm text-support-sm text-on-surface-variant">{{ _('State-Grade Security') }}</p>
 </div>
 <a href="{{ url_for('citizen.submit_request') }}" class="bg-primary text-on-primary font-label-caps py-3 px-4 rounded-sm mb-6 hover:opacity-90 transition-opacity">
-            New Request
+            {{ _('New Request') }}
         </a>
 <ul class="flex flex-col gap-1 w-full">
 <li>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
-<span>Dashboard</span>
+<span>{{ _('Dashboard') }}</span>
 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
-<span>Documents</span>
+<span>{{ _('Documents') }}</span>
 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.office_appointments') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">event</span>
-<span>Appointments</span>
+<span>{{ _('Appointments') }}</span>
 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.health') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">monitor_heart</span>
-<span>System Health</span>
+<span>{{ _('System Health') }}</span>
 </a>
 </li>
 <li>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary-container text-on-secondary-container font-bold translate-x-1 transition-transform" href="{{ url_for('staff.audit') }}">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary-container text-on-secondary-container font-bold translate-x-1 rtl:-translate-x-1 transition-transform" href="{{ url_for('staff.audit') }}">
 <span aria-hidden="true" class="material-symbols-outlined icon-filled">shield</span>
-<span>Security Log</span>
+<span>{{ _('Security Log') }}</span>
 </a>
 </li>
 </ul>
 <div class="mt-auto px-4 py-4 border-t border-outline-variant/30 flex items-center gap-3">
 <span class="material-symbols-outlined text-on-surface-variant">verified_user</span>
-<span class="text-on-surface-variant text-sm">Auditor Acc.</span>
+<span class="text-on-surface-variant text-sm">{{ _('Auditor Acc.') }}</span>
 </div>
 <form action="{{ url_for('public.logout') }}" class="mt-auto" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-error hover:bg-error-container/20 transition-colors" type="submit">
 <span aria-hidden="true" class="material-symbols-outlined">logout</span>
-<span class="font-label-md text-label-md">Sign Out</span>
+<span class="font-label-md text-label-md">{{ _('Sign Out') }}</span>
 </button>
 </form>
 </nav>
 <!-- Main Content Canvas -->
-<main class="flex-1 ml-0 md:ml-64 p-margin-mobile md:p-gutter xl:p-margin-desktop min-h-screen relative overflow-x-hidden">
+<main class="flex-1 ms-0 md:ms-64 p-margin-mobile md:p-gutter xl:p-margin-desktop min-h-screen relative overflow-x-hidden">
 <!-- Subtle Global Watermark -->
 <div class="absolute inset-0 pointer-events-none watermark z-0"></div>
 <!-- Header -->
 <header class="mb-12 relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-outline-variant/50 pb-6">
 <div>
-<h2 class="font-label-caps text-label-caps text-primary uppercase mb-2 tracking-widest">System Diagnostics</h2>
-<h1 class="font-headline-lg text-headline-lg text-on-background">Auditor Monitoring Console</h1>
+<h2 class="font-label-caps text-label-caps text-primary uppercase mb-2 tracking-widest">{{ _('System Diagnostics') }}</h2>
+<h1 class="font-headline-lg text-headline-lg text-on-background">{{ _('Auditor Monitoring Console') }}</h1>
 </div>
 {%- set all_ok = healthy == checks|length %}
 <div class="flex items-center gap-3 bg-surface-container-highest px-4 py-2 rounded-sm border border-outline-variant/20">
@@ -89,12 +89,12 @@
 <!-- Surfaces responding (Span 4) -->
 <div class="col-span-1 md:col-span-4 bg-surface rounded-xl p-6 shadow-soft border border-primary/5 flex flex-col justify-between h-48">
 <div class="flex justify-between items-start">
-<span class="font-label-caps text-label-caps text-on-surface-variant">Surfaces Responding</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Surfaces Responding') }}</span>
 <span aria-hidden="true" class="material-symbols-outlined text-primary">dns</span>
 </div>
 <div>
 <div class="font-headline-lg text-headline-lg text-primary">{{ healthy }}<span class="text-headline-md text-on-surface-variant">/{{ checks|length }}</span></div>
-<p class="font-support-sm text-support-sm text-on-surface-variant mt-1">Probed {{ now_utc }}</p>
+<p class="font-support-sm text-support-sm text-on-surface-variant mt-1">{{ _('Probed') }} {{ now_utc }}</p>
 </div>
 </div>
 <!-- Degraded surfaces (Span 4) -->
@@ -102,7 +102,7 @@
 <div class="col-span-1 md:col-span-4 bg-primary-container text-on-primary-container rounded-xl p-6 shadow-soft h-48 flex flex-col justify-between relative overflow-hidden group">
 <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-br from-transparent to-primary/20 pointer-events-none"></div>
 <div class="flex justify-between items-start relative z-10">
-<span class="font-label-caps text-label-caps text-on-primary-fixed">Surfaces Not Answering</span>
+<span class="font-label-caps text-label-caps text-on-primary-fixed">{{ _('Surfaces Not Answering') }}</span>
 <span aria-hidden="true" class="material-symbols-outlined icon-filled {{ 'text-error' if degraded else 'text-primary-fixed' }}">security</span>
 </div>
 <div class="relative z-10">
@@ -117,7 +117,7 @@
 {%- set slowest = (checks|map(attribute='ms')|max) or 1 %}
 <div class="col-span-1 md:col-span-4 bg-surface rounded-xl p-6 shadow-soft border border-primary/5 h-48 flex flex-col">
 <div class="flex justify-between items-center mb-4">
-<span class="font-label-caps text-label-caps text-on-surface-variant">Round-trip Latency</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Round-trip Latency') }}</span>
 <span aria-hidden="true" class="material-symbols-outlined text-primary text-[20px]">router</span>
 </div>
 <div class="flex-1 w-full bg-surface-container-lowest rounded-sm border border-outline-variant/30 flex items-end p-2 gap-1 overflow-hidden">
@@ -129,15 +129,15 @@
 <!-- Per-surface detail (Span 6) -->
 <div class="col-span-1 md:col-span-6 bg-surface rounded-xl p-6 shadow-soft border border-primary/5 min-h-[300px]">
 <div class="flex justify-between items-center mb-6">
-<h3 class="font-label-caps text-label-caps text-on-surface-variant">Response Time by Surface</h3>
-<a class="text-primary text-sm hover:underline font-semibold focus-ring rounded" href="{{ url_for('staff.audit') }}">View access log</a>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Response Time by Surface') }}</h3>
+<a class="text-primary text-sm hover:underline font-semibold focus-ring rounded" href="{{ url_for('staff.audit') }}">{{ _('View access log') }}</a>
 </div>
 <div class="space-y-6">
 {%- for check in checks %}
 <div>
 <div class="flex justify-between font-support-sm text-support-sm mb-2">
 <span class="font-semibold text-on-background">{{ check.label }}</span>
-<span class="text-on-surface-variant">{{ check.ms }}ms · {{ check.status }}</span>
+<span class="text-on-surface-variant">{{ check.ms }}{{ _('ms ·') }} {{ check.status }}</span>
 </div>
 <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
 <div class="h-full rounded-full latency-bar {{ 'bg-error' if check.status == 'down' else 'bg-secondary' if check.status == 'degraded' else 'bg-primary' }}" data-pct="{{ (100 * check.ms / slowest)|round|int }}"></div>
@@ -151,7 +151,7 @@
 <div class="bg-on-background/40 px-4 py-3 flex items-center justify-between border-b border-primary-fixed-dim/20">
 <div class="flex items-center gap-2">
 <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed text-[18px]">terminal</span>
-<span class="font-label-caps text-label-caps text-primary-fixed tracking-wider">Probe Transcript</span>
+<span class="font-label-caps text-label-caps text-primary-fixed tracking-wider">{{ _('Probe Transcript') }}</span>
 </div>
 <div aria-hidden="true" class="flex gap-1.5">
 <div class="w-2.5 h-2.5 rounded-full bg-outline"></div>
@@ -159,13 +159,13 @@
 <div class="w-2.5 h-2.5 rounded-full bg-outline"></div>
 </div>
 </div>
-<div class="p-4 flex-1 overflow-y-auto code-panel bg-primary-container text-left text-sm text-[#a3b8cc] leading-relaxed">
-<div class="mb-2 text-primary-fixed">[SYSTEM] {{ checks|length }} probes issued from the BFF at request time.</div>
+<div class="p-4 flex-1 overflow-y-auto code-panel bg-primary-container text-start text-sm text-[#a3b8cc] leading-relaxed">
+<div class="mb-2 text-primary-fixed">{{ _('[SYSTEM]') }} {{ checks|length }} {{ _('probes issued from the BFF at request time.') }}</div>
 {%- for check in checks %}
-<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">{{ now_utc }}</span> [{{ check.status|upper }}] GET {{ check.path }} — {{ check.ms }}ms</div>
+<div class="text-[#a3b8cc]"><span class="text-[#7aa2f7]">{{ now_utc }}</span> [{{ check.status|upper }}{{ _('] GET') }} {{ check.path }} — {{ check.ms }}{{ _('ms') }}</div>
 {%- endfor %}
-<div class="text-[#bb9af7] mt-2"><span class="text-[#7aa2f7]">{{ now_utc }}</span> [AUDIT] Console opened by {{ (staff.full_name if staff else none) or 'staff session' }}.</div>
-<div class="mt-2 text-[#7dcfff]">No log tail is wired: this build ships no log shipper, so nothing beyond these probes is observable from here.</div>
+<div class="text-[#bb9af7] mt-2"><span class="text-[#7aa2f7]">{{ now_utc }}</span> {{ _('[AUDIT] Console opened by') }} {{ (staff.full_name if staff else none) or 'staff session' }}.</div>
+<div class="mt-2 text-[#7dcfff]">{{ _('No log tail is wired: this build ships no log shipper, so nothing beyond these probes is observable from here.') }}</div>
 </div>
 </div>
 </div>

@@ -21,7 +21,7 @@ body {
         .national-watermark {
             position: fixed;
             bottom: -50px;
-            right: -50px;
+            inset-inline-end: -50px;
             opacity: 0.03;
             pointer-events: none;
             z-index: 0;

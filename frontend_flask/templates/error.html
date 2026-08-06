@@ -17,7 +17,7 @@
      else 'error_maintenance.html' if code in (502, 503, 504)
      else '_page.html' %}
 
-{% block title %}{{ title }} | Watiq National Portal{% endblock %}
+{% block title %}{{ title }} {{ _('| Watiq National Portal') }}{% endblock %}
 
 {# Only reached by the generic branch; the two designed screens render their
    own content block and ignore this. #}
@@ -26,15 +26,15 @@
 <span aria-hidden="true" class="material-symbols-outlined text-primary text-[64px]">{% if code == 404 %}search_off{% elif code == 409 %}history{% else %}warning{% endif %}</span>
 <h1 class="font-headline-lg text-headline-lg text-on-surface">{{ title }}</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant">{{ message }}</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Reference: {{ code }}{% if g.request_id %} · {{ g.request_id[:8] }}{% endif %}</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">{{ _('Reference:') }} {{ code }}{% if g.request_id %} · {{ g.request_id[:8] }}{% endif %}</p>
 <div class="flex flex-wrap justify-center gap-4 pt-4">
 <a class="inline-flex items-center gap-2 bg-primary-container text-on-primary font-label-md text-label-md py-3 px-6 rounded hover:bg-primary transition-colors focus-ring" href="{{ url_for('public.index') }}">
 <span aria-hidden="true" class="material-symbols-outlined">account_balance</span>
-                Return to the portal
+                {{ _('Return to the portal') }}
             </a>
 <a class="inline-flex items-center gap-2 border border-outline-variant text-on-surface font-label-md text-label-md py-3 px-6 rounded hover:bg-surface-container-low transition-colors focus-ring" href="{{ url_for('public.help_page') }}">
 <span aria-hidden="true" class="material-symbols-outlined">help</span>
-                Get help
+                {{ _('Get help') }}
             </a>
 </div>
 </section>

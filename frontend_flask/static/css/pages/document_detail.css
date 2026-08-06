@@ -51,7 +51,7 @@
         .audit-line::before {
             content: '';
             position: absolute;
-            left: 11px;
+            inset-inline-start: 11px;
             top: 24px;
             bottom: -8px;
             width: 2px;

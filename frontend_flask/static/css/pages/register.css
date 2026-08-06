@@ -22,7 +22,7 @@ body { font-family: 'Public Sans', sans-serif; }
         .tsl-video-container {
             position: fixed;
             bottom: 32px;
-            right: 32px;
+            inset-inline-end: 32px;
             width: 320px;
             aspect-ratio: 16/9;
             z-index: 100;
@@ -41,7 +41,7 @@ body { font-family: 'Public Sans', sans-serif; }
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
+            inset-inline-start: 0;
             width: 4px;
             height: 100%;
             background: #af792f;

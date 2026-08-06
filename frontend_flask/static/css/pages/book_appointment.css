@@ -59,7 +59,7 @@ body {
 
         /* Sovereign Institutional Borders */
         .institutional-border-left {
-            border-left: 3px solid #775a19;
+            border-inline-start: 3px solid #775a19;
         }
 
 /* The two backgrounds the mockup set with inline style attributes. style-src

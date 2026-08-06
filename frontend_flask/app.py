@@ -55,6 +55,7 @@ def create_app() -> Flask:
 
     _init_session(app)
     _init_csrf(app)
+    _init_babel(app)
     _register_blueprints(app)
     _register_hooks(app)
     _register_error_handlers(app)
@@ -116,6 +117,21 @@ def _init_csrf(app: Flask) -> None:
     CSRFProtect(app)
 
 
+def _init_babel(app: Flask) -> None:
+    """English, French and Arabic, selected per request.
+
+    The catalogs are keyed on the English source text rather than on symbolic
+    ids, so a template that has not been marked up yet, or a message added
+    after the last extraction, still renders readable English instead of a
+    bare key. Compiled .mo files live in translations/<lang>/LC_MESSAGES/.
+    """
+    from flask_babel import Babel
+
+    app.config.setdefault("BABEL_DEFAULT_LOCALE", "en")
+    app.config.setdefault("BABEL_TRANSLATION_DIRECTORIES", "translations")
+    Babel(app, locale_selector=_locale)
+
+
 def _register_blueprints(app: Flask) -> None:
     from views.admin import bp as admin_bp
     from views.citizen import bp as citizen_bp
@@ -166,7 +182,15 @@ def _register_hooks(app: Flask) -> None:
         import auth
 
         theme, scale = _preferences()
+        locale = _locale()
         return {
+            # Language, and the writing direction that follows from it. `dir`
+            # drives the logical Tailwind utilities (ms-/me-/start-/end-), so
+            # setting it on <html> is what actually mirrors the layout for
+            # Arabic — there is no separate RTL stylesheet.
+            "locale": locale,
+            "text_dir": LANGUAGES[locale]["dir"],
+            "languages": LANGUAGES,
             # Reader preferences, rendered onto <html> by base.html. They come
             # from a cookie rather than localStorage because the CSP forbids
             # the inline <head> script that would otherwise apply them before
@@ -189,8 +213,29 @@ def _register_hooks(app: Flask) -> None:
 
 THEME_COOKIE = "watiq_theme"
 TEXT_SCALE_COOKIE = "watiq_text_scale"
+LANG_COOKIE = "watiq_lang"
 THEMES = ("light", "dark")
 TEXT_SCALES = (100, 125, 150)
+
+# Order is the order the switcher renders. English is the source language the
+# catalogs are keyed on, so it is also the fallback when a message is missing.
+LANGUAGES = {
+    "en": {"label": "English", "native": "English", "dir": "ltr"},
+    "fr": {"label": "French", "native": "Français", "dir": "ltr"},
+    "ar": {"label": "Arabic", "native": "العربية", "dir": "rtl"},
+}
+
+
+def _locale() -> str:
+    """The reader's language: cookie first, then what the browser asks for.
+
+    Accept-Language is only consulted when no choice has been made, so an
+    explicit pick always wins over a browser that advertises something else.
+    """
+    chosen = request.cookies.get(LANG_COOKIE, "")
+    if chosen in LANGUAGES:
+        return chosen
+    return request.accept_languages.best_match(list(LANGUAGES)) or "en"
 
 
 def _preferences() -> tuple[str, int]:
@@ -278,9 +323,8 @@ def _register_error_handlers(app: Flask) -> None:
             render_template(
                 "error.html",
                 code=503,
-                title="Service unavailable",
-                message="The portal cannot reach the records service right now. "
-                "Please try again in a few minutes.",
+                title=_("Service unavailable"),
+                message=_("The portal cannot reach the records service right now. Please try again in a few minutes."),
             ),
             503,
         )
@@ -291,8 +335,8 @@ def _register_error_handlers(app: Flask) -> None:
             render_template(
                 "error.html",
                 code=404,
-                title="Page not found",
-                message="That page does not exist, or you do not have access to it.",
+                title=_("Page not found"),
+                message=_("That page does not exist, or you do not have access to it."),
             ),
             404,
         )
@@ -303,8 +347,8 @@ def _register_error_handlers(app: Flask) -> None:
             render_template(
                 "error.html",
                 code=500,
-                title="Something went wrong",
-                message="An unexpected error occurred. The incident has been logged.",
+                title=_("Something went wrong"),
+                message=_("An unexpected error occurred. The incident has been logged."),
             ),
             500,
         )

@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-crimanel-record-b3-application icons-w300' %}
-{% block title %}Demande d'Extrait de Casier Judiciaire (B3) - République Tunisienne{% endblock %}
-{% block body_class %}bg-background text-on-surface{% endblock %}
+{% block title %}{{ _('Demande d\'Extrait de Casier Judiciaire (B3) - République Tunisienne') }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-surface') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/submit_request.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 <!-- National Watermark -->
 <div class="national-watermark">
-<img class="w-full h-full object-contain" alt="A highly detailed, high-fidelity technical rendering of the Tunisian National Emblem used as a watermark." src="{{ url_for('static', filename='img/img-b4cb8bfb107d.jpg') }}"/>
+<img class="w-full h-full object-contain" alt="{{ _('A highly detailed, high-fidelity technical rendering of the Tunisian National Emblem used as a watermark.') }}" src="{{ url_for('static', filename='img/img-b4cb8bfb107d.jpg') }}"/>
 </div>
 <!-- TopNavBar -->
 <header class="bg-surface sticky top-0 z-50 border-b border-outline-variant shadow-sm h-20">
 <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-full">
 <div class="flex items-center gap-4">
-<span class="font-headline-md text-headline-md text-primary uppercase tracking-wider">République Tunisienne</span>
+<span class="font-headline-md text-headline-md text-primary uppercase tracking-wider">{{ _('République Tunisienne') }}</span>
 </div>
 <nav class="hidden md:flex items-center gap-8 font-label-md text-label-md">
-<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
-<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="{{ url_for('public.services', category='identity') }}">Identity</a>
-<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='justice') }}">Justice</a>
-<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='admin') }}">Admin</a>
+<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='civil') }}">{{ _('Civil Status') }}</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-bold" href="{{ url_for('public.services', category='identity') }}">{{ _('Identity') }}</a>
+<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='justice') }}">{{ _('Justice') }}</a>
+<a class="text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='admin') }}">{{ _('Admin') }}</a>
 </nav>
 <div class="flex items-center gap-4">
 <a href="{{ url_for('public.index') }}" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 duration-150">
@@ -29,12 +29,12 @@
 <a href="{{ url_for('citizen.notifications') }}" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 duration-150">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </a>
-<a aria-label="Your profile" class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant block focus-ring" href="{{ url_for('citizen.profile') }}">
-<img class="w-full h-full object-cover" alt="A professional, high-quality corporate headshot of a person with a neutral, calm expression, representing a Citizen Prof" src="{{ url_for('static', filename='img/img-71d688a49052.jpg') }}"/>
+<a aria-label="{{ _('Your profile') }}" class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant block focus-ring" href="{{ url_for('citizen.profile') }}">
+<img class="w-full h-full object-cover" alt="{{ _('A professional, high-quality corporate headshot of a person with a neutral, calm expression, representing a Citizen Prof') }}" src="{{ url_for('static', filename='img/img-71d688a49052.jpg') }}"/>
 </a>
 <form action="{{ url_for('public.logout') }}" class="inline" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
-<button aria-label="Sign out" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-all focus-ring" type="submit">
+<button aria-label="{{ _('Sign out') }}" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-all focus-ring" type="submit">
 <span aria-hidden="true" class="material-symbols-outlined">logout</span>
 </button>
 </form>
@@ -45,30 +45,30 @@
 <!-- Header & Breadcrumbs -->
 <div class="mb-12">
 <div class="flex items-center gap-2 font-label-caps text-label-caps text-on-surface-variant mb-4 uppercase">
-<a class="hover:text-primary" href="{{ url_for('public.services', category='justice') }}">E-Justice</a>
+<a class="hover:text-primary" href="{{ url_for('public.services', category='justice') }}">{{ _('E-Justice') }}</a>
 <span class="material-symbols-outlined text-[14px]">chevron_right</span>
-<span class="text-primary font-bold">Extrait de Casier Judiciaire (B3)</span>
+<span class="text-primary font-bold">{{ _('Extrait de Casier Judiciaire (B3)') }}</span>
 </div>
-<h1 class="font-headline-lg text-headline-lg mb-4">Demande de Bulletin N°3</h1>
+<h1 class="font-headline-lg text-headline-lg mb-4">{{ _('Demande de Bulletin N°3') }}</h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-                Plateforme officielle de demande d'extrait de casier judiciaire. Ce service sécurisé permet aux citoyens tunisiens d'obtenir leur document légal par voie postale.
+                {{ _('Plateforme officielle de demande d\'extrait de casier judiciaire. Ce service sécurisé permet aux citoyens tunisiens d\'obtenir leur document légal par voie postale.') }}
             </p>
 </div>
 <!-- Progress Stepper -->
 <div class="flex items-center justify-between mb-16 px-4">
 <div class="flex flex-col items-center gap-2 flex-1">
 <div class="w-10 h-10 rounded-sm bg-primary text-on-primary flex items-center justify-center font-bold">1</div>
-<span class="font-label-caps text-label-caps text-primary">Identité</span>
+<span class="font-label-caps text-label-caps text-primary">{{ _('Identité') }}</span>
 </div>
 <div class="step-line step-line-active mx-4 mb-6"></div>
 <div class="flex flex-col items-center gap-2 flex-1">
 <div class="w-10 h-10 rounded-sm border-2 border-outline-variant text-outline-variant flex items-center justify-center font-bold">2</div>
-<span class="font-label-caps text-label-caps text-outline-variant">Objet</span>
+<span class="font-label-caps text-label-caps text-outline-variant">{{ _('Objet') }}</span>
 </div>
 <div class="step-line mx-4 mb-6"></div>
 <div class="flex flex-col items-center gap-2 flex-1">
 <div class="w-10 h-10 rounded-sm border-2 border-outline-variant text-outline-variant flex items-center justify-center font-bold">3</div>
-<span class="font-label-caps text-label-caps text-outline-variant">Livraison</span>
+<span class="font-label-caps text-label-caps text-outline-variant">{{ _('Livraison') }}</span>
 </div>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
@@ -78,9 +78,9 @@
 <div class="bg-surface-container-high p-6 rounded-xl border border-primary/5 flex gap-4">
 <span class="icon-filled material-symbols-outlined text-primary" data-icon="gavel">gavel</span>
 <div>
-<h4 class="font-label-caps text-label-caps text-primary mb-1">Avis Institutionnel</h4>
+<h4 class="font-label-caps text-label-caps text-primary mb-1">{{ _('Avis Institutionnel') }}</h4>
 <p class="font-support-sm text-support-sm text-on-surface-variant">
-                            Conformément à la réglementation en vigueur, toute demande fait l'objet d'une vérification judiciaire rigoureuse. Les délais de traitement varient entre 24h et 72h ouvrables.
+                            {{ _('Conformément à la réglementation en vigueur, toute demande fait l\'objet d\'une vérification judiciaire rigoureuse. Les délais de traitement varient entre 24h et 72h ouvrables.') }}
                         </p>
 </div>
 </div>
@@ -91,31 +91,31 @@
     office is a normal navigation. -#}
 <!-- Office & Service Selection -->
 <div class="glass-panel p-8 rounded-xl space-y-6">
-<h2 class="font-headline-md text-headline-md mb-6">Bureau et Service</h2>
+<h2 class="font-headline-md text-headline-md mb-6">{{ _('Bureau et Service') }}</h2>
 <form action="{{ url_for('citizen.submit_request') }}" class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-end" method="get">
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="office_id">Bureau compétent</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="office_id">{{ _('Bureau compétent') }}</label>
 <select class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary appearance-none cursor-pointer" id="office_id" name="office_id">
-<option value="">— Choisir un bureau —</option>
+<option value="">{{ _('— Choisir un bureau —') }}</option>
 {%- for office in offices %}
 <option value="{{ office.id }}"{% if office.id == office_id %} selected{% endif %}>{{ office.name }}{% if office.city %} — {{ office.city }}{% endif %}</option>
 {%- endfor %}
 </select>
 </div>
-<button class="bg-surface-container-high text-primary border border-outline-variant px-6 py-3 rounded-sm font-label-md text-label-md hover:bg-surface-container-highest transition-all" type="submit">Afficher les services</button>
+<button class="bg-surface-container-high text-primary border border-outline-variant px-6 py-3 rounded-sm font-label-md text-label-md hover:bg-surface-container-highest transition-all" type="submit">{{ _('Afficher les services') }}</button>
 </form>
 {%- if office_id %}
 <div class="space-y-2 pt-4 border-t border-outline-variant/30">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="office_service_id">Service demandé</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="office_service_id">{{ _('Service demandé') }}</label>
 {%- if office_services %}
 <select class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary appearance-none cursor-pointer" form="request-form" id="office_service_id" name="office_service_id" required>
-<option value="">— Choisir un service —</option>
+<option value="">{{ _('— Choisir un service —') }}</option>
 {%- for item in office_services %}
-<option value="{{ item.id }}"{% if item.id|string == form.get('office_service_id', '')|string %} selected{% endif %}>{{ item.name }}{% if item.fee_override is not none %} — {{ item.fee_override }} TND{% endif %}</option>
+<option value="{{ item.id }}"{% if item.id|string == form.get('office_service_id', '')|string %} selected{% endif %}>{{ item.name }}{% if item.fee_override is not none %} — {{ item.fee_override }} {{ _('TND') }}{% endif %}</option>
 {%- endfor %}
 </select>
 {%- else %}
-<p class="font-body-md text-body-md text-on-surface-variant">Ce bureau ne propose actuellement aucun service en ligne. Choisissez un autre bureau.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">{{ _('Ce bureau ne propose actuellement aucun service en ligne. Choisissez un autre bureau.') }}</p>
 {%- endif %}
 </div>
 {%- endif %}
@@ -124,29 +124,29 @@
 <form action="{{ url_for('citizen.submit_request') }}" class="glass-panel p-8 rounded-xl space-y-6" id="request-form" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <input name="office_id" type="hidden" value="{{ office_id or '' }}">
-<h2 class="font-headline-md text-headline-md mb-6">Informations Personnelles</h2>
+<h2 class="font-headline-md text-headline-md mb-6">{{ _('Informations Personnelles') }}</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="cin">Numéro de la CIN</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="cin">{{ _('Numéro de la CIN') }}</label>
 <input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" id="cin" inputmode="numeric" name="cin" placeholder="00000000" required type="text" value="{{ form.get('cin', (profile.national_id if profile else '') or '') }}">
 </div>
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="date_de_delivrance">Date de Délivrance</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="date_de_delivrance">{{ _('Date de Délivrance') }}</label>
 <input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" id="date_de_delivrance" name="date_de_delivrance" type="date" value="{{ form.get('date_de_delivrance', '') }}">
 </div>
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="nom_ar">Nom (en arabe)</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="nom_ar">{{ _('Nom (en arabe)') }}</label>
 <input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" dir="rtl" id="nom_ar" lang="ar" name="nom_ar" placeholder="اللقب" type="text" value="{{ form.get('nom_ar', '') }}">
 </div>
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="prenom_ar">Prénom (en arabe)</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="prenom_ar">{{ _('Prénom (en arabe)') }}</label>
 <input class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all" dir="rtl" id="prenom_ar" lang="ar" name="prenom_ar" placeholder="الاسم" type="text" value="{{ form.get('prenom_ar', '') }}">
 </div>
 </div>
 <div class="pt-6 border-t border-outline-variant/30 space-y-6">
-<h3 class="font-label-caps text-label-caps text-primary">Objet de la demande</h3>
+<h3 class="font-label-caps text-label-caps text-primary">{{ _('Objet de la demande') }}</h3>
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="finalite">Finalité du document</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="finalite">{{ _('Finalité du document') }}</label>
 <select class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary appearance-none cursor-pointer" id="finalite" name="finalite">
 {%- for option in ['Dossier de recrutement', "Création d'entreprise", 'Visa / Immigration', 'Autre usage administratif'] %}
 <option{% if form.get('finalite') == option %} selected{% endif %}>{{ option }}</option>
@@ -154,17 +154,17 @@
 </select>
 </div>
 <div class="space-y-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant" for="precisions">Précisions supplémentaires (Champ Sécurisé)</label>
-<textarea class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all resize-none" id="precisions" name="precisions" placeholder="Veuillez préciser l'institution destinataire..." rows="3">{{ form.get('precisions', '') }}</textarea>
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="precisions">{{ _('Précisions supplémentaires (Champ Sécurisé)') }}</label>
+<textarea class="w-full bg-white border border-outline-variant rounded-sm px-4 py-3 font-body-md text-body-md focus:border-primary transition-all resize-none" id="precisions" name="precisions" placeholder="{{ _('Veuillez préciser l\'institution destinataire...') }}" rows="3">{{ form.get('precisions', '') }}</textarea>
 </div>
 </div>
 <div class="flex justify-between items-center pt-8">
 <a href="{{ url_for('citizen.requests_list') }}" class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">
 <span class="material-symbols-outlined">arrow_back</span>
-                            Retour
+                            {{ _('Retour') }}
                         </a>
 <button class="bg-primary text-on-primary px-8 py-3 rounded-sm font-label-md text-label-md flex items-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-40 disabled:cursor-not-allowed" type="submit"{% if not office_services %} disabled{% endif %}>
-                            Soumettre la demande
+                            {{ _('Soumettre la demande') }}
                             <span class="material-symbols-outlined">arrow_forward</span>
 </button>
 </div>
@@ -175,46 +175,46 @@
 <!-- Status Badge -->
 <div class="bg-secondary-fixed text-on-secondary-fixed p-4 rounded-sm flex items-center gap-3">
 <span class="icon-filled material-symbols-outlined">verified_user</span>
-<span class="font-label-caps text-label-caps font-bold">Statut Souverain Vérifié</span>
+<span class="font-label-caps text-label-caps font-bold">{{ _('Statut Souverain Vérifié') }}</span>
 </div>
 <!-- Secure Checkbox List -->
 <div class="glass-panel p-6 rounded-xl space-y-4">
-<h4 class="font-label-caps text-label-caps text-primary">Pré-requis</h4>
+<h4 class="font-label-caps text-label-caps text-primary">{{ _('Pré-requis') }}</h4>
 <ul class="space-y-3">
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-<span class="font-support-sm text-support-sm">CIN en cours de validité</span>
+<span class="font-support-sm text-support-sm">{{ _('CIN en cours de validité') }}</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-<span class="font-support-sm text-support-sm">Paiement électronique (Timbre fiscal)</span>
+<span class="font-support-sm text-support-sm">{{ _('Paiement électronique (Timbre fiscal)') }}</span>
 </li>
 <li class="flex items-start gap-3">
 <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-<span class="font-support-sm text-support-sm">Adresse de livraison exacte en Tunisie</span>
+<span class="font-support-sm text-support-sm">{{ _('Adresse de livraison exacte en Tunisie') }}</span>
 </li>
 </ul>
 </div>
 <!-- Help Center Card -->
 <div class="bg-primary-container p-6 rounded-xl text-on-primary">
-<h4 class="font-label-caps text-label-caps mb-2 opacity-80">Besoin d'assistance ?</h4>
-<p class="font-support-sm text-support-sm mb-4 opacity-90">Nos agents sont disponibles pour vous guider dans votre démarche administrative.</p>
+<h4 class="font-label-caps text-label-caps mb-2 opacity-80">{{ _('Besoin d\'assistance ?') }}</h4>
+<p class="font-support-sm text-support-sm mb-4 opacity-90">{{ _('Nos agents sont disponibles pour vous guider dans votre démarche administrative.') }}</p>
 <a href="{{ url_for('public.contact') }}" class="w-full bg-white text-primary py-3 rounded-sm font-label-md text-label-md hover:bg-opacity-90 transition-all">
-                        Contacter le support
+                        {{ _('Contacter le support') }}
                     </a>
 </div>
 </div>
 </div>
 </main>
 <!-- Sign Language Assistant (TSL) -->
-<div class="fixed bottom-8 right-8 z-[100] w-64 md:w-80 group" id="tsl-module">
+<div class="fixed bottom-8 end-8 z-[100] w-64 md:w-80 group" id="tsl-module">
 <div class="glass-panel rounded-xl overflow-hidden shadow-2xl border-2 border-secondary-fixed/50 hover:border-secondary-fixed transition-all duration-300 transform group-hover:-translate-y-2">
 <div class="relative aspect-video bg-black/10">
-<img class="w-full h-full object-cover" alt="A focused close-up video frame of a professional Tunisian Sign Language interpreter wearing neutral professional attire." src="{{ url_for('static', filename='img/img-c60bf991956e.jpg') }}"/>
+<img class="w-full h-full object-cover" alt="{{ _('A focused close-up video frame of a professional Tunisian Sign Language interpreter wearing neutral professional attire.') }}" src="{{ url_for('static', filename='img/img-c60bf991956e.jpg') }}"/>
 <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<div class="absolute bottom-3 start-3 flex items-center gap-2">
 <span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
-<span class="text-[10px] font-bold text-white uppercase tracking-widest">TSL Assistant Direct</span>
+<span class="text-[10px] font-bold text-white uppercase tracking-widest">{{ _('TSL Assistant Direct') }}</span>
 </div>
 </div>
 <div class="p-3 flex justify-between items-center bg-primary text-white">
@@ -228,7 +228,7 @@
 </div>
 <button class="flex items-center gap-1 font-label-caps text-[10px] hover:text-secondary-fixed transition-colors" data-action="a11y-expand" type="button">
 <span class="material-symbols-outlined text-[16px]">open_in_full</span>
-                    AGRANDIR
+                    {{ _('AGRANDIR') }}
                 </button>
 </div>
 </div>
@@ -237,16 +237,16 @@
 <footer class="bg-on-surface text-surface-container py-12 mt-20 border-t border-outline">
 <div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
 <div class="flex flex-col gap-2">
-<span class="font-label-md text-label-md text-surface-container-lowest uppercase tracking-widest">République Tunisienne</span>
+<span class="font-label-md text-label-md text-surface-container-lowest uppercase tracking-widest">{{ _('République Tunisienne') }}</span>
 <p class="font-caption text-caption text-surface-container-highest opacity-70">
-                    © {{ year }} République Tunisienne - Portail National des Services
+                    © {{ year }} {{ _('République Tunisienne - Portail National des Services') }}
                 </p>
 </div>
 <div class="flex flex-wrap justify-center gap-6 font-caption text-caption">
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.terms') }}">Security Protocols</a>
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.contact') }}">Contact Support</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.privacy') }}">{{ _('Privacy Policy') }}</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.terms') }}">{{ _('Terms of Service') }}</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.terms') }}">{{ _('Security Protocols') }}</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all" href="{{ url_for('public.contact') }}">{{ _('Contact Support') }}</a>
 </div>
 </div>
 </footer>

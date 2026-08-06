@@ -6,77 +6,77 @@
   mockup's per-row overflow menu is dropped rather than wired, because there
   is no per-entry action to put in it — an audit row is a fact, not a task.
 #}
-{% block title %}Security Log - Watiq Staff Portal{% endblock %}
-{% block body_class %}bg-background text-on-surface font-body-md min-h-screen flex flex-col md:flex-row relative{% endblock %}
+{% block title %}{{ _('Security Log - Watiq Staff Portal') }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-surface font-body-md min-h-screen flex flex-col md:flex-row relative') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/staff_audit.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 {% from 'partials/_logo.html' import mark %}
 <!-- Watermark Background -->
-<div class="fixed inset-0 watermark-emblem z-0" alt="A highly detailed illustration of the Tunisian National Emblem, rendered in a crisp, monochromatic style suitable for a"></div>
+<div class="fixed inset-0 watermark-emblem z-0" alt="{{ _('A highly detailed illustration of the Tunisian National Emblem, rendered in a crisp, monochromatic style suitable for a') }}"></div>
 <!-- SideNavBar (Desktop Only) -->
-<nav class="hidden md:flex flex-col p-4 gap-2 h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant dark:border-outline z-20">
+<nav class="hidden md:flex flex-col p-4 gap-2 h-screen w-64 fixed start-0 top-0 bg-surface-container-low dark:bg-inverse-surface border-e border-outline-variant dark:border-outline z-20">
 <!-- Header -->
 <div class="flex items-center gap-4 px-2 py-6 mb-4">
 <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
 {{ mark(size='h-6') }}
 </div>
 <div>
-<h1 class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface">Watiq Portal</h1>
-<p class="font-support-sm text-support-sm text-on-surface-variant">State-Grade Security</p>
+<h1 class="font-headline-md text-headline-md text-on-surface dark:text-inverse-on-surface">{{ _('Watiq Portal') }}</h1>
+<p class="font-support-sm text-support-sm text-on-surface-variant">{{ _('State-Grade Security') }}</p>
 </div>
 </div>
 <!-- Navigation Links -->
 <div class="flex-1 overflow-y-auto">
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
+<span class="font-label-md text-label-md">{{ _('Dashboard') }}</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">description</span>
-<span class="font-label-md text-label-md">Documents</span>
+<span class="font-label-md text-label-md">{{ _('Documents') }}</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.office_appointments') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">event</span>
-<span class="font-label-md text-label-md">Appointments</span>
+<span class="font-label-md text-label-md">{{ _('Appointments') }}</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('staff.health') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">monitor_heart</span>
-<span class="font-label-md text-label-md">System Health</span>
+<span class="font-label-md text-label-md">{{ _('System Health') }}</span>
 </a>
 <!-- Active State -->
-<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg translate-x-1 transition-transform group" href="{{ url_for('staff.audit') }}">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container font-bold rounded-lg translate-x-1 rtl:-translate-x-1 transition-transform group" href="{{ url_for('staff.audit') }}">
 <span class="material-symbols-outlined" data-weight="fill">shield</span>
-<span class="font-label-md text-label-md">Security Log</span>
+<span class="font-label-md text-label-md">{{ _('Security Log') }}</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant transition-colors group" href="{{ url_for('admin.index') }}">
 <span class="material-symbols-outlined group-hover:text-primary transition-colors">verified_user</span>
-<span class="font-label-md text-label-md">Staff Access</span>
+<span class="font-label-md text-label-md">{{ _('Staff Access') }}</span>
 </a>
 </div>
 <!-- CTA -->
 <div class="mt-auto px-2 pt-4 border-t border-outline-variant">
 <a href="{{ url_for('citizen.submit_request') }}" class="w-full bg-primary text-on-primary py-3 rounded-sm font-label-caps text-label-caps hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
 <span class="material-symbols-outlined text-[18px]">add</span>
-                New Request
+                {{ _('New Request') }}
             </a>
 <form action="{{ url_for('public.logout') }}" class="contents" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="w-full mt-2 flex items-center justify-center gap-2 py-3 rounded-sm text-error hover:bg-error-container/20 transition-colors font-label-caps text-label-caps" type="submit">
 <span aria-hidden="true" class="material-symbols-outlined text-[18px]">logout</span>
-                Sign Out
+                {{ _('Sign Out') }}
             </button>
 </form>
 </div>
 </nav>
 <!-- Main Content Canvas -->
-<main class="flex-1 md:ml-64 relative z-10 flex flex-col min-h-screen">
+<main class="flex-1 md:ms-64 relative z-10 flex flex-col min-h-screen">
 <!-- Mobile Top Nav (Simulated TopAppBar for Mobile since SideNav is hidden) -->
 <header class="md:hidden flex justify-between items-center w-full px-margin-mobile h-16 bg-surface dark:bg-on-surface border-b border-outline-variant sticky top-0 z-30">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary text-[28px]" data-weight="fill">account_balance</span>
-<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Watiq</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">{{ _('Watiq') }}</span>
 </div>
 <button class="text-primary p-2 rounded-full hover:bg-surface-variant transition-colors" data-action="toggle" data-target="advanced-filters" type="button">
 <span class="material-symbols-outlined">menu</span>
@@ -88,17 +88,17 @@
 <div class="flex flex-col gap-4">
 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
 <div>
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight">System Security Log</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">Granular audit trail for staff actions and automated system events. All records are cryptographically signed.</p>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight">{{ _('System Security Log') }}</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2 max-w-2xl">{{ _('Granular audit trail for staff actions and automated system events. All records are cryptographically signed.') }}</p>
 </div>
 <div class="flex items-center gap-3 self-start md:self-auto">
 <button class="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-sm hover:bg-surface-variant transition-colors font-label-caps text-label-caps" data-action="print"  type="button">
 <span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
-                            Export PDF
+                            {{ _('Export PDF') }}
                         </button>
 <button class="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-sm hover:bg-surface-variant transition-colors font-label-caps text-label-caps" data-action="print"  type="button">
 <span class="material-symbols-outlined text-[16px]">download</span>
-                            Export CSV
+                            {{ _('Export CSV') }}
                         </button>
 </div>
 </div>
@@ -106,56 +106,56 @@
 <div class="bg-secondary-container text-on-secondary-container p-4 rounded-xl flex items-start md:items-center gap-3 surface-2">
 <span class="material-symbols-outlined text-secondary shrink-0 mt-1 md:mt-0" data-weight="fill">policy</span>
 <div>
-<p class="font-label-caps text-label-caps font-bold">Confidentiality Protocol Active</p>
-<p class="font-support-sm text-support-sm mt-1">Sensitive personally identifiable information (PII) is currently masked in this view. Access to unmasked records requires Level 4 clearance and secondary biometric authentication.</p>
+<p class="font-label-caps text-label-caps font-bold">{{ _('Confidentiality Protocol Active') }}</p>
+<p class="font-support-sm text-support-sm mt-1">{{ _('Sensitive personally identifiable information (PII) is currently masked in this view. Access to unmasked records requires Level 4 clearance and secondary biometric authentication.') }}</p>
 </div>
 </div>
 </div>
 <!-- Filters & Search (Bento style row) -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
 <div class="md:col-span-4 surface-1 surface-2 rounded-xl p-4 flex flex-col gap-2 relative">
-<div class="absolute inset-0 watermark-emblem-small z-0 rounded-xl" alt="A subtle, minimalist watermark of scales of justice, rendered in ultra-light grey on a stark white background."></div>
-<label class="font-label-caps text-label-caps text-on-surface-variant z-10">Date Range</label>
+<div class="absolute inset-0 watermark-emblem-small z-0 rounded-xl" alt="{{ _('A subtle, minimalist watermark of scales of justice, rendered in ultra-light grey on a stark white background.') }}"></div>
+<label class="font-label-caps text-label-caps text-on-surface-variant z-10">{{ _('Date Range') }}</label>
 <div class="flex items-center gap-2 z-10">
 <div class="relative flex-1">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">calendar_today</span>
-<input class="w-full pl-9 pr-3 py-2 bg-surface border border-outline-variant rounded-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:font-light placeholder:text-outline outline-none" placeholder="Start Date" type="text"/>
+<span class="material-symbols-outlined absolute start-3 top-1/2 -translate-y-1/2 text-outline text-[18px]">calendar_today</span>
+<input class="w-full ps-9 pe-3 py-2 bg-surface border border-outline-variant rounded-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:font-light placeholder:text-outline outline-none" placeholder="{{ _('Start Date') }}" type="text"/>
 </div>
 <span class="text-outline-variant">-</span>
 <div class="relative flex-1">
-<input class="w-full px-3 py-2 bg-surface border border-outline-variant rounded-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:font-light placeholder:text-outline outline-none" placeholder="End Date" type="text"/>
+<input class="w-full px-3 py-2 bg-surface border border-outline-variant rounded-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:font-light placeholder:text-outline outline-none" placeholder="{{ _('End Date') }}" type="text"/>
 </div>
 </div>
 </div>
 <div class="md:col-span-3 surface-1 surface-2 rounded-xl p-4 flex flex-col gap-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">Action Type</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Action Type') }}</label>
 <select class="w-full px-3 py-2 bg-surface border border-outline-variant rounded-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none cursor-pointer">
-<option>All Actions</option>
-<option>Record Access</option>
-<option>Data Modification</option>
-<option>Authentication</option>
-<option>System Event</option>
+<option>{{ _('All Actions') }}</option>
+<option>{{ _('Record Access') }}</option>
+<option>{{ _('Data Modification') }}</option>
+<option>{{ _('Authentication') }}</option>
+<option>{{ _('System Event') }}</option>
 </select>
 </div>
 <div class="md:col-span-5 surface-1 surface-2 rounded-xl p-4 flex flex-col gap-2">
-<label class="font-label-caps text-label-caps text-on-surface-variant">Search Actor or Resource</label>
+<label class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Search Actor or Resource') }}</label>
 <div class="relative w-full">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-<input class="w-full pl-10 pr-3 py-2 bg-surface border border-outline-variant rounded-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:font-light placeholder:text-outline outline-none" placeholder="Enter ID, Name, or Resource hash..." type="text"/>
+<span class="material-symbols-outlined absolute start-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full ps-10 pe-3 py-2 bg-surface border border-outline-variant rounded-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary placeholder:font-light placeholder:text-outline outline-none" placeholder="{{ _('Enter ID, Name, or Resource hash...') }}" type="text"/>
 </div>
 </div>
 </div>
 <!-- Audit Log Table (Glassmorphism Card) -->
 <div class="surface-1 surface-2 rounded-xl overflow-hidden flex flex-col">
 <div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
+<table class="w-full text-start border-collapse">
 <thead>
 <tr class="bg-surface-container-low border-b border-outline-variant">
-<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">Timestamp (UTC)</th>
-<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">Actor</th>
-<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">Action</th>
-<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">Resource</th>
-<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">Status</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">{{ _('Timestamp (UTC)') }}</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">{{ _('Actor') }}</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">{{ _('Action') }}</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">{{ _('Resource') }}</th>
+<th class="py-4 px-6 font-label-caps text-label-caps text-on-surface-variant">{{ _('Status') }}</th>
 </tr>
 </thead>
 <tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant">
@@ -165,7 +165,7 @@
 <td class="py-4 px-6 whitespace-nowrap">
 <div class="flex flex-col">
 <span>{{ (entry.created_at or entry.occurred_at or '')[:19]|replace('T', ' ') }}</span>
-<span class="font-support-sm text-support-sm text-on-surface-variant">Entry {{ entry.id or loop.index }}</span>
+<span class="font-support-sm text-support-sm text-on-surface-variant">{{ _('Entry') }} {{ entry.id or loop.index }}</span>
 </div>
 </td>
 <td class="py-4 px-6">
@@ -175,7 +175,7 @@
 </div>
 <div class="flex flex-col">
 <span class="font-medium">{{ entry.actor_name or entry.staff_name or ('Staff #' ~ entry.staff_id if entry.staff_id else 'User #' ~ (entry.user_id or '—')) }}</span>
-<span class="font-support-sm text-support-sm text-on-surface-variant">IP: {{ entry.ip_address or 'not recorded' }}</span>
+<span class="font-support-sm text-support-sm text-on-surface-variant">{{ _('IP:') }} {{ entry.ip_address or 'not recorded' }}</span>
 </div>
 </div>
 </td>
@@ -199,8 +199,8 @@
 <tr>
 <td class="py-12 px-6 text-center text-on-surface-variant" colspan="5">
 <span aria-hidden="true" class="material-symbols-outlined text-3xl block mb-2 opacity-40">manage_search</span>
-                                    No access-log entries were returned. The API authorises this feed, so an
-                                    account without the audit permission sees nothing here.
+                                    {{ _('No access-log entries were returned. The API authorises this feed, so an
+                                    account without the audit permission sees nothing here.') }}
                                 </td>
 </tr>
 {%- endfor %}
@@ -209,11 +209,11 @@
 </div>
 <!-- Pagination -->
 <div class="px-6 py-4 border-t border-outline-variant flex items-center justify-between bg-surface-container-low">
-<span class="font-support-sm text-support-sm text-on-surface-variant">Showing 1 to 4 of 2,491 records</span>
+<span class="font-support-sm text-support-sm text-on-surface-variant">{{ _('Showing 1 to 4 of 2,491 records') }}</span>
 <div class="flex items-center gap-2">
 {%- set pages = ((total or 0) + 49) // 50 %}
 {%- if page > 1 %}
-<a aria-label="Previous page" class="p-1 rounded-sm text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors focus-ring" href="{{ url_for('staff.audit', page=page - 1) }}">
+<a aria-label="{{ _('Previous page') }}" class="p-1 rounded-sm text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors focus-ring" href="{{ url_for('staff.audit', page=page - 1) }}">
 <span aria-hidden="true" class="material-symbols-outlined">chevron_left</span>
 </a>
 {%- else %}
@@ -231,7 +231,7 @@
 <span class="w-8 h-8 rounded-sm bg-primary text-on-primary font-body-md text-body-md flex items-center justify-center">1</span>
 {%- endfor %}
 {%- if page < pages %}
-<a aria-label="Next page" class="p-1 rounded-sm text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors focus-ring" href="{{ url_for('staff.audit', page=page + 1) }}">
+<a aria-label="{{ _('Next page') }}" class="p-1 rounded-sm text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors focus-ring" href="{{ url_for('staff.audit', page=page + 1) }}">
 <span aria-hidden="true" class="material-symbols-outlined">chevron_right</span>
 </a>
 {%- else %}
@@ -245,23 +245,23 @@
 </div>
 <!-- Footer -->
 <footer class="bg-on-secondary-fixed-variant dark:bg-on-surface text-on-primary dark:text-primary-fixed font-body-md text-body-md w-full mt-auto border-t-4 border-primary flex flex-col md:flex-row justify-between items-center px-margin-desktop py-12 z-20 relative">
-<div class="font-headline-lg text-headline-lg text-white mb-6 md:mb-0">Watiq</div>
+<div class="font-headline-lg text-headline-lg text-white mb-6 md:mb-0">{{ _('Watiq') }}</div>
 <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-6 md:mb-0">
-<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.terms') }}">Security Protocol</a>
-<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.terms') }}">Edge Protection</a>
-<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.about') }}">Architecture</a>
-<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.contact') }}">Contact Support</a>
+<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.terms') }}">{{ _('Security Protocol') }}</a>
+<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.terms') }}">{{ _('Edge Protection') }}</a>
+<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.about') }}">{{ _('Architecture') }}</a>
+<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.privacy') }}">{{ _('Privacy Policy') }}</a>
+<a class="text-surface-variant opacity-80 hover:opacity-100 transition-opacity" href="{{ url_for('public.contact') }}">{{ _('Contact Support') }}</a>
 </div>
-<div class="text-center md:text-right text-surface-variant opacity-80 font-support-sm text-support-sm">
-                © <span id="current-year"></span> Republic of Tunisia - Secured by National Legal Infrastructure
+<div class="text-center md:text-end text-surface-variant opacity-80 font-support-sm text-support-sm">
+                © <span id="current-year"></span> {{ _('Republic of Tunisia - Secured by National Legal Infrastructure') }}
             </div>
 </footer>
 </main>
 <!-- Sign Language Module (TSL) -->
-<div class="fixed bottom-8 right-8 z-50 w-64 h-48 surface-3 rounded-xl border border-outline-variant/30 shadow-lg overflow-hidden group">
-<div class="absolute top-0 left-0 w-full h-8 bg-primary-container/90 flex justify-between items-center px-2 z-10 transition-transform -translate-y-full group-hover:translate-y-0">
-<span class="font-label-caps text-label-caps text-on-primary-container text-[10px]">TSL Translation Active</span>
+<div class="fixed bottom-8 end-8 z-50 w-64 h-48 surface-3 rounded-xl border border-outline-variant/30 shadow-lg overflow-hidden group">
+<div class="absolute top-0 start-0 w-full h-8 bg-primary-container/90 flex justify-between items-center px-2 z-10 transition-transform -translate-y-full group-hover:translate-y-0">
+<span class="font-label-caps text-label-caps text-on-primary-container text-[10px]">{{ _('TSL Translation Active') }}</span>
 <div class="flex gap-1">
 <button class="text-on-primary-container hover:text-white p-1 rounded-sm" data-action="a11y-pause"  type="button"><span class="material-symbols-outlined text-[14px]">pause</span></button>
 <button class="text-on-primary-container hover:text-white p-1 rounded-sm" data-action="a11y-expand"  type="button"><span class="material-symbols-outlined text-[14px]">open_in_full</span></button>
@@ -271,7 +271,7 @@
 <div class="absolute inset-0 border-2 border-transparent group-focus-within:border-secondary-fixed rounded-xl pointer-events-none z-20"></div>
 <div class="w-full h-full bg-surface-variant/50 flex items-center justify-center relative">
 <!-- Simulated video feed placeholder -->
-<div class="absolute inset-0 bg-gradient-to-br from-surface-container-highest to-surface-container-low" alt="A small, stylized video feed frame designed to display a sign language interpreter."></div>
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-highest to-surface-container-low" alt="{{ _('A small, stylized video feed frame designed to display a sign language interpreter.') }}"></div>
 <span class="material-symbols-outlined text-primary text-[32px] opacity-20 z-0">sign_language</span>
 </div>
 </div>

@@ -10,15 +10,15 @@
   process never sees, and the transaction id is the payment id.
 #}
 {%- set paid = payment and payment.status == 'completed' %}
-{% block title %}Payment Successful - République Tunisienne{% endblock %}
-{% block body_class %}bg-background min-h-screen flex flex-col font-body-md text-body-md text-on-background relative overflow-x-hidden{% endblock %}
+{% block title %}{{ _('Payment Successful - République Tunisienne') }}{% endblock %}
+{% block body_class %}{{ _('bg-background min-h-screen flex flex-col font-body-md text-body-md text-on-background relative overflow-x-hidden') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/payment_confirmation.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 <!-- Watermark -->
 <div class="fixed inset-0 pointer-events-none opacity-[0.03] flex items-center justify-center z-0">
-<img class="w-[800px] h-auto object-contain" alt="The official national emblem of the Tunisian Republic, rendered as a subtle watermark." src="{{ url_for('static', filename='img/img-1ed334683970.jpg') }}"/>
+<img class="w-[800px] h-auto object-contain" alt="{{ _('The official national emblem of the Tunisian Republic, rendered as a subtle watermark.') }}" src="{{ url_for('static', filename='img/img-1ed334683970.jpg') }}"/>
 </div>
 <!-- Main Content Canvas (No Nav Shell as per instructions for Transactional/Success screen) -->
 <main class="flex-grow flex items-center justify-center py-20 px-margin-mobile md:px-margin-desktop z-10 relative">
@@ -36,26 +36,26 @@
                         {{ "Payment Successful" if paid else "Payment Recorded" if payment else "No Payment Found" }}
                     </h1>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
-                        {% if paid %}Your transaction has been securely processed. Keep the reference below for the counter.{% elif payment %}This payment is on file with status “{{ payment.status }}”. It is not settled yet.{% else %}There is no payment on your record yet.{% endif %}
+                        {% if paid %}{{ _('Your transaction has been securely processed. Keep the reference below for the counter.') }}{% elif payment %}{{ _('This payment is on file with status “') }}{{ payment.status }}{{ _('”. It is not settled yet.') }}{% else %}{{ _('There is no payment on your record yet.') }}{% endif %}
                     </p>
 <!-- Receipt Details Card -->
-<div class="w-full bg-surface rounded-lg border border-outline-variant p-6 mb-10 text-left">
-<h2 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 pb-2 border-b border-outline-variant/50">Transaction Details</h2>
+<div class="w-full bg-surface rounded-lg border border-outline-variant p-6 mb-10 text-start">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase mb-6 pb-2 border-b border-outline-variant/50">{{ _('Transaction Details') }}</h2>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
 <div>
-<span class="font-support-sm text-support-sm text-outline block mb-1">Transaction ID</span>
+<span class="font-support-sm text-support-sm text-outline block mb-1">{{ _('Transaction ID') }}</span>
 <span class="font-body-md text-body-md text-on-surface font-semibold tracking-wide">{{ ("PAY-%06d"|format(payment.id)) if payment else "—" }}</span>
 </div>
 <div>
-<span class="font-support-sm text-support-sm text-outline block mb-1">Date &amp; Time</span>
+<span class="font-support-sm text-support-sm text-outline block mb-1">{{ _('Date &amp; Time') }}</span>
 <span class="font-body-md text-body-md text-on-surface">{{ ((payment.paid_at or "")[:16]|replace("T", " ") ~ " UTC") if payment and payment.paid_at else "Not settled" }}</span>
 </div>
 <div>
-<span class="font-support-sm text-support-sm text-outline block mb-1">Service Type</span>
+<span class="font-support-sm text-support-sm text-outline block mb-1">{{ _('Service Type') }}</span>
 <span class="font-body-md text-body-md text-on-surface">{{ (payment.service_name if payment else none) or "—" }}</span>
 </div>
 <div>
-<span class="font-support-sm text-support-sm text-outline block mb-1">Ledger Status</span>
+<span class="font-support-sm text-support-sm text-outline block mb-1">{{ _('Ledger Status') }}</span>
 <span class="font-body-md text-body-md text-on-surface flex items-center gap-2">
 <span aria-hidden="true" class="material-symbols-outlined text-[18px]">{{ "verified" if paid else "schedule" }}</span>
                                     {{ (payment.status if payment else "unknown")|title }}
@@ -63,7 +63,7 @@
 </div>
 </div>
 <div class="mt-8 pt-6 border-t border-outline-variant/50 flex justify-between items-center">
-<span class="font-headline-md text-headline-md text-on-surface">Total Paid</span>
+<span class="font-headline-md text-headline-md text-on-surface">{{ _('Total Paid') }}</span>
 <span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">{{ "%.2f"|format(payment.amount|float) ~ " " ~ (payment.currency or "TND") if payment else "—" }}</span>
 </div>
 </div>
@@ -71,13 +71,13 @@
 <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
 <button class="bg-primary hover:bg-primary-container text-on-primary font-body-md text-body-md py-3 px-8 rounded-sm transition-colors flex items-center justify-center gap-2 w-full sm:w-auto" data-action="print"  type="button">
 <span class="material-symbols-outlined">download</span>
-                            Download PDF Receipt
+                            {{ _('Download PDF Receipt') }}
                         </button>
 <a href="{{ url_for('citizen.requests_list') }}" class="bg-surface hover:bg-surface-container-high border border-primary text-primary font-body-md text-body-md py-3 px-8 rounded-sm transition-colors w-full sm:w-auto">
-                            View Application Status
+                            {{ _('View Application Status') }}
                         </a>
 <a href="{{ url_for('citizen.dashboard') }}" class="bg-surface hover:bg-surface-container-high border border-outline-variant text-on-surface-variant font-body-md text-body-md py-3 px-8 rounded-sm transition-colors w-full sm:w-auto">
-                            Return to Dashboard
+                            {{ _('Return to Dashboard') }}
                         </a>
 </div>
 </div>
@@ -85,11 +85,11 @@
 </div>
 </main>
 <!-- Sign Language Module (Floating) -->
-<div class="fixed bottom-gutter right-gutter z-50 w-72 bg-surface-container-lowest/90 backdrop-blur-md rounded-xl shadow-lg border border-primary-container/10 overflow-hidden transition-all duration-300" id="tsl-module">
+<div class="fixed bottom-gutter end-gutter z-50 w-72 bg-surface-container-lowest/90 backdrop-blur-md rounded-xl shadow-lg border border-primary-container/10 overflow-hidden transition-all duration-300" id="tsl-module">
 <div class="bg-primary-container text-on-primary-container px-4 py-2 flex justify-between items-center cursor-move" id="tsl-header">
 <span class="font-label-caps text-label-caps flex items-center gap-2">
 <span class="material-symbols-outlined text-[16px]">sign_language</span>
-                TSL Support Active
+                {{ _('TSL Support Active') }}
             </span>
 <button class="hover:opacity-80 transition-opacity" data-action="a11y-close"  type="button">
 <span class="material-symbols-outlined text-[18px]">close</span>
@@ -97,7 +97,7 @@
 </div>
 <div class="p-2 relative group">
 <div class="w-full h-40 bg-surface-container-highest rounded-lg flex items-center justify-center overflow-hidden">
-<img class="w-full h-full object-cover" alt="A professional sign language interpreter providing translation for a digital government service interface." src="{{ url_for('static', filename='img/img-9774767eaa06.jpg') }}"/>
+<img class="w-full h-full object-cover" alt="{{ _('A professional sign language interpreter providing translation for a digital government service interface.') }}" src="{{ url_for('static', filename='img/img-9774767eaa06.jpg') }}"/>
 </div>
 <!-- Overlay Controls -->
 <div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 rounded-lg m-2">
@@ -111,13 +111,13 @@
 <footer class="bg-on-surface text-surface-container w-full py-12 border-t border-outline relative z-10">
 <div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
 <div class="font-label-md text-label-md text-surface-container-lowest">
-                © <span id="dynamic-year"></span> République Tunisienne - Portail National des Services
+                © <span id="dynamic-year"></span> {{ _('République Tunisienne - Portail National des Services') }}
             </div>
 <div class="flex flex-wrap gap-6 justify-center">
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Security Protocols</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">{{ _('Privacy Policy') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Terms of Service') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Security Protocols') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">{{ _('Contact Support') }}</a>
 </div>
 </div>
 </footer>

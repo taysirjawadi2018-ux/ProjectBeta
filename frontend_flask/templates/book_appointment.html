@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-searchabale-appointment-map' %}
-{% block title %}Prendre Rendez-vous - Portail National{% endblock %}
-{% block body_class %}bg-surface text-on-surface{% endblock %}
+{% block title %}{{ _('Prendre Rendez-vous - Portail National') }}{% endblock %}
+{% block body_class %}{{ _('bg-surface text-on-surface') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/book_appointment.css') }}" rel="stylesheet"/>
 {% endblock %}
@@ -13,58 +13,58 @@
     chrome are identical throughout, exactly as designed. -#}
 {%- set step = 3 if slot else 2 if office else 1 %}
 <!-- National Emblem Watermark -->
-<img alt="Sceau National Tunisien" class="national-watermark" src="{{ url_for('static', filename='img/img-582976cda946.jpg') }}">
+<img alt="{{ _('Sceau National Tunisien') }}" class="national-watermark" src="{{ url_for('static', filename='img/img-582976cda946.jpg') }}">
 <!-- TopNavBar -->
 <header class="bg-surface flex justify-between items-center w-full px-margin-desktop h-20 border-b border-outline-variant shadow-sm fixed top-0 z-50">
 <div class="flex items-center gap-4">
-<span class="font-headline-md text-headline-md text-primary uppercase tracking-wider">République Tunisienne</span>
+<span class="font-headline-md text-headline-md text-primary uppercase tracking-wider">{{ _('République Tunisienne') }}</span>
 </div>
 <nav class="hidden md:flex items-center gap-8">
-<a class="text-secondary hover:text-primary font-label-md text-label-md transition-colors" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
-<a class="text-secondary hover:text-primary font-label-md text-label-md transition-colors" href="{{ url_for('public.services', category='identity') }}">Identity</a>
-<a class="text-secondary hover:text-primary font-label-md text-label-md transition-colors" href="{{ url_for('public.services', category='justice') }}">Justice</a>
-<a aria-current="page" class="text-primary border-b-2 border-primary pb-1 font-bold font-label-md text-label-md" href="{{ url_for('public.services', category='admin') }}">Admin</a>
+<a class="text-secondary hover:text-primary font-label-md text-label-md transition-colors" href="{{ url_for('public.services', category='civil') }}">{{ _('Civil Status') }}</a>
+<a class="text-secondary hover:text-primary font-label-md text-label-md transition-colors" href="{{ url_for('public.services', category='identity') }}">{{ _('Identity') }}</a>
+<a class="text-secondary hover:text-primary font-label-md text-label-md transition-colors" href="{{ url_for('public.services', category='justice') }}">{{ _('Justice') }}</a>
+<a aria-current="page" class="text-primary border-b-2 border-primary pb-1 font-bold font-label-md text-label-md" href="{{ url_for('public.services', category='admin') }}">{{ _('Admin') }}</a>
 </nav>
 <div class="flex items-center gap-4">
-<a aria-label="Institutional Search" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 focus-ring" href="{{ url_for('public.index') }}">
+<a aria-label="{{ _('Institutional Search') }}" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 focus-ring" href="{{ url_for('public.index') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-primary">account_balance</span>
 </a>
-<a aria-label="Notifications" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 focus-ring" href="{{ url_for('citizen.notifications') }}">
+<a aria-label="{{ _('Notifications') }}" class="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 focus-ring" href="{{ url_for('citizen.notifications') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-primary">notifications</span>
 </a>
-<a aria-label="Your profile" class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant focus-ring" href="{{ url_for('citizen.profile') }}">
+<a aria-label="{{ _('Your profile') }}" class="h-10 w-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant focus-ring" href="{{ url_for('citizen.profile') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-on-primary-container">account_circle</span>
 </a>
 </div>
 </header>
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 pt-24 bg-surface-container-low border-r border-outline-variant shadow-md flex flex-col gap-2 z-40">
+<aside class="h-screen w-64 fixed start-0 top-0 pt-24 bg-surface-container-low border-e border-outline-variant shadow-md flex flex-col gap-2 z-40">
 <div class="px-6 mb-6">
-<h2 class="font-headline-sm text-headline-sm text-primary">Citizen Space</h2>
-<p class="text-secondary text-label-sm font-label-sm uppercase tracking-tighter">Secure Session</p>
+<h2 class="font-headline-sm text-headline-sm text-primary">{{ _('Citizen Space') }}</h2>
+<p class="text-secondary text-label-sm font-label-sm uppercase tracking-tighter">{{ _('Secure Session') }}</p>
 </div>
 <nav class="flex-grow">
-<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.dashboard') }}">
+<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 rtl:active:-translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.dashboard') }}">
 <span aria-hidden="true" class="material-symbols-outlined">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
+<span class="font-label-md text-label-md">{{ _('Dashboard') }}</span>
 </a>
 <a aria-current="page" class="flex items-center gap-3 py-3 px-4 mx-2 bg-primary text-on-primary rounded-lg institutional-border-left focus-ring" href="{{ url_for('citizen.requests_list') }}">
 <span aria-hidden="true" class="material-symbols-outlined">description</span>
-<span class="font-label-md text-label-md">Applications</span>
+<span class="font-label-md text-label-md">{{ _('Applications') }}</span>
 </a>
 {#- Documents hang off a request, so "My Documents" lands on the request list
     where each row opens its own document set. -#}
-<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.documents') }}">
+<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 rtl:active:-translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.documents') }}">
 <span aria-hidden="true" class="material-symbols-outlined">folder_shared</span>
-<span class="font-label-md text-label-md">My Documents</span>
+<span class="font-label-md text-label-md">{{ _('My Documents') }}</span>
 </a>
-<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('public.contact') }}">
+<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 rtl:active:-translate-x-1 focus-ring rounded-lg" href="{{ url_for('public.contact') }}">
 <span aria-hidden="true" class="material-symbols-outlined">gavel</span>
-<span class="font-label-md text-label-md">Legal Support</span>
+<span class="font-label-md text-label-md">{{ _('Legal Support') }}</span>
 </a>
-<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.profile') }}">
+<a class="flex items-center gap-3 py-3 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest transition-all duration-200 active:translate-x-1 rtl:active:-translate-x-1 focus-ring rounded-lg" href="{{ url_for('citizen.profile') }}">
 <span aria-hidden="true" class="material-symbols-outlined">settings</span>
-<span class="font-label-md text-label-md">Settings</span>
+<span class="font-label-md text-label-md">{{ _('Settings') }}</span>
 </a>
 </nav>
 <div class="border-t border-outline-variant mt-auto py-4">
@@ -73,91 +73,91 @@
     the profile page, which is the equivalent a citizen can actually see. -#}
 <a class="flex items-center gap-3 py-2 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest text-label-sm font-label-sm focus-ring rounded" href="{{ url_for('citizen.security_log') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-sm">security</span>
-<span class="">Security Log</span>
+<span class="">{{ _('Security Log') }}</span>
 </a>
 <form action="{{ url_for('public.logout') }}" class="contents" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="flex items-center gap-3 py-2 px-4 mx-2 text-on-surface-variant hover:bg-surface-container-highest text-label-sm font-label-sm focus-ring rounded w-full" type="submit">
 <span aria-hidden="true" class="material-symbols-outlined text-sm">logout</span>
-<span class="">Logout</span>
+<span class="">{{ _('Logout') }}</span>
 </button>
 </form>
 </div>
 </aside>
 <!-- Main Content Canvas -->
-<main class="ml-64 pt-20 h-screen overflow-hidden flex flex-col md:flex-row">
+<main class="ms-64 pt-20 h-screen overflow-hidden flex flex-col md:flex-row">
 <!-- Search & Filter Sidebar -->
-<section class="w-full md:w-96 sidebar-glass border-r border-outline-variant flex flex-col h-full z-30 shadow-xl">
+<section class="w-full md:w-96 sidebar-glass border-e border-outline-variant flex flex-col h-full z-30 shadow-xl">
 {#- One GET form wraps the search box, the type filters and the apply button,
     so "Appliquer les filtres" submits all three at once and the whole result
     set is a bookmarkable URL. -#}
 <form action="{{ url_for('citizen.book_appointment') }}" class="contents" method="get" role="search">
 <div class="p-6 border-b border-outline-variant bg-surface-container-low">
-<h1 class="font-headline-sm text-headline-sm text-on-surface mb-2">Prendre Rendez-vous</h1>
-<p class="text-body-sm font-body-sm text-secondary">Localisez l'administration la plus proche et réservez votre créneau.</p>
+<h1 class="font-headline-sm text-headline-sm text-on-surface mb-2">{{ _('Prendre Rendez-vous') }}</h1>
+<p class="text-body-sm font-body-sm text-secondary">{{ _('Localisez l\'administration la plus proche et réservez votre créneau.') }}</p>
 <div class="mt-6 relative">
-<label class="sr-only" for="map-search-input">Rechercher un bureau</label>
-<span aria-hidden="true" class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-<input class="w-full pl-10 pr-4 py-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md text-body-md" id="map-search-input" name="q" placeholder="Rechercher une ville ou un code postal..." type="search" value="{{ q }}">
+<label class="sr-only" for="map-search-input">{{ _('Rechercher un bureau') }}</label>
+<span aria-hidden="true" class="material-symbols-outlined absolute start-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full ps-10 pe-4 py-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all font-body-md text-body-md" id="map-search-input" name="q" placeholder="{{ _('Rechercher une ville ou un code postal...') }}" type="search" value="{{ q }}">
 </div>
 </div>
 <div class="flex-grow overflow-y-auto p-6 custom-scrollbar space-y-8">
 <!-- Service Type Filter -->
 <div>
-<h3 class="font-label-md text-label-md text-primary uppercase mb-4 tracking-wider">Type de Service</h3>
+<h3 class="font-label-md text-label-md text-primary uppercase mb-4 tracking-wider">{{ _('Type de Service') }}</h3>
 <div class="grid grid-cols-1 gap-2">
 {%- for office_type in office_types %}
 {%- set checked = office_type in selected_types %}
 <label class="flex items-center p-3 border border-outline-variant rounded-lg hover:bg-surface-container transition-colors cursor-pointer{{ ' bg-primary-container/20 border-primary' if checked }}">
 <input class="service-filter rounded border-outline text-primary focus:ring-primary" name="type" type="checkbox" value="{{ office_type }}"{{ ' checked' if checked }}>
-<span class="ml-3 font-body-md text-body-md">{{ office_type|replace('_', ' ')|title }}</span>
+<span class="ms-3 font-body-md text-body-md">{{ office_type|replace('_', ' ')|title }}</span>
 </label>
 {%- else %}
-<p class="text-body-sm font-body-sm text-secondary">Le répertoire des bureaux ne publie aucun type pour le moment.</p>
+<p class="text-body-sm font-body-sm text-secondary">{{ _('Le répertoire des bureaux ne publie aucun type pour le moment.') }}</p>
 {%- endfor %}
 </div>
 </div>
 <!-- Accessibility Filter -->
 <div>
-<h3 class="font-label-md text-label-md text-primary uppercase mb-4 tracking-wider">Accessibilité</h3>
+<h3 class="font-label-md text-label-md text-primary uppercase mb-4 tracking-wider">{{ _('Accessibilité') }}</h3>
 <div class="space-y-3">
 <div class="flex items-center justify-between">
-<span class="font-body-md text-body-md">Assistance LST (Langue des Signes)</span>
+<span class="font-body-md text-body-md">{{ _('Assistance LST (Langue des Signes)') }}</span>
 <div class="relative inline-block w-12 h-6 rounded-full bg-surface-container-highest transition-colors peer-checked:bg-primary">
 {#- Checked on load because the module it controls starts visible; the mockup
     shipped the two out of sync. -#}
 <input aria-controls="lst-module" checked class="sr-only peer accessibility-toggle" data-action="toggle" data-target="lst-module" id="lst-toggle" type="checkbox">
-<label class="absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-6 cursor-pointer border border-outline-variant" for="lst-toggle"><span class="sr-only">Afficher le module d'interprétation LST</span></label>
+<label class="absolute top-1 start-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-6 rtl:peer-checked:-translate-x-6 cursor-pointer border border-outline-variant" for="lst-toggle"><span class="sr-only">{{ _('Afficher le module d\'interprétation LST') }}</span></label>
 </div>
 </div>
 {#- The office directory carries no accessibility column, so this one is
     shown as designed but disabled rather than wired to a filter that could
     only ever ignore it. Enable it the day the API publishes the field. -#}
 <div class="flex items-center justify-between opacity-50">
-<span class="font-body-md text-body-md">Accès Mobilité Réduite</span>
+<span class="font-body-md text-body-md">{{ _('Accès Mobilité Réduite') }}</span>
 <div class="relative inline-block w-12 h-6 rounded-full bg-surface-container-highest">
 <input aria-describedby="wheelchair-note" class="sr-only peer accessibility-toggle" disabled id="wheelchair-toggle" type="checkbox">
-<label class="absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-6 cursor-not-allowed border border-outline-variant" for="wheelchair-toggle"><span class="sr-only">Filtre non disponible</span></label>
+<label class="absolute top-1 start-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-6 rtl:peer-checked:-translate-x-6 cursor-not-allowed border border-outline-variant" for="wheelchair-toggle"><span class="sr-only">{{ _('Filtre non disponible') }}</span></label>
 </div>
 </div>
-<p class="text-[10px] text-secondary" id="wheelchair-note">Donnée non encore publiée par le répertoire des bureaux.</p>
+<p class="text-[10px] text-secondary" id="wheelchair-note">{{ _('Donnée non encore publiée par le répertoire des bureaux.') }}</p>
 </div>
 </div>
 <!-- Results Listing Preview -->
 <div>
-<h3 class="font-label-md text-label-md text-primary uppercase mb-4 tracking-wider">Résultats Proches ({{ offices|length }})</h3>
+<h3 class="font-label-md text-label-md text-primary uppercase mb-4 tracking-wider">{{ _('Résultats Proches (') }}{{ offices|length }})</h3>
 <div class="space-y-4">
 {%- for item in offices %}
 {%- set active = item.id == office_id %}
 <a class="block p-4 bg-surface-container-lowest shadow-sm group hover:bg-surface transition-colors cursor-pointer appointment-result focus-ring
-{{- ' border-l-4 border-primary rounded-r-lg' if active else ' border border-outline-variant rounded-lg opacity-80' }}" href="{{ url_for('citizen.book_appointment', office_id=item.id, q=q or none) }}">
+{{- ' border-s-4 border-primary rounded-e-lg' if active else ' border border-outline-variant rounded-lg opacity-80' }}" href="{{ url_for('citizen.book_appointment', office_id=item.id, q=q or none) }}">
 <div class="flex justify-between items-start">
 <h4 class="font-label-md text-label-md text-on-surface">{{ item.name_fr or item.name }}</h4>
 <span class="bg-green-100 text-green-700 text-[10px] px-2 py-0.5 rounded font-bold uppercase">{{ (item.type or 'Bureau')|replace('_', ' ') }}</span>
 </div>
 <p class="text-body-sm text-secondary mt-1">{{ item.address or item.city }}{% if item.governorate %}, {{ item.governorate }}{% endif %}</p>
 <div class="flex items-center gap-4 mt-3 {{ 'text-primary font-semibold' if active else 'text-secondary' }} text-body-sm">
-<span class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-sm">event_available</span> Voir les créneaux</span>
+<span class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-sm">event_available</span> {{ _('Voir les créneaux') }}</span>
 {%- if item.phone %}
 <span class="flex items-center gap-1"><span aria-hidden="true" class="material-symbols-outlined text-sm">call</span> {{ item.phone }}</span>
 {%- endif %}
@@ -166,9 +166,9 @@
 {%- else %}
 <div class="p-4 bg-surface-container-lowest border border-outline-variant shadow-sm rounded-lg text-center">
 <span aria-hidden="true" class="material-symbols-outlined text-outline text-3xl">location_off</span>
-<p class="text-body-sm text-secondary mt-2">{% if q %}Aucun bureau ne correspond à « {{ q }} ».{% else %}Le répertoire des bureaux est indisponible.{% endif %}</p>
+<p class="text-body-sm text-secondary mt-2">{% if q %}{{ _('Aucun bureau ne correspond à «') }} {{ q }} ».{% else %}{{ _('Le répertoire des bureaux est indisponible.') }}{% endif %}</p>
 {%- if q or selected_types %}
-<a class="inline-block mt-3 text-primary font-label-md text-label-md hover:underline focus-ring rounded" href="{{ url_for('citizen.book_appointment') }}">Afficher tous les bureaux</a>
+<a class="inline-block mt-3 text-primary font-label-md text-label-md hover:underline focus-ring rounded" href="{{ url_for('citizen.book_appointment') }}">{{ _('Afficher tous les bureaux') }}</a>
 {%- endif %}
 </div>
 {%- endfor %}
@@ -177,7 +177,7 @@
 </div>
 <div class="p-6 bg-surface-container-high border-t border-outline-variant">
 <button class="w-full bg-primary text-on-primary py-4 rounded font-label-md text-label-md uppercase tracking-widest hover:brightness-90 active:scale-[0.98] transition-all shadow-md focus-ring" id="apply-filters-btn" type="submit">
-                    Appliquer les filtres
+                    {{ _('Appliquer les filtres') }}
                 </button>
 </div>
 </form>
@@ -197,9 +197,9 @@
 <div class="relative">
 <div class="marker-pulse absolute -inset-2 bg-primary/20 rounded-full"></div>
 <span class="material-symbols-outlined icon-filled text-primary text-4xl relative cursor-pointer">location_on</span>
-<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-48 bg-inverse-surface text-inverse-on-surface p-3 rounded-lg shadow-2xl z-50">
-<p class="font-label-md text-label-md">Tunis District</p>
-<p class="text-[10px] opacity-70">{{ offices|length }} bureau{{ '' if offices|length == 1 else 'x' }} listé{{ '' if offices|length == 1 else 's' }}</p>
+<div class="absolute bottom-full start-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-48 bg-inverse-surface text-inverse-on-surface p-3 rounded-lg shadow-2xl z-50">
+<p class="font-label-md text-label-md">{{ _('Tunis District') }}</p>
+<p class="text-[10px] opacity-70">{{ offices|length }} {{ _('bureau') }}{{ '' if offices|length == 1 else 'x' }} {{ _('listé') }}{{ '' if offices|length == 1 else 's' }}</p>
 <div class="mt-2 h-1 bg-primary w-full rounded-full overflow-hidden">
 <div class="bg-primary-container h-full w-2/3"></div>
 </div>
@@ -224,32 +224,32 @@
 </div>
 </div>
 <!-- Map Controls -->
-<div class="absolute bottom-10 right-10 flex flex-col gap-2 z-30">
-<button aria-label="Zoom In" class="bg-surface p-3 rounded shadow-md border border-outline-variant hover:bg-surface-container transition-all bg-inverse-surface text-primary-fixed border-primary focus-ring" data-action="map-zoom-in" id="map-zoom-in" type="button">
+<div class="absolute bottom-10 end-10 flex flex-col gap-2 z-30">
+<button aria-label="{{ _('Zoom In') }}" class="bg-surface p-3 rounded shadow-md border border-outline-variant hover:bg-surface-container transition-all bg-inverse-surface text-primary-fixed border-primary focus-ring" data-action="map-zoom-in" id="map-zoom-in" type="button">
 <span aria-hidden="true" class="material-symbols-outlined">add</span>
 </button>
-<button aria-label="Zoom Out" class="bg-surface p-3 rounded shadow-md border border-outline-variant hover:bg-surface-container transition-all bg-inverse-surface text-primary-fixed border-primary focus-ring" data-action="map-zoom-out" id="map-zoom-out" type="button">
+<button aria-label="{{ _('Zoom Out') }}" class="bg-surface p-3 rounded shadow-md border border-outline-variant hover:bg-surface-container transition-all bg-inverse-surface text-primary-fixed border-primary focus-ring" data-action="map-zoom-out" id="map-zoom-out" type="button">
 <span aria-hidden="true" class="material-symbols-outlined">remove</span>
 </button>
-<button aria-label="My Location" class="bg-surface p-3 rounded shadow-md border border-outline-variant hover:bg-surface-container transition-all mt-4 bg-inverse-surface text-primary-fixed border-primary focus-ring" data-action="map-recenter" id="map-recenter" type="button">
+<button aria-label="{{ _('My Location') }}" class="bg-surface p-3 rounded shadow-md border border-outline-variant hover:bg-surface-container transition-all mt-4 bg-inverse-surface text-primary-fixed border-primary focus-ring" data-action="map-recenter" id="map-recenter" type="button">
 <span aria-hidden="true" class="material-symbols-outlined">my_location</span>
 </button>
 </div>
 <!-- Map Legend -->
-<div class="absolute bottom-10 left-10 bg-white/90 backdrop-blur-sm p-4 rounded-lg border border-outline-variant shadow-lg z-30 hidden lg:block bg-inverse-surface border-primary">
-<h4 class="font-label-sm text-label-sm text-primary uppercase mb-3 text-primary-fixed">Légende</h4>
+<div class="absolute bottom-10 start-10 bg-white/90 backdrop-blur-sm p-4 rounded-lg border border-outline-variant shadow-lg z-30 hidden lg:block bg-inverse-surface border-primary">
+<h4 class="font-label-sm text-label-sm text-primary uppercase mb-3 text-primary-fixed">{{ _('Légende') }}</h4>
 <div class="space-y-2">
 <div class="flex items-center gap-2">
 <span class="w-3 h-3 rounded-full bg-primary"></span>
-<span class="text-body-sm font-body-sm text-inverse-on-surface">Forte Disponibilité</span>
+<span class="text-body-sm font-body-sm text-inverse-on-surface">{{ _('Forte Disponibilité') }}</span>
 </div>
 <div class="flex items-center gap-2">
 <span class="w-3 h-3 rounded-full bg-secondary"></span>
-<span class="text-body-sm font-body-sm text-inverse-on-surface">Disponibilité Limitée</span>
+<span class="text-body-sm font-body-sm text-inverse-on-surface">{{ _('Disponibilité Limitée') }}</span>
 </div>
 <div class="flex items-center gap-2">
 <span class="w-3 h-3 rounded-full bg-error"></span>
-<span class="text-body-sm font-body-sm text-inverse-on-surface">Complet</span>
+<span class="text-body-sm font-body-sm text-inverse-on-surface">{{ _('Complet') }}</span>
 </div>
 </div>
 </div>
@@ -289,12 +289,12 @@
     mockup's month: the view fetches slots for one day at a time, so a month
     of availability dots would mean thirty round trips to draw. -#}
 <div class="flex items-center gap-4 mb-8" id="step-2">
-<a aria-label="Retour à la liste des bureaux" class="w-12 h-12 rounded-lg border border-outline-variant flex items-center justify-center hover:bg-surface-container-high transition-all bg-surface shadow-sm focus-ring" href="{{ url_for('citizen.book_appointment', q=q or none) }}">
+<a aria-label="{{ _('Retour à la liste des bureaux') }}" class="w-12 h-12 rounded-lg border border-outline-variant flex items-center justify-center hover:bg-surface-container-high transition-all bg-surface shadow-sm focus-ring" href="{{ url_for('citizen.book_appointment', q=q or none) }}">
 <span aria-hidden="true" class="material-symbols-outlined text-primary">arrow_back</span>
 </a>
 <div>
-<p class="font-label-caps text-label-caps text-primary uppercase mb-1">Schedule Appointment</p>
-<h1 class="font-headline-md text-headline-md text-on-surface">Select Date &amp; Time</h1>
+<p class="font-label-caps text-label-caps text-primary uppercase mb-1">{{ _('Schedule Appointment') }}</p>
+<h1 class="font-headline-md text-headline-md text-on-surface">{{ _('Select Date &amp; Time') }}</h1>
 <p class="text-body-sm font-body-sm text-secondary">{{ office.name_fr or office.name }}{% if office.city %} — {{ office.city }}{% endif %}</p>
 </div>
 </div>
@@ -306,7 +306,7 @@
 <h2 class="font-headline-md text-headline-md text-on-surface">{{ slot_date.strftime('%B %Y') }}</h2>
 <div class="flex gap-2">
 {%- if week[0] > today %}
-<a aria-label="Semaine précédente" class="p-2 border border-outline rounded-sm hover:bg-surface-container-low transition-colors text-primary focus-ring" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=prev_week, q=q or none) }}">
+<a aria-label="{{ _('Semaine précédente') }}" class="p-2 border border-outline rounded-sm hover:bg-surface-container-low transition-colors text-primary focus-ring" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=prev_week, q=q or none) }}">
 <span aria-hidden="true" class="material-symbols-outlined">chevron_left</span>
 </a>
 {%- else %}
@@ -314,7 +314,7 @@
 <span class="material-symbols-outlined">chevron_left</span>
 </span>
 {%- endif %}
-<a aria-label="Semaine suivante" class="p-2 border border-outline rounded-sm hover:bg-surface-container-low transition-colors text-primary focus-ring" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=next_week, q=q or none) }}">
+<a aria-label="{{ _('Semaine suivante') }}" class="p-2 border border-outline rounded-sm hover:bg-surface-container-low transition-colors text-primary focus-ring" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=next_week, q=q or none) }}">
 <span aria-hidden="true" class="material-symbols-outlined">chevron_right</span>
 </a>
 </div>
@@ -334,7 +334,7 @@
 <div aria-current="date" class="h-12 flex flex-col items-center justify-center rounded-sm border-2 border-primary bg-surface-container-low text-on-surface relative">
 <span class="font-body-md text-body-md font-semibold">{{ day.day }}</span>
 {%- if slots %}
-<div aria-hidden="true" class="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary-container"></div>
+<div aria-hidden="true" class="absolute bottom-1 start-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-secondary-container"></div>
 {%- endif %}
 </div>
 {%- else %}
@@ -366,15 +366,15 @@
 {%- if left is not none and left < 1 %}
 <span class="py-3 px-4 rounded-sm border border-outline-variant text-center transition-all flex flex-col items-center opacity-50 cursor-not-allowed">
 <span class="font-body-md text-body-md text-on-surface">{{ item.time_slot }}</span>
-<span class="font-support-sm text-support-sm text-error mt-1">Full</span>
+<span class="font-support-sm text-support-sm text-error mt-1">{{ _('Full') }}</span>
 </span>
 {%- else %}
 <a class="py-3 px-4 rounded-sm text-center transition-all flex flex-col items-center focus-ring
 {{- ' border-2 border-primary bg-surface-container-low' if slot and slot.id == item.id else ' border border-outline-variant hover:border-primary' }}" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=slot_date.isoformat(), slot_id=item.id, q=q or none) }}">
 <span class="font-body-md text-body-md text-on-surface{{ ' font-semibold' if slot and slot.id == item.id }}">{{ item.time_slot }}</span>
 <span class="font-support-sm text-support-sm text-on-surface-variant mt-1">
-{%- if left is none %}Available
-{%- else %}Availability: <span class="{{ 'text-error' if left <= 2 else 'text-secondary-container' }} font-semibold">{{ 'Limited' if left <= 2 else 'High' }}</span>
+{%- if left is none %}{{ _('Available') }}
+{%- else %}{{ _('Availability:') }} <span class="{{ 'text-error' if left <= 2 else 'text-secondary-container' }} font-semibold">{{ 'Limited' if left <= 2 else 'High' }}</span>
 {%- endif -%}
 </span>
 </a>
@@ -384,7 +384,7 @@
 </div>
 {%- endif %}
 {%- else %}
-<p class="text-body-sm font-body-sm text-secondary text-center py-6">Aucun créneau ouvert dans ce bureau le {{ slot_date.strftime('%d %B') }}. Essayez un autre jour.</p>
+<p class="text-body-sm font-body-sm text-secondary text-center py-6">{{ _('No slots are open at this office on %(date)s. Try another day.', date=slot_date.strftime('%d %B')) }}</p>
 {%- endfor %}
 </div>
 </div>
@@ -397,8 +397,8 @@
 <div class="w-16 h-16 bg-primary-container/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-primary">
 <span aria-hidden="true" class="material-symbols-outlined icon-filled text-3xl text-primary">verified</span>
 </div>
-<h2 class="font-headline-sm text-headline-sm text-primary">Vérifier &amp; Confirmer</h2>
-<p class="text-body-sm font-body-sm text-secondary">Contrôlez les détails avant de réserver.</p>
+<h2 class="font-headline-sm text-headline-sm text-primary">{{ _('Vérifier &amp; Confirmer') }}</h2>
+<p class="text-body-sm font-body-sm text-secondary">{{ _('Contrôlez les détails avant de réserver.') }}</p>
 </div>
 <form action="{{ url_for('citizen.book_appointment') }}" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
@@ -409,14 +409,14 @@
 <div class="p-10">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 <div>
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2 block">Demandeur</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2 block">{{ _('Demandeur') }}</span>
 <p class="font-headline-sm text-headline-sm text-primary">{{ profile|display_name }}</p>
 {%- if profile.national_id %}
-<p class="font-label-sm text-label-sm text-secondary mt-1 uppercase">CIN {{ profile.national_id }}</p>
+<p class="font-label-sm text-label-sm text-secondary mt-1 uppercase">{{ _('CIN') }} {{ profile.national_id }}</p>
 {%- endif %}
 </div>
-<div class="md:text-right">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2 block">Référence du créneau</span>
+<div class="md:text-end">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-2 block">{{ _('Référence du créneau') }}</span>
 <p class="font-label-md text-label-md bg-surface-container px-3 py-1.5 rounded inline-block border border-outline-variant text-primary">#{{ slot.id }}</p>
 </div>
 <div aria-hidden="true" class="md:col-span-2 h-px bg-outline-variant"></div>
@@ -425,7 +425,7 @@
 <span class="material-symbols-outlined text-primary">location_on</span>
 </div>
 <div>
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">Bureau</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">{{ _('Bureau') }}</span>
 <p class="font-label-md text-label-md text-primary">{{ office.name_fr or office.name }}</p>
 <p class="text-body-sm font-body-sm text-secondary">{{ office.address or office.city }}{% if office.governorate %}, {{ office.governorate }}{% endif %}</p>
 </div>
@@ -435,9 +435,9 @@
 <span class="material-symbols-outlined icon-filled text-primary">calendar_today</span>
 </div>
 <div>
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">Date &amp; créneau</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">{{ _('Date &amp; créneau') }}</span>
 <p class="font-label-md text-label-md text-primary">{{ slot_date.strftime('%A, %d %B %Y') }}</p>
-<p class="text-body-sm font-body-sm text-secondary">{{ slot.time_slot }} (heure locale)</p>
+<p class="text-body-sm font-body-sm text-secondary">{{ slot.time_slot }} {{ _('(heure locale)') }}</p>
 </div>
 </div>
 {#- A booking must name an office_service_id. Slots opened for one specific
@@ -446,43 +446,43 @@
 <div class="md:col-span-2">
 {%- if slot.office_service_id %}
 <input name="office_service_id" type="hidden" value="{{ slot.office_service_id }}">
-<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">Service</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block">{{ _('Service') }}</span>
 {%- set pinned = (office_services | selectattr('id', 'equalto', slot.office_service_id) | list | first) %}
 <p class="font-label-md text-label-md text-primary">
 {{- (pinned.name_fr or pinned.name) if pinned else 'Réservé à un service précis' -}}
 </p>
 {%- else %}
-<label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block" for="office_service_id">Service demandé</label>
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block" for="office_service_id">{{ _('Service demandé') }}</label>
 <select class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-primary focus:ring-2 focus:ring-primary focus:border-transparent" id="office_service_id" name="office_service_id" required>
-<option value="">— Choisir un service —</option>
+<option value="">{{ _('— Choisir un service —') }}</option>
 {%- for service in office_services %}
 <option value="{{ service.id }}">{{ service.name_fr or service.name }}</option>
 {%- endfor %}
 </select>
 {%- if not office_services %}
-<p class="text-body-sm font-body-sm text-error mt-2">Ce bureau ne publie aucun service réservable, le rendez-vous ne peut pas être finalisé ici.</p>
+<p class="text-body-sm font-body-sm text-error mt-2">{{ _('Ce bureau ne publie aucun service réservable, le rendez-vous ne peut pas être finalisé ici.') }}</p>
 {%- endif %}
 {%- endif %}
 </div>
 <div class="md:col-span-2">
-<label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block" for="reason">Motif de la visite (facultatif)</label>
-<textarea class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md resize-none h-20 focus:ring-2 focus:ring-primary focus:border-transparent" id="reason" maxlength="2000" name="reason" placeholder="Ce que le bureau devrait savoir à l'avance."></textarea>
+<label class="font-label-sm text-label-sm text-secondary uppercase tracking-widest mb-1 block" for="reason">{{ _('Motif de la visite (facultatif)') }}</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md resize-none h-20 focus:ring-2 focus:ring-primary focus:border-transparent" id="reason" maxlength="2000" name="reason" placeholder="{{ _('Ce que le bureau devrait savoir à l\'avance.') }}"></textarea>
 </div>
 </div>
 <div class="mt-10 bg-surface-container-low p-6 rounded-xl institutional-border-left flex gap-5">
 <span aria-hidden="true" class="material-symbols-outlined icon-filled text-primary">gavel</span>
 <div>
-<p class="font-label-md text-label-md text-primary uppercase tracking-wider mb-1">Déclaration officielle</p>
+<p class="font-label-md text-label-md text-primary uppercase tracking-wider mb-1">{{ _('Déclaration officielle') }}</p>
 <p class="text-body-sm font-body-sm text-secondary leading-relaxed">
-                                    En confirmant ce rendez-vous, vous certifiez que les informations fournies sont exactes et que vous apporterez les documents requis par votre service.
+                                    {{ _('En confirmant ce rendez-vous, vous certifiez que les informations fournies sont exactes et que vous apporterez les documents requis par votre service.') }}
                                 </p>
 </div>
 </div>
 </div>
 <div class="bg-surface-container p-8 flex flex-col md:flex-row justify-between items-center gap-4 border-t border-outline-variant">
-<a class="px-6 py-3 font-label-md text-label-md text-secondary hover:text-primary transition-all focus-ring rounded" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=slot_date.isoformat(), q=q or none) }}">Modifier la sélection</a>
+<a class="px-6 py-3 font-label-md text-label-md text-secondary hover:text-primary transition-all focus-ring rounded" href="{{ url_for('citizen.book_appointment', office_id=office_id, slot_date=slot_date.isoformat(), q=q or none) }}">{{ _('Modifier la sélection') }}</a>
 <button class="w-full md:w-auto bg-primary text-on-primary px-12 py-4 rounded font-label-md text-label-md uppercase tracking-widest hover:brightness-90 active:scale-[0.98] transition-all shadow-md flex items-center justify-center gap-3 disabled:opacity-40 focus-ring" type="submit"{% if not slot.office_service_id and not office_services %} disabled{% endif %}>
-                            Confirmer le rendez-vous <span aria-hidden="true" class="material-symbols-outlined">lock</span>
+                            {{ _('Confirmer le rendez-vous') }} <span aria-hidden="true" class="material-symbols-outlined">lock</span>
 </button>
 </div>
 </div>
@@ -494,47 +494,47 @@
 </section>
 </main>
 <!-- Floating TSL Accessibility Module -->
-<div class="fixed bottom-10 right-margin-desktop z-[60] w-64 md:w-80 group" id="lst-module">
+<div class="fixed bottom-10 end-margin-desktop z-[60] w-64 md:w-80 group" id="lst-module">
 <div class="bg-inverse-surface rounded-xl overflow-hidden shadow-2xl border-2 border-primary-container relative" data-a11y-panel>
-<div class="absolute top-2 right-2 z-10">
-<button aria-label="Fermer le module LST" class="bg-black/50 text-white rounded-full p-1 hover:bg-black transition-colors focus-ring" data-action="toggle" data-target="lst-module" id="close-lst-module" type="button">
+<div class="absolute top-2 end-2 z-10">
+<button aria-label="{{ _('Fermer le module LST') }}" class="bg-black/50 text-white rounded-full p-1 hover:bg-black transition-colors focus-ring" data-action="toggle" data-target="lst-module" id="close-lst-module" type="button">
 <span aria-hidden="true" class="material-symbols-outlined text-sm">close</span>
 </button>
 </div>
 <div class="aspect-video w-full relative">
-<img alt="Interprète en langue des signes tunisienne" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}">
-<button aria-label="Lancer l'interprète LST" class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-transparent transition-all cursor-pointer w-full focus-ring" data-action="a11y-play" type="button">
+<img alt="{{ _('Interprète en langue des signes tunisienne') }}" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}">
+<button aria-label="{{ _('Lancer l\'interprète LST') }}" class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-transparent transition-all cursor-pointer w-full focus-ring" data-action="a11y-play" type="button">
 <span aria-hidden="true" class="material-symbols-outlined text-white text-5xl">play_circle</span>
 </button>
 </div>
 <div class="p-3 bg-primary text-on-primary">
 <div class="flex items-center justify-between">
-<span class="font-label-sm text-label-sm uppercase font-bold">Assistance LST Direct</span>
+<span class="font-label-sm text-label-sm uppercase font-bold">{{ _('Assistance LST Direct') }}</span>
 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
 </div>
-<p class="text-[10px] opacity-90 leading-tight mt-1">Interprète disponible pour vous guider dans la recherche de bureau.</p>
+<p class="text-[10px] opacity-90 leading-tight mt-1">{{ _('Interprète disponible pour vous guider dans la recherche de bureau.') }}</p>
 </div>
 </div>
 <!-- Tooltip toggle -->
 <button class="mt-4 flex items-center gap-2 bg-surface border border-outline-variant px-4 py-2 rounded-full shadow-md hover:bg-surface-container transition-all focus-ring" data-action="toggle" data-target="lst-module" id="toggle-lst-visibility" type="button">
 <span aria-hidden="true" class="material-symbols-outlined text-primary">sign_language</span>
-<span class="font-label-md text-label-md">Accessibilité Vidéo</span>
+<span class="font-label-md text-label-md">{{ _('Accessibilité Vidéo') }}</span>
 </button>
 </div>
 <!-- Institutional Footer -->
-<footer class="ml-64 w-auto py-12 bg-on-surface text-surface-container border-t border-outline transition-all z-10 relative">
+<footer class="ms-64 w-auto py-12 bg-on-surface text-surface-container border-t border-outline transition-all z-10 relative">
 <div class="px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-gutter">
 <div class="flex flex-col items-center md:items-start">
-<span class="font-label-md text-label-md text-surface-container-lowest mb-2 uppercase">République Tunisienne</span>
-<p class="font-caption text-caption text-surface-container-highest text-center md:text-left">
-                    © {{ year }} République Tunisienne - Portail National des Services
+<span class="font-label-md text-label-md text-surface-container-lowest mb-2 uppercase">{{ _('République Tunisienne') }}</span>
+<p class="font-caption text-caption text-surface-container-highest text-center md:text-start">
+                    © {{ year }} {{ _('République Tunisienne - Portail National des Services') }}
                 </p>
 </div>
 <div class="flex gap-8">
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.terms') }}">Security Protocols</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.contact') }}">Contact Support</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.privacy') }}">{{ _('Privacy Policy') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.terms') }}">{{ _('Terms of Service') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.terms') }}">{{ _('Security Protocols') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed transition-all hover:underline" href="{{ url_for('public.contact') }}">{{ _('Contact Support') }}</a>
 </div>
 </div>
 </footer>

@@ -1,41 +1,41 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-frequently-asked-questions' %}
-{% block title %}Knowledge Base - République Tunisienne{% endblock %}
-{% block body_class %}bg-surface text-on-surface min-h-screen flex flex-col relative overflow-x-hidden{% endblock %}
+{% block title %}{{ _('Knowledge Base - République Tunisienne') }}{% endblock %}
+{% block body_class %}{{ _('bg-surface text-on-surface min-h-screen flex flex-col relative overflow-x-hidden') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/faq.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 <!-- Watermark -->
-<div class="fixed inset-0 watermark bg-no-repeat bg-center bg-[length:50%]" alt="A stylized, low-opacity vector rendering of the Tunisian National Emblem serving as a subtle watermark."></div>
+<div class="fixed inset-0 watermark bg-no-repeat bg-center bg-[length:50%]" alt="{{ _('A stylized, low-opacity vector rendering of the Tunisian National Emblem serving as a subtle watermark.') }}"></div>
 <!-- TopNavBar -->
 <header class="bg-surface dark:bg-inverse-surface w-full top-0 shadow-sm border-b border-outline-variant dark:border-outline z-50 sticky">
 <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
 <!-- Brand -->
 <div class="flex items-center gap-4">
-<span class="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider">République Tunisienne</span>
+<span class="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider">{{ _('République Tunisienne') }}</span>
 </div>
 <!-- Navigation Links (Desktop) -->
 <nav class="hidden md:flex gap-8">
-<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
-<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='identity') }}">Identity</a>
-<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='justice') }}">Justice</a>
-<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='admin') }}">Admin</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='civil') }}">{{ _('Civil Status') }}</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='identity') }}">{{ _('Identity') }}</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='justice') }}">{{ _('Justice') }}</a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-secondary-container transition-all active:scale-95 duration-150 px-3 py-2 rounded" href="{{ url_for('public.services', category='admin') }}">{{ _('Admin') }}</a>
 <!-- The prompt implies a KB/Support intent. Highlighting a generic tab isn't appropriate if there's no direct match in the nav labels, but "Admin" or a theoretical "Support" might fit. Given the strict semantic mapping, we suppress highlight if no exact match. We'll leave all inactive for this specific page intent. -->
 </nav>
 <!-- Search and Actions -->
 <div class="flex items-center gap-4">
 <div class="relative hidden md:block">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
-<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 font-[300]" placeholder="Search..." type="text"/>
+<span class="material-symbols-outlined absolute start-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="ps-10 pe-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary w-64 font-[300]" placeholder="{{ _('Search...') }}" type="text"/>
 </div>
-<a href="{{ url_for('public.index') }}" aria-label="account_balance" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-150">
+<a href="{{ url_for('public.index') }}" aria-label="{{ _('account_balance') }}" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-150">
 <span class="material-symbols-outlined">account_balance</span>
 </a>
-<a href="{{ url_for('citizen.notifications') }}" aria-label="notifications" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-150">
+<a href="{{ url_for('citizen.notifications') }}" aria-label="{{ _('notifications') }}" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-150">
 <span class="material-symbols-outlined">notifications</span>
 </a>
-<a href="{{ url_for('citizen.profile') }}" aria-label="account_circle" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-150">
+<a href="{{ url_for('citizen.profile') }}" aria-label="{{ _('account_circle') }}" class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-150">
 <span class="material-symbols-outlined">account_circle</span>
 </a>
 </div>
@@ -46,14 +46,14 @@
 <!-- Sidebar Navigation (Not the main SideNavBar component, but a local page nav for KB) -->
 <aside class="w-full md:w-64 flex-shrink-0 mb-8 md:mb-0">
 <div class="sticky top-28">
-<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4 uppercase">Categories</h3>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-4 uppercase">{{ _('Categories') }}</h3>
 <nav class="flex flex-col gap-2">
 {%- for name in topics %}
 <a class="px-4 py-3 rounded-lg font-body-md transition-all
-{{- ' bg-surface-container-high text-primary font-semibold border-l-4 border-primary shadow-sm' if topic == name else ' text-on-surface-variant hover:bg-surface-container-low' }}" href="{{ url_for('public.help_page', topic=name, q=q or none) }}">{{ name }}</a>
+{{- ' bg-surface-container-high text-primary font-semibold border-s-4 border-primary shadow-sm' if topic == name else ' text-on-surface-variant hover:bg-surface-container-low' }}" href="{{ url_for('public.help_page', topic=name, q=q or none) }}">{{ name }}</a>
 {%- endfor %}
 {%- if topic or q %}
-<a class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg font-body-md transition-all" href="{{ url_for('public.help_page') }}">All topics</a>
+<a class="px-4 py-3 text-on-surface-variant hover:bg-surface-container-low rounded-lg font-body-md transition-all" href="{{ url_for('public.help_page') }}">{{ _('All topics') }}</a>
 {%- endif %}
 </nav>
 </div>
@@ -61,14 +61,14 @@
 <!-- Knowledge Base Content -->
 <div class="flex-grow flex flex-col gap-12 max-w-3xl">
 <header>
-<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">How can we help you?</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Browse our frequently asked questions or search for specific topics related to national services.</p>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">{{ _('How can we help you?') }}</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">{{ _('Browse our frequently asked questions or search for specific topics related to national services.') }}</p>
 <form action="{{ url_for('public.help_page') }}" class="mt-8 relative" method="get" role="search">
 {%- if topic %}<input name="topic" type="hidden" value="{{ topic }}">{% endif %}
-<label class="sr-only" for="kb-search">Search the knowledge base</label>
-<span aria-hidden="true" class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline text-xl">search</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-body-md shadow-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-[300]" id="kb-search" name="q" placeholder="Search the knowledge base..." type="search" value="{{ q }}"/>
-<button class="sr-only" type="submit">Search</button>
+<label class="sr-only" for="kb-search">{{ _('Search the knowledge base') }}</label>
+<span aria-hidden="true" class="material-symbols-outlined absolute start-4 top-1/2 -translate-y-1/2 text-outline text-xl">search</span>
+<input class="w-full ps-12 pe-4 py-4 bg-surface-container-lowest border border-outline-variant rounded-xl text-body-md shadow-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-[300]" id="kb-search" name="q" placeholder="{{ _('Search the knowledge base...') }}" type="search" value="{{ q }}"/>
+<button class="sr-only" type="submit">{{ _('Search') }}</button>
 </form>
 </header>
 {#- One section per category, each holding the questions that belong to it.
@@ -86,7 +86,7 @@
 <div class="flex flex-col gap-4">
 {%- for entry in items %}
 <details class="faq-item bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]"{{ ' open' if q }}>
-<summary class="w-full px-6 py-5 flex justify-between items-center text-left cursor-pointer group focus-ring">
+<summary class="w-full px-6 py-5 flex justify-between items-center text-start cursor-pointer group focus-ring">
 <span class="font-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">{{ entry.question }}</span>
 <span aria-hidden="true" class="faq-chevron material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform duration-300">expand_more</span>
 </summary>
@@ -101,38 +101,41 @@
 {%- else %}
 <section class="bg-surface-container-lowest rounded-xl border border-outline-variant/30 p-12 text-center">
 <span aria-hidden="true" class="material-symbols-outlined text-outline text-4xl mb-3">search_off</span>
-<h2 class="font-headline-md text-headline-md text-primary mb-2">Nothing matched</h2>
-<p class="font-body-md text-on-surface-variant">No article matches{% if q %} “{{ q }}”{% endif %}{% if topic %} under {{ topic }}{% endif %}. Try a different term, or ask the support desk.</p>
-<a class="inline-block mt-6 px-6 py-3 bg-primary text-on-primary rounded-sm font-body-md font-semibold hover:bg-primary-container transition-colors shadow-sm focus-ring" href="{{ url_for('public.help_page') }}">Show all {{ total }} articles</a>
+<h2 class="font-headline-md text-headline-md text-primary mb-2">{{ _('Nothing matched') }}</h2>
+<p class="font-body-md text-on-surface-variant">{%- if q and topic %}{{ _('No article matches “%(query)s” under %(topic)s. Try a different term, or ask the support desk.', query=q, topic=topic) }}
+{%- elif q %}{{ _('No article matches “%(query)s”. Try a different term, or ask the support desk.', query=q) }}
+{%- elif topic %}{{ _('No article matches under %(topic)s. Try a different term, or ask the support desk.', topic=topic) }}
+{%- else %}{{ _('No article matches. Try a different term, or ask the support desk.') }}{% endif %}</p>
+<a class="inline-block mt-6 px-6 py-3 bg-primary text-on-primary rounded-sm font-body-md font-semibold hover:bg-primary-container transition-colors shadow-sm focus-ring" href="{{ url_for('public.help_page') }}">{{ _('Show all') }} {{ total }} {{ _('articles') }}</a>
 </section>
 {%- endfor %}
 <!-- Support CTA CTA -->
 <section class="mt-8 bg-surface-container-low rounded-xl p-8 border border-outline-variant/20 flex flex-col md:flex-row items-center justify-between gap-6">
 <div>
-<h3 class="font-headline-md text-headline-md text-primary mb-2">Still need help?</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Our support team is available 24/7 to assist you with any inquiries.</p>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">{{ _('Still need help?') }}</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">{{ _('Our support team is available 24/7 to assist you with any inquiries.') }}</p>
 </div>
 <div class="flex flex-col sm:flex-row gap-3">
 <a class="whitespace-nowrap px-6 py-3 bg-primary text-on-primary rounded-sm font-body-md font-semibold hover:bg-primary-container transition-colors shadow-sm focus-ring" href="{{ url_for('public.contact') }}">
-                    Contact Support
+                    {{ _('Contact Support') }}
                 </a>
 <a class="whitespace-nowrap px-6 py-3 border border-primary text-primary rounded-sm font-body-md font-semibold hover:bg-surface-container-high transition-colors focus-ring flex items-center gap-2" href="{{ url_for('public.support_chat') }}">
 <span aria-hidden="true" class="material-symbols-outlined">headset_mic</span>
-                    Live Chat
+                    {{ _('Live Chat') }}
                 </a>
 </div>
 </section>
 </div>
 </main>
 <!-- Sign Language Module (TSL) -->
-<div class="fixed bottom-8 right-8 w-72 glass-panel rounded-xl shadow-lg border border-outline-variant/50 z-50 overflow-hidden flex flex-col transition-all duration-300 transform translate-y-0" id="tsl-module">
+<div class="fixed bottom-8 end-8 w-72 glass-panel rounded-xl shadow-lg border border-outline-variant/50 z-50 overflow-hidden flex flex-col transition-all duration-300 transform translate-y-0" id="tsl-module">
 <div class="bg-primary px-4 py-2 flex justify-between items-center cursor-move" id="tsl-header">
-<span class="font-label-caps text-label-caps text-on-primary">Sign Language Assist</span>
+<span class="font-label-caps text-label-caps text-on-primary">{{ _('Sign Language Assist') }}</span>
 <div class="flex gap-2 text-on-primary">
-<button aria-label="Minimize" class="hover:text-surface-container-highest transition-colors focus-ring" data-action="toggle" data-target="tsl-video-container" type="button">
+<button aria-label="{{ _('Minimize') }}" class="hover:text-surface-container-highest transition-colors focus-ring" data-action="toggle" data-target="tsl-video-container" type="button">
 <span class="material-symbols-outlined text-sm">remove</span>
 </button>
-<button aria-label="Close" class="hover:text-surface-container-highest transition-colors" data-action="a11y-close"  type="button">
+<button aria-label="{{ _('Close') }}" class="hover:text-surface-container-highest transition-colors" data-action="a11y-close"  type="button">
 <span class="material-symbols-outlined text-sm">close</span>
 </button>
 </div>
@@ -143,8 +146,8 @@
 <span class="material-symbols-outlined text-4xl opacity-50">sign_language</span>
 </div>
 <!-- Controls Overlay -->
-<div class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/60 to-transparent flex justify-center gap-4">
-<button aria-label="Play" class="text-white hover:text-primary-fixed transition-colors focus-ring" data-action="a11y-play" type="button">
+<div class="absolute bottom-0 start-0 end-0 p-2 bg-gradient-to-t from-black/60 to-transparent flex justify-center gap-4">
+<button aria-label="{{ _('Play') }}" class="text-white hover:text-primary-fixed transition-colors focus-ring" data-action="a11y-play" type="button">
 <span class="material-symbols-outlined" data-weight="fill">play_circle</span>
 </button>
 </div>
@@ -154,13 +157,13 @@
 <footer class="bg-on-surface dark:bg-on-background w-full py-12 border-t border-outline dark:border-outline-variant mt-auto z-20">
 <div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
 <div class="font-label-md text-label-md text-surface-container-lowest">
-                © {{ year }} République Tunisienne - Portail National des Services
+                © {{ year }} {{ _('République Tunisienne - Portail National des Services') }}
             </div>
 <nav class="flex flex-wrap justify-center gap-6">
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Security Protocols</a>
-<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">{{ _('Privacy Policy') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Terms of Service') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Security Protocols') }}</a>
+<a class="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">{{ _('Contact Support') }}</a>
 </nav>
 </div>
 </footer>

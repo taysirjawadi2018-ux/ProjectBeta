@@ -38,10 +38,10 @@
   for one of tk-/light/dark on this element.
 #}
 {%- set root_classes = [html_class or 'light', theme_class, text_scale_class] | select | join(' ') %}
-<html class="{{ root_classes }}" lang="en"><head>
+<html class="{{ root_classes }}" dir="{{ text_dir }}" lang="{{ locale }}"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>{% block title %}Watiq National Portal{% endblock %}</title>
+<title>{% block title %}{{ _('Watiq National Portal') }}{% endblock %}</title>
 {#
   Brand marks, all same-origin so `img-src 'self' data:` keeps holding. The ICO
   carries 16/32/48 for browsers that ignore the PNG hints, and the 180px Apple

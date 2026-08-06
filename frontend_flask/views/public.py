@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from flask_babel import gettext as _, lazy_gettext as _l
 from flask import (
     Blueprint,
     flash,
@@ -43,7 +44,7 @@ def login() -> Any:
     identifier = (request.form.get("cin") or request.form.get("email") or "").strip()
     password = request.form.get("password") or ""
     if not identifier or not password:
-        flash("Enter your credentials to continue.", "error")
+        flash(_("Enter your credentials to continue."), "error")
         return render_template("login.html", staff_mode=staff_mode), 400
 
     try:
@@ -55,8 +56,7 @@ def login() -> Any:
         # One message for every failure mode. Distinguishing "no such account"
         # from "wrong password" turns this form into an account enumerator.
         flash(
-            "Those credentials were not recognised."
-            if exc.status in (400, 401, 404)
+            _("Those credentials were not recognised.")if exc.status in (400, 401, 404)
             else exc.user_message(),
             "error",
         )
@@ -98,7 +98,7 @@ def mfa() -> Any:
         session[api.S_ACCESS] = body.get("access_token", "")
         session[api.S_MFA] = False
     except api.ApiError as exc:
-        flash("That code was not accepted." if exc.status in (400, 401, 403, 404)
+        flash(_("That code was not accepted.")if exc.status in (400, 401, 403, 404)
               else exc.user_message(), "error")
         return render_template("mfa.html", profile=auth.current_profile()), 401
     return redirect(url_for("staff.workbench"))
@@ -121,7 +121,7 @@ def register() -> Any:
             payload[optional] = form[optional]
 
     if payload["password"] != request.form.get("password_confirm", ""):
-        flash("The two passwords do not match.", "error")
+        flash(_("The two passwords do not match."), "error")
         return render_template("register.html", form=form), 400
 
     try:
@@ -133,16 +133,16 @@ def register() -> Any:
     try:
         auth.login_citizen(payload["national_id"], payload["password"])
     except api.ApiError:
-        flash("Account created. Please sign in.", "success")
+        flash(_("Account created. Please sign in."), "success")
         return redirect(url_for("public.login"))
-    flash("Welcome to Watiq. Your account is ready.", "success")
+    flash(_("Welcome to Watiq. Your account is ready."), "success")
     return redirect(url_for("citizen.dashboard"))
 
 
 @bp.post("/logout")
 def logout() -> Any:
     auth.logout()
-    flash("You have been signed out.", "info")
+    flash(_("You have been signed out."), "info")
     return redirect(url_for("public.index"))
 
 
@@ -159,7 +159,7 @@ def password_reset() -> Any:
                 auth=False,
             )
             # Always the same response: no account-existence oracle.
-            flash("If that account exists, a reset code has been sent.", "info")
+            flash(_("If that account exists, a reset code has been sent."), "info")
             return redirect(url_for("public.password_reset", stage="confirm"))
         api.post(
             "/api/v1/auth/password-reset",
@@ -172,7 +172,7 @@ def password_reset() -> Any:
     except api.ApiError as exc:
         flash(exc.user_message(), "error")
         return render_template("password_reset.html", stage=stage), exc.status
-    flash("Your password has been changed. Please sign in.", "success")
+    flash(_("Your password has been changed. Please sign in."), "success")
     return redirect(url_for("public.login"))
 
 
@@ -243,7 +243,7 @@ def track() -> Any:
             # Same response whether the code is malformed or simply not yours:
             # a distinguishable answer makes this a tracking-code oracle, which
             # is the enumeration CrowdSec scenario watiq/tracking-enum watches.
-            flash("No request matches that tracking code.", "error")
+            flash(_("No request matches that tracking code."), "error")
     return render_template("track.html", code=code, result=result)
 
 
@@ -346,7 +346,7 @@ def privacy() -> str:
 @bp.get("/legal/terms")
 def terms() -> str:
     """The terms screen has a design of its own; the other four slugs do not."""
-    return render_template("terms.html", page_title="Terms of Service")
+    return render_template("terms.html", page_title=_("Terms of Service"))
 
 
 @bp.get("/accessibility")
@@ -366,12 +366,11 @@ def contact() -> Any:
     """
     if request.method == "POST":
         flash(
-            "Online inquiries are not connected yet. Please use the telephone "
-            "or email channel listed below and quote your national ID.",
+            _("Online inquiries are not connected yet. Please use the telephone or email channel listed below and quote your national ID."),
             "info",
         )
         return redirect(url_for("public.contact"))
-    return render_template("support.html", page_title="Contact Us", slug="contact")
+    return render_template("support.html", page_title=_("Contact Us"), slug="contact")
 
 
 @bp.get("/help")
@@ -418,8 +417,7 @@ def support_chat() -> Any:
     """
     if request.method == "POST":
         flash(
-            "Live chat is not connected yet. Please use the telephone or email "
-            "channel listed on the contact page and quote your national ID.",
+            _("Live chat is not connected yet. Please use the telephone or email channel listed on the contact page and quote your national ID."),
             "info",
         )
         return redirect(url_for("public.support_chat"))
@@ -449,7 +447,14 @@ def preferences() -> Any:
     A year-long cookie rather than the session: the preference has to survive
     signing out, and it is not a secret.
     """
-    from app import THEME_COOKIE, THEMES, TEXT_SCALE_COOKIE, TEXT_SCALES
+    from app import (
+        LANG_COOKIE,
+        LANGUAGES,
+        THEME_COOKIE,
+        THEMES,
+        TEXT_SCALE_COOKIE,
+        TEXT_SCALES,
+    )
 
     # Same relative-path rule as _safe_next, but landing on the portal rather
     # than the dashboard: this route is reachable signed out, and bouncing an
@@ -470,6 +475,12 @@ def preferences() -> Any:
     if scale and scale.isdigit() and int(scale) in TEXT_SCALES:
         response.set_cookie(
             TEXT_SCALE_COOKIE, scale, max_age=31536000, samesite="Lax", httponly=False
+        )
+
+    lang = request.form.get("lang")
+    if lang in LANGUAGES:
+        response.set_cookie(
+            LANG_COOKIE, lang, max_age=31536000, samesite="Lax", httponly=False
         )
     return response
 
@@ -494,7 +505,7 @@ def status() -> str:
         degraded = True
     return render_template(
         "error_maintenance.html",
-        title="Scheduled Maintenance" if not degraded else "Service Degraded",
+        title=_("Scheduled Maintenance")if not degraded else "Service Degraded",
         message=(
             "Core services are operating normally. Planned maintenance windows "
             "are published here before they begin."

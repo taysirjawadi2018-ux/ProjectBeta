@@ -49,11 +49,17 @@ TEXT_FONTS = {
     "Work Sans": "wght@100..900",
     "JetBrains Mono": "wght@100..800",
     "Public Sans": "wght@100..900",
+    # Arabic UI face. The Latin families above carry no Arabic coverage, so
+    # without this the Arabic locale falls through to whatever the OS happens
+    # to have — which font-src 'self' cannot vouch for and which renders the
+    # portal in a different voice on every machine.
+    "Noto Sans Arabic": "wght@100..900",
 }
 
-# The mockups only ever render Latin text (the Arabic strings in the B3 form
-# fall through to a system face here exactly as they do in the originals).
-WANTED_SUBSETS = ("latin", "latin-ext")
+# The portal ships in English, French and Arabic. The Latin families have no
+# arabic subset, so naming it here costs nothing for them and picks up the one
+# face that does.
+WANTED_SUBSETS = ("latin", "latin-ext", "arabic")
 
 
 def fetch(url: str) -> bytes:

@@ -10,6 +10,7 @@ from __future__ import annotations
 from typing import Any
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_babel import gettext as _, lazy_gettext as _l
 
 import api
 from auth import admin_required
@@ -49,7 +50,7 @@ def index() -> str:
 @admin_required
 def deactivate_user(user_id: int) -> Any:
     api.post(f"/api/v1/admin/users/{user_id}/deactivate")
-    flash("Account deactivated.", "success")
+    flash(_("Account deactivated."), "success")
     return redirect(url_for("admin.index", tab="users"))
 
 
@@ -57,7 +58,7 @@ def deactivate_user(user_id: int) -> Any:
 @admin_required
 def reactivate_user(user_id: int) -> Any:
     api.post(f"/api/v1/admin/users/{user_id}/reactivate")
-    flash("Account reactivated.", "success")
+    flash(_("Account reactivated."), "success")
     return redirect(url_for("admin.index", tab="users"))
 
 
@@ -76,20 +77,19 @@ def anonymize_user(user_id: int) -> Any:
     expected = (request.form.get("expected_national_id") or "").strip()
     if not typed or typed != expected:
         flash(
-            "Erasure cancelled: the national ID typed did not match the account.",
+            _("Erasure cancelled: the national ID typed did not match the account."),
             "error",
         )
         return redirect(url_for("admin.index", tab="users"))
     if request.form.get("blobs_purged") != "yes":
         flash(
-            "Erasure cancelled: confirm that stored documents were purged first. "
-            "Anonymising before purging orphans them permanently.",
+            _("Erasure cancelled: confirm that stored documents were purged first. Anonymising before purging orphans them permanently."),
             "error",
         )
         return redirect(url_for("admin.index", tab="users"))
 
     api.post(f"/api/v1/admin/users/{user_id}/anonymize")
-    flash("Account anonymised. This cannot be undone.", "success")
+    flash(_("Account anonymised. This cannot be undone."), "success")
     return redirect(url_for("admin.index", tab="users"))
 
 
@@ -113,7 +113,7 @@ def create_staff() -> Any:
     except api.ApiError as exc:
         flash(exc.user_message(), "error")
         return redirect(url_for("admin.index", tab="staff"))
-    flash("Staff member created.", "success")
+    flash(_("Staff member created."), "success")
     return redirect(url_for("admin.index", tab="staff"))
 
 
@@ -121,7 +121,7 @@ def create_staff() -> Any:
 @admin_required
 def deactivate_staff(staff_id: int) -> Any:
     api.post(f"/api/v1/admin/staff/{staff_id}/deactivate")
-    flash("Staff account deactivated.", "success")
+    flash(_("Staff account deactivated."), "success")
     return redirect(url_for("admin.index", tab="staff"))
 
 
@@ -129,7 +129,7 @@ def deactivate_staff(staff_id: int) -> Any:
 @admin_required
 def reactivate_staff(staff_id: int) -> Any:
     api.post(f"/api/v1/admin/staff/{staff_id}/reactivate")
-    flash("Staff account reactivated.", "success")
+    flash(_("Staff account reactivated."), "success")
     return redirect(url_for("admin.index", tab="staff"))
 
 

@@ -10,25 +10,25 @@
   either go back or continue to the account form. content_page.html is left
   alone for the other four slugs, which have no design of their own.
 #}
-{% block title %}Terms and Conditions | République Tunisienne{% endblock %}
-{% block body_class %}bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col relative overflow-x-hidden{% endblock %}
+{% block title %}{{ _('Terms and Conditions | République Tunisienne') }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col relative overflow-x-hidden') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/terms.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 <!-- Global Watermark -->
 <div class="fixed inset-0 flex justify-center items-center pointer-events-none watermark">
-<img class="w-[800px] h-[800px] object-contain opacity-5" alt="A highly detailed, intricate monochromatic rendering of the Tunisian National Emblem, presented as a subtle watermark." src="{{ url_for('static', filename='img/img-9228191e7be2.jpg') }}"/>
+<img class="w-[800px] h-[800px] object-contain opacity-5" alt="{{ _('A highly detailed, intricate monochromatic rendering of the Tunisian National Emblem, presented as a subtle watermark.') }}" src="{{ url_for('static', filename='img/img-9228191e7be2.jpg') }}"/>
 </div>
 <!-- Header (No Nav Shell as per rules for transactional/onboarding flow) -->
 <header class="w-full bg-surface-container-lowest border-b border-outline-variant py-6 px-margin-mobile md:px-margin-desktop relative z-20 flex items-center justify-between shadow-sm">
 <div class="flex items-center gap-4">
-<img class="w-10 h-10 object-contain" alt="A refined, minimalist logo icon for the République Tunisienne portal, featuring abstract geometric forms hinting at a fl" src="{{ url_for('static', filename='img/img-fa4ad60326eb.jpg') }}"/>
-<h1 class="font-headline-md text-headline-md text-primary tracking-wider uppercase">République Tunisienne</h1>
+<img class="w-10 h-10 object-contain" alt="{{ _('A refined, minimalist logo icon for the République Tunisienne portal, featuring abstract geometric forms hinting at a fl') }}" src="{{ url_for('static', filename='img/img-fa4ad60326eb.jpg') }}"/>
+<h1 class="font-headline-md text-headline-md text-primary tracking-wider uppercase">{{ _('République Tunisienne') }}</h1>
 </div>
 <div class="hidden md:flex items-center text-on-surface-variant font-support-sm">
-<span class="material-symbols-outlined mr-2">lock</span>
-            Secure Registration Flow
+<span class="material-symbols-outlined me-2">lock</span>
+            {{ _('Secure Registration Flow') }}
         </div>
 </header>
 <!-- Main Content Canvas -->
@@ -36,59 +36,59 @@
 <div class="w-full max-w-[800px] mx-auto bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-[0_4px_20px_rgba(0,0,0,0.04)] overflow-hidden relative glass-panel">
 <!-- Card Header -->
 <div class="bg-surface-container-low px-8 py-6 border-b border-outline-variant/50 sticky top-0 z-20">
-<p class="font-label-caps text-label-caps text-secondary mb-2 uppercase tracking-widest">Legal terms · in force {{ year }}</p>
-<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Terms &amp; Conditions</h2>
-<p class="font-support-sm text-support-sm text-on-surface-variant mt-2">The conditions that apply when you use this platform. Creating an account accepts them.</p>
+<p class="font-label-caps text-label-caps text-secondary mb-2 uppercase tracking-widest">{{ _('Legal terms · in force') }} {{ year }}</p>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">{{ _('Terms &amp; Conditions') }}</h2>
+<p class="font-support-sm text-support-sm text-on-surface-variant mt-2">{{ _('The conditions that apply when you use this platform. Creating an account accepts them.') }}</p>
 </div>
 <!-- Scrollable Content Area -->
 <div class="px-8 py-8 h-[50vh] overflow-y-auto space-y-8 bg-surface-container-lowest text-on-surface relative content-layer" id="terms-content">
 <section>
 <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
 <span class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center font-label-caps text-sm">1</span>
-                        Platform Usage &amp; Sovereignty
+                        {{ _('Platform Usage &amp; Sovereignty') }}
                     </h3>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-4">
-                        Access to the National Services Portal ("The Platform") is granted solely for the execution of official civil, legal, and administrative procedures within the jurisdiction of the République Tunisienne. Users must utilize the Platform in accordance with national laws governing digital identity and electronic communication.
+                        {{ _('Access to the National Services Portal ("The Platform") is granted solely for the execution of official civil, legal, and administrative procedures within the jurisdiction of the République Tunisienne. Users must utilize the Platform in accordance with national laws governing digital identity and electronic communication.') }}
                     </p>
 <p class="font-body-md text-body-md text-on-surface-variant">
-                        Any unauthorized access, attempt to manipulate data, or circumvention of security protocols constitutes a violation of national cybersecurity mandates and is subject to immediate legal action under Sovereign Authority regulations.
+                        {{ _('Any unauthorized access, attempt to manipulate data, or circumvention of security protocols constitutes a violation of national cybersecurity mandates and is subject to immediate legal action under Sovereign Authority regulations.') }}
                     </p>
 </section>
 <section>
 <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
 <span class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center font-label-caps text-sm">2</span>
-                        Data Privacy &amp; Transparency
+                        {{ _('Data Privacy &amp; Transparency') }}
                     </h3>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-4">
-                        We operate under a mandate of Modern Transparency. Personal data collected during registration and subsequent use of the Platform is processed strictly for the execution of requested administrative services.
+                        {{ _('We operate under a mandate of Modern Transparency. Personal data collected during registration and subsequent use of the Platform is processed strictly for the execution of requested administrative services.') }}
                     </p>
-<ul class="list-disc pl-6 space-y-2 font-body-md text-body-md text-on-surface-variant">
-<li>Data is encrypted at rest and in transit using advanced national cryptographic standards.</li>
-<li>Information is shared between authorized governmental entities only when strictly necessary for service fulfillment.</li>
-<li>Citizens retain the right to audit their access logs via the 'Security Log' feature available in the user dashboard.</li>
+<ul class="list-disc ps-6 space-y-2 font-body-md text-body-md text-on-surface-variant">
+<li>{{ _('Data is encrypted at rest and in transit using advanced national cryptographic standards.') }}</li>
+<li>{{ _('Information is shared between authorized governmental entities only when strictly necessary for service fulfillment.') }}</li>
+<li>{{ _('Citizens retain the right to audit their access logs via the \'Security Log\' feature available in the user dashboard.') }}</li>
 </ul>
 </section>
 <section>
 <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
 <span class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center font-label-caps text-sm">3</span>
-                        Digital Signature &amp; Liability
+                        {{ _('Digital Signature &amp; Liability') }}
                     </h3>
 <p class="font-body-lg text-body-lg text-on-surface-variant mb-4">
-                        Actions performed on this Platform, including the submission of forms and acceptance of terms, carry the equivalent legal weight of a physical signature under the Digital Economy Act.
+                        {{ _('Actions performed on this Platform, including the submission of forms and acceptance of terms, carry the equivalent legal weight of a physical signature under the Digital Economy Act.') }}
                     </p>
-<div class="bg-surface-container-low p-4 border-l-4 border-primary rounded-r-md mt-4">
+<div class="bg-surface-container-low p-4 border-s-4 border-primary rounded-e-md mt-4">
 <p class="font-support-sm text-support-sm text-on-surface-variant">
-<strong>Note on Liability:</strong> The user is solely responsible for maintaining the confidentiality of their Secure Session credentials. The State is not liable for unauthorized actions resulting from user negligence.
+<strong>{{ _('Note on Liability:') }}</strong> {{ _('The user is solely responsible for maintaining the confidentiality of their Secure Session credentials. The State is not liable for unauthorized actions resulting from user negligence.') }}
                         </p>
 </div>
 </section>
 <section>
 <h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
 <span class="bg-primary text-on-primary w-8 h-8 rounded-full flex items-center justify-center font-label-caps text-sm">4</span>
-                        Accessibility &amp; Inclusion
+                        {{ _('Accessibility &amp; Inclusion') }}
                     </h3>
 <p class="font-body-md text-body-md text-on-surface-variant">
-                        The République Tunisienne is committed to ensuring equal access to digital services. This platform integrates adaptive technologies, including the omnipresent Sign Language Module (TSL), to facilitate communication for all citizens.
+                        {{ _('The République Tunisienne is committed to ensuring equal access to digital services. This platform integrates adaptive technologies, including the omnipresent Sign Language Module (TSL), to facilitate communication for all citizens.') }}
                     </p>
 </section>
 <!-- Intersection Observer Target to enable button -->
@@ -99,26 +99,26 @@
 <div class="flex items-center gap-2">
 <input class="w-5 h-5 rounded-sm border-outline text-primary focus:ring-primary focus:ring-offset-surface-container-lowest cursor-pointer transition-colors" disabled="" id="accept-checkbox" type="checkbox"/>
 <label class="font-body-md text-body-md text-on-surface-variant cursor-not-allowed opacity-60 transition-opacity" for="accept-checkbox" id="accept-label">
-                        I have read and agree to the Terms
+                        {{ _('I have read and agree to the Terms') }}
                     </label>
 </div>
 <div class="flex gap-4 w-full sm:w-auto">
 <a href="{{ url_for('public.index') }}" class="px-6 py-3 rounded-sm border border-primary text-primary font-label-caps text-label-caps hover:bg-surface-container-low transition-colors w-full sm:w-auto text-center uppercase tracking-widest">
-                        Decline
+                        {{ _('Decline') }}
                     </a>
 <a class="px-6 py-3 rounded-sm bg-outline text-surface-container-lowest font-label-caps text-label-caps cursor-not-allowed w-full sm:w-auto text-center uppercase tracking-widest transition-all shadow-sm" disabled="" id="continue-btn"  href="{{ url_for('public.register') }}">
-                    Continue to registration
+                    {{ _('Continue to registration') }}
                     </a>
 </div>
 </div>
 </div>
 </main>
 <!-- Sign Language Module (Floating) -->
-<div class="fixed bottom-6 right-6 z-50 w-64 glass-panel rounded-xl shadow-lg border border-outline-variant/20 overflow-hidden flex flex-col" id="tsl-module">
+<div class="fixed bottom-6 end-6 z-50 w-64 glass-panel rounded-xl shadow-lg border border-outline-variant/20 overflow-hidden flex flex-col" id="tsl-module">
 <div class="bg-primary px-3 py-2 flex justify-between items-center cursor-move">
 <span class="font-label-caps text-label-caps text-on-primary flex items-center gap-2 uppercase tracking-widest">
 <span class="material-symbols-outlined text-sm icon-filled">sign_language</span>
-                TSL Support
+                {{ _('TSL Support') }}
             </span>
 <div class="flex gap-2">
 <button class="text-on-primary hover:text-secondary-fixed transition-colors" data-action="a11y-expand"  type="button">
@@ -131,14 +131,14 @@
 </div>
 <div class="relative bg-black h-36 w-full flex items-center justify-center">
 <!-- Placeholder for Video -->
-<img class="w-full h-full object-cover opacity-80" alt="A professional sign language interpreter, dressed in dark formal attire, positioned against a stark white background." src="{{ url_for('static', filename='img/img-4424305c67e1.jpg') }}"/>
+<img class="w-full h-full object-cover opacity-80" alt="{{ _('A professional sign language interpreter, dressed in dark formal attire, positioned against a stark white background.') }}" src="{{ url_for('static', filename='img/img-4424305c67e1.jpg') }}"/>
 <!-- Play Overlay -->
 <div class="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/10 transition-colors cursor-pointer group">
 <span class="material-symbols-outlined text-on-primary text-4xl group-hover:scale-110 transition-transform icon-filled">play_circle</span>
 </div>
 </div>
 <div class="bg-surface px-3 py-2 border-t border-outline-variant/30 flex justify-between items-center">
-<span class="font-support-sm text-support-sm text-on-surface-variant">Reading: Section 1</span>
+<span class="font-support-sm text-support-sm text-on-surface-variant">{{ _('Reading: Section 1') }}</span>
 <span class="flex gap-1">
 <span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed-dim animate-pulse"></span>
 <span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
@@ -149,7 +149,7 @@
 <!-- Minimal Footer -->
 <footer class="w-full bg-surface-container-lowest border-t border-outline-variant/30 py-6 px-margin-mobile md:px-margin-desktop text-center relative z-20">
 <p class="font-support-sm text-support-sm text-on-surface-variant">
-            © <span id="current-year"></span> République Tunisienne - Portail National des Services. Strict Compliance Enforced.
+            © <span id="current-year"></span> {{ _('République Tunisienne - Portail National des Services. Strict Compliance Enforced.') }}
         </p>
 </footer>
 {% endblock %}

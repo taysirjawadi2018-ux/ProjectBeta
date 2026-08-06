@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-security-acces-blocked' %}
-{% block title %}{{ title }} | Watiq National Portal{% endblock %}
-{% block body_class %}font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed{% endblock %}
+{% block title %}{{ title }} {{ _('| Watiq National Portal') }}{% endblock %}
+{% block body_class %}{{ _('font-body-md text-body-md selection:bg-primary-fixed selection:text-on-primary-fixed') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/error_blocked.css') }}" rel="stylesheet"/>
 {% endblock %}
@@ -10,15 +10,15 @@
 <!-- Global Watermark -->
 <div class="national-watermark"></div>
 <!-- Header / Top Bar (Simplified for Transactional/Blocked State) -->
-<header class="fixed top-0 left-0 w-full h-20 px-margin-desktop flex items-center justify-between z-50">
+<header class="fixed top-0 start-0 w-full h-20 px-margin-desktop flex items-center justify-between z-50">
 <div class="flex items-center gap-4">
 <div class="w-12 h-12 flex items-center justify-center bg-on-surface text-surface rounded-sm">
 <span class="icon-filled material-symbols-outlined">policy</span>
 </div>
 {{ mark(size='h-9') }}
 <div class="flex flex-col">
-<span class="font-headline-md text-headline-md tracking-wider uppercase text-on-surface leading-tight">République Tunisienne</span>
-<span class="font-label-caps text-label-caps text-on-surface-variant">Portail National des Services</span>
+<span class="font-headline-md text-headline-md tracking-wider uppercase text-on-surface leading-tight">{{ _('République Tunisienne') }}</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Portail National des Services') }}</span>
 </div>
 </div>
 </header>
@@ -38,19 +38,19 @@
 <div class="glass-panel rounded-xl p-8 md:p-12 w-full shadow-lg relative overflow-hidden text-center border-t-4 border-error">
 <div class="scanline"></div>
 <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2 uppercase tracking-tight">{{ title }}</h1>
-<p class="font-headline-md text-headline-md text-error mb-8">Security Protocol v2.4 Active</p>
-<div class="bg-surface-container-high rounded-sm p-6 mb-10 text-left border-l-4 border-on-surface">
+<p class="font-headline-md text-headline-md text-error mb-8">{{ _('Security Protocol v2.4 Active') }}</p>
+<div class="bg-surface-container-high rounded-sm p-6 mb-10 text-start border-s-4 border-on-surface">
 <div class="flex flex-col gap-4">
 <div class="flex justify-between items-center border-b border-outline-variant pb-3">
-<span class="font-label-caps text-label-caps text-on-surface-variant">Reason for Restriction</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Reason for Restriction') }}</span>
 <span class="font-body-md text-body-md font-bold text-on-surface">{{ title }}</span>
 </div>
 <div class="flex justify-between items-center border-b border-outline-variant pb-3">
-<span class="font-label-caps text-label-caps text-on-surface-variant">Timestamp</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Timestamp') }}</span>
 <span class="font-body-md text-body-md text-on-surface" id="current-time">{{ now_utc }}</span>
 </div>
 <div class="flex justify-between items-center">
-<span class="font-label-caps text-label-caps text-on-surface-variant">Reference ID</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">{{ _('Reference ID') }}</span>
 <span class="font-body-md text-body-md font-bold text-primary tracking-widest bg-secondary-container px-2 py-1 rounded-sm">{{ code }}-{{ g.request_id[:8] if g.request_id else 'UNKNOWN' }}</span>
 </div>
 </div>
@@ -62,7 +62,7 @@
 <div class="flex flex-col md:flex-row gap-gutter justify-center items-center">
 <a href="{{ url_for('public.contact') }}" class="w-full md:w-auto px-10 py-4 bg-primary text-on-primary font-headline-md text-headline-md rounded-sm hover:bg-on-surface-variant transition-all active:scale-95 flex items-center justify-center gap-3">
 <span class="material-symbols-outlined">send</span>
-                        Lodge Official Appeal
+                        {{ _('Lodge Official Appeal') }}
                     </a>
 {#- The link map gives this screen three ways out, not two: appeal the block,
     try a different identity, or leave. The second button used to be a second
@@ -70,11 +70,11 @@
     signed in as the wrong account with nowhere to go. -#}
 <a href="{{ url_for('public.login') }}" class="w-full md:w-auto px-10 py-4 border-2 border-primary text-primary font-headline-md text-headline-md rounded-sm hover:bg-surface-container-highest transition-all active:scale-95 flex items-center justify-center gap-3">
 <span class="material-symbols-outlined">account_circle</span>
-                        Sign in as someone else
+                        {{ _('Sign in as someone else') }}
                     </a>
 <a href="{{ url_for('public.index') }}" class="w-full md:w-auto px-10 py-4 text-on-surface-variant font-headline-md text-headline-md rounded-sm hover:bg-surface-container-highest transition-all active:scale-95 flex items-center justify-center gap-3 focus-ring">
 <span class="material-symbols-outlined">account_balance</span>
-                        Return to the portal
+                        {{ _('Return to the portal') }}
                     </a>
 </div>
 </div>
@@ -82,22 +82,22 @@
 <div class="mt-12 text-center">
 <p class="font-support-sm text-support-sm text-on-surface-variant opacity-60 flex items-center justify-center gap-2">
 <span class="material-symbols-outlined !text-[16px]">verified_user</span>
-                    Secured by National Cybersecurity Agency (ANSI) &amp; Ministry of Justice
+                    {{ _('Secured by National Cybersecurity Agency (ANSI) &amp; Ministry of Justice') }}
                 </p>
 </div>
 </div>
 </main>
 <!-- Sign Language Module (Accessibility) -->
-<div class="fixed bottom-margin-desktop right-margin-desktop z-[100] group">
+<div class="fixed bottom-margin-desktop end-margin-desktop z-[100] group">
 <div class="glass-panel rounded-xl p-2 border-2 border-secondary-container shadow-2xl relative overflow-hidden w-48 h-64 md:w-56 md:h-72">
-<div class="absolute top-2 left-2 z-10">
-<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">Live Interpreter</span>
+<div class="absolute top-2 start-2 z-10">
+<span class="bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">{{ _('Live Interpreter') }}</span>
 </div>
 <div class="w-full h-full bg-on-surface rounded-lg overflow-hidden relative">
-<img class="w-full h-full object-cover" alt="A professional sign language interpreter, an elegant woman in a dark corporate blazer, performing Tunisian Sign Language" src="{{ url_for('static', filename='img/img-5006c6991848.jpg') }}"/>
+<img class="w-full h-full object-cover" alt="{{ _('A professional sign language interpreter, an elegant woman in a dark corporate blazer, performing Tunisian Sign Language') }}" src="{{ url_for('static', filename='img/img-5006c6991848.jpg') }}"/>
 <div class="absolute inset-0 bg-gradient-to-t from-on-surface/60 to-transparent"></div>
 <!-- Controls -->
-<div class="absolute bottom-2 left-0 w-full flex justify-center gap-2">
+<div class="absolute bottom-2 start-0 w-full flex justify-center gap-2">
 <button class="w-8 h-8 rounded-full bg-surface text-on-surface flex items-center justify-center hover:bg-secondary-container transition-colors" data-action="a11y-play" type="button">
 <span class="material-symbols-outlined !text-[18px]">play_arrow</span>
 </button>

@@ -12,8 +12,8 @@
   It deliberately does NOT replace verify_request.html: that is the staff
   review workbench, a different actor doing a different job.
 #}
-{% block title %}Portail Souverain - {{ document.document_type or 'Document' }}{% endblock %}
-{% block body_class %}bg-background text-on-background{% endblock %}
+{% block title %}{{ _('Portail Souverain -') }} {{ document.document_type or 'Document' }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-background') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/document_detail.css') }}" rel="stylesheet"/>
 {% endblock %}
@@ -22,67 +22,67 @@
 {%- set certified = document.status == 'verified' %}
 {%- set primary = document %}
 <!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 bg-white border-r border-outline-variant flex flex-col py-8 gap-2 z-50">
+<aside class="h-screen w-64 fixed start-0 top-0 bg-white border-e border-outline-variant flex flex-col py-8 gap-2 z-50">
 <div class="px-6 mb-8">
 <h1 class="font-bold text-xl text-primary flex items-center gap-2">
 {{ mark(size='h-6') }}
-            Citizen Space
+            {{ _('Citizen Space') }}
         </h1>
 <div class="mt-1 flex items-center gap-1.5">
 <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-<p class="text-[10px] font-bold uppercase tracking-widest text-secondary">Sovereign Secure</p>
+<p class="text-[10px] font-bold uppercase tracking-widest text-secondary">{{ _('Sovereign Secure') }}</p>
 </div>
 </div>
 <nav class="flex-grow flex flex-col gap-1">
 <a class="text-on-surface-variant hover:bg-surface-container-low mx-3 flex items-center px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('citizen.dashboard') }}">
-<span aria-hidden="true" class="material-symbols-outlined mr-3">dashboard</span>
-<span class="font-label-md text-label-md">Dashboard</span>
+<span aria-hidden="true" class="material-symbols-outlined me-3">dashboard</span>
+<span class="font-label-md text-label-md">{{ _('Dashboard') }}</span>
 </a>
 <a class="text-on-surface-variant hover:bg-surface-container-low mx-3 flex items-center px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('citizen.requests_list') }}">
-<span aria-hidden="true" class="material-symbols-outlined mr-3">description</span>
-<span class="font-label-md text-label-md">Applications</span>
+<span aria-hidden="true" class="material-symbols-outlined me-3">description</span>
+<span class="font-label-md text-label-md">{{ _('Applications') }}</span>
 </a>
 <a aria-current="page" class="bg-primary text-on-primary rounded-lg mx-3 flex items-center px-4 py-3 transition-all shadow-md focus-ring" href="{{ url_for('citizen.documents') }}">
-<span aria-hidden="true" class="material-symbols-outlined mr-3 gold-text">folder_shared</span>
-<span class="font-label-md text-label-md">My Documents</span>
+<span aria-hidden="true" class="material-symbols-outlined me-3 gold-text">folder_shared</span>
+<span class="font-label-md text-label-md">{{ _('My Documents') }}</span>
 </a>
 <a class="text-on-surface-variant hover:bg-surface-container-low mx-3 flex items-center px-4 py-3 rounded-lg transition-all focus-ring" href="{{ url_for('public.contact') }}">
-<span aria-hidden="true" class="material-symbols-outlined mr-3">gavel</span>
-<span class="font-label-md text-label-md">Legal Support</span>
+<span aria-hidden="true" class="material-symbols-outlined me-3">gavel</span>
+<span class="font-label-md text-label-md">{{ _('Legal Support') }}</span>
 </a>
 </nav>
 <div class="mt-auto border-t border-outline-variant pt-4 flex flex-col gap-2">
 <div class="mx-4 mb-4 p-4 bg-primary text-white rounded-xl gold-border-subtle">
 <div class="flex items-center gap-2 mb-1">
 <span aria-hidden="true" class="material-symbols-outlined text-[16px] gold-text">security</span>
-<span class="text-[10px] font-bold uppercase tracking-widest">Sovereign Shield</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">{{ _('Sovereign Shield') }}</span>
 </div>
-<p class="text-[10px] text-surface-container-highest opacity-70">Hardware-level encryption enabled.</p>
+<p class="text-[10px] text-surface-container-highest opacity-70">{{ _('Hardware-level encryption enabled.') }}</p>
 </div>
 <form action="{{ url_for('public.logout') }}" class="contents" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <button class="text-on-surface-variant hover:bg-surface-container-low mx-3 flex items-center px-4 py-2 rounded-lg text-sm focus-ring" type="submit">
-<span aria-hidden="true" class="material-symbols-outlined mr-3">logout</span>
-<span>Logout</span>
+<span aria-hidden="true" class="material-symbols-outlined me-3">logout</span>
+<span>{{ _('Logout') }}</span>
 </button>
 </form>
 </div>
 </aside>
 <!-- TopNavBar -->
-<header class="fixed top-0 right-0 left-64 bg-white/80 backdrop-blur-md h-20 flex justify-between items-center px-margin-desktop border-b border-outline-variant z-40">
+<header class="fixed top-0 end-0 start-64 bg-white/80 backdrop-blur-md h-20 flex justify-between items-center px-margin-desktop border-b border-outline-variant z-40">
 <div class="flex items-center gap-4">
 <div aria-hidden="true" class="h-8 w-1.5 gold-bg rounded-full"></div>
-<span class="font-bold text-lg text-primary uppercase tracking-[0.15em]">République Tunisienne</span>
+<span class="font-bold text-lg text-primary uppercase tracking-[0.15em]">{{ _('République Tunisienne') }}</span>
 </div>
 <div class="flex items-center gap-6">
-<div class="hidden md:flex gap-8 items-center border-r border-outline-variant pr-8">
-<a class="text-label-md text-primary font-bold hover:gold-text transition-colors" href="{{ url_for('public.services', category='civil') }}">Civil Status</a>
-<a class="text-label-md text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='identity') }}">Identity</a>
-<a class="text-label-md text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='justice') }}">Justice</a>
+<div class="hidden md:flex gap-8 items-center border-e border-outline-variant pe-8">
+<a class="text-label-md text-primary font-bold hover:gold-text transition-colors" href="{{ url_for('public.services', category='civil') }}">{{ _('Civil Status') }}</a>
+<a class="text-label-md text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='identity') }}">{{ _('Identity') }}</a>
+<a class="text-label-md text-secondary hover:text-primary transition-colors" href="{{ url_for('public.services', category='justice') }}">{{ _('Justice') }}</a>
 </div>
 <div class="flex items-center gap-4">
 <a aria-label="Notifications{% if unread_count %} ({{ unread_count }} unread){% endif %}" class="material-symbols-outlined text-primary hover:bg-surface-container-low p-2 rounded-full transition-all focus-ring" href="{{ url_for('citizen.notifications') }}">notifications</a>
-<a aria-label="Your profile" class="flex items-center gap-3 bg-surface-container-low hover:bg-surface-container-high px-3 py-1.5 rounded-full transition-all border border-outline-variant focus-ring" href="{{ url_for('citizen.profile') }}">
+<a aria-label="{{ _('Your profile') }}" class="flex items-center gap-3 bg-surface-container-low hover:bg-surface-container-high px-3 py-1.5 rounded-full transition-all border border-outline-variant focus-ring" href="{{ url_for('citizen.profile') }}">
 <img alt="" class="w-7 h-7 rounded-full border border-primary object-cover" src="{{ url_for('static', filename='img/img-19ed1e0f197b.jpg') }}"/>
 <span class="font-label-md text-label-md text-primary">{{ profile|display_name }}</span>
 <span aria-hidden="true" class="material-symbols-outlined text-secondary text-[18px]">expand_more</span>
@@ -91,14 +91,14 @@
 </div>
 </header>
 <!-- Main Content Area -->
-<main class="ml-64 pt-20 min-h-screen relative">
+<main class="ms-64 pt-20 min-h-screen relative">
 <div class="max-w-container-max mx-auto p-margin-desktop">
 {% include 'partials/_flash.html' %}
 <!-- Breadcrumbs -->
-<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-secondary mb-8">
-<a class="hover:text-primary focus-ring rounded" href="{{ url_for('citizen.dashboard') }}">Home</a>
+<nav aria-label="{{ _('Breadcrumb') }}" class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-secondary mb-8">
+<a class="hover:text-primary focus-ring rounded" href="{{ url_for('citizen.dashboard') }}">{{ _('Home') }}</a>
 <span aria-hidden="true" class="material-symbols-outlined text-[14px]">chevron_right</span>
-<a class="hover:text-primary focus-ring rounded" href="{{ url_for('citizen.documents') }}">My Documents</a>
+<a class="hover:text-primary focus-ring rounded" href="{{ url_for('citizen.documents') }}">{{ _('My Documents') }}</a>
 <span aria-hidden="true" class="material-symbols-outlined text-[14px]">chevron_right</span>
 <span class="text-primary">{{ document.document_type or 'Document' }} · {{ request_item.tracking_code }}</span>
 </nav>
@@ -111,8 +111,8 @@
 <div class="document-card bg-white border border-outline-variant p-16 aspect-[1/1.41] relative overflow-hidden flex flex-col shadow-inner">
 <!-- Header of Document -->
 <div class="flex justify-between items-start border-b-2 border-primary pb-8 mb-12">
-<div class="text-left">
-<h2 class="font-bold text-[15px] uppercase navy-text tracking-tighter">République Tunisienne</h2>
+<div class="text-start">
+<h2 class="font-bold text-[15px] uppercase navy-text tracking-tighter">{{ _('République Tunisienne') }}</h2>
 <h3 class="text-[12px] font-medium text-secondary">{{ request_item.office_name or 'Ministère de l’Intérieur' }}</h3>
 <div aria-hidden="true" class="mt-2 h-1 w-12 gold-bg"></div>
 </div>
@@ -121,7 +121,7 @@
     plate carries the tracking code, which is the identifier a counter
     clerk can actually check against the registry. -#}
 <div class="w-20 h-20 bg-white border border-outline-variant p-1 shadow-sm flex flex-col items-center justify-center text-center">
-<span class="text-[7px] uppercase tracking-widest text-secondary">Réf.</span>
+<span class="text-[7px] uppercase tracking-widest text-secondary">{{ _('Réf.') }}</span>
 <span class="font-mono text-[9px] leading-tight navy-text break-all">{{ request_item.tracking_code }}</span>
 </div>
 </div>
@@ -153,23 +153,23 @@
 <!-- Official Seal Area -->
 <div class="mt-auto flex justify-between items-end relative h-40 pt-6">
 <div class="flex flex-col items-start opacity-40">
-<div class="text-[10px] font-bold uppercase navy-text mb-2">Signature Numérique ANCE</div>
-<div class="w-32 h-12 border border-primary/30 flex items-center justify-center italic text-[11px] text-primary/60">ANCE DIGITAL SEAL</div>
+<div class="text-[10px] font-bold uppercase navy-text mb-2">{{ _('Signature Numérique ANCE') }}</div>
+<div class="w-32 h-12 border border-primary/30 flex items-center justify-center italic text-[11px] text-primary/60">{{ _('ANCE DIGITAL SEAL') }}</div>
 </div>
 <div class="flex flex-col items-center">
 <div class="w-28 h-28 border-2 gold-border rounded-full flex items-center justify-center rotate-[-12deg] shadow-lg bg-white/40 backdrop-blur-sm">
 <div class="text-[11px] font-bold text-center leading-tight navy-text">
-                                        CERTIFIÉ CONFORME<br/>ETAT CIVIL<br/>TUNISIE
+                                        {{ _('CERTIFIÉ CONFORME') }}<br/>{{ _('ETAT CIVIL') }}<br/>{{ _('TUNISIE') }}
                                     </div>
 </div>
-<p class="text-[9px] mt-4 font-mono text-secondary tracking-[0.2em] uppercase">ID: {{ request_item.tracking_code }}</p>
+<p class="text-[9px] mt-4 font-mono text-secondary tracking-[0.2em] uppercase">{{ _('ID:') }} {{ request_item.tracking_code }}</p>
 </div>
 </div>
 </div>
 <!-- Interactive Trigger -->
-<a class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 px-6 py-2.5 bg-primary text-white rounded-full text-[11px] font-bold uppercase tracking-widest shadow-xl cursor-pointer hover:gold-bg transition-all focus-ring" href="{{ url_for('public.track', code=request_item.tracking_code) }}">
+<a class="absolute bottom-6 start-1/2 -translate-x-1/2 flex items-center gap-3 px-6 py-2.5 bg-primary text-white rounded-full text-[11px] font-bold uppercase tracking-widest shadow-xl cursor-pointer hover:gold-bg transition-all focus-ring" href="{{ url_for('public.track', code=request_item.tracking_code) }}">
 <span aria-hidden="true" class="material-symbols-outlined text-[18px]">view_in_ar</span>
-                        Interactive Verification
+                        {{ _('Interactive Verification') }}
                     </a>
 </div>
 {#- The mockup asserted "Blockchain Authenticated". Nothing in Watiq anchors
@@ -183,14 +183,14 @@
 <div>
 <p class="text-sm font-bold navy-text uppercase tracking-wider">{{ 'Registry Authenticated' if certified else 'Verification Pending' }}</p>
 <p class="text-[11px] text-secondary font-medium">
-{%- if certified %}Verified by the Tunisian National Registry on {{ (document.verified_at or '')[:10] or 'file' }}
-{%- else %}This document has not been verified yet{% endif -%}
+{%- if certified %}{{ _('Verified by the Tunisian National Registry on') }} {{ (document.verified_at or '')[:10] or 'file' }}
+{%- else %}{{ _('This document has not been verified yet') }}{% endif -%}
 </p>
 </div>
 </div>
 <a class="flex items-center gap-2 px-4 py-2 bg-surface-container-low rounded-lg text-primary text-[11px] font-bold tracking-widest uppercase border border-outline-variant hover:bg-surface-container-high transition-all focus-ring" href="{{ url_for('public.open_data') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-[16px] gold-text">database</span>
-                        State Registry Link
+                        {{ _('State Registry Link') }}
                     </a>
 </div>
 </div>
@@ -198,18 +198,18 @@
 <div class="lg:col-span-5 flex flex-col gap-6">
 <!-- Electronic Seal Status -->
 <div class="navy-bg text-white rounded-2xl p-8 flex items-center gap-6 shadow-2xl relative overflow-hidden gold-border-subtle">
-<div aria-hidden="true" class="absolute -right-8 -top-8 w-48 h-48 gold-bg opacity-10 rounded-full blur-3xl"></div>
+<div aria-hidden="true" class="absolute -end-8 -top-8 w-48 h-48 gold-bg opacity-10 rounded-full blur-3xl"></div>
 <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center gold-border-strong relative">
 <span aria-hidden="true" class="material-symbols-outlined icon-filled text-5xl gold-text">security</span>
 {%- if certified %}
-<div aria-hidden="true" class="absolute -bottom-1 -right-1 w-7 h-7 bg-green-500 rounded-full border-4 navy-bg flex items-center justify-center">
+<div aria-hidden="true" class="absolute -bottom-1 -end-1 w-7 h-7 bg-green-500 rounded-full border-4 navy-bg flex items-center justify-center">
 <span class="material-symbols-outlined text-white text-[14px] font-bold">check</span>
 </div>
 {%- endif %}
 </div>
 <div>
-<h4 class="font-bold text-xl gold-text tracking-wider uppercase">Institutional Seal</h4>
-<p class="text-[13px] text-surface-container-highest opacity-70 leading-relaxed mt-2">Legally binding digital certificate issued by the Ministry of Interior through the national civil registry.</p>
+<h4 class="font-bold text-xl gold-text tracking-wider uppercase">{{ _('Institutional Seal') }}</h4>
+<p class="text-[13px] text-surface-container-highest opacity-70 leading-relaxed mt-2">{{ _('Legally binding digital certificate issued by the Ministry of Interior through the national civil registry.') }}</p>
 </div>
 </div>
 <!-- Cryptographic Metadata -->
@@ -217,16 +217,16 @@
 <div class="bg-surface-container-low px-8 py-5 border-b border-outline-variant flex justify-between items-center">
 <div class="flex items-center gap-3">
 <span aria-hidden="true" class="material-symbols-outlined gold-text text-[20px]">fingerprint</span>
-<span class="font-bold text-xs text-primary uppercase tracking-widest">Metadata Audit</span>
+<span class="font-bold text-xs text-primary uppercase tracking-widest">{{ _('Metadata Audit') }}</span>
 </div>
 <span class="text-[10px] font-bold text-green-700 bg-green-50 px-3 py-1 rounded-full border border-green-200">{{ (request_item.status_name or 'ACTIVE')|upper }}</span>
 </div>
 <div class="p-8 space-y-8">
 <div>
 <div class="flex justify-between mb-3 items-center">
-<label class="text-[10px] uppercase font-bold text-secondary tracking-widest" for="doc-fingerprint">Document Fingerprint (SHA-256)</label>
+<label class="text-[10px] uppercase font-bold text-secondary tracking-widest" for="doc-fingerprint">{{ _('Document Fingerprint (SHA-256)') }}</label>
 {%- if primary and primary.checksum_sha256 %}
-<button aria-label="Copy the document fingerprint" class="hover:bg-surface-container-low p-1.5 rounded-md transition-colors focus-ring" data-action="copy" data-target="doc-fingerprint" type="button">
+<button aria-label="{{ _('Copy the document fingerprint') }}" class="hover:bg-surface-container-low p-1.5 rounded-md transition-colors focus-ring" data-action="copy" data-target="doc-fingerprint" type="button">
 <span aria-hidden="true" class="material-symbols-outlined text-[18px] text-secondary">content_copy</span>
 </button>
 {%- endif %}
@@ -237,7 +237,7 @@
 </div>
 <!-- Verification Timeline -->
 <div class="space-y-4">
-<span class="text-[10px] uppercase font-bold text-secondary tracking-widest block mb-4">Institutional Audit Trail</span>
+<span class="text-[10px] uppercase font-bold text-secondary tracking-widest block mb-4">{{ _('Institutional Audit Trail') }}</span>
 {%- for entry in history %}
 <div class="audit-line flex gap-4">
 <div class="w-6 h-6 rounded-full {{ 'bg-green-500' if loop.index < history|length else 'border-2 border-green-500 bg-white' }} flex items-center justify-center z-10">
@@ -249,7 +249,7 @@
 </div>
 <div>
 <p class="text-xs font-bold navy-text">{{ entry.status_name or entry.action }}</p>
-<p class="text-[10px] text-secondary">{{ (entry.changed_at or entry.created_at or '')[:16]|replace('T', ' ') }} UTC</p>
+<p class="text-[10px] text-secondary">{{ (entry.changed_at or entry.created_at or '')[:16]|replace('T', ' ') }} {{ _('UTC') }}</p>
 {%- if entry.note %}<p class="text-[10px] text-secondary opacity-80 mt-1">{{ entry.note }}</p>{% endif %}
 </div>
 </div>
@@ -259,8 +259,8 @@
 <div aria-hidden="true" class="w-2 h-2 rounded-full bg-outline-variant"></div>
 </div>
 <div>
-<p class="text-xs font-bold navy-text">No audit entries yet</p>
-<p class="text-[10px] text-secondary">The registry records every status change here.</p>
+<p class="text-xs font-bold navy-text">{{ _('No audit entries yet') }}</p>
+<p class="text-[10px] text-secondary">{{ _('The registry records every status change here.') }}</p>
 </div>
 </div>
 {%- endfor %}
@@ -269,12 +269,12 @@
 {%- if primary %}
 <a class="w-full navy-bg text-white py-4 rounded-xl font-bold text-[13px] flex items-center justify-center gap-3 hover:shadow-lg hover:brightness-110 transition-all gold-border-subtle group focus-ring" href="{{ url_for('citizen.download_document', document_id=primary.id) }}" rel="noopener" target="_blank">
 <span aria-hidden="true" class="material-symbols-outlined gold-text group-hover:scale-110 transition-transform">download_done</span>
-                                DOWNLOAD CERTIFIED PDF
+                                {{ _('DOWNLOAD CERTIFIED PDF') }}
                             </a>
 {%- else %}
 <button class="w-full navy-bg text-white py-4 rounded-xl font-bold text-[13px] flex items-center justify-center gap-3 gold-border-subtle opacity-40 cursor-not-allowed" disabled type="submit">
 <span aria-hidden="true" class="material-symbols-outlined gold-text">download_done</span>
-                                NO DOCUMENT TO DOWNLOAD
+                                {{ _('NO DOCUMENT TO DOWNLOAD') }}
                             </button>
 {%- endif %}
 </div>
@@ -283,76 +283,76 @@
 <div class="grid grid-cols-2 gap-4">
 <a class="bg-white border-2 border-primary text-primary py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-surface-container-low transition-all focus-ring" href="{{ url_for('citizen.profile') }}">
 <span aria-hidden="true" class="material-symbols-outlined text-[20px]">vpn_key</span>
-                        ACCESS KEY
+                        {{ _('ACCESS KEY') }}
                     </a>
 <a class="bg-white border-2 border-primary text-primary py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-surface-container-low transition-all focus-ring" href="{{ url_for('public.track', code=request_item.tracking_code) }}">
 <span aria-hidden="true" class="material-symbols-outlined text-[20px]">share</span>
-                        SECURE SHARE
+                        {{ _('SECURE SHARE') }}
                     </a>
 </div>
 </div>
 </div>
 </div>
 <!-- TSL Video Module (Institutional Pro Style) -->
-<div class="fixed bottom-10 right-10 z-[60] flex flex-col items-end gap-4 group">
+<div class="fixed bottom-10 end-10 z-[60] flex flex-col items-end gap-4 group">
 <div class="tsl-video-container bg-black rounded-2xl overflow-hidden w-72 shadow-2xl gold-border-strong aspect-[16/9] relative transition-all duration-500 transform translate-y-6 opacity-0 invisible group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-<img alt="TSL Interpreter" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
+<img alt="{{ _('TSL Interpreter') }}" class="w-full h-full object-cover" src="{{ url_for('static', filename='img/img-091ffb278e7e.jpg') }}"/>
 <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-<div class="absolute bottom-0 left-0 right-0 p-3 flex justify-between items-center">
+<div class="absolute bottom-0 start-0 end-0 p-3 flex justify-between items-center">
 <div class="flex items-center gap-2">
 <div aria-hidden="true" class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-<span class="text-[10px] text-white font-bold uppercase tracking-widest">TSL Interpretation</span>
+<span class="text-[10px] text-white font-bold uppercase tracking-widest">{{ _('TSL Interpretation') }}</span>
 </div>
 <span aria-hidden="true" class="material-symbols-outlined gold-text text-[18px]">volume_up</span>
 </div>
 </div>
-<a aria-label="Tunisian Sign Language support" class="w-16 h-16 navy-bg rounded-2xl gold-border-strong flex items-center justify-center shadow-2xl hover:scale-105 transition-all active:scale-95 group relative focus-ring" href="{{ url_for('public.accessibility') }}">
+<a aria-label="{{ _('Tunisian Sign Language support') }}" class="w-16 h-16 navy-bg rounded-2xl gold-border-strong flex items-center justify-center shadow-2xl hover:scale-105 transition-all active:scale-95 group relative focus-ring" href="{{ url_for('public.accessibility') }}">
 <span aria-hidden="true" class="material-symbols-outlined gold-text text-3xl group-hover:hidden">sign_language</span>
 <span aria-hidden="true" class="material-symbols-outlined gold-text text-3xl hidden group-hover:block">open_in_new</span>
-<div aria-hidden="true" class="absolute -top-1 -right-1 w-4 h-4 gold-bg rounded-full border-2 navy-bg"></div>
+<div aria-hidden="true" class="absolute -top-1 -end-1 w-4 h-4 gold-bg rounded-full border-2 navy-bg"></div>
 </a>
 </div>
 </main>
 <!-- Institutional Footer -->
-<footer class="ml-64 navy-bg text-white border-t gold-border-faint py-16">
+<footer class="ms-64 navy-bg text-white border-t gold-border-faint py-16">
 <div class="px-margin-desktop max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
 <div class="flex flex-col gap-6 max-w-md">
 <div class="flex items-center gap-4">
 <img alt="" class="w-12 h-12 object-contain brightness-0 invert opacity-80" src="{{ url_for('static', filename='img/img-3c9e4b7b2e93.jpg') }}"/>
 <div>
-<span class="font-bold text-sm tracking-[0.2em] uppercase gold-text block">REPUBLIQUE TUNISIENNE</span>
-<span class="text-[10px] opacity-40 uppercase tracking-widest">Sovereign Document Infrastructure</span>
+<span class="font-bold text-sm tracking-[0.2em] uppercase gold-text block">{{ _('REPUBLIQUE TUNISIENNE') }}</span>
+<span class="text-[10px] opacity-40 uppercase tracking-widest">{{ _('Sovereign Document Infrastructure') }}</span>
 </div>
 </div>
-<p class="text-[12px] opacity-60 leading-relaxed">Infrastructure sécurisée opérée par l'Agence Nationale de Certification Électronique (ANCE) en collaboration avec le Ministère des Technologies de la Communication.</p>
+<p class="text-[12px] opacity-60 leading-relaxed">{{ _('Infrastructure sécurisée opérée par l\'Agence Nationale de Certification Électronique (ANCE) en collaboration avec le Ministère des Technologies de la Communication.') }}</p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-12">
 <div class="flex flex-col gap-4">
-<h5 class="text-[11px] font-bold uppercase tracking-widest gold-text">Governance</h5>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.terms') }}">Legal Framework</a>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.open_data') }}">Open Data Policy</a>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.accessibility') }}">Accessibility</a>
+<h5 class="text-[11px] font-bold uppercase tracking-widest gold-text">{{ _('Governance') }}</h5>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.terms') }}">{{ _('Legal Framework') }}</a>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.open_data') }}">{{ _('Open Data Policy') }}</a>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.accessibility') }}">{{ _('Accessibility') }}</a>
 </div>
 <div class="flex flex-col gap-4">
-<h5 class="text-[11px] font-bold uppercase tracking-widest gold-text">Trust Services</h5>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.track') }}">Verification Portal</a>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('citizen.security_log') }}">Audit Logs</a>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.open_data') }}">API Access</a>
+<h5 class="text-[11px] font-bold uppercase tracking-widest gold-text">{{ _('Trust Services') }}</h5>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.track') }}">{{ _('Verification Portal') }}</a>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('citizen.security_log') }}">{{ _('Audit Logs') }}</a>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.open_data') }}">{{ _('API Access') }}</a>
 </div>
 <div class="flex flex-col gap-4">
-<h5 class="text-[11px] font-bold uppercase tracking-widest gold-text">Support</h5>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.help_page') }}">Help Center</a>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.contact') }}">Report Issue</a>
-<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.contact') }}">Contact Gov</a>
+<h5 class="text-[11px] font-bold uppercase tracking-widest gold-text">{{ _('Support') }}</h5>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.help_page') }}">{{ _('Help Center') }}</a>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.contact') }}">{{ _('Report Issue') }}</a>
+<a class="text-[12px] opacity-70 hover:opacity-100 hover:gold-text transition-all" href="{{ url_for('public.contact') }}">{{ _('Contact Gov') }}</a>
 </div>
 </div>
 </div>
 <div class="px-margin-desktop max-w-container-max mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-[11px] opacity-40">© {{ year }} National Services Portal. All rights reserved.</p>
+<p class="text-[11px] opacity-40">© {{ year }} {{ _('National Services Portal. All rights reserved.') }}</p>
 <div class="flex gap-6">
 <span class="text-[10px] font-bold uppercase tracking-tighter opacity-30 flex items-center gap-2">
 <span aria-hidden="true" class="material-symbols-outlined text-[14px]">shield_lock</span>
-                ISO/IEC 27001 COMPLIANT
+                {{ _('ISO/IEC 27001 COMPLIANT') }}
             </span>
 </div>
 </div>

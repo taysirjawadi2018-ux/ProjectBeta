@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-secure-login' %}
-{% block title %}Watiq National Portal | Secure Login{% endblock %}
-{% block body_class %}auth-bg min-h-screen flex flex-col relative overflow-y-auto{% endblock %}
+{% block title %}{{ _('Watiq National Portal | Secure Login') }}{% endblock %}
+{% block body_class %}{{ _('auth-bg min-h-screen flex flex-col relative overflow-y-auto') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/login.css') }}" rel="stylesheet"/>
 {% endblock %}
@@ -12,12 +12,12 @@
 <header class="w-full h-20 bg-primary-container border-b border-outline-variant z-20 flex items-center px-gutter sticky top-0">
 <div class="max-w-container-max mx-auto w-full flex justify-between items-center">
 <div class="flex items-center gap-md">
-<span class="font-headline-md text-white tracking-tighter">Watiq</span>
+<span class="font-headline-md text-white tracking-tighter">{{ _('Watiq') }}</span>
 <div class="h-6 w-[1px] bg-white/20 hidden md:block"></div>
-<span class="text-white/70 font-label-sm uppercase tracking-widest hidden md:block">National Portal</span>
+<span class="text-white/70 font-label-sm uppercase tracking-widest hidden md:block">{{ _('National Portal') }}</span>
 </div>
 <div class="flex items-center gap-sm">
-<span class="text-white/60 font-label-sm hidden sm:block">Secure Session Protocol v2.4</span>
+<span class="text-white/60 font-label-sm hidden sm:block">{{ _('Secure Session Protocol v2.4') }}</span>
 <span class="material-symbols-outlined text-white/60" data-icon="lock">lock</span>
 </div>
 </div>
@@ -26,16 +26,16 @@
 <main class="flex-grow grid grid-cols-12 gap-gutter max-w-container-max mx-auto w-full p-margin-mobile md:p-margin-desktop z-10">
 <!-- Left Decorative/Info Column (Hidden on mobile) -->
 <div class="hidden lg:flex lg:col-span-4 flex-col justify-center space-y-md">
-<h2 class="font-headline-lg text-midnight-navy">Sovereign National Identity</h2>
-<p class="font-body-lg text-on-surface-variant">The unified secure gateway for Tunisian citizens. Access e-government services, manage digital credentials, and interact with the legal infrastructure of the Republic.</p>
+<h2 class="font-headline-lg text-midnight-navy">{{ _('Sovereign National Identity') }}</h2>
+<p class="font-body-lg text-on-surface-variant">{{ _('The unified secure gateway for Tunisian citizens. Access e-government services, manage digital credentials, and interact with the legal infrastructure of the Republic.') }}</p>
 <div class="space-y-sm pt-md">
 <div class="flex items-center gap-sm text-mediterranean-cerulean">
 <span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
-<span class="font-label-sm font-bold uppercase tracking-wider">National Grade Encryption</span>
+<span class="font-label-sm font-bold uppercase tracking-wider">{{ _('National Grade Encryption') }}</span>
 </div>
 <div class="flex items-center gap-sm text-sovereign-gold">
 <span class="material-symbols-outlined" data-icon="gavel">gavel</span>
-<span class="font-label-sm font-bold uppercase tracking-wider">Legally Binding Signatures</span>
+<span class="font-label-sm font-bold uppercase tracking-wider">{{ _('Legally Binding Signatures') }}</span>
 </div>
 </div>
 </div>
@@ -45,8 +45,8 @@
 <div class="sovereign-line"></div>
 <div class="p-8 md:p-10">
 <div class="mb-10">
-<h1 class="font-headline-md text-midnight-navy mb-1">{% if staff_mode %}Staff Access Portal{% else %}Access Portal{% endif %}</h1>
-<p class="font-body-md text-on-surface-variant">Enter your official credentials to proceed.</p>
+<h1 class="font-headline-md text-midnight-navy mb-1">{% if staff_mode %}{{ _('Staff Access Portal') }}{% else %}{{ _('Access Portal') }}{% endif %}</h1>
+<p class="font-body-md text-on-surface-variant">{{ _('Enter your official credentials to proceed.') }}</p>
 </div>
 {% include 'partials/_flash.html' %}
 <form action="{{ url_for('public.login', next=request.args.get('next')) }}" class="space-y-6" id="loginForm" method="post">
@@ -56,40 +56,40 @@
 {%- endif %}
 <!-- National ID (CIN) -->
 <div class="space-y-2">
-<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider" for="cin">{% if staff_mode %}Staff email{% else %}National ID (CIN){% endif %}</label>
+<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider" for="cin">{% if staff_mode %}{{ _('Staff email') }}{% else %}{{ _('National ID (CIN)') }}{% endif %}</label>
 <div class="relative">
-<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="badge">badge</span>
-<input autocomplete="username" class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-outline-variant rounded hover:border-mediterranean-cerulean focus:ring-1 focus:ring-mediterranean-cerulean focus:border-mediterranean-cerulean transition-all font-body-md placeholder:text-outline-variant" id="cin" name="cin" placeholder="{% if staff_mode %}name@ministry.tn{% else %}8-digit identity number{% endif %}" required type="text">
+<span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="badge">badge</span>
+<input autocomplete="username" class="w-full ps-12 pe-4 py-4 bg-surface-container-lowest border border-outline-variant rounded hover:border-mediterranean-cerulean focus:ring-1 focus:ring-mediterranean-cerulean focus:border-mediterranean-cerulean transition-all font-body-md placeholder:text-outline-variant" id="cin" name="cin" placeholder="{% if staff_mode %}name@ministry.tn{% else %}8-digit identity number{% endif %}" required type="text">
 </div>
 </div>
 <!-- Password -->
 <div class="space-y-2">
 <div class="flex justify-between items-center">
-<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider" for="password">Security Password</label>
-<a class="font-label-sm text-mediterranean-cerulean hover:underline" href="{{ url_for('public.password_reset') }}">RECOVER ACCESS</a>
+<label class="block font-label-sm text-on-surface-variant uppercase tracking-wider" for="password">{{ _('Security Password') }}</label>
+<a class="font-label-sm text-mediterranean-cerulean hover:underline" href="{{ url_for('public.password_reset') }}">{{ _('RECOVER ACCESS') }}</a>
 </div>
 <div class="relative">
-<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="key">key</span>
-<input autocomplete="current-password" class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest border border-outline-variant rounded hover:border-mediterranean-cerulean focus:ring-1 focus:ring-mediterranean-cerulean focus:border-mediterranean-cerulean transition-all font-body-md placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" required type="password">
+<span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="key">key</span>
+<input autocomplete="current-password" class="w-full ps-12 pe-4 py-4 bg-surface-container-lowest border border-outline-variant rounded hover:border-mediterranean-cerulean focus:ring-1 focus:ring-mediterranean-cerulean focus:border-mediterranean-cerulean transition-all font-body-md placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" required type="password">
 </div>
 </div>
 <!-- Security Options -->
 <div class="flex items-center gap-3 py-2 bg-surface-container-low p-3 rounded">
 <input class="w-4 h-4 text-midnight-navy border-outline-variant rounded focus:ring-midnight-navy" id="mfa" name="mfa" type="checkbox" value="1">
-<label class="font-label-sm text-on-surface-variant leading-tight" for="mfa">Require biometric e-signature handshake for this session</label>
+<label class="font-label-sm text-on-surface-variant leading-tight" for="mfa">{{ _('Require biometric e-signature handshake for this session') }}</label>
 </div>
 <!-- Actions -->
 <div class="pt-4">
 <button class="w-full bg-midnight-navy text-white py-4 font-headline-md rounded hover:bg-black active:scale-[0.98] transition-all flex justify-center items-center gap-3 shadow-lg shadow-midnight-navy/10" type="submit">
-                            Secure Login
+                            {{ _('Secure Login') }}
                             <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
 </button>
 </div>
 </form>
 <!-- Footer Links -->
 <div class="mt-10 pt-8 border-t border-outline-variant">
-<p class="font-body-md text-on-surface-variant text-center mb-4">First time accessing the portal?</p>
-<a class="w-full block text-center font-label-sm font-bold text-midnight-navy border-2 border-midnight-navy px-8 py-3 rounded hover:bg-surface-variant transition-colors" href="{{ url_for('public.register') }}">Register Digital Identity</a>
+<p class="font-body-md text-on-surface-variant text-center mb-4">{{ _('First time accessing the portal?') }}</p>
+<a class="w-full block text-center font-label-sm font-bold text-midnight-navy border-2 border-midnight-navy px-8 py-3 rounded hover:bg-surface-variant transition-colors" href="{{ url_for('public.register') }}">{{ _('Register Digital Identity') }}</a>
 </div>
 </div>
 </div>
@@ -101,30 +101,30 @@
 </main>
 <!-- Footer Compliance -->
 <footer class="w-full py-lg bg-white border-t border-outline-variant z-10">
-<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-md text-center md:text-left">
+<div class="max-w-container-max mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-md text-center md:text-start">
 <div>
 <p class="font-label-sm text-on-surface-variant opacity-70">
-                © {{ year }} Republic of Tunisia — National Digital Sovereignty Department.<br/>
-                Sovereign Infrastructure Secured by Watiq Protocol.
+                © {{ year }} {{ _('Republic of Tunisia — National Digital Sovereignty Department.') }}<br/>
+                {{ _('Sovereign Infrastructure Secured by Watiq Protocol.') }}
             </p>
 </div>
 <div class="flex justify-center md:justify-end gap-6 items-center">
 <div class="flex items-center gap-1 font-label-sm text-sovereign-gold">
 <span class="material-symbols-outlined text-[18px]" data-icon="verified">verified</span>
-                STATE COMPLIANT
+                {{ _('STATE COMPLIANT') }}
             </div>
 <div class="flex items-center gap-1 font-label-sm text-on-surface-variant">
 <span class="material-symbols-outlined text-[18px]" data-icon="fingerprint">fingerprint</span>
-                BIO-PROTECTED
+                {{ _('BIO-PROTECTED') }}
             </div>
 </div>
 </div>
 </footer>
 <!-- Tunisian Sign Language (TSL) Accessibility Module (Persistent Floating) -->
-<div class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop z-50 group">
-<div class="absolute bottom-full right-0 mb-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+<div class="fixed bottom-margin-mobile end-margin-mobile md:bottom-margin-desktop md:end-margin-desktop z-50 group">
+<div class="absolute bottom-full end-0 mb-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
 <div class="bg-midnight-navy text-white px-4 py-2 rounded-lg font-label-sm whitespace-nowrap shadow-xl border border-white/10">
-            TSL ASSISTANCE ACTIVE
+            {{ _('TSL ASSISTANCE ACTIVE') }}
         </div>
 </div>
 <div class="relative w-48 h-64 md:w-56 md:h-72 rounded-xl overflow-hidden shadow-2xl border-2 border-sovereign-gold bg-primary-container transition-all duration-300 group-hover:scale-[1.02]">
@@ -135,7 +135,7 @@
 <!-- Controls Overlay -->
 <div class="absolute inset-0 flex flex-col justify-between p-4 text-white">
 <div class="flex justify-between items-start">
-<span class="bg-sovereign-gold text-white text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-tighter">Live Support</span>
+<span class="bg-sovereign-gold text-white text-[9px] px-2 py-0.5 rounded font-bold uppercase tracking-tighter">{{ _('Live Support') }}</span>
 <button class="bg-black/40 p-1 rounded hover:bg-error transition-colors" data-action="a11y-close" type="button">
 <span class="material-symbols-outlined text-[16px]" data-icon="close">close</span>
 </button>
@@ -148,7 +148,7 @@
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-1">
 <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-<span class="font-label-sm text-[10px] font-bold">TSL INTERPRETER</span>
+<span class="font-label-sm text-[10px] font-bold">{{ _('TSL INTERPRETER') }}</span>
 </div>
 <button class="hover:text-sovereign-gold" data-action="a11y-expand" type="button">
 <span class="material-symbols-outlined text-[18px]" data-icon="fullscreen">fullscreen</span>

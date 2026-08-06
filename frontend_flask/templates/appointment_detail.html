@@ -1,29 +1,29 @@
 {% extends 'base.html' %}
 {% set html_class = 'light tk-appointment-detail' %}
-{% block title %}Appointment Detail - République Tunisienne{% endblock %}
-{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-x-hidden{% endblock %}
+{% block title %}{{ _('Appointment Detail - République Tunisienne') }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-background font-body-md min-h-screen flex flex-col relative overflow-x-hidden') }}{% endblock %}
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/appointment_detail.css') }}" rel="stylesheet"/>
 {% endblock %}
 {% block content %}
 <!-- Watermark -->
 <div class="fixed inset-0 pointer-events-none z-0 flex items-center justify-center opacity-[0.03]">
-<img alt="National Emblem Watermark" class="w-[800px] h-[800px] object-contain" alt="The official national emblem of the Republic of Tunisia, depicted in a highly detailed, monochrome line-art style." src="{{ url_for('static', filename='img/img-17e685fdb788.jpg') }}"/>
+<img alt="{{ _('National Emblem Watermark') }}" class="w-[800px] h-[800px] object-contain" alt="{{ _('The official national emblem of the Republic of Tunisia, depicted in a highly detailed, monochrome line-art style.') }}" src="{{ url_for('static', filename='img/img-17e685fdb788.jpg') }}"/>
 </div>
 <!-- Main Content Canvas (No Nav Shell for focused task) -->
 <main class="flex-grow z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-24">
 <!-- Header Section -->
 <div class="mb-12">
-<a aria-label="Back to appointments" class="flex items-center text-primary hover:text-primary-container transition-colors mb-6 focus-ring rounded" href="{{ url_for('citizen.appointments') }}">
-<span class="material-symbols-outlined mr-2" data-icon="arrow_back">arrow_back</span>
-<span class="font-label-caps uppercase tracking-wider">Back to appointments</span>
+<a aria-label="{{ _('Back to appointments') }}" class="flex items-center text-primary hover:text-primary-container transition-colors mb-6 focus-ring rounded" href="{{ url_for('citizen.appointments') }}">
+<span class="material-symbols-outlined me-2" data-icon="arrow_back">arrow_back</span>
+<span class="font-label-caps uppercase tracking-wider">{{ _('Back to appointments') }}</span>
 </a>
-<a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors mb-6 ml-6 focus-ring rounded" href="{{ url_for('citizen.dashboard') }}">
+<a class="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors mb-6 ms-6 focus-ring rounded" href="{{ url_for('citizen.dashboard') }}">
 <span aria-hidden="true" class="material-symbols-outlined">dashboard</span>
-<span class="font-label-caps uppercase tracking-wider">Dashboard</span>
+<span class="font-label-caps uppercase tracking-wider">{{ _('Dashboard') }}</span>
 </a>
-<h1 class="font-headline-lg-mobile md:font-headline-lg text-primary mb-2">Appointment Confirmed</h1>
-<p class="font-body-lg text-on-surface-variant max-w-2xl">Your booking is secured. Please review the details below and present the QR code upon arrival.</p>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-primary mb-2">{{ _('Appointment Confirmed') }}</h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">{{ _('Your booking is secured. Please review the details below and present the QR code upon arrival.') }}</p>
 </div>
 <!-- Detail Grid -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
@@ -31,12 +31,12 @@
 <div class="lg:col-span-8 flex flex-col gap-gutter">
 <!-- Time & Date Card -->
 <div class="bg-surface rounded-xl p-8 border border-outline-variant shadow-sm relative overflow-hidden">
-<div class="absolute right-0 top-0 w-32 h-32 bg-surface-container-high rounded-bl-full opacity-50 -z-10"></div>
+<div class="absolute end-0 top-0 w-32 h-32 bg-surface-container-high rounded-es-full opacity-50 -z-10"></div>
 <div class="flex items-start justify-between mb-6">
 <div>
-<span class="font-label-caps text-on-surface-variant uppercase tracking-wider mb-1 block">Date &amp; Time</span>
+<span class="font-label-caps text-on-surface-variant uppercase tracking-wider mb-1 block">{{ _('Date &amp; Time') }}</span>
 <div class="font-headline-md text-primary mt-2">{{ appointment.slot_date }}{% if appointment.time_slot %} • {{ appointment.time_slot }}{% endif %}</div>
-<div class="font-headline-lg text-primary mt-1">09:30 AM</div>
+<div class="font-headline-lg text-primary mt-1">{{ _('09:30 AM') }}</div>
 </div>
 <div class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-sm flex items-center gap-2">
 <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
@@ -45,11 +45,11 @@
 </div>
 <div class="border-t border-outline-variant pt-6 mt-2 flex flex-col sm:flex-row gap-6 sm:gap-12">
 <div>
-<span class="font-label-caps text-on-surface-variant block mb-1">Service</span>
+<span class="font-label-caps text-on-surface-variant block mb-1">{{ _('Service') }}</span>
 <span class="font-body-md text-primary font-semibold">{{ appointment.service_name or "Scheduled visit" }}</span>
 </div>
 <div>
-<span class="font-label-caps text-on-surface-variant block mb-1">Reference ID</span>
+<span class="font-label-caps text-on-surface-variant block mb-1">{{ _('Reference ID') }}</span>
 <span class="font-body-md text-primary font-mono bg-surface-container-low px-2 py-1 rounded">{{ appointment.queue_number or appointment.id }}</span>
 </div>
 </div>
@@ -58,29 +58,29 @@
 <div class="bg-surface rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col md:flex-row">
 <div class="p-8 md:w-1/2 flex flex-col justify-between">
 <div>
-<span class="font-label-caps text-on-surface-variant uppercase tracking-wider mb-4 block">Location</span>
+<span class="font-label-caps text-on-surface-variant uppercase tracking-wider mb-4 block">{{ _('Location') }}</span>
 <h3 class="font-headline-md text-primary mb-2">{{ appointment.office_name or "Assigned office" }}</h3>
 <p class="font-body-md text-on-surface-variant mb-6">
-                                45 Avenue Habib Bourguiba<br/>
-                                Tunis 1001, Tunisia<br/>
-                                Guichet 4, 2nd Floor
+                                {{ _('45 Avenue Habib Bourguiba') }}<br/>
+                                {{ _('Tunis 1001, Tunisia') }}<br/>
+                                {{ _('Guichet 4, 2nd Floor') }}
                             </p>
 </div>
 <a class="text-primary border border-primary px-6 py-3 rounded-sm font-label-caps hover:bg-surface-container transition-colors w-fit flex items-center gap-2 focus-ring" href="{{ url_for('citizen.book_appointment', q=appointment.office_name or none) }}">
 <span class="material-symbols-outlined" data-icon="directions">directions</span>
-                            Get Directions
+                            {{ _('Get Directions') }}
                         </a>
 </div>
 <div class="md:w-1/2 h-64 md:h-auto bg-surface-container-high relative">
-<img alt="Map indicating bureau location" class="w-full h-full object-cover" data-location="Tunis" src="{{ url_for('static', filename='img/img-a6fda11855c4.jpg') }}"/>
+<img alt="{{ _('Map indicating bureau location') }}" class="w-full h-full object-cover" data-location="Tunis" src="{{ url_for('static', filename='img/img-a6fda11855c4.jpg') }}"/>
 </div>
 </div>
 <!-- Requirements Note -->
-<div class="bg-surface-container-low rounded-xl p-6 border-l-4 border-primary flex gap-4 items-start">
+<div class="bg-surface-container-low rounded-xl p-6 border-s-4 border-primary flex gap-4 items-start">
 <span class="material-symbols-outlined text-primary mt-1" data-icon="info">info</span>
 <div>
-<h4 class="font-body-md font-bold text-primary mb-1">Required Documents</h4>
-<p class="font-support-sm text-on-surface-variant">Please bring your current ID card, proof of address (utility bill within last 3 months), and two recent passport-sized photographs.</p>
+<h4 class="font-body-md font-bold text-primary mb-1">{{ _('Required Documents') }}</h4>
+<p class="font-support-sm text-on-surface-variant">{{ _('Please bring your current ID card, proof of address (utility bill within last 3 months), and two recent passport-sized photographs.') }}</p>
 </div>
 </div>
 </div>
@@ -90,25 +90,25 @@
 <div class="bg-primary text-on-primary rounded-xl p-8 shadow-md flex flex-col items-center text-center relative overflow-hidden">
 <div class="absolute inset-0 bg-primary-container opacity-50 z-0"></div>
 <div class="relative z-10 w-full flex flex-col items-center">
-<span class="font-label-caps text-primary-fixed uppercase tracking-wider mb-6">Check-In Pass</span>
+<span class="font-label-caps text-primary-fixed uppercase tracking-wider mb-6">{{ _('Check-In Pass') }}</span>
 <div class="bg-white p-4 rounded-lg mb-6 w-48 h-48 flex items-center justify-center">
 <!-- Placeholder for QR Code, using an abstract representation -->
-<img alt="Check-in QR Code" class="w-full h-full object-contain" alt="A stark, high-contrast black and white QR code graphic." src="{{ url_for('static', filename='img/img-ba1a22175fde.jpg') }}"/>
+<img alt="{{ _('Check-in QR Code') }}" class="w-full h-full object-contain" alt="{{ _('A stark, high-contrast black and white QR code graphic.') }}" src="{{ url_for('static', filename='img/img-ba1a22175fde.jpg') }}"/>
 </div>
-<p class="font-support-sm text-inverse-primary mb-2">Scan upon arrival at the kiosk.</p>
+<p class="font-support-sm text-inverse-primary mb-2">{{ _('Scan upon arrival at the kiosk.') }}</p>
 <p class="font-body-md font-mono text-white">{{ appointment.queue_number or appointment.id }}</p>
 </div>
 </div>
 <!-- Actions Card -->
 <div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
-<span class="font-label-caps text-on-surface-variant uppercase tracking-wider mb-2">Manage Booking</span>
+<span class="font-label-caps text-on-surface-variant uppercase tracking-wider mb-2">{{ _('Manage Booking') }}</span>
 <a class="w-full bg-surface-container-high text-primary px-4 py-3 rounded-sm font-label-caps hover:bg-surface-container-highest transition-colors flex justify-center items-center gap-2 focus-ring" href="{{ url_for('citizen.book_appointment', q=appointment.office_name or none) }}">
 <span class="material-symbols-outlined text-sm" data-icon="edit_calendar">edit_calendar</span>
-                        Reschedule Appointment
+                        {{ _('Reschedule Appointment') }}
                     </a>
 <form action="{{ url_for('citizen.cancel_appointment', appointment_id=appointment.id) }}" class="contents" data-confirm="Cancel this appointment? The slot is released immediately." method="post"><input name="csrf_token" type="hidden" value="{{ csrf_token() }}"><button class="w-full bg-surface border border-outline-variant text-error px-4 py-3 rounded-sm font-label-caps hover:bg-error-container transition-colors flex justify-center items-center gap-2 mt-2 focus-ring" type="submit">
 <span class="material-symbols-outlined text-sm" data-icon="cancel">cancel</span>
-                        Cancel Booking
+                        {{ _('Cancel Booking') }}
                     </button>
 </form>
 </div>
@@ -116,25 +116,25 @@
 </div>
 </main>
 <!-- Sign Language Module (Floating) -->
-<div class="fixed bottom-margin-mobile right-margin-mobile md:bottom-margin-desktop md:right-margin-desktop w-64 md:w-72 glass-panel rounded-xl overflow-hidden z-50 tsl-module group" id="tsl-module">
+<div class="fixed bottom-margin-mobile end-margin-mobile md:bottom-margin-desktop md:end-margin-desktop w-64 md:w-72 glass-panel rounded-xl overflow-hidden z-50 tsl-module group" id="tsl-module">
 <!-- Header / Draggable Area -->
-<div aria-label="Sign Language Interpreter Window" class="bg-primary px-4 py-2 flex justify-between items-center cursor-move">
+<div aria-label="{{ _('Sign Language Interpreter Window') }}" class="bg-primary px-4 py-2 flex justify-between items-center cursor-move">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-on-primary text-sm" data-icon="sign_language">sign_language</span>
-<span class="font-label-caps text-on-primary">TSL Interpreter</span>
+<span class="font-label-caps text-on-primary">{{ _('TSL Interpreter') }}</span>
 </div>
-<button aria-label="Close interpreter" class="text-on-primary hover:text-secondary-fixed transition-colors" data-action="a11y-close"  type="button">
+<button aria-label="{{ _('Close interpreter') }}" class="text-on-primary hover:text-secondary-fixed transition-colors" data-action="a11y-close"  type="button">
 <span class="material-symbols-outlined text-sm" data-icon="close">close</span>
 </button>
 </div>
 <!-- Video Area -->
 <div class="relative w-full aspect-video bg-surface-container-low flex items-center justify-center">
 <!-- Simulated Video Feed -->
-<img alt="Sign Language Interpreter Video Feed" class="w-full h-full object-cover" alt="A professional sign language interpreter, viewed from the chest up against a plain, soft grey background." src="{{ url_for('static', filename='img/img-84bbe221409e.jpg') }}"/>
+<img alt="{{ _('Sign Language Interpreter Video Feed') }}" class="w-full h-full object-cover" alt="{{ _('A professional sign language interpreter, viewed from the chest up against a plain, soft grey background.') }}" src="{{ url_for('static', filename='img/img-84bbe221409e.jpg') }}"/>
 <!-- Controls Overlay -->
-<div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 bg-primary/80 backdrop-blur rounded-full px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="absolute bottom-2 start-1/2 -translate-x-1/2 flex gap-2 bg-primary/80 backdrop-blur rounded-full px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
 <button class="text-white hover:text-secondary-fixed" data-action="a11y-pause"  type="button"><span class="material-symbols-outlined text-sm" data-icon="pause">pause</span></button>
-<button aria-label="Toggle captions" class="text-white hover:text-secondary-fixed focus-ring" data-action="a11y-mute" type="button"><span aria-hidden="true" class="material-symbols-outlined text-sm">subtitles</span></button>
+<button aria-label="{{ _('Toggle captions') }}" class="text-white hover:text-secondary-fixed focus-ring" data-action="a11y-mute" type="button"><span aria-hidden="true" class="material-symbols-outlined text-sm">subtitles</span></button>
 </div>
 </div>
 </div>
@@ -142,13 +142,13 @@
 <footer class="w-full py-12 bg-on-surface text-surface-container border-t border-outline font-caption text-caption z-10 relative">
 <div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
 <div class="font-label-md text-label-md text-surface-container-lowest">
-                © <span id="current-year"></span> République Tunisienne - Portail National des Services
+                © <span id="current-year"></span> {{ _('République Tunisienne - Portail National des Services') }}
             </div>
 <div class="flex gap-6">
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">Privacy Policy</a>
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Terms of Service</a>
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">Security Protocols</a>
-<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">Contact Support</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.privacy') }}">{{ _('Privacy Policy') }}</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Terms of Service') }}</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.terms') }}">{{ _('Security Protocols') }}</a>
+<a class="text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100" href="{{ url_for('public.contact') }}">{{ _('Contact Support') }}</a>
 </div>
 </div>
 </footer>

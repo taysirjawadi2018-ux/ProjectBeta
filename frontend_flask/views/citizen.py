@@ -7,6 +7,7 @@ from datetime import date, timedelta
 from typing import Any
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_babel import gettext as _, lazy_gettext as _l
 
 import api
 import auth
@@ -131,7 +132,7 @@ def submit_request() -> Any:
 
     office_service_id = request.form.get("office_service_id", type=int)
     if not office_service_id:
-        flash("Choose a service and an office before submitting.", "error")
+        flash(_("Choose a service and an office before submitting."), "error")
         return redirect(url_for("citizen.submit_request"))
 
     # Everything not a control field is application data. The API enforces the
@@ -177,7 +178,7 @@ def upload_document(request_id: int) -> Any:
     filename = (request.form.get("filename") or "").strip()
     content_type = request.form.get("content_type") or "application/octet-stream"
     if not filename:
-        flash("Choose a file to upload.", "error")
+        flash(_("Choose a file to upload."), "error")
         return redirect(url_for("citizen.request_detail", request_id=request_id))
     try:
         presigned = api.post(
@@ -256,7 +257,7 @@ def document_detail(request_id: int, document_id: int) -> Any:
     )
     document = next((d for d in documents_ if d.get("id") == document_id), None)
     if document is None:
-        flash("That document is not on this request.", "error")
+        flash(_("That document is not on this request."), "error")
         return redirect(url_for("citizen.documents"))
     return render_template(
         "document_detail.html",
@@ -292,7 +293,7 @@ def security_log() -> str:
 @login_required
 def confirm_document(document_id: int) -> Any:
     api.post(f"/api/v1/documents/{document_id}/confirm")
-    flash("Document uploaded. It will be checked by an officer.", "success")
+    flash(_("Document uploaded. It will be checked by an officer."), "success")
     return redirect(request.referrer or url_for("citizen.requests_list"))
 
 
@@ -313,7 +314,7 @@ def download_document(document_id: int) -> Any:
     presigned = api.try_get(f"/api/v1/documents/{document_id}/download", default={}) or {}
     url = presigned.get("presigned_url") if isinstance(presigned, dict) else None
     if not url:
-        flash("That document is not available for download right now.", "error")
+        flash(_("That document is not available for download right now."), "error")
         return redirect(request.referrer or url_for("citizen.requests_list"))
     return redirect(url)
 
@@ -322,7 +323,7 @@ def download_document(document_id: int) -> Any:
 @login_required
 def delete_document(document_id: int) -> Any:
     api.delete(f"/api/v1/documents/{document_id}")
-    flash("Document removed.", "info")
+    flash(_("Document removed."), "info")
     return redirect(request.referrer or url_for("citizen.requests_list"))
 
 
@@ -344,10 +345,10 @@ def book_appointment() -> Any:
         slot_id = request.form.get("slot_id", type=int)
         office_service_id = request.form.get("office_service_id", type=int)
         if not slot_id:
-            flash("Choose a time slot to continue.", "error")
+            flash(_("Choose a time slot to continue."), "error")
             return redirect(url_for("citizen.book_appointment"))
         if not office_service_id:
-            flash("Choose which service the appointment is for.", "error")
+            flash(_("Choose which service the appointment is for."), "error")
             return redirect(
                 url_for(
                     "citizen.book_appointment",
@@ -366,13 +367,12 @@ def book_appointment() -> Any:
             api.post("/api/v1/appointments", json=payload)
         except api.ApiError as exc:
             flash(
-                "That slot has just been taken. Please choose another."
-                if exc.status == 409
+                _("That slot has just been taken. Please choose another.")if exc.status == 409
                 else exc.user_message(),
                 "error",
             )
             return redirect(url_for("citizen.book_appointment"))
-        flash("Your appointment is booked.", "success")
+        flash(_("Your appointment is booked."), "success")
         return redirect(url_for("citizen.appointments"))
 
     office_id = request.args.get("office_id", type=int)
@@ -488,7 +488,7 @@ def appointment_detail(appointment_id: int) -> Any:
     items = api.items_of(api.try_get("/api/v1/appointments", default={}))
     appointment = next((a for a in items if a.get("id") == appointment_id), None)
     if appointment is None:
-        flash("That appointment is not on your record.", "error")
+        flash(_("That appointment is not on your record."), "error")
         return redirect(url_for("citizen.appointments"))
     return render_template(
         "appointment_detail.html",
@@ -501,7 +501,7 @@ def appointment_detail(appointment_id: int) -> Any:
 @login_required
 def cancel_appointment(appointment_id: int) -> Any:
     api.post(f"/api/v1/appointments/{appointment_id}/cancel")
-    flash("Appointment cancelled.", "info")
+    flash(_("Appointment cancelled."), "info")
     return redirect(url_for("citizen.appointments"))
 
 
@@ -545,7 +545,7 @@ def mark_read(notification_id: int) -> Any:
 @login_required
 def mark_all_read() -> Any:
     api.post("/api/v1/notifications/read-all")
-    flash("All notifications marked as read.", "info")
+    flash(_("All notifications marked as read."), "info")
     return redirect(url_for("citizen.notifications"))
 
 

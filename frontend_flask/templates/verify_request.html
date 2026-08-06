@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% set html_class = 'h-full' %}
 
-{% block title %}Staff Document Review - Watiq National Portal{% endblock %}
-{% block body_class %}bg-background text-on-background font-body-md min-h-screen flex h-full overflow-hidden{% endblock %}
+{% block title %}{{ _('Staff Document Review - Watiq National Portal') }}{% endblock %}
+{% block body_class %}{{ _('bg-background text-on-background font-body-md min-h-screen flex h-full overflow-hidden') }}{% endblock %}
 
 {% block page_style %}
 <link href="{{ url_for('static', filename='css/pages/verify_request.css') }}" rel="stylesheet"/>
@@ -10,50 +10,50 @@
 
 {% block content %}
 <!-- SideNavBar -->
-<nav class="hidden md:flex flex-col h-screen p-4 border-r border-surface-variant bg-surface-container w-64 flex-shrink-0 z-20">
+<nav class="hidden md:flex flex-col h-screen p-4 border-e border-surface-variant bg-surface-container w-64 flex-shrink-0 z-20">
 <div class="mb-8">
-<h1 class="text-headline-sm font-headline-sm font-bold text-on-surface">Admin Console</h1>
-<p class="text-label-sm font-label-sm text-on-surface-variant">Government Staff Portal</p>
+<h1 class="text-headline-sm font-headline-sm font-bold text-on-surface">{{ _('Admin Console') }}</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">{{ _('Government Staff Portal') }}</p>
 </div>
 <a class="bg-primary text-on-primary font-label-md text-label-md py-3 px-4 rounded-lg w-full flex items-center justify-center gap-2 mb-8 hover:bg-primary-container transition-colors" href="{{ url_for('citizen.submit_request') }}">
 <span class="material-symbols-outlined">add</span>
-            New Request
+            {{ _('New Request') }}
         </a>
 <ul class="flex flex-col gap-2 flex-grow">
 <li>
 <a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                    Dashboard
+                    {{ _('Dashboard') }}
                 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 bg-primary text-on-primary rounded-lg px-4 py-2 font-label-md text-label-md transition-all shadow-sm" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined fill" data-icon="folder_shared">folder_shared</span>
-                    Service Requests
+                    {{ _('Service Requests') }}
                 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('admin.index', tab='users') }}">
 <span class="material-symbols-outlined" data-icon="group">group</span>
-                    Citizen Registry
+                    {{ _('Citizen Registry') }}
                 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('staff.workbench') }}">
 <span class="material-symbols-outlined" data-icon="description">description</span>
-                    Documents
+                    {{ _('Documents') }}
                 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('staff.audit') }}">
 <span class="material-symbols-outlined" data-icon="analytics">analytics</span>
-                    Analytics
+                    {{ _('Analytics') }}
                 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('citizen.profile') }}">
 <span class="material-symbols-outlined" data-icon="settings">settings</span>
-                    Settings
+                    {{ _('Settings') }}
                 </a>
 </li>
 </ul>
@@ -61,13 +61,13 @@
 <li>
 <a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('public.help_page') }}">
 <span class="material-symbols-outlined" data-icon="help">help</span>
-                    Help Center
+                    {{ _('Help Center') }}
                 </a>
 </li>
 <li>
 <a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 hover:bg-surface-variant transition-all rounded-lg font-label-md text-label-md" href="{{ url_for('public.logout') }}">
 <span class="material-symbols-outlined" data-icon="logout">logout</span>
-                    Logout
+                    {{ _('Logout') }}
                 </a>
 </li>
 </ul>
@@ -82,16 +82,16 @@
 </a>
 <div>
 <div class="flex items-center gap-3">
-<h2 class="text-headline-sm font-headline-sm text-on-surface">Review Request: <span class="font-bold">{{ request_item.tracking_code if request_item else "—" }}</span></h2>
-<span class="bg-tertiary-container text-on-tertiary px-2 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">Pending Review</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">{{ _('Review Request:') }} <span class="font-bold">{{ request_item.tracking_code if request_item else "—" }}</span></h2>
+<span class="bg-tertiary-container text-on-tertiary px-2 py-1 rounded-full text-[10px] uppercase font-bold tracking-wider">{{ _('Pending Review') }}</span>
 </div>
-<p class="text-body-md font-body-md text-on-surface-variant mt-1">Applicant: {{ request_item.citizen_name or "—" }} • Submitted: {{ request_item.submitted_at }}</p>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">{{ _('Applicant:') }} {{ request_item.citizen_name or "—" }} {{ _('• Submitted:') }} {{ request_item.submitted_at }}</p>
 </div>
 </div>
 <div class="flex items-center gap-4">
 <button class="flex items-center gap-2 text-secondary font-label-md text-label-md px-4 py-2 rounded-lg border border-secondary hover:bg-secondary-fixed transition-colors" data-action="print" type="button">
 <span class="material-symbols-outlined">print</span>
-                    Print
+                    {{ _('Print') }}
                 </button>
 <div class="h-8 w-px bg-surface-variant"></div>
 {#- The mockup counted down an SLA. Nothing in the API expresses one; what a
@@ -101,11 +101,11 @@
 <span aria-hidden="true" class="material-symbols-outlined text-primary">timer</span>
 <span class="font-label-md text-label-md text-on-surface-variant">
 {%- if request_item and request_item.estimated_ready_date %}
-                            Due {{ request_item.estimated_ready_date }}
+                            {{ _('Due') }} {{ request_item.estimated_ready_date }}
 {%- elif request_item and request_item.submitted_at %}
-                            Submitted {{ request_item.submitted_at[:10] }}
+                            {{ _('Submitted') }} {{ request_item.submitted_at[:10] }}
 {%- else %}
-                            No request loaded
+                            {{ _('No request loaded') }}
 {%- endif %}
 </span>
 </div>
@@ -121,13 +121,13 @@
     stock photograph with working zoom controls would invite a reviewer to
     believe they had inspected the citizen's actual evidence, so the panel
     shows the real uploaded files and opens each one in a new tab instead. -#}
-<section class="flex-1 border-r border-surface-variant bg-surface-container-low overflow-hidden flex flex-col relative">
+<section class="flex-1 border-e border-surface-variant bg-surface-container-low overflow-hidden flex flex-col relative">
 <div class="p-4 border-b border-surface-variant bg-surface-container-lowest flex justify-between items-center">
 <h3 class="text-headline-sm font-headline-sm text-on-surface flex items-center gap-2">
 <span aria-hidden="true" class="material-symbols-outlined text-secondary">description</span>
-                        Submitted Documents
+                        {{ _('Submitted Documents') }}
                     </h3>
-<span class="text-label-sm font-label-sm text-on-surface-variant">{{ documents|length }} file{{ '' if documents|length == 1 else 's' }}</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">{{ documents|length }} {{ _('file') }}{{ '' if documents|length == 1 else 's' }}</span>
 </div>
 <div class="flex-grow overflow-auto p-6 space-y-4 bg-surface-variant/30">
 {%- for document in documents %}
@@ -139,18 +139,18 @@
 <p class="text-body-md font-body-md text-on-surface font-semibold truncate">{{ document.document_type or 'Document' }}</p>
 <p class="text-label-sm font-label-sm text-on-surface-variant mt-1">
 {{- document.mime_type or 'unknown type' -}}
-{%- if document.file_size_bytes %} • {{ (document.file_size_bytes / 1024)|round|int }} KB{% endif -%}
-{%- if document.uploaded_at %} • uploaded {{ document.uploaded_at[:10] }}{% endif -%}
+{%- if document.file_size_bytes %} • {{ (document.file_size_bytes / 1024)|round|int }} {{ _('KB') }}{% endif -%}
+{%- if document.uploaded_at %} {{ _('• uploaded') }} {{ document.uploaded_at[:10] }}{% endif -%}
                                 </p>
 <div class="flex flex-wrap items-center gap-2 mt-3">
 <a class="text-label-sm font-label-sm text-primary hover:underline inline-flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-primary-container rounded" href="{{ url_for('citizen.download_document', document_id=document.id) }}" rel="noopener" target="_blank">
 <span aria-hidden="true" class="material-symbols-outlined text-[16px]">open_in_new</span>
-                                        Open document
+                                        {{ _('Open document') }}
                                     </a>
 <form action="{{ url_for('staff.verify_document', document_id=document.id) }}" class="inline-flex gap-2" method="post">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
-<button class="px-2 py-1 rounded border border-surface-variant text-tertiary hover:bg-surface-variant hover:text-primary text-label-sm font-label-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container" name="decision" value="accept" type="submit">Accept</button>
-<button class="px-2 py-1 rounded border border-surface-variant text-tertiary hover:bg-error-container hover:text-error hover:border-error text-label-sm font-label-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container" name="decision" value="reject" type="submit">Reject</button>
+<button class="px-2 py-1 rounded border border-surface-variant text-tertiary hover:bg-surface-variant hover:text-primary text-label-sm font-label-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container" name="decision" value="accept" type="submit">{{ _('Accept') }}</button>
+<button class="px-2 py-1 rounded border border-surface-variant text-tertiary hover:bg-error-container hover:text-error hover:border-error text-label-sm font-label-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container" name="decision" value="reject" type="submit">{{ _('Reject') }}</button>
 </form>
 </div>
 </div>
@@ -160,7 +160,7 @@
 {%- else %}
 <div class="bg-surface-container-lowest border border-surface-variant rounded-lg p-8 text-center">
 <span aria-hidden="true" class="material-symbols-outlined text-on-surface-variant text-[48px]">folder_off</span>
-<p class="text-body-md font-body-md text-on-surface-variant mt-2">No documents have been uploaded for this request.</p>
+<p class="text-body-md font-body-md text-on-surface-variant mt-2">{{ _('No documents have been uploaded for this request.') }}</p>
 </div>
 {%- endfor %}
 </div>
@@ -170,7 +170,7 @@
 <div class="p-6 flex-grow">
 <h3 class="text-headline-sm font-headline-sm text-on-surface mb-6 flex items-center gap-2 border-b border-surface-variant pb-2">
 <span class="material-symbols-outlined text-secondary">fact_check</span>
-                        Data Verification
+                        {{ _('Data Verification') }}
                     </h3>
 {#- The mockup hardcoded three fields, one of them a fabricated
     "extracted from scan" mismatch. There is no extraction service, and the
@@ -187,11 +187,11 @@
 </div>
 {%- else %}
 <div class="border border-surface-variant rounded-lg p-6 bg-surface text-center">
-<p class="text-body-md font-body-md text-on-surface-variant">This request was submitted without additional form data.</p>
+<p class="text-body-md font-body-md text-on-surface-variant">{{ _('This request was submitted without additional form data.') }}</p>
 </div>
 {%- endfor %}
 <div class="group border border-secondary/30 rounded-lg p-4 bg-secondary-fixed/10 relative">
-<label class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Tracking Code</label>
+<label class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">{{ _('Tracking Code') }}</label>
 <div class="flex justify-between items-center gap-4">
 <p class="text-body-md font-body-md text-on-surface font-semibold tracking-widest">{{ request_item.tracking_code or "—" }}</p>
 <span class="bg-secondary text-on-secondary px-2 py-1 rounded text-[10px] uppercase font-bold flex items-center gap-1 shadow-sm">
@@ -209,39 +209,39 @@
 <form action="{{ url_for('staff.set_status', request_id=request_item.id) }}" method="post" data-confirm="Record this decision? The citizen will be notified.">
 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}">
 <div class="px-6 pb-6">
-<label class="text-label-md font-label-md text-on-surface block mb-2" for="reason">Reviewer Notes (recorded with the decision)</label>
-<textarea class="w-full bg-surface border border-surface-variant rounded-lg p-3 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all resize-none h-24 placeholder:text-on-surface-variant/50" id="reason" maxlength="2000" name="reason" placeholder="Add notes regarding discrepancies or required actions..."></textarea>
+<label class="text-label-md font-label-md text-on-surface block mb-2" for="reason">{{ _('Reviewer Notes (recorded with the decision)') }}</label>
+<textarea class="w-full bg-surface border border-surface-variant rounded-lg p-3 text-body-md focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all resize-none h-24 placeholder:text-on-surface-variant/50" id="reason" maxlength="2000" name="reason" placeholder="{{ _('Add notes regarding discrepancies or required actions...') }}"></textarea>
 </div>
 <div class="p-4 border-t border-surface-variant bg-surface-container-lowest flex gap-3 justify-end sticky bottom-0 z-10 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
 <button name="status_code" value="{{ status_codes.resubmission }}" type="submit" class="px-4 py-2 border border-secondary text-secondary font-label-md text-label-md rounded-lg hover:bg-secondary-fixed transition-colors bg-transparent focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2">
-                        Request Resubmission
+                        {{ _('Request Resubmission') }}
                     </button>
 <button name="status_code" value="{{ status_codes.rejected }}" type="submit" class="px-4 py-2 bg-surface text-error border border-error font-label-md text-label-md rounded-lg hover:bg-error-container transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2">
-                        Reject
+                        {{ _('Reject') }}
                     </button>
 <button name="status_code" value="{{ status_codes.approved }}" type="submit" class="px-6 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:bg-primary-container transition-all flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 hover:shadow-[0_4px_14px_rgba(184,0,13,0.3)]">
 <span class="material-symbols-outlined text-[20px]">how_to_reg</span>
-                        Approve Request
+                        {{ _('Approve Request') }}
                     </button>
 </div>
 </form>
 {% else %}
 <div class="p-4 border-t border-surface-variant bg-surface-container-lowest text-center">
-<p class="font-body-md text-body-md text-on-surface-variant">The queue is empty — there is nothing awaiting review.</p>
+<p class="font-body-md text-body-md text-on-surface-variant">{{ _('The queue is empty — there is nothing awaiting review.') }}</p>
 </div>
 {% endif %}
 </section>
 </div>
 </main>
 <!-- Persistent Accessibility Overlay (Interpreter Slot) -->
-<div class="fixed bottom-6 right-6 w-interpreter-slot-width z-50 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-surface-variant bg-surface-container-highest flex flex-col group">
+<div class="fixed bottom-6 end-6 w-interpreter-slot-width z-50 rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-surface-variant bg-surface-container-highest flex flex-col group">
 <!-- Handle/Header -->
 <div class="bg-secondary text-on-secondary p-2 flex justify-between items-center cursor-move">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-[16px]">sign_language</span>
-<span class="text-label-sm font-label-sm font-semibold">Live Interpreter</span>
+<span class="text-label-sm font-label-sm font-semibold">{{ _('Live Interpreter') }}</span>
 </div>
-<button aria-label="Minimize" class="text-on-secondary hover:text-white transition-colors opacity-0 group-hover:opacity-100 p-1" data-action="dismiss" type="button">
+<button aria-label="{{ _('Minimize') }}" class="text-on-secondary hover:text-white transition-colors opacity-0 group-hover:opacity-100 p-1" data-action="dismiss" type="button">
 <span class="material-symbols-outlined text-[16px]">close_fullscreen</span>
 </button>
 </div>
@@ -254,7 +254,7 @@
 </div>
 </div>
 <!-- Voice Narration Toggle (Top Right Fixed) -->
-<button aria-label="Enable Screen Reader Narration" class="fixed top-24 right-6 z-40 bg-surface-container-lowest border border-surface-variant text-secondary p-3 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:bg-secondary-fixed transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 flex items-center justify-center" title="Toggle Narration" data-action="a11y-narration" type="button">
+<button aria-label="{{ _('Enable Screen Reader Narration') }}" class="fixed top-24 end-6 z-40 bg-surface-container-lowest border border-surface-variant text-secondary p-3 rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.08)] hover:bg-secondary-fixed transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 flex items-center justify-center" title="{{ _('Toggle Narration') }}" data-action="a11y-narration" type="button">
 <span class="material-symbols-outlined">record_voice_over</span>
 </button>
 {% endblock %}
