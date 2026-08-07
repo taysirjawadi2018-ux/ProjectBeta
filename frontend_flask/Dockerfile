@@ -7,21 +7,35 @@
 # is a static, same-origin asset.
 #
 # Base images pinned by digest — a tag is a moving pointer, so an unpinned
-# rebuild can ship a base that was never scanned. Refresh with:
+# rebuild can ship a base that was never scanned.
+#
+# node was not pinned at all here, so every rebuild could pull a different
+# base. Pin the multi-platform INDEX digest, never a per-architecture one — see
+# the longer note in backend/Dockerfile. Refresh with:
 #   docker buildx imagetools inspect node:22-bookworm-slim
 #   docker buildx imagetools inspect python:3.12-slim-bookworm
+# and confirm BOTH linux/amd64 and linux/arm64 appear before pinning.
+#
+# Verified 2026-08-07 — node index: amd64, arm64/v8, arm/v7, ppc64le;
+# python index: amd64, arm64/v8, arm/v7, 386, ppc64le.
 
-FROM node:22-bookworm-slim AS assets
+FROM node:22-bookworm-slim@sha256:d649c27dae7ba0137b3cef5dd75baa422c08dc3d9e3fc0c23dfb172dc3cc6436 AS assets
 WORKDIR /build
+# package-lock.json is required, not optional: `npm ci` refuses to run without
+# it. The glob keeps the COPY from failing on a checkout that lacks the file,
+# so fall back to `npm install` there rather than dying with a lockfile error
+# that says nothing about what is actually missing.
 COPY package.json package-lock.json* ./
-RUN npm ci --no-audit --no-fund
+RUN if [ -f package-lock.json ]; then npm ci --no-audit --no-fund; \
+    else echo "warning: no package-lock.json, falling back to npm install" >&2; \
+         npm install --no-audit --no-fund; fi
 COPY tailwind.config.js ./
 COPY static/src ./static/src
 COPY templates ./templates
 RUN npx tailwindcss -i static/src/watiq.css -o static/css/watiq.css --minify
 
 
-FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3136726336b2a4c657aa30b AS builder
+FROM python:3.12-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2 AS builder
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 PIP_NO_CACHE_DIR=1
 WORKDIR /build
 COPY requirements.txt ./
@@ -33,9 +47,11 @@ RUN python -m venv /opt/watiq/.venv \
  && /opt/watiq/.venv/bin/pip install -r requirements.txt
 
 
-FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3136726336b2a4c657aa30b
+FROM python:3.12-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
+# -m: create the home directory — see backend/Dockerfile. Without it gunicorn
+# logs a Permission denied ERROR for $HOME on every boot of a healthy service.
 RUN groupadd -r watiq -g 10001 && \
-    useradd -r -g watiq -u 10001 -s /usr/sbin/nologin watiq
+    useradd -r -g watiq -u 10001 -m -d /home/watiq -s /usr/sbin/nologin watiq
 
 # Root-owned, non-root-executed: the process cannot rewrite its own code or
 # templates at runtime (Wazuh FIM watches this tree).
@@ -53,7 +69,8 @@ ENV PATH="/opt/watiq/.venv/bin:$PATH" \
 WORKDIR /opt/watiq
 USER 10001:10001
 EXPOSE 5000
-HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+# Grace window before the retry budget starts — see backend/Dockerfile.
+HEALTHCHECK --interval=15s --timeout=5s --retries=5 --start-period=45s \
   CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:5000/healthz')"
 
 # gthread, not the default sync worker: nearly every request is blocked on an

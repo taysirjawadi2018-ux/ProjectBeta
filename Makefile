@@ -1,11 +1,27 @@
 .ONESHELL:
-.PHONY: up down migrate test test-security test-frontend lint scan fmt dev-setup dev-keys frontend-build frontend-dev
+.PHONY: up down doctor logs ps reset migrate test test-security test-frontend lint scan fmt dev-setup dev-keys frontend-build frontend-dev
 
-up:              ## dev stack (API + BFF frontend on 127.0.0.1:5000)
-	docker compose up -d --build
+doctor:          ## check this machine can run the stack (ports, docker, .env) — changes nothing
+	bash ops/dev/preflight.sh
+
+up:              ## dev stack (API on 127.0.0.1:8000, BFF on 127.0.0.1:5000)
+	bash ops/dev/preflight.sh
+	docker compose up -d --build --remove-orphans
 
 down:
-	docker compose down
+	docker compose down --remove-orphans
+
+ps:              ## what is running, and is it healthy
+	docker compose ps
+
+logs:            ## follow everything; `make logs s=api` for one service
+	docker compose logs -f --tail=100 $(s)
+
+reset:           ## DESTRUCTIVE: delete the database and object-store volumes, rebuild from scratch
+	@printf 'This deletes the pgdata and miniodata volumes. Type "yes" to continue: '
+	@read ans; [ "$$ans" = yes ] || { echo "aborted"; exit 1; }
+	docker compose down -v --remove-orphans
+	docker compose up -d --build
 
 migrate:         ## run as the migration user, never an app role
 	docker compose exec api alembic upgrade head

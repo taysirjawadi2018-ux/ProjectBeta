@@ -1,14 +1,81 @@
 # Watiq — development stack (docker-compose.yml)
 #
-# Topology mirrors Architecture.md §5: three networks, the data tier on an
-# internal network with no published host ports. The single deviation is the
-# API port (127.0.0.1:8000) for local development; production publishes
-# nothing but 80/443 via Nginx (docker-compose.prod.yml).
+# DESIGN GOAL: `docker compose up` succeeds on a clean checkout, on any
+# machine, with no .env file, with no account on any third-party service, on
+# both amd64 and arm64. Everything the stack needs, the stack starts.
 #
-# Bootstrap order (handled by compose dependencies, all automatic):
-#   postgres (initdb: watiq_migrate + self-signed TLS) -> migrate (alembic 0001)
-#   -> roles-init (LOGIN users) -> api -> worker
+# The three rules that keep it that way:
+#
+#   1. SELF-CONTAINED. Every DSN, endpoint and credential below defaults to a
+#      service defined in this file. Nothing here reaches the public internet
+#      except the image pulls. Point WATIQ_MIGRATE_DSN / DSN_* at a remote
+#      database in .env if you want one — see "Using a remote database" below —
+#      but that is opt-in, never the default.
+#
+#   2. PINNED AND MULTI-ARCH. Images are pinned to a manifest-list ("index")
+#      digest, not a tag and not a per-architecture digest. A tag is a moving
+#      pointer, so two machines pulling on different days get different images;
+#      a per-arch digest pins the supply chain but builds only on the
+#      architecture it was captured on, failing elsewhere with "no match for
+#      platform in manifest". An index digest gives both properties. Verify one
+#      before pinning it:
+#        docker buildx imagetools inspect <image>:<tag>
+#      and confirm the Platform list contains linux/amd64 AND linux/arm64.
+#      Read the whole list — truncating that output is how a single-arch digest
+#      gets mistaken for a multi-arch one, in both directions.
+#
+#   3. FAILURES ARE LOUD AND BOUNDED. No `until` loop without a deadline. A
+#      dependency that never arrives must exit non-zero with a message naming
+#      what it waited for, because a bootstrap container stuck in `Created`
+#      forever is the single most confusing failure mode compose has.
+#
+# Bootstrap order (all automatic, expressed as compose dependencies):
+#   pg-tls-init -> postgres -> migrate -> roles-init -> api -> worker/frontend
+#
+# Using a remote database (e.g. Supabase) instead of the local Postgres:
+#   Set WATIQ_MIGRATE_DSN and the five DSN_* keys in .env. Remote Postgres
+#   requires TLS, which app/core/db.py already forces (ssl=require). Skip the
+#   local data tier with:  docker compose up api frontend worker
+#   Note that roles-init only makes sense against the local Postgres — a
+#   managed provider does not let you create the LOGIN roles it creates.
 name: watiq-dev
+
+# ---------------------------------------------------------------------------
+# Dev-only JWT signing keypair (Ed25519).
+#
+# Committed on purpose, and this is the whole reason a fresh clone boots with
+# no setup step: app/core/config.py requires jwt_private_key/jwt_public_key and
+# refuses to start without them, so an empty default would turn "clone and up"
+# into "clone, read the README, run make dev-keys, then up".
+#
+# NEVER IN PRODUCTION. docker-compose.prod.yml mounts the real keypair from
+# Docker secrets (/run/secrets), which pydantic-settings prefers over env vars.
+# Regenerate these with: make dev-keys
+# ---------------------------------------------------------------------------
+x-dev-jwt-private-key: &dev_jwt_private_key |
+  -----BEGIN PRIVATE KEY-----
+  MC4CAQAwBQYDK2VwBCIEIL0dwfzHWUBbjB7mwYQHPl9xewTCd+Sn9EVJXP4y0PQz
+  -----END PRIVATE KEY-----
+
+x-dev-jwt-public-key: &dev_jwt_public_key |
+  -----BEGIN PUBLIC KEY-----
+  MCowBQYDK2VwAyEAVPvX3nZ3IyG/SgqrRJjeWvi8btT1pFC4bMPNqMLylKE=
+  -----END PUBLIC KEY-----
+
+# Read a host-mounted script CRLF-tolerantly.
+#
+# This repo lives on an NTFS/OneDrive mount and gets cloned onto Windows. A
+# shell script carrying \r fails as `$'\r': command not found`, or worse, as a
+# shebang naming an interpreter that does not exist. .gitattributes forces LF
+# in git, but OneDrive sync, an editor, or a zip round-trip can still put CRs
+# in the working tree — and these two files are bind-mounted from that working
+# tree straight into a container, bypassing git entirely. Stripping CR at exec
+# costs nothing and removes the whole class of failure.
+#
+# bash, not sh: 01-dev-tls.sh uses `set -o pipefail`, which Debian's /bin/sh
+# (dash) does not implement. The postgres image ships bash, so use it.
+x-strip-cr: &strip_cr >-
+  tr -d '\r' < "$$0" > /tmp/script.sh && exec bash /tmp/script.sh
 
 services:
   pg-tls-init:
@@ -21,29 +88,29 @@ services:
     # "could not load server certificate file". Running it as its own step
     # makes the certificate a precondition of starting rather than a side
     # effect of first-time initialisation. The script is idempotent.
-    image: postgres:15
+    image: postgres:15@sha256:6eb0add3b77c081df18aa518ce43df58fdcc40f2e6d868a6fd08038dc7acd425
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
-    entrypoint: ["/bin/bash", "/init/01-dev-tls.sh"]
+    entrypoint: ["/bin/bash", "-c", *strip_cr, "/init/01-dev-tls.sh"]
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./ops/postgres/init/01-dev-tls.sh:/init/01-dev-tls.sh:ro
+    restart: "no"
     networks: [watiq_data]
 
   postgres:
-    image: postgres:15
+    image: postgres:15@sha256:6eb0add3b77c081df18aa518ce43df58fdcc40f2e6d868a6fd08038dc7acd425
     depends_on:
       pg-tls-init:
         condition: service_completed_successfully
     environment:
-      POSTGRES_USER: watiq_migrate
-      POSTGRES_PASSWORD: watiq-dev-migrate
-      POSTGRES_DB: watiq
+      POSTGRES_USER: ${PG_MIGRATE_USER:-watiq_migrate}
+      POSTGRES_PASSWORD: ${PG_MIGRATE_PW:-watiq-dev-migrate}
+      POSTGRES_DB: ${PG_DB:-watiq}
       PGDATA: /var/lib/postgresql/data/pgdata
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-    # TLS on because asyncpg connects with ssl='require' (Backend.md §4.1).
-    # The self-signed cert is generated by 01-dev-tls.sh into PGDATA.
+    # TLS on because app/core/db.py connects with ssl='require' unconditionally
+    # (Backend.md §4.1) — that is not a dev/prod switch, so the dev database
+    # has to speak TLS too. The self-signed cert comes from pg-tls-init.
     command: >
       postgres
       -c ssl=on
@@ -51,15 +118,24 @@ services:
       -c ssl_key_file=/var/lib/postgresql/data/certs/server.key
       -c statement_timeout=5000
       -c idle_in_transaction_session_timeout=10000
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U watiq_migrate -d watiq"]
+      test:
+        ["CMD-SHELL", "pg_isready -U ${PG_MIGRATE_USER:-watiq_migrate} -d ${PG_DB:-watiq}"]
       interval: 5s
-      timeout: 3s
+      timeout: 5s
       retries: 12
+      # initdb on a cold volume over a Windows/macOS bind-mounted VM disk is
+      # slow. Without a start_period the retry budget burns during first-time
+      # initialisation and the service is declared unhealthy before it ever had
+      # a chance to come up.
+      start_period: 60s
+    restart: unless-stopped
     networks: [watiq_data]
 
   redis:
-    image: redis:7.2
+    image: redis:7.2@sha256:6461ca4ac0c5c9d81d53685c3bf76aa81f464a9de6cf3a97b80a1da8d1bb1de4
     # Dev: plaintext on the internal network only. Production uses TLS + ACL
     # users (ops/redis/*) — see Security.md §10.2.
     command: redis-server --bind 0.0.0.0 --maxmemory 256mb --maxmemory-policy allkeys-lru
@@ -68,91 +144,140 @@ services:
       interval: 5s
       timeout: 3s
       retries: 12
+      start_period: 10s
+    restart: unless-stopped
     networks: [watiq_data]
 
   minio:
-    image: minio/minio:latest
+    # Pinned to a release, not :latest. MinIO ships frequently and has been
+    # actively removing things from this image (the community web console went
+    # away in 2025), including the bundled `mc` the old healthcheck called. With
+    # a floating tag, two machines pulling on different days get different
+    # images, one of them has no working healthcheck, and because `api` waits on
+    # `minio: service_healthy` the entire stack stalls with nothing in the logs
+    # to explain it. That is exactly the "works on my machine" failure this file
+    # is meant to be immune to.
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e
     command: server /data --console-address ":9001"
     environment:
-      MINIO_ROOT_USER: watiq-dev
-      MINIO_ROOT_PASSWORD: watiq-dev-minio
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-watiq-dev}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-watiq-dev-minio}
     volumes:
       - miniodata:/data
+    # The documented health endpoint, not `mc ready local`. It is stable across
+    # releases and needs only curl, which the pinned image has; `mc` is a
+    # bundled convenience MinIO does not promise to keep shipping.
     healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:9000/minio/health/live"]
       interval: 5s
-      timeout: 3s
+      timeout: 5s
       retries: 12
+      start_period: 20s
+    restart: unless-stopped
     networks: [watiq_data]
 
   createbuckets:
-    image: minio/mc:latest
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z@sha256:a7fe349ef4bd8521fb8497f55c6042871b2ae640607cf99d9bede5e9bdf11727
     depends_on:
       minio:
         condition: service_healthy
-    entrypoint: >
-      /bin/sh -c "
-      mc alias set local http://minio:9000 watiq-dev watiq-dev-minio &&
-      mc mb -p local/watiq-documents &&
-      mc anonymous set none local/watiq-documents &&
-      mc ilm rule add local/watiq-documents --expire-days 1 --noncurrent true 2>/dev/null || true
-      "
+    environment:
+      MC_HOST_local: http://${S3_ACCESS_KEY:-watiq-dev}:${S3_SECRET_KEY:-watiq-dev-minio}@minio:9000
+      S3_BUCKET_DOCUMENTS: ${S3_BUCKET_DOCUMENTS:-watiq-documents}
+    # MC_HOST_local (above) configures the alias through the environment, so
+    # there is no `mc alias set` to race against a not-quite-ready server.
+    #
+    # Every step is idempotent: --ignore-existing on the bucket, and `|| true`
+    # on the two policy calls. Re-running the stack must not fail here, and a
+    # lifecycle rule that already exists is not an error worth stopping for.
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        mc mb --ignore-existing "local/$${S3_BUCKET_DOCUMENTS}"
+        mc anonymous set none "local/$${S3_BUCKET_DOCUMENTS}" || true
+        mc ilm rule add "local/$${S3_BUCKET_DOCUMENTS}" --expire-days 1 --noncurrent true 2>/dev/null || true
+        echo "createbuckets: $${S3_BUCKET_DOCUMENTS} ready"
+    restart: "no"
     networks: [watiq_data]
 
   migrate:
-    build: ./backend
+    build:
+      context: ./backend
     # Runs as the migration user ONLY. It owns the schema, so it must never
     # serve traffic (Structure.md §6, Security.md §10.1).
     entrypoint: ["alembic", "upgrade", "head"]
     environment:
-      WATIQ_MIGRATE_DSN: ${WATIQ_MIGRATE_DSN:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
+      WATIQ_MIGRATE_DSN: ${WATIQ_MIGRATE_DSN:-postgresql+asyncpg://watiq_migrate:watiq-dev-migrate@postgres:5432/watiq}
     depends_on:
       postgres:
         condition: service_healthy
-    # watiq_data is internal-only (no DNS/internet); the remote Supabase DSN
-    # needs the egress route of the app tier.
+    restart: "no"
+    # watiq_app is attached only so that an operator who overrides
+    # WATIQ_MIGRATE_DSN with a remote host has an egress route; watiq_data is
+    # internal and has none. It is unused on the default local path.
     networks: [watiq_data, watiq_app]
 
   roles-init:
-    image: postgres:15
+    image: postgres:15@sha256:6eb0add3b77c081df18aa518ce43df58fdcc40f2e6d868a6fd08038dc7acd425
     environment:
-      PGUSER: watiq_migrate
-      PGPASSWORD: watiq-dev-migrate
-      CITIZEN_PW: watiq-dev-citizen
-      STAFF_PW: watiq-dev-staff
-      AUTH_PW: watiq-dev-auth
-      AUDITOR_PW: watiq-dev-auditor
-      ADMIN_PW: watiq-dev-admin
+      PGHOST: postgres
+      PGUSER: ${PG_MIGRATE_USER:-watiq_migrate}
+      PGPASSWORD: ${PG_MIGRATE_PW:-watiq-dev-migrate}
+      PGDATABASE: ${PG_DB:-watiq}
+      CITIZEN_PW: ${PG_CITIZEN_PW:-watiq-dev-citizen}
+      STAFF_PW: ${PG_STAFF_PW:-watiq-dev-staff}
+      AUTH_PW: ${PG_AUTH_PW:-watiq-dev-auth}
+      AUDITOR_PW: ${PG_AUDITOR_PW:-watiq-dev-auditor}
+      ADMIN_PW: ${PG_ADMIN_PW:-watiq-dev-admin}
     volumes:
       - ./ops/postgres/init/00-create-login-roles.sql:/init/00-create-login-roles.sql:ro
       - ./ops/postgres/init/00-create-login-roles.sh:/init/00-create-login-roles.sh:ro
-    entrypoint: ["/bin/sh", "/init/00-create-login-roles.sh"]
+    entrypoint: ["/bin/bash", "-c", *strip_cr, "/init/00-create-login-roles.sh"]
     depends_on:
+      postgres:
+        condition: service_healthy
       migrate:
         condition: service_completed_successfully
+    restart: "no"
     networks: [watiq_data]
 
   api:
-    build: ./backend
+    build:
+      context: ./backend
     environment: &api_env
-      ENV: dev
-      DEBUG: "false"
-      DSN_CITIZEN: ${DSN_CITIZEN:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
-      DSN_STAFF: ${DSN_STAFF:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
-      DSN_AUTH: ${DSN_AUTH:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
-      DSN_AUDITOR: ${DSN_AUDITOR:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
-      DSN_ADMIN: ${DSN_ADMIN:-postgresql+asyncpg://postgres.ccylihdemsoaggscehyf:06062004mohamed**ç@aws-0-eu-west-2.pooler.supabase.com:6543/postgres}
+      ENV: ${ENV:-dev}
+      DEBUG: "${DEBUG:-false}"
+      # Default to the local Postgres above, one LOGIN role per DSN (ADR-001).
+      # These roles are created by roles-init; the passwords here and the
+      # *_PW values in that service are the same knobs, so overriding one in
+      # .env moves both.
+      DSN_CITIZEN: ${DSN_CITIZEN:-postgresql+asyncpg://watiq_app_citizen:watiq-dev-citizen@postgres:5432/watiq}
+      DSN_STAFF: ${DSN_STAFF:-postgresql+asyncpg://watiq_app_staff:watiq-dev-staff@postgres:5432/watiq}
+      DSN_AUTH: ${DSN_AUTH:-postgresql+asyncpg://watiq_app_auth:watiq-dev-auth@postgres:5432/watiq}
+      DSN_AUDITOR: ${DSN_AUDITOR:-postgresql+asyncpg://watiq_app_auditor:watiq-dev-auditor@postgres:5432/watiq}
+      DSN_ADMIN: ${DSN_ADMIN:-postgresql+asyncpg://watiq_app_admin:watiq-dev-admin@postgres:5432/watiq}
       REDIS_DSN: redis://redis:6379/0
       S3_ENDPOINT: http://minio:9000
-      S3_BUCKET_DOCUMENTS: watiq-documents
-      S3_ACCESS_KEY: watiq-dev
-      S3_SECRET_KEY: watiq-dev-minio
-      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY:-}
-      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY:-}
+      S3_BUCKET_DOCUMENTS: ${S3_BUCKET_DOCUMENTS:-watiq-documents}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-watiq-dev}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-watiq-dev-minio}
+      JWT_PRIVATE_KEY: *dev_jwt_private_key
+      JWT_PUBLIC_KEY: *dev_jwt_public_key
       MFA_ENCRYPTION_KEY: ${MFA_ENCRYPTION_KEY:-JUdAr3HfPpho5uE6l5lW9m4evDaK0FIRUtH1CIvjv1c=}
       CORS_ORIGINS: ${CORS_ORIGINS:-'["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:5000", "http://127.0.0.1:5000"]'}
+    # 127.0.0.1, not 0.0.0.0. "${API_PORT}:8000" binds every interface, which
+    # put the dev API — debug settings, dev JWT key and all — on the LAN for
+    # anyone on the same café or office network. The header of this file always
+    # claimed the port was published on 127.0.0.1; now it actually is.
+    #
+    # Port already in use? Nothing here can prevent another project owning 8000
+    # on your machine, so make it a one-line fix rather than a puzzle:
+    #     echo 'API_PORT=8001' >> .env
+    # `make doctor` checks this before you hit it.
     ports:
-      - "${API_PORT:-8000}:8000"
+      - "127.0.0.1:${API_PORT:-8000}:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -164,9 +289,14 @@ services:
         condition: service_completed_successfully
       roles-init:
         condition: service_completed_successfully
+    # Bounded, not unless-stopped: a genuine misconfiguration should surface as
+    # a stopped container with a traceback, not as a crash loop that buries the
+    # traceback under a thousand restarts. Three attempts absorbs a slow-machine
+    # race without hiding a real error.
+    restart: on-failure:3
     # `watiq-api` is the name ops/nginx/nginx.conf resolves in its upstream
-    # block. Without this alias Docker DNS only publishes `api` and nginx fails
-    # to resolve its own upstream at startup.
+    # block. nginx is a prod-only service, but the alias is kept here so the two
+    # topologies do not drift.
     networks:
       watiq_edge:
         aliases: [watiq-api]
@@ -174,22 +304,26 @@ services:
       watiq_data:
 
   frontend:
-    build: ./frontend_flask
+    build:
+      context: ./frontend_flask
     # The BFF. It renders the twelve screens server-side and is the only thing
     # holding an API token — the browser never receives one (ADR-005).
     environment:
-      ENV: dev
-      DEBUG: "false"
+      ENV: ${ENV:-dev}
+      DEBUG: "${DEBUG:-false}"
       WATIQ_API_URL: http://api:8000
       REDIS_DSN: redis://session-store:6379/0
       SECRET_KEY: ${FRONTEND_SECRET_KEY:-watiq-dev-frontend-secret-change-me}
+    # Loopback only — see the note on the api service. On macOS, port 5000 is
+    # taken by AirPlay Receiver by default; FRONTEND_PORT=5001 in .env is the fix.
     ports:
-      - "${FRONTEND_PORT:-5000}:5000"
+      - "127.0.0.1:${FRONTEND_PORT:-5000}:5000"
     depends_on:
       api:
         condition: service_healthy
       session-store:
         condition: service_healthy
+    restart: on-failure:3
     # NOT on watiq_data. The BFF talks to the API over HTTP and to its own
     # session store — it has no business reaching Postgres, MinIO or the API's
     # cache, and joining the data tier just to find a Redis would hand it that
@@ -197,7 +331,7 @@ services:
     networks: [watiq_edge, watiq_app]
 
   session-store:
-    image: redis:7.2
+    image: redis:7.2@sha256:6461ca4ac0c5c9d81d53685c3bf76aa81f464a9de6cf3a97b80a1da8d1bb1de4
     # Separate from the API's Redis on purpose. It lives on the app tier rather
     # than the data tier, and holds only BFF session records: access token,
     # refresh token, expiry, CSRF token, user id and role. No citizen PII is
@@ -208,25 +342,62 @@ services:
       interval: 5s
       timeout: 3s
       retries: 12
+      start_period: 10s
+    restart: unless-stopped
     networks: [watiq_app]
 
   worker:
-    build: ./backend
-    command: ["arq", "app.workers.settings.WorkerSettings"]
+    build:
+      context: ./backend
+    # entrypoint, NOT command. The image's ENTRYPOINT is the gunicorn exec form,
+    # so a bare `command:` is appended to it as arguments — the worker silently
+    # ran `gunicorn app.main:app ... arq app.workers.settings.WorkerSettings`,
+    # i.e. a second copy of the API, and no ARQ worker existed at all. Nothing
+    # failed loudly; background jobs just never ran.
+    entrypoint: ["arq", "app.workers.settings.WorkerSettings"]
     environment: *api_env
+    # The image's HEALTHCHECK GETs http://127.0.0.1:8000/healthz, which is
+    # correct for the API and impossible for a queue consumer — the worker
+    # serves no HTTP at all, so it would sit permanently (unhealthy) in
+    # `docker compose ps` and look like the broken thing in a working stack.
+    #
+    # It only appeared to pass before because the worker was accidentally
+    # running gunicorn (see the entrypoint note above), i.e. the healthcheck
+    # was confirming the very bug it should have caught.
+    #
+    # Disabled rather than replaced: nothing depends on worker health, and the
+    # only real liveness signal arq offers is the `arq:queue:health-check` key,
+    # which it refreshes just once an hour — too stale to gate anything on.
+    # Liveness here is "the container is up"; the logs list the 12 registered
+    # job functions on startup.
+    healthcheck:
+      disable: true
     depends_on:
       api:
         condition: service_healthy
+    restart: on-failure:3
     networks: [watiq_app, watiq_data]
 
   clamav:
+    # Opt-in:  docker compose --profile av up
+    #
+    # Off by default for two reasons. It is amd64-only (no arm64 manifest), so
+    # on Apple Silicon it either refuses to start or crawls under emulation; and
+    # it wants ~1.5 GB of RAM plus a multi-minute signature download before it
+    # reports healthy. Nothing depends on it: app/core/config.py defaults
+    # clamd_host to None, which disables AV scanning outright, so the only thing
+    # running it by default bought was a slower, heavier, arch-specific stack.
+    #
+    # With the profile on, point the API at it by setting CLAMD_HOST=clamav:3310.
+    profiles: ["av"]
     image: clamav/clamav:stable
     healthcheck:
       test: ["CMD", "clamdcheck"]
       interval: 30s
       timeout: 10s
       retries: 5
-      start_period: 90s
+      start_period: 300s
+    restart: unless-stopped
     networks: [watiq_app]
 
 volumes:
@@ -234,23 +405,20 @@ volumes:
   miniodata:
 
 networks:
-  # The subnet is pinned because ops/nginx/conf.d/watiq.conf trusts
-  # X-Forwarded-For only from this range (set_real_ip_from). On a
-  # Docker-assigned subnet that match fails, nginx falls back to the proxy's own
-  # address, and every per-IP control — rate limits, CrowdSec decisions,
-  # access_log attribution — silently collapses onto one address.
+  # No pinned subnet here, deliberately.
   #
-  # 10.200.0.0/16 rather than a 172.x range on purpose: Docker auto-allocates
-  # from 172.17.0.0/12 (172.17–172.31), so pinning inside that pool means
-  # racing every other project on the host for the address — which is exactly
-  # how this collided with a frappe network the first time. 10.200/16 is
-  # outside the pool, so nothing will be auto-assigned on top of it.
-  # Change here and in ops/nginx/conf.d/watiq.conf together, or XFF stops
-  # being trusted.
-  watiq_edge:
-    ipam:
-      config:
-        - subnet: 10.200.0.0/16
+  # This used to pin watiq_edge to 10.200.0.0/16 so that nginx's
+  # set_real_ip_from could trust X-Forwarded-For from that range. But nginx is a
+  # PRODUCTION service — it exists in docker-compose.prod.yml and not in this
+  # file — so in dev the pin protected nothing and only created a way to fail:
+  # `docker compose up` aborts outright with "Pool overlaps with other one on
+  # this address space" on any host where 10.200/16 is already spoken for by a
+  # corporate VPN, a WSL bridge, or another project's network. Letting Docker
+  # allocate means dev never collides.
+  #
+  # The prod pin stays where it belongs: docker-compose.prod.yml, which must be
+  # changed together with ops/nginx/conf.d/watiq.conf or XFF stops being trusted.
+  watiq_edge: {}
   watiq_app: {}
   watiq_data:
     internal: true   # NO route to the internet from the data tier (Security.md §2)

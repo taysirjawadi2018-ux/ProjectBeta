@@ -6,11 +6,19 @@
 # unpinned rebuild can silently ship a different base than the one that was
 # scanned. The digest is what Docker enforces; the tag in front of it is there
 # so a human can see which release is pinned without resolving the hash.
-# Refresh these with:
+#
+# PIN THE INDEX DIGEST, NOT A PER-ARCHITECTURE ONE. A digest can name either a
+# multi-platform index or one architecture's manifest, and they look identical
+# in a FROM line. Pinning a per-arch digest still builds fine on the machine it
+# was captured on and fails on every other with "no match for platform in
+# manifest" — so verify the platform list before pinning, and read ALL of it:
 #   docker buildx imagetools inspect python:3.12-slim-bookworm
 #   docker buildx imagetools inspect ghcr.io/astral-sh/uv:latest   # note the version it reports
-# Resolved 2026-08-04 (uv 0.12.1).
-FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3136726336b2a4c657aa30b AS builder
+# Confirm BOTH linux/amd64 and linux/arm64 appear.
+#
+# Verified 2026-08-07 — python index: amd64, arm64/v8, arm/v7, 386, ppc64le;
+# uv 0.12.1 index: amd64, arm64. Refreshed to the current 3.12 patch release.
+FROM python:3.12-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2 AS builder
 # UV_PROJECT_ENVIRONMENT puts the venv at its FINAL path during the build.
 # Console scripts (alembic, gunicorn, arq) bake an absolute shebang pointing at
 # the interpreter that created them, so a venv built at /build/.venv and then
@@ -25,9 +33,13 @@ COPY pyproject.toml uv.lock alembic.ini ./
 RUN uv sync --frozen --no-dev --no-install-project
 COPY app ./app
 
-FROM python:3.12-slim-bookworm@sha256:d50fb7611f86d04a3b0471b46d7557818d88983fc3136726336b2a4c657aa30b
+FROM python:3.12-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
+# -m: create the home directory. Without it $HOME points at a path that does
+# not exist, and gunicorn logs "Control server error: [Errno 13] Permission
+# denied: '/home/watiq'" on every boot — a red ERROR line, on a working stack,
+# that sends you looking for a fault that is not there.
 RUN groupadd -r watiq -g 10001 && \
-  useradd -r -g watiq -u 10001 -s /usr/sbin/nologin watiq && \
+  useradd -r -g watiq -u 10001 -m -d /home/watiq -s /usr/sbin/nologin watiq && \
   apt-get update && apt-get install -y --no-install-recommends libmagic1 && \
   rm -rf /var/lib/apt/lists/*
 
@@ -40,6 +52,11 @@ ENV PATH="/opt/watiq/.venv/bin:$PATH" PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED
 WORKDIR /opt/watiq
 USER 10001:10001
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
+# start-period matters here: `frontend` and `worker` both wait on this service
+# being healthy, and without a grace window the three retries are spent while
+# the app is still importing on a cold, slow, or emulated machine — the API is
+# then marked unhealthy and everything downstream is blocked behind a service
+# that was only ever slow to start.
+HEALTHCHECK --interval=15s --timeout=5s --retries=5 --start-period=60s \
   CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/healthz')"
 ENTRYPOINT ["gunicorn","app.main:app","--worker-class","uvicorn.workers.UvicornWorker","--bind","0.0.0.0:8000"]
