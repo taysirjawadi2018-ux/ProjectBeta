@@ -32,7 +32,35 @@ RUN if [ -f package-lock.json ]; then npm ci --no-audit --no-fund; \
 COPY tailwind.config.js ./
 COPY static/src ./static/src
 COPY templates ./templates
-RUN npx tailwindcss -i static/src/watiq.css -o static/css/watiq.css --minify
+# static/js is one of the two content globs in tailwind.config.js
+# (["./templates/**/*.html", "./static/js/**/*.js"]). Leaving it out of this
+# stage does not fail the build — it makes Tailwind scan a directory that is
+# not there and silently purge every class used only from JavaScript.
+COPY static/js ./static/js
+# tools/ carries the second half of the stylesheet build. Only the two scripts
+# that step needs, so the Python tooling in that directory stays out of the
+# image.
+COPY tools/scale-text.js tools/postcss-text-scale.js ./tools/
+
+# `npm run build`, not a bare `tailwindcss` call.
+#
+# The build is TWO steps — see package.json:
+#     tailwindcss ... --minify  &&  node tools/scale-text.js static/css/watiq.css
+# and this stage used to run only the first. The second rewrites every
+# `font-size: X` in the compiled sheet into `calc(X * var(--w-text-scale))`,
+# which is the entire mechanism behind the text-size control: the .text-scale-125
+# / .text-scale-150 classes set that variable and nothing else.
+#
+# Skipping it produces a stylesheet that looks correct and is missing the one
+# thing that matters. The classes are all present, the toggle sets its cookie,
+# the server renders the class onto <html> — and no text changes size, because
+# no font-size in the sheet reads the variable those classes set.
+#
+# scale-text.js requires postcss, which is a transitive dependency of tailwindcss
+# rather than a declared one. It is pinned in package-lock.json, so `npm ci`
+# installs it deterministically; if the Tailwind major ever changes and drops it,
+# this step fails loudly here rather than shipping an unscaled sheet.
+RUN npm run build
 
 
 FROM python:3.12-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2 AS builder
@@ -45,6 +73,16 @@ COPY requirements.txt ./
 # points nowhere — failing at exec with "no such file or directory".
 RUN python -m venv /opt/watiq/.venv \
  && /opt/watiq/.venv/bin/pip install -r requirements.txt
+
+# Compile the message catalogs here rather than trusting the .mo files in the
+# build context. Flask-Babel reads only the compiled .mo; a .po edited without
+# a `pybabel compile` leaves a stale or absent .mo, and the symptom is the
+# language switcher appearing to do nothing — the locale and text direction
+# change, every string stays English. Compiling as part of the build makes the
+# committed .po the single source of truth.
+COPY translations ./translations
+RUN /opt/watiq/.venv/bin/pybabel compile -d translations -f \
+ && echo "compiled catalogs:" && find translations -name '*.mo' -printf '  %p (%s bytes)\n'
 
 
 FROM python:3.12-slim-bookworm@sha256:4766d8b510c428e595d74b9cc5bbb2fae8e26316fffb4adc89908d79aacd58a2
@@ -60,6 +98,13 @@ COPY --chown=root:root app.py config.py api.py auth.py screens.py /opt/watiq/
 COPY --chown=root:root views      /opt/watiq/views
 COPY --chown=root:root templates  /opt/watiq/templates
 COPY --chown=root:root static     /opt/watiq/static
+# The compiled message catalogs. app.py sets BABEL_TRANSLATION_DIRECTORIES to
+# the relative path "translations", which Flask-Babel resolves against the app
+# root — /opt/watiq. This directory was simply never copied, so that lookup hit
+# nothing, gettext fell back to the untranslated source strings, and picking
+# French or Arabic changed the <html> lang/dir attributes and not one word of
+# text. Taken from the builder stage so they are the freshly compiled ones.
+COPY --from=builder --chown=root:root /build/translations /opt/watiq/translations
 # The built stylesheet overwrites any stale copy from the build context.
 COPY --from=assets --chown=root:root /build/static/css/watiq.css /opt/watiq/static/css/watiq.css
 
