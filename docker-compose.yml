@@ -120,9 +120,27 @@ services:
       -c idle_in_transaction_session_timeout=10000
     volumes:
       - pgdata:/var/lib/postgresql/data
+    # -h 127.0.0.1 forces the check over TCP, and that flag is load-bearing.
+    #
+    # `pg_isready` with no -h uses the Unix socket, and during first-time setup
+    # the postgres entrypoint runs initdb and then starts a TEMPORARY server
+    # with listen_addresses='' — socket only, no TCP — to execute the init
+    # scripts. A socket check passes against that temporary server, so compose
+    # marks this service healthy while the real one has not started listening.
+    # Measured on a cold volume:
+    #     750ms  socket READY (temp init server)  -> healthy, migrate starts
+    #    1000ms  socket down  (temp server stops)
+    #    1250ms  TCP    READY (real server up)
+    # Everything gated on `postgres: service_healthy` is released into that
+    # ~500ms window and connects over TCP to a port nothing is listening on.
+    # Whether it fails is a race against how fast the other container boots, so
+    # it passes on one machine and fails on the next with no code difference —
+    # which is exactly how this reached "works on mine".
+    #
+    # Over TCP the temporary server is invisible, so healthy means reachable.
     healthcheck:
       test:
-        ["CMD-SHELL", "pg_isready -U ${PG_MIGRATE_USER:-watiq_migrate} -d ${PG_DB:-watiq}"]
+        ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ${PG_MIGRATE_USER:-watiq_migrate} -d ${PG_DB:-watiq}"]
       interval: 5s
       timeout: 5s
       retries: 12
@@ -207,7 +225,56 @@ services:
       context: ./backend
     # Runs as the migration user ONLY. It owns the schema, so it must never
     # serve traffic (Structure.md §6, Security.md §10.1).
-    entrypoint: ["alembic", "upgrade", "head"]
+    #
+    # Waits for a real TCP connection before invoking alembic. The healthcheck
+    # on `postgres` is now TCP-based and should make this redundant, but this
+    # is the container that everything else is gated behind, and alembic's own
+    # failure mode is a 40-line SQLAlchemy traceback ending in a DNS or refused
+    # -connection error — the least readable way possible to say "the database
+    # was not up yet". Belt and braces, and the message names the host it tried.
+    #
+    # It also catches the case the healthcheck cannot: a WATIQ_MIGRATE_DSN
+    # pointing somewhere remote, where "not reachable" means egress or
+    # credentials rather than start-up ordering.
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        set -e
+        python - <<'PY'
+        import os, socket, sys, time
+        from urllib.parse import urlparse
+
+        dsn = os.environ.get("WATIQ_MIGRATE_DSN", "")
+        if not dsn:
+            sys.exit("migrate: FATAL - WATIQ_MIGRATE_DSN is not set")
+        u = urlparse(dsn)
+        host, port = u.hostname, u.port or 5432
+        if not host:
+            sys.exit(
+                "migrate: FATAL - no host could be parsed out of WATIQ_MIGRATE_DSN.\n"
+                "migrate: a DSN is a URL: percent-encode any '@', ':', '/' or\n"
+                "migrate: non-ASCII character in the password, or it parses as a hostname."
+            )
+
+        timeout = int(os.environ.get("DB_WAIT_TIMEOUT", "120"))
+        deadline = time.time() + timeout
+        while True:
+            try:
+                socket.create_connection((host, port), timeout=5).close()
+                break
+            except OSError as err:
+                if time.time() >= deadline:
+                    sys.exit(
+                        f"migrate: FATAL - {host}:{port} not reachable after {timeout}s ({err}).\n"
+                        f"migrate: if the host is 'postgres', check  docker compose ps postgres\n"
+                        f"migrate: if it is remote, this container needs internet egress and\n"
+                        f"migrate: valid credentials - check  docker compose config | grep MIGRATE_DSN"
+                    )
+                time.sleep(1)
+        print(f"migrate: {host}:{port} is accepting connections", flush=True)
+        PY
+        exec alembic upgrade head
     environment:
       WATIQ_MIGRATE_DSN: ${WATIQ_MIGRATE_DSN:-postgresql+asyncpg://watiq_migrate:watiq-dev-migrate@postgres:5432/watiq}
     depends_on:
