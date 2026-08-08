@@ -33,11 +33,18 @@
 #   pg-tls-init -> postgres -> migrate -> roles-init -> api -> worker/frontend
 #
 # Using a remote database (e.g. Supabase) instead of the local Postgres:
-#   Set WATIQ_MIGRATE_DSN and the five DSN_* keys in .env. Remote Postgres
-#   requires TLS, which app/core/db.py already forces (ssl=require). Skip the
-#   local data tier with:  docker compose up api frontend worker
-#   Note that roles-init only makes sense against the local Postgres — a
-#   managed provider does not let you create the LOGIN roles it creates.
+#   Set WATIQ_MIGRATE_DSN and the five DSN_* keys in .env, then use the overlay:
+#       make up-remote
+#       docker compose -f docker-compose.yml -f docker-compose.remote-db.yml up -d
+#
+#   Use the overlay rather than just overriding the DSNs. Overriding them alone
+#   leaves roles-init polling the LOCAL Postgres for the NOLOGIN bundles that
+#   the migration just created in the REMOTE one; it waits out its deadline,
+#   fails, and takes `api` down with it because api is gated on it completing.
+#   The migration succeeds and the stack still does not come up — a confusing
+#   place to end up. docker-compose.remote-db.yml turns off the local SQL tier
+#   and the dependencies on it; read its header for the manual role-creation
+#   step a managed provider forces on you.
 name: watiq-dev
 
 # ---------------------------------------------------------------------------

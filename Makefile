@@ -1,12 +1,16 @@
 .ONESHELL:
-.PHONY: up down doctor logs ps reset migrate test test-security test-frontend lint scan fmt dev-setup dev-keys frontend-build frontend-dev
+.PHONY: up up-remote down doctor logs ps reset migrate test test-security test-frontend lint scan fmt dev-setup dev-keys frontend-build frontend-dev
 
 doctor:          ## check this machine can run the stack (ports, docker, .env) — changes nothing
 	bash ops/dev/preflight.sh
 
-up:              ## dev stack (API on 127.0.0.1:8000, BFF on 127.0.0.1:5000)
+up:              ## dev stack, self-contained (API on 127.0.0.1:8000, BFF on 127.0.0.1:5000)
 	bash ops/dev/preflight.sh
 	docker compose up -d --build --remove-orphans
+
+up-remote:       ## dev stack against a REMOTE database (Supabase/RDS); needs all six DSNs in .env
+	bash ops/dev/preflight.sh
+	docker compose -f docker-compose.yml -f docker-compose.remote-db.yml up -d --build --remove-orphans
 
 down:
 	docker compose down --remove-orphans

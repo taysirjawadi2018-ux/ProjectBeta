@@ -1,0 +1,104 @@
+# Watiq — remote-database overlay.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.remote-db.yml up -d
+#   (or simply: make up-remote)
+#
+# Use this when the database lives somewhere else — Supabase, RDS, a shared
+# staging box — instead of the Postgres docker-compose.yml starts. Redis and
+# MinIO still run locally; only the SQL tier moves.
+#
+# WHAT THIS FIXES
+#
+# The base file assumes the local Postgres, and three of its assumptions are
+# actively wrong against a remote database:
+#
+#   1. roles-init connects to the LOCAL postgres and waits for the NOLOGIN
+#      bundles that migration 0001 creates. Point the migration at Supabase and
+#      the bundles are created THERE, so the local database it polls stays
+#      empty — it waits out its full deadline, fails, and because `api` is
+#      gated on it completing, the API never starts. The migration succeeded;
+#      the stack still does not come up. That is the confusing one.
+#
+#      It is also unfixable rather than merely misconfigured: roles-init runs
+#      CREATE USER ... IN ROLE, and a managed provider does not grant you the
+#      privilege to create login roles. So this overlay does not repoint it —
+#      it switches it off, along with the local Postgres it served.
+#
+#   2. migrate and api depend on `postgres: service_healthy`, so a database
+#      nobody talks to still has to boot, pass a healthcheck, and hold a volume
+#      before anything starts.
+#
+#   3. migrate sits on watiq_data, which is `internal: true`. It has no route
+#      off the host, and reaching a remote database needs one. The base file
+#      also attaches watiq_app, which does provide egress — but relying on
+#      Docker to pick the right default route out of two attached networks is
+#      not something to leave to chance in the one service whose whole job is
+#      to reach the outside. Here it is on watiq_app alone, so there is no
+#      choice to get wrong.
+#
+# WHAT YOU STILL HAVE TO DO
+#
+#   Set all six DSNs in .env — WATIQ_MIGRATE_DSN plus the five DSN_* keys.
+#   Without them this overlay points every service at a local Postgres that is
+#   no longer running, which fails immediately and confusingly.
+#
+#   Percent-encode the password. A DSN is a URL: a raw '@', ':', '/', '?', '#'
+#   or non-ASCII character makes it parse into a different host than you meant.
+#       python -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1],safe=''))" 'your-password'
+#
+#   Supabase specifically:
+#     * The username is `postgres.<project-ref>`, not `postgres`. Getting this
+#       wrong returns "(ENOTFOUND) tenant/user <name> not found", which reads
+#       like a network error and is really a username error.
+#     * Prefer the SESSION pooler (port 5432) or a direct connection for
+#       migrations. The TRANSACTION pooler (port 6543) does not keep a session
+#       across statements, which is a poor fit for DDL.
+#     * app/db/migrations/env.py already passes statement_cache_size=0, so
+#       alembic works through pgbouncer either way. app/core/db.py does NOT —
+#       if the API reports DuplicatePreparedStatementError or "prepared
+#       statement ... does not exist", that is the transaction pooler, and the
+#       fix is either the session pooler on 5432 or the same connect_arg there.
+#
+#   The five DSN_* roles (watiq_app_citizen and friends) must already exist on
+#   the remote database with the right grants, because roles-init cannot create
+#   them for you. ops/postgres/init/00-create-login-roles.sql is the statement
+#   list to run by hand, once, as an admin.
+
+services:
+  # --- switched off: the local SQL tier ------------------------------------
+  # An unmatched profile is what keeps these out of `up`. They stay defined, so
+  # `docker compose config` still resolves and you can start one deliberately
+  # (`--profile local-db up postgres`) when you want to compare against local.
+  pg-tls-init:
+    profiles: ["local-db"]
+
+  postgres:
+    profiles: ["local-db"]
+
+  roles-init:
+    profiles: ["local-db"]
+
+  # --- repointed: everything that assumed the local SQL tier ---------------
+  # !override replaces the base list rather than merging into it. Without it,
+  # compose would union these with the base depends_on and re-introduce the
+  # postgres/roles-init dependencies this overlay exists to remove — and then
+  # fail, because those services are no longer part of the active profile set.
+  migrate:
+    depends_on: !override {}
+    networks: !override [watiq_app]
+
+  api:
+    depends_on: !override
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      createbuckets:
+        condition: service_completed_successfully
+      migrate:
+        condition: service_completed_successfully
+
+  worker:
+    depends_on: !override
+      api:
+        condition: service_healthy

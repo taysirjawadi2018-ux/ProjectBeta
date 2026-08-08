@@ -102,8 +102,12 @@ if [ ! -f .env ]; then
 else
   ok ".env present (overrides compose defaults)"
   if grep -qE '^[[:space:]]*(WATIQ_MIGRATE_DSN|DSN_[A-Z]+)=' .env; then
-    warn "DSN overrides are active in .env. The stack will NOT use its local
-        Postgres. Confirm they are what you want:
+    warn "DSN overrides are active in .env, so the stack will NOT use its local
+        Postgres. Start it with the remote-database overlay:
+          make up-remote
+        Plain \`make up\` leaves roles-init polling the local Postgres for a
+        migration that landed in the remote one; it fails and blocks api.
+        Confirm what compose resolved:
           docker compose config | grep -E 'DSN'"
     # A DSN whose password holds a raw reserved/non-ASCII character parses into
     # the wrong host and fails with a misleading error.
