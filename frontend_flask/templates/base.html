@@ -58,6 +58,7 @@
 {%- block page_style %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
+{% include 'partials/_loader.html' %}
 {% block content %}{% endblock %}
 {# Last in the body so it is last in the tab order — it is chrome, and should
    not sit between the skip target and the page's own content. #}

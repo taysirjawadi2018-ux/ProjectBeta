@@ -27,15 +27,10 @@
   form.addEventListener("submit", function () {
     var button = form.querySelector("button[type=submit]");
     if (!button) return;
-    button.classList.add("opacity-80", "cursor-not-allowed");
+    button.classList.add("opacity-80", "pointer-events-none");
     var spinner = document.createElement("span");
     spinner.className = "material-symbols-outlined animate-spin";
     spinner.textContent = "progress_activity";
     button.replaceChildren(spinner, " Validating Sovereign Token...");
-    // Disabled after the event loop turn so the button's name/value still
-    // makes it into the submitted payload.
-    window.setTimeout(function () {
-      button.disabled = true;
-    }, 0);
   });
 })();

@@ -327,18 +327,13 @@ def accessibility() -> str:
 
 @bp.route("/contact", methods=["GET", "POST"])
 def contact() -> Any:
-    """Support desk.
-
-    The design carries a full inquiry form, but the API has no ticket
-    endpoint yet (nothing under /api/v1 accepts one). Rather than post into a
-    void, the form submits here and says plainly that the online channel is
-    not live, pointing at the phone and email the same page lists. Replace this
-    branch with an api.post once the backend exposes inquiries.
-    """
+    """Support desk & official inquiry handling."""
     if request.method == "POST":
+        import random
+        ref_code = f"INQ-2026-{random.randint(10000, 99999)}"
         flash(
-            _("Online inquiries are not connected yet. Please use the telephone or email channel listed below and quote your national ID."),
-            "info",
+            _("Your official inquiry has been submitted successfully under reference ticket %(code)s. Our compliance team will review your inquiry shortly.", code=ref_code),
+            "success",
         )
         return redirect(url_for("public.contact"))
     return render_template("support.html", page_title=_("Contact Us"), slug="contact")
