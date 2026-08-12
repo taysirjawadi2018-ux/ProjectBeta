@@ -1,0 +1,371 @@
+/* Reader preferences: colour scheme and text size.
+ *
+ * Hand-written, unlike _tokens.css and _fonts.css next to it. It is imported
+ * AFTER _tokens.css on purpose: .dark and .tk-<page> are both single-class
+ * selectors on <html>, so equal specificity makes source order the tie-break,
+ * and the dark palette has to win over a page's light-mode overrides.
+ *
+ * Both preferences are rendered onto <html> by the server from a cookie (see
+ * _root_classes in app.py) rather than applied by a script on load. The CSP is
+ * `script-src 'self'`, which forbids the inline <head> script the usual
+ * no-flash trick depends on, and a deferred script would repaint the page in
+ * the wrong theme first.
+ */
+
+/* --- dark scheme ---------------------------------------------------------
+ *
+ * Almost every colour in the compiled sheet resolves to rgb(var(--w-c-*)), so
+ * rebinding the variables flips the whole site -- including the 29 templates
+ * that never wrote a dark: utility.
+ *
+ * The M3 "fixed" tokens are deliberately absent. Their contract is to hold the
+ * same value in both schemes so a component can sit on the navy brand colour
+ * in either, and the nav and footer depend on exactly that.
+ */
+.dark {
+  /* Surfaces: a dim navy-black, with the container ladder climbing towards
+   * the viewer rather than away from it as it does in light. */
+  --w-c-background: 9 14 25;
+  --w-c-surface: 9 14 25;
+  --w-c-surface-dim: 6 10 19;
+  --w-c-surface-bright: 47 58 79;
+  --w-c-surface-container-lowest: 4 8 16;
+  --w-c-surface-container-low: 17 24 38;
+  --w-c-surface-container: 21 29 45;
+  --w-c-surface-container-high: 28 38 56;
+  --w-c-surface-container-highest: 36 47 67;
+  --w-c-surface-variant: 36 47 67;
+  --w-c-surface-tint: 177 199 242;
+
+  --w-c-on-background: 225 232 244;
+  --w-c-on-surface: 225 232 244;
+  --w-c-on-surface-variant: 190 197 210;
+
+  --w-c-outline: 141 148 161;
+  --w-c-outline-variant: 62 72 90;
+
+  /* Primary inverts: the near-black brand colour becomes the light blue that
+   * light mode used for inverse-primary, and the navy container lifts enough
+   * to separate from the background it would otherwise match. */
+  --w-c-primary: 177 199 242;
+  --w-c-on-primary: 0 27 61;
+  --w-c-primary-container: 30 55 95;
+  --w-c-on-primary-container: 214 227 255;
+
+  --w-c-secondary: 233 195 73;
+  --w-c-on-secondary: 61 48 0;
+  --w-c-secondary-container: 87 69 0;
+  --w-c-on-secondary-container: 255 224 136;
+
+  --w-c-tertiary: 224 227 229;
+  --w-c-on-tertiary: 45 48 50;
+  --w-c-tertiary-container: 68 71 73;
+  --w-c-on-tertiary-container: 224 227 229;
+
+  --w-c-error: 255 180 171;
+  --w-c-on-error: 105 0 5;
+  --w-c-error-container: 147 0 10;
+  --w-c-on-error-container: 255 218 214;
+
+  /* inverse-* name the opposite scheme, so in dark they name the light one. */
+  --w-c-inverse-surface: 225 232 244;
+  --w-c-inverse-on-surface: 21 29 45;
+  --w-c-inverse-primary: 49 71 107;
+
+  /* Brand constants. These are used as literal colours (bg-institutional-navy,
+   * .gold-text), so they need a dark-scheme reading of their own: the two
+   * navies lift to stay visible against the background, and the golds lighten
+   * to keep their contrast against it. */
+  --w-c-institutional-navy: 30 55 95;
+  --w-c-midnight-navy: 30 55 95;
+  --w-c-mediterranean-cerulean: 122 180 233;
+  --w-c-accent-gold: 219 187 122;
+  --w-c-gold-muted: 122 106 74;
+  --w-c-sovereign-gold: 221 168 102;
+}
+
+/* --- dark scheme: surfaces the templates treat as "the dark one" -----------
+ *
+ * A correct M3 dark scheme lifts primary and the brand colours to pastel tones,
+ * and for text that is right — text-primary has to read against a dark surface.
+ * But this design also uses those same tokens as FILLED backgrounds carrying
+ * white or near-white labels: bg-primary appears with light text 99 times and
+ * with dark text 6. Rebinding the token would fix the fills and break the text.
+ *
+ * So the token stays light and the background utility is overridden instead.
+ * Each rule below is a pairing measured under 4.5:1 in dark mode, not a guess.
+ */
+.dark .bg-primary {
+  background-color: rgb(var(--w-c-primary-container));
+}
+
+/* The two brand colours are filled chips and buttons with white labels, so they
+ * keep a saturated tone in dark rather than the lightened one the palette gives
+ * them for use as text and rules. */
+.dark .bg-sovereign-gold {
+  background-color: rgb(122 84 30);
+}
+
+.dark .bg-mediterranean-cerulean {
+  background-color: rgb(18 76 122);
+}
+
+/* The "inverted panel" idiom: headers and footers written as bg-on-surface /
+ * bg-inverse-surface because those are the dark colours in light mode. In dark
+ * they are the LIGHT ones (luminance 0.80), so the bars turned near-white and
+ * kept their white text. */
+.dark .bg-on-surface,
+.dark .bg-on-background,
+.dark .bg-inverse-surface,
+.dark .bg-on-primary-container,
+.dark .bg-on-secondary-fixed-variant {
+  background-color: rgb(var(--w-c-surface-container));
+}
+
+/* 64 literal white cards. Untouched they stay white while on-surface text flips
+ * to near-white on top of them. Opacity variants (bg-white/10, used as glass
+ * overlays on dark chrome) compile to a different class and are left alone. */
+.dark .bg-white {
+  background-color: rgb(var(--w-c-surface-container-low));
+}
+
+/* Text tokens that stay dark and now sit on the dark fills above. */
+.dark .text-on-primary {
+  color: rgb(var(--w-c-on-primary-container));
+}
+
+.dark .text-primary-container {
+  color: rgb(var(--w-c-primary));
+}
+
+.dark .text-on-tertiary {
+  color: rgb(var(--w-c-on-tertiary-container));
+}
+
+/* Pairings fixed only where they co-occur, because each of these text tokens is
+ * legible elsewhere and a blanket override would break it. Which way a pairing
+ * has to move depends on whether the fill ended up dark or light, so the two
+ * directions are separate rules.
+ *
+ * Fills that are DARK in dark mode -> the label has to become light. */
+.dark .bg-primary-container.text-on-primary-fixed {
+  color: rgb(var(--w-c-primary-fixed));
+}
+
+.dark .bg-on-secondary-fixed-variant.text-on-secondary {
+  color: rgb(var(--w-c-on-secondary-container));
+}
+
+.dark .bg-inverse-surface.text-inverse-on-surface,
+.dark .bg-on-surface.text-surface,
+.dark .bg-on-surface.text-surface-container,
+.dark .bg-on-surface.text-surface-container-lowest,
+.dark .bg-on-background.text-surface,
+.dark .bg-on-background.text-surface-container,
+.dark .bg-on-background.text-surface-container-lowest {
+  color: rgb(var(--w-c-on-surface));
+}
+
+/* Fills that stay LIGHT because they are M3 "fixed" tokens -> the label has to
+ * stay dark, which is the opposite move. */
+.dark .bg-primary-fixed.text-primary {
+  color: rgb(var(--w-c-on-primary-fixed));
+}
+
+.dark .bg-secondary-fixed.text-secondary {
+  color: rgb(var(--w-c-on-secondary-fixed));
+}
+
+/* --- dark scheme: panels defined outside the Tailwind build ----------------
+ *
+ * static/css/pages/*.css is linked per page and never saw the token layer, so
+ * these are literal white cards. Two classes beats their one, which is what
+ * makes these win even though the page sheet loads after this one.
+ */
+.dark .glass-panel,
+.dark .glass-card,
+.dark .surface-3 {
+  background: rgba(21, 29, 45, 0.72);
+  border-color: rgb(var(--w-c-outline-variant));
+}
+
+.dark .sidebar-glass {
+  background: rgba(17, 24, 38, 0.95);
+}
+
+.dark .surface-1,
+.dark .sovereign-card,
+.dark .surface-card,
+.dark .upload-card,
+.dark .request-card,
+.dark .faq-item {
+  background-color: rgb(var(--w-c-surface-container-low));
+  color: rgb(var(--w-c-on-surface));
+}
+
+/* Three page sheets set a light body background, which would paint over the
+ * dark surface entirely. */
+.dark body {
+  background-color: rgb(var(--w-c-background));
+}
+
+.dark .navy-text,
+.dark .step-active {
+  color: rgb(var(--w-c-on-surface));
+}
+
+.dark .navy-bg {
+  background-color: rgb(var(--w-c-surface-container));
+}
+
+.dark .audit-line::before {
+  background: rgb(var(--w-c-outline-variant));
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgb(var(--w-c-surface-container));
+}
+
+/* The emblem watermarks are tuned to sit at 3% on a white field; at the same
+ * opacity on a dark one they read as grey smudges rather than as paper. */
+.dark .watermark,
+.dark .watermark-emblem,
+.dark .watermark-overlay,
+.dark .national-watermark,
+.dark .emblem-watermark {
+  opacity: 0.06;
+  filter: invert(1);
+}
+
+/* --- text size -----------------------------------------------------------
+ *
+ * tools/postcss-text-scale.js multiplies every font-size in the compiled sheet
+ * by this variable, so setting it here scales design tokens, Tailwind presets
+ * and arbitrary text-[10px] values alike. The default lives on :root so that
+ * the calc() still resolves on a page rendered before the cookie is set.
+ */
+:root {
+  --w-text-scale: 1;
+}
+
+.text-scale-125 {
+  --w-text-scale: 1.25;
+}
+
+.text-scale-150 {
+  --w-text-scale: 1.5;
+}
+
+/* The control itself is exempt. It is chrome, not content, and it has to stay
+ * a predictable size and shape — a reader who has just set 150% needs the
+ * button that undoes it to still be where it was. Resetting the variable on
+ * the form re-runs every calc() inside the subtree at 1. */
+[data-a11y-controls] {
+  --w-text-scale: 1;
+}
+
+/* Selected text size. Carrying this in CSS off aria-pressed rather than in the
+ * class list means the state is announced and painted from one source, and the
+ * enhancement in watiq.js only has to flip the attribute. Scoped to the size
+ * group so the theme button, which is also a toggle, keeps its plain styling. */
+[data-a11y-sizes] button[aria-pressed="true"] {
+  background-color: rgb(var(--w-c-primary-container));
+  color: rgb(var(--w-c-primary-fixed));
+}
+
+/* Fixed-height chrome is the one thing scaled text cannot fit inside: the
+ * headers are h-20 and the mobile bars h-16, measured in a scale where the
+ * label was 14px. Letting them grow keeps a 150% label from being clipped by
+ * the bar that contains it. */
+.text-scale-125 header,
+.text-scale-150 header {
+  height: auto;
+  min-height: 5rem;
+}
+
+/* Line-height tokens are unitless multipliers and scale with the font, but the
+ * literal Tailwind ones (leading-tight and friends) are rem and do not, which
+ * crowds the taller text. */
+.text-scale-125 body,
+.text-scale-150 body {
+  line-height: 1.6;
+}
+
+/* --- Arabic --------------------------------------------------------------
+ *
+ * Every font in the compiled sheet resolves to a --w-ff-* token, so rebinding
+ * them is enough to reface the whole site — the same trick the dark scheme
+ * plays with colour. The four Latin families carry no Arabic glyphs, so
+ * without this the locale falls through to whatever the machine happens to
+ * have installed, which font-src 'self' cannot vouch for and which renders the
+ * portal in a different voice on every device.
+ *
+ * Mono keeps JetBrains first: tracking codes and reference ids stay Latin and
+ * are meant to be read as fixed-width, with the Arabic face only as fallback.
+ */
+[lang="ar"] {
+  --w-ff-body-lg: 'Noto Sans Arabic', sans-serif;
+  --w-ff-body-md: 'Noto Sans Arabic', sans-serif;
+  --w-ff-body-sm: 'Noto Sans Arabic', sans-serif;
+  --w-ff-caption: 'Noto Sans Arabic', sans-serif;
+  --w-ff-display-lg: 'Noto Sans Arabic', sans-serif;
+  --w-ff-display-lg-mobile: 'Noto Sans Arabic', sans-serif;
+  --w-ff-headline-lg: 'Noto Sans Arabic', sans-serif;
+  --w-ff-headline-lg-mobile: 'Noto Sans Arabic', sans-serif;
+  --w-ff-headline-md: 'Noto Sans Arabic', sans-serif;
+  --w-ff-headline-sm: 'Noto Sans Arabic', sans-serif;
+  --w-ff-headline-xl: 'Noto Sans Arabic', sans-serif;
+  --w-ff-label-caps: 'Noto Sans Arabic', sans-serif;
+  --w-ff-label-md: 'Noto Sans Arabic', sans-serif;
+  --w-ff-label-sm: 'Noto Sans Arabic', sans-serif;
+  --w-ff-support-sm: 'Noto Sans Arabic', sans-serif;
+  --w-ff-mono: 'JetBrains Mono', 'Noto Sans Arabic', monospace;
+}
+
+/* Arabic sits taller than Latin at the same nominal size and its ascenders and
+ * descenders are longer, so the tight line-heights the Latin scale uses clip
+ * it. This is a type-setting correction, not a preference. */
+[lang="ar"] body {
+  line-height: 1.75;
+}
+
+/* Uppercasing is meaningless in Arabic — the script has no case — and the wide
+ * tracking these labels carry breaks the cursive joins between letters. */
+[lang="ar"] .uppercase {
+  text-transform: none;
+}
+
+[lang="ar"] .tracking-wider,
+[lang="ar"] .tracking-widest,
+[lang="ar"] .tracking-tight {
+  letter-spacing: normal;
+}
+
+/* --- RTL -----------------------------------------------------------------
+ *
+ * The layout itself needs no rules here: the 294 physical utilities were
+ * converted to logical ones (ms-/me-, ps-/pe-, start-/end-, border-s/border-e),
+ * which resolve against dir on their own. What remains is the handful of
+ * things that carry a direction CSS cannot infer.
+ */
+
+/* Glyphs that point. An arrow meaning "onward" points the other way when the
+ * reading order reverses; a clock or a spinner does not, which is why this is
+ * a list rather than a blanket rule on every icon. */
+[dir="rtl"] .material-symbols-outlined.icon-directional,
+[dir="rtl"] [data-icon-directional] {
+  transform: scaleX(-1);
+}
+
+/* Latin runs inside Arabic text — tracking codes, emails, AES-256-GCM, a URL —
+ * keep their own direction so the bidi algorithm does not reorder them. */
+[dir="rtl"] .font-label-sm,
+[dir="rtl"] [data-latin] {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* No rule is needed to move the controls: they carry start-4 and every
+ * sign-language module carries end-*, so the pair mirrors together and stays
+ * in opposite corners whichever way the page reads.
+ */

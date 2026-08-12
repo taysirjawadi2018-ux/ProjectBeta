@@ -1,0 +1,91 @@
+/*
+ * Watiq — global stylesheet source.
+ *
+ * Compiled by `npm run build` into static/css/watiq.css. This replaces three
+ * things the mockups pulled from CDNs, all of which the production CSP
+ * (default-src 'none'; script-src 'self'; style-src 'self') rejects:
+ *
+ *   1. cdn.tailwindcss.com          -> the @tailwind directives below
+ *   2. fonts.googleapis.com CSS     -> _fonts.css
+ *   3. fonts.gstatic.com woff2      -> static/fonts/*.woff2
+ *
+ * Both imports are generated; regenerate them with `npm run assets` rather
+ * than editing them:
+ *
+ *   _fonts.css   tools/vendor_assets.py  (self-hosted @font-face rules)
+ *   _tokens.css  tools/build_tokens.py   (design tokens + per-page overrides)
+ *
+ * _theme.css is hand-written and must stay imported last of the three: it
+ * rebinds the same variables for the dark scheme, and beats the per-page
+ * .tk-* overrides only by being later in source order.
+ *
+ * Rules that belong to ONE page live in static/css/pages/<page>.css and are
+ * linked from that page's `page_style` block. They are deliberately not merged
+ * in here: several pages define the same class with different values (login's
+ * .interpreter-overlay carries `display: none`, notification_center's does
+ * not), so merging them would change how those pages render.
+ */
+@import "./_fonts.css";
+@import "./_tokens.css";
+@import "./_theme.css";
+
+@tailwind base;
+@tailwind components;
+
+@layer base {
+  /* The mockups all set this on <body>; doing it here means a template that
+   * forgets the class still gets the right face rather than Times. */
+  body {
+    font-family: var(--w-ff-body-md);
+    background-color: rgb(var(--w-c-background));
+    color: rgb(var(--w-c-on-surface));
+  }
+
+  /* The Google Fonts stylesheet shipped this rule for every page that loaded
+   * it; self-hosting means declaring it once here. */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* Two mockups (the B3 application and the maintenance page) set the weight
+   * axis to 300 for a lighter institutional look. */
+  .icons-w300 .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+
+  /* Icons the mockups filled with an inline
+   * style="font-variation-settings: 'FILL' 1". An inline style attribute is
+   * blocked by style-src just as a <style> block is, so it became a class. */
+  .material-symbols-outlined.icon-filled {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .icons-w300 .material-symbols-outlined.icon-filled {
+    font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+}
+
+@tailwind utilities;
+
+@layer utilities {
+  /* Keyboard focus ring. The mockups relied on the Play CDN's default ring;
+   * spelling it out keeps focus visible against both the light surfaces and
+   * the navy staff screens. */
+  .focus-ring:focus-visible {
+    outline: 2px solid rgb(var(--w-c-secondary));
+    outline-offset: 2px;
+  }
+}
