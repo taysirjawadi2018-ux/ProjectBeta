@@ -76,12 +76,27 @@
    * .gold-text), so they need a dark-scheme reading of their own: the two
    * navies lift to stay visible against the background, and the golds lighten
    * to keep their contrast against it. */
-  --w-c-institutional-navy: 30 55 95;
-  --w-c-midnight-navy: 30 55 95;
+  --w-c-institutional-navy: 214 227 255;
+  --w-c-midnight-navy: 214 227 255;
   --w-c-mediterranean-cerulean: 122 180 233;
   --w-c-accent-gold: 219 187 122;
   --w-c-gold-muted: 122 106 74;
   --w-c-sovereign-gold: 221 168 102;
+}
+
+.dark .text-midnight-navy,
+.dark .text-institutional-navy,
+.dark .text-black,
+.dark .text-gray-900,
+.dark .text-slate-900,
+.dark .text-neutral-900,
+.dark .text-zinc-900 {
+  color: rgb(var(--w-c-on-surface));
+}
+
+.dark .bg-midnight-navy,
+.dark .bg-institutional-navy {
+  background-color: rgb(30 55 95);
 }
 
 /* --- dark scheme: surfaces the templates treat as "the dark one" -----------
@@ -289,6 +304,37 @@
 .text-scale-125 body,
 .text-scale-150 body {
   line-height: 1.6;
+}
+
+.text-scale-125 [class*="h-"],
+.text-scale-150 [class*="h-"] {
+  max-height: none;
+}
+
+.text-scale-125 .glass-card,
+.text-scale-150 .glass-card,
+.text-scale-125 .sovereign-card,
+.text-scale-150 .sovereign-card,
+.text-scale-125 .surface-card,
+.text-scale-125 .step-content,
+.text-scale-150 .step-content,
+.text-scale-125 main,
+.text-scale-150 main,
+.text-scale-125 aside,
+.text-scale-150 aside {
+  height: auto !important;
+  min-height: min-content;
+  overflow: visible;
+}
+
+.text-scale-125 button,
+.text-scale-150 button,
+.text-scale-125 input,
+.text-scale-150 input,
+.text-scale-125 select,
+.text-scale-150 select {
+  height: auto;
+  min-height: 2.75rem;
 }
 
 /* --- Arabic --------------------------------------------------------------

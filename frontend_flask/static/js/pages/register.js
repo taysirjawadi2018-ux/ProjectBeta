@@ -122,10 +122,7 @@
   });
 
   form.addEventListener("submit", function () {
-    nextButton.classList.add("opacity-80", "cursor-not-allowed");
-    window.setTimeout(function () {
-      nextButton.disabled = true;
-    }, 0);
+    nextButton.classList.add("opacity-80", "pointer-events-none");
   });
 
   render();

@@ -70,7 +70,10 @@
 </div>
 <div class="relative">
 <span class="absolute start-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="key">key</span>
-<input autocomplete="current-password" class="w-full ps-12 pe-4 py-4 bg-surface-container-lowest border border-outline-variant rounded hover:border-mediterranean-cerulean focus:ring-1 focus:ring-mediterranean-cerulean focus:border-mediterranean-cerulean transition-all font-body-md placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" required type="password">
+<input autocomplete="current-password" class="w-full ps-12 pe-12 py-4 bg-surface-container-lowest border border-outline-variant rounded hover:border-mediterranean-cerulean focus:ring-1 focus:ring-mediterranean-cerulean focus:border-mediterranean-cerulean transition-all font-body-md placeholder:text-outline-variant" id="password" name="password" placeholder="••••••••" required type="password">
+<button aria-label="{{ _('Toggle password visibility') }}" class="absolute end-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors p-1" data-action="toggle-password" data-target="password" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span>
+</button>
 </div>
 </div>
 <!-- Security Options -->
@@ -121,7 +124,7 @@
 </div>
 </footer>
 <!-- Tunisian Sign Language (TSL) Accessibility Module (Persistent Floating) -->
-<div class="fixed bottom-margin-mobile end-margin-mobile md:bottom-margin-desktop md:end-margin-desktop z-50 group">
+<div class="fixed bottom-margin-mobile end-margin-mobile md:bottom-margin-desktop md:end-margin-desktop z-50 group" data-a11y-panel>
 <div class="absolute bottom-full end-0 mb-4 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
 <div class="bg-midnight-navy text-white px-4 py-2 rounded-lg font-label-sm whitespace-nowrap shadow-xl border border-white/10">
             {{ _('TSL ASSISTANCE ACTIVE') }}

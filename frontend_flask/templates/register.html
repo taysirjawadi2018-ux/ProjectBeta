@@ -10,7 +10,7 @@
 <!-- Watermark Background -->
 <img alt="{{ _('Tunisian National Emblem Watermark') }}" class="watermark" src="{{ url_for('static', filename='img/img-2bb77862248b.jpg') }}"/>
 <!-- TSL Component -->
-<div class="tsl-video-container group cursor-pointer">
+<div class="tsl-video-container group cursor-pointer" data-a11y-panel>
 <div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-all flex items-center justify-center z-10">
 <span class="material-symbols-outlined text-white text-5xl opacity-0 group-hover:opacity-100 transition-opacity">play_circle</span>
 </div>
@@ -185,11 +185,21 @@
 <div class="max-w-xl space-y-8">
 <div class="space-y-4">
 <label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="password">{{ _('Secure Master Password') }}</label>
-<input autocomplete="new-password" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary transition-all" id="password" name="password" placeholder="••••••••••••••••" required type="password">
+<div class="relative">
+<input autocomplete="new-password" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 pe-12 focus:ring-2 focus:ring-tertiary transition-all" id="password" name="password" placeholder="••••••••••••••••" required type="password">
+<button aria-label="{{ _('Toggle password visibility') }}" class="absolute end-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors p-1" data-action="toggle-password" data-target="password" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
 </div>
 <div class="space-y-4">
 <label class="text-[11px] font-extrabold text-primary uppercase tracking-[0.15em]" for="password_confirm">{{ _('Confirm Master Password') }}</label>
-<input autocomplete="new-password" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 focus:ring-2 focus:ring-tertiary transition-all" id="password_confirm" name="password_confirm" placeholder="••••••••••••••••" required type="password">
+<div class="relative">
+<input autocomplete="new-password" class="w-full bg-surface-container border-outline-variant rounded-lg p-5 pe-12 focus:ring-2 focus:ring-tertiary transition-all" id="password_confirm" name="password_confirm" placeholder="••••••••••••••••" required type="password">
+<button aria-label="{{ _('Toggle password visibility') }}" class="absolute end-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors p-1" data-action="toggle-password" data-target="password_confirm" type="button">
+<span class="material-symbols-outlined text-xl">visibility</span>
+</button>
+</div>
 </div>
 </div>
 </div>

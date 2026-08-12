@@ -50,7 +50,8 @@
    * icon and aria-pressed always reflect reality. */
   function panelOf(trigger) {
     return (
-      byId(trigger, "data-target") || trigger.closest("[data-a11y-panel]")
+      byId(trigger, "data-target") ||
+      trigger.closest("[data-a11y-panel], .tsl-video-container, .tsl-module, .fixed.z-50, .fixed.z-\\[100\\], .fixed.bottom-margin-mobile, .fixed.bottom-4, #tsl-module")
     );
   }
 
@@ -181,7 +182,23 @@
 
     "a11y-close": function (trigger) {
       var panel = panelOf(trigger);
-      if (panel) panel.classList.add("hidden");
+      if (panel) {
+        panel.classList.add("hidden");
+        panel.style.display = "none";
+      }
+    },
+
+    "toggle-password": function (trigger) {
+      var target = byId(trigger, "data-target");
+      if (!target) {
+        var group = trigger.closest(".relative, .space-y-2, .space-y-4");
+        target = group ? group.querySelector("input[type=password], input[type=text]") : null;
+      }
+      if (!target) return;
+      var isPassword = target.type === "password";
+      target.type = isPassword ? "text" : "password";
+      trigger.setAttribute("aria-pressed", String(isPassword));
+      swapIcon(trigger, isPassword ? "visibility_off" : "visibility");
     },
 
     "a11y-expand": function (trigger) {
@@ -358,4 +375,25 @@
       link.setAttribute("aria-current", "page");
     }
   });
+
+  /* Preloader splash screen fade out */
+  function initPreloader() {
+    var loader = document.getElementById("watiq-preloader");
+    if (!loader) return;
+    var fadeOut = function () {
+      loader.classList.add("opacity-0", "pointer-events-none");
+      setTimeout(function () {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 500);
+    };
+    if (document.readyState === "complete") {
+      setTimeout(fadeOut, 300);
+    } else {
+      window.addEventListener("load", function () {
+        setTimeout(fadeOut, 300);
+      });
+      setTimeout(fadeOut, 1500);
+    }
+  }
+  initPreloader();
 })();
