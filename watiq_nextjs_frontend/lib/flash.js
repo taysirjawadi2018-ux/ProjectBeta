@@ -20,7 +20,7 @@ export async function flash(message, category = 'info') {
 }
 
 /** Read and clear. Rendering a message twice is worse than not showing it. */
-export async function consumeFlash() {
+export async function takeFlashes() {
   const session = await getSession();
   const queue = Array.isArray(session.flash) ? session.flash : [];
   if (queue.length) await setSession({ flash: [] });

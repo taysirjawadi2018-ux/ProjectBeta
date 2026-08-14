@@ -1,0 +1,56 @@
+/* Asset URLs are absolute (/img/...), not the ../../img/ that the Flask
+ * copy used. Under Next the images are served from public/ at the site
+ * root, and a relative url() here is resolved by webpack against this
+ * file's directory — which fails the build rather than 404ing at runtime.
+ */
+/* _error_maintenance.html — rules lifted from frontend/system_maintenance.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+body {
+            font-family: 'Public Sans', sans-serif;
+            background-color: #f8f9ff;
+            color: #0b1c30;
+            overflow-x: hidden;
+        }
+
+        .emblem-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(180, 190, 210, 0.2);
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.98); }
+        }
+
+        .status-pulse {
+            animation: pulse-soft 3s infinite ease-in-out;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+/* Backgrounds the mockup set with an inline style attribute, which
+ * style-src blocks. The element carries data-bgclass and the class is
+ * applied from the page script. */
+.bg-asset-error-maintenance-1 {
+  background-image: url('/img/img-0cca303e6aea.jpg');
+}
