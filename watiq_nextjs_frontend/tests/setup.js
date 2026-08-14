@@ -5,6 +5,11 @@ import { FIXTURES } from './fixtures.js';
 import { resetRequestScope } from './mocks/next-headers.js';
 import { resetRedis } from './mocks/ioredis.js';
 
+// The compose service name, matching docker-compose.yml. The MSW handler below
+// is scoped to this host, so a client that reads the wrong variable — or
+// hardcodes a default — fails loudly instead of quietly hitting nothing.
+process.env.WATIQ_API_URL = 'http://api:8000';
+
 // next/headers reads a per-request async-local scope that only the Next server
 // populates; ioredis wants a server. Both are replaced globally rather than per
 // test file, so no test can accidentally reach the real ones.
@@ -22,6 +27,11 @@ beforeEach(() => {
 // Every call the BFF makes, so a test can assert on the payload it SENT and
 // not just on the page it rendered. Several Flask write paths were posting
 // fields the API does not accept, which no render-only test can see.
+//
+// Caveat: a `server.use()` override REPLACES the catch-all below for that path,
+// so overridden calls never reach SENT. A test that needs both a custom
+// response and the payload should read the payload off the request inside its
+// own handler.
 export const SENT = [];
 
 const handler = async ({ request }) => {
