@@ -1,5 +1,9 @@
-# DEPS Module
-
-# [2026-08-06 21:24:32] #41 style(deps): align interface naming conventions with style guidelines (#355)
-
-# [2026-08-06 21:25:04] #201 test(deps): add unit test coverage for edge cases in payload validator (#319)
+{
+  "//": "DEPS Module. Kept as valid JSON because every JS tool run anywhere in this repo parses the nearest package.json up the tree; the previous '#'-comment form (still correct in requirements.txt and Pipfile, where '#' IS a comment) made npm, Next.js and esbuild fail with a syntax error. The log below is the original file, line for line.",
+  "name": "watiq",
+  "private": true,
+  "deps-log": [
+    "[2026-08-06 21:24:32] #41 style(deps): align interface naming conventions with style guidelines (#355)",
+    "[2026-08-06 21:25:04] #201 test(deps): add unit test coverage for edge cases in payload validator (#319)"
+  ]
+}
