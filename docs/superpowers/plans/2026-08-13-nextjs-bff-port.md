@@ -93,7 +93,7 @@ watiq_nextjs_frontend/
 **Interfaces:**
 - Produces: a buildable Next.js project on Tailwind 3.4.17 with `output: 'standalone'`.
 
-- [ ] **Step 1: Replace `package.json`**
+- [x] **Step 1: Replace `package.json`**
 
 ```json
 {
@@ -133,7 +133,7 @@ watiq_nextjs_frontend/
 
 Note what left: `lucide-react` (the ported templates use Material Symbols glyphs, not Lucide), `uri-js` (not used), `tailwindcss@4` + `@tailwindcss/postcss` (Constraint 3).
 
-- [ ] **Step 2: Create `next.config.mjs`**
+- [x] **Step 2: Create `next.config.mjs`**
 
 ```js
 /** @type {import('next').NextConfig} */
@@ -152,7 +152,7 @@ const nextConfig = {
 export default nextConfig;
 ```
 
-- [ ] **Step 3: Create `.gitignore`**
+- [x] **Step 3: Create `.gitignore`**
 
 ```
 node_modules/
@@ -162,12 +162,12 @@ out/
 *.tsbuildinfo
 ```
 
-- [ ] **Step 4: Install and verify the build runs**
+- [x] **Step 4: Install and verify the build runs**
 
 Run: `cd watiq_nextjs_frontend && npm install --no-audit --no-fund && npm run build`
 Expected: build completes. It may warn about the missing PostCSS config — Task 2 fixes that.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/package.json watiq_nextjs_frontend/package-lock.json \
@@ -189,14 +189,14 @@ git commit -m "build(frontend): pin next.js BFF dependency set on tailwind 3.4"
 **Interfaces:**
 - Produces: a compiled same-origin stylesheet where every `font-size` reads `var(--w-text-scale)`.
 
-- [ ] **Step 1: Copy the PostCSS plugin**
+- [x] **Step 1: Copy the PostCSS plugin**
 
 ```bash
 mkdir -p watiq_nextjs_frontend/tools
 cp frontend_flask/tools/postcss-text-scale.js watiq_nextjs_frontend/tools/
 ```
 
-- [ ] **Step 2: Create `postcss.config.js`**
+- [x] **Step 2: Create `postcss.config.js`**
 
 ```js
 // The text-scale plugin MUST run after tailwindcss, so it sees the generated
@@ -212,7 +212,7 @@ module.exports = {
 };
 ```
 
-- [ ] **Step 3: Update the Tailwind content globs**
+- [x] **Step 3: Update the Tailwind content globs**
 
 In `tailwind.config.js`, replace the `content` array with:
 
@@ -225,7 +225,7 @@ In `tailwind.config.js`, replace the `content` array with:
 
 Leave `theme`, `plugins` and `darkMode: 'class'` exactly as they are — they carry the design tokens.
 
-- [ ] **Step 4: Fix `app/globals.css`**
+- [x] **Step 4: Fix `app/globals.css`**
 
 Replace the first two lines (`@import "../styles/watiq.css";` / `@tailwind utilities;`) with the full v3 directive set, keeping the rest of the file:
 
@@ -241,16 +241,16 @@ Replace the first two lines (`@import "../styles/watiq.css";` / `@tailwind utili
 
 `_theme.css` stays imported last of the three — it rebinds the same variables for dark mode and only beats the per-page `.tk-*` overrides by source order.
 
-- [ ] **Step 5: Remove the CSP-violating font link**
+- [x] **Step 5: Remove the CSP-violating font link**
 
 In `app/layout.js`, delete the entire `<link rel="stylesheet" href="https://fonts.googleapis.com/...">` element. The Material Symbols glyphs are already served from `public/fonts/material-symbols-outlined.woff2` via `_fonts.css`.
 
-- [ ] **Step 6: Verify the pipeline**
+- [x] **Step 6: Verify the pipeline**
 
 Run: `cd watiq_nextjs_frontend && npm run build && grep -c "var(--w-text-scale)" .next/static/css/*.css`
 Expected: a non-zero count. Zero means the plugin did not run — do not proceed.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/postcss.config.js watiq_nextjs_frontend/tools/ \
@@ -272,7 +272,7 @@ git commit -m "build(frontend): compile design tokens with the text-scale postcs
 
 **Why this task exists:** Next.js emits inline `<script>` tags for hydration and the RSC payload. The current CSP is `script-src 'self'` with no `'unsafe-inline'` and no nonce, so **the app will render a blank page behind nginx** without this. Flask had no inline scripts, so this problem is new.
 
-- [ ] **Step 1: Create `middleware.js`**
+- [x] **Step 1: Create `middleware.js`**
 
 ```js
 import { NextResponse } from 'next/server';
@@ -316,7 +316,7 @@ export const config = {
 };
 ```
 
-- [ ] **Step 2: Stop nginx from setting a conflicting CSP**
+- [x] **Step 2: Stop nginx from setting a conflicting CSP**
 
 In `ops/nginx/snippets/security-headers.conf`, replace the `Content-Security-Policy` line (line 20) with a comment explaining the move, keeping every other header untouched:
 
@@ -329,12 +329,12 @@ In `ops/nginx/snippets/security-headers.conf`, replace the `Content-Security-Pol
 # app sends.
 ```
 
-- [ ] **Step 3: Verify both header sets**
+- [x] **Step 3: Verify both header sets**
 
 Run: `cd watiq_nextjs_frontend && npm run build && npm start &` then `curl -sI localhost:3000/ | grep -i content-security-policy`
 Expected: one CSP header containing `'nonce-` .
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/middleware.js ops/nginx/snippets/security-headers.conf
@@ -355,7 +355,7 @@ git commit -m "feat(frontend): per-request CSP nonce for next.js hydration scrip
 
 This is the direct analogue of `frontend_flask/tests/conftest.py`: the API is stubbed at the HTTP boundary so tests exercise the real client, the real session handling and the real components — everything except the network hop.
 
-- [ ] **Step 1: Create `vitest.config.js`**
+- [x] **Step 1: Create `vitest.config.js`**
 
 ```js
 import { defineConfig } from 'vitest/config';
@@ -373,11 +373,11 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 2: Port the fixtures**
+- [x] **Step 2: Port the fixtures**
 
 Create `tests/fixtures.js` by transcribing the `FIXTURES` dict from `frontend_flask/tests/conftest.py:28-200` into a JS object with the identical keys (`"GET /api/v1/auth/me"` etc.) and identical payloads. Do not paraphrase the payloads — the comments in that file record which field names the API actually uses (`unread_count` not `count`; `role_code`; office_service `id` vs `catalog_id`), and those distinctions are what the contract tests catch.
 
-- [ ] **Step 3: Create `tests/setup.js`**
+- [x] **Step 3: Create `tests/setup.js`**
 
 ```js
 import { afterAll, afterEach, beforeAll } from 'vitest';
@@ -421,7 +421,7 @@ afterEach(() => { server.resetHandlers(); SENT.length = 0; });
 afterAll(() => server.close());
 ```
 
-- [ ] **Step 4: Verify the harness boots**
+- [x] **Step 4: Verify the harness boots**
 
 Write `tests/harness.test.js`:
 
@@ -439,12 +439,91 @@ test('msw intercepts and records', async () => {
 Run: `npm test`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/vitest.config.js watiq_nextjs_frontend/tests/
 git commit -m "test(frontend): msw-backed harness mirroring the flask conftest"
 ```
+
+---
+
+## Phase 0 — as built (2026-08-14)
+
+Complete. `6a38b07`, `2119ca3`, `acfa20e`, `f2e2361`, `9bcb402`.
+
+Where the result differs from the steps above, and why:
+
+1. **`app/globals.css` only imports `styles/watiq.css`** rather than repeating
+   the `@tailwind` directives. `watiq.css` was already the complete v3 source —
+   the `_fonts`/`_tokens`/`_theme` imports, all three layers, the Material
+   Symbols base layer and the focus ring. Following Step 4 literally would have
+   emitted the whole utility layer twice and re-declared
+   `.material-symbols-outlined` outside `@layer base`.
+
+2. **`postcss.config.js` names plugins as strings.** Next.js rejects
+   `require()`d instances with "Malformed PostCSS Configuration".
+
+3. **The text-scale verification initially reported a false negative.** The
+   first `npm run build` after adding the plugin reused a webpack filesystem
+   cache from a build that predated `postcss.config.js`, so the emitted CSS had
+   no `calc()` at all. `rm -rf .next` before verifying a PostCSS change; the
+   check is only meaningful on a cold build.
+
+4. **`middleware.js` sets the CSP on the forwarded REQUEST headers too**, not
+   only `x-nonce` and the response. Next extracts the nonce for its own script
+   tags by parsing the request CSP; `x-nonce` alone yields a correct-looking
+   response header and zero nonced scripts.
+
+5. **`export const dynamic = 'force-dynamic'` in the root layout.** Not in the
+   plan, and load-bearing: a statically prerendered page keeps build-time HTML
+   whose scripts predate the nonce, so the browser refuses all of them.
+   Measured before the fix — `/` and `/terms` shipped 0 of 16 tags nonced while
+   the dynamic `/documents/[id]` shipped 16 of 16. All 22 routes now build as
+   `ƒ`. Anything that reintroduces static rendering reintroduces a blank page.
+
+6. **nginx keeps a CSP for the API instead of dropping the header.** Step 2
+   would have left `/api/` uncovered. A `map` on
+   `$upstream_http_content_security_policy` resolves to the static policy when
+   the upstream sent none and to the empty string when it did (nginx skips
+   `add_header` on an empty value), so each response carries exactly one CSP.
+   Verified against a stock nginx with stub upstreams.
+
+7. **The root `package.json` had to be repaired first** (`f2e2361`). It was a
+   `#`-commented "DEPS Module" placeholder, i.e. not JSON, and esbuild parses
+   the nearest ancestor `package.json` before loading any config — so
+   `npm test` could not start from anywhere in the repo. `"type": "commonjs"`
+   in the frontend package does not stop the walk-up; the file itself had to
+   become valid JSON. Content preserved line for line under `deps-log`.
+
+8. **`vitest.config.js` pins `css: { postcss: {} }`.** Vite rejects the plugin
+   names Next requires and Next rejects the instances Vite wants, so one
+   `postcss.config.js` cannot serve both. The tests compile no CSS.
+
+9. **The session helpers named in Task 4's Interfaces (`citizenSession()` /
+   `adminSession()`) are deferred to Task 5**, where `lib/session.js` lands.
+   They cannot be written against a session store that does not exist yet.
+
+### Still blocking Task 11: route path reconciliation
+
+Now measurable on both sides. Flask exposes ~58 browser routes; the mockup
+builds 22, under names it invented:
+
+| Flask (tests + nginx rate-limit rules key on these) | Mockup as built |
+| --- | --- |
+| `/requests/new` | `/requests/submit` |
+| `/login/mfa` | `/mfa` |
+| `/staff` | `/staff/workbench` |
+| `/staff/review/<id>` | `/staff/verify/[id]` |
+| `/help` | `/faq` |
+| `/legal/terms` | `/terms` |
+| `/contact` | `/support` |
+| `/requests/<id>/documents/new` | `/documents/upload` |
+
+Default assumption unless told otherwise: **keep Flask's paths and move the
+mockup files.** `ops/nginx/conf.d/watiq.conf` pins `location = /login` to the
+`login` rate-limit zone by exact path, and the whole ported test suite keys on
+the Flask inventory.
 
 ---
 
