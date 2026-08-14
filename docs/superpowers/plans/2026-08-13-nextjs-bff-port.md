@@ -544,7 +544,7 @@ the Flask inventory.
 
 Port of `frontend_flask/config.py:26-46` + Flask-Session. Cookie name `wtq_session`, Redis prefix `wtq:fe:sess:` — **keep both identical to Flask** so an in-flight deployment does not have to invalidate live sessions.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 import { expect, test } from 'vitest';
@@ -564,12 +564,12 @@ test('a session round-trips without exposing tokens to the cookie', async () => 
 });
 ```
 
-- [ ] **Step 2: Run it and confirm it fails**
+- [x] **Step 2: Run it and confirm it fails**
 
 Run: `npm test -- session`
 Expected: FAIL — cannot resolve `@/lib/session.js`.
 
-- [ ] **Step 3: Implement**
+- [x] **Step 3: Implement**
 
 ```js
 import 'server-only';
@@ -643,12 +643,12 @@ export async function clearSession() {
 }
 ```
 
-- [ ] **Step 4: Run the test**
+- [x] **Step 4: Run the test**
 
 Run: `npm test -- session`
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/lib/session.js watiq_nextjs_frontend/tests/session.test.js
@@ -679,7 +679,7 @@ Port of `frontend_flask/api.py`. **Three details are load-bearing and must survi
 2. `userMessage()` returns generic copy per status. 404 in particular must stay opaque — Security.md §7.3 makes BOLA return 404 rather than 403 precisely so it is not an existence oracle, and echoing the API's detail would hand that back.
 3. `itemsOf` normalises bare lists and `{items,total}` envelopes. The API returns both shapes; a component that iterates the wrong one fails obscurely on a page that merely had no data.
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```js
 import { expect, test } from 'vitest';
@@ -714,12 +714,12 @@ test('displayName resolves both profile shapes', () => {
 });
 ```
 
-- [ ] **Step 2: Run and confirm failure**
+- [x] **Step 2: Run and confirm failure**
 
 Run: `npm test -- api`
 Expected: FAIL — module not found.
 
-- [ ] **Step 3: Implement `lib/format.js`**
+- [x] **Step 3: Implement `lib/format.js`**
 
 ```js
 // The two /me endpoints disagree: GET /auth/me returns first_name/last_name,
@@ -750,7 +750,7 @@ export function totalOf(data, fallback = 0) {
 }
 ```
 
-- [ ] **Step 4: Implement `lib/api.js`**
+- [x] **Step 4: Implement `lib/api.js`**
 
 ```js
 import 'server-only';
@@ -888,12 +888,12 @@ export async function tryGet(path, fallback = null, opts) {
 }
 ```
 
-- [ ] **Step 5: Run the tests**
+- [x] **Step 5: Run the tests**
 
 Run: `npm test -- api`
 Expected: PASS.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/lib/api.js watiq_nextjs_frontend/lib/format.js \
@@ -925,7 +925,7 @@ Port of `frontend_flask/auth.py`. Guard semantics, verbatim:
 - authenticated but not staff, on a staff route → **`notFound()`**, not 403 (Constraint 8)
 - staff but `role` not in `('admin','director')`, on an admin route → `notFound()`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```js
 import { expect, test, vi } from 'vitest';
@@ -964,12 +964,12 @@ test('logout revokes upstream then clears regardless', async () => {
 });
 ```
 
-- [ ] **Step 2: Run and confirm failure**
+- [x] **Step 2: Run and confirm failure**
 
 Run: `npm test -- auth`
 Expected: FAIL — modules not found.
 
-- [ ] **Step 3: Implement `lib/auth.js`**
+- [x] **Step 3: Implement `lib/auth.js`**
 
 ```js
 import 'server-only';
@@ -1095,7 +1095,7 @@ export async function currentProfile() {
 }
 ```
 
-- [ ] **Step 4: Implement `lib/guards.js`**
+- [x] **Step 4: Implement `lib/guards.js`**
 
 ```js
 import 'server-only';
@@ -1125,7 +1125,7 @@ export async function requireAdmin(nextPath) {
 }
 ```
 
-- [ ] **Step 5: Implement `lib/csrf.js`**
+- [x] **Step 5: Implement `lib/csrf.js`**
 
 Next.js checks Origin/Host on Server Actions, but the Flask app carried an explicit token and the threat model documents it (`config.py:48-52` — the BFF authenticates form POSTs with a cookie, so it needs its own CSRF defence). Keep the explicit token; defence in depth costs nothing here.
 
@@ -1152,12 +1152,12 @@ export async function assertCsrf(formData) {
 }
 ```
 
-- [ ] **Step 6: Run the tests**
+- [x] **Step 6: Run the tests**
 
 Run: `npm test -- auth`
 Expected: PASS.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/lib/auth.js watiq_nextjs_frontend/lib/guards.js \
@@ -1188,7 +1188,7 @@ Port of `frontend_flask/app.py:196-266` (`_locale`, `_preferences`, `LANGUAGES`,
 
 Error mapping, from `app.py:280-330`: **403 and 429 render the dedicated blocked screen** (it shows the session reference and timestamp someone quotes when asking for a review); 401 clears the session; 404/409 and everything else use the generic error screen; an unreachable API is 503.
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 import { expect, test } from 'vitest';
@@ -1215,12 +1215,12 @@ test('arabic is rtl and is offered last', async () => {
 });
 ```
 
-- [ ] **Step 2: Run and confirm failure**
+- [x] **Step 2: Run and confirm failure**
 
 Run: `npm test -- prefs`
 Expected: FAIL.
 
-- [ ] **Step 3: Implement `lib/prefs.js`**
+- [x] **Step 3: Implement `lib/prefs.js`**
 
 ```js
 import 'server-only';
@@ -1277,7 +1277,7 @@ export async function readPrefs() {
 }
 ```
 
-- [ ] **Step 4: Implement `lib/flash.js`**
+- [x] **Step 4: Implement `lib/flash.js`**
 
 ```js
 import 'server-only';
@@ -1296,11 +1296,11 @@ export async function takeFlashes() {
 }
 ```
 
-- [ ] **Step 5: Implement `app/api/preferences/route.js`**
+- [x] **Step 5: Implement `app/api/preferences/route.js`**
 
 Port `views/public.py:403-452` exactly: accept `theme`, `text_scale` and `lang` from the posted form, validate each against its closed set, set the cookie, and redirect back to the `next` field (same-origin only). It must work without JavaScript, so it responds to a form POST with a 303 redirect rather than JSON.
 
-- [ ] **Step 6: Implement the three error screens**
+- [x] **Step 6: Implement the three error screens**
 
 - `app/error.js` — the generic screen, ported from `templates/error.html`, taking `code`, `title`, `message`.
 - `app/not-found.js` — renders `templates/error.html` with 404 / "That page does not exist, or you do not have access to it."
@@ -1308,12 +1308,12 @@ Port `views/public.py:403-452` exactly: accept `theme`, `text_scale` and `lang` 
 
 Titles, verbatim from `app.py:_TITLES`: 401 "Session expired", 403 "Access Restricted", 404 "Page not found", 409 "Conflict", 429 "Too many requests", 502 "Service error".
 
-- [ ] **Step 7: Run the tests**
+- [x] **Step 7: Run the tests**
 
 Run: `npm test -- prefs`
 Expected: PASS.
 
-- [ ] **Step 8: Commit**
+- [x] **Step 8: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/lib/prefs.js watiq_nextjs_frontend/lib/flash.js \
@@ -1339,11 +1339,11 @@ git commit -m "feat(frontend): reader preferences, flash messages and error scre
 
 The catalogs are keyed on English source text rather than symbolic ids, so a component not yet marked up still renders readable English instead of a bare key. Convert `frontend_flask/translations/{fr,ar}/LC_MESSAGES/messages.po` into JSON with a script committed alongside, so the `.po` files stay the reviewable source of truth for this conversion.
 
-- [ ] **Step 1: Write the conversion script `tools/po-to-json.mjs`**
+- [x] **Step 1: Write the conversion script `tools/po-to-json.mjs`**
 
 Parse `msgid`/`msgstr` pairs (including multi-line continuations), skip entries with an empty `msgstr`, and emit `{ "<msgid>": "<msgstr>" }`. `en.json` is `{}` — English falls through to the key.
 
-- [ ] **Step 2: Run it and commit the output**
+- [x] **Step 2: Run it and commit the output**
 
 ```bash
 node tools/po-to-json.mjs ../frontend_flask/translations/fr/LC_MESSAGES/messages.po > i18n/messages/fr.json
@@ -1351,7 +1351,7 @@ node tools/po-to-json.mjs ../frontend_flask/translations/ar/LC_MESSAGES/messages
 echo '{}' > i18n/messages/en.json
 ```
 
-- [ ] **Step 3: Write the parity test**
+- [x] **Step 3: Write the parity test**
 
 ```js
 import { expect, test } from 'vitest';
@@ -1368,20 +1368,87 @@ test('the catalogs are non-trivial and disagree with the source language', () =>
 
 This is the analogue of `tests/test_i18n_catalog.py`: it catches the failure mode where the language switcher appears to do nothing because the catalog never loaded — direction and lang change, every string stays English.
 
-- [ ] **Step 4: Implement `i18n/request.js`** using `next-intl`'s `getRequestConfig`, taking the locale from `readPrefs()`.
+- [x] **Step 4: Implement `i18n/request.js`** using `next-intl`'s `getRequestConfig`, taking the locale from `readPrefs()`.
 
-- [ ] **Step 5: Run the test**
+- [x] **Step 5: Run the test**
 
 Run: `npm test -- i18n`
 Expected: PASS.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/i18n/ watiq_nextjs_frontend/tools/po-to-json.mjs \
         watiq_nextjs_frontend/tests/i18n.test.js
 git commit -m "feat(frontend): fr/ar message catalogs converted from the gettext sources"
 ```
+
+---
+
+## Phase 1 — as built (2026-08-14)
+
+Complete. `73511df`, `36b721e`, `ce3ed27`, `7cbb34a`, `3a453f6`. 83 tests, 6 files.
+
+Where the result differs from the steps above, and why:
+
+1. **`rotateSession()` is new, and login/MFA use it instead of `setSession`.**
+   Flask merged new tokens into whatever session id was already present. The
+   cookie is not `__Host-`prefixed, so a sibling subdomain can plant one, and
+   that id would then hold a signed-in session. Both privilege changes now mint
+   a new id and drop the old record, with `captureRefreshCookie` running after
+   the rotation so the refresh token lands in the new record.
+
+2. **The guards do not flash.** `flash()` writes the session, writing the
+   session may issue the cookie, and Next only permits that from a Server Action
+   or Route Handler — so the plan's `requireLogin` would have thrown a
+   cookie-write error instead of redirecting an anonymous visitor. They redirect
+   with a fixed `?notice=` code that `lib/flash.js` resolves to text. Free text
+   in a URL is reflected content and untranslatable besides.
+
+3. **The session cookie carries no `maxAge`.** The plan set one; Flask's
+   `SESSION_PERMANENT=False` did not. A persistent cookie on a shared municipal
+   terminal hands the session to whoever sits down next. The 8h expiry is on the
+   Redis record instead.
+
+4. **`lib/config.js` ports `_from_env_or_file`,** so `REDIS_DSN_FILE` works.
+   Production mounts secrets under `/run/secrets` rather than putting them in
+   the environment, where `docker inspect` exposes them (Security.md §12.4).
+
+5. **The error mapping keeps all three designs**, not the two the plan
+   described. `error.html` dispatched on 401/403/429 → blocked, 502/503/504 →
+   maintenance, else generic. `components/FailureScreen.jsx` is that dispatch;
+   both designed screens are ported with their page CSS. `lib/error-views.js`
+   exists separately because `app/error.js` must be a client component and
+   cannot import a `server-only` module.
+
+6. **Language negotiation honours q-values.** The plan took the first supported
+   tag in document order; Flask's `best_match` did not. `fr;q=0.2, ar;q=0.9`
+   means the reader would rather have Arabic.
+
+7. **i18n is not next-intl, and the dependency is dropped.** next-intl reads a
+   dot in a key as a namespace path, and 152 keys are English sentences ending
+   in a full stop; its ICU layer treats an apostrophe as an escape, and eight
+   keys contain one. Both catalogs have 0 `msgid_plural` and 0 `msgctxt`, so
+   nothing it offers is needed. `lib/i18n.js` is gettext semantics in thirty
+   lines. `i18n/request.js` was therefore never created.
+
+8. **`assertCsrf` compares in constant time**, and both the CSRF token and the
+   session id are 256-bit rather than UUIDs.
+
+### Carried into Phase 2
+
+- The root layout still wraps every route in the **mockup's** `Navbar`/`Footer`.
+  `/blocked` and the maintenance screen render their own chrome and must not be
+  wrapped — Task 10 needs a route group that excludes them.
+- `error_blocked.html` set `html_class = 'light tk-security-acces-blocked'` and
+  `error_maintenance.html` set `'light tk-system-maintenance icons-w300'`. Those
+  per-page token overrides go on `<html>`, which only the layout can write.
+- Copied page CSS needs its `url()` rewritten from `../../img/` to `/img/`;
+  webpack resolves relative URLs against the stylesheet directory and fails the
+  build rather than 404ing at runtime. Applies to every screen ported later.
+- `tests/setup.js` note: a `server.use()` override replaces the catch-all
+  handler, so overridden calls never reach `SENT`. Read the payload inside the
+  handler when a test needs both.
 
 ---
 
