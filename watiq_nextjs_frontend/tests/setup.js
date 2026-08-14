@@ -1,7 +1,23 @@
-import { afterAll, afterEach, beforeAll } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
 import { setupServer } from 'msw/node';
 import { http, HttpResponse } from 'msw';
 import { FIXTURES } from './fixtures.js';
+import { resetRequestScope } from './mocks/next-headers.js';
+import { resetRedis } from './mocks/ioredis.js';
+
+// next/headers reads a per-request async-local scope that only the Next server
+// populates; ioredis wants a server. Both are replaced globally rather than per
+// test file, so no test can accidentally reach the real ones.
+vi.mock('next/headers', () => import('./mocks/next-headers.js'));
+vi.mock('ioredis', () => import('./mocks/ioredis.js'));
+
+// A fresh request scope and an empty store per test — otherwise one test's
+// session cookie signs the next one in, which is exactly the bug the guard
+// tests are meant to catch.
+beforeEach(() => {
+  resetRequestScope();
+  resetRedis();
+});
 
 // Every call the BFF makes, so a test can assert on the payload it SENT and
 // not just on the page it rendered. Several Flask write paths were posting
