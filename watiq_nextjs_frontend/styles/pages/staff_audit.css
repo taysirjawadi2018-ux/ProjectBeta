@@ -1,0 +1,44 @@
+/* Asset URLs are absolute (/img/...), not the ../../img/ that the Flask
+ * copy used. Under Next the images are served from public/ at the site
+ * root, and a relative url() here is resolved by webpack against this
+ * file's directory — which fails the build rather than 404ing at runtime.
+ */
+/* staff_audit.html — rules lifted from frontend/user_activity_audit.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+/* Optical Layering classes based on Style Guidance */
+.surface-1 {
+    background-color: #fff
+    }
+.surface-2 {
+    border: 1px solid rgba(0, 27, 61, 0.05);
+    /* Midnight Navy at 5% */
+    box-shadow: 0 4px 20px rgba(0, 27, 61, 0.04)
+    }
+.surface-3 {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px)
+    }
+.watermark-emblem {
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url(/img/img-f85a57f5c30b.jpg);
+    /* Placeholder for Tunisian National Emblem */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain
+    }
+.watermark-emblem-small {
+    opacity: 0.02;
+    pointer-events: none;
+    background-image: url(/img/img-5cb4eca77731.jpg);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 30%
+    }
+/* Material Symbols Weight adjustment utility */
+.material-symbols-outlined[data-weight="fill"] {
+    font-variation-settings: "FILL" 1
+    }

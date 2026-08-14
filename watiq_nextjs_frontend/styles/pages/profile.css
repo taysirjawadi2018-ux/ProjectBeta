@@ -1,0 +1,48 @@
+/* profile.html — rules lifted from frontend/profile_management.html.
+ * Kept out of the shared sheet because several mockups define the same
+ * class with different values. Loaded from the page's page_style block.
+ */
+.material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .verified-badge {
+            box-shadow: inset 0 0 0 1px rgba(175, 121, 47, 0.2);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .bento-item-full { grid-column: span 12; }
+        .bento-item-lg { grid-column: span 8; }
+        .bento-item-sm { grid-column: span 4; }
+        
+        @media (max-width: 1024px) {
+            .bento-item-lg, .bento-item-sm { grid-column: span 12; }
+        }
+        
+        .active-session-indicator::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            top: 50%;
+            inset-inline-end: -12px;
+            transform: translateY(-50%);
+            box-shadow: 0 0 8px #10b981;
+        }
+
+/* The mockup set this box-shadow from JavaScript on mouseenter/mouseleave.
+   Inline style is dropped by the CSP and a hover effect never needed script,
+   so it is a stylesheet rule. */
+.bento-item-lg,
+.bento-item-sm {
+    transition: box-shadow 150ms ease-out;
+}
+
+.bento-item-lg:hover,
+.bento-item-sm:hover {
+    box-shadow: 0 4px 20px rgb(0 0 0 / 5%);
+}

@@ -1,0 +1,16 @@
+/* Asset URLs are absolute (/img/...), not the ../../img/ that the Flask
+ * copy used. Under Next the images are served from public/ at the site
+ * root, and a relative url() here is resolved by webpack against this
+ * file's directory — which fails the build rather than 404ing at runtime.
+ */
+/* notification_center.html — page-scoped rules, lifted verbatim from the mockup's
+ * <style> block. Kept in its own file rather than merged into watiq.css:
+ * several pages define the same class with different values, so a merge
+ * would silently change how they render. theme() calls are resolved to the
+ * literal token values the Tailwind build would have produced. */
+
+body { font-family: 'Public Sans', sans-serif; background-color: #f7fafc; }
+.interpreter-overlay { position: fixed; bottom: 24px; inset-inline-end: 24px; width: 320px; z-index: 50; }
+.voice-narration-btn { position: fixed; top: 88px; inset-inline-end: 24px; z-index: 40; }
+
+.bg-asset-notification-center-1 { background-image: url('/img/img-5d7ea750bd07.jpg'); }
