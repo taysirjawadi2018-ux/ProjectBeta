@@ -1,197 +1,374 @@
-'use client';
+import { Mark } from '@/components/Logo.jsx';
+import { pageContext } from '@/lib/page.js';
+import '@/styles/pages/index.css';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import ScreenCatalog from '@/components/ScreenCatalog';
+/**
+ * The national portal landing page.
+ * Port of frontend_flask/templates/index.html.
+ *
+ * Carries its own header and footer — this is one of the four chrome
+ * archetypes, and it is why the root layout renders neither.
+ */
 
-export default function HomePage() {
-  const [activeTab, setActiveTab] = useState('landing');
-  const [searchQuery, setSearchQuery] = useState('');
+export const metadata = { title: 'Watiq National Portal | Republic of Tunisia' };
 
-  const services = [
-    { title: 'National Identity Card (CIN)', category: 'Civil Status', time: '5 Business Days', icon: 'badge', href: '/requests/submit' },
-    { title: 'Biometric Passport Renewal', category: 'Travel & Mobility', time: '3 Business Days', icon: 'flight_takeoff', href: '/requests/submit' },
-    { title: 'Birth Certificate (Extract)', category: 'Civil Status', time: 'Instant Digital', icon: 'description', href: '/requests/submit' },
-    { title: 'Property Tax Payment & Certificate', category: 'Finance & Tax', time: 'Instant Receipt', icon: 'payments', href: '/requests/submit' },
-    { title: 'Business License Registration', category: 'Enterprise', time: '7 Business Days', icon: 'domain', href: '/requests/submit' },
-    { title: 'Driver License Verification', category: 'Transport', time: 'Instant Verification', icon: 'directions_car', href: '/requests/submit' },
-  ];
+// The four categories are the mockup's own copy, not catalogue rows: each card
+// deep-links into the catalogue filtered to that category.
+const CATEGORIES = [
+  ['civil', 'diversity_3', 'Civil Status', 'Birth, marriage, death certificates and certified family documents.'],
+  ['identity', 'badge', 'Identity', 'CIN renewal, passport applications, and secure residency certificates.'],
+  ['justice', 'gavel', 'Justice', 'Criminal record certificates and legal case tracking.'],
+  ['admin', 'business_center', 'Admin', 'Tax declarations, administrative permits, and centralized licensing.'],
+];
 
-  const filteredServices = services.filter(s =>
-    s.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    s.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+const SPECS = [
+  ['security', 'Zero Trust Architecture', 'Every request is authenticated, authorized, and continuously inspected.'],
+  ['api', 'X-Road Standard', 'Secure interoperability layer ensuring the integrity of data exchanges.'],
+  ['lan', 'Multi-Hosting', 'Geographical redundancy across three isolated national data centers.'],
+];
+
+const FOOTER_LINKS = [
+  ['/legal/privacy', 'Privacy Policy'],
+  ['/legal/terms', 'Terms of Service'],
+  ['/legal/terms', 'Security Protocols'],
+  ['/contact', 'Contact Support'],
+  ['/status', 'System Status'],
+];
+
+export default async function PortalIndex() {
+  const { t, isAuthenticated } = await pageContext({ withUnread: false, withProfile: false });
+  const year = new Date().getFullYear();
 
   return (
-    <div className="space-y-10 pb-16">
-      {/* Hero Banner Section */}
-      <section className="relative bg-gradient-to-b from-midnight-navy via-slate-900 to-institutional-navy text-white pt-16 pb-20 px-4 sm:px-6 overflow-hidden">
-        {/* Subtle Decorative Pattern Overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(#C5A059_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto text-center space-y-6 relative z-10">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-accent-gold/20 text-accent-gold border border-accent-gold/40">
-            <span className="w-2 h-2 rounded-full bg-accent-gold"></span>
-            Unified Citizen Portal 2.0
-          </span>
+    <div className="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed overflow-x-hidden">
+      <img
+        alt={t('Tunisian National Emblem Watermark')}
+        className="watermark-emblem"
+        src="/img/img-a5f82587302e.jpg"
+      />
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
-            Access All National Government Services & Procedures
-          </h1>
-
-          <p className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Submit applications, track document verification status, schedule in-person appointments, and manage official civil records securely online.
-          </p>
-
-          {/* Hero Search Box */}
-          <div className="max-w-2xl mx-auto relative pt-4">
-            <div className="relative flex items-center bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-gold-muted/40 p-2">
-              <span className="material-symbols-outlined text-slate-400 ml-3 mr-2 text-2xl">search</span>
-              <input
-                type="text"
-                placeholder="Search for a service, procedure, or document (e.g., Passport, CIN, Birth Certificate)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-transparent text-slate-900 dark:text-white placeholder-slate-400 text-sm focus:outline-none py-2"
-              />
-              <button 
-                onClick={() => setSearchQuery('')}
-                className="px-5 py-2.5 bg-midnight-navy text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition-colors shadow-sm"
-              >
-                Search
-              </button>
-            </div>
+      <header className="fixed top-0 w-full h-20 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm z-50 flex items-center">
+        <div className="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
+          <div className="flex items-center gap-4">
+            <a className="flex items-center gap-3 focus-ring rounded" href="/">
+              <Mark size="h-9" />
+              <span className="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider">
+                {t('Republic of Tunisia')}
+              </span>
+            </a>
           </div>
-
-          {/* Tab Switcher: Landing vs Complete Screen Catalog */}
-          <div className="inline-flex p-1 bg-white/10 backdrop-blur rounded-xl border border-white/20 text-xs font-semibold mt-4">
-            <button
-              onClick={() => setActiveTab('landing')}
-              className={`px-5 py-2 rounded-lg transition-all ${
-                activeTab === 'landing'
-                  ? 'bg-accent-gold text-midnight-navy font-bold shadow-md'
-                  : 'text-white hover:bg-white/10'
-              }`}
-            >
-              Public Services View
-            </button>
-            <button
-              onClick={() => setActiveTab('catalog')}
-              className={`px-5 py-2 rounded-lg transition-all ${
-                activeTab === 'catalog'
-                  ? 'bg-accent-gold text-midnight-navy font-bold shadow-md'
-                  : 'text-white hover:bg-white/10'
-              }`}
-            >
-              All 12 Screen Mockups Catalog
-            </button>
+          <nav className="hidden md:flex items-center gap-8" aria-label={t('Service categories')}>
+            {CATEGORIES.map(([code, , title], index) => (
+              <a
+                key={code}
+                className={
+                  index === 0
+                    ? 'text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md transition-all active:scale-95 duration-150'
+                    : 'text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150'
+                }
+                href={`/services?category=${code}`}
+              >
+                {t(title)}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4">
+              <a
+                aria-label={t('About the national institutions')}
+                className="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring"
+                href="/about"
+              >
+                account_balance
+              </a>
+              <a
+                aria-label={t('Notifications')}
+                className="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring"
+                href="/notifications"
+              >
+                notifications
+              </a>
+              <a
+                aria-label={isAuthenticated ? t('Your profile') : t('Sign in')}
+                className="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring"
+                href={isAuthenticated ? '/profile' : '/login'}
+              >
+                account_circle
+              </a>
+              {!isAuthenticated && (
+                <a
+                  className="font-label-md text-label-md text-on-primary bg-primary-container px-4 py-2 rounded-sm hover:shadow-lg transition-all focus-ring"
+                  href="/register"
+                >
+                  {t('Register')}
+                </a>
+              )}
+            </div>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {activeTab === 'catalog' ? (
-          <ScreenCatalog />
-        ) : (
-          <div className="space-y-12">
-            {/* Quick Action Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 -mt-16 relative z-20">
-              <Link
-                href="/requests/submit"
-                className="bg-surface dark:bg-slate-800 p-5 rounded-xl border border-outline-variant/40 shadow-md hover:border-accent-gold hover:-translate-y-1 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-lg bg-midnight-navy/10 dark:bg-accent-gold/20 text-midnight-navy dark:text-accent-gold flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-2xl">post_add</span>
-                </div>
-                <h3 className="font-bold text-sm text-institutional-navy dark:text-white">Submit Request</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Start a new procedure</p>
-              </Link>
+      <main className="pt-20" id="main">
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden" id="hero">
+          <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop grid grid-cols-12 gap-gutter">
+            <div className="col-span-12 lg:col-span-7 flex flex-col justify-center gap-8">
+              <div className="inline-flex items-center gap-2 bg-secondary-fixed px-3 py-1 rounded-sm w-fit">
+                <span aria-hidden="true" className="material-symbols-outlined icon-filled text-[16px]">
+                  verified_user
+                </span>
+                <span className="font-label-caps text-label-caps text-on-secondary-fixed uppercase">
+                  {t('Sovereign Gateway Verified')}
+                </span>
+              </div>
 
-              <Link
-                href="/requests"
-                className="bg-surface dark:bg-slate-800 p-5 rounded-xl border border-outline-variant/40 shadow-md hover:border-accent-gold hover:-translate-y-1 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-lg bg-mediterranean-cerulean/10 text-mediterranean-cerulean flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-2xl">timeline</span>
-                </div>
-                <h3 className="font-bold text-sm text-institutional-navy dark:text-white">Track Application</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Check status by Ref ID</p>
-              </Link>
+              <h1 className="font-headline-lg text-headline-lg text-on-surface">
+                {t('Secure Access to')} <br />
+                <span className="text-primary-container">{t('National Services')}</span>
+              </h1>
 
-              <Link
-                href="/appointments"
-                className="bg-surface dark:bg-slate-800 p-5 rounded-xl border border-outline-variant/40 shadow-md hover:border-accent-gold hover:-translate-y-1 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-2xl">calendar_month</span>
-                </div>
-                <h3 className="font-bold text-sm text-institutional-navy dark:text-white">Book Appointment</h3>
-                <p className="text-xs text-on-surface-variant mt-1">In-person office visits</p>
-              </Link>
+              <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                {t('Welcome to Watiq, the unified portal of the Republic of Tunisia. A trusted infrastructure for your administrative, legal, and civil status procedures.')}
+              </p>
 
-              <Link
-                href="/documents"
-                className="bg-surface dark:bg-slate-800 p-5 rounded-xl border border-outline-variant/40 shadow-md hover:border-accent-gold hover:-translate-y-1 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-2xl">folder_shared</span>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <a
+                  className="bg-primary-container text-on-primary px-8 py-4 rounded-sm font-headline-md text-body-md hover:shadow-xl active:scale-95 transition-all flex items-center gap-3 focus-ring"
+                  href={isAuthenticated ? '/dashboard' : '/login'}
+                >
+                  {t('Access Portal')}
+                  <span aria-hidden="true" className="material-symbols-outlined">login</span>
+                </a>
+                <a
+                  className="border border-primary-container text-primary-container px-8 py-4 rounded-sm font-headline-md text-body-md hover:bg-surface-container-low transition-all focus-ring"
+                  href="/help"
+                >
+                  {t('View Documentation')}
+                </a>
+                <a
+                  className="border border-primary-container text-primary-container px-8 py-4 rounded-sm font-headline-md text-body-md hover:bg-surface-container-low transition-all focus-ring flex items-center gap-3"
+                  href="/appointments/book"
+                >
+                  {t('Book Appointment')}
+                  <span aria-hidden="true" className="material-symbols-outlined">event_available</span>
+                </a>
+              </div>
+
+              <div className="mt-12 flex gap-8 items-center border-t border-outline-variant pt-8">
+                <div className="flex flex-col">
+                  <span className="font-label-caps text-label-caps text-outline uppercase">{t('Uptime')}</span>
+                  <span className="font-headline-md text-headline-md">99.99%</span>
                 </div>
-                <h3 className="font-bold text-sm text-institutional-navy dark:text-white">Document Vault</h3>
-                <p className="text-xs text-on-surface-variant mt-1">Access verified PDFs</p>
-              </Link>
+                <div className="h-10 w-px bg-outline-variant" />
+                <div className="flex flex-col">
+                  <span className="font-label-caps text-label-caps text-outline uppercase">{t('Encryption')}</span>
+                  <span className="font-headline-md text-headline-md">{t('AES-256-GCM')}</span>
+                </div>
+                <div className="h-10 w-px bg-outline-variant" />
+                <div className="flex flex-col">
+                  <span className="font-label-caps text-label-caps text-outline uppercase">{t('Status')}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                    <span className="font-headline-md text-headline-md">{t('Operational')}</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Popular Services Grid */}
-            <section className="space-y-6">
-              <div className="flex justify-between items-end border-b border-outline-variant/30 pb-3">
-                <div>
-                  <h2 className="text-2xl font-bold text-institutional-navy dark:text-white">Popular Government Services</h2>
-                  <p className="text-xs text-on-surface-variant mt-1">Select a procedure below to initiate request processing.</p>
-                </div>
-                <Link href="/requests/submit" className="text-xs font-bold text-mediterranean-cerulean hover:underline">
-                  View All Services →
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredServices.map((service, i) => (
-                  <div
-                    key={i}
-                    className="bg-surface dark:bg-slate-800 rounded-xl p-6 border border-outline-variant/30 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
-                  >
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-start">
-                        <span className="p-2.5 rounded-lg bg-surface-container text-midnight-navy dark:text-accent-gold">
-                          <span className="material-symbols-outlined text-2xl">{service.icon}</span>
+            <div className="hidden lg:flex col-span-5 items-center justify-center">
+              <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl glass-panel p-1">
+                <div className="h-full w-full rounded-lg sovereign-gradient relative overflow-hidden flex flex-col p-10 text-surface">
+                  <div className="absolute top-0 end-0 p-8">
+                    <span aria-hidden="true" className="material-symbols-outlined text-6xl opacity-20">shield</span>
+                  </div>
+                  <span className="font-label-caps text-label-caps text-secondary-fixed mb-4">
+                    {t('SYSTEM ARCHITECTURE')}
+                  </span>
+                  <h2 className="font-headline-md text-headline-md mb-6">{t('Watiq Sovereign Cloud')}</h2>
+                  <div className="space-y-6">
+                    {[
+                      ['cloud_done', 'Infrastructure hosted exclusively on national territory.'],
+                      ['fingerprint', 'Biometric identification and certified electronic signature.'],
+                      ['database', 'Real-time interoperability with civil status registries.'],
+                    ].map(([icon, copy]) => (
+                      <div key={icon} className="flex gap-4">
+                        <span aria-hidden="true" className="material-symbols-outlined text-secondary-fixed">
+                          {icon}
                         </span>
-                        <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
-                          {service.category}
-                        </span>
+                        <p className="font-support-sm text-support-sm opacity-80">{t(copy)}</p>
                       </div>
-                      <h3 className="font-bold text-base text-institutional-navy dark:text-white">{service.title}</h3>
-                      <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                        <span className="material-symbols-outlined text-sm">schedule</span>
-                        Est. Processing Time: <strong className="text-slate-800 dark:text-slate-200">{service.time}</strong>
-                      </div>
-                    </div>
-
-                    <div className="pt-5 mt-4 border-t border-outline-variant/20 flex items-center justify-between">
-                      <span className="text-xs text-slate-400 font-mono">CODE: SERV-0{i + 1}</span>
-                      <Link
-                        href={service.href}
-                        className="px-3.5 py-1.5 text-xs font-bold text-white bg-midnight-navy hover:bg-slate-800 dark:bg-accent-gold dark:text-midnight-navy rounded-lg transition-colors"
-                      >
-                        Apply Now
-                      </Link>
+                    ))}
+                  </div>
+                  <div className="mt-auto border-t border-white/10 pt-6">
+                    <p className="font-label-caps text-[10px] opacity-50 mb-2">{t('AUTH_TOKEN_ACTIVE')}</p>
+                    <div className="w-full h-1 bg-white/20 rounded-full overflow-hidden">
+                      <div className="h-full w-2/3 bg-secondary-fixed" />
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </section>
+            </div>
           </div>
-        )}
+        </section>
+
+        <section className="py-24 bg-surface-container-low relative" id="services">
+          <div className="max-w-container-max mx-auto px-margin-desktop">
+            <div className="flex flex-col mb-16 text-center items-center">
+              <span className="font-label-caps text-label-caps text-secondary uppercase mb-4">
+                {t('Service Categories')}
+              </span>
+              <h2 className="font-headline-lg text-headline-lg text-on-surface max-w-2xl">
+                {t('Universal access to digital administration')}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {CATEGORIES.map(([code, icon, title, blurb]) => (
+                <a
+                  key={code}
+                  className="group bg-surface hover:bg-primary-container hover:text-on-primary transition-all duration-500 p-8 rounded-xl border border-outline-variant flex flex-col gap-6 cursor-pointer shadow-sm hover:shadow-2xl focus-ring"
+                  href={`/services?category=${code}`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="material-symbols-outlined text-4xl text-primary-container group-hover:text-secondary-fixed transition-colors"
+                  >
+                    {icon}
+                  </span>
+                  <div>
+                    <h3 className="font-headline-md text-headline-md mb-2">{t(title)}</h3>
+                    <p className="font-body-md text-on-surface-variant group-hover:text-surface-variant">
+                      {t(blurb)}
+                    </p>
+                  </div>
+                  <div className="mt-auto flex items-center gap-2 font-label-caps text-label-caps opacity-0 group-hover:opacity-100 transition-opacity">
+                    {t('Open Service')}{' '}
+                    <span aria-hidden="true" className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-24 bg-white overflow-hidden relative" id="technical">
+          <div className="max-w-container-max mx-auto px-margin-desktop grid grid-cols-12 gap-gutter items-center">
+            <div className="col-span-12 md:col-span-6 order-2 md:order-1">
+              <div className="p-8 border border-outline-variant rounded-sm bg-surface-container-lowest relative overflow-hidden">
+                <div className="absolute -end-10 -top-10">
+                  <span aria-hidden="true" className="material-symbols-outlined text-[180px] text-surface-container">
+                    memory
+                  </span>
+                </div>
+                <div className="relative z-10">
+                  <h2 className="font-headline-md text-headline-md text-on-surface mb-8">
+                    {t('Technical Specifications')}
+                  </h2>
+                  <div className="grid grid-cols-1 gap-6">
+                    {SPECS.map(([icon, title, copy]) => (
+                      <div key={icon} className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-sm bg-primary-container flex items-center justify-center text-on-primary shrink-0">
+                          <span aria-hidden="true" className="material-symbols-outlined">{icon}</span>
+                        </div>
+                        <div>
+                          <h3 className="font-label-caps text-label-caps text-on-surface uppercase mb-1">
+                            {t(title)}
+                          </h3>
+                          <p className="font-support-sm text-support-sm text-on-surface-variant">{t(copy)}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-12 md:col-span-6 order-1 md:order-2 flex flex-col gap-6">
+              <span className="font-label-caps text-label-caps text-primary uppercase">
+                {t('Sovereign Cloud Secured')}
+              </span>
+              <h2 className="font-headline-lg text-headline-lg text-on-surface">
+                {t('Protected by National Trust Infrastructure')}
+              </h2>
+              <p className="font-body-lg text-body-lg text-on-surface-variant">
+                {t('Watiq is not just a portal; it is the backbone of Tunisian digital sovereignty. Our systems are audited quarterly by the ANSI to ensure the highest level of protection for citizen data.')}
+              </p>
+              <div className="flex gap-4">
+                <img
+                  alt={t('ANSI Logo')}
+                  className="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60"
+                  src="/img/img-59b136c5decd.jpg"
+                />
+                <img
+                  alt={t('Sovereign Cloud Infrastructure Logo')}
+                  className="h-12 w-auto grayscale hover:grayscale-0 transition-all opacity-60"
+                  src="/img/img-9d8a79b731d0.jpg"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Sign Language Module (TSL) */}
+      <div className="fixed bottom-margin-mobile end-margin-mobile z-[100] group">
+        <div className="relative">
+          <div className="absolute -top-10 end-0 bg-primary-container text-on-primary text-[10px] font-label-caps py-1 px-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
+            {t('ACCESSIBILITY TSL')}
+          </div>
+          <a
+            aria-label={t('Tunisian Sign Language support')}
+            className="block w-48 md:w-64 aspect-[1.79] rounded-xl overflow-hidden shadow-2xl glass-panel border-2 border-secondary-fixed relative cursor-pointer active:scale-95 transition-transform focus-ring"
+            href="/accessibility"
+          >
+            <img alt={t('TSL Interpreter')} className="w-full h-full object-cover" src="/img/img-091ffb278e7e.jpg" />
+            <div className="absolute inset-0 bg-primary-container/20 group-hover:bg-transparent transition-colors" />
+            <div className="absolute bottom-2 end-2 flex gap-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-ping" />
+            </div>
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span aria-hidden="true" className="material-symbols-outlined text-white text-4xl">play_circle</span>
+            </div>
+          </a>
+        </div>
       </div>
+
+      <footer className="bg-on-surface dark:bg-on-background border-t border-outline dark:border-outline-variant w-full py-12 relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <div className="font-label-md text-label-md text-surface-container-lowest font-bold tracking-widest uppercase">
+              {t('Watiq Portal')}
+            </div>
+            <p className="font-caption text-caption text-surface-container-highest opacity-60 text-center md:text-start">
+              © {year} {t('Republic of Tunisia - National Services Portal')}
+            </p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-8">
+            {FOOTER_LINKS.map(([href, label]) => (
+              <a
+                key={label}
+                className="font-caption text-caption text-surface-container-highest hover:text-primary-fixed hover:underline transition-all opacity-80 hover:opacity-100 focus-ring rounded"
+                href={href}
+              >
+                {t(label)}
+              </a>
+            ))}
+          </div>
+          <div className="flex gap-4">
+            <a
+              aria-label={t('Watiq on social media')}
+              className="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded"
+              href="/contact"
+            >
+              facebook
+            </a>
+            <a
+              aria-label={t('Language and accessibility options')}
+              className="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded"
+              href="/accessibility"
+            >
+              language
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

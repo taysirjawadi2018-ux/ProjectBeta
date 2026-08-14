@@ -1,74 +1,85 @@
-'use client';
+import { pageContext } from '@/lib/page.js';
+import { supportChatAction } from '@/lib/actions.js';
+import PageShell from '@/components/PageShell.jsx';
+import '@/styles/pages/support_chat.css';
 
-import { useState } from 'react';
+/**
+ * The live-chat screen.
+ * Port of frontend_flask/templates/support_chat.html and
+ * views/public.py:support_chat.
+ *
+ * There is no chat backend — no websocket, nothing under /api/v1 that accepts a
+ * message — so the composer posts to an action that says plainly the channel is
+ * not live and points at the phone and email that are. The design is the
+ * mockup's; the promise is not.
+ */
 
-export default function SupportChatPage() {
-  const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Hello! I am your Watiq AI Assistant. How can I assist you with your government procedure today?' },
-  ]);
-  const [input, setInput] = useState('');
+export const metadata = { title: 'Live Support | Watiq National Portal' };
 
-  const handleSend = (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-    const userMsg = input;
-    setMessages((prev) => [...prev, { sender: 'user', text: userMsg }]);
-    setInput('');
-
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          sender: 'bot',
-          text: `Thank you for your question regarding "${userMsg}". You can track your active procedure at /requests or schedule an appointment at /appointments.`,
-        },
-      ]);
-    }, 600);
-  };
+export default async function SupportChatPage() {
+  const ctx = await pageContext();
+  const { t } = ctx;
 
   return (
-    <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
-      <div className="bg-surface dark:bg-slate-900 rounded-2xl border border-outline-variant/30 shadow-xl overflow-hidden flex flex-col h-[70vh]">
-        {/* Chat Header */}
-        <div className="bg-midnight-navy text-white p-4 flex items-center gap-3">
-          <span className="w-3 h-3 rounded-full bg-emerald-400"></span>
-          <div>
-            <h1 className="font-bold text-sm">Watiq Virtual Support Agent</h1>
-            <p className="text-[11px] text-slate-300">24/7 Automated Government Procedure Assistant</p>
+    <PageShell {...ctx}>
+      <header className="space-y-3">
+        <h1 className="font-headline-lg text-headline-lg text-on-surface">{t('Live Support')}</h1>
+      </header>
+
+      <div
+        className="flex items-start gap-3 p-4 rounded-xl border bg-tertiary-container border-tertiary text-on-tertiary-container max-w-3xl"
+        role="status"
+      >
+        <span aria-hidden="true" className="material-symbols-outlined">info</span>
+        <div className="font-body-md text-body-md space-y-1">
+          <p className="font-bold">{t('This channel is not live yet.')}</p>
+          <p>
+            {t('Messages sent here are not received by anyone. The telephone and email channels on the contact page are staffed; quote your national ID when you reach them.')}
+          </p>
+        </div>
+      </div>
+
+      <section className="bg-surface border border-outline-variant rounded-xl max-w-3xl shadow-sm overflow-hidden">
+        <div className="border-b border-outline-variant px-6 py-4 flex items-center gap-3">
+          <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-outline" />
+          <p className="font-label-md text-label-md text-on-surface-variant">{t('Support desk — offline')}</p>
+        </div>
+
+        <div className="p-6 space-y-4 min-h-[16rem]" aria-live="polite">
+          <div className="flex gap-3">
+            <div className="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+              <span aria-hidden="true" className="material-symbols-outlined text-[18px]">support_agent</span>
+            </div>
+            <div className="bg-surface-container-low rounded-xl rounded-ss-none p-4 max-w-lg">
+              <p className="font-body-md text-body-md text-on-surface">
+                {t('The live channel has not been connected. Please use the telephone or email channel listed on the contact page.')}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Message History */}
-        <div className="flex-1 p-6 overflow-y-auto space-y-4 text-xs">
-          {messages.map((m, i) => (
-            <div key={i} className={`flex ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div
-                className={`max-w-md p-3.5 rounded-2xl leading-relaxed ${
-                  m.sender === 'user'
-                    ? 'bg-midnight-navy text-white rounded-br-none'
-                    : 'bg-surface-container text-on-surface rounded-bl-none'
-                }`}
-              >
-                {m.text}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Chat Input */}
-        <form onSubmit={handleSend} className="p-4 border-t border-outline-variant/30 bg-background dark:bg-slate-800 flex gap-2">
+        <form action={supportChatAction} className="border-t border-outline-variant p-4 flex gap-3">
+          <label className="sr-only" htmlFor="message">{t('Your message')}</label>
           <input
+            className="flex-1 px-4 py-3 bg-surface-container-lowest border border-outline-variant rounded focus:ring-1 focus:ring-primary focus:border-primary font-body-md"
+            id="message"
+            name="message"
+            placeholder={t('Type a message…')}
             type="text"
-            placeholder="Type your question..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="flex-1 px-4 py-2.5 rounded-xl border border-outline-variant text-xs bg-surface dark:bg-slate-900 text-on-background outline-none"
           />
-          <button type="submit" className="px-5 py-2.5 bg-midnight-navy text-white text-xs font-bold rounded-xl hover:bg-slate-800">
-            Send
+          <button
+            className="bg-primary-container text-on-primary px-6 py-3 rounded font-label-md text-label-md hover:shadow-lg transition-all focus-ring"
+            type="submit"
+          >
+            {t('Send')}
           </button>
         </form>
-      </div>
-    </div>
+      </section>
+
+      <a className="inline-flex items-center gap-2 font-label-md text-label-md text-primary hover:underline focus-ring rounded" href="/contact">
+        <span aria-hidden="true" className="material-symbols-outlined">arrow_back</span>
+        {t('Back to contact options')}
+      </a>
+    </PageShell>
   );
 }
