@@ -1,28 +1,6 @@
+/* The whole stylesheet lives in styles/watiq.css — shared verbatim with the
+ * design-token generators. It already pulls in _fonts/_tokens/_theme and emits
+ * all three @tailwind layers, so this file is only the entry point Next.js
+ * needs inside app/. Do not add @tailwind directives here: a second
+ * `@tailwind utilities` emits the entire utility layer twice. */
 @import "../styles/watiq.css";
-
-@tailwind utilities;
-
-/* Material Symbols Outlined Icon Utility */
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  font-family: var(--w-ff-body-md, 'Public Sans', sans-serif);
-  background-color: rgb(var(--w-c-background, 248 249 255));
-  color: rgb(var(--w-c-on-background, 11 28 48));
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-}

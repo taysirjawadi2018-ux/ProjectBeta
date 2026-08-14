@@ -12,10 +12,6 @@ export default function RootLayout({ children }) {
     <html lang="fr" className="h-full scroll-smooth">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
       </head>
       <body className="flex flex-col min-h-screen bg-background text-on-background antialiased">
         <Navbar />
