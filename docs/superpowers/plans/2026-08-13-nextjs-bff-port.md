@@ -1474,7 +1474,7 @@ Port of `templates/base.html` and `templates/partials/`. Carry these decisions a
 - The a11y overlay is last in the body so it is last in the tab order — it is chrome and must not sit between the skip target and the page's own content.
 - The unread-notification badge count comes from `GET /api/v1/notifications/unread-count`, reading `unread_count` (**not** `count` — reading the wrong key made the badge always 0).
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 ```js
 import { expect, test } from 'vitest';
@@ -1502,23 +1502,23 @@ test('no external origin is referenced', async () => {
 });
 ```
 
-- [ ] **Step 2: Run and confirm failure**
+- [x] **Step 2: Run and confirm failure**
 
 Run: `npm test -- layout`
 Expected: FAIL.
 
-- [ ] **Step 3: Rewrite `app/layout.js`** as an async Server Component reading `readPrefs()` and `takeFlashes()`, emitting the favicon/manifest/theme-color set from `base.html:44-56`, and passing the nonce from the `x-nonce` header to any `<script>` it renders.
+- [x] **Step 3: Rewrite `app/layout.js`** as an async Server Component reading `readPrefs()` and `takeFlashes()`, emitting the favicon/manifest/theme-color set from `base.html:44-56`, and passing the nonce from the `x-nonce` header to any `<script>` it renders.
 
-- [ ] **Step 4: Port `components/Flash.js` and `components/Loader.js`** from `templates/partials/_flash.html` and `_loader.html`.
+- [x] **Step 4: Port `components/Flash.js` and `components/Loader.js`** from `templates/partials/_flash.html` and `_loader.html`.
 
-- [ ] **Step 5: Update `Navbar`/`Footer`/`A11yControls`** to take their language, theme and auth state as props from the layout rather than the current `useState` placeholders, and to post to `/api/preferences` so the controls work without JavaScript.
+- [x] **Step 5: Update `Navbar`/`Footer`/`A11yControls`** to take their language, theme and auth state as props from the layout rather than the current `useState` placeholders, and to post to `/api/preferences` so the controls work without JavaScript.
 
-- [ ] **Step 6: Run the tests**
+- [x] **Step 6: Run the tests**
 
 Run: `npm test -- layout`
 Expected: PASS.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add watiq_nextjs_frontend/app/layout.js watiq_nextjs_frontend/components/ \
@@ -1651,12 +1651,12 @@ Note: the existing `app/admin/page.js` is a mockup with hardcoded metrics and mu
 
 Port `frontend_flask/tests/test_routes.py`. Keep `PUBLIC_GETS`, `CITIZEN_GETS` and `STAFF_GETS` as the same arrays of paths — including the query-string variants, which exist because those pages render differently with and without their parameters.
 
-- [ ] **Step 1:** Transcribe the three path arrays verbatim from `test_routes.py:9-46`.
-- [ ] **Step 2:** Assert every public path renders 200 and contains `<html`.
-- [ ] **Step 3:** Assert every citizen path renders 200 with a citizen session and **redirects to `/login` when signed out**.
-- [ ] **Step 4:** Assert every staff path renders 200 with an admin session and **404s (not 403) for a signed-in citizen**.
-- [ ] **Step 5:** Run `npm test -- routes`. Expected: PASS.
-- [ ] **Step 6:** Commit.
+- [x] **Step 1:** Transcribe the three path arrays verbatim from `test_routes.py:9-46`.
+- [x] **Step 2:** Assert every public path renders 200 and contains `<html`.
+- [x] **Step 3:** Assert every citizen path renders 200 with a citizen session and **redirects to `/login` when signed out**.
+- [x] **Step 4:** Assert every staff path renders 200 with an admin session and **404s (not 403) for a signed-in citizen**.
+- [x] **Step 5:** Run `npm test -- routes`. Expected: PASS.
+- [x] **Step 6:** Commit.
 
 ### Task 52: Port the API contract suite
 
@@ -1693,11 +1693,11 @@ Mirror the hardening of `frontend_flask/Dockerfile` and `backend/Dockerfile`: mu
 
 Build stage runs `npm ci && npm run build`; runtime stage copies `.next/standalone`, `.next/static` and `public/`, and runs `node server.js`.
 
-- [ ] **Step 1:** Write the Dockerfile.
-- [ ] **Step 2:** Add `/healthz` and `/readyz` route handlers under `app/`, ported from `app.py:60-83`. `/healthz` is liveness only and deliberately does **not** call the API — a health check that fails when its upstream is down turns a recoverable API blip into the orchestrator killing every replica. `/readyz` does check upstream and returns 503 when it is unreachable.
-- [ ] **Step 3:** `docker build -t watiq-frontend:test watiq_nextjs_frontend/` — expect success.
-- [ ] **Step 4:** `docker run --rm -p 3000:3000 watiq-frontend:test` then `curl localhost:3000/healthz` — expect `{"status":"ok"}`.
-- [ ] **Step 5:** Commit.
+- [x] **Step 1:** Write the Dockerfile.
+- [x] **Step 2:** Add `/healthz` and `/readyz` route handlers under `app/`, ported from `app.py:60-83`. `/healthz` is liveness only and deliberately does **not** call the API — a health check that fails when its upstream is down turns a recoverable API blip into the orchestrator killing every replica. `/readyz` does check upstream and returns 503 when it is unreachable.
+- [x] **Step 3:** `docker build -t watiq-frontend:test watiq_nextjs_frontend/` — expect success.
+- [x] **Step 4:** `docker run --rm -p 3000:3000 watiq-frontend:test` then `curl localhost:3000/healthz` — expect `{"status":"ok"}`.
+- [x] **Step 5:** Commit.
 
 ### Task 56: Rewire compose, nginx, Makefile and run.sh; delete frontend_flask
 
@@ -1711,12 +1711,12 @@ Build stage runs `npm ci && npm run build`; runtime stage copies `.next/standalo
 - Modify: `.env.example`, `README.md`, `Architecture.md`, `Structure.md`
 - Delete: `frontend_flask/`
 
-- [ ] **Step 1: `docker-compose.yml`** — change `build.context` to `./watiq_nextjs_frontend`, the port mapping to `127.0.0.1:${FRONTEND_PORT:-3000}:3000`, and the env block to `ENV`, `WATIQ_API_URL: http://api:8000`, `REDIS_DSN: redis://session-store:6379/0`, `SESSION_SECRET`. Keep the `depends_on` on `api` + `session-store` and the `networks: [watiq_edge, watiq_app]` — the BFF still has no business on `watiq_data`. Keep the comment explaining why.
-- [ ] **Step 2: `docker-compose.prod.yml`** — same environment changes; keep `read_only: true`, the `tmpfs` mount, `cap_drop`, `seccomp`, `user: "10001:10001"`, `replicas: 2` and the `watiq-frontend` network alias. Next.js writes its cache to `.next/cache` at runtime, so add `/app/.next/cache` to the `tmpfs` list alongside `/tmp`.
-- [ ] **Step 3: nginx** — `nginx.conf:116` becomes `server watiq-frontend:3000`. In `conf.d/watiq.conf`, replace the `location /static/` block with `location /_next/static/` (Next.js's asset path) and add `location /img/` and `location /fonts/` for the vendored assets, all still proxying to `watiq_frontend`. The `/api/`, `/login`, `/register`, `/password-reset`, `/track` and rate-limit blocks are unchanged — those paths are identical in the port.
-- [ ] **Step 4: `Makefile`** — `test-frontend` becomes `cd watiq_nextjs_frontend && npm test`; `frontend-build` becomes `cd watiq_nextjs_frontend && npm ci && npm run build`; `frontend-dev` becomes `cd watiq_nextjs_frontend && npm run dev`. Drop the now-meaningless split between the CSS watch and the app process.
-- [ ] **Step 5: `run.sh`** — delete `ensure_frontend_env` entirely (there is no frontend Python environment any more) and reduce `ensure_frontend_assets` to an `npm ci` in `watiq_nextjs_frontend`. Update `FRONTEND_URL` to port 3000 and the native-run path to `npm run dev`.
-- [ ] **Step 6: Verify the stack comes up before deleting anything**
+- [x] **Step 1: `docker-compose.yml`** — change `build.context` to `./watiq_nextjs_frontend`, the port mapping to `127.0.0.1:${FRONTEND_PORT:-3000}:3000`, and the env block to `ENV`, `WATIQ_API_URL: http://api:8000`, `REDIS_DSN: redis://session-store:6379/0`, `SESSION_SECRET`. Keep the `depends_on` on `api` + `session-store` and the `networks: [watiq_edge, watiq_app]` — the BFF still has no business on `watiq_data`. Keep the comment explaining why.
+- [x] **Step 2: `docker-compose.prod.yml`** — same environment changes; keep `read_only: true`, the `tmpfs` mount, `cap_drop`, `seccomp`, `user: "10001:10001"`, `replicas: 2` and the `watiq-frontend` network alias. Next.js writes its cache to `.next/cache` at runtime, so add `/app/.next/cache` to the `tmpfs` list alongside `/tmp`.
+- [x] **Step 3: nginx** — `nginx.conf:116` becomes `server watiq-frontend:3000`. In `conf.d/watiq.conf`, replace the `location /static/` block with `location /_next/static/` (Next.js's asset path) and add `location /img/` and `location /fonts/` for the vendored assets, all still proxying to `watiq_frontend`. The `/api/`, `/login`, `/register`, `/password-reset`, `/track` and rate-limit blocks are unchanged — those paths are identical in the port.
+- [x] **Step 4: `Makefile`** — `test-frontend` becomes `cd watiq_nextjs_frontend && npm test`; `frontend-build` becomes `cd watiq_nextjs_frontend && npm ci && npm run build`; `frontend-dev` becomes `cd watiq_nextjs_frontend && npm run dev`. Drop the now-meaningless split between the CSS watch and the app process.
+- [x] **Step 5: `run.sh`** — delete `ensure_frontend_env` entirely (there is no frontend Python environment any more) and reduce `ensure_frontend_assets` to an `npm ci` in `watiq_nextjs_frontend`. Update `FRONTEND_URL` to port 3000 and the native-run path to `npm run dev`.
+- [x] **Step 6: Verify the stack comes up before deleting anything**
 
 ```bash
 docker compose build frontend && docker compose up -d
@@ -1725,20 +1725,20 @@ curl -sf http://127.0.0.1:3000/ | grep -q '<html'
 ```
 Expected: both succeed. **Do not proceed to Step 7 until they do.**
 
-- [ ] **Step 7: Delete the Flask app**
+- [x] **Step 7: Delete the Flask app**
 
 ```bash
 git rm -r frontend_flask
 ```
 
-- [ ] **Step 8: Sweep for stragglers**
+- [x] **Step 8: Sweep for stragglers**
 
 ```bash
 grep -rn "frontend_flask" . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=graphify-out
 ```
 Expected: no output. Update `README.md`, `Architecture.md` and `Structure.md` for any prose hit.
 
-- [ ] **Step 9: Full verification**
+- [x] **Step 9: Full verification**
 
 ```bash
 docker compose down -v && docker compose up -d
@@ -1746,7 +1746,7 @@ make test-frontend
 ```
 Expected: stack boots clean from empty volumes; frontend suite passes.
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add -A
@@ -1768,3 +1768,78 @@ that Next.js hydration requires."
 **Two things this plan adds that Flask did not need**, both flagged where they arise: the CSP nonce (Task 3 — without it the app is a blank page behind nginx) and the `.next/cache` tmpfs mount (Task 56 Step 2 — without it a read-only root filesystem breaks the container at runtime).
 
 **One known deviation.** `frontend_flask/tools/` also holds `build_logo.py`, `build_tokens.py`, `vendor_assets.py` and `i18n.sh` — the generators for the token CSS, the vendored fonts and the logo. Their *outputs* are already committed under `watiq_nextjs_frontend/styles/` and `public/`, so the port does not need them at build time, but deleting `frontend_flask/` deletes the generators. Task 56 Step 7 should move `tools/build_tokens.py`, `tools/vendor_assets.py` and `tools/build_logo.py` to `watiq_nextjs_frontend/tools/` rather than deleting them, or the design tokens become uneditable.
+
+---
+
+# Complete — as built (2026-08-17)
+
+`frontend_flask` is gone (273 files, 101 MB). 43 routes, 486 tests, image
+built and verified against the live stack.
+
+Commits: `6a38b07` `2119ca3` `acfa20e` `f2e2361` `9bcb402` `c5dfd0c` `73511df`
+`36b721e` `ce3ed27` `7cbb34a` `3a453f6` `db7552f` `6ca64d4` `2850fee` `1854601`
+`2c08d7e` `c0752b6` `0073d73` `0bba6b6`
+
+## The route decision that was blocking Phase 3
+
+**Flask's paths won**, as proposed. `/help` not `/faq`, `/legal/terms` not
+`/terms`, `/contact` not `/support`, `/login/mfa` not `/mfa`, `/requests/new`
+not `/requests/submit`, `/staff` not `/staff/workbench`, `/staff/review/[id]`
+not `/staff/verify/[id]`, `/requests/[id]/documents/new` not
+`/documents/upload`. `ops/nginx/conf.d/watiq.conf` pins `location = /login` to
+the login rate-limit zone by exact path, and the ported test suite keys on the
+Flask inventory. Staff sign-in stays `?staff=1` on `/login` for the same
+reason — a second path would sit outside that zone, and it is the
+higher-value target of the two.
+
+A route-parity check (Flask views vs. the Next tree) reports 40 shared, 2 added
+(`/api/preferences`, `/blocked`) and 1 changed: `/documents/{id}/download` is a
+form action rather than a GET route, because it mints a presigned URL and a GET
+that does that is followed by every link prefetcher.
+
+## Verified against the running stack, not just the harness
+
+- 39/39 route checks: public 200, citizen and staff 307 to the right sign-in,
+  unknown 404.
+- `/readyz` reports `{"session_store":"ok","api":"ok"}` against real Redis and
+  a real API; 503 with neither.
+- 15 services rendered from live catalogue data.
+- Read-only rootfs, uid 10001, one CSP header, 32/32 script tags nonced,
+  `var(--w-text-scale)` present in the served stylesheet.
+- Titles render in French and Arabic; the no-JavaScript preferences form sets
+  all three cookies and redirects.
+
+## Deviations worth carrying forward
+
+Everything in the Phase 0 and Phase 1 sections above still holds. Added since:
+
+1. **JSX lives in `.jsx`, not `.js`.** Next parses either; Vite only `.jsx`, and
+   no combination of plugin-react `include` or esbuild loader options got the
+   `.js` form through import analysis.
+2. **`revalidatePath` was dead code and is removed.** Every route is
+   `force-dynamic`, so there is no cached page to bust — and the calls throw
+   outside a request scope, which is how they were found.
+3. **Page titles use `generateMetadata`, split into name + suffix.** Static
+   `metadata` is evaluated once outside any request and cannot see the locale;
+   the catalogs key the name and the `| Watiq National Portal` suffix
+   separately, so the joined string finds nothing and falls through to English.
+4. **`/api/preferences` returns a relative `Location`.**
+   `NextResponse.redirect()` builds an absolute URL from `request.url`, which
+   inside the container is the bound address — the browser was sent to
+   `http://0.0.0.0:3000/`.
+5. **The session store publishes `127.0.0.1:6380`.** Native-mode development
+   needs one to reach, and this BFF has no signed-cookie fallback — that
+   fallback put the access token in the browser.
+6. **`/app/.next/cache` is a tmpfs in prod, and `mem_limit` is 768m.** Next
+   writes that cache on every render, so a `read_only` container fails on its
+   first *request* rather than at startup — the healthcheck grace period hides
+   it and the replica looks healthy until it takes traffic.
+
+## Known gap
+
+The gettext extraction tooling (`tools/i18n*.py`, `i18n.sh`) went with the
+Flask app. It parsed Jinja templates and cannot read JSX, so moving it would
+have moved something broken. The catalogs are complete, committed, and
+regenerated from the `.po` files by a test on every run — but adding a **new**
+translatable string needs a JSX-aware extractor that does not exist yet. The
+`.po` files are preserved at `watiq_nextjs_frontend/i18n/po/`.
