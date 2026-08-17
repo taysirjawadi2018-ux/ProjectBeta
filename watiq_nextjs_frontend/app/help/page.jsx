@@ -1,4 +1,5 @@
 import { pageContext } from '@/lib/page.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { one, query as qs } from '@/lib/view.js';
 import { FAQ, FAQ_TOPICS } from '@/lib/faq.js';
 import PageShell from '@/components/PageShell.jsx';
@@ -17,7 +18,7 @@ import '@/styles/pages/faq.css';
  * the expanded state without any aria bookkeeping.
  */
 
-export const metadata = { title: 'Help & Support | Watiq National Portal' };
+export const generateMetadata = pageTitle('Help & Support');
 
 export default async function HelpPage({ searchParams }) {
   const params = await searchParams;

@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -19,7 +20,7 @@ import '@/styles/pages/security_log.css';
  * its own the day the endpoint is scoped to self.
  */
 
-export const metadata = { title: 'Security Log | Watiq National Portal' };
+export const generateMetadata = pageTitle('Security Log');
 
 export default async function SecurityLogPage() {
   await requireLogin('/security-log');

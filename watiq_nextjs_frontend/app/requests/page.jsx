@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf, totalOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -15,7 +16,7 @@ import '@/styles/pages/my_requests.css';
  * views/citizen.py:requests_list.
  */
 
-export const metadata = { title: 'My Requests | Watiq National Portal' };
+export const generateMetadata = pageTitle('My Requests');
 
 const PAGE_SIZE = 20;
 

@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { one, query as qs, formatMoney } from '@/lib/view.js';
@@ -21,7 +22,7 @@ import '@/styles/pages/citizen_portal.css';
  * hand-written links in the ported mockups use readable names.
  */
 
-export const metadata = { title: 'National Services Catalog | Watiq' };
+export const generateMetadata = pageTitle('National Services Catalog');
 
 function matches(service, { queryText, category, delivery }) {
   if (delivery === 'digital' || delivery === 'office') {

@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { isAuthenticated } from '@/lib/auth.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { getTranslator } from '@/lib/i18n.js';
 import RegisterForm from './RegisterForm.jsx';
 import '@/styles/pages/register.css';
@@ -9,7 +10,7 @@ import '@/styles/pages/register.css';
  * Port of frontend_flask/templates/register.html and views/public.py:register.
  */
 
-export const metadata = { title: 'Register Digital Identity | Watiq National Portal' };
+export const generateMetadata = pageTitle('Register Digital Identity');
 
 export default async function RegisterPage() {
   if (await isAuthenticated()) redirect('/dashboard');

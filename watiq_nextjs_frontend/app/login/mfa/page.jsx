@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { isAuthenticated, currentProfile } from '@/lib/auth.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { getTranslator } from '@/lib/i18n.js';
 import { displayName } from '@/lib/format.js';
 import MfaForm from './MfaForm.jsx';
@@ -10,7 +11,7 @@ import '@/styles/pages/mfa.css';
  * Port of frontend_flask/templates/mfa.html and views/public.py:mfa.
  */
 
-export const metadata = { title: 'Two-Factor Verification | Watiq National Portal' };
+export const generateMetadata = pageTitle('Two-Factor Verification');
 
 export default async function MfaPage() {
   // A partial session is still a session; without one there is nothing to

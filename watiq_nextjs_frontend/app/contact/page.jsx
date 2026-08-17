@@ -1,4 +1,5 @@
 import { pageContext } from '@/lib/page.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { contactAction } from '@/lib/actions.js';
 import PageShell from '@/components/PageShell.jsx';
 import '@/styles/pages/support.css';
@@ -13,7 +14,7 @@ import '@/styles/pages/support.css';
  * nobody can look up.
  */
 
-export const metadata = { title: 'Contact Us | Watiq National Portal' };
+export const generateMetadata = pageTitle('Contact Us');
 
 const CHANNELS = [
   ['call', 'Telephone', '+216 71 000 000', 'Sunday to Thursday, 08:30–16:30 (local time)'],

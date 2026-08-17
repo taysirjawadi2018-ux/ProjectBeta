@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -11,7 +12,7 @@ import '@/styles/pages/appointment_detail.css';
 
 /** Port of frontend_flask/templates/appointments.html and views/citizen.py:appointments. */
 
-export const metadata = { title: 'Appointments | Watiq National Portal' };
+export const generateMetadata = pageTitle('Appointments');
 
 export default async function AppointmentsPage() {
   await requireLogin('/appointments');

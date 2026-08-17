@@ -1,4 +1,5 @@
 import { apiRequest } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { getTranslator } from '@/lib/i18n.js';
 import MaintenanceScreen from '@/components/MaintenanceScreen.jsx';
 
@@ -14,7 +15,7 @@ import MaintenanceScreen from '@/components/MaintenanceScreen.jsx';
  * banner reflects the API rather than a hand-edited constant.
  */
 
-export const metadata = { title: 'Platform Status | Watiq National Portal' };
+export const generateMetadata = pageTitle('Platform Status');
 
 export default async function StatusPage() {
   const t = await getTranslator();

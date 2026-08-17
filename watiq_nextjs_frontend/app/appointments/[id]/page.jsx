@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -21,7 +22,7 @@ import '@/styles/pages/appointment_detail.css';
  * list, it is not theirs to read.
  */
 
-export const metadata = { title: 'Appointment | Watiq National Portal' };
+export const generateMetadata = pageTitle('Appointment');
 
 export default async function AppointmentDetailPage({ params }) {
   const { id } = await params;

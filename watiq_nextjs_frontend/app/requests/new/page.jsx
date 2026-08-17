@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -23,7 +24,7 @@ import '@/styles/pages/submit_request.css';
  * exists at all without JavaScript.
  */
 
-export const metadata = { title: 'File a Request | Watiq National Portal' };
+export const generateMetadata = pageTitle('File a Request');
 
 export default async function SubmitRequestPage({ searchParams }) {
   await requireLogin('/requests/new');

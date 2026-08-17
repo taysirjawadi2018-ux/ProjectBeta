@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -9,7 +10,7 @@ import EmptyState from '@/components/EmptyState.jsx';
 
 /** Port of frontend_flask/templates/payments.html and views/citizen.py:payments. */
 
-export const metadata = { title: 'Payments | Watiq National Portal' };
+export const generateMetadata = pageTitle('Payments');
 
 export default async function PaymentsPage() {
   await requireLogin('/payments');

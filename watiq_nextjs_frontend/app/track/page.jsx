@@ -1,4 +1,5 @@
 import { apiGet, ApiError } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { pageContext } from '@/lib/page.js';
 import { one, formatDate, statusTone, statusLabel } from '@/lib/view.js';
 import PageShell from '@/components/PageShell.jsx';
@@ -8,7 +9,7 @@ import PageShell from '@/components/PageShell.jsx';
  * Port of frontend_flask/templates/track.html and views/public.py:track.
  */
 
-export const metadata = { title: 'Track a Request | Watiq National Portal' };
+export const generateMetadata = pageTitle('Track a Request');
 
 export default async function TrackPage({ searchParams }) {
   const params = await searchParams;

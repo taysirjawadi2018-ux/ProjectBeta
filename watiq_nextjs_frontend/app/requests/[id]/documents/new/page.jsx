@@ -1,4 +1,5 @@
 import { apiGet, tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -23,7 +24,7 @@ import '@/styles/pages/document_upload.css';
  * needs JavaScript: a plain form post cannot PUT to a second origin.
  */
 
-export const metadata = { title: 'Upload a Document | Watiq National Portal' };
+export const generateMetadata = pageTitle('Upload a Document');
 
 export default async function UploadPage({ params }) {
   const { id } = await params;

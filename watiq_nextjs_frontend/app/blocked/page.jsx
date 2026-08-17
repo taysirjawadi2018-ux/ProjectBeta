@@ -1,5 +1,6 @@
 import BlockedScreen from '@/components/BlockedScreen.jsx';
 import { TITLES, FORBIDDEN_VIEW } from '@/lib/error-views.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { failureContext } from '@/lib/failure.js';
 
 /**
@@ -13,7 +14,7 @@ import { failureContext } from '@/lib/failure.js';
  * exactly the one someone would want to forge.
  */
 
-export const metadata = { title: 'Access Restricted | Watiq National Portal' };
+export const generateMetadata = pageTitle('Access Restricted');
 
 const ALLOWED_CODES = [401, 403, 429];
 

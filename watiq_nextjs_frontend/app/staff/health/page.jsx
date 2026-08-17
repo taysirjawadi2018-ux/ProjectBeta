@@ -1,4 +1,5 @@
 import { apiGet, apiRequest, ApiError, tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { requireStaff } from '@/lib/guards.js';
 import { getTranslator } from '@/lib/i18n.js';
 import { role as sessionRole } from '@/lib/auth.js';
@@ -18,7 +19,7 @@ import '@/styles/pages/staff_health.css';
  * it would have to invent.
  */
 
-export const metadata = { title: 'System Health | Watiq Back Office' };
+export const generateMetadata = pageTitle('System Health', { suffix: '| Watiq Back Office' });
 
 const CHECKS = [
   ['Upstream API', '/healthz', false],

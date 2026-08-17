@@ -1,4 +1,5 @@
 import { pageContext } from '@/lib/page.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { requireLogin } from '@/lib/guards.js';
 import { displayName } from '@/lib/format.js';
 import { formatDate } from '@/lib/view.js';
@@ -15,7 +16,7 @@ import '@/styles/pages/profile.css';
  * worse than no input.
  */
 
-export const metadata = { title: 'Your Profile | Watiq National Portal' };
+export const generateMetadata = pageTitle('Your Profile');
 
 export default async function ProfilePage() {
   await requireLogin('/profile');

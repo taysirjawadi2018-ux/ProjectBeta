@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { requireStaff } from '@/lib/guards.js';
 import { getTranslator } from '@/lib/i18n.js';
@@ -15,7 +16,7 @@ import { setAppointmentStatusAction } from '@/lib/actions.js';
  * views/staff.py:office_appointments.
  */
 
-export const metadata = { title: 'Appointments | Watiq Back Office' };
+export const generateMetadata = pageTitle('Appointments', { suffix: '| Watiq Back Office' });
 
 export default async function StaffAppointmentsPage() {
   await requireStaff('/staff/appointments');

@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -22,7 +23,7 @@ import '@/styles/pages/book_appointment.css';
  * neither returned 422 on every load, which is why no slot ever appeared.
  */
 
-export const metadata = { title: 'Book an Appointment | Watiq National Portal' };
+export const generateMetadata = pageTitle('Book an Appointment');
 
 /**
  * Group slots into the Morning/Afternoon blocks the design draws.

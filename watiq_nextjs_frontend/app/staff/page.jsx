@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf, totalOf } from '@/lib/format.js';
 import { requireStaff } from '@/lib/guards.js';
 import { getTranslator } from '@/lib/i18n.js';
@@ -17,7 +18,7 @@ import '@/styles/pages/staff_workbench.css';
  * views/staff.py:workbench.
  */
 
-export const metadata = { title: 'Workbench | Watiq Back Office' };
+export const generateMetadata = pageTitle('Workbench', { suffix: '| Watiq Back Office' });
 
 const PAGE_SIZE = 25;
 

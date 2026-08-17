@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -22,7 +23,7 @@ import '@/styles/pages/my_documents.css';
  * detail route can address it without a second lookup.
  */
 
-export const metadata = { title: 'My Documents | Watiq National Portal' };
+export const generateMetadata = pageTitle('My Documents');
 
 const KINDS = ['verified', 'pending', 'rejected'];
 

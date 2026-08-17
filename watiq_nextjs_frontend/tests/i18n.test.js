@@ -94,6 +94,41 @@ test('the committed json matches what the script produces from the .po', () => {
   expect(regenerate('ar')).toEqual(ar);
 });
 
+// --- page titles ----------------------------------------------------------
+
+test('every page title resolves against the catalog', async () => {
+  // The catalogs key the page NAME and the "| Watiq National Portal" suffix
+  // separately, because that is how the Flask templates emitted them. Looking
+  // up the joined string finds nothing and falls through to English — which is
+  // silent, and was the state of every title until this was split.
+  const { globSync } = await import('node:fs');
+  const calls = [];
+  for (const file of globSync('app/**/page.jsx')) {
+    const src = readFileSync(file, 'utf8');
+    const match = src.match(/pageTitle\(\s*'([^']*)'(,\s*\{[^}]*\})?\s*\)/);
+    // `options` distinguishes "took the default suffix" from "passed
+    // suffix: null because the catalog holds the whole title as one entry".
+    if (match) calls.push({ file, name: match[1], options: match[2] });
+  }
+  expect(calls.length).toBeGreaterThan(30);
+
+  // Anything the catalog does not know renders in English, which is correct
+  // behaviour — but it must be a deliberate short list, not most of them.
+  const untranslated = calls.filter(({ name }) => !(name in fr));
+  expect(
+    untranslated.length,
+    `titles missing from the catalog: ${untranslated.map((c) => c.name).join(', ')}`,
+  ).toBeLessThan(calls.length / 2);
+
+  // No call may pass a joined string with the default suffix — that is the
+  // exact shape that silently fails.
+  for (const { file, name, options } of calls) {
+    if (!options) {
+      expect(name, `${file} joins the suffix into the name`).not.toContain(' | ');
+    }
+  }
+});
+
 // --- the translator -------------------------------------------------------
 
 test('a translated string comes back in the reader’s language', async () => {

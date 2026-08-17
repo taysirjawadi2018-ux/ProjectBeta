@@ -44,10 +44,16 @@ export async function POST(request) {
 
   // 303: the response to a POST is a resource to GET, and without it a browser
   // repeats the POST on reload.
-  const response = NextResponse.redirect(
-    new URL(safeTarget(form.get('next')), request.url),
-    303,
-  );
+  //
+  // A RELATIVE Location, which RFC 7231 permits and every browser resolves
+  // against the request URL. NextResponse.redirect() insists on an absolute
+  // URL and builds it from request.url — which inside the container is the
+  // bound address, so the browser was sent to http://0.0.0.0:3000/… and went
+  // nowhere. Behind nginx it would have leaked the internal host instead.
+  const response = new NextResponse(null, {
+    status: 303,
+    headers: { Location: safeTarget(form.get('next')) },
+  });
 
   const options = {
     maxAge: PREF_MAX_AGE,

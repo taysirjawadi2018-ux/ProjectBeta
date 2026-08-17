@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { apiGet, tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -25,7 +26,7 @@ import '@/styles/pages/document_detail.css';
  * yours to read.
  */
 
-export const metadata = { title: 'Document | Watiq National Portal' };
+export const generateMetadata = pageTitle('Document');
 
 export default async function DocumentDetailPage({ params }) {
   const { id, documentId } = await params;

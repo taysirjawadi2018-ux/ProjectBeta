@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { isAuthenticated } from '@/lib/auth.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { getTranslator } from '@/lib/i18n.js';
 import { noticeFor } from '@/lib/flash.js';
 import { one } from '@/lib/view.js';
@@ -16,7 +17,7 @@ import '@/styles/pages/login.css';
  * the staff form is the higher-value target of the two.
  */
 
-export const metadata = { title: 'Watiq National Portal | Secure Login' };
+export const generateMetadata = pageTitle('Watiq National Portal | Secure Login', { suffix: null });
 
 export default async function LoginPage({ searchParams }) {
   // Already signed in: there is nothing to do here, and leaving the form up

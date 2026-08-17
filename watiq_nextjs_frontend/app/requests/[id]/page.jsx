@@ -1,4 +1,5 @@
 import { apiGet, tryGet, ApiError } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -23,7 +24,7 @@ import '@/styles/pages/request_detail.css';
  * FailureScreen renders whichever the API decided without adding a hint.
  */
 
-export const metadata = { title: 'Request | Watiq National Portal' };
+export const generateMetadata = pageTitle('Request');
 
 export default async function RequestDetailPage({ params }) {
   const { id } = await params;

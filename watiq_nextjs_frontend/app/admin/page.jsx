@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf, totalOf } from '@/lib/format.js';
 import { requireAdmin } from '@/lib/guards.js';
 import { getTranslator } from '@/lib/i18n.js';
@@ -28,7 +29,7 @@ import '@/styles/pages/staff_workbench.css';
  * non-admin has no business learning this route exists.
  */
 
-export const metadata = { title: 'Administration | Watiq Back Office' };
+export const generateMetadata = pageTitle('Administration', { suffix: '| Watiq Back Office' });
 
 const TABS = [
   ['users', 'Citizens'],

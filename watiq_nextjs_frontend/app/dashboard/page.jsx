@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf, displayName } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -19,7 +20,7 @@ import '@/styles/pages/citizen_dashboard.css';
  * portal is down" even when only the notification feed is.
  */
 
-export const metadata = { title: 'Your Space | Watiq National Portal' };
+export const generateMetadata = pageTitle('Your Space');
 
 export default async function DashboardPage() {
   await requireLogin('/dashboard');

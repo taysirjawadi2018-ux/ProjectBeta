@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf, totalOf } from '@/lib/format.js';
 import { requireStaff } from '@/lib/guards.js';
 import { getTranslator } from '@/lib/i18n.js';
@@ -19,7 +20,7 @@ import '@/styles/pages/staff_audit.css';
  * cannot read it.
  */
 
-export const metadata = { title: 'Access Log | Watiq Back Office' };
+export const generateMetadata = pageTitle('Access Log', { suffix: '| Watiq Back Office' });
 
 const PAGE_SIZE = 50;
 

@@ -1,4 +1,5 @@
 import { pageContext } from '@/lib/page.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { supportChatAction } from '@/lib/actions.js';
 import PageShell from '@/components/PageShell.jsx';
 import '@/styles/pages/support_chat.css';
@@ -14,7 +15,7 @@ import '@/styles/pages/support_chat.css';
  * mockup's; the promise is not.
  */
 
-export const metadata = { title: 'Live Support | Watiq National Portal' };
+export const generateMetadata = pageTitle('Live Support');
 
 export default async function SupportChatPage() {
   const ctx = await pageContext();

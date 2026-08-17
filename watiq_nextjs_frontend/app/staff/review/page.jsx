@@ -1,4 +1,5 @@
 import { apiGet, tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { requireStaff } from '@/lib/guards.js';
 import { getTranslator } from '@/lib/i18n.js';
@@ -14,7 +15,7 @@ import '@/styles/pages/verify_request.css';
  * Port of views/staff.py:review with no request_id.
  */
 
-export const metadata = { title: 'Review | Watiq Back Office' };
+export const generateMetadata = pageTitle('Review', { suffix: '| Watiq Back Office' });
 
 export default async function ReviewNextPage() {
   await requireStaff('/staff/review');

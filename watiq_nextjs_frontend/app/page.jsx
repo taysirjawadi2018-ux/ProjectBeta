@@ -1,5 +1,6 @@
 import { Mark } from '@/components/Logo.jsx';
 import { pageContext } from '@/lib/page.js';
+import { pageTitle } from '@/lib/metadata.js';
 import '@/styles/pages/index.css';
 
 /**
@@ -10,7 +11,7 @@ import '@/styles/pages/index.css';
  * archetypes, and it is why the root layout renders neither.
  */
 
-export const metadata = { title: 'Watiq National Portal | Republic of Tunisia' };
+export const generateMetadata = pageTitle('Watiq National Portal | Republic of Tunisia', { suffix: null });
 
 // The four categories are the mockup's own copy, not catalogue rows: each card
 // deep-links into the catalogue filtered to that category.

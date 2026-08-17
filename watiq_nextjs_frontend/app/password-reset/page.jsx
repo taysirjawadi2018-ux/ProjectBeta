@@ -1,4 +1,5 @@
 import { getTranslator } from '@/lib/i18n.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { one } from '@/lib/view.js';
 import PasswordResetForm from './PasswordResetForm.jsx';
 import '@/styles/pages/password_reset.css';
@@ -12,7 +13,7 @@ import '@/styles/pages/password_reset.css';
  * exists — anything else makes this form an account-existence oracle.
  */
 
-export const metadata = { title: 'Recover Access | Watiq National Portal' };
+export const generateMetadata = pageTitle('Recover Access');
 
 export default async function PasswordResetPage({ searchParams }) {
   const query = await searchParams;

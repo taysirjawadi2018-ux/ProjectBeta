@@ -1,4 +1,5 @@
 import { tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf, displayName } from '@/lib/format.js';
 import { pageContext } from '@/lib/page.js';
 import { requireLogin } from '@/lib/guards.js';
@@ -18,7 +19,7 @@ import '@/styles/pages/payment_confirmation.css';
  * what anyone wants at a counter. print:hidden covers the rest.
  */
 
-export const metadata = { title: 'Payment Receipt | Watiq National Portal' };
+export const generateMetadata = pageTitle('Payment Receipt');
 
 export default async function PaymentConfirmationPage({ searchParams }) {
   await requireLogin('/payments/confirmation');

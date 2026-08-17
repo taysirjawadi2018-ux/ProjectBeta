@@ -1,7 +1,8 @@
 import { pageContext } from '@/lib/page.js';
+import { pageTitle } from '@/lib/metadata.js';
 import ContentPage from '@/components/ContentPage.jsx';
 
-export const metadata = { title: 'Watiq National Portal - About Watiq' };
+export const generateMetadata = pageTitle('Watiq National Portal - About Watiq');
 
 export default async function Page() {
   const ctx = await pageContext();

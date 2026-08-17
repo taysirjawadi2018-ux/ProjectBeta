@@ -1,4 +1,5 @@
 import { apiGet, tryGet } from '@/lib/api.js';
+import { pageTitle } from '@/lib/metadata.js';
 import { itemsOf } from '@/lib/format.js';
 import { requireStaff } from '@/lib/guards.js';
 import { getTranslator } from '@/lib/i18n.js';
@@ -11,7 +12,7 @@ import '@/styles/pages/verify_request.css';
 
 /** A deep-linked request. Port of views/staff.py:review with a request_id. */
 
-export const metadata = { title: 'Review | Watiq Back Office' };
+export const generateMetadata = pageTitle('Review', { suffix: '| Watiq Back Office' });
 
 export default async function ReviewPage({ params }) {
   const { id } = await params;

@@ -1,4 +1,5 @@
 import { pageContext } from '@/lib/page.js';
+import { pageTitle } from '@/lib/metadata.js';
 import PageShell from '@/components/PageShell.jsx';
 import '@/styles/pages/terms.css';
 
@@ -7,7 +8,7 @@ import '@/styles/pages/terms.css';
  * Port of frontend_flask/templates/terms.html and views/public.py:terms.
  */
 
-export const metadata = { title: 'Terms of Service | Watiq National Portal' };
+export const generateMetadata = pageTitle('Terms of Service');
 
 const SECTIONS = [
   [
