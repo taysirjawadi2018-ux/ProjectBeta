@@ -1,7 +1,6 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
 import { loginCitizen, loginStaff, completeMfa, logout } from './auth.js';
 import { getSession } from './session.js';
 import { flash } from './flash.js';
@@ -18,6 +17,11 @@ import { STATUS_CODES } from './workflow.js';
  * They are also the only place cookies may be written: a Server Component
  * render cannot issue one (see lib/session.js), which is why sign-in and
  * sign-out are actions rather than page logic.
+ *
+ * No revalidatePath anywhere. Every route is force-dynamic (see
+ * app/layout.jsx) precisely because the BFF renders per request, so there is no
+ * cached page for it to bust — the calls were dead, and they throw outside a
+ * request scope, which is how they were found.
  *
  * No explicit CSRF token. Next compares Origin against Host on every Server
  * Action before the function body runs, which is the check Flask-WTF's token
@@ -223,7 +227,6 @@ export async function confirmDocumentAction(formData) {
   } catch (err) {
     await flash(message(err), 'error');
   }
-  revalidatePath(back);
   redirect(back);
 }
 
@@ -236,7 +239,6 @@ export async function deleteDocumentAction(formData) {
   } catch (err) {
     await flash(message(err), 'error');
   }
-  revalidatePath(back);
   redirect(back);
 }
 
@@ -288,7 +290,6 @@ export async function cancelAppointmentAction(formData) {
   } catch (err) {
     await flash(message(err), 'error');
   }
-  revalidatePath('/appointments');
   redirect('/appointments');
 }
 
@@ -301,7 +302,6 @@ export async function markNotificationReadAction(formData) {
   } catch (err) {
     await flash(message(err), 'error');
   }
-  revalidatePath('/notifications');
   redirect('/notifications');
 }
 
@@ -312,7 +312,6 @@ export async function markAllNotificationsReadAction() {
   } catch (err) {
     await flash(message(err), 'error');
   }
-  revalidatePath('/notifications');
   redirect('/notifications');
 }
 
@@ -396,7 +395,6 @@ export async function verifyDocumentAction(formData) {
   } catch (err) {
     await flash(message(err), 'error');
   }
-  revalidatePath(back);
   redirect(back);
 }
 

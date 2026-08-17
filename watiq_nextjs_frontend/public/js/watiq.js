@@ -10,7 +10,7 @@
  * would simply be dropped by the browser.
  *
  * Every value below is dispatched here. If you add a data-action to a
- * template, add a case for it too — a button whose action falls through is a
+ * component, add a case for it too — a button whose action falls through is a
  * dead control, which is exactly what tests/test_no_dead_controls.py exists to
  * prevent it silently becoming.
  *
@@ -303,7 +303,7 @@
     }
   });
 
-  /* Reader preferences (templates/partials/_a11y.html).
+  /* Reader preferences (components/A11yControls.jsx).
    *
    * The control is a real form and the server sets the same cookie, so this is
    * strictly an upgrade: it applies the change in place instead of costing a
