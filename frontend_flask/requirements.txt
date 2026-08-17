@@ -1,8 +1,0 @@
-# Watiq BFF runtime dependencies.
-Flask>=3.0,<4.0
-httpx>=0.27          # server-side calls to the Watiq API
-Flask-Session>=0.8   # server-side sessions; the token never reaches the browser
-redis>=5.2           # session backing store
-Flask-WTF>=1.2       # CSRF on every mutating form
-Flask-Babel>=4.0     # English / French / Arabic catalogs and locale selection
-gunicorn>=23.0       # production WSGI server

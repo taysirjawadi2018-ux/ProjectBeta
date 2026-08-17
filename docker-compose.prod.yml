@@ -75,24 +75,30 @@ services:
     read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=32m
+      # Next writes its incremental cache here on every render. Without this
+      # mount a read_only container exits with EACCES on its first request —
+      # not at startup, so the healthcheck grace period hides it and the
+      # replica looks healthy right up until it takes traffic.
+      - /app/.next/cache:rw,noexec,nosuid,size=64m
     cap_drop: [ALL]
     security_opt:
       - no-new-privileges:true
       - seccomp:./ops/docker/seccomp-watiq.json
     user: "10001:10001"
     pids_limit: 256
-    mem_limit: 512m
+    # Node holds more resident memory than the Flask worker pair did: the V8
+    # heap plus the RSC renderer. 512m was tight enough to OOM under load.
+    mem_limit: 768m
     ulimits:
       nofile: { soft: 8192, hard: 8192 }
     environment:
       ENV: prod
-      DEBUG: "false"
+      NODE_ENV: production
       WATIQ_API_URL: http://watiq-api:8000
-      REDIS_DSN: redis://session-store:6379/0
       # Mounted, not injected: an env var is visible in `docker inspect`.
-      SECRET_KEY_FILE: /run/secrets/frontend_secret_key
+      REDIS_DSN_FILE: /run/secrets/frontend_redis_dsn
     secrets:
-      - frontend_secret_key
+      - frontend_redis_dsn
     depends_on:
       api:
         condition: service_started
@@ -290,7 +296,12 @@ secrets:
   auth_pw: { file: ./secrets/auth_pw }
   auditor_pw: { file: ./secrets/auditor_pw }
   admin_pw: { file: ./secrets/admin_pw }
-  frontend_secret_key: { file: ./secrets/frontend_secret_key }
+  # Was frontend_secret_key, which signed the Flask session-id cookie. The
+  # Next BFF uses a 256-bit random id needing no shared secret, so the only
+  # frontend secret left is the session store's DSN — which carries its
+  # password and therefore must not sit in the environment, where
+  # `docker inspect` exposes it (Security.md §12.4).
+  frontend_redis_dsn: { file: ./secrets/frontend_redis_dsn }
 
 volumes:
   pgdata:

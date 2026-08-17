@@ -379,19 +379,23 @@ services:
 
   frontend:
     build:
-      context: ./frontend_flask
-    # The BFF. It renders the twelve screens server-side and is the only thing
-    # holding an API token — the browser never receives one (ADR-005).
+      context: ./watiq_nextjs_frontend
+    # The BFF. It renders every screen server-side and is the only thing holding
+    # an API token — the browser never receives one (ADR-005).
     environment:
       ENV: ${ENV:-dev}
-      DEBUG: "${DEBUG:-false}"
+      NODE_ENV: production
       WATIQ_API_URL: http://api:8000
       REDIS_DSN: redis://session-store:6379/0
-      SECRET_KEY: ${FRONTEND_SECRET_KEY:-watiq-dev-frontend-secret-change-me}
-    # Loopback only — see the note on the api service. On macOS, port 5000 is
-    # taken by AirPlay Receiver by default; FRONTEND_PORT=5001 in .env is the fix.
+    # No SECRET_KEY. Flask signed the session-id cookie with one; the Next BFF
+    # uses a 256-bit random id instead, which needs no shared secret between
+    # replicas (see lib/session.js).
+    #
+    # Loopback only — see the note on the api service. Port 3000 rather than
+    # 5000: on macOS 5000 is taken by AirPlay Receiver, which is what
+    # FRONTEND_PORT existed to work around.
     ports:
-      - "127.0.0.1:${FRONTEND_PORT:-5000}:5000"
+      - "127.0.0.1:${FRONTEND_PORT:-3000}:3000"
     depends_on:
       api:
         condition: service_healthy
@@ -411,6 +415,19 @@ services:
     # refresh token, expiry, CSRF token, user id and role. No citizen PII is
     # ever written here (Backend.md §7, ADR-003).
     command: redis-server --bind 0.0.0.0 --maxmemory 128mb --maxmemory-policy volatile-lru
+    # Published for native-mode development only, and loopback-only like every
+    # other dev port here. The frontend can be run outside Docker against a
+    # dockerised API (`./run.sh dev`), and it needs a session store to reach:
+    # unlike Flask, this BFF has no signed-cookie fallback when Redis is
+    # missing, because that fallback put the access token in the browser —
+    # exactly what the BFF exists to prevent. Without a session store, sign-in
+    # appears to succeed and every subsequent page is signed out.
+    #
+    # 6380 on the host, not 6379: the API's Redis and a developer's own local
+    # Redis both want 6379, and a session store silently sharing a keyspace
+    # with either is worse than one that fails to bind.
+    ports:
+      - "127.0.0.1:${SESSION_STORE_PORT:-6380}:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s

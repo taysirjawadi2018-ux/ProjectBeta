@@ -4,7 +4,7 @@
 doctor:          ## check this machine can run the stack (ports, docker, .env) — changes nothing
 	bash ops/dev/preflight.sh
 
-up:              ## dev stack, self-contained (API on 127.0.0.1:8000, BFF on 127.0.0.1:5000)
+up:              ## dev stack, self-contained (API on 127.0.0.1:8000, BFF on 127.0.0.1:3000)
 	bash ops/dev/preflight.sh
 	docker compose up -d --build --remove-orphans
 
@@ -36,15 +36,14 @@ test:
 test-security:   ## the RLS regression suite — must pass before any merge
 	docker compose exec api pytest tests/security/ -v
 
-test-frontend:   ## BFF routes, guards and the dead-control gate
-	cd frontend_flask && .venv/bin/python -m pytest tests/ -q
+test-frontend:   ## BFF routes, guards, API contracts and the dead-control gate
+	cd watiq_nextjs_frontend && npm test
 
-frontend-build:  ## compile the design tokens to a static stylesheet
-	cd frontend_flask && npm install --no-audit --no-fund && npm run build
+frontend-build:  ## production build, including the text-scale PostCSS step
+	cd watiq_nextjs_frontend && npm install --no-audit --no-fund && npm run build
 
-frontend-dev:    ## run the BFF against a local API, rebuilding CSS on change
-	cd frontend_flask && npm run watch & \
-	cd frontend_flask && .venv/bin/python app.py
+frontend-dev:    ## run the BFF against a local API, with hot reload
+	cd watiq_nextjs_frontend && npm install --no-audit --no-fund && npm run dev
 
 lint:
 	ruff check backend && ruff format --check backend

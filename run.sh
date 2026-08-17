@@ -22,7 +22,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT"
 
 API_PORT="${API_PORT:-8000}"
-FRONTEND_PORT="${FRONTEND_PORT:-5000}"
+FRONTEND_PORT="${FRONTEND_PORT:-3000}"
 API_URL="http://127.0.0.1:${API_PORT}"
 FRONTEND_URL="http://127.0.0.1:${FRONTEND_PORT}"
 
@@ -314,66 +314,29 @@ ensure_backend_env() {
   echo "$py_cmd"
 }
 
-ensure_frontend_env() {
-  ensure_python_tool
+# The frontend is Node now, so there is no Python environment to build for it.
+# ensure_frontend_env() used to create frontend_flask/.venv; it is gone with the
+# Flask app.
 
-  local py_cmd
-  py_cmd="$(find_python_cmd frontend_flask)"
-
-  if [[ -z "$py_cmd" || "$py_cmd" == "python3" || "$py_cmd" == "python" || "$py_cmd" == "py" || "$py_cmd" == *"/python3"* || "$py_cmd" == *"/python"* ]]; then
-    if [[ -d "$ROOT/frontend_flask/.venv" ]]; then
-      warn "Existing frontend_flask/.venv is invalid or from another machine; recreating..."
-      rm -rf "$ROOT/frontend_flask/.venv"
-    fi
-    info "creating frontend_flask/.venv environment..."
-    local base_py
-    base_py="$(get_base_python)"
-    if command -v uv >/dev/null 2>&1; then
-      (cd "$ROOT/frontend_flask" && uv venv .venv >/dev/null 2>&1 || "$base_py" -m venv "$ROOT/frontend_flask/.venv")
-    else
-      "$base_py" -m venv "$ROOT/frontend_flask/.venv"
-    fi
-    py_cmd="$(find_python_cmd frontend_flask)"
-  fi
-
-  if [[ -z "$py_cmd" ]]; then
-    py_cmd="$(find_python_cmd backend)"
-  fi
-
-  [[ -n "$py_cmd" ]] || die "Python environment for frontend could not be created."
-
-  info "ensuring frontend Python dependencies are installed..."
-  if command -v uv >/dev/null 2>&1; then
-    (cd "$ROOT/frontend_flask" && uv pip install -r requirements.txt >/dev/null 2>&1 || true)
-  else
-    "$py_cmd" -m pip install -r "$ROOT/frontend_flask/requirements.txt" >/dev/null 2>&1 || \
-    "$py_cmd" -m pip install flask flask-session flask-wtf httpx redis flask-babel gunicorn >/dev/null 2>&1 || \
-    die "Failed to install frontend Python dependencies."
-  fi
-
-  echo "$py_cmd"
-}
-
-ensure_frontend_assets() {
+ensure_frontend_deps() {
   ensure_node_tool
   local npm_cmd
   npm_cmd="$(find_npm_cmd)"
 
-  if [[ -n "$npm_cmd" ]]; then
-    if [[ ! -d "$ROOT/frontend_flask/node_modules" ]]; then
-      info "installing frontend Node modules..."
-      (cd "$ROOT/frontend_flask" && "$npm_cmd" install --no-audit --no-fund)
-    fi
+  [[ -n "$npm_cmd" ]] || die "npm is required to run the frontend. Install Node 20 or newer."
 
-    if [[ ! -s "$ROOT/frontend_flask/static/css/watiq.css" ]]; then
-      info "compiling Tailwind CSS stylesheet..."
-      (cd "$ROOT/frontend_flask" && "$npm_cmd" run build)
-    fi
-  else
-    if [[ ! -s "$ROOT/frontend_flask/static/css/watiq.css" ]]; then
-      warn "static/css/watiq.css missing and npm not available; UI styling may be unrendered."
+  if [[ ! -d "$ROOT/watiq_nextjs_frontend/node_modules" ]]; then
+    info "installing frontend Node modules..."
+    # `npm ci` when there is a lockfile: it is faster and it installs exactly
+    # what was locked, which is the whole point of committing one.
+    if [[ -f "$ROOT/watiq_nextjs_frontend/package-lock.json" ]]; then
+      (cd "$ROOT/watiq_nextjs_frontend" && "$npm_cmd" ci --no-audit --no-fund)
+    else
+      (cd "$ROOT/watiq_nextjs_frontend" && "$npm_cmd" install --no-audit --no-fund)
     fi
   fi
+
+  echo "$npm_cmd"
 }
 
 # --- Docker & Compose helpers ---------------------------------------------
@@ -438,14 +401,9 @@ install_all_dependencies() {
   backend_python="$(ensure_backend_env)"
   bold "  ✓ Backend environment ready ($backend_python)"
 
-  info "Setting up frontend Python environment..."
-  local frontend_python
-  frontend_python="$(ensure_frontend_env)"
-  bold "  ✓ Frontend environment ready ($frontend_python)"
-
-  info "Setting up frontend Node.js assets..."
-  ensure_frontend_assets
-  bold "  ✓ Frontend assets & CSS ready"
+  info "Setting up frontend Node.js environment..."
+  ensure_frontend_deps >/dev/null
+  bold "  ✓ Frontend dependencies ready"
 
   bold "=== Setup Complete! All tools and dependencies are installed. ==="
 }
@@ -510,29 +468,23 @@ up_local() {
   }
   trap cleanup EXIT INT TERM
 
-  local frontend_python npm_cmd
-  frontend_python="$(ensure_frontend_env)"
-  npm_cmd="$(find_npm_cmd)"
+  local npm_cmd
+  npm_cmd="$(ensure_frontend_deps)"
 
   info "starting API and dependencies in Docker..."
-  compose up -d api
+  compose up -d api session-store
   wait_for "API" "$API_URL" || die "The API did not respond; check './run.sh logs api'."
-
-  if [[ -n "$npm_cmd" ]]; then
-    info "watching static/src and templates for CSS changes..."
-    (cd frontend_flask && "$npm_cmd" run watch >"$LOG_DIR/watiq-tailwind.log" 2>&1) &
-    watcher_pid=$!
-  else
-    warn "npm not found — CSS hot reload disabled."
-  fi
 
   echo
   bold "Frontend (native) → $FRONTEND_URL   API (docker) → $API_URL"
-  echo "  Tailwind log: $LOG_DIR/watiq-tailwind.log"
   echo
 
-  cd frontend_flask
-  WATIQ_API_URL="$API_URL" ENV=dev DEBUG=true FLASK_DEBUG=1 "$frontend_python" app.py
+  # `next dev` rebuilds CSS and rerenders on change itself, so there is no
+  # separate Tailwind watcher to run any more.
+  cd watiq_nextjs_frontend
+  WATIQ_API_URL="$API_URL" \
+  REDIS_DSN="redis://127.0.0.1:${SESSION_STORE_PORT:-6380}/0" \
+  ENV=dev PORT="$FRONTEND_PORT" "$npm_cmd" run dev
 }
 
 up_native() {
@@ -556,16 +508,9 @@ up_native() {
   }
   trap cleanup EXIT INT TERM
 
-  local backend_python frontend_python npm_cmd
+  local backend_python npm_cmd
   backend_python="$(ensure_backend_env)"
-  frontend_python="$(ensure_frontend_env)"
-  npm_cmd="$(find_npm_cmd)"
-
-  if [[ -n "$npm_cmd" ]]; then
-    info "watching static/src and templates for CSS changes..."
-    (cd frontend_flask && "$npm_cmd" run watch >"$LOG_DIR/watiq-tailwind.log" 2>&1) &
-    watcher_pid=$!
-  fi
+  npm_cmd="$(ensure_frontend_deps)"
 
   info "starting API server natively on port ${API_PORT}..."
   if command -v uv >/dev/null 2>&1; then
@@ -583,11 +528,12 @@ up_native() {
   echo "  frontend  $FRONTEND_URL"
   echo "  API       $API_URL      (docs at $API_URL/docs)"
   echo "  API log:  $LOG_DIR/watiq-api.log"
-  echo "  CSS log:  $LOG_DIR/watiq-tailwind.log"
   echo
 
-  cd frontend_flask
-  WATIQ_API_URL="$API_URL" ENV=dev DEBUG=true FLASK_DEBUG=1 "$frontend_python" app.py
+  cd watiq_nextjs_frontend
+  WATIQ_API_URL="$API_URL" \
+  REDIS_DSN="redis://127.0.0.1:${SESSION_STORE_PORT:-6380}/0" \
+  ENV=dev PORT="$FRONTEND_PORT" "$npm_cmd" run dev
 }
 
 # --- entrypoint -----------------------------------------------------------
