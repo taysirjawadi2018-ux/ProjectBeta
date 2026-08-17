@@ -1,0 +1,15 @@
+# Everything the build does not need. node_modules especially: the deps stage
+# installs its own from the lockfile, and copying a host tree in would ship
+# whatever architecture the developer's machine happens to be.
+node_modules
+.next
+out
+npm-debug.log*
+.env*.local
+.git
+.gitignore
+Dockerfile
+.dockerignore
+tests
+vitest.config.js
+README.md

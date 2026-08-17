@@ -88,7 +88,7 @@ test('the committed json matches what the script produces from the .po', () => {
   // of truth the translators work in.
   const regenerate = (locale) =>
     parsePo(
-      readFileSync(`../frontend_flask/translations/${locale}/LC_MESSAGES/messages.po`, 'utf8'),
+      readFileSync(`i18n/po/${locale}/LC_MESSAGES/messages.po`, 'utf8'),
     );
   expect(regenerate('fr')).toEqual(fr);
   expect(regenerate('ar')).toEqual(ar);

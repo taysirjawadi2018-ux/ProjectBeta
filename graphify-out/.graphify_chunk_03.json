@@ -1,0 +1,879 @@
+{
+  "nodes": [
+    {
+      "id": "frontend_flask_readme_watiq_bff",
+      "label": "Watiq Flask Back-end-for-Frontend",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 1-17",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_redis_token_session",
+      "label": "Redis-backed Token-Only Session",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 6-17, 38",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_refresh_cookie_replay",
+      "label": "Manual Refresh Cookie Replay",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 82-87",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_edge_login_rate_limiting",
+      "label": "Edge Login Rate Limiting",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 89-93",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_404_not_403",
+      "label": "404 Instead of 403 for Privileged Routes",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 57-59",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_csp_asset_vendoring",
+      "label": "Strict CSP Asset Self-Hosting",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 95-117",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_per_page_css_separation",
+      "label": "Per-Page CSS Kept Separate",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 107-110",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_icon_font_subsetting",
+      "label": "Material Symbols Icon Font Subsetting",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 111-113",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_unshared_nav_and_footer",
+      "label": "Navigation and Footers Deliberately Not Shared",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 74-78",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_progressive_enhancement",
+      "label": "Works With JavaScript Disabled",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 6-10",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_admin_screen_had_no_design",
+      "label": "Admin Screen Had No Source Design",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 135-140",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_readme_read_only_profile",
+      "label": "Read-Only Citizen Profile",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 143-144",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_requirements_csrf_on_mutating_forms",
+      "label": "CSRF on Every Mutating Form",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/requirements.txt",
+      "source_location": "line 6",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_requirements_trilingual_catalogs",
+      "label": "English / French / Arabic Locale Catalogs",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/requirements.txt",
+      "source_location": "line 7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_base_shell",
+      "label": "base.html Shared Document Shell",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/base.html",
+      "source_location": "lines 1-68",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_base_root_class_block",
+      "label": "Blockified <html> Root Class",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/base.html",
+      "source_location": "lines 24-41",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_base_server_rendered_theme",
+      "label": "Server-Rendered Theme and Text Scale",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/base.html",
+      "source_location": "lines 32-41",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates__page_layout",
+      "label": "_page.html Fallback Layout",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/_page.html",
+      "source_location": "lines 1-24",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_admin_management_screen",
+      "label": "Administration Screen",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 1-232",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_admin_management_typed_erase_confirmation",
+      "label": "Typed National-ID Erase Confirmation",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 87-106",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_admin_management_role_permission_editor",
+      "label": "Role Permission Editor",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 196-231",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_admin_management_token_carried_permissions",
+      "label": "Permissions Carried in the Access Token",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 198-204",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_appointments_list_screen",
+      "label": "My Appointments List Screen",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointments.html",
+      "source_location": "lines 1-50",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_appointment_detail_screen",
+      "label": "Appointment Detail Screen",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "lines 1-158",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_appointment_detail_checkin_qr_pass",
+      "label": "QR Check-In Pass Card",
+      "file_type": "concept",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "lines 89-101",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_appointment_detail_tsl_interpreter_module",
+      "label": "Floating TSL Sign-Language Interpreter Module",
+      "file_type": "concept",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "lines 118-140",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_book_appointment_screen",
+      "label": "Book Appointment Screen",
+      "file_type": "code",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 1-544",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_book_appointment_querystring_wizard",
+      "label": "Query-String Driven Booking Wizard",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 9-14",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_book_appointment_week_calendar",
+      "label": "Week-at-a-Time Slot Calendar",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 284-346",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_book_appointment_static_map_plate",
+      "label": "Static Map Plate With Non-Projected Pins",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 187-225",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_book_appointment_accessibility_filters",
+      "label": "Accessibility Filter Toggles",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 120-145",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "frontend_flask_templates_book_appointment_bookmarkable_filter_form",
+      "label": "Single GET Form for Search and Filters",
+      "file_type": "rationale",
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 91-94",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "frontend_flask_templates__page_layout",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/_page.html",
+      "source_location": "line 12",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointments_list_screen",
+      "target": "frontend_flask_templates__page_layout",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointments.html",
+      "source_location": "line 1",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_admin_management_screen",
+      "target": "frontend_flask_templates__page_layout",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "line 14",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointment_detail_screen",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "line 1",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_screen",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "line 1",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_unshared_nav_and_footer",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 74-78",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_unshared_nav_and_footer",
+      "target": "frontend_flask_templates__page_layout",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 76-78",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_csp_asset_vendoring",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/base.html",
+      "source_location": "lines 11-21",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_csp_asset_vendoring",
+      "target": "frontend_flask_readme_per_page_css_separation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 103-110",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_csp_asset_vendoring",
+      "target": "frontend_flask_readme_icon_font_subsetting",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 111-113",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_csp_asset_vendoring",
+      "target": "frontend_flask_templates_base_server_rendered_theme",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/base.html",
+      "source_location": "lines 32-39",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_base_root_class_block",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/base.html",
+      "source_location": "lines 24-41",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_base_server_rendered_theme",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/base.html",
+      "source_location": "lines 32-41",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_watiq_bff",
+      "target": "frontend_flask_readme_redis_token_session",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 6-17",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_watiq_bff",
+      "target": "frontend_flask_readme_edge_login_rate_limiting",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 89-93",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_refresh_cookie_replay",
+      "target": "frontend_flask_readme_redis_token_session",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "lines 82-87",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_screen",
+      "target": "frontend_flask_readme_404_not_403",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 71-77",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_admin_screen_had_no_design",
+      "target": "frontend_flask_templates_admin_management_screen",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 1-13",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_admin_management_typed_erase_confirmation",
+      "target": "frontend_flask_templates_admin_management_screen",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 87-106",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_admin_management_token_carried_permissions",
+      "target": "frontend_flask_templates_admin_management_role_permission_editor",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 198-204",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_admin_management_role_permission_editor",
+      "target": "frontend_flask_templates_admin_management_screen",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 196-231",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_admin_management_token_carried_permissions",
+      "target": "frontend_flask_readme_redis_token_session",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "lines 198-204",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointments_list_screen",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointments.html",
+      "source_location": "lines 12, 47",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointments_list_screen",
+      "target": "frontend_flask_templates_appointment_detail_screen",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointments.html",
+      "source_location": "line 32",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointment_detail_screen",
+      "target": "frontend_flask_templates_appointments_list_screen",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "line 17",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointment_detail_screen",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "lines 69, 105",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointments_list_screen",
+      "target": "frontend_flask_templates_appointment_detail_screen",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointments.html",
+      "source_location": "appointment record: id, slot_date, time_slot, office_name, service_name, status, queue_number",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_screen",
+      "target": "frontend_flask_templates_appointment_detail_screen",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "slot_id / office_id / slot_date posted here become the appointment rendered there",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_querystring_wizard",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 9-14",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_querystring_wizard",
+      "target": "frontend_flask_readme_progressive_enhancement",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 9-14",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_bookmarkable_filter_form",
+      "target": "frontend_flask_readme_progressive_enhancement",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 91-94",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_week_calendar",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 284-290",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_static_map_plate",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 191-193",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_accessibility_filters",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "lines 133-143",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_book_appointment_accessibility_filters",
+      "target": "frontend_flask_templates_appointment_detail_tsl_interpreter_module",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html",
+      "source_location": "LST toggle here controls the same sign-language affordance the TSL module provides there",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_per_page_css_separation",
+      "target": "frontend_flask_readme_unshared_nav_and_footer",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "both refuse to deduplicate near-identical artefacts because merging would silently change one page's behaviour",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_refresh_cookie_replay",
+      "target": "frontend_flask_templates_base_server_rendered_theme",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "both move work server-side to route around a browser/transport security control (Secure cookie jar, script-src 'self')",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_requirements_csrf_on_mutating_forms",
+      "target": "frontend_flask_templates_admin_management_screen",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/requirements.txt",
+      "source_location": "csrf_token() hidden input on every POST form in the template",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_requirements_csrf_on_mutating_forms",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/requirements.txt",
+      "source_location": "csrf_token() hidden input on logout and confirm-booking forms",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_requirements_csrf_on_mutating_forms",
+      "target": "frontend_flask_templates_appointments_list_screen",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/requirements.txt",
+      "source_location": "csrf_token() hidden input on the cancel form",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_requirements_csrf_on_mutating_forms",
+      "target": "frontend_flask_templates_appointment_detail_screen",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/requirements.txt",
+      "source_location": "csrf_token() hidden input on the cancel-booking form",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_requirements_trilingual_catalogs",
+      "target": "frontend_flask_templates_base_shell",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/requirements.txt",
+      "source_location": "base.html sets dir=text_dir and lang=locale and wraps strings in _()",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_read_only_profile",
+      "target": "frontend_flask_templates_book_appointment_accessibility_filters",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "both render a control as inert rather than wiring it to an API capability that does not exist yet",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointment_detail_checkin_qr_pass",
+      "target": "frontend_flask_templates_appointment_detail_screen",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "lines 89-101",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_appointment_detail_tsl_interpreter_module",
+      "target": "frontend_flask_templates_appointment_detail_screen",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/appointment_detail.html",
+      "source_location": "lines 118-140",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_templates_admin_management_screen",
+      "target": "frontend_flask_readme_404_not_403",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/admin_management.html",
+      "source_location": "screen lives behind @admin_required, which the README says answers 404 for non-admins",
+      "weight": 1.0
+    },
+    {
+      "source": "frontend_flask_readme_icon_font_subsetting",
+      "target": "frontend_flask_templates_book_appointment_screen",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md",
+      "source_location": "template emits material-symbols-outlined ligatures that must exist in the 81-icon subset",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "csp_driven_asset_self_hosting",
+      "label": "CSP-Driven Asset Self-Hosting",
+      "nodes": [
+        "frontend_flask_readme_csp_asset_vendoring",
+        "frontend_flask_templates_base_shell",
+        "frontend_flask_readme_per_page_css_separation",
+        "frontend_flask_readme_icon_font_subsetting",
+        "frontend_flask_templates_base_server_rendered_theme"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md"
+    },
+    {
+      "id": "appointment_booking_flow",
+      "label": "Citizen Appointment Booking Flow",
+      "nodes": [
+        "frontend_flask_templates_book_appointment_screen",
+        "frontend_flask_templates_book_appointment_querystring_wizard",
+        "frontend_flask_templates_book_appointment_week_calendar",
+        "frontend_flask_templates_appointments_list_screen",
+        "frontend_flask_templates_appointment_detail_screen",
+        "frontend_flask_templates_appointment_detail_checkin_qr_pass"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/templates/book_appointment.html"
+    },
+    {
+      "id": "bff_token_confinement_posture",
+      "label": "BFF Token Confinement Posture",
+      "nodes": [
+        "frontend_flask_readme_watiq_bff",
+        "frontend_flask_readme_redis_token_session",
+        "frontend_flask_readme_refresh_cookie_replay",
+        "frontend_flask_readme_edge_login_rate_limiting",
+        "frontend_flask_readme_404_not_403",
+        "frontend_flask_templates_admin_management_token_carried_permissions"
+      ],
+      "relation": "form",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "/mnt/c/Users/moham/OneDrive/Desktop/ProjectBeta/frontend_flask/README.md"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}
