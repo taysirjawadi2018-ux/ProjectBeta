@@ -3946,3 +3946,25 @@ msgstr "• téléversé"
 #~ msgid "min-h-screen flex flex-col font-body-md"
 #~ msgstr ""
 
+
+msgid "Tunisian Sign Language interpreter"
+msgstr "Interprète en langue des signes tunisienne"
+
+msgid "Play the sign language video"
+msgstr "Lire la vidéo en langue des signes"
+
+msgid "Mute the sign language video"
+msgstr "Couper le son de la vidéo en langue des signes"
+
+msgid "Enlarge the sign language panel"
+msgstr "Agrandir le panneau de langue des signes"
+
+msgid "Hide the sign language panel"
+msgstr "Masquer le panneau de langue des signes"
+
+msgid "Sign language interpreter feed"
+msgstr "Flux de l'interprète en langue des signes"
+
+msgid "Interpreter video coming soon"
+msgstr "Vidéo de l'interprète bientôt disponible"
+

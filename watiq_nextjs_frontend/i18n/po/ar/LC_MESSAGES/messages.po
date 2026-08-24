@@ -3790,3 +3790,25 @@ msgstr "• تم تحميله"
 #~ msgid "min-h-screen flex flex-col font-body-md"
 #~ msgstr ""
 
+
+msgid "Tunisian Sign Language interpreter"
+msgstr "مترجم لغة الإشارة التونسية"
+
+msgid "Play the sign language video"
+msgstr "تشغيل فيديو لغة الإشارة"
+
+msgid "Mute the sign language video"
+msgstr "كتم صوت فيديو لغة الإشارة"
+
+msgid "Enlarge the sign language panel"
+msgstr "تكبير لوحة لغة الإشارة"
+
+msgid "Hide the sign language panel"
+msgstr "إخفاء لوحة لغة الإشارة"
+
+msgid "Sign language interpreter feed"
+msgstr "بث مترجم لغة الإشارة"
+
+msgid "Interpreter video coming soon"
+msgstr "فيديو المترجم قريباً"
+
