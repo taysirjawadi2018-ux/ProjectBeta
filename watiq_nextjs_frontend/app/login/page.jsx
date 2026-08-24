@@ -35,24 +35,6 @@ export default async function LoginPage({ searchParams }) {
     <div className="auth-bg min-h-screen flex flex-col relative overflow-y-auto">
       <div className="bg-asset-login-1 emblem-watermark" />
 
-      <header className="w-full h-20 bg-primary-container border-b border-outline-variant z-20 flex items-center px-gutter sticky top-0">
-        <div className="max-w-container-max mx-auto w-full flex justify-between items-center">
-          <div className="flex items-center gap-md">
-            <span className="font-headline-md text-white tracking-tighter">{t('Watiq')}</span>
-            <div className="h-6 w-px bg-white/20 hidden md:block" />
-            <span className="text-white/70 font-label-sm uppercase tracking-widest hidden md:block">
-              {t('National Portal')}
-            </span>
-          </div>
-          <div className="flex items-center gap-sm">
-            <span className="text-white/60 font-label-sm hidden sm:block">
-              {t('Secure Session Protocol v2.4')}
-            </span>
-            <span className="material-symbols-outlined text-white/60">lock</span>
-          </div>
-        </div>
-      </header>
-
       <main id="main" className="flex-grow grid grid-cols-12 gap-gutter max-w-container-max mx-auto w-full p-margin-mobile md:p-margin-desktop z-10">
         <div className="hidden lg:flex lg:col-span-4 flex-col justify-center space-y-md">
           <h2 className="font-headline-lg text-midnight-navy">{t('Sovereign National Identity')}</h2>

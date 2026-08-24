@@ -1,4 +1,3 @@
-import { Lockup } from './Logo.jsx';
 import '@/styles/pages/error_maintenance.css';
 
 /**
@@ -10,24 +9,13 @@ import '@/styles/pages/error_maintenance.css';
  * fix — so the screen offers the status page, the priority support line, and
  * the parts of the portal that are still up, rather than a retry.
  *
- * Like the blocked screen it carries its own header and footer: the site nav is
- * driven by API data that is, by definition, not answering right now.
+ * The navigation bar is the universal one from the root layout — it reads only
+ * session cookies, so it still renders while the API is down.
  */
 export default function MaintenanceScreen({ title, message, year = new Date().getFullYear() }) {
   return (
     <>
       <div className="bg-asset-error-maintenance-1 emblem-watermark" />
-
-      <header className="w-full h-20 px-margin-desktop flex items-center justify-between z-10">
-        <a className="flex items-center gap-unit-2 focus-ring rounded" href="/">
-          <Lockup size="h-10" />
-        </a>
-        <div className="hidden md:flex gap-unit-4">
-          <span className="font-label-caps text-label-caps text-on-surface-variant uppercase">
-            Sovereign Digital Authority
-          </span>
-        </div>
-      </header>
 
       <main className="flex-1 flex flex-col items-center justify-center w-full max-w-container-max-width px-margin-mobile md:px-margin-desktop z-10 text-center">
         <div className="mb-unit-4 flex items-center gap-unit-2 bg-secondary-container/20 border border-secondary-fixed text-on-secondary-container px-unit-3 py-unit-1 rounded-full status-pulse">

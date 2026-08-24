@@ -3,22 +3,23 @@ import './globals.css';
 import { readPrefs } from '@/lib/prefs.js';
 import { takeFlashes } from '@/lib/flash.js';
 import { getTranslator } from '@/lib/i18n.js';
+import { pageContext } from '@/lib/page.js';
+import { role } from '@/lib/auth.js';
 import Loader from '@/components/Loader.jsx';
 import Flash from '@/components/Flash.jsx';
 import A11yControls from '@/components/A11yControls.jsx';
 import SignLanguageModule from '@/components/SignLanguageModule.jsx';
+import SiteNav from '@/components/SiteNav.jsx';
 
 /**
  * Shared shell for every Watiq screen. Port of
  * frontend_flask/templates/base.html.
  *
- * Only the parts that were provably identical across all the source pages live
- * here: the document scaffold, the stylesheet, the preloader, the flash region
- * and the reader controls. Navigation bars and footers are NOT shared — the
- * source screens use seven distinct nav variants and five distinct footers, so
- * hoisting them would silently change the design. Each page renders its own
- * (components/SiteNav.jsx and SiteFooter.jsx are the variant for the screens
- * that had no design of their own).
+ * The document scaffold, the stylesheet, the preloader, the flash region, the
+ * reader controls and THE one navigation bar live here — rendered once, so no
+ * screen carries chrome of its own. Footers are still per-shell: the source
+ * screens use five distinct footers, and hoisting them would silently change
+ * the design.
  *
  * Everything loaded here is same-origin on purpose. The CSP is
  *
@@ -78,9 +79,18 @@ export default async function RootLayout({ children }) {
   // script-src, so an un-nonced same-origin script is refused.
   const nonce = requestHeaders.get('x-nonce') ?? undefined;
 
+  // The one navigation bar, for every screen. The session decides its shape —
+  // anonymous, citizen or officer — and middleware's x-pathname decides which
+  // section is current. Pages render content only; none of them carries a
+  // nav of its own any more.
+  const pathname = requestHeaders.get('x-pathname') ?? '/';
+  const { isAuthenticated, isStaff, unreadCount } = await pageContext({ withProfile: false });
+  const isAdmin = ['admin', 'director'].includes(await role());
+
   // Where the reader controls return to when they post without JavaScript.
   // Keeps the query string, so a filtered list comes back still filtered.
   const next =
+    pathname ||
     requestHeaders.get('x-invoke-path') ||
     requestHeaders.get('x-matched-path') ||
     requestHeaders.get('referer')?.replace(/^https?:\/\/[^/]+/, '') ||
@@ -99,6 +109,14 @@ export default async function RootLayout({ children }) {
       <body>
         <Loader t={t} />
         <Flash messages={messages} />
+        <SiteNav
+          isAuthenticated={isAuthenticated}
+          isAdmin={isAdmin}
+          isStaff={isStaff}
+          pathname={pathname}
+          t={t}
+          unreadCount={unreadCount}
+        />
         {children}
         {/* The mandated sign-language interpreter slot. Bottom-end corner, so
             it mirrors the reader controls and stays out of the content flow

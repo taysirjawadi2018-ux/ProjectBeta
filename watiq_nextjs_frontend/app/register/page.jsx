@@ -19,21 +19,6 @@ export default async function RegisterPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-surface-container-low">
-      <header className="w-full h-20 bg-primary-container border-b border-outline-variant flex items-center px-gutter">
-        <div className="max-w-container-max mx-auto w-full flex justify-between items-center">
-          <a className="flex items-center gap-md focus-ring rounded" href="/">
-            <span className="font-headline-md text-white tracking-tighter">{t('Watiq')}</span>
-            <div className="h-6 w-px bg-white/20 hidden md:block" />
-            <span className="text-white/70 font-label-sm uppercase tracking-widest hidden md:block">
-              {t('National Portal')}
-            </span>
-          </a>
-          <a className="text-white/80 font-label-sm hover:text-white focus-ring rounded" href="/login">
-            {t('Already registered? Sign in')}
-          </a>
-        </div>
-      </header>
-
       <main id="main" className="flex-grow w-full max-w-3xl mx-auto px-margin-mobile py-12">
         <div className="mb-8">
           <h1 className="font-headline-lg text-headline-lg text-on-surface mb-2">

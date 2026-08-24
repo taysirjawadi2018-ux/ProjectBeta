@@ -62,11 +62,11 @@ test('the reader controls come after the page content, for tab order', async () 
   expect(controls).toBeGreaterThan(preloader);
 });
 
-test('the layout renders no nav or footer of its own', async () => {
+test('the layout renders exactly one nav — the universal one — and no footer', async () => {
   const html = await render(RootLayout, { children: null });
-  // Seven nav variants and five footers across the source screens; hoisting
-  // one into the shell would silently change the other six designs.
-  expect(html).not.toContain('<nav');
+  // One bar for every screen: anonymous, citizen and officer all read the
+  // same component. Footers stay per-shell by design.
+  expect((html.match(/<nav\b/g) ?? []).length).toBe(1);
   expect(html).not.toContain('<footer');
 });
 
@@ -158,6 +158,21 @@ test('the unread badge renders only when there is something unread', async () =>
 });
 
 test('the active item is the only one marked current', async () => {
-  const html = await render(SiteNav, { active: 'requests' });
+  const html = await render(SiteNav, { pathname: '/requests' });
   expect((html.match(/aria-current="page"/g) ?? []).length).toBe(1);
+});
+
+test('a nested route still marks its section, and only that section', async () => {
+  const html = await render(SiteNav, { pathname: '/requests/11/documents/3' });
+  const marked = html.match(/aria-current="page"[^>]*href="([^"]*)"|href="([^"]*)"[^>]*aria-current="page"/g) ?? [];
+  expect(marked).toHaveLength(1);
+  expect(html).toContain('href="/requests"');
+});
+
+test('an officer gets the back-office sections in the same bar', async () => {
+  const html = await render(SiteNav, { isAuthenticated: true, isStaff: true });
+  expect(html).toContain('href="/staff/review"');
+  expect(html).toContain('href="/staff/audit"');
+  // The citizen sections mean nothing inside the workbench.
+  expect(html).not.toContain('href="/payments"');
 });
