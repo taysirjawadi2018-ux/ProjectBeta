@@ -369,3 +369,25 @@
  * sign-language module carries end-*, so the pair mirrors together and stays
  * in opposite corners whichever way the page reads.
  */
+
+/* --- sign-language module (components/SignLanguageModule.jsx) -------------
+ *
+ * Width lives here rather than in Tailwind utilities because the expand
+ * control toggles .is-expanded on the module from watiq.js, and a plain class
+ * rule is what has to answer it. Base size matches the mockup's floating
+ * card; expanded grows toward a third of the viewport without ever covering
+ * the reader controls on the opposite corner.
+ */
+.SignLanguageModule .tsl-video-frame {
+  width: 12rem;
+}
+
+@media (min-width: 768px) {
+  .SignLanguageModule .tsl-video-frame {
+    width: 16rem;
+  }
+}
+
+.SignLanguageModule.is-expanded .tsl-video-frame {
+  width: min(24rem, calc(100vw - 6rem));
+}

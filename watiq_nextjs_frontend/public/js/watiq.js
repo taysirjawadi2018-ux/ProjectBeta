@@ -211,7 +211,12 @@
 
     "a11y-play": function (trigger) {
       var element = media(panelOf(trigger));
-      if (element) element.play();
+      if (element) {
+        // A source-less placeholder video (the TSL slot before the real feed
+        // lands) rejects play(); the rejection is expected, not an error.
+        var playing = element.play();
+        if (playing && playing.catch) playing.catch(function () {});
+      }
       trigger.setAttribute("aria-pressed", "true");
       swapIcon(trigger, "pause");
       trigger.setAttribute("data-action", "a11y-pause");

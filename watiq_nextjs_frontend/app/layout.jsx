@@ -6,6 +6,7 @@ import { getTranslator } from '@/lib/i18n.js';
 import Loader from '@/components/Loader.jsx';
 import Flash from '@/components/Flash.jsx';
 import A11yControls from '@/components/A11yControls.jsx';
+import SignLanguageModule from '@/components/SignLanguageModule.jsx';
 
 /**
  * Shared shell for every Watiq screen. Port of
@@ -99,6 +100,10 @@ export default async function RootLayout({ children }) {
         <Loader t={t} />
         <Flash messages={messages} />
         {children}
+        {/* The mandated sign-language interpreter slot. Bottom-end corner, so
+            it mirrors the reader controls and stays out of the content flow
+            on every screen, including the ones with chrome of their own. */}
+        <SignLanguageModule t={t} />
         {/* Last in the body so it is last in the tab order — it is chrome, and
             should not sit between the skip target and the page's own content. */}
         <A11yControls

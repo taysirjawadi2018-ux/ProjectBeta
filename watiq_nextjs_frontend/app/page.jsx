@@ -308,28 +308,8 @@ export default async function PortalIndex() {
         </section>
       </main>
 
-      {/* Sign Language Module (TSL) */}
-      <div className="fixed bottom-margin-mobile end-margin-mobile z-[100] group">
-        <div className="relative">
-          <div className="absolute -top-10 end-0 bg-primary-container text-on-primary text-[10px] font-label-caps py-1 px-3 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
-            {t('ACCESSIBILITY TSL')}
-          </div>
-          <a
-            aria-label={t('Tunisian Sign Language support')}
-            className="block w-48 md:w-64 aspect-[1.79] rounded-xl overflow-hidden shadow-2xl glass-panel border-2 border-secondary-fixed relative cursor-pointer active:scale-95 transition-transform focus-ring"
-            href="/accessibility"
-          >
-            <img alt={t('TSL Interpreter')} className="w-full h-full object-cover" src="/img/img-091ffb278e7e.jpg" />
-            <div className="absolute inset-0 bg-primary-container/20 group-hover:bg-transparent transition-colors" />
-            <div className="absolute bottom-2 end-2 flex gap-1">
-              <div className="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-ping" />
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              <span aria-hidden="true" className="material-symbols-outlined text-white text-4xl">play_circle</span>
-            </div>
-          </a>
-        </div>
-      </div>
+      {/* The Sign Language Module (TSL) is rendered by the root layout on
+          every screen — this page no longer carries its own copy. */}
 
       <footer className="bg-on-surface dark:bg-on-background border-t border-outline dark:border-outline-variant w-full py-12 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-gutter">
@@ -355,10 +335,19 @@ export default async function PortalIndex() {
           <div className="flex gap-4">
             <a
               aria-label={t('Watiq on social media')}
-              className="material-symbols-outlined text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded"
+              className="text-surface-container-highest hover:text-secondary-fixed transition-colors focus-ring rounded"
               href="/contact"
             >
-              facebook
+              {/* Material Symbols dropped brand marks, so the logo is inline
+                  SVG — a ligature would render as the literal text. */}
+              <svg
+                aria-hidden="true"
+                className="h-6 w-6"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.1-2.45-.1-2.4 0-4.05 1.45-4.05 4.15v2.25H7.5V13h2.7v8h3.3z" />
+              </svg>
             </a>
             <a
               aria-label={t('Language and accessibility options')}
