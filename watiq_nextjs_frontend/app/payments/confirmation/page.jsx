@@ -6,7 +6,6 @@ import { requireLogin } from '@/lib/guards.js';
 import { intOr, formatDate, formatMoney } from '@/lib/view.js';
 import EmptyState from '@/components/EmptyState.jsx';
 import StatusBadge from '@/components/StatusBadge.jsx';
-import { Lockup } from '@/components/Logo.jsx';
 import '@/styles/pages/payment_confirmation.css';
 
 /**
@@ -35,17 +34,6 @@ export default async function PaymentConfirmationPage({ searchParams }) {
 
   return (
     <div className="min-h-screen bg-surface-container-low flex flex-col">
-      <header className="w-full bg-primary-container px-margin-mobile md:px-gutter py-4 print:hidden">
-        <div className="max-w-3xl mx-auto flex items-center justify-between gap-4">
-          <a className="flex items-center focus-ring rounded" href="/">
-            <Lockup size="h-9" tone="light" />
-          </a>
-          <a className="font-label-md text-label-md text-white/80 hover:text-white focus-ring rounded" href="/payments">
-            {t('All payments')}
-          </a>
-        </div>
-      </header>
-
       <main id="main" className="flex-1 w-full max-w-3xl mx-auto px-margin-mobile py-12 space-y-6">
         {!payment ? (
           <EmptyState
@@ -67,7 +55,7 @@ export default async function PaymentConfirmationPage({ searchParams }) {
             </div>
 
             <article className="bg-surface border border-outline-variant rounded-xl p-8 shadow-sm space-y-6">
-              <header className="flex items-start justify-between gap-4 border-b border-outline-variant pb-6">
+      <header className="flex items-start justify-between gap-4 border-b border-outline-variant pb-6">
                 <div>
                   <p className="font-label-caps text-label-caps text-on-surface-variant uppercase">
                     {t('Official receipt')}

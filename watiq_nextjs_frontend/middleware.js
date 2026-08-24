@@ -39,6 +39,9 @@ export function middleware(request) {
   // components read when they need to nonce something by hand.
   headers.set('x-nonce', nonce);
   headers.set('Content-Security-Policy', csp);
+  // Next exposes no request path to server components, and the universal nav
+  // needs one to mark the current section without waiting for watiq.js.
+  headers.set('x-pathname', request.nextUrl.pathname);
 
   const response = NextResponse.next({ request: { headers } });
   response.headers.set('Content-Security-Policy', csp);

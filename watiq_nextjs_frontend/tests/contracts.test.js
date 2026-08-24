@@ -15,6 +15,7 @@ import {
 import BookAppointmentPage from '@/app/appointments/book/page.jsx';
 import NotificationsPage from '@/app/notifications/page.jsx';
 import DashboardPage from '@/app/dashboard/page.jsx';
+import RootLayout from '@/app/layout.jsx';
 
 /**
  * What the BFF sends upstream must match the API's request models.
@@ -245,7 +246,8 @@ test('the unread badge reads unread_count, not count', async () => {
   await citizen();
   // GET /notifications/unread-count answers {"unread_count": n}. Reading
   // "count" made the badge permanently 0, so the element never rendered.
-  const html = await render(DashboardPage, props());
+  // The badge now lives in the universal nav rendered by the root layout.
+  const html = await render(RootLayout, { children: null });
   expect(html).toContain('2 unread');
 });
 

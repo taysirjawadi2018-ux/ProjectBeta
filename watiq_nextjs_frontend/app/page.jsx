@@ -1,4 +1,3 @@
-import { Mark } from '@/components/Logo.jsx';
 import { pageContext } from '@/lib/page.js';
 import { pageTitle } from '@/lib/metadata.js';
 import '@/styles/pages/index.css';
@@ -48,68 +47,10 @@ export default async function PortalIndex() {
         src="/img/img-a5f82587302e.jpg"
       />
 
-      <header className="fixed top-0 w-full h-20 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm z-50 flex items-center">
-        <div className="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto">
-          <div className="flex items-center gap-4">
-            <a className="flex items-center gap-3 focus-ring rounded" href="/">
-              <Mark size="h-9" />
-              <span className="font-headline-md text-headline-md text-primary dark:text-inverse-primary uppercase tracking-wider">
-                {t('Republic of Tunisia')}
-              </span>
-            </a>
-          </div>
-          <nav className="hidden md:flex items-center gap-8" aria-label={t('Service categories')}>
-            {CATEGORIES.map(([code, , title], index) => (
-              <a
-                key={code}
-                className={
-                  index === 0
-                    ? 'text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary pb-1 font-bold font-label-md text-label-md transition-all active:scale-95 duration-150'
-                    : 'text-secondary dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md transition-all active:scale-95 duration-150'
-                }
-                href={`/services?category=${code}`}
-              >
-                {t(title)}
-              </a>
-            ))}
-          </nav>
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-4">
-              <a
-                aria-label={t('About the national institutions')}
-                className="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring"
-                href="/about"
-              >
-                account_balance
-              </a>
-              <a
-                aria-label={t('Notifications')}
-                className="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring"
-                href="/notifications"
-              >
-                notifications
-              </a>
-              <a
-                aria-label={isAuthenticated ? t('Your profile') : t('Sign in')}
-                className="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-all focus-ring"
-                href={isAuthenticated ? '/profile' : '/login'}
-              >
-                account_circle
-              </a>
-              {!isAuthenticated && (
-                <a
-                  className="font-label-md text-label-md text-on-primary bg-primary-container px-4 py-2 rounded-sm hover:shadow-lg transition-all focus-ring"
-                  href="/register"
-                >
-                  {t('Register')}
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* The universal navigation bar comes from the root layout; this page
+          renders no chrome of its own any more. */}
 
-      <main className="pt-20" id="main">
+      <main className="pt-margin-desktop" id="main">
         <section className="relative min-h-[85vh] flex items-center overflow-hidden" id="hero">
           <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop grid grid-cols-12 gap-gutter">
             <div className="col-span-12 lg:col-span-7 flex flex-col justify-center gap-8">

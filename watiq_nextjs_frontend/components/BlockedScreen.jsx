@@ -1,4 +1,3 @@
-import { Mark } from './Logo.jsx';
 import '@/styles/pages/error_blocked.css';
 
 /**
@@ -10,8 +9,8 @@ import '@/styles/pages/error_blocked.css';
  * it carries the session reference and timestamp someone has to quote when they
  * ask for the block to be reviewed.
  *
- * It renders its own header rather than the site nav, deliberately — a blocked
- * visitor is shown the state, not the navigation they cannot use.
+ * The navigation bar is the universal one from the root layout — this screen
+ * renders no chrome of its own any more.
  *
  * `now` and `reference` are passed in rather than read here so the caller
  * decides them on the server: the timestamp has to be right before, and
@@ -21,23 +20,6 @@ export default function BlockedScreen({ code, title, message, now, reference }) 
   return (
     <>
       <div className="national-watermark" />
-
-      <header className="fixed top-0 start-0 w-full h-20 px-margin-desktop flex items-center justify-between z-50">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 flex items-center justify-center bg-on-surface text-surface rounded-sm">
-            <span className="icon-filled material-symbols-outlined">policy</span>
-          </div>
-          <Mark size="h-9" />
-          <div className="flex flex-col">
-            <span className="font-headline-md text-headline-md tracking-wider uppercase text-on-surface leading-tight">
-              République Tunisienne
-            </span>
-            <span className="font-label-caps text-label-caps text-on-surface-variant">
-              Portail National des Services
-            </span>
-          </div>
-        </div>
-      </header>
 
       <main className="relative z-10 min-h-screen flex items-center justify-center px-margin-mobile md:px-0 py-24">
         <div className="max-w-2xl w-full flex flex-col items-center">
