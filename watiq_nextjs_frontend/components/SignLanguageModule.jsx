@@ -68,6 +68,7 @@ export default function SignLanguageModule({ src = '', t = (s) => s }) {
         </div>
 
         <video
+          data-tsl-video=""
           aria-label={t('Sign language interpreter feed')}
           className="block h-full w-full aspect-[1.79] object-cover"
           loop
@@ -78,9 +79,14 @@ export default function SignLanguageModule({ src = '', t = (s) => s }) {
           src={src || undefined}
         />
 
-        {/* Only for screens the guide has not scripted a clip for yet. */}
+        {/* Only for screens the guide has not scripted a clip for yet. The
+            marker lets watiq.js clear it when an error or maintenance screen
+            supplies a clip after render — see initTslClip there. */}
         {!src && (
-          <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 text-center">
+          <div
+            data-tsl-placeholder=""
+            className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 text-center"
+          >
             <p className="font-label-caps text-label-caps text-on-surface-variant">
               {t('Interpreter video coming soon')}
             </p>

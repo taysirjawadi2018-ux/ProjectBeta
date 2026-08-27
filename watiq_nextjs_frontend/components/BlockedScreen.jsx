@@ -1,4 +1,5 @@
 import '@/styles/pages/error_blocked.css';
+import { TSL_MAINTENANCE_VIDEO } from '@/lib/tsl.js';
 
 /**
  * The dedicated access-denied screen.
@@ -19,6 +20,10 @@ import '@/styles/pages/error_blocked.css';
 export default function BlockedScreen({ code, title, message, now, reference }) {
   return (
     <>
+      {/* Guide row 10: this screen carries the maintenance clip, wherever it
+          renders. watiq.js reads the marker and points the interpreter
+          panel at it — the panel itself lives in the root layout. */}
+      <span data-tsl-clip={TSL_MAINTENANCE_VIDEO} hidden />
       <div className="national-watermark" />
 
       <main className="relative z-10 min-h-screen flex items-center justify-center px-margin-mobile md:px-0 py-24">

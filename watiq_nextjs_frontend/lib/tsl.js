@@ -7,69 +7,87 @@
  * of the layout so the mapping is one readable table rather than a branch in
  * the middle of the shell.
  *
- * The pairing comes from sign_language_videos_guide.pdf, which scripts ten
- * clips against ten screens. Filenames are the ones the clips were delivered
- * under; they are deliberately left untouched so a clip on disk can be traced
- * back to its row in that guide.
+ * The pairing is sign_language_videos_guide.pdf, which scripts ten clips
+ * against ten screens and names the target file for each. Its "Target File /
+ * Page" column is reproduced verbatim in the comments below, so a row here can
+ * be checked against the guide without opening it. Filenames are the ones the
+ * clips were delivered under and are deliberately left untouched, so a clip on
+ * disk traces back to its row in the guide.
  *
- * Routes are matched longest-prefix-first, so `/login/mfa` wins over `/login`
- * regardless of the order entries are written in. A screen with no entry gets
- * no clip, and the panel falls back to its "coming soon" placeholder.
+ * Nine of the ten rows name a route. The tenth names two components —
+ * BlockedScreen.jsx and ErrorScreen.jsx — because an error or maintenance view
+ * can replace the content of *any* route (lib/errors.js renders one whenever an
+ * upstream call fails), so its clip has to follow the screen rather than the
+ * path. That one is TSL_MAINTENANCE_VIDEO below, applied by those components.
  */
 
 const BASE = '/video/tsl';
 
-// Longest-prefix-first, so nested routes beat their parents. `/` is special:
-// it is an exact match only, otherwise it would swallow every other route.
+// Patterns are matched longest-first, so `/login/mfa` beats `/login` whatever
+// order they are written in. A `:param` segment matches exactly one segment,
+// which is how the dynamic request id in row 5 is covered. `/` is exact-match
+// only — as a prefix it would swallow every other route.
 const ROUTES = [
-  // "Homepage & Portal Overview" — welcome, and what the portal is for.
+  // 1. Homepage & Portal Overview → app/page.jsx (Main Landing Page)
   ['/', 'IntroToWebsite.mp4'],
-  // "Public Service Catalogue" — searching services, required documents, fees.
+  // 2. Public Service Catalogue → app/services/page.jsx
   ['/services', 'DocumentsSearch.mp4'],
-  // "Request Tracking" — entering a receipt code to read application status.
+  // 3. Request Tracking → app/track/page.jsx
   ['/track', 'TrackRequest.mp4'],
-  // "Appointment Booking" — choosing office, date and time slot.
+  // 4. Appointment Booking → app/appointments/book/page.jsx
   ['/appointments/book', 'BookOfficeVisit.mp4'],
-  // "New Request & Document Upload" — filling details, uploading copies.
+  // 5. New Request & Document Upload → app/requests/new/page.jsx &
+  //    UploadForm.jsx, which is the upload step at the route below.
   ['/requests/new', 'FillInDetails.mp4'],
-  // "Multi-Factor Authentication" — the 6-digit code screen. Listed before
-  // /login only for readability; the longest-prefix sort is what enforces it.
-  ['/login/mfa', '2FA.mp4'],
-  // "Citizen Sign In" — National ID and password, or biometric sign-in.
+  ['/requests/:id/documents/new', 'FillInDetails.mp4'],
+  // 6. Citizen Sign-In → app/login/page.jsx
   ['/login', 'SignIn.mp4'],
-  // "Support & Live Interpreter Assistance" — starting a live interpreter call.
+  // 7. Multi-Factor Authentication → app/login/mfa/page.jsx
+  ['/login/mfa', '2FA.mp4'],
+  // 8. Support & Live Interpreter Assistance → app/support/chat/page.jsx.
+  //    The guide scopes this to the live desk, not the /help knowledge base.
   ['/support/chat', 'NeedHelp.mp4'],
-  ['/help', 'NeedHelp.mp4'],
-  // "Accessibility & Privacy" — the accessibility guarantees and data policy.
+  // 9. Accessibility & Privacy → app/accessibility/page.jsx &
+  //    app/legal/privacy/page.jsx
   ['/accessibility', 'WhyVhooseWatiq.mp4'],
   ['/legal/privacy', 'WhyVhooseWatiq.mp4'],
-  // "System Alerts & Maintenance" — session expired, come back shortly. This
-  // covers the forbidden screen; app/error.jsx and app/not-found.jsx render
-  // under whatever path was requested, so they keep that path's clip.
+  // 10, for the one error screen that owns a route of its own. The marker in
+  // BlockedScreen.jsx covers it too, but resolving it here means /blocked is
+  // server-rendered with its clip and needs no JavaScript to show it.
   ['/blocked', 'SignInAgain.mp4'],
 ];
 
-// Sorted once at module load rather than per request.
-const PREFIXES = ROUTES.filter(([route]) => route !== '/').sort(
-  (a, b) => b[0].length - a[0].length,
-);
+// 10. System Alerts & Maintenance → components/BlockedScreen.jsx &
+//     components/ErrorScreen.jsx (Error & Maintenance Modal/Views).
+export const TSL_MAINTENANCE_VIDEO = `${BASE}/SignInAgain.mp4`;
+
+// Compiled once at module load rather than per request. Sorting by segment
+// count then by length keeps the more specific pattern ahead of its parent.
+const PATTERNS = ROUTES.filter(([route]) => route !== '/')
+  .map(([route, file]) => ({ segments: route.split('/').filter(Boolean), file }))
+  .sort((a, b) => b.segments.length - a.segments.length);
 
 const HOME = ROUTES.find(([route]) => route === '/')[1];
 
 /**
  * The clip for a pathname, as a public URL, or '' when the screen has none.
  *
- * Trailing slashes are tolerated. Matching is on path segments, so `/services`
- * matches `/services` and `/services/passport` but never `/services-admin`.
+ * Matching is per segment, so `/services` covers `/services/passport` but never
+ * `/services-admin`. Trailing slashes are tolerated.
  */
 export function tslVideoFor(pathname) {
   if (!pathname) return '';
 
-  const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
-  if (path === '' || path === '/') return `${BASE}/${HOME}`;
+  const path = pathname.split('?')[0];
+  const segments = path.split('/').filter(Boolean);
+  if (segments.length === 0) return `${BASE}/${HOME}`;
 
-  const hit = PREFIXES.find(
-    ([route]) => path === route || path.startsWith(`${route}/`),
+  const hit = PATTERNS.find(
+    ({ segments: pattern }) =>
+      pattern.length <= segments.length &&
+      pattern.every(
+        (seg, i) => seg.startsWith(':') || seg === segments[i],
+      ),
   );
-  return hit ? `${BASE}/${hit[1]}` : '';
+  return hit ? `${BASE}/${hit.file}` : '';
 }

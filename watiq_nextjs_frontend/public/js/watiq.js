@@ -381,6 +381,34 @@
     }
   });
 
+  /* Sign-language clip declared by the screen rather than the route.
+   *
+   * The interpreter panel is rendered once by the root layout, which picks its
+   * clip from the pathname (lib/tsl.js). Error and maintenance screens can
+   * replace the content of any route, so they carry their own clip on a
+   * [data-tsl-clip] marker instead; this points the panel at it and clears the
+   * "coming soon" placeholder the layout rendered. */
+  function initTslClip() {
+    var marker = document.querySelector("[data-tsl-clip]");
+    if (!marker) return;
+    var src = marker.getAttribute("data-tsl-clip");
+    if (!src) return;
+
+    var panel = document.getElementById("tsl-module");
+    var video = panel && panel.querySelector("[data-tsl-video], video");
+    if (!video) return;
+
+    if (video.getAttribute("src") !== src) {
+      video.setAttribute("src", src);
+      video.load();
+    }
+    var placeholder = panel.querySelector("[data-tsl-placeholder]");
+    if (placeholder && placeholder.parentNode) {
+      placeholder.parentNode.removeChild(placeholder);
+    }
+  }
+  initTslClip();
+
   /* Preloader splash screen fade out */
   function initPreloader() {
     var loader = document.getElementById("watiq-preloader");

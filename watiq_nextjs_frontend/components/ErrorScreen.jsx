@@ -1,3 +1,4 @@
+
 /**
  * The generic error page. Port of the `page` block in
  * frontend_flask/templates/error.html.
@@ -11,11 +12,17 @@
  * must be a client component) and the server-rendered pages can use it.
  */
 
+import { TSL_MAINTENANCE_VIDEO } from '@/lib/tsl.js';
+
 const ICONS = { 404: 'search_off', 409: 'history' };
 
 export default function ErrorScreen({ code, title, message, reference }) {
   return (
     <section className="max-w-2xl mx-auto text-center py-12 space-y-6">
+      {/* Guide row 10: this screen carries the maintenance clip, wherever it
+          renders. watiq.js reads the marker and points the interpreter
+          panel at it — the panel itself lives in the root layout. */}
+      <span data-tsl-clip={TSL_MAINTENANCE_VIDEO} hidden />
       <span aria-hidden="true" className="material-symbols-outlined text-primary text-[64px]">
         {ICONS[code] ?? 'warning'}
       </span>
