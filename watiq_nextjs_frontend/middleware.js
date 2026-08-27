@@ -22,6 +22,12 @@ export function middleware(request) {
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
     "style-src 'self'",
     "img-src 'self' data:",
+    // The Tunisian Sign Language clips under public/video/tsl are <video src>
+    // subresources, and media-src falls back to default-src 'none' when it is
+    // absent. Omitting it is silent: the interpreter panel renders, the controls
+    // respond, and the browser refuses every clip with nothing on the page to
+    // say why. See lib/tsl.js for the route -> clip table.
+    "media-src 'self'",
     "font-src 'self'",
     "connect-src 'self'",
     "form-action 'self'",
@@ -53,6 +59,11 @@ export const config = {
     // Everything except Next's own build output and the vendored assets — those
     // are same-origin static files with no inline script to protect, and
     // running the middleware on them costs a nonce per image request.
-    '/((?!_next/static|_next/image|img|fonts|favicon.ico).*)',
+    //
+    // `video` carries the most weight of the three: the clips are 8-25 MB each
+    // and the player fetches them in byte ranges, so leaving them in the
+    // matcher mints a UUID and rebuilds the whole policy string for every
+    // range request of a file that has no script in it at all.
+    '/((?!_next/static|_next/image|img|fonts|video|favicon.ico).*)',
   ],
 };
