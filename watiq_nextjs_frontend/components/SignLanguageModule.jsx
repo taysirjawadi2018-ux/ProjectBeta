@@ -3,24 +3,27 @@
  * it floats over every screen.
  *
  * The design system mandates a reserved overlay slot for a TSL interpreter
- * feed across the primary citizen journeys; until the real stream is cut this
- * renders its placeholder — a framed video region with the interpreter poster
- * and an explicit "coming soon" badge, plus the full control set that
- * public/js/watiq.js already ships actions for (a11y-play/-pause, -mute/
- * -unmute, -expand, -close).
+ * feed across the primary citizen journeys. Screens scripted in
+ * sign_language_videos_guide.pdf carry their own clip, resolved per request by
+ * lib/tsl.js and passed in as `src`; every other screen still renders the
+ * placeholder — a framed video region with the interpreter poster and an
+ * explicit "coming soon" badge. Either way the full control set that
+ * public/js/watiq.js ships actions for (a11y-play/-pause, -mute/-unmute,
+ * -expand, -close) is present and bound.
  *
  * Wiring notes, so the panel keeps working as it evolves:
  *   - id="tsl-module" and class "SignLanguageModule" are load-bearing:
  *     watiq.js resolves controls through #tsl-module/.tsl-module selectors,
  *     and public/js/pages/error_maintenance.js greps for .SignLanguageModule.
- *   - The <video> carries no source yet. When the interpreter loop lands, drop
- *     it at public/video/tsl/interpreter.mp4 and fill src below — every
- *     control starts working unchanged.
+ *   - Clips live in public/video/tsl/ and are chosen by route in lib/tsl.js.
+ *     watiq.js resolves the media as panel.querySelector('video, audio'), so a
+ *     filled src makes every control work with no change on its side.
+ *   - preload="metadata" is deliberate: the panel is chrome on every screen,
+ *     and only the citizen who opens it should pay for the download.
  *   - Bottom-end corner, mirroring A11yControls on the bottom-start corner;
  *     both carry logical (start/end) offsets so RTL flips them together.
  */
 
-const VIDEO_SRC = '';
 const POSTER = '/img/img-091ffb278e7e.jpg';
 
 const CONTROL =
@@ -43,7 +46,7 @@ function ControlButton({ action, icon, label, pressed, t }) {
   );
 }
 
-export default function SignLanguageModule({ t = (s) => s }) {
+export default function SignLanguageModule({ src = '', t = (s) => s }) {
   return (
     <aside
       aria-label={t('Tunisian Sign Language interpreter')}
@@ -72,15 +75,17 @@ export default function SignLanguageModule({ t = (s) => s }) {
           playsInline
           poster={POSTER}
           preload="metadata"
-          src={VIDEO_SRC || undefined}
+          src={src || undefined}
         />
 
-        {/* Placeholder notice. Remove once a real feed fills the slot. */}
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 text-center">
-          <p className="font-label-caps text-label-caps text-on-surface-variant">
-            {t('Interpreter video coming soon')}
-          </p>
-        </div>
+        {/* Only for screens the guide has not scripted a clip for yet. */}
+        {!src && (
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 text-center">
+            <p className="font-label-caps text-label-caps text-on-surface-variant">
+              {t('Interpreter video coming soon')}
+            </p>
+          </div>
+        )}
       </div>
     </aside>
   );
