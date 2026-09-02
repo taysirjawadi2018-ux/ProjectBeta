@@ -45,7 +45,6 @@ key
 key_off
 lan
 language
-light
 light_mode
 location_off
 location_on
