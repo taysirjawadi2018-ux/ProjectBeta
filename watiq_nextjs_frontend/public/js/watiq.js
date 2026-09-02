@@ -44,6 +44,44 @@
     return id ? document.getElementById(id) : null;
   }
 
+  /* Every element this file touches was rendered by React, and React keeps a
+   * pointer to each node it rendered. Detaching one from here does not tell it
+   * that; the pointer just goes stale, and the next render that has to insert
+   * or move a sibling calls insertBefore/removeChild against a node that is no
+   * longer in the tree:
+   *
+   *     NotFoundError: Failed to execute 'insertBefore' on 'Node'
+   *
+   * which is fatal to hydration — the screen is left half-rendered. Signing up
+   * hit it every time: the splash panel is removed on load, and the redirect
+   * into /dashboard is the first render that inserts a flash message as a
+   * sibling of where it used to be.
+   *
+   * So nothing here removes a node. Hiding one leaves the tree the shape React
+   * believes it is, and is what a11y-close already did. Inline display beats
+   * the utility classes on these elements (.flex would otherwise win over
+   * [hidden]), and React sets no style attribute on any of them, so there is
+   * nothing for it to fight with. */
+  function hide(node) {
+    if (!node) return;
+    node.classList.add("hidden");
+    node.style.display = "none";
+  }
+
+  /* Retarget existing text rather than replacing it. `el.textContent = x`
+   * drops the text node React is holding and makes a new one, which is the
+   * same stale-pointer bug in miniature — these run on the interpreter
+   * controls, which sit in the root layout and are re-rendered on every
+   * navigation. */
+  function setText(node, value) {
+    if (!node) return;
+    if (node.childNodes.length === 1 && node.firstChild.nodeType === 3) {
+      node.firstChild.nodeValue = value;
+    } else {
+      node.textContent = value;
+    }
+  }
+
   /* The interpreter widget the mockups drew as a floating video card. There is
    * no interpreter stream to attach yet, so the controls drive whatever media
    * element the panel contains and otherwise just carry their own state — the
@@ -63,7 +101,7 @@
     var icon = trigger.matches(".material-symbols-outlined")
       ? trigger
       : trigger.querySelector(".material-symbols-outlined");
-    if (icon) icon.textContent = name;
+    setText(icon, name);
   }
 
   var ACTIONS = {
@@ -81,8 +119,7 @@
     },
 
     dismiss: function (trigger) {
-      var panel = trigger.closest("[data-dismissable]");
-      if (panel) panel.remove();
+      hide(trigger.closest("[data-dismissable]"));
     },
 
     filter: function (trigger) {
@@ -115,7 +152,7 @@
       var value = target.getAttribute("data-value");
       if (masked === null || value === null) return;
       var revealed = target.textContent.trim() === value;
-      target.textContent = revealed ? masked : value;
+      setText(target, revealed ? masked : value);
       trigger.setAttribute("aria-pressed", String(!revealed));
       swapIcon(trigger, revealed ? "visibility" : "visibility_off");
     },
@@ -402,10 +439,7 @@
       video.setAttribute("src", src);
       video.load();
     }
-    var placeholder = panel.querySelector("[data-tsl-placeholder]");
-    if (placeholder && placeholder.parentNode) {
-      placeholder.parentNode.removeChild(placeholder);
-    }
+    hide(panel.querySelector("[data-tsl-placeholder]"));
   }
   initTslClip();
 
@@ -416,7 +450,7 @@
     var fadeOut = function () {
       loader.classList.add("opacity-0", "pointer-events-none");
       setTimeout(function () {
-        if (loader.parentNode) loader.parentNode.removeChild(loader);
+        hide(loader);
       }, 500);
     };
     if (document.readyState === "complete") {
