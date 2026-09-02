@@ -43,8 +43,24 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 FONTS = ROOT / "public" / "fonts"
-IMAGES = ROOT / "static" / "img"
+# public/, not static/ — the line in the note above that this one was missed by.
+# Pointed at static/img this rebuilt the manifest from an empty dict in a
+# directory nothing serves, so the run reported success, left the real
+# public/img/manifest.json stale, and served no image from the new one.
+IMAGES = ROOT / "public" / "img"
 MOCKUPS = ROOT.parent / "frontend"
+
+# Where the browser fetches a vendored face from, and therefore what has to go
+# in the url() token.
+#
+# Root-relative, not '../fonts/'. A relative url() resolves against the
+# stylesheet that carries it, and Next emits no rewrite for these: under Flask
+# the sheet was served from /static/css/ so '../fonts/' landed on
+# /static/fonts/, but the compiled sheet is now /_next/static/css/<hash>.css,
+# where the same token resolves to /_next/static/fonts/ and 404s — every face
+# at once, the icons included, which is a portal rendering in a fallback serif
+# with its ligatures spelled out as words.
+FONT_URL_PREFIX = "/fonts"
 
 # A browser UA is required: Google serves ttf to unrecognised clients and woff2
 # only to engines it knows support it.
@@ -203,7 +219,9 @@ def vendor_text_fonts() -> list[str]:
             # it. Only the url() token is rewritten -- the format() that follows
             # is already in the block.
             blocks.append(
-                block.replace(url_match.group(0), f"url('../fonts/{filename}')")
+                block.replace(
+                    url_match.group(0), f"url('{FONT_URL_PREFIX}/{filename}')"
+                )
             )
     return blocks
 
@@ -229,7 +247,8 @@ def vendor_icon_font(icons: list[str]) -> str:
         "  font-style: normal;\n"
         "  font-weight: 100 700;\n"
         "  font-display: block;\n"
-        "  src: url('../fonts/material-symbols-outlined.woff2') format('woff2');\n"
+        f"  src: url('{FONT_URL_PREFIX}/material-symbols-outlined.woff2')"
+        " format('woff2');\n"
         "}"
     )
 

@@ -53,45 +53,55 @@ export default function SignLanguageModule({ src = '', t = (s) => s }) {
       className="SignLanguageModule fixed bottom-margin-mobile end-margin-mobile z-[100] print:hidden"
       id="tsl-module"
     >
-      <div className="tsl-video-frame relative rounded-xl shadow-2xl glass-panel border-2 border-secondary-fixed overflow-hidden bg-surface-container-lowest">
-        <span className="absolute top-2 start-2 z-10 inline-flex items-center gap-1 rounded-sm bg-primary-container/90 px-2 py-0.5 font-label-caps text-[10px] uppercase tracking-wider text-on-primary">
-          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-secondary-fixed animate-pulse" />
-          {t('TSL')}
-        </span>
+      <div className="tsl-video-frame rounded-xl shadow-2xl glass-panel border-2 border-secondary-fixed overflow-hidden bg-surface-container-lowest">
+        {/* The picture and anything that belongs ON it. The controls used to
+            sit here too, on `absolute bottom-0`, which put a 40px bar across
+            the bottom 13% of the frame — exactly where these clips carry their
+            burned-in captions, so the last line was cut through the middle of
+            the glyphs and the line under it never appeared at all. They are a
+            row beneath the video now: nothing is covered, and the controls
+            stay visible rather than needing a hover the touch and keyboard
+            paths never deliver. */}
+        <div className="relative">
+          <span className="absolute top-2 start-2 z-10 inline-flex items-center gap-1 rounded-sm bg-primary-container/90 px-2 py-0.5 font-label-caps text-[10px] uppercase tracking-wider text-on-primary">
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-secondary-fixed animate-pulse" />
+            {t('TSL')}
+          </span>
+
+          <video
+            data-tsl-video=""
+            aria-label={t('Sign language interpreter feed')}
+            className="block h-full w-full aspect-[1.79] object-cover"
+            loop
+            muted
+            playsInline
+            poster={POSTER}
+            preload="metadata"
+            src={src || undefined}
+          />
+
+          {/* Only for screens the guide has not scripted a clip for yet. The
+              marker lets watiq.js clear it when an error or maintenance screen
+              supplies a clip after render — see initTslClip there. */}
+          {!src && (
+            <div
+              data-tsl-placeholder=""
+              className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 text-center"
+            >
+              <p className="font-label-caps text-label-caps text-on-surface-variant">
+                {t('Interpreter video coming soon')}
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* Controls bind through data-action; see public/js/watiq.js. */}
-        <div className="absolute inset-x-0 bottom-0 z-10 flex items-center justify-between bg-surface-container-lowest/90 px-1 py-1 backdrop-blur">
+        <div className="flex items-center justify-between bg-surface-container-lowest px-1 py-1">
           <ControlButton action="a11y-play" icon="play_arrow" label="Play the sign language video" t={t} />
           <ControlButton action="a11y-mute" icon="volume_off" label="Mute the sign language video" t={t} />
           <ControlButton action="a11y-expand" icon="open_in_full" label="Enlarge the sign language panel" t={t} />
           <ControlButton action="a11y-close" icon="close" label="Hide the sign language panel" t={t} />
         </div>
-
-        <video
-          data-tsl-video=""
-          aria-label={t('Sign language interpreter feed')}
-          className="block h-full w-full aspect-[1.79] object-cover"
-          loop
-          muted
-          playsInline
-          poster={POSTER}
-          preload="metadata"
-          src={src || undefined}
-        />
-
-        {/* Only for screens the guide has not scripted a clip for yet. The
-            marker lets watiq.js clear it when an error or maintenance screen
-            supplies a clip after render — see initTslClip there. */}
-        {!src && (
-          <div
-            data-tsl-placeholder=""
-            className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 px-3 text-center"
-          >
-            <p className="font-label-caps text-label-caps text-on-surface-variant">
-              {t('Interpreter video coming soon')}
-            </p>
-          </div>
-        )}
       </div>
     </aside>
   );

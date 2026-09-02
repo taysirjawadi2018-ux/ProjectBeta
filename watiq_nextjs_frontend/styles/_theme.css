@@ -388,6 +388,21 @@
   }
 }
 
+/* 35rem, not 24rem, and the gutter halved so small screens reach it too.
+ *
+ * The clips carry their captions burned into the picture at a cap-height of
+ * 3% of frame width, which is 7.8px in the collapsed 16rem panel and 5.8px in
+ * the 12rem one — under the ~8px at which text stops being readable at all.
+ * 24rem put them at 11.7px, i.e. legible only just, which is a poor place to
+ * leave the one control a citizen opens *because* they could not read
+ * something. At 35rem the same text is 17px.
+ *
+ * Only the expanded state grows: collapsed is chrome on every screen and
+ * widening that would cover content the citizen did not ask to have covered.
+ * The real fix is a caption track rather than pixels — burned-in text cannot
+ * be translated for the French and Arabic locales and does not answer the
+ * reader's text-size control — but that needs the clips re-rendered without
+ * it, so this is the part that can be fixed from here. */
 .SignLanguageModule.is-expanded .tsl-video-frame {
-  width: min(24rem, calc(100vw - 6rem));
+  width: min(35rem, calc(100vw - 3rem));
 }
