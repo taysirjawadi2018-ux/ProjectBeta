@@ -43,8 +43,24 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 FONTS = ROOT / "public" / "fonts"
-IMAGES = ROOT / "static" / "img"
+# public/, not static/ — the line in the note above that this one was missed by.
+# Pointed at static/img this rebuilt the manifest from an empty dict in a
+# directory nothing serves, so the run reported success, left the real
+# public/img/manifest.json stale, and served no image from the new one.
+IMAGES = ROOT / "public" / "img"
 MOCKUPS = ROOT.parent / "frontend"
+
+# Where the browser fetches a vendored face from, and therefore what has to go
+# in the url() token.
+#
+# Root-relative, not '../fonts/'. A relative url() resolves against the
+# stylesheet that carries it, and Next emits no rewrite for these: under Flask
+# the sheet was served from /static/css/ so '../fonts/' landed on
+# /static/fonts/, but the compiled sheet is now /_next/static/css/<hash>.css,
+# where the same token resolves to /_next/static/fonts/ and 404s — every face
+# at once, the icons included, which is a portal rendering in a fallback serif
+# with its ligatures spelled out as words.
+FONT_URL_PREFIX = "/fonts"
 
 # A browser UA is required: Google serves ttf to unrecognised clients and woff2
 # only to engines it knows support it.
@@ -84,16 +100,88 @@ def slugify(name: str) -> str:
     return name.lower().replace(" ", "-")
 
 
+# Google's own catalogue of Material Symbols names. Every candidate below is
+# checked against it, which is what makes the loose patterns safe: a word that
+# merely looks like an icon name cannot enter the subset, so the scrapers are
+# free to over-reach rather than having to parse JSX exactly.
+ICON_METADATA = "https://fonts.google.com/metadata/icons?incomplete=true&key=material_symbols"
+
+# A literal ligature written straight into the markup: <span class="material-
+# symbols-outlined">badge</span>.
+ICON_CHILD = re.compile(r"material-symbols-outlined[^>]*>\s*([a-z][a-z0-9_]*)\s*<")
+
+# An icon named through a prop or a record field -- <EmptyState icon="folder_open" />,
+# `{ icon: 'warning' }`. Deliberately matched BEFORE attributes are masked
+# below, because for this one attribute the value is exactly what we want.
+ICON_PROP = re.compile(r"(?<![-\w])icon\s*[:=]\s*\{?\s*['\"]([a-z][a-z0-9_]*)['\"]")
+
+# Every OTHER attribute value gets blanked before the loose scrape runs.
+# name="email", htmlFor="password", type="search" and slug="accessibility" are
+# all real icon names and none of them is an icon.
+OTHER_ATTR = re.compile(r"\b(?!icon\b)[A-Za-z_][\w:-]*\s*=\s*(['\"])(?:(?!\1).)*\1")
+
+# A bare lowercase string literal, once attributes are out of the way.
+BARE_LITERAL = re.compile(r"['\"]([a-z][a-z0-9_]{1,40})['\"]")
+
+# public/js swaps ligatures at runtime: swapIcon(trigger, "pause") and
+# `icon.textContent = "content_copy"`. Nothing in the markup names these, so a
+# scrape of the JSX alone ships a button whose icon turns into a word on click.
+JS_SWAP = re.compile(r"swapIcon\s*\([^,]+,\s*(.*?)\)\s*;", re.S)
+JS_TEXT = re.compile(r"\w*[Ii]con\w*\s*\.textContent\s*=\s*(.*?);", re.S)
+
+
+def icon_catalogue() -> set[str]:
+    """Every name Google will actually mint a ligature for."""
+    raw = fetch(ICON_METADATA).decode("utf-8")
+    # The response is JSON behind an anti-hijacking prefix -- )]}' on line one.
+    payload = json.loads(raw[raw.index("{"):])
+    return {icon["name"] for icon in payload["icons"]}
+
+
 def collect_icons() -> list[str]:
-    """Every Material Symbols ligature used by a template or a mockup."""
-    pattern = re.compile(r'material-symbols-outlined[^>]*>\s*([a-z0-9_]+)\s*<')
+    """Every Material Symbols ligature the portal can render.
+
+    Matching a literal ligature child is not enough on its own, and that gap is
+    what put fourteen icons on screen as their own names: the ligature is very
+    often supplied dynamically -- from a tuple table (`['Morning', 'light_mode',
+    slots]`), an `icon` prop, a status map (`{ 404: 'search_off' }`), or a
+    ternary -- and none of those spellings sits between `>` and `<`. The icon
+    still renders, so nothing fails; it just renders as the word `light_mode`,
+    one 1em glyph per character, straight out of whatever box it was in.
+
+    So the scrape is deliberately loose -- attributes that are not `icon` are
+    masked out, then every remaining bare lowercase literal in a file that
+    renders icons is a candidate -- and `catalogue` is what keeps it honest.
+    """
+    catalogue = icon_catalogue()
     names: set[str] = set()
+
     sources = list([*(ROOT / "app").rglob("*.jsx"), *(ROOT / "components").rglob("*.jsx")])
     if MOCKUPS.is_dir():
         sources += list(MOCKUPS.glob("*.html"))
+
     for path in sources:
-        names.update(pattern.findall(path.read_text(encoding="utf-8")))
+        text = path.read_text(encoding="utf-8")
+        names.update(ICON_CHILD.findall(text))
+        names.update(ICON_PROP.findall(text))
+        if "material-symbols-outlined" not in text:
+            continue
+        masked = OTHER_ATTR.sub(lambda m: " " * len(m.group(0)), text)
+        names.update(BARE_LITERAL.findall(masked))
+
+    for path in sorted((ROOT / "public" / "js").rglob("*.js")):
+        text = path.read_text(encoding="utf-8")
+        for match in list(JS_SWAP.finditer(text)) + list(JS_TEXT.finditer(text)):
+            names.update(BARE_LITERAL.findall(match.group(1)))
+
     names.discard("")
+    unknown = names - catalogue
+    names &= catalogue
+    if unknown:
+        # Not fatal: most of these are ordinary words the loose scrape swept up.
+        # Printed so a genuine typo in an icon name is visible rather than
+        # silently dropped and rendered as text later.
+        print(f"  note  {len(unknown)} non-icon candidates ignored")
     return sorted(names)
 
 
@@ -131,7 +219,9 @@ def vendor_text_fonts() -> list[str]:
             # it. Only the url() token is rewritten -- the format() that follows
             # is already in the block.
             blocks.append(
-                block.replace(url_match.group(0), f"url('../fonts/{filename}')")
+                block.replace(
+                    url_match.group(0), f"url('{FONT_URL_PREFIX}/{filename}')"
+                )
             )
     return blocks
 
@@ -157,7 +247,8 @@ def vendor_icon_font(icons: list[str]) -> str:
         "  font-style: normal;\n"
         "  font-weight: 100 700;\n"
         "  font-display: block;\n"
-        "  src: url('../fonts/material-symbols-outlined.woff2') format('woff2');\n"
+        f"  src: url('{FONT_URL_PREFIX}/material-symbols-outlined.woff2')"
+        " format('woff2');\n"
         "}"
     )
 
